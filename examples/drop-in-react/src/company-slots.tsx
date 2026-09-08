@@ -5,6 +5,7 @@ import type {
   ChatComposerSlotProps,
   ChatEmptyStateSlotProps,
   ChatEntityReferenceSlotProps,
+  ChatLinkPreviewSlotProps,
   ChatMessageSlotProps,
   ChatSystemEventSlotProps,
   ChatUserSlotProps,
@@ -191,6 +192,15 @@ export function CompanyEntityReference({
   );
 }
 
+export function CompanyLinkPreview({ linkPreview, hostProps }: ChatLinkPreviewSlotProps) {
+  return (
+    <aside {...hostProps} data-example-slot="LinkPreview">
+      <a href={linkPreview.url} target="_blank" rel="noopener noreferrer">{linkPreview.title}</a>
+      {linkPreview.description === undefined ? null : <p>{linkPreview.description}</p>}
+    </aside>
+  );
+}
+
 export const companyComponents = Object.freeze({
   WorkspaceHeader: CompanyWorkspaceHeader,
   Avatar: CompanyAvatar,
@@ -199,6 +209,7 @@ export const companyComponents = Object.freeze({
   Composer: CompanyComposer,
   EmptyState: CompanyEmptyState,
   Attachment: CompanyAttachment,
+  LinkPreview: CompanyLinkPreview,
   SystemEvent: CompanySystemEvent,
   User: CompanyUser,
   EntityReference: CompanyEntityReference,

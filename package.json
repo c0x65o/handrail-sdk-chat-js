@@ -1,6 +1,6 @@
 {
   "name": "@handrail/chat",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Embeddable chat SDK for Handrail applications",
   "type": "module",
   "main": "./dist/index.js",
@@ -213,7 +213,8 @@
     "typecheck:contracts": "tsc --project tsconfig.type-tests.json",
     "sync:flutter-contracts": "node scripts/sync-flutter-contracts.mjs",
     "check:flutter-contracts": "node scripts/sync-flutter-contracts.mjs --check",
-    "test:git-consumer": "node --test --test-concurrency=1 --test-timeout=180000 consumer-tests/git-install.test.mjs"
+    "test:git-consumer": "node --test --test-concurrency=1 --test-timeout=180000 consumer-tests/git-install.test.mjs",
+    "setup:lab": "npm --prefix examples/drop-in-react ci --include=dev && npm --prefix examples/drop-in-react run build:flutter:lab"
   },
   "engines": {
     "node": ">=22.0.0"

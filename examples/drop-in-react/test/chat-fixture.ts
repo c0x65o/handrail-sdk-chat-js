@@ -54,6 +54,7 @@ const preference = (conversationId: typeof organizationConversationId) => ({
   conversationId,
   userId,
   notificationPreference: "all" as const,
+  isStarred: false,
   mute: { muted: false as const },
   updatedAt: now,
 });

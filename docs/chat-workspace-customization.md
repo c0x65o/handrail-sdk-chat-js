@@ -610,3 +610,49 @@ socket subscription, direct transport/cache access, or package-relative import.
 For headless lifecycle and recovery details, continue with the
 [headless client and React guide](headless-client-react.md). For the lower-level
 CSS primitives and preference behavior, see [optional UI styles](ui-styles.md).
+
+## Additional semantic tokens
+
+These defaults cover the navigation, presence, state, and compact controls. Override them on your scoped chat theme.
+
+| Token | Default |
+| --- | --- |
+| `--hr-chat-font-size-xs` | `0.75rem` |
+| `--hr-chat-color-surface-raised` | `#ffffff` |
+| `--hr-chat-color-success` | `#067647` |
+| `--hr-chat-color-success-background` | `#ecfdf3` |
+| `--hr-chat-color-warning` | `#854d0e` |
+| `--hr-chat-color-warning-background` | `#fffaeb` |
+| `--hr-chat-color-danger-background` | `#fef3f2` |
+| `--hr-chat-color-navigation-background` | `#1f2933` |
+| `--hr-chat-color-navigation-text` | `#f0f4f8` |
+| `--hr-chat-color-navigation-text-muted` | `#bcccdc` |
+| `--hr-chat-color-navigation-hover-background` | `#334e5c` |
+| `--hr-chat-color-navigation-error` | `#fecaca` |
+| `--hr-chat-color-starred` | `#fbbf24` |
+| `--hr-chat-color-starred-selected` | `#fde68a` |
+| `--hr-chat-color-conversation-background` | `#f8fafc` |
+| `--hr-chat-color-selected-background` | `#075985` |
+| `--hr-chat-color-selected-text` | `#ffffff` |
+| `--hr-chat-color-hover-background` | `#e8eef3` |
+| `--hr-chat-color-surface-composer` | `#ffffff` |
+| `--hr-chat-color-surface-menu` | `#ffffff` |
+| `--hr-chat-color-surface-action` | `#ffffff` |
+| `--hr-chat-color-border-subtle` | `#e4e9ed` |
+| `--hr-chat-color-border-strong` | `#9aa5b1` |
+| `--hr-chat-color-presence-online` | `#067647` |
+| `--hr-chat-color-presence-away` | `#a15c07` |
+| `--hr-chat-color-presence-offline` | `#7b8794` |
+| `--hr-chat-color-unread-background` | `#075985` |
+| `--hr-chat-color-unread-text` | `#ffffff` |
+| `--hr-chat-color-mention-background` | `#c2410c` |
+| `--hr-chat-color-mention-text` | `#ffffff` |
+| `--hr-chat-color-muted-background` | `#edf1f4` |
+| `--hr-chat-color-muted-text` | `#52606d` |
+| `--hr-chat-color-error` | `var(--hr-chat-color-danger, #b42318)` |
+| `--hr-chat-color-error-background` | `var(--hr-chat-color-danger-background, #fef3f2)` |
+| `--hr-chat-control-size-compact` | `2rem` |
+| `--hr-chat-icon-size-compact` | `1rem` |
+| `--hr-chat-shadow-sm` | `0 1px 3px rgb(15 23 42 / 8%)` |
+| `--hr-chat-shadow-lg` | `0 1rem 2rem rgb(15 23 42 / 18%)` |
+| `--hr-chat-elevation-menu` | `0 0.5rem 1.5rem rgb(15 23 42 / 18%)` |

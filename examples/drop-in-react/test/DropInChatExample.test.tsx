@@ -3,8 +3,10 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
 import type { ChatClient } from "@handrail/chat/client";
 import { ChatProvider } from "@handrail/chat/react";
+import type { ChatUserSlotProps } from "@handrail/chat/ui";
 
 import { DropInChatExample } from "../src/DropInChatExample";
+import { CompanyUser } from "../src/company-slots";
 import "../src/styles.css";
 import { createDropInFixture } from "./chat-fixture";
 
@@ -92,12 +94,28 @@ describe("drop-in ChatWorkspace example", () => {
       "Composer",
       "Attachment",
       "SystemEvent",
-      "User",
       "EntityReference",
     ]) {
-      expect(document.querySelector(`[data-example-slot="${name}"]`)).toBeTruthy();
+      expect(document.querySelector(`[data-example-slot="${name}"]`), name).toBeTruthy();
     }
     expect(screen.getAllByText("approval-notes.txt").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Sales order SO-1042").length).toBeGreaterThan(0);
+  });
+
+  it("preserves host props on the user override used by direct conversations", () => {
+    // Channel headers no longer render the User slot. Keep its override
+    // coverage separate from the populated channel fixture above.
+    const actions: ChatUserSlotProps["actions"] = {
+      createDirect: vi.fn(),
+      createGroupDirect: vi.fn(),
+      addConversationMember: vi.fn(),
+      removeConversationMember: vi.fn(),
+    };
+    render(<CompanyUser
+      user={{ kind: "active", userId: "user-example" as never, displayName: "Avery Example", avatar: { kind: "initials", initials: "AE" } }}
+      actions={actions}
+      hostProps={{ "aria-label": "Direct conversation participant" }}
+    />);
+    expect(screen.getByLabelText("Direct conversation participant").textContent).toBe("Avery Example");
   });
 });

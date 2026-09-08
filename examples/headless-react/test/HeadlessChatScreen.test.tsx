@@ -44,6 +44,8 @@ function createFixture() {
       updatedAt: now,
       latestSequence: 101,
       activityAt: now,
+      unreadMentionCount: 0,
+      activeMemberUserIds: [userId],
       currentMember: {
         tenantId,
         conversationId,
@@ -64,6 +66,7 @@ function createFixture() {
         conversationId,
         userId,
         notificationPreference: "all",
+        isStarred: false,
         mute: { muted: false },
         updatedAt: now,
       },

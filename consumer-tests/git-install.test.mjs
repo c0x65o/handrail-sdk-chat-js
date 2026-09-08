@@ -25,7 +25,18 @@ test("public Git install builds the SDK and shares the host React runtime", { ti
   }, null, 2));
   await copyFile(resolve(root, "test/fixtures/react-ui-consumer.mjs"), resolve(consumerRoot, "consumer.mjs"));
   // The SDK's normal prepare hook must build it during the Git installation.
-  await execFileAsync("npm", ["install", "--include=dev", "--no-audit", "--no-fund"], {
+  await execFileAsync("npm", ["install", "--package-lock-only", "--include=dev", "--no-audit", "--no-fund"], {
+    cwd: consumerRoot, timeout: 120_000, maxBuffer: 4 * 1024 * 1024,
+  });
+  // npm canonicalizes unauthenticated GitHub URLs to SSH when making a lock.
+  // Preserve the requested public HTTPS transport without changing its SHA,
+  // then prove that the resulting lock installs through the normal lifecycle.
+  const generatedLock = JSON.parse(await readFile(resolve(consumerRoot, "package-lock.json"), "utf8"));
+  const lockedSdk = generatedLock.packages["node_modules/@handrail/chat"];
+  assert.ok([dependency, dependency.replace("git+https://github.com/", "git+ssh://git@github.com/")].includes(lockedSdk.resolved));
+  lockedSdk.resolved = dependency;
+  await writeFile(resolve(consumerRoot, "package-lock.json"), `${JSON.stringify(generatedLock, null, 2)}\n`);
+  await execFileAsync("npm", ["ci", "--include=dev", "--no-audit", "--no-fund"], {
     cwd: consumerRoot, timeout: 120_000, maxBuffer: 4 * 1024 * 1024,
   });
   const installRoot = resolve(consumerRoot, "node_modules/@handrail/chat");

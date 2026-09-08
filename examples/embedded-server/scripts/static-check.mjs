@@ -70,6 +70,9 @@ const checks = [
   {
     label: "non-loopback provider URL",
     pattern: /https?:\/\/(?!(?:127\.0\.0\.1|localhost)(?::|\/|$))[^\s"'`)]+/gi,
+    inspect(match) {
+      return !/^https:\/\/github\.com\/c0x65o\/handrail-sdk-chat-js\.git#[a-f0-9]{40}$/.test(match[0]);
+    },
   },
   {
     label: "live provider SDK or call",

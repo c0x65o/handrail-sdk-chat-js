@@ -36,6 +36,7 @@ await collect(join(root, "src"));
 await collect(join(root, "test"));
 
 const allowedImports = new Set([
+  "@handrail/chat",
   "@handrail/chat/client",
   "@handrail/chat/react",
   "@handrail/chat/ui",
@@ -55,11 +56,15 @@ for (const path of files) {
     `relative package-internal import in ${relative(root, path)}`,
   );
   assert.equal(/<iframe\b/i.test(source), false, `iframe in ${relative(root, path)}`);
-  assert.equal(
-    /\b(?:new\s+)?WebSocket\s*\(|\bsocket\s*\./.test(source),
-    false,
-    `raw socket API in ${relative(root, path)}`,
-  );
+  // The lab's host-owned WebRTC media adapter owns its signaling socket.
+  // Chat components must continue using the SDK's chat transport.
+  if (relative(root, path).startsWith("src/") && relative(root, path) !== "src/chat-lab-webrtc.ts") {
+    assert.equal(
+      /\b(?:new\s+)?WebSocket\s*\(|\bsocket\s*\./.test(source),
+      false,
+      `raw socket API in ${relative(root, path)}`,
+    );
+  }
   assert.equal(
     /["'][^"']*(?:client\/cache|internal\/cache|transport\/|realtime\/)[^"']*["']/.test(source),
     false,

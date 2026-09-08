@@ -26,7 +26,7 @@
     "node": ">=22.0.0"
   },
   "dependencies": {
-    "@handrail/chat": "file:../..",
+    "@handrail/chat": "git+https://github.com/c0x65o/handrail-sdk-chat-js.git#90bff33529df06720ff89ccd821360ac65eaf0d0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "ws": "^8.21.3"

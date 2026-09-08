@@ -54,8 +54,7 @@ const readyState = Object.freeze({
   metadata,
   enabledFeatures: Object.freeze({}),
 });
-const conversation: ConversationListSnapshotSummary &
-  ConversationDetailSnapshotConversation = Object.freeze({
+const conversation = Object.freeze({
   id: conversationId,
   tenantId,
   type: "channel" as const,
@@ -88,10 +87,11 @@ const conversation: ConversationListSnapshotSummary &
     conversationId,
     userId,
     notificationPreference: "all" as const,
+    isStarred: false,
     mute: Object.freeze({ muted: false as const }),
     updatedAt: now,
   }),
-});
+}) satisfies ConversationListSnapshotSummary & ConversationDetailSnapshotConversation;
 const anchorConversation = Object.freeze({
   ...conversation,
   id: anchorConversationId,
@@ -146,6 +146,7 @@ export const createConversationStateFixtureClient = (
           conversationId,
           userId,
           notificationPreference: "all",
+          isStarred: false,
           mute: { muted: false },
           updatedAt: now,
         },

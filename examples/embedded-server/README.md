@@ -52,3 +52,7 @@ npx handrail-chat migrate apply
 No database URL or credential belongs in source control. The runtime also
 supports an environment-derived connection string when the host constructs
 `createChatServer`; migration application remains an explicit CLI operation.
+
+The deterministic notification fixture does not register device push tokens. Its
+protector rejects that unsupported operation. An application enabling device
+push supplies its own token protector and durable notification provider.

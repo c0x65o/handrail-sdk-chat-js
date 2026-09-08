@@ -212,6 +212,9 @@ const conversationRow = {
   created_at: "2030-01-01T00:00:00.000Z",
   updated_at: "2030-01-01T00:02:00.000Z",
   activity_at: "2030-01-01T00:02:00.000000Z",
+  has_active_huddle: false,
+  active_member_user_ids: ["fixture-user"],
+  unread_mention_count: 0,
   member_role: "member",
   member_state: "active",
   member_joined_at: "2030-01-01T00:00:00.000Z",
@@ -220,6 +223,8 @@ const conversationRow = {
   manual_unread_from_sequence: null,
   read_updated_at: "2030-01-01T00:01:00.000Z",
   notification_level: "all",
+  is_starred: false,
+  preference_revision: 0,
   muted: false,
   muted_until: null,
   preference_updated_at: "2030-01-01T00:01:00.000Z",
@@ -316,6 +321,16 @@ export async function startEmbeddedFixtureHost(): Promise<EmbeddedFixtureHost> {
     permissions,
     storage,
     notifications,
+    // This deterministic host has no device-token storage or push provider.
+    // Real hosts supply protection backed by their own secret storage.
+    pushTokenProtector: {
+      async protect() {
+        throw new Error("Device push tokens are not supported by the embedded fixture");
+      },
+      async unprotect() {
+        throw new Error("Device push tokens are not supported by the embedded fixture");
+      },
+    },
     audit,
     media,
     // This fixture is one process. Horizontally scaled hosts must select
