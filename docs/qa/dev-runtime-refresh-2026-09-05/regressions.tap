@@ -1,0 +1,178 @@
+TAP version 13
+# Subtest: stalled presence publisher isolates separate tenants and preserves owner order
+ok 1 - stalled presence publisher isolates separate tenants and preserves owner order
+  ---
+  duration_ms: 7.738904
+  type: 'test'
+  ...
+# Subtest: stalled presence publisher isolates two sessions of the same actor and preserves owner order
+ok 2 - stalled presence publisher isolates two sessions of the same actor and preserves owner order
+  ---
+  duration_ms: 1.322331
+  type: 'test'
+  ...
+# Subtest: rejecting presence publisher allows queued work and drain to recover
+ok 3 - rejecting presence publisher allows queued work and drain to recover
+  ---
+  duration_ms: 0.890262
+  type: 'test'
+  ...
+# Subtest: outbound typing capacity includes active and queued authorizations
+ok 4 - outbound typing capacity includes active and queued authorizations
+  ---
+  duration_ms: 48.758873
+  type: 'test'
+  ...
+# Subtest: outbound typing below capacity preserves order and reuses drained reservations
+ok 5 - outbound typing below capacity preserves order and reuses drained reservations
+  ---
+  duration_ms: 10.555707
+  type: 'test'
+  ...
+# Subtest: rejected outbound permission promises deny delivery and release capacity
+ok 6 - rejected outbound permission promises deny delivery and release capacity
+  ---
+  duration_ms: 8.43997
+  type: 'test'
+  ...
+# Subtest: typing timestamps supersede live starts on explicit stop
+ok 7 - typing timestamps supersede live starts on explicit stop
+  ---
+  duration_ms: 38.108897
+  type: 'test'
+  ...
+# Subtest: typing timestamps supersede live starts on backward-clock disconnect
+ok 8 - typing timestamps supersede live starts on backward-clock disconnect
+  ---
+  duration_ms: 36.978296
+  type: 'test'
+  ...
+# Subtest: typing timestamps supersede live starts on expiry
+ok 9 - typing timestamps supersede live starts on expiry
+  ---
+  duration_ms: 38.028993
+  type: 'test'
+  ...
+# Subtest: typing cleanup clears each session on explicit stop
+ok 10 - typing cleanup clears each session on explicit stop
+  ---
+  duration_ms: 93.352852
+  type: 'test'
+  ...
+# Subtest: typing cleanup clears each session on disconnect
+ok 11 - typing cleanup clears each session on disconnect
+  ---
+  duration_ms: 89.701255
+  type: 'test'
+  ...
+# Subtest: typing cleanup clears each session on expiry
+ok 12 - typing cleanup clears each session on expiry
+  ---
+  duration_ms: 92.22317
+  type: 'test'
+  ...
+# Subtest: typing start, refresh, stop, expiry, ordering, and private authorization stay ephemeral
+ok 13 - typing start, refresh, stop, expiry, ordering, and private authorization stay ephemeral
+  ---
+  duration_ms: 115.019575
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on explicit offline, survivor: undefined
+ok 14 - presence timestamps supersede live state on explicit offline, survivor: undefined
+  ---
+  duration_ms: 34.606383
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on explicit offline, survivor: away
+ok 15 - presence timestamps supersede live state on explicit offline, survivor: away
+  ---
+  duration_ms: 61.921271
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on explicit offline, survivor: online
+ok 16 - presence timestamps supersede live state on explicit offline, survivor: online
+  ---
+  duration_ms: 61.849133
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on disconnect, survivor: undefined
+ok 17 - presence timestamps supersede live state on disconnect, survivor: undefined
+  ---
+  duration_ms: 33.938771
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on disconnect, survivor: away
+ok 18 - presence timestamps supersede live state on disconnect, survivor: away
+  ---
+  duration_ms: 61.512989
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on disconnect, survivor: online
+ok 19 - presence timestamps supersede live state on disconnect, survivor: online
+  ---
+  duration_ms: 64.464975
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on expiry, survivor: undefined
+ok 20 - presence timestamps supersede live state on expiry, survivor: undefined
+  ---
+  duration_ms: 32.794041
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on expiry, survivor: away
+ok 21 - presence timestamps supersede live state on expiry, survivor: away
+  ---
+  duration_ms: 35.825252
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on expiry, survivor: online
+ok 22 - presence timestamps supersede live state on expiry, survivor: online
+  ---
+  duration_ms: 34.969652
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on staggered expiry, survivor: undefined
+ok 23 - presence timestamps supersede live state on staggered expiry, survivor: undefined
+  ---
+  duration_ms: 33.037711
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on staggered expiry, survivor: away
+ok 24 - presence timestamps supersede live state on staggered expiry, survivor: away
+  ---
+  duration_ms: 62.846967
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on staggered expiry, survivor: online
+ok 25 - presence timestamps supersede live state on staggered expiry, survivor: online
+  ---
+  duration_ms: 61.798372
+  type: 'test'
+  ...
+# Subtest: presence and typing disconnect cleanup preserve other active sessions
+ok 26 - presence and typing disconnect cleanup preserve other active sessions
+  ---
+  duration_ms: 17.147296
+  type: 'test'
+  ...
+# Subtest: public typing reaches active participants only and rate limits recover
+ok 27 - public typing reaches active participants only and rate limits recover
+  ---
+  duration_ms: 86.629533
+  type: 'test'
+  ...
+# Subtest: external adapter fanout retains local delivery and ephemeral events never advance replay cursors
+ok 28 - external adapter fanout retains local delivery and ephemeral events never advance replay cursors
+  ---
+  duration_ms: 6.798519
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1694.700395

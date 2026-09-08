@@ -1,0 +1,49 @@
+{
+  "initialPreference": {
+    "preferenceRevision": 1,
+    "conversationId": "5123e621-ace0-42e9-bbee-b1485e52c01a",
+    "userId": "bob",
+    "isStarred": false,
+    "notificationPreference": "all",
+    "mute": {
+      "muted": false
+    },
+    "updatedAt": "2026-09-07T20:25:31.491Z"
+  },
+  "request": {
+    "operation": "update_conversation_preference",
+    "conversationId": "5123e621-ace0-42e9-bbee-b1485e52c01a",
+    "expectedPreferenceRevision": 1,
+    "idempotencyKey": "preference:059fda76-e5c7-4e48-b180-896961439e77",
+    "notificationPreference": "mentions",
+    "isStarred": false,
+    "mute": {
+      "muted": true
+    }
+  },
+  "status": 200,
+  "saved": {
+    "operation": "update_conversation_preference",
+    "reconciliationStatus": "applied",
+    "conversationId": "5123e621-ace0-42e9-bbee-b1485e52c01a",
+    "expectedPreferenceRevision": 1,
+    "idempotencyKey": "preference:059fda76-e5c7-4e48-b180-896961439e77",
+    "requestedPreference": {
+      "notificationPreference": "mentions",
+      "isStarred": false,
+      "mute": {
+        "muted": true
+      }
+    },
+    "preferenceRevision": 2,
+    "preference": {
+      "notificationPreference": "mentions",
+      "isStarred": false,
+      "mute": {
+        "muted": true
+      },
+      "updatedAt": "2026-09-07T20:25:31.743Z"
+    }
+  },
+  "persistedAfterReload": true
+}

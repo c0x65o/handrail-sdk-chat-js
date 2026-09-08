@@ -1,0 +1,14 @@
+{
+  "button": {
+    "x": 969.46875,
+    "y": 388.25,
+    "width": 109.640625,
+    "height": 36,
+    "top": 388.25,
+    "right": 1079.109375,
+    "bottom": 424.25,
+    "left": 969.46875
+  },
+  "hit": "<button type=\"button\" class=\"handrail-chat__thread-action\">Reopen thread</button>",
+  "receivesClick": true
+}

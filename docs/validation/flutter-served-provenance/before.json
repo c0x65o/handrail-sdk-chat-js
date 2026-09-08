@@ -1,0 +1,48 @@
+{
+  "observedAt": "2026-09-07T18:15:16.872Z",
+  "url": "http://127.0.0.1:4167/__flutter-chat-lab/",
+  "inputsBefore": {
+    "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+    "sourceDigest": "75fe5ee344916ace8db563339c9df7a1cd42f64fd9926aa6cd9228dd2c2e0084",
+    "builtAt": "2026-09-07T18:15:15.753Z"
+  },
+  "inputsAfter": {
+    "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+    "sourceDigest": "75fe5ee344916ace8db563339c9df7a1cd42f64fd9926aa6cd9228dd2c2e0084",
+    "builtAt": "2026-09-07T18:15:16.872Z"
+  },
+  "exported": {
+    "captures": [],
+    "current": {
+      "mode": "shared-backend",
+      "actor": "alice",
+      "instanceId": "09cc43d02b2911e0ff91788be8ae55ae",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "idle",
+      "clientLifecycle": "initializing",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": null,
+      "conversationIds": [],
+      "hydratedTimelineIds": [],
+      "cursor": null,
+      "timelineReplayCursor": null,
+      "durableStreams": {},
+      "messages": [],
+      "diagnostics": [],
+      "provenance": {
+        "sourceRevision": "43b47b93a69523fee5376dfcc1745297b58c6857",
+        "sourceDigest": "f5c932a70abde412965137aa0ed4872624273bfb913aa179f86ec7ceefa308a1",
+        "builtAt": "2026-09-07T17:01:10.989Z",
+        "packageVersion": "0.1.19"
+      }
+    }
+  }
+}

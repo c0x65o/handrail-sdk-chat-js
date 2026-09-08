@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "input_hashes_unchanged": true,
+  "shared_dist_hashes_unchanged": true,
+  "status_after": " M src/server/edit-message-command.ts\n M test/postgres-edit-message-command.test.mjs\n?? docs/validation/edit-message-fractional-claim/\n",
+  "temporary_root": "/opt/handrail/.handrail/codex-runs/510bf914-16a0-49ae-a3d2-c8e79636d949/tmp/edit-message-evidence-bHpdG7",
+  "temporary_artifacts_retained": true,
+  "fixture_cleanup": "See test-results.json: exact owned schema names checked after harness teardown; no manual schema drops performed."
+}

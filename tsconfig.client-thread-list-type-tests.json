@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.client-thread-list.json",
+  "compilerOptions": { "noEmit": true, "rootDir": "." },
+  "include": ["type-tests/client-thread-list.test.ts"]
+}

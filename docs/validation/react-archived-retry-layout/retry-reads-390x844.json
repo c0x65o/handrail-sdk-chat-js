@@ -1,0 +1,57 @@
+{
+  "backendKind": "url-backed",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "probe": {
+    "receivesClick": true,
+    "hit": "handrail-chat__button",
+    "alertBottom": 638.328125,
+    "controlsTop": 662.515625
+  },
+  "deniedReads": [
+    {
+      "path": "/api/chat/conversations/1bc1b979-4fc3-48eb-af94-b855e4e9a21f",
+      "status": 401
+    },
+    {
+      "path": "/api/chat/conversations/1bc1b979-4fc3-48eb-af94-b855e4e9a21f",
+      "status": 401
+    },
+    {
+      "path": "/api/chat/conversations/1bc1b979-4fc3-48eb-af94-b855e4e9a21f",
+      "status": 401
+    },
+    {
+      "path": "/api/chat/conversations/1bc1b979-4fc3-48eb-af94-b855e4e9a21f/messages",
+      "status": 401
+    },
+    {
+      "path": "/api/chat/conversations/1bc1b979-4fc3-48eb-af94-b855e4e9a21f",
+      "status": 401
+    },
+    {
+      "path": "/api/chat/conversations/1bc1b979-4fc3-48eb-af94-b855e4e9a21f",
+      "status": 401
+    },
+    {
+      "path": "/api/chat/conversations/1bc1b979-4fc3-48eb-af94-b855e4e9a21f/messages",
+      "status": 401
+    },
+    {
+      "path": "/api/chat/conversations/1bc1b979-4fc3-48eb-af94-b855e4e9a21f",
+      "status": 401
+    }
+  ],
+  "retryReads": [
+    {
+      "path": "/api/chat/conversations/1bc1b979-4fc3-48eb-af94-b855e4e9a21f",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/1bc1b979-4fc3-48eb-af94-b855e4e9a21f/messages",
+      "status": 200
+    }
+  ]
+}

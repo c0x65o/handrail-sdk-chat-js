@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.client-reply-style.json",
+  "compilerOptions": { "noEmit": true, "rootDir": "." },
+  "include": ["type-tests/client-reply-style.test.ts"]
+}

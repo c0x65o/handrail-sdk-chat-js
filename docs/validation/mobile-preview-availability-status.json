@@ -1,0 +1,156 @@
+{
+  "capturedAt": "2026-09-07T16:21:01.888Z",
+  "workRequestId": "4e979270-3d99-4eb7-a512-c4a3cd5f7b59",
+  "source": "handrail_dev_service_status (before configuration approval request)",
+  "projectId": "1791fdf7-f197-483c-ba67-5c0da8f4315f",
+  "services": [
+    {
+      "service": {
+        "id": "812c4054-6ced-4616-94fb-13f672b3e897",
+        "name": "chat-lab",
+        "repo_name": "handrail-sdk-chat",
+        "port": 4167,
+        "healthcheck_path": "/__chat-lab/health"
+      },
+      "runtime_status": {
+        "status": "running",
+        "container_id": "3209725",
+        "pid": 3209725,
+        "exit_code": null,
+        "started_at": 1788796901164,
+        "uptime_ms": 1056004,
+        "runtime_phase": null,
+        "port_ready": true,
+        "status_detail": null,
+        "dev_runtime_mode": "host_process",
+        "dev_runtime_image": null,
+        "dev_runtime_dockerfile_path": null,
+        "docker_container_name": null,
+        "dev_url": "https://h-57a5c33bac91a8de.dev.handrail-daas.com/",
+        "route": {
+          "host": "h-57a5c33bac91a8de.dev.handrail-daas.com",
+          "container_port": 4167,
+          "host_port": 4167,
+          "public": false,
+          "subdomain_url": "https://h-57a5c33bac91a8de.dev.handrail-daas.com/",
+          "preview_url": "https://h-57a5c33bac91a8de.dev.handrail-daas.com/",
+          "runtime_scope": "main",
+          "change_lane_id": null,
+          "runtime_lane_active": null,
+          "runtime_fallback_to_main": false
+        },
+        "target_env": null,
+        "runtime_reconciliation": {
+          "classification": "supervised_running",
+          "authoritative_state": "running",
+          "supervisor": {
+            "pid": 3209725,
+            "alive": true,
+            "process_group_id": 3208185,
+            "source": "handrail_pid_file"
+          },
+          "listener": {
+            "port": 4167,
+            "present": true,
+            "pid": 3209725,
+            "process_group_id": 3208185,
+            "matches_supervisor": true,
+            "owned_by_service": true,
+            "owner_project_id": null,
+            "owner_service_id": null,
+            "source": "host_lsof_tcp_listen"
+          },
+          "probe_provenance": {
+            "scope": "handrail_host_process",
+            "target": "127.0.0.1:4167",
+            "tcp_ready": true,
+            "queued_worker_namespace_checked": false
+          },
+          "qa_browser_route": {
+            "url": "https://h-57a5c33bac91a8de.dev.handrail-daas.com/",
+            "scope": "handrail_dev_proxy",
+            "status": "available"
+          }
+        },
+        "runtime_scope": "main",
+        "change_lane_id": null,
+        "runtime_lane_active": null,
+        "runtime_fallback_to_main": false,
+        "ttl_ms": 1800000,
+        "ttl_base_at": "2026-09-07T16:01:41.164Z",
+        "ttl_expires_at": "2026-09-07T16:31:41.164Z",
+        "ttl_remaining_ms": 743996,
+        "last_keepalive_at": "2026-09-07T16:01:41.164Z",
+        "last_keepalive_reason": "service_spawned",
+        "health": {
+          "status": "ok",
+          "http_status": 200,
+          "latency_ms": 2,
+          "url": "http://127.0.0.1:4167/__chat-lab/health"
+        },
+        "readiness": {
+          "status": "ok",
+          "http_status": 200,
+          "latency_ms": 5,
+          "configured": true,
+          "url": "http://127.0.0.1:4167/readyz"
+        }
+      }
+    },
+    {
+      "service": {
+        "id": "e9735531-9f0c-4db0-8c95-2e388b561cfb",
+        "name": "Mobile Preview",
+        "repo_name": "handrail-chat-preview-flutter",
+        "port": 4115,
+        "healthcheck_path": "/"
+      },
+      "runtime_status": {
+        "status": "stopped",
+        "container_id": null,
+        "dev_url": null,
+        "route": null,
+        "stale_pid": null,
+        "stale_runtime_cleared": false,
+        "stale_runtime_clear_eligible": false,
+        "runtime_reconciliation": {
+          "classification": "stopped",
+          "authoritative_state": "stopped",
+          "supervisor": {
+            "pid": null,
+            "alive": false,
+            "process_group_id": null,
+            "source": "handrail_pid_file"
+          },
+          "listener": {
+            "port": 4115,
+            "present": false,
+            "pid": null,
+            "process_group_id": null,
+            "matches_supervisor": null,
+            "owned_by_service": false,
+            "owner_project_id": null,
+            "owner_service_id": null,
+            "source": "host_loopback_connect_probe"
+          },
+          "probe_provenance": {
+            "scope": "handrail_host_process",
+            "target": "127.0.0.1:4115",
+            "tcp_ready": false,
+            "queued_worker_namespace_checked": false
+          },
+          "qa_browser_route": {
+            "url": null,
+            "scope": null,
+            "status": "missing"
+          }
+        },
+        "runtime_scope": "main",
+        "change_lane_id": null,
+        "runtime_lane_active": null,
+        "runtime_fallback_to_main": false
+      }
+    }
+  ],
+  "approval": "4724b303-dadf-4617-a052-bd3b9c908926"
+}

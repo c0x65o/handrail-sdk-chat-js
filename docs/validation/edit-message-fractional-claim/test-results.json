@@ -1,0 +1,42 @@
+[
+  {
+    "label": "passing-test",
+    "exit_code": 0,
+    "schemas": [
+      "chat_edit_25d95023c20d42ef8ab0aba4655a5523"
+    ],
+    "remaining": [],
+    "counts": {
+      "tests": 9,
+      "suites": 0,
+      "pass": 9,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "fractional_pass": true,
+    "timestamp_constraint_failure": false,
+    "fractional_failed": false
+  },
+  {
+    "label": "negative-control",
+    "exit_code": 1,
+    "schemas": [
+      "chat_edit_c8d2a359d0454b07b4430fa7ca01f680"
+    ],
+    "remaining": [],
+    "counts": {
+      "tests": 9,
+      "suites": 0,
+      "pass": 6,
+      "fail": 3,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "fractional_pass": false,
+    "timestamp_constraint_failure": true,
+    "fractional_failed": true
+  }
+]

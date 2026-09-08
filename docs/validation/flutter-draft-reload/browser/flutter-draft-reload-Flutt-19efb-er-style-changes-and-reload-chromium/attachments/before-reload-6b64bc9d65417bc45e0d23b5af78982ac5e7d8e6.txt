@@ -1,0 +1,30 @@
+- heading "Flutter Chat Lab · shared backend" [level=2]
+- button "Alice"
+- text: "Managed realtime: connected"
+- button "Disconnect"
+- button "Capture state"
+- button "Export evidence"
+- button "Back to conversations"
+- heading "Direct message" [level=2]
+- button "Open workspace settings"
+- text: Empty conversation No messages yet
+- group "Message composer":
+  - textbox "Message input"
+  - textbox "Write a message": QA 298e20b4 durable draft
+  - button "Add attachment"
+  - group:
+    - button "Bold":
+      - button "Bold" [disabled]
+    - button "Italic":
+      - button "Italic" [disabled]
+    - button "Link":
+      - button "Link" [disabled]
+    - button "Bulleted list":
+      - button "Bulleted list"
+    - button "Numbered list":
+      - button "Numbered list"
+    - button "Inline code":
+      - button "Inline code" [disabled]
+    - button "Code block":
+      - button "Code block"
+  - button "Send message"

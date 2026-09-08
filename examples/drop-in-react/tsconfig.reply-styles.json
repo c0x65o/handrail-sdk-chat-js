@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/ChatLabApp.tsx", "src/ChatLabRuntime.tsx", "src/chat-lab-config.ts", "src/chat-lab-main.tsx"]
+}

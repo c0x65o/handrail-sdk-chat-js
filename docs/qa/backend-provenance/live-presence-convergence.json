@@ -1,0 +1,967 @@
+{
+  "checkedAt": "2026-09-05T17:10:49.827Z",
+  "origin": "http://127.0.0.1:4167",
+  "instance": {
+    "instanceId": "cdbd6cbe7f4acf741a357b46c4c42c46",
+    "backend": {
+      "scheme": "sha256-loaded-functions-v1",
+      "capturedAt": "2026-09-05T17:08:27.109Z",
+      "fingerprint": "55d9416b335084a427fb561c795914fdc00bcf9ce9c62d5c34d0b7abe871bcf2",
+      "functions": {
+        "createChatTestHarness": "1cd44ec754da756a730e9f007afe23d9c36cf415454af2846ef9424bcf42e24d",
+        "createChatServer": "215a934e50ce9e555661cbc62c555b9d0e1c062e48c1509ecf6782b10c2e611c",
+        "createChatEphemeralSignalController": "9ee1cc2b79509f5fcf27a01095f0590d355e147d61ea741b59eab7f67dc37fed"
+      }
+    }
+  },
+  "backendPackageVersion": "0.1.85",
+  "checks": [
+    "Live loaded backend fingerprint matches fresh disk-build imports",
+    "explicit offline, A first: owner offline, peer unchanged, then zero active sessions",
+    "explicit offline, B first: owner offline, peer unchanged, then zero active sessions",
+    "disconnect, A first: owner offline, peer unchanged, then zero active sessions",
+    "disconnect, B first: owner offline, peer unchanged, then zero active sessions",
+    "expiry, A first: owner offline, peer unchanged, then zero active sessions",
+    "expiry, B first: owner offline, peer unchanged, then zero active sessions",
+    "Private audience: outsider subscription denied and no presence delivered",
+    "Strict per-owner sentAt across both types; occurredAt equals sentAt; TTLs stay 10000/60000 ms"
+  ],
+  "events": [
+    {
+      "eventId": "ephemeral-26ff5600-bfb7-4927-9005-f358fe1b3fa3-11",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:42.553Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-7fef605a-5588-4217-82c3-c13c626fff9f-7",
+        "sessionId": "session-e1235908-f87a-4c2c-b029-57378f5c75d0-8",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:08:42.553Z",
+        "expiresAt": "2026-09-05T17:09:42.553Z",
+        "state": "online",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-e4d8bafe-b788-416c-96c9-40e25159ce5f-12",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:42.572Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-eacc0fa9-a0d4-42b4-b1d5-a7cad596335f-9",
+        "sessionId": "session-fa63d6e0-f10f-46a7-8d78-854af996dbb2-10",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:08:42.572Z",
+        "expiresAt": "2026-09-05T17:09:42.572Z",
+        "state": "away",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-6305a518-7687-4faf-b869-b457deed45ff-13",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:42.595Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-7fef605a-5588-4217-82c3-c13c626fff9f-7",
+        "sessionId": "session-e1235908-f87a-4c2c-b029-57378f5c75d0-8",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:08:42.595Z",
+        "expiresAt": "2026-09-05T17:09:42.595Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-36a5092b-c26e-49f3-a4ad-a2f642bdf328-14",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:42.616Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-eacc0fa9-a0d4-42b4-b1d5-a7cad596335f-9",
+        "sessionId": "session-fa63d6e0-f10f-46a7-8d78-854af996dbb2-10",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:08:42.616Z",
+        "expiresAt": "2026-09-05T17:09:42.616Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-6069a913-13fe-4835-bb60-97d0a16dacf5-19",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:42.761Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-685c626e-7893-4328-aca8-94b206a67db6-15",
+        "sessionId": "session-7b802425-228e-48cd-b5c1-05c520567e59-16",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:08:42.761Z",
+        "expiresAt": "2026-09-05T17:09:42.761Z",
+        "state": "online",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-5b389ecf-09f3-45b5-852c-3849ac74de51-20",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:42.781Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-17e02821-a8e0-405c-a4f7-69cd8de287a5-17",
+        "sessionId": "session-23d3fbc8-e405-4dcb-a86f-c095b550c48d-18",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:08:42.781Z",
+        "expiresAt": "2026-09-05T17:09:42.781Z",
+        "state": "away",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-88e101ca-b246-4e66-9537-471d4cc606ce-21",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:42.802Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-17e02821-a8e0-405c-a4f7-69cd8de287a5-17",
+        "sessionId": "session-23d3fbc8-e405-4dcb-a86f-c095b550c48d-18",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:08:42.802Z",
+        "expiresAt": "2026-09-05T17:09:42.802Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-65e8395f-90ec-4250-932f-4d054923c511-22",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:42.823Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-685c626e-7893-4328-aca8-94b206a67db6-15",
+        "sessionId": "session-7b802425-228e-48cd-b5c1-05c520567e59-16",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:08:42.823Z",
+        "expiresAt": "2026-09-05T17:09:42.823Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-c48dea84-63e3-4124-bc48-04abc907570e-27",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:42.969Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-c9f3dc34-b603-461b-b019-6f4157da117d-23",
+        "sessionId": "session-7c98f4dd-c3f8-4a45-83e6-237341f57f35-24",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:08:42.969Z",
+        "expiresAt": "2026-09-05T17:09:42.969Z",
+        "state": "online",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-3e6de718-a72c-4b60-89a1-adf02936c8b1-28",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+      "type": "typing.signal",
+      "occurredAt": "2026-09-05T17:08:42.989Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-c9f3dc34-b603-461b-b019-6f4157da117d-23",
+        "sessionId": "session-7c98f4dd-c3f8-4a45-83e6-237341f57f35-24",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:08:42.989Z",
+        "expiresAt": "2026-09-05T17:08:52.989Z",
+        "state": "start",
+        "scope": {
+          "type": "conversation",
+          "conversationId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+          "visibility": "private",
+          "audience": "members"
+        },
+        "capability": "typing"
+      }
+    },
+    {
+      "eventId": "ephemeral-4ed365f7-ab4a-448d-b8a1-53ceabccc151-29",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:43.009Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-cf7c51ca-3c2d-4948-831c-ff6ded5499c4-25",
+        "sessionId": "session-edf57748-5d17-4d0b-8f82-2a0bc83c91eb-26",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:08:43.009Z",
+        "expiresAt": "2026-09-05T17:09:43.009Z",
+        "state": "away",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-b32f8096-7661-42dc-9f26-22ab777ae0de-30",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+      "type": "typing.signal",
+      "occurredAt": "2026-09-05T17:08:43.030Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-cf7c51ca-3c2d-4948-831c-ff6ded5499c4-25",
+        "sessionId": "session-edf57748-5d17-4d0b-8f82-2a0bc83c91eb-26",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:08:43.030Z",
+        "expiresAt": "2026-09-05T17:08:53.030Z",
+        "state": "start",
+        "scope": {
+          "type": "conversation",
+          "conversationId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+          "visibility": "private",
+          "audience": "members"
+        },
+        "capability": "typing"
+      }
+    },
+    {
+      "eventId": "ephemeral-e427a963-175d-4507-a040-e38c12ad1447-31",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+      "type": "typing.signal",
+      "occurredAt": "2026-09-05T17:08:43.051Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-c9f3dc34-b603-461b-b019-6f4157da117d-23",
+        "sessionId": "session-7c98f4dd-c3f8-4a45-83e6-237341f57f35-24",
+        "sequence": 3,
+        "sentAt": "2026-09-05T17:08:43.051Z",
+        "expiresAt": "2026-09-05T17:08:53.051Z",
+        "state": "stop",
+        "scope": {
+          "type": "conversation",
+          "conversationId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+          "visibility": "private",
+          "audience": "members"
+        },
+        "capability": "typing"
+      }
+    },
+    {
+      "eventId": "ephemeral-1d11b3e3-9056-400a-91f9-4a0075e4ae70-32",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:43.052Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-c9f3dc34-b603-461b-b019-6f4157da117d-23",
+        "sessionId": "session-7c98f4dd-c3f8-4a45-83e6-237341f57f35-24",
+        "sequence": 4,
+        "sentAt": "2026-09-05T17:08:43.052Z",
+        "expiresAt": "2026-09-05T17:09:43.052Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-8e3a80db-af11-4e96-8365-227281cfef7c-33",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+      "type": "typing.signal",
+      "occurredAt": "2026-09-05T17:08:43.072Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-cf7c51ca-3c2d-4948-831c-ff6ded5499c4-25",
+        "sessionId": "session-edf57748-5d17-4d0b-8f82-2a0bc83c91eb-26",
+        "sequence": 3,
+        "sentAt": "2026-09-05T17:08:43.072Z",
+        "expiresAt": "2026-09-05T17:08:53.072Z",
+        "state": "stop",
+        "scope": {
+          "type": "conversation",
+          "conversationId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+          "visibility": "private",
+          "audience": "members"
+        },
+        "capability": "typing"
+      }
+    },
+    {
+      "eventId": "ephemeral-f9e66b39-2ccb-4474-996d-85ad5ef55cfd-34",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:43.073Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-cf7c51ca-3c2d-4948-831c-ff6ded5499c4-25",
+        "sessionId": "session-edf57748-5d17-4d0b-8f82-2a0bc83c91eb-26",
+        "sequence": 4,
+        "sentAt": "2026-09-05T17:08:43.073Z",
+        "expiresAt": "2026-09-05T17:09:43.073Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-27613029-4cd6-4a92-93f8-cfafc83299ad-39",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:43.173Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-530840c8-b1e4-4ab7-af86-ac786586100d-35",
+        "sessionId": "session-6a3228a1-7394-4832-b693-b8b8a8b3353b-36",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:08:43.173Z",
+        "expiresAt": "2026-09-05T17:09:43.173Z",
+        "state": "online",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-258990c4-ab2b-41fb-af00-9b1995f39634-40",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+      "type": "typing.signal",
+      "occurredAt": "2026-09-05T17:08:43.194Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-530840c8-b1e4-4ab7-af86-ac786586100d-35",
+        "sessionId": "session-6a3228a1-7394-4832-b693-b8b8a8b3353b-36",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:08:43.194Z",
+        "expiresAt": "2026-09-05T17:08:53.194Z",
+        "state": "start",
+        "scope": {
+          "type": "conversation",
+          "conversationId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+          "visibility": "private",
+          "audience": "members"
+        },
+        "capability": "typing"
+      }
+    },
+    {
+      "eventId": "ephemeral-34cab729-3af7-4396-88bf-2320c1750147-41",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:43.215Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-06af90b2-2479-4af5-94ca-2b49e4bf64f3-37",
+        "sessionId": "session-24fdcd05-3df6-4d7b-a716-68c8f0fc99d7-38",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:08:43.215Z",
+        "expiresAt": "2026-09-05T17:09:43.215Z",
+        "state": "away",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-aa6cb580-0a2c-4277-861e-9919725e37c6-42",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+      "type": "typing.signal",
+      "occurredAt": "2026-09-05T17:08:43.236Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-06af90b2-2479-4af5-94ca-2b49e4bf64f3-37",
+        "sessionId": "session-24fdcd05-3df6-4d7b-a716-68c8f0fc99d7-38",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:08:43.236Z",
+        "expiresAt": "2026-09-05T17:08:53.236Z",
+        "state": "start",
+        "scope": {
+          "type": "conversation",
+          "conversationId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+          "visibility": "private",
+          "audience": "members"
+        },
+        "capability": "typing"
+      }
+    },
+    {
+      "eventId": "ephemeral-9488a4eb-2f11-4164-9d57-b7d48d1cc74b-43",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+      "type": "typing.signal",
+      "occurredAt": "2026-09-05T17:08:43.257Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-06af90b2-2479-4af5-94ca-2b49e4bf64f3-37",
+        "sessionId": "session-24fdcd05-3df6-4d7b-a716-68c8f0fc99d7-38",
+        "sequence": 3,
+        "sentAt": "2026-09-05T17:08:43.257Z",
+        "expiresAt": "2026-09-05T17:08:53.257Z",
+        "state": "stop",
+        "scope": {
+          "type": "conversation",
+          "conversationId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+          "visibility": "private",
+          "audience": "members"
+        },
+        "capability": "typing"
+      }
+    },
+    {
+      "eventId": "ephemeral-ce828f03-cdad-499f-a635-eedf75fe69d6-44",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:43.258Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-06af90b2-2479-4af5-94ca-2b49e4bf64f3-37",
+        "sessionId": "session-24fdcd05-3df6-4d7b-a716-68c8f0fc99d7-38",
+        "sequence": 4,
+        "sentAt": "2026-09-05T17:08:43.258Z",
+        "expiresAt": "2026-09-05T17:09:43.258Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-ba1b7cfd-662e-491c-a05a-38b9d3430b9e-45",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+      "type": "typing.signal",
+      "occurredAt": "2026-09-05T17:08:43.278Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-530840c8-b1e4-4ab7-af86-ac786586100d-35",
+        "sessionId": "session-6a3228a1-7394-4832-b693-b8b8a8b3353b-36",
+        "sequence": 3,
+        "sentAt": "2026-09-05T17:08:43.278Z",
+        "expiresAt": "2026-09-05T17:08:53.278Z",
+        "state": "stop",
+        "scope": {
+          "type": "conversation",
+          "conversationId": "4f760d9b-e092-4295-ba6a-bdc733037ede",
+          "visibility": "private",
+          "audience": "members"
+        },
+        "capability": "typing"
+      }
+    },
+    {
+      "eventId": "ephemeral-e9b9ab0a-6b88-4dd1-b400-ee805d31782b-46",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:43.279Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-530840c8-b1e4-4ab7-af86-ac786586100d-35",
+        "sessionId": "session-6a3228a1-7394-4832-b693-b8b8a8b3353b-36",
+        "sequence": 4,
+        "sentAt": "2026-09-05T17:08:43.279Z",
+        "expiresAt": "2026-09-05T17:09:43.279Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-49cb30fd-e142-442d-81bb-0e36ae6724d6-51",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:43.379Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-49d785d8-e0c4-48a9-8e5d-45addaabe817-47",
+        "sessionId": "session-4f9d7017-a31a-4815-a3d7-f21afb3a729a-48",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:08:43.379Z",
+        "expiresAt": "2026-09-05T17:09:43.379Z",
+        "state": "online",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-727737a8-ad45-4d12-ab85-1b7cc4429ac6-52",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:43.400Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-e6989f6e-5965-4c63-9434-02301c74b38a-49",
+        "sessionId": "session-c6848a51-dfb6-49c0-8941-2003fc0c0676-50",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:08:43.400Z",
+        "expiresAt": "2026-09-05T17:09:43.400Z",
+        "state": "away",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-54d8b1d3-cc76-492f-996c-ef78a6e4ae77-53",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:08:58.427Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-e6989f6e-5965-4c63-9434-02301c74b38a-49",
+        "sessionId": "session-c6848a51-dfb6-49c0-8941-2003fc0c0676-50",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:08:58.427Z",
+        "expiresAt": "2026-09-05T17:09:58.427Z",
+        "state": "away",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-b0a3bd7c-5338-46f9-8a10-e14c4b243eb6-54",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:09:13.435Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-e6989f6e-5965-4c63-9434-02301c74b38a-49",
+        "sessionId": "session-c6848a51-dfb6-49c0-8941-2003fc0c0676-50",
+        "sequence": 3,
+        "sentAt": "2026-09-05T17:09:13.435Z",
+        "expiresAt": "2026-09-05T17:10:13.435Z",
+        "state": "away",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-5ab0333e-5eb3-45f5-91e2-896844942a19-55",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:09:28.437Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-e6989f6e-5965-4c63-9434-02301c74b38a-49",
+        "sessionId": "session-c6848a51-dfb6-49c0-8941-2003fc0c0676-50",
+        "sequence": 4,
+        "sentAt": "2026-09-05T17:09:28.437Z",
+        "expiresAt": "2026-09-05T17:10:28.437Z",
+        "state": "away",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-40a4bb65-73c4-4714-80ed-577690bf9918-56",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:09:43.380Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-49d785d8-e0c4-48a9-8e5d-45addaabe817-47",
+        "sessionId": "session-4f9d7017-a31a-4815-a3d7-f21afb3a729a-48",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:09:43.380Z",
+        "expiresAt": "2026-09-05T17:10:43.380Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-f0d88390-5c49-446a-8713-dba18daf7d60-57",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:09:43.422Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-e6989f6e-5965-4c63-9434-02301c74b38a-49",
+        "sessionId": "session-c6848a51-dfb6-49c0-8941-2003fc0c0676-50",
+        "sequence": 5,
+        "sentAt": "2026-09-05T17:09:43.422Z",
+        "expiresAt": "2026-09-05T17:10:43.422Z",
+        "state": "away",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-875169b4-d119-407e-8653-a74fc83ba60d-58",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:09:46.424Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-e6989f6e-5965-4c63-9434-02301c74b38a-49",
+        "sessionId": "session-c6848a51-dfb6-49c0-8941-2003fc0c0676-50",
+        "sequence": 6,
+        "sentAt": "2026-09-05T17:09:46.424Z",
+        "expiresAt": "2026-09-05T17:10:46.424Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-5e1933b3-a648-4e22-8e8f-676dadb8be1b-63",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:09:46.568Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-c31767ff-8f54-433b-9397-a1c06c617398-59",
+        "sessionId": "session-8896a742-9076-4ce1-8a44-cbbebdf66fe4-60",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:09:46.568Z",
+        "expiresAt": "2026-09-05T17:10:46.568Z",
+        "state": "online",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-a705d6d6-4b97-4a2b-a5ee-be6f86b5cc21-64",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:09:46.588Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-17128367-c7a8-4cdc-8718-7afc698771d6-61",
+        "sessionId": "session-fec76806-4df2-4c1c-a3ef-b3ada912d6cf-62",
+        "sequence": 1,
+        "sentAt": "2026-09-05T17:09:46.588Z",
+        "expiresAt": "2026-09-05T17:10:46.588Z",
+        "state": "away",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-73e36d83-050e-43c0-aa61-ddf611ecb1a2-65",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:10:01.623Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-c31767ff-8f54-433b-9397-a1c06c617398-59",
+        "sessionId": "session-8896a742-9076-4ce1-8a44-cbbebdf66fe4-60",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:10:01.623Z",
+        "expiresAt": "2026-09-05T17:11:01.623Z",
+        "state": "online",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-b5f5dce4-8d35-40df-9fb8-9b1ce4f6c870-66",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:10:16.623Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-c31767ff-8f54-433b-9397-a1c06c617398-59",
+        "sessionId": "session-8896a742-9076-4ce1-8a44-cbbebdf66fe4-60",
+        "sequence": 3,
+        "sentAt": "2026-09-05T17:10:16.623Z",
+        "expiresAt": "2026-09-05T17:11:16.623Z",
+        "state": "online",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-1abe8797-7411-48be-8e73-31d9b864480c-67",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:10:31.623Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-c31767ff-8f54-433b-9397-a1c06c617398-59",
+        "sessionId": "session-8896a742-9076-4ce1-8a44-cbbebdf66fe4-60",
+        "sequence": 4,
+        "sentAt": "2026-09-05T17:10:31.623Z",
+        "expiresAt": "2026-09-05T17:11:31.623Z",
+        "state": "online",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-3bf98f68-5a04-4c3f-b647-8e32514a40d2-68",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:10:46.589Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-17128367-c7a8-4cdc-8718-7afc698771d6-61",
+        "sessionId": "session-fec76806-4df2-4c1c-a3ef-b3ada912d6cf-62",
+        "sequence": 2,
+        "sentAt": "2026-09-05T17:10:46.589Z",
+        "expiresAt": "2026-09-05T17:11:46.589Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-d2a7d8cd-268b-4bfe-8021-28e59bb6c884-69",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:10:46.608Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-c31767ff-8f54-433b-9397-a1c06c617398-59",
+        "sessionId": "session-8896a742-9076-4ce1-8a44-cbbebdf66fe4-60",
+        "sequence": 5,
+        "sentAt": "2026-09-05T17:10:46.608Z",
+        "expiresAt": "2026-09-05T17:11:46.608Z",
+        "state": "online",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    },
+    {
+      "eventId": "ephemeral-449915e5-8145-4874-b344-dde80c5618b2-70",
+      "protocolVersion": 4,
+      "tenantId": "chat-lab",
+      "streamId": "user:grace",
+      "type": "presence.signal",
+      "occurredAt": "2026-09-05T17:10:49.611Z",
+      "payload": {
+        "durability": "ephemeral",
+        "actorUserId": "grace",
+        "deviceId": "device-c31767ff-8f54-433b-9397-a1c06c617398-59",
+        "sessionId": "session-8896a742-9076-4ce1-8a44-cbbebdf66fe4-60",
+        "sequence": 6,
+        "sentAt": "2026-09-05T17:10:49.611Z",
+        "expiresAt": "2026-09-05T17:11:49.611Z",
+        "state": "offline",
+        "scope": {
+          "type": "user_private",
+          "userId": "grace"
+        },
+        "capability": "presence"
+      }
+    }
+  ]
+}

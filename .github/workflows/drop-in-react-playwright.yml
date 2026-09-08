@@ -1,0 +1,75 @@
+name: Drop-in React Playwright
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: drop-in-react-playwright-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HANDRAIL_CHAT_FLUTTER_ROOT: ${{ github.workspace }}/.sdk-peers/flutter
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            examples/drop-in-react/package-lock.json
+      - name: Install root dependencies
+        run: npm ci --include=dev
+      - name: Read frozen Flutter revision
+        id: flutter-revision
+        run: node scripts/read-flutter-revision.mjs
+      - name: Check out matching Flutter SDK
+        uses: actions/checkout@v4
+        with:
+          repository: c0x65o/handrail-sdk-chat-flutter
+          ref: ${{ steps.flutter-revision.outputs.revision }}
+          path: .sdk-peers/flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: "3.41.7"
+          cache: true
+          pub-cache: true
+      - name: Install drop-in React dependencies
+        run: npm ci --include=dev
+        working-directory: examples/drop-in-react
+      - name: Build package
+        run: npm run build
+      - name: Build Flutter lab from locked SDK dependencies
+        run: npm run build:flutter:lab
+        working-directory: examples/drop-in-react
+      - name: Install locked Chromium browser
+        run: npx playwright install --with-deps chromium
+        working-directory: examples/drop-in-react
+      - name: Run drop-in React browser journeys
+        id: browser-tests
+        run: npm run test:browser -- --workers=1
+        working-directory: examples/drop-in-react
+      - name: Upload Playwright failure artifacts
+        if: failure() && steps.browser-tests.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: drop-in-react-playwright-failure
+          path: |
+            examples/drop-in-react/test-results/playwright
+            examples/drop-in-react/playwright-report
+          if-no-files-found: ignore
+          retention-days: 3

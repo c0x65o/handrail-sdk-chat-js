@@ -1,0 +1,213 @@
+{
+  "runtime_evidence": {
+    "tool": "handrail_record_qa_runtime_evidence",
+    "status": "completed",
+    "owner_goal_turn_behavior": "continue",
+    "result": {
+      "ok": true,
+      "result": {
+        "ok": true,
+        "work_request_id": "003ca3b3-29b3-4d2e-a90e-f6d3d100795a",
+        "project_id": "1791fdf7-f197-483c-ba67-5c0da8f4315f",
+        "qa_campaign_id": null,
+        "inserted": [
+          {
+            "id": "aff5206e-9073-47e1-92cf-6ba2f0a9273b",
+            "kind": "file",
+            "filename": "README.md",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "9d878dda-c3b5-4ec9-bbdc-78f61fb6aa66",
+            "kind": "file",
+            "filename": "backend-probe.json",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "fdc1d2cf-7b40-42f5-9e0c-01512cff74cb",
+            "kind": "file",
+            "filename": "backend-provenance.json",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "1e49060a-d923-4df6-8965-e567e0b5c30e",
+            "kind": "file",
+            "filename": "commands.json",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "c04b4706-72dc-4943-8e10-abdbc27b80f2",
+            "kind": "log",
+            "filename": "compilation.log",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "55676736-7dc4-4ba1-8952-353782cf49c8",
+            "kind": "file",
+            "filename": "compiled-identity.json",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "e9fafdc9-0e0b-4751-a475-0e194007231a",
+            "kind": "file",
+            "filename": "execute.mjs",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "5b37d15d-c6b1-4419-933d-6587884893a5",
+            "kind": "log",
+            "filename": "negative-control.log",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "af237f10-51b3-4958-b5d4-2ec46d9b2ed0",
+            "kind": "log",
+            "filename": "passing-test.log",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "ed53c2b7-c14f-4505-aea8-81ffcfd13c26",
+            "kind": "file",
+            "filename": "preservation-cleanup.json",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "5c781203-a177-4792-b846-64202a3838c1",
+            "kind": "file",
+            "filename": "source-identity.json",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          },
+          {
+            "id": "a6fac3ac-ffd4-45da-882e-0d1b15bebf2a",
+            "kind": "file",
+            "filename": "test-results.json",
+            "visibility": "staff_only",
+            "redaction_status": "redacted"
+          }
+        ],
+        "evidence_count": 12,
+        "mutation_boundary": "run_owned_artifact_materialization_and_work_request_validation_evidence_metadata"
+      }
+    }
+  },
+  "validation": {
+    "tool": "handrail_record_qa_validation_result",
+    "status": "completed",
+    "owner_goal_turn_behavior": "continue",
+    "result": {
+      "ok": true,
+      "result": {
+        "ok": true,
+        "work_request_id": "003ca3b3-29b3-4d2e-a90e-f6d3d100795a",
+        "project_id": "1791fdf7-f197-483c-ba67-5c0da8f4315f",
+        "qa_campaign_id": null,
+        "validation_result": {
+          "schema": "handrail.qa_validation_result.v1",
+          "source": "qa-bug-testing",
+          "status": "passed",
+          "summary": "Fresh isolated TypeScript compile exited 0. Verified project dev PostgreSQL run passed 9/9 with zero skips, including fractional claim. Separate compiled copy restoring only two direct timestamp assignments exited 1 with fractional-claim SQLSTATE 23514 timestamp-order constraint failure. Both owned schemas removed; source/test and shared dist hashes unchanged.",
+          "environment": "dev",
+          "scenario": "Focused edit-message PostgreSQL fractional-claim regression and old-assignment negative control",
+          "target": "handrail-sdk-chat/test/postgres-edit-message-command.test.mjs",
+          "target_environment": {
+            "environment": "dev",
+            "target": "handrail-sdk-chat/test/postgres-edit-message-command.test.mjs",
+            "url": null,
+            "service": null,
+            "route": null
+          },
+          "auth_profile_metadata": null,
+          "steps": [
+            "Verified scoped project dev resource through read-only MCP inspection and direct SQL probe.",
+            "Snapshotted dirty source/test inputs with SHA-256; compiled snapshot into isolated dist.",
+            "Ran unchanged focused test with TEST_DATABASE_URL bound in memory to verified worker DATABASE_URL.",
+            "Copied compiled tree and restored only completed_at=$3 and updated_at=$3; ran same test.",
+            "Verified owned schema absence, artifact isolation, unchanged source/tests/shared dist; persisted 12 evidence artifacts."
+          ],
+          "expected": "Fractional-claim regression passes without skips on current source and fails with timestamp-order constraint after restoring old assignments.",
+          "observed": "Passing: 9 tests, 9 pass, 0 fail, 0 skipped. Negative: 9 tests, 6 pass, 3 fail (fractional claim and stale revision plus parent), 0 skipped; chat_idempotency_keys_timestamp_order_check. Compilation exit 0. Both artifact resolution checks passed.",
+          "evidence_refs": [
+            {
+              "id": "aff5206e-9073-47e1-92cf-6ba2f0a9273b",
+              "filename": "README.md"
+            },
+            {
+              "id": "9d878dda-c3b5-4ec9-bbdc-78f61fb6aa66",
+              "filename": "backend-probe.json"
+            },
+            {
+              "id": "fdc1d2cf-7b40-42f5-9e0c-01512cff74cb",
+              "filename": "backend-provenance.json"
+            },
+            {
+              "id": "1e49060a-d923-4df6-8965-e567e0b5c30e",
+              "filename": "commands.json"
+            },
+            {
+              "id": "c04b4706-72dc-4943-8e10-abdbc27b80f2",
+              "filename": "compilation.log"
+            },
+            {
+              "id": "55676736-7dc4-4ba1-8952-353782cf49c8",
+              "filename": "compiled-identity.json"
+            },
+            {
+              "id": "e9fafdc9-0e0b-4751-a475-0e194007231a",
+              "filename": "execute.mjs"
+            },
+            {
+              "id": "5b37d15d-c6b1-4419-933d-6587884893a5",
+              "filename": "negative-control.log"
+            },
+            {
+              "id": "af237f10-51b3-4958-b5d4-2ec46d9b2ed0",
+              "filename": "passing-test.log"
+            },
+            {
+              "id": "ed53c2b7-c14f-4505-aea8-81ffcfd13c26",
+              "filename": "preservation-cleanup.json"
+            },
+            {
+              "id": "5c781203-a177-4792-b846-64202a3838c1",
+              "filename": "source-identity.json"
+            },
+            {
+              "id": "a6fac3ac-ffd4-45da-882e-0d1b15bebf2a",
+              "filename": "test-results.json"
+            }
+          ],
+          "artifact_refs": [],
+          "findings": [],
+          "blockers": [],
+          "handoffs": [],
+          "staged_follow_up_links": [],
+          "residual_risk": "Focused PostgreSQL validation only; no broad test campaign or runtime/configuration changes.",
+          "next_actions": [
+            "Allow configured work-request finalization to settle this repair; Owner Goal runner can re-evaluate using persisted fresh execution evidence."
+          ],
+          "recorded_by_tool": "handrail_record_qa_validation_result",
+          "codex_run_id": "510bf914-16a0-49ae-a3d2-c8e79636d949",
+          "recorded_at": "2026-09-05T19:36:10.122Z",
+          "work_request_id": "003ca3b3-29b3-4d2e-a90e-f6d3d100795a",
+          "project_id": "1791fdf7-f197-483c-ba67-5c0da8f4315f",
+          "qa_campaign_id": null,
+          "owner_goal_id": "65b8f78e-01fc-4fe3-933d-f601ee4c4753",
+          "owner_goal_turn_id": "4e2126b9-d996-4f4f-8c27-25fb123a9ac7"
+        },
+        "canonical_result": null,
+        "mutation_boundary": "work_request_validation_state_and_atomic_canonical_result_only"
+      }
+    }
+  }
+}

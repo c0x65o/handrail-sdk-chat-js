@@ -1,0 +1,101 @@
+{
+  "backendKind": "url-backed",
+  "requests": [
+    {
+      "method": "PATCH",
+      "path": "/api/chat/conversations/927a2077-d6ab-4961-8cf8-bbb04ff3be31/read-cursor"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af/messages"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/927a2077-d6ab-4961-8cf8-bbb04ff3be31/messages"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af/draft"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af/read-cursor"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/_meta"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/saved-messages"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/message-reminders"
+    },
+    {
+      "method": "POST",
+      "path": "/api/chat/directory/users:batch"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/927a2077-d6ab-4961-8cf8-bbb04ff3be31/draft"
+    },
+    {
+      "method": "POST",
+      "path": "/api/chat/directory/users:batch"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/927a2077-d6ab-4961-8cf8-bbb04ff3be31/messages"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/preferences/reply-style"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/927a2077-d6ab-4961-8cf8-bbb04ff3be31/messages/115baa9d-48da-4ec6-a561-0cc0e98cfca5/context"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/927a2077-d6ab-4961-8cf8-bbb04ff3be31"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af/messages"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/927a2077-d6ab-4961-8cf8-bbb04ff3be31/messages"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af/draft"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations/97585bd3-3b83-4087-bb8a-99f007d715af"
+    }
+  ]
+}

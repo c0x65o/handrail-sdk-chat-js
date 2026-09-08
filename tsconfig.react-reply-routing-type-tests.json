@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.react-reply-routing.json",
+  "compilerOptions": { "noEmit": true, "rootDir": "." },
+  "include": ["type-tests/react-reply-routing.test.ts"]
+}

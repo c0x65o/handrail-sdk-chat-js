@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/server/notification-dispatcher.ts",
+    "src/server/create-chat-server.ts",
+    "src/server/postgres-schema-migrations.ts",
+    "src/testing/index.ts"
+  ]
+}

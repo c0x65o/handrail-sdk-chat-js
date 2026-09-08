@@ -1,0 +1,31 @@
+{
+  "observedAt": "2026-09-05T00:39:44.368Z",
+  "source": "owner_check_goal_progress",
+  "auditId": "33e61a9d-4f28-4fc4-8b67-846c0faf5aca",
+  "ownerGoalId": "b628a20e-48c6-4690-aaac-35b3e64a0442",
+  "originWorkRequestId": "db7b4779-b4b9-4705-8d15-ba8ab17d11fe",
+  "qaCampaignId": "205b1fce-2ca4-4484-a545-0d52b165e05d",
+  "classification": {
+    "status": "completed",
+    "state": "needs_attention",
+    "active": false,
+    "waiting": false,
+    "achievement_blocking": true,
+    "terminal": true,
+    "attention": true,
+    "needs_attention": true,
+    "convergence_active": true,
+    "attention_reason": "completed_qa_requires_repair_and_zero_finding_revalidation"
+  },
+  "counts": {
+    "finding_count": 1,
+    "unresolved_finding_count": 0,
+    "linked_repair_finding_count": 1,
+    "resolved_linked_repair_finding_count": 1,
+    "active_approval_action_count": 0
+  },
+  "repairWorkRequestId": "7b557337-6d00-4e00-bd89-5a09572b224d",
+  "platformFollowupId": "1af95e2c-0d19-45fd-b488-c7e22d885219",
+  "attentionCleared": false,
+  "residualRisk": "No canonical zero-finding revalidation campaign is recorded. Successful code-repair evidence does not itself satisfy the platform QA gate."
+}

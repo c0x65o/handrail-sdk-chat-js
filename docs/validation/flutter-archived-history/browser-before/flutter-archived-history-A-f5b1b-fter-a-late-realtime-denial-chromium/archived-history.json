@@ -1,0 +1,55 @@
+{
+  "backendKind": "url-backed",
+  "fixture": {
+    "threadId": "8660a23a-2020-450f-b6ab-e81e060fed82",
+    "rootMessageId": "2656853c-9e1d-4be3-8672-8fe5a67295e0",
+    "replyMessageId": "7a3e92c8-9d05-4595-b486-300e41aae84e",
+    "archive": {
+      "operation": "set_conversation_archive",
+      "intent": "archive",
+      "reconciliationStatus": "applied",
+      "conversationId": "8660a23a-2020-450f-b6ab-e81e060fed82",
+      "expectedLifecycleRevision": 1,
+      "lifecycleRevision": 2,
+      "archiveState": {
+        "status": "archived",
+        "archivedAt": "2026-09-07T22:16:10.239Z",
+        "archivedByUserId": "alice"
+      }
+    }
+  },
+  "responses": [
+    {
+      "path": "/api/chat/conversations/8660a23a-2020-450f-b6ab-e81e060fed82",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/8660a23a-2020-450f-b6ab-e81e060fed82/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/8660a23a-2020-450f-b6ab-e81e060fed82/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/8660a23a-2020-450f-b6ab-e81e060fed82",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/8660a23a-2020-450f-b6ab-e81e060fed82",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/8660a23a-2020-450f-b6ab-e81e060fed82/draft",
+      "method": "GET",
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "semantics": "- heading \"Flutter Chat Lab · shared backend\" [level=2]\n- button \"Alice\"\n- text: \"Managed realtime: connected\"\n- button \"Disconnect\"\n- button \"Capture state\"\n- button \"Export evidence\"\n- text: Thread\n- button \"Open workspace settings\"\n- button \"Close panel\"\n- banner \"Archived launch history\":\n  - button \"Thread subscriptions\"\n  - button \"Close panel\"\n  - text: \"Following. Notifications: all. Unmuted.\"\n- text: Thread or parent administratively archived. Sending is disabled; your draft is retained. Thread lifecycle access denied. Your draft is retained. Thread root message In Launch planning Archived launch notes Conversation access revoked Conversation realtime access was rejected.\n- group \"Message composer You no longer have access to this conversation.\":\n  - textbox \"Message input\" [disabled]\n  - textbox \"You no longer have access to this conversation.\" [disabled]\n  - button \"Add attachment\" [disabled]\n  - group:\n    - button \"Bold\":\n      - button \"Bold\" [disabled]\n    - button \"Italic\":\n      - button \"Italic\" [disabled]\n    - button \"Link\":\n      - button \"Link\" [disabled]\n    - button \"Bulleted list\":\n      - button \"Bulleted list\" [disabled]\n    - button \"Numbered list\":\n      - button \"Numbered list\" [disabled]\n    - button \"Inline code\":\n      - button \"Inline code\" [disabled]\n    - button \"Code block\":\n      - button \"Code block\" [disabled]\n  - button \"Send message\" [disabled]"
+}

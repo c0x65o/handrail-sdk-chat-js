@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": true, "rootDir": "." },
+  "include": ["src/contracts/reply-style-preference.ts", "type-tests/reply-style-preference.test.ts"]
+}

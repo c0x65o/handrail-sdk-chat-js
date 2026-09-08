@@ -1,0 +1,70 @@
+{
+  "tool": "handrail_dev_resource_action",
+  "status": "completed",
+  "owner_goal_turn_behavior": "continue",
+  "result": {
+    "ok": true,
+    "result": {
+      "ok": true,
+      "action": "inspect",
+      "resource": {
+        "id": "c699099d-668d-4a0f-a5a0-7f52923f3e32",
+        "project_id": "1791fdf7-f197-483c-ba67-5c0da8f4315f",
+        "name": "handrail-chat-db",
+        "resource_type": "postgres",
+        "provider": "docker_postgres",
+        "env": "dev",
+        "config": {
+          "version": "16",
+          "database": "handrail_chat"
+        },
+        "status": "provisioned",
+        "status_message": null,
+        "provisioned_at": "2026-08-28T06:11:03.037Z",
+        "created_at": "2026-08-28T06:10:52.481Z",
+        "updated_at": "2026-09-05T19:33:01.197Z",
+        "node_group": null,
+        "repo_id": "fea405c8-3cdf-4c8f-9bd0-57ccf56a37ad",
+        "probe_health": "healthy",
+        "probe_checked_at": "2026-09-05T19:33:01.197Z",
+        "consecutive_probe_failures": 0,
+        "autogrow_enabled": false,
+        "credential_summary": {
+          "host": "127.0.0.1",
+          "port": 34371,
+          "database": "handrail_chat",
+          "username": "handrail_chat_dev_handrail_chat_db_app",
+          "container_name": "handrail-pg-handrail-chat-dev-handrail-chat-db",
+          "volume_name": "handrail-pg-data-handrail-chat-dev-handrail-chat-db",
+          "version": "16",
+          "redacted": true
+        }
+      },
+      "runtime": {
+        "supported": true,
+        "provider": "docker_postgres",
+        "state": "running",
+        "detail": null,
+        "execution_mode": "local",
+        "execution_label": "local",
+        "transport": "local",
+        "docker_context": null,
+        "docker_server": "20.10.24+dfsg1",
+        "container_name": "handrail-pg-handrail-chat-dev-handrail-chat-db",
+        "volume_name": "handrail-pg-data-handrail-chat-dev-handrail-chat-db",
+        "container_present": true,
+        "container_status": "running",
+        "health_status": "healthy",
+        "labels_match": true,
+        "adopted_from_prior_resource": false,
+        "host": "127.0.0.1",
+        "port": 34371,
+        "port_source": "docker_runtime",
+        "runtime_port_current": true,
+        "last_known_port": 34371,
+        "version": "16",
+        "volume_present": true
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.composer-replies.json",
+  "compilerOptions": { "noEmit": true, "rootDir": "." },
+  "include": ["src/ui/index.ts", "type-tests/message-composer.test.ts"]
+}

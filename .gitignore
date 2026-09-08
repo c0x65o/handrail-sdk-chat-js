@@ -4,3 +4,15 @@
 *.env.*
 !.env.example
 !*.env.example
+node_modules/
+dist/
+# Downloaded Playwright browser binaries must stay out of Git history.
+/build/playwright-browsers/
+/flutter/handrail_chat/.dart_tool/
+/flutter/handrail_chat/build/
+/examples/drop-in-react/test-results/
+/examples/drop-in-react/playwright-report/
+
+/build/
+*.log
+/.sdk-peers/

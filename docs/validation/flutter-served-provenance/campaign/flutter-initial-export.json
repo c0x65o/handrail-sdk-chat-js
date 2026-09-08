@@ -1,0 +1,200 @@
+{
+  "captures": [
+    {
+      "label": "before-parent-hydration",
+      "capturedAt": "2026-09-07T17:47:49.909Z",
+      "mode": "shared-backend",
+      "actor": "alice",
+      "instanceId": "09cc43d02b2911e0ff91788be8ae55ae",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "idle",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "14d069be-fbde-4a1b-b3f5-628f843fc1ae",
+      "conversationIds": [
+        "14d069be-fbde-4a1b-b3f5-628f843fc1ae"
+      ],
+      "hydratedTimelineIds": [],
+      "cursor": null,
+      "timelineReplayCursor": null,
+      "durableStreams": {},
+      "messages": [],
+      "diagnostics": [
+        "conversation.list:completed"
+      ],
+      "provenance": {
+        "sourceRevision": "43b47b93a69523fee5376dfcc1745297b58c6857",
+        "sourceDigest": "f5c932a70abde412965137aa0ed4872624273bfb913aa179f86ec7ceefa308a1",
+        "builtAt": "2026-09-07T17:01:10.989Z",
+        "packageVersion": "0.1.19"
+      }
+    },
+    {
+      "label": "before-managed-snapshot-hydration",
+      "capturedAt": "2026-09-07T17:47:50.942Z",
+      "mode": "shared-backend",
+      "actor": "alice",
+      "instanceId": "09cc43d02b2911e0ff91788be8ae55ae",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "hydratingSnapshot",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "14d069be-fbde-4a1b-b3f5-628f843fc1ae",
+      "conversationIds": [
+        "14d069be-fbde-4a1b-b3f5-628f843fc1ae"
+      ],
+      "hydratedTimelineIds": [
+        "14d069be-fbde-4a1b-b3f5-628f843fc1ae"
+      ],
+      "cursor": null,
+      "timelineReplayCursor": {
+        "eventId": "7ab408e8-0afc-4acc-a298-134192810c25"
+      },
+      "durableStreams": {},
+      "messages": [
+        {
+          "id": "832e136b-5ddc-41db-a2e4-9b3190f778a6",
+          "canonicalSummary": {
+            "threadId": "e35ac80a-52f1-472a-b8f0-f35aa7eb9ef6",
+            "replyCount": 1,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T17:47:48.738Z"
+          },
+          "projectedSummary": {
+            "threadId": "e35ac80a-52f1-472a-b8f0-f35aa7eb9ef6",
+            "replyCount": 1,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T17:47:48.738Z"
+          }
+        },
+        {
+          "id": "30876de8-24e3-4d0d-bb31-4b4e89dffb9f",
+          "canonicalSummary": null,
+          "projectedSummary": null
+        }
+      ],
+      "diagnostics": [
+        "conversation.list:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "reply.style.preference:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery"
+      ],
+      "provenance": {
+        "sourceRevision": "43b47b93a69523fee5376dfcc1745297b58c6857",
+        "sourceDigest": "f5c932a70abde412965137aa0ed4872624273bfb913aa179f86ec7ceefa308a1",
+        "builtAt": "2026-09-07T17:01:10.989Z",
+        "packageVersion": "0.1.19"
+      }
+    }
+  ],
+  "current": {
+    "mode": "shared-backend",
+    "actor": "alice",
+    "instanceId": "09cc43d02b2911e0ff91788be8ae55ae",
+    "seedProfile": "reply-styles",
+    "availableActors": {
+      "alice": "Alice",
+      "bob": "Bob"
+    },
+    "endpoint": "http://127.0.0.1:4167/api/chat",
+    "identity": {
+      "tenantId": "chat-lab",
+      "userId": "alice",
+      "deviceId": "device-fd77fd63-8a26-40e4-b0ae-6ac0306df772-44"
+    },
+    "realtime": "connected",
+    "clientLifecycle": "ready",
+    "clientDiagnostic": null,
+    "listError": null,
+    "error": null,
+    "selectedConversationId": "14d069be-fbde-4a1b-b3f5-628f843fc1ae",
+    "conversationIds": [
+      "14d069be-fbde-4a1b-b3f5-628f843fc1ae"
+    ],
+    "hydratedTimelineIds": [
+      "14d069be-fbde-4a1b-b3f5-628f843fc1ae"
+    ],
+    "cursor": {
+      "eventId": "038b0645-a30e-454a-8a0d-6ef3471a8f39"
+    },
+    "timelineReplayCursor": {
+      "eventId": "038b0645-a30e-454a-8a0d-6ef3471a8f39"
+    },
+    "durableStreams": {},
+    "messages": [
+      {
+        "id": "832e136b-5ddc-41db-a2e4-9b3190f778a6",
+        "canonicalSummary": {
+          "threadId": "e35ac80a-52f1-472a-b8f0-f35aa7eb9ef6",
+          "replyCount": 1,
+          "participantIds": [
+            "bob"
+          ],
+          "unreadCount": 0,
+          "lastReplyAt": "2026-09-07T17:47:48.738Z"
+        },
+        "projectedSummary": {
+          "threadId": "e35ac80a-52f1-472a-b8f0-f35aa7eb9ef6",
+          "replyCount": 1,
+          "participantIds": [
+            "bob"
+          ],
+          "unreadCount": 0,
+          "lastReplyAt": "2026-09-07T17:47:48.738Z"
+        }
+      },
+      {
+        "id": "30876de8-24e3-4d0d-bb31-4b4e89dffb9f",
+        "canonicalSummary": null,
+        "projectedSummary": null
+      }
+    ],
+    "diagnostics": [
+      "conversation.list:completed",
+      "message.timeline:completed",
+      "conversation.detail:completed",
+      "reply.style.preference:completed",
+      "conversation.detail:completed",
+      "conversation.detail:completed",
+      "durable_event_recovery",
+      "message_reminder.list:completed",
+      "conversation.list:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "connection_lost",
+      "reply.style.preference:completed",
+      "conversation.detail:completed"
+    ],
+    "provenance": {
+      "sourceRevision": "43b47b93a69523fee5376dfcc1745297b58c6857",
+      "sourceDigest": "f5c932a70abde412965137aa0ed4872624273bfb913aa179f86ec7ceefa308a1",
+      "builtAt": "2026-09-07T17:01:10.989Z",
+      "packageVersion": "0.1.19"
+    }
+  }
+}

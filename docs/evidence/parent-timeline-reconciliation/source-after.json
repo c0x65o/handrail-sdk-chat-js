@@ -1,0 +1,17 @@
+{
+  "baseManifest": "source-before.json",
+  "baseManifestSha256": "22b6f2ab8119f0f313ee0ef0e98000b1722ab8bc9e7b017a67831792e84ea38d",
+  "changedFiles": {
+    "examples/drop-in-react/e2e/flutter-backend-lab.spec.mjs": "0421b6dc59d94112cb42d3beb19948d09f57fd12c84139cb3097844125f30078",
+    "flutter/handrail_chat/lib/src/core/normalized_snapshot_state.dart": "1206e25a414b116fbff31edd464db35d27fdfe2028be98907c82535ab25533b9"
+  },
+  "validationInputs": {
+    "flutter/handrail_chat/test/durable_message_event_reducer_test.dart": "5d3fe14ef129251e1afe00132b90bf5063ae812085882f5b43335a73b9145a3d",
+    "examples/drop-in-react/e2e/chat-lab.fixture.mjs": "d77dc85fbf4149997ac2f451c73662b67b1ed09970cf3d7003392d24f8a2f5ea",
+    "examples/drop-in-react/scripts/chat-lab-backend.mjs": "69f0bf8741ca1f0799cf82f8a3b399945623d1b69305c2c7f40aaeeba12ef60c",
+    "examples/drop-in-react/scripts/build-flutter-chat-lab.mjs": "91459927d942a1fc284fb3ed9212e5af5c2abc93a20e9e133f658e06a159d912",
+    "dist/server/send-message-command.js": "8ff99fde67904bb982aaad69d962b95b1241ef9d0aa71f581d38fac22a0a02ef",
+    "dist/server/thread-summary-query.js": "8ab24ebc18e20d98f985a0381bd74d8d9755fd7ddbd96436f0a4fef9d0d015bf",
+    "dist/server/message-timeline-query.js": "985bff2ba8575a5f425ecc4aa9b6d488654fce4e1f0a5ab340b4fed6e1b8793c"
+  }
+}

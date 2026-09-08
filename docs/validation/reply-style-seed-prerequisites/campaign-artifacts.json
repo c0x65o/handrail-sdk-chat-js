@@ -1,0 +1,42 @@
+{
+  "campaignId": "298e20b4-4faf-4283-949d-3801cf437aa8",
+  "sourceFinding": "526b684a-33ca-428b-a65f-1c63892bf98b",
+  "review": "Three image inputs reviewed; JSON summaries reviewed from work request. Resolved attachment files were unavailable in worker filesystem. Hashes below were supplied by the work request.",
+  "artifacts": [
+    {
+      "path": "campaigns/298e20b4-4faf-4283-949d-3801cf437aa8/13-flutter-bob-discord.png",
+      "apiPath": "/api/pm/qa-campaign-artifacts/76477eed-7016-4d2e-8f69-cef9b5de2693/content",
+      "suppliedSha256": "7ae1a5b43a950c1d120dfe2d3a583d4e934753de838f38d595933bb806718a8e"
+    },
+    {
+      "path": "campaigns/298e20b4-4faf-4283-949d-3801cf437aa8/38-group-missing-third-actor.png",
+      "apiPath": "/api/pm/qa-campaign-artifacts/68c3929a-2011-481b-8a1e-4d7469edee19/content",
+      "suppliedSha256": "0f7ba90a1ecfad6a1fd25bb2937645d817e6dfb4e0b5c4ff051306a75bea85c1"
+    },
+    {
+      "path": "campaigns/298e20b4-4faf-4283-949d-3801cf437aa8/46-flutter-alice-independent-current.png",
+      "apiPath": "/api/pm/qa-campaign-artifacts/619c2e4d-31d8-4e49-b9fb-b67655f8af76/content",
+      "suppliedSha256": "a4c18ef3c49dac2f4c38a1d476cae2dd7ed0606c6dd4e3becdb0a8c2b946ea75"
+    },
+    {
+      "path": "campaigns/298e20b4-4faf-4283-949d-3801cf437aa8/canonical-final.json",
+      "apiPath": "/api/pm/qa-campaign-artifacts/5d0390d1-c414-4afb-a981-0e37faef9d72/content",
+      "suppliedSha256": "fa6e7a2dd32213fc53302379c999898b0a9a8ca76c66db9d05c148a21e279831"
+    },
+    {
+      "path": "campaigns/298e20b4-4faf-4283-949d-3801cf437aa8/group-prerequisite.json",
+      "apiPath": "/api/pm/qa-campaign-artifacts/9f53f85e-742d-4ca6-9df9-59a2bd91bbde/content",
+      "suppliedSha256": "153905adefec2a903cba73f3e9b0c20c4040ccf91eb5b9ab9ead28e497cb498f"
+    },
+    {
+      "path": "campaigns/298e20b4-4faf-4283-949d-3801cf437aa8/runtime-instance.json",
+      "apiPath": "/api/pm/qa-campaign-artifacts/0f6303f1-9d0f-4da6-a637-f48def4f81a7/content",
+      "suppliedSha256": "ea0284964f058c6239e84b91cda43040e54fd0be42f2f9ed578f8b86323ea23d"
+    },
+    {
+      "path": "campaigns/298e20b4-4faf-4283-949d-3801cf437aa8/transport.json",
+      "apiPath": "/api/pm/qa-campaign-artifacts/3fcfe99d-4e30-4827-ba46-bde22082e558/content",
+      "suppliedSha256": "91b5d299e6aec63b264b1b234c21b8a41e57fbc630a5ebae50ecb9412804516c"
+    }
+  ]
+}

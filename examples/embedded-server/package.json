@@ -1,0 +1,24 @@
+{
+  "name": "embedded-server-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "npm run build && node dist/main.js",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "build": "tsc --project tsconfig.json",
+    "smoke": "npm run build && node --test test/smoke.test.mjs",
+    "check:static": "node scripts/static-check.mjs",
+    "check": "npm run typecheck && npm run smoke && npm run check:static"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@handrail/chat": "file:../.."
+  },
+  "devDependencies": {
+    "@types/node": "26.3.0",
+    "typescript": "7.0.2"
+  }
+}

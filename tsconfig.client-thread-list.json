@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "outDir": "build/client-thread-list" },
+  "include": ["src/client/index.ts", "src/react/index.ts"]
+}

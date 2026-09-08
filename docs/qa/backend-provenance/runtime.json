@@ -1,0 +1,45 @@
+{
+  "service": "chat-lab",
+  "command": "npm run build && npm --prefix examples/drop-in-react ci --ignore-scripts && npm --prefix examples/drop-in-react run dev:lab",
+  "startedAt": "2026-09-05T00:31:38.027Z",
+  "pid": 2040803,
+  "health": {
+    "status": "ok",
+    "http_status": 200,
+    "latency_ms": 2,
+    "url": "http://127.0.0.1:4167/__chat-lab/health"
+  },
+  "reconciliation": {
+    "classification": "supervised_running",
+    "authoritative_state": "running",
+    "supervisor": {
+      "pid": 2040803,
+      "alive": true,
+      "process_group_id": 2039260,
+      "source": "handrail_pid_file"
+    },
+    "listener": {
+      "port": 4167,
+      "present": true,
+      "pid": 2040803,
+      "process_group_id": 2039260,
+      "matches_supervisor": true,
+      "owned_by_service": true,
+      "owner_project_id": null,
+      "owner_service_id": null,
+      "source": "host_lsof_tcp_listen"
+    },
+    "probe_provenance": {
+      "scope": "handrail_host_process",
+      "target": "127.0.0.1:4167",
+      "tcp_ready": true,
+      "queued_worker_namespace_checked": false
+    },
+    "qa_browser_route": {
+      "url": "https://h-57a5c33bac91a8de.dev.handrail-daas.com/",
+      "scope": "handrail_dev_proxy",
+      "status": "available"
+    }
+  },
+  "logs": "\n[handrail] starting chat-lab with /bin/bash -c at 2026-09-05T00:31:37.979Z\n[handrail] runtime mode: host_process\n[handrail] command: npm run build && npm --prefix examples/drop-in-react ci --ignore-scripts && npm --prefix examples/drop-in-react run dev:lab\n\n> @handrail/chat@0.1.76 build\n> node scripts/generate-package-version.mjs --check && tsc --project tsconfig.json && node scripts/copy-ui-styles.mjs\n\nGenerated package-version source is up to date.\nnpm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation\n\nadded 118 packages in 3s\n\n> handrail-chat-drop-in-react-example@0.0.0 dev:lab\n> node scripts/chat-lab.mjs\n\nCompiling lib/main.dart for the Web...                          Chat Lab backend provenance {\"instanceId\":\"a4837bb57f0527273a805ad3c3ff7c88\",\"backend\":{\"scheme\":\"sha256-loaded-functions-v1\",\"capturedAt\":\"2026-09-05T00:31:43.782Z\",\"fingerprint\":\"79cee7fa07697b75b0c233affc00f11329cca29ed7ff803f231006720b33bbe4\",\"functions\":{\"createChatTestHarness\":\"1cd44ec754da756a730e9f007afe23d9c36cf415454af2846ef9424bcf42e24d\",\"createChatServer\":\"215a934e50ce9e555661cbc62c555b9d0e1c062e48c1509ecf6782b10c2e611c\",\"createChatEphemeralSignalController\":\"ed1f948c7fb8b5bff408ee016df0351c4642b40ea0923ae957877430d1ddf129\"}}}\nReact real-stack Chat Lab ready at http://127.0.0.1:4167/chat-lab.html\nDefault React message renderer Lab ready at http://127.0.0.1:4167/reminder-chat-lab.html\nLegacy React Chat Lab alias ready at http://127.0.0.1:4167/react-chat-lab.html\nFlutter HandrailMessageTimeline Lab ready at http://127.0.0.1:4167/__flutter-chat-lab/\n\nExpected to find fonts for (MaterialIcons, packages/cupertino_icons/CupertinoIcons), but found (MaterialIcons). This usually means you are referring to font families in an IconData class but not including them in the assets section of your pubspec.yaml, are missing the package that would include them, or are missing \"uses-material-design: true\".\nFont asset \"MaterialIcons-Regular.otf\" was tree-shaken, reducing it from 1645184 to 13400 bytes (99.2% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.\nCompiling lib/main.dart for the Web...                             58.5s\n✓ Built build/web"
+}

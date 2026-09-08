@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.client-message-context.json",
+  "compilerOptions": { "noEmit": true, "rootDir": "." },
+  "include": ["type-tests/client-message-context.test.ts"]
+}

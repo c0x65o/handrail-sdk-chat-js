@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/contracts/generated/durable-events.ts"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM"],
+    "noEmit": true,
+    "rootDir": "."
+  },
+  "include": [
+    "src/contracts/reaction-mutations.ts",
+    "type-tests/reaction-mutations.test.ts"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.react-reply-style.json",
+  "compilerOptions": { "noEmit": true, "rootDir": "." },
+  "include": ["src/ui/index.ts", "src/react/index.ts", "type-tests/react-reply-style.test.ts"]
+}

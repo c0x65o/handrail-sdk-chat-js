@@ -1,0 +1,13 @@
+{
+  "snapshot": "- heading \"Flutter Chat Lab · shared backend\" [level=2]\n- button \"Alice\"\n- text: \"Managed realtime: connected\"\n- button \"Disconnect\"\n- button \"Capture state\"\n- button \"Export evidence\"\n- button \"Back to conversations\"\n- heading \"Direct message\" [level=2]\n- button \"Open workspace settings\"\n- group \"Message timeline\":\n  - group:\n    - group \"Message 1 from bob QA 298e20b4 DM source\":\n      - button \"Copy\"\n      - button \"Mark unread from message 1\":\n        - button\n      - button \"Forward\"\n      - button \"Remind me\"\n      - button \"Create Thread\"\n      - button \"Reply\"\n    - group \"Message 2 from bob Original message unavailable QA 298e20b4 DM reply\":\n      - button \"Copy\"\n      - button \"Mark unread from message 2\":\n        - button\n      - button \"Forward\"\n      - button \"Remind me\"\n      - button \"Create Thread\"\n      - button \"Reply\"\n    - group \"Message 3 from bob Original message unavailable QA 298e20b4 Flutter DM reply\":\n      - button \"Copy\"\n      - button \"Mark unread from message 3\":\n        - button\n      - button \"Forward\"\n      - button \"Remind me\"\n      - button \"Create Thread\"\n      - button \"Reply\"\n    - group \"Message 4 from alice QA 298e20b4 Alice Flutter acknowledgement\":\n      - button \"Copy\"\n      - button \"Mark unread from message 4\":\n        - button\n      - button \"Forward\"\n      - button \"Remind me\"\n      - button \"Create Thread\"\n      - button \"Reply\"\n- group \"Message composer\":\n  - textbox \"Message input\"\n  - textbox \"Write a message\"\n  - button \"Add attachment\"\n  - group:\n    - button \"Bold\":\n      - button \"Bold\" [disabled]\n    - button \"Italic\":\n      - button \"Italic\" [disabled]\n    - button \"Link\":\n      - button \"Link\" [disabled]\n    - button \"Bulleted list\":\n      - button \"Bulleted list\" [disabled]\n    - button \"Numbered list\":\n      - button \"Numbered list\" [disabled]\n    - button \"Inline code\":\n      - button \"Inline code\" [disabled]\n    - button \"Code block\":\n      - button \"Code block\" [disabled]\n  - button \"Send message\" [disabled]",
+  "inputs": [
+    {
+      "value": "",
+      "placeholder": null
+    },
+    {
+      "value": "",
+      "placeholder": null
+    }
+  ]
+}

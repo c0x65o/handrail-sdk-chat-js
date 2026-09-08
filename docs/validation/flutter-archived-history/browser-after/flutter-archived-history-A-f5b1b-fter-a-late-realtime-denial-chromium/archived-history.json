@@ -1,0 +1,93 @@
+{
+  "backendKind": "url-backed",
+  "fixture": {
+    "threadId": "773dde26-e908-45bf-a1e9-0ab87f2f2e50",
+    "rootMessageId": "839d59c5-de93-4fcc-9677-a425397d9194",
+    "replyMessageId": "30402672-26f7-4d58-b9b9-d08ff625bea2",
+    "archive": {
+      "operation": "set_conversation_archive",
+      "intent": "archive",
+      "reconciliationStatus": "applied",
+      "conversationId": "773dde26-e908-45bf-a1e9-0ab87f2f2e50",
+      "expectedLifecycleRevision": 1,
+      "lifecycleRevision": 2,
+      "archiveState": {
+        "status": "archived",
+        "archivedAt": "2026-09-07T22:19:36.145Z",
+        "archivedByUserId": "alice"
+      }
+    }
+  },
+  "responses": [
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50/draft",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50/draft",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50/read-cursor",
+      "method": "PATCH",
+      "status": 403
+    },
+    {
+      "path": "/api/chat/conversations/773dde26-e908-45bf-a1e9-0ab87f2f2e50/read-cursor",
+      "method": "PATCH",
+      "status": 403
+    }
+  ],
+  "subscriptionDenials": [
+    {
+      "type": "chat.subscription.rejected",
+      "code": "access_denied",
+      "requestId": "chat-realtime-3"
+    }
+  ],
+  "errors": [],
+  "provenance": {
+    "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+    "sourceDigest": "7d5931609dcad7436aa7997ae392b3f28dfbf9271a9976a476e250f880cb0bee",
+    "builtAt": "2026-09-07T22:17:12.701Z",
+    "packageVersion": "0.1.19"
+  },
+  "semantics": "- heading \"Flutter Chat Lab · shared backend\" [level=2]\n- button \"Alice\"\n- text: \"Managed realtime: connected\"\n- button \"Disconnect\"\n- button \"Capture state\"\n- button \"Export evidence\"\n- text: Thread\n- button \"Open workspace settings\"\n- button \"Close panel\"\n- banner \"Archived launch history\":\n  - button \"Thread subscriptions\"\n  - button \"Close panel\"\n  - text: \"Following. Notifications: all. Unmuted.\"\n- text: Thread or parent administratively archived. Sending is disabled; your draft is retained. Thread lifecycle access denied. Your draft is retained. Thread root message In Launch planning Archived launch notes\n- group \"Message timeline\":\n  - group:\n    - text: Unread messages New messages\n    - group \"Message 1 from alice Retained archived launch history\":\n      - button \"Copy\"\n      - button \"Remind me\"\n      - button \"Reply\"\n- group \"Message composer Message composer disabled.\":\n  - textbox \"Message input\" [disabled]\n  - textbox \"Message composer disabled.\" [disabled]\n  - button \"Add attachment\" [disabled]\n  - group:\n    - button \"Bold\":\n      - button \"Bold\" [disabled]\n    - button \"Italic\":\n      - button \"Italic\" [disabled]\n    - button \"Link\":\n      - button \"Link\" [disabled]\n    - button \"Bulleted list\":\n      - button \"Bulleted list\" [disabled]\n    - button \"Numbered list\":\n      - button \"Numbered list\" [disabled]\n    - button \"Inline code\":\n      - button \"Inline code\" [disabled]\n    - button \"Code block\":\n      - button \"Code block\" [disabled]\n  - button \"Send message\" [disabled]"
+}

@@ -1,0 +1,69 @@
+{
+  "observedAt": "2026-09-07T17:59:37.646Z",
+  "method": "SHA256 of HTTP-served bytes; scoped asset evidence, not checkout revision attestation",
+  "assets": [
+    {
+      "url": "http://127.0.0.1:4167/src/ChatLabRuntime.tsx",
+      "status": 200,
+      "bytes": 6941,
+      "sha256": "8bcc59ff27681a5e495f45b003ff9ceaaed268c4f42e013fedd0cfc142387058",
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://127.0.0.1:4167/src/ChatLabApp.tsx",
+      "status": 200,
+      "bytes": 49931,
+      "sha256": "8b61315e1b53eb5cc63061d98e8e240d88a50085f910eaa07b3013e35d826e37",
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://127.0.0.1:4167/@fs/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat/dist/client/create-chat-client.js",
+      "status": 200,
+      "bytes": 1786651,
+      "sha256": "7322bd3053fd65c7b17c04afe433565cf4ff4d7c1d959868a5c87c14820ca911",
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://127.0.0.1:4167/@fs/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat/dist/client/durable-event-reducer.js",
+      "status": 200,
+      "bytes": 202333,
+      "sha256": "8d67873f074c3a38db271705e256546cd9ae562c454fa2e0864c769c0ac46bac",
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://127.0.0.1:4167/@fs/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat/dist/ui/message-timeline.js",
+      "status": 200,
+      "bytes": 469593,
+      "sha256": "6392e9b604cd0a7409987a756664ac07fe6306258119e661ac1c5b34d05f9494",
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://127.0.0.1:4167/@fs/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat/dist/ui/thread-panel.js",
+      "status": 200,
+      "bytes": 115751,
+      "sha256": "4ef2f791d110d7f7fb577c1a78836f8fc0a68ddc0956a63a76ad947c7329524d",
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://127.0.0.1:4167/@fs/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat/dist/client/message-context.js",
+      "status": 200,
+      "bytes": 61387,
+      "sha256": "15fe97ee57570ce5dfcd4bba2077efdfb13860fa610e357a15e7eda23ce920d8",
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://127.0.0.1:4167/@fs/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat/dist/client/thread-lifecycle.js",
+      "status": 200,
+      "bytes": 60046,
+      "sha256": "5f5265dd5f067b5110d8f0833ace363934ce9036891865306201949ebec5a963",
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://127.0.0.1:4167/__flutter-chat-lab/main.dart.js",
+      "status": 200,
+      "bytes": 4367373,
+      "sha256": "18b655d1af347a02891dd05472c8b59443b881766880d417052c00bc89851367",
+      "contentType": "text/javascript; charset=utf-8"
+    }
+  ]
+}

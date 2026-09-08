@@ -1,0 +1,53 @@
+name: Cross-runtime conformance
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cross-runtime-conformance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HANDRAIL_CHAT_FLUTTER_ROOT: ${{ github.workspace }}/.sdk-peers/flutter
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install Node.js dependencies
+        run: npm ci --include=dev
+      - name: Read frozen Flutter revision
+        id: flutter-revision
+        run: node scripts/read-flutter-revision.mjs
+      - name: Check out matching Flutter SDK
+        uses: actions/checkout@v4
+        with:
+          repository: c0x65o/handrail-sdk-chat-flutter
+          ref: ${{ steps.flutter-revision.outputs.revision }}
+          path: .sdk-peers/flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: "3.41.7"
+          cache: true
+          pub-cache: true
+      - name: Resolve Flutter dependencies
+        run: flutter pub get --no-example
+        working-directory: .sdk-peers/flutter
+      - name: Check cross-runtime conformance
+        run: npm run check:conformance

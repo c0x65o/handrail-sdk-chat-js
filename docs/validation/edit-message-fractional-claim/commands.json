@@ -1,0 +1,57 @@
+[
+  {
+    "label": "compilation",
+    "command": [
+      "/usr/bin/node",
+      "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat/node_modules/typescript/bin/tsc",
+      "--project",
+      "tsconfig.json",
+      "--outDir",
+      "dist",
+      "--incremental",
+      "false"
+    ],
+    "cwd": "/opt/handrail/.handrail/codex-runs/510bf914-16a0-49ae-a3d2-c8e79636d949/tmp/edit-message-evidence-bHpdG7/passing",
+    "environment": {},
+    "started": "2026-09-05T19:34:30.233Z",
+    "finished": "2026-09-05T19:34:31.624Z",
+    "exit_code": 0,
+    "signal": null
+  },
+  {
+    "label": "passing-test",
+    "command": [
+      "/usr/bin/node",
+      "--import",
+      "./verify.mjs",
+      "--test",
+      "test/postgres-edit-message-command.test.mjs"
+    ],
+    "cwd": "/opt/handrail/.handrail/codex-runs/510bf914-16a0-49ae-a3d2-c8e79636d949/tmp/edit-message-evidence-bHpdG7/passing",
+    "environment": {
+      "TEST_DATABASE_URL": "[worker DATABASE_URL; verified dev endpoint]"
+    },
+    "started": "2026-09-05T19:34:31.802Z",
+    "finished": "2026-09-05T19:34:32.795Z",
+    "exit_code": 0,
+    "signal": null
+  },
+  {
+    "label": "negative-control",
+    "command": [
+      "/usr/bin/node",
+      "--import",
+      "./verify.mjs",
+      "--test",
+      "test/postgres-edit-message-command.test.mjs"
+    ],
+    "cwd": "/opt/handrail/.handrail/codex-runs/510bf914-16a0-49ae-a3d2-c8e79636d949/tmp/edit-message-evidence-bHpdG7/negative",
+    "environment": {
+      "TEST_DATABASE_URL": "[worker DATABASE_URL; verified dev endpoint]"
+    },
+    "started": "2026-09-05T19:34:32.800Z",
+    "finished": "2026-09-05T19:34:33.738Z",
+    "exit_code": 1,
+    "signal": null
+  }
+]

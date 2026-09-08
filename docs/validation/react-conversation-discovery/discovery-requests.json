@@ -1,0 +1,33 @@
+{
+  "backendKind": "url-backed",
+  "created": [
+    "a5d34b00-1fc9-47eb-b11e-079c0936fe2e",
+    "75490dfb-48a0-4cba-9985-b4177dc352cb"
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations?scope=organization&limit=50"
+    },
+    {
+      "method": "POST",
+      "path": "/api/chat/conversations"
+    },
+    {
+      "method": "POST",
+      "path": "/api/chat/conversations"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations?scope=organization&limit=50"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations?scope=organization&limit=50"
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/conversations?scope=organization&limit=50"
+    }
+  ]
+}

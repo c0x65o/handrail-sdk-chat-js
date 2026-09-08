@@ -1,0 +1,14 @@
+{
+  "method": "MCP get_dev_service_logs, service 812c4054-6ced-4616-94fb-13f672b3e897, tail 150, patterns Flutter/provenance/error/4167",
+  "observed_at": "2026-09-07T17:50:25Z",
+  "startup_at": "2026-09-07T17:01:04.597Z",
+  "instanceId": "09cc43d02b2911e0ff91788be8ae55ae",
+  "build_result": "Flutter build/web succeeded after 41.6s; target route /__flutter-chat-lab/",
+  "errors": [
+    {
+      "time": "12:44:46 PM",
+      "message": "[vite] ws proxy error / socket error: Error: write EPIPE"
+    }
+  ],
+  "correlation": "EPIPE occurred around initial route/reload exploration, before Flutter thread attempts; no observed HTTP 5xx on thread detail responses. Does not establish root cause of Flutter thread failure."
+}

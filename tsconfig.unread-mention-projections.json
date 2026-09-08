@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/server/conversation-detail-query.ts",
+    "src/server/conversation-list-query.ts",
+    "src/server/unread-mention-sql.ts"
+  ]
+}

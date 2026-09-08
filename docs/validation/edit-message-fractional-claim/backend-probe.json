@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-09-05T19:34:31.802Z",
+  "endpoint": {
+    "host": "127.0.0.1",
+    "port": "34371",
+    "database": "handrail_chat"
+  },
+  "source": "worker DATABASE_URL matched read-only Handrail dev resource inspection",
+  "result": [
+    {
+      "database": "handrail_chat",
+      "role": "handrail_chat_dev_handrail_chat_db_app",
+      "version": "PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit",
+      "server_address": "172.17.0.4/32",
+      "server_port": 5432,
+      "recovery": false
+    }
+  ],
+  "exit_code": 0
+}

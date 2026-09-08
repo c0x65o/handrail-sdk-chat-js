@@ -1,0 +1,32 @@
+name: Git consumer installation
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: git-consumer-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  consumer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install and build SDK
+        run: npm ci --include=dev
+      - name: Verify public Git consumer
+        run: npm run test:git-consumer
+        env:
+          HANDRAIL_CHAT_JS_REVISION: ${{ github.sha }}

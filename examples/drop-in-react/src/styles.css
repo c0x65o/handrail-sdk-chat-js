@@ -1,0 +1,189 @@
+.drop-in-example {
+  min-block-size: 100vh;
+  padding: 1.5rem;
+  color: #172033;
+  background: #eef2f8;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.drop-in-example .drop-in-example__heading,
+.drop-in-example .drop-in-example__record-summary {
+  padding: 1rem 1.25rem;
+}
+
+.drop-in-example .drop-in-example__heading p,
+.drop-in-example .drop-in-example__record-summary p {
+  margin: 0;
+  color: #526071;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.drop-in-example .drop-in-example__heading h1,
+.drop-in-example .drop-in-example__record-summary h2 {
+  margin: 0.25rem 0 0;
+}
+
+.drop-in-example .drop-in-example__full-screen {
+  block-size: min(46rem, calc(100vh - 3rem));
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid #cbd5e1;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 1.25rem 3rem rgb(15 23 42 / 12%);
+}
+
+.drop-in-example .company-chat-theme {
+  --hr-chat-color-accent: #4f46e5;
+  --hr-chat-color-on-accent: #ffffff;
+  --hr-chat-color-surface-muted: #eef2ff;
+  --hr-chat-focus-color: #6366f1;
+  --hr-chat-radius-sm: 0.5rem;
+  --hr-chat-radius-md: 0.75rem;
+  --hr-chat-radius-lg: 1rem;
+  --hr-chat-font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.drop-in-example .drop-in-example__record {
+  display: grid;
+  grid-template-columns: minmax(16rem, 1fr) minmax(26rem, 42rem);
+  gap: 1.5rem;
+  margin-block-start: 2rem;
+  min-block-size: 36rem;
+  overflow: hidden;
+  border: 1px solid #cbd5e1;
+  border-radius: 1rem;
+  background: #ffffff;
+}
+
+.drop-in-example .drop-in-example__record-summary dl {
+  display: grid;
+  gap: 1rem;
+  margin-block-start: 2rem;
+}
+
+.drop-in-example .drop-in-example__record-summary dt {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.drop-in-example .drop-in-example__record-summary dd {
+  margin: 0.2rem 0 0;
+  font-weight: 600;
+}
+
+.drop-in-example .drop-in-example__side-panel {
+  min-block-size: 0;
+  border-inline-start: 1px solid #cbd5e1;
+}
+
+.drop-in-example .company-chat-theme--record {
+  --hr-chat-color-canvas: #111827;
+  --hr-chat-color-surface: #182234;
+  --hr-chat-color-surface-muted: #243149;
+  --hr-chat-color-accent: #a5b4fc;
+  --hr-chat-color-on-accent: #1e1b4b;
+  --hr-chat-color-border: #40506a;
+  --hr-chat-color-text: #f8fafc;
+  --hr-chat-color-text-muted: #cbd5e1;
+}
+
+.drop-in-example .company-avatar {
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 0.75rem;
+  color: var(--hr-chat-color-on-accent);
+  background: var(--hr-chat-color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.drop-in-example .company-message p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.drop-in-example .company-message small {
+  color: var(--hr-chat-color-text-muted);
+}
+
+.drop-in-example .company-composer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+}
+
+.drop-in-example .company-composer label,
+.drop-in-example .company-composer textarea {
+  inline-size: 100%;
+}
+
+.drop-in-example .company-composer label > span {
+  display: block;
+  margin-block-end: 0.25rem;
+  color: var(--hr-chat-color-text-muted);
+  font-size: 0.8rem;
+}
+
+.drop-in-example .company-composer textarea {
+  min-block-size: 4.5rem;
+  padding: 0.75rem;
+  resize: vertical;
+  border: 1px solid var(--hr-chat-color-border);
+  border-radius: var(--hr-chat-radius-md);
+  color: var(--hr-chat-color-text);
+  background: var(--hr-chat-color-surface);
+  font: inherit;
+}
+
+.drop-in-example .company-composer button {
+  align-self: end;
+  min-block-size: 2.75rem;
+  padding-inline: 1rem;
+  border: 0;
+  border-radius: var(--hr-chat-radius-md);
+  color: var(--hr-chat-color-on-accent);
+  background: var(--hr-chat-color-accent);
+  font: inherit;
+  font-weight: 700;
+}
+
+.drop-in-example .company-composer [role="status"] {
+  grid-column: 1 / -1;
+  color: var(--hr-chat-color-text-muted);
+  font-size: 0.8rem;
+}
+
+.drop-in-example .company-attachment,
+.drop-in-example .company-entity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-block: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--hr-chat-color-border);
+  border-radius: var(--hr-chat-radius-md);
+  background: var(--hr-chat-color-surface-muted);
+}
+
+.drop-in-example .company-entity {
+  justify-content: space-between;
+}
+
+@media (max-width: 780px) {
+  .drop-in-example .drop-in-example__record {
+    grid-template-columns: 1fr;
+  }
+
+  .drop-in-example .drop-in-example__side-panel {
+    min-block-size: 34rem;
+    border-block-start: 1px solid #cbd5e1;
+    border-inline-start: 0;
+  }
+}

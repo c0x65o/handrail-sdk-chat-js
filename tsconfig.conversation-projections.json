@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": true },
+  "include": [
+    "src/server/conversation-detail-query.ts",
+    "src/server/conversation-list-query.ts",
+    "src/server/postgres-schema-migrations.ts",
+    "src/testing/index.ts"
+  ]
+}

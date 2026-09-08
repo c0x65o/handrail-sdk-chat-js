@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-09-05T18:03:09.516Z",
+  "live": {
+    "instanceId": "078f5aaed6edb66b745bedc12cf58466",
+    "backend": {
+      "scheme": "sha256-loaded-functions-v1",
+      "capturedAt": "2026-09-05T18:00:28.173Z",
+      "fingerprint": "1718af4125020f27a5723a68be740c7461981cd64f304715c5544b36dd49a473",
+      "functions": {
+        "createChatTestHarness": "1cd44ec754da756a730e9f007afe23d9c36cf415454af2846ef9424bcf42e24d",
+        "createChatServer": "215a934e50ce9e555661cbc62c555b9d0e1c062e48c1509ecf6782b10c2e611c",
+        "createChatEphemeralSignalController": "a4e453f8cbef00aafe8e4e823a61c5db3bfde13746b654c81e6f51d4efbd0f82"
+      }
+    }
+  },
+  "disk": {
+    "scheme": "sha256-loaded-functions-v1",
+    "capturedAt": "2026-09-05T18:03:09.490Z",
+    "fingerprint": "1718af4125020f27a5723a68be740c7461981cd64f304715c5544b36dd49a473",
+    "functions": {
+      "createChatTestHarness": "1cd44ec754da756a730e9f007afe23d9c36cf415454af2846ef9424bcf42e24d",
+      "createChatServer": "215a934e50ce9e555661cbc62c555b9d0e1c062e48c1509ecf6782b10c2e611c",
+      "createChatEphemeralSignalController": "a4e453f8cbef00aafe8e4e823a61c5db3bfde13746b654c81e6f51d4efbd0f82"
+    }
+  },
+  "allFunctionsMatch": true,
+  "sameInstanceAsLiveVerifier": true
+}

@@ -1,0 +1,779 @@
+{
+  "name": "QA thread recovery 1788818260967",
+  "errors": [],
+  "semantics": "- menu \"Popup menu\":\n  - group:\n    - menuitem \"Join\"\n    - 'menuitem \"Notifications: all\"'\n    - 'menuitem \"Notifications: mentions\"'\n    - 'menuitem \"Notifications: none\"'\n    - menuitem \"Unmute\"\n    - menuitem \"Mute indefinitely\"\n    - menuitem \"Mute for 1 hour\"",
+  "exported": {
+    "captures": [
+      {
+        "label": "before-parent-hydration",
+        "capturedAt": "2026-09-07T21:57:42.156Z",
+        "mode": "shared-backend",
+        "actor": "bob",
+        "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+        "seedProfile": "reply-styles",
+        "availableActors": {
+          "alice": "Alice",
+          "bob": "Bob",
+          "carol": "Carol",
+          "dave": "Dave"
+        },
+        "endpoint": "http://127.0.0.1:4167/api/chat",
+        "identity": null,
+        "realtime": "idle",
+        "clientLifecycle": "ready",
+        "clientDiagnostic": null,
+        "listError": null,
+        "error": null,
+        "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+        "conversationIds": [
+          "39e4d1c8-759d-4998-b46f-ff8cd14fccac",
+          "49a6d519-7d47-4406-9d4e-5424005c8a09",
+          "2a037ded-45a0-47be-bf64-49c49a486603"
+        ],
+        "hydratedTimelineIds": [],
+        "cursor": null,
+        "timelineReplayCursor": null,
+        "durableStreams": {},
+        "messages": [],
+        "diagnostics": [
+          "conversation.list:completed"
+        ],
+        "provenance": {
+          "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+          "sourceDigest": "b08cc0bdca572eb559c6aa32b1a22b964ac71c89c44072a23c85bd75cf4d4658",
+          "builtAt": "2026-09-07T21:51:47.014Z",
+          "packageVersion": "0.1.19"
+        }
+      },
+      {
+        "label": "before-managed-snapshot-hydration",
+        "capturedAt": "2026-09-07T21:57:46.146Z",
+        "mode": "shared-backend",
+        "actor": "bob",
+        "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+        "seedProfile": "reply-styles",
+        "availableActors": {
+          "alice": "Alice",
+          "bob": "Bob",
+          "carol": "Carol",
+          "dave": "Dave"
+        },
+        "endpoint": "http://127.0.0.1:4167/api/chat",
+        "identity": null,
+        "realtime": "hydratingSnapshot",
+        "clientLifecycle": "ready",
+        "clientDiagnostic": null,
+        "listError": null,
+        "error": null,
+        "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+        "conversationIds": [
+          "39e4d1c8-759d-4998-b46f-ff8cd14fccac",
+          "49a6d519-7d47-4406-9d4e-5424005c8a09",
+          "2a037ded-45a0-47be-bf64-49c49a486603"
+        ],
+        "hydratedTimelineIds": [
+          "49a6d519-7d47-4406-9d4e-5424005c8a09"
+        ],
+        "cursor": {
+          "eventId": "a06eef44-d328-4366-bd65-c49f842b4a39"
+        },
+        "timelineReplayCursor": {
+          "eventId": "49b36e2a-cf5d-4afb-a8c0-7aeb48cf06d6"
+        },
+        "durableStreams": {
+          "user:bob": {
+            "lastEventId": "a06eef44-d328-4366-bd65-c49f842b4a39",
+            "lastOccurredAt": "2026-09-07T21:57:45.560Z"
+          },
+          "49a6d519-7d47-4406-9d4e-5424005c8a09": {
+            "lastEventId": "286ad44a-0bc5-420c-8db8-df56fe2c3c97",
+            "lastOccurredAt": "2026-09-07T21:57:45.407Z"
+          }
+        },
+        "messages": [
+          {
+            "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+            "canonicalSummary": {
+              "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+              "replyCount": 3,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:35:37.034Z"
+            },
+            "projectedSummary": {
+              "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+              "replyCount": 3,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:35:37.034Z"
+            }
+          },
+          {
+            "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+            "canonicalSummary": {
+              "threadId": "d4eb4ae4-2b79-4fb8-9b39-cb393d924a3b",
+              "replyCount": 1,
+              "participantIds": [
+                "alice"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:30:16.261Z"
+            },
+            "projectedSummary": {
+              "threadId": "d4eb4ae4-2b79-4fb8-9b39-cb393d924a3b",
+              "replyCount": 1,
+              "participantIds": [
+                "alice"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:30:16.261Z"
+            }
+          },
+          {
+            "id": "5607ba69-ae42-47fc-8b44-6b815eda7d9b",
+            "canonicalSummary": {
+              "threadId": "b1b47f17-5ec8-4380-80d0-f4fe3f8709b6",
+              "replyCount": 1,
+              "participantIds": [
+                "alice"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:28:11.205Z"
+            },
+            "projectedSummary": {
+              "threadId": "b1b47f17-5ec8-4380-80d0-f4fe3f8709b6",
+              "replyCount": 1,
+              "participantIds": [
+                "alice"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:28:11.205Z"
+            }
+          },
+          {
+            "id": "7ad5c623-ae96-4694-bdf5-dd1eb9ab1419",
+            "canonicalSummary": {
+              "threadId": "522338b7-edcd-419e-93ac-7f99f98f478a",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:53:50.244Z"
+            },
+            "projectedSummary": {
+              "threadId": "522338b7-edcd-419e-93ac-7f99f98f478a",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:53:50.244Z"
+            }
+          },
+          {
+            "id": "ec921cf1-45df-42ba-b20e-7cc4d0c94c2c",
+            "canonicalSummary": {
+              "threadId": "c3229c70-5d89-4820-9304-85498197e3b2",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:54:40.781Z"
+            },
+            "projectedSummary": {
+              "threadId": "c3229c70-5d89-4820-9304-85498197e3b2",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:54:40.781Z"
+            }
+          },
+          {
+            "id": "7aedab50-8a2b-422a-8da7-aa4cd6d711c6",
+            "canonicalSummary": {
+              "threadId": "d4df77e4-5fd6-41d8-a4ab-bc0420432b68",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:55:48.642Z"
+            },
+            "projectedSummary": {
+              "threadId": "d4df77e4-5fd6-41d8-a4ab-bc0420432b68",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:55:48.642Z"
+            }
+          },
+          {
+            "id": "de9438e5-53d5-4598-95d0-e19659c83178",
+            "canonicalSummary": {
+              "threadId": "48bc07e6-7dde-4c45-b417-f33c2d40f256",
+              "replyCount": 0,
+              "participantIds": [],
+              "unreadCount": 0
+            },
+            "projectedSummary": {
+              "threadId": "48bc07e6-7dde-4c45-b417-f33c2d40f256",
+              "replyCount": 0,
+              "participantIds": [],
+              "unreadCount": 0
+            }
+          }
+        ],
+        "diagnostics": [
+          "conversation.list:completed",
+          "reply.style.preference:completed",
+          "message.timeline:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "message.context:aborted",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.draft:completed",
+          "message.context:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "durable_event_recovery",
+          "recovery:ordering_gap:conversation.preference.updated"
+        ],
+        "provenance": {
+          "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+          "sourceDigest": "b08cc0bdca572eb559c6aa32b1a22b964ac71c89c44072a23c85bd75cf4d4658",
+          "builtAt": "2026-09-07T21:51:47.014Z",
+          "packageVersion": "0.1.19"
+        }
+      },
+      {
+        "label": "before-managed-snapshot-hydration",
+        "capturedAt": "2026-09-07T21:57:48.137Z",
+        "mode": "shared-backend",
+        "actor": "bob",
+        "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+        "seedProfile": "reply-styles",
+        "availableActors": {
+          "alice": "Alice",
+          "bob": "Bob",
+          "carol": "Carol",
+          "dave": "Dave"
+        },
+        "endpoint": "http://127.0.0.1:4167/api/chat",
+        "identity": null,
+        "realtime": "hydratingSnapshot",
+        "clientLifecycle": "ready",
+        "clientDiagnostic": null,
+        "listError": null,
+        "error": null,
+        "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+        "conversationIds": [
+          "39e4d1c8-759d-4998-b46f-ff8cd14fccac",
+          "49a6d519-7d47-4406-9d4e-5424005c8a09",
+          "2a037ded-45a0-47be-bf64-49c49a486603"
+        ],
+        "hydratedTimelineIds": [
+          "49a6d519-7d47-4406-9d4e-5424005c8a09"
+        ],
+        "cursor": null,
+        "timelineReplayCursor": {
+          "eventId": "49b36e2a-cf5d-4afb-a8c0-7aeb48cf06d6"
+        },
+        "durableStreams": {
+          "user:bob": {
+            "lastEventId": "a06eef44-d328-4366-bd65-c49f842b4a39",
+            "lastOccurredAt": "2026-09-07T21:57:45.560Z"
+          },
+          "49a6d519-7d47-4406-9d4e-5424005c8a09": {
+            "lastEventId": "286ad44a-0bc5-420c-8db8-df56fe2c3c97",
+            "lastOccurredAt": "2026-09-07T21:57:45.407Z"
+          }
+        },
+        "messages": [
+          {
+            "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+            "canonicalSummary": {
+              "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+              "replyCount": 3,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:35:37.034Z"
+            },
+            "projectedSummary": {
+              "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+              "replyCount": 3,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:35:37.034Z"
+            }
+          },
+          {
+            "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+            "canonicalSummary": {
+              "threadId": "d4eb4ae4-2b79-4fb8-9b39-cb393d924a3b",
+              "replyCount": 1,
+              "participantIds": [
+                "alice"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:30:16.261Z"
+            },
+            "projectedSummary": {
+              "threadId": "d4eb4ae4-2b79-4fb8-9b39-cb393d924a3b",
+              "replyCount": 1,
+              "participantIds": [
+                "alice"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:30:16.261Z"
+            }
+          },
+          {
+            "id": "5607ba69-ae42-47fc-8b44-6b815eda7d9b",
+            "canonicalSummary": {
+              "threadId": "b1b47f17-5ec8-4380-80d0-f4fe3f8709b6",
+              "replyCount": 1,
+              "participantIds": [
+                "alice"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:28:11.205Z"
+            },
+            "projectedSummary": {
+              "threadId": "b1b47f17-5ec8-4380-80d0-f4fe3f8709b6",
+              "replyCount": 1,
+              "participantIds": [
+                "alice"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:28:11.205Z"
+            }
+          },
+          {
+            "id": "7ad5c623-ae96-4694-bdf5-dd1eb9ab1419",
+            "canonicalSummary": {
+              "threadId": "522338b7-edcd-419e-93ac-7f99f98f478a",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:53:50.244Z"
+            },
+            "projectedSummary": {
+              "threadId": "522338b7-edcd-419e-93ac-7f99f98f478a",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:53:50.244Z"
+            }
+          },
+          {
+            "id": "ec921cf1-45df-42ba-b20e-7cc4d0c94c2c",
+            "canonicalSummary": {
+              "threadId": "c3229c70-5d89-4820-9304-85498197e3b2",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:54:40.781Z"
+            },
+            "projectedSummary": {
+              "threadId": "c3229c70-5d89-4820-9304-85498197e3b2",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:54:40.781Z"
+            }
+          },
+          {
+            "id": "7aedab50-8a2b-422a-8da7-aa4cd6d711c6",
+            "canonicalSummary": {
+              "threadId": "d4df77e4-5fd6-41d8-a4ab-bc0420432b68",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:55:48.642Z"
+            },
+            "projectedSummary": {
+              "threadId": "d4df77e4-5fd6-41d8-a4ab-bc0420432b68",
+              "replyCount": 2,
+              "participantIds": [
+                "bob"
+              ],
+              "unreadCount": 0,
+              "lastReplyAt": "2026-09-07T21:55:48.642Z"
+            }
+          },
+          {
+            "id": "de9438e5-53d5-4598-95d0-e19659c83178",
+            "canonicalSummary": {
+              "threadId": "48bc07e6-7dde-4c45-b417-f33c2d40f256",
+              "replyCount": 0,
+              "participantIds": [],
+              "unreadCount": 0
+            },
+            "projectedSummary": {
+              "threadId": "48bc07e6-7dde-4c45-b417-f33c2d40f256",
+              "replyCount": 0,
+              "participantIds": [],
+              "unreadCount": 0
+            }
+          }
+        ],
+        "diagnostics": [
+          "conversation.list:completed",
+          "reply.style.preference:completed",
+          "message.timeline:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "message.context:aborted",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.draft:completed",
+          "message.context:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "durable_event_recovery",
+          "recovery:ordering_gap:conversation.preference.updated",
+          "message_reminder.list:completed",
+          "conversation.list:completed",
+          "conversation.detail:completed",
+          "message.timeline:completed",
+          "conversation.detail:completed",
+          "message.timeline:completed",
+          "snapshot_hydration_failed",
+          "message.context:aborted",
+          "message.context:completed",
+          "reply.style.preference:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "conversation.detail:completed",
+          "durable_event_recovery",
+          "recovery:ordering_gap:thread.follow.updated"
+        ],
+        "provenance": {
+          "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+          "sourceDigest": "b08cc0bdca572eb559c6aa32b1a22b964ac71c89c44072a23c85bd75cf4d4658",
+          "builtAt": "2026-09-07T21:51:47.014Z",
+          "packageVersion": "0.1.19"
+        }
+      }
+    ],
+    "current": {
+      "mode": "shared-backend",
+      "actor": "bob",
+      "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob",
+        "carol": "Carol",
+        "dave": "Dave"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": {
+        "tenantId": "chat-lab",
+        "userId": "bob",
+        "deviceId": "device-399132ea-7ae3-4785-8db3-198ee387556a-363"
+      },
+      "realtime": "connected",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+      "conversationIds": [
+        "39e4d1c8-759d-4998-b46f-ff8cd14fccac",
+        "49a6d519-7d47-4406-9d4e-5424005c8a09",
+        "2a037ded-45a0-47be-bf64-49c49a486603"
+      ],
+      "hydratedTimelineIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09",
+        "48bc07e6-7dde-4c45-b417-f33c2d40f256"
+      ],
+      "cursor": {
+        "eventId": "92723a90-8920-4bf4-ab23-7d537a23488e"
+      },
+      "timelineReplayCursor": {
+        "eventId": "49b36e2a-cf5d-4afb-a8c0-7aeb48cf06d6"
+      },
+      "durableStreams": {
+        "user:bob": {
+          "lastEventId": "92723a90-8920-4bf4-ab23-7d537a23488e",
+          "lastOccurredAt": "2026-09-07T21:57:50.823Z"
+        },
+        "49a6d519-7d47-4406-9d4e-5424005c8a09": {
+          "lastEventId": "286ad44a-0bc5-420c-8db8-df56fe2c3c97",
+          "lastOccurredAt": "2026-09-07T21:57:45.407Z"
+        }
+      },
+      "messages": [
+        {
+          "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+          "canonicalSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 3,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:35:37.034Z"
+          },
+          "projectedSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 3,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:35:37.034Z"
+          }
+        },
+        {
+          "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+          "canonicalSummary": {
+            "threadId": "d4eb4ae4-2b79-4fb8-9b39-cb393d924a3b",
+            "replyCount": 1,
+            "participantIds": [
+              "alice"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:30:16.261Z"
+          },
+          "projectedSummary": {
+            "threadId": "d4eb4ae4-2b79-4fb8-9b39-cb393d924a3b",
+            "replyCount": 1,
+            "participantIds": [
+              "alice"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:30:16.261Z"
+          }
+        },
+        {
+          "id": "5607ba69-ae42-47fc-8b44-6b815eda7d9b",
+          "canonicalSummary": {
+            "threadId": "b1b47f17-5ec8-4380-80d0-f4fe3f8709b6",
+            "replyCount": 1,
+            "participantIds": [
+              "alice"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:28:11.205Z"
+          },
+          "projectedSummary": {
+            "threadId": "b1b47f17-5ec8-4380-80d0-f4fe3f8709b6",
+            "replyCount": 1,
+            "participantIds": [
+              "alice"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:28:11.205Z"
+          }
+        },
+        {
+          "id": "7ad5c623-ae96-4694-bdf5-dd1eb9ab1419",
+          "canonicalSummary": {
+            "threadId": "522338b7-edcd-419e-93ac-7f99f98f478a",
+            "replyCount": 2,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:53:50.244Z"
+          },
+          "projectedSummary": {
+            "threadId": "522338b7-edcd-419e-93ac-7f99f98f478a",
+            "replyCount": 2,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:53:50.244Z"
+          }
+        },
+        {
+          "id": "ec921cf1-45df-42ba-b20e-7cc4d0c94c2c",
+          "canonicalSummary": {
+            "threadId": "c3229c70-5d89-4820-9304-85498197e3b2",
+            "replyCount": 2,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:54:40.781Z"
+          },
+          "projectedSummary": {
+            "threadId": "c3229c70-5d89-4820-9304-85498197e3b2",
+            "replyCount": 2,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:54:40.781Z"
+          }
+        },
+        {
+          "id": "7aedab50-8a2b-422a-8da7-aa4cd6d711c6",
+          "canonicalSummary": {
+            "threadId": "d4df77e4-5fd6-41d8-a4ab-bc0420432b68",
+            "replyCount": 2,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:55:48.642Z"
+          },
+          "projectedSummary": {
+            "threadId": "d4df77e4-5fd6-41d8-a4ab-bc0420432b68",
+            "replyCount": 2,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:55:48.642Z"
+          }
+        },
+        {
+          "id": "de9438e5-53d5-4598-95d0-e19659c83178",
+          "canonicalSummary": {
+            "threadId": "48bc07e6-7dde-4c45-b417-f33c2d40f256",
+            "replyCount": 0,
+            "participantIds": [],
+            "unreadCount": 0
+          },
+          "projectedSummary": {
+            "threadId": "48bc07e6-7dde-4c45-b417-f33c2d40f256",
+            "replyCount": 0,
+            "participantIds": [],
+            "unreadCount": 0
+          }
+        }
+      ],
+      "diagnostics": [
+        "conversation.list:completed",
+        "reply.style.preference:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "message.context:aborted",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.draft:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.preference.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "snapshot_hydration_failed",
+        "message.context:aborted",
+        "message.context:completed",
+        "reply.style.preference:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:thread.follow.updated",
+        "conversation.detail:completed",
+        "message_reminder.list:completed",
+        "message.timeline:completed",
+        "message.timeline:completed",
+        "conversation.list:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "conversation.draft:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "snapshot_hydration_failed",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:aborted",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed"
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "b08cc0bdca572eb559c6aa32b1a22b964ac71c89c44072a23c85bd75cf4d4658",
+        "builtAt": "2026-09-07T21:51:47.014Z",
+        "packageVersion": "0.1.19"
+      }
+    }
+  }
+}

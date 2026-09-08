@@ -1,0 +1,86 @@
+{
+  "campaign": "298e20b4-4faf-4283-949d-3801cf437aa8",
+  "stored": [
+    {
+      "user_id": "alice",
+      "content": {
+        "text": "QA 298e20b4 durable draft",
+        "format": "plain",
+        "attachments": []
+      },
+      "revision": "1"
+    }
+  ],
+  "tombstone": [
+    {
+      "user_id": "alice",
+      "content": null,
+      "revision": "2"
+    }
+  ],
+  "current": {
+    "mode": "shared-backend",
+    "actor": "alice",
+    "instanceId": "a930d8f4c33b1d43452ee78210f65c33",
+    "seedProfile": "reply-styles",
+    "availableActors": {
+      "alice": "Alice",
+      "bob": "Bob",
+      "carol": "Carol",
+      "dave": "Dave"
+    },
+    "endpoint": "http://127.0.0.1:33441/api/chat",
+    "identity": {
+      "tenantId": "chat-lab",
+      "userId": "alice",
+      "deviceId": "device-f055dab4-f978-44b1-9fe5-799e56135d9d-13"
+    },
+    "realtime": "connected",
+    "clientLifecycle": "ready",
+    "clientDiagnostic": null,
+    "listError": null,
+    "error": null,
+    "selectedConversationId": "0cda0c0d-44b0-4ddd-8643-646e6377c07e",
+    "conversationIds": [
+      "0cda0c0d-44b0-4ddd-8643-646e6377c07e",
+      "a6e2b6e3-b50d-4174-ad42-7510c5e8a1de"
+    ],
+    "hydratedTimelineIds": [
+      "a6e2b6e3-b50d-4174-ad42-7510c5e8a1de",
+      "0cda0c0d-44b0-4ddd-8643-646e6377c07e"
+    ],
+    "cursor": null,
+    "timelineReplayCursor": {
+      "eventId": "0f5226b8-7c70-4e32-b333-e62e46d51735"
+    },
+    "durableStreams": {},
+    "messages": [],
+    "diagnostics": [
+      "conversation.list:completed",
+      "message.timeline:completed",
+      "conversation.detail:completed",
+      "reply.style.preference:completed",
+      "conversation.detail:completed",
+      "conversation.detail:completed",
+      "conversation.draft:completed",
+      "conversation.detail:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "conversation.detail:completed",
+      "conversation.draft:completed"
+    ],
+    "provenance": {
+      "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+      "sourceDigest": "17ce49152d709f46dbac31e58e439efddec1e769c9a25df27520885db2ea5f87",
+      "builtAt": "2026-09-07T21:00:16.813Z",
+      "packageVersion": "0.1.19"
+    }
+  },
+  "checks": [
+    "Current / Discord-style / Current",
+    "reload and reopen DM",
+    "other conversation empty",
+    "Bob isolated",
+    "clear persists after reload"
+  ]
+}

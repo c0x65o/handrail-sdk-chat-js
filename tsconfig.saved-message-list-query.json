@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": true },
+  "include": [
+    "src/server/saved-message-list-query.ts",
+    "src/server/postgres-schema-migrations.ts",
+    "src/testing/index.ts"
+  ]
+}

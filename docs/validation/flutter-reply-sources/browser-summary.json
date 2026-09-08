@@ -1,0 +1,97 @@
+{
+  "result": "4 passed",
+  "checks": [
+    {
+      "actor": "bob",
+      "conversation": "channel",
+      "contextResponses": [
+        {
+          "url": "http://127.0.0.1:4167/api/chat/conversations/14d069be-fbde-4a1b-b3f5-628f843fc1ae/messages/832e136b-5ddc-41db-a2e4-9b3190f778a6/context",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4167/api/chat/conversations/14d069be-fbde-4a1b-b3f5-628f843fc1ae/messages/832e136b-5ddc-41db-a2e4-9b3190f778a6/context",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4167/api/chat/conversations/14d069be-fbde-4a1b-b3f5-628f843fc1ae/messages/832e136b-5ddc-41db-a2e4-9b3190f778a6/context",
+          "status": 200
+        }
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "5cac9517fd50f36e670d21607634a8bc5f64c90d659333260fedf93847ee3e0f",
+        "builtAt": "2026-09-07T18:31:33.721Z",
+        "packageVersion": "0.1.19"
+      },
+      "instanceId": "09cc43d02b2911e0ff91788be8ae55ae"
+    },
+    {
+      "actor": "alice",
+      "conversation": "direct",
+      "contextResponses": [
+        {
+          "url": "http://127.0.0.1:4167/api/chat/conversations/14d069be-fbde-4a1b-b3f5-628f843fc1ae/messages/832e136b-5ddc-41db-a2e4-9b3190f778a6/context",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4167/api/chat/conversations/a184c0ce-84d7-4cde-a610-4d3558e7ebe2/messages/6d78afb3-5200-447e-a3a9-07e7f3bec4ab/context",
+          "status": 200
+        }
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "5cac9517fd50f36e670d21607634a8bc5f64c90d659333260fedf93847ee3e0f",
+        "builtAt": "2026-09-07T18:31:33.721Z",
+        "packageVersion": "0.1.19"
+      },
+      "instanceId": "09cc43d02b2911e0ff91788be8ae55ae"
+    },
+    {
+      "actor": "alice",
+      "conversation": "channel",
+      "contextResponses": [
+        {
+          "url": "http://127.0.0.1:4167/api/chat/conversations/14d069be-fbde-4a1b-b3f5-628f843fc1ae/messages/832e136b-5ddc-41db-a2e4-9b3190f778a6/context",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4167/api/chat/conversations/14d069be-fbde-4a1b-b3f5-628f843fc1ae/messages/832e136b-5ddc-41db-a2e4-9b3190f778a6/context",
+          "status": 200
+        }
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "5cac9517fd50f36e670d21607634a8bc5f64c90d659333260fedf93847ee3e0f",
+        "builtAt": "2026-09-07T18:31:33.721Z",
+        "packageVersion": "0.1.19"
+      },
+      "instanceId": "09cc43d02b2911e0ff91788be8ae55ae"
+    },
+    {
+      "actor": "bob",
+      "conversation": "direct",
+      "contextResponses": [
+        {
+          "url": "http://127.0.0.1:4167/api/chat/conversations/14d069be-fbde-4a1b-b3f5-628f843fc1ae/messages/832e136b-5ddc-41db-a2e4-9b3190f778a6/context",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4167/api/chat/conversations/a184c0ce-84d7-4cde-a610-4d3558e7ebe2/messages/6d78afb3-5200-447e-a3a9-07e7f3bec4ab/context",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4167/api/chat/conversations/a184c0ce-84d7-4cde-a610-4d3558e7ebe2/messages/6d78afb3-5200-447e-a3a9-07e7f3bec4ab/context",
+          "status": 200
+        }
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "5cac9517fd50f36e670d21607634a8bc5f64c90d659333260fedf93847ee3e0f",
+        "builtAt": "2026-09-07T18:31:33.721Z",
+        "packageVersion": "0.1.19"
+      },
+      "instanceId": "09cc43d02b2911e0ff91788be8ae55ae"
+    }
+  ]
+}

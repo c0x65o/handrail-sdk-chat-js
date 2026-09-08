@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-09-05T18:00:16.632Z",
+  "live": {
+    "instanceId": "cdbd6cbe7f4acf741a357b46c4c42c46",
+    "backend": {
+      "scheme": "sha256-loaded-functions-v1",
+      "capturedAt": "2026-09-05T17:08:27.109Z",
+      "fingerprint": "55d9416b335084a427fb561c795914fdc00bcf9ce9c62d5c34d0b7abe871bcf2",
+      "functions": {
+        "createChatTestHarness": "1cd44ec754da756a730e9f007afe23d9c36cf415454af2846ef9424bcf42e24d",
+        "createChatServer": "215a934e50ce9e555661cbc62c555b9d0e1c062e48c1509ecf6782b10c2e611c",
+        "createChatEphemeralSignalController": "9ee1cc2b79509f5fcf27a01095f0590d355e147d61ea741b59eab7f67dc37fed"
+      }
+    }
+  },
+  "disk": {
+    "scheme": "sha256-loaded-functions-v1",
+    "capturedAt": "2026-09-05T18:00:16.611Z",
+    "fingerprint": "1718af4125020f27a5723a68be740c7461981cd64f304715c5544b36dd49a473",
+    "functions": {
+      "createChatTestHarness": "1cd44ec754da756a730e9f007afe23d9c36cf415454af2846ef9424bcf42e24d",
+      "createChatServer": "215a934e50ce9e555661cbc62c555b9d0e1c062e48c1509ecf6782b10c2e611c",
+      "createChatEphemeralSignalController": "a4e453f8cbef00aafe8e4e823a61c5db3bfde13746b654c81e6f51d4efbd0f82"
+    }
+  },
+  "differingFunctions": [
+    "createChatEphemeralSignalController"
+  ]
+}

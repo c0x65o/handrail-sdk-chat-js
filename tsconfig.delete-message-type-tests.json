@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "."
+  },
+  "include": [
+    "src/contracts/generated/delete-message.ts",
+    "type-tests/delete-message.test.ts"
+  ]
+}

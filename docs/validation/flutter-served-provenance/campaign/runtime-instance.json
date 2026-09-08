@@ -1,0 +1,14 @@
+{
+  "instanceId": "09cc43d02b2911e0ff91788be8ae55ae",
+  "seedProfile": "reply-styles",
+  "backend": {
+    "scheme": "sha256-loaded-functions-v1",
+    "capturedAt": "2026-09-07T17:01:10.963Z",
+    "fingerprint": "32409d6c98136c4ed5fc030ddcacf8546df6dfdf86237160af4afa649bef0914",
+    "functions": {
+      "createChatTestHarness": "1cd44ec754da756a730e9f007afe23d9c36cf415454af2846ef9424bcf42e24d",
+      "createChatServer": "59c9c955422095e3217cac86414339f29effa70b824307e08cd1e0defa3fad97",
+      "createChatEphemeralSignalController": "a4e453f8cbef00aafe8e4e823a61c5db3bfde13746b654c81e6f51d4efbd0f82"
+    }
+  }
+}

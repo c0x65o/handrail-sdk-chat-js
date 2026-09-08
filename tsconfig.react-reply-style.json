@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/ui/index.ts", "src/react/index.ts", "src/client/index.ts", "src/index.ts"]
+}

@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-09-05T00:36:29.135Z",
+  "url": "http://127.0.0.1:4167/chat-lab.html",
+  "workspaceVisible": true,
+  "instance": {
+    "instanceId": "a4837bb57f0527273a805ad3c3ff7c88",
+    "backend": {
+      "scheme": "sha256-loaded-functions-v1",
+      "capturedAt": "2026-09-05T00:31:43.782Z",
+      "fingerprint": "79cee7fa07697b75b0c233affc00f11329cca29ed7ff803f231006720b33bbe4",
+      "functions": {
+        "createChatTestHarness": "1cd44ec754da756a730e9f007afe23d9c36cf415454af2846ef9424bcf42e24d",
+        "createChatServer": "215a934e50ce9e555661cbc62c555b9d0e1c062e48c1509ecf6782b10c2e611c",
+        "createChatEphemeralSignalController": "ed1f948c7fb8b5bff408ee016df0351c4642b40ea0923ae957877430d1ddf129"
+      }
+    }
+  },
+  "accepted": [
+    {
+      "type": "chat.session.accepted",
+      "metadata": {
+        "packageVersion": "0.1.76",
+        "protocolVersion": 4,
+        "schemaVersion": 38,
+        "enabledFeatures": {
+          "attachments": true,
+          "notifications": true,
+          "audit": false,
+          "realtime": true,
+          "media": true,
+          "typing": true,
+          "presence": true
+        },
+        "supportedProtocolRange": {
+          "minimumVersion": 3,
+          "maximumVersion": 4
+        }
+      },
+      "tenantId": "chat-lab",
+      "actorStreamId": "user:ada",
+      "deviceId": "device-76d4002e-2c9d-4e57-a35b-24491c777c56-62",
+      "sessionId": "session-7e9ebd83-adbd-496e-b7f3-d82e8bb735bb-63"
+    }
+  ],
+  "errors": []
+}

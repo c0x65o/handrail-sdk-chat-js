@@ -1,0 +1,1066 @@
+{
+  "captures": [
+    {
+      "label": "before-parent-hydration",
+      "capturedAt": "2026-09-07T21:20:54.440Z",
+      "mode": "shared-backend",
+      "actor": "bob",
+      "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob",
+        "carol": "Carol",
+        "dave": "Dave"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "idle",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+      "conversationIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "hydratedTimelineIds": [],
+      "cursor": null,
+      "timelineReplayCursor": null,
+      "durableStreams": {},
+      "messages": [],
+      "diagnostics": [
+        "conversation.list:completed"
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "17ce49152d709f46dbac31e58e439efddec1e769c9a25df27520885db2ea5f87",
+        "builtAt": "2026-09-07T21:11:17.896Z",
+        "packageVersion": "0.1.19"
+      }
+    },
+    {
+      "label": "before-managed-snapshot-hydration",
+      "capturedAt": "2026-09-07T21:21:06.268Z",
+      "mode": "shared-backend",
+      "actor": "bob",
+      "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob",
+        "carol": "Carol",
+        "dave": "Dave"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "hydratingSnapshot",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+      "conversationIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "hydratedTimelineIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "cursor": {
+        "eventId": "12ebe512-183a-4dfd-b20c-747f8a6d2ed6"
+      },
+      "timelineReplayCursor": {
+        "eventId": "3d4cde75-f5c4-45c3-a44b-6a265089cd1b"
+      },
+      "durableStreams": {
+        "user:bob": {
+          "lastEventId": "12ebe512-183a-4dfd-b20c-747f8a6d2ed6",
+          "lastOccurredAt": "2026-09-07T21:20:55.256Z"
+        }
+      },
+      "messages": [
+        {
+          "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+          "canonicalSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 0,
+            "participantIds": [],
+            "unreadCount": 0
+          },
+          "projectedSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 0,
+            "participantIds": [],
+            "unreadCount": 0
+          }
+        },
+        {
+          "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+          "canonicalSummary": null,
+          "projectedSummary": null
+        }
+      ],
+      "diagnostics": [
+        "conversation.list:completed",
+        "reply.style.preference:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "message.context:aborted",
+        "conversation.detail:completed",
+        "conversation.draft:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.preference.updated"
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "17ce49152d709f46dbac31e58e439efddec1e769c9a25df27520885db2ea5f87",
+        "builtAt": "2026-09-07T21:11:17.896Z",
+        "packageVersion": "0.1.19"
+      }
+    },
+    {
+      "label": "before-managed-snapshot-hydration",
+      "capturedAt": "2026-09-07T21:21:06.562Z",
+      "mode": "shared-backend",
+      "actor": "bob",
+      "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob",
+        "carol": "Carol",
+        "dave": "Dave"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "hydratingSnapshot",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+      "conversationIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "hydratedTimelineIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "cursor": {
+        "eventId": "9057e110-f292-4e32-a565-0432bd2cc0f3"
+      },
+      "timelineReplayCursor": {
+        "eventId": "9057e110-f292-4e32-a565-0432bd2cc0f3"
+      },
+      "durableStreams": {},
+      "messages": [
+        {
+          "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+          "canonicalSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 1,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 1,
+            "lastReplyAt": "2026-09-07T21:21:06.313Z"
+          },
+          "projectedSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 1,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 1,
+            "lastReplyAt": "2026-09-07T21:21:06.313Z"
+          }
+        },
+        {
+          "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+          "canonicalSummary": null,
+          "projectedSummary": null
+        }
+      ],
+      "diagnostics": [
+        "conversation.list:completed",
+        "reply.style.preference:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "message.context:aborted",
+        "conversation.detail:completed",
+        "conversation.draft:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.preference.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated"
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "17ce49152d709f46dbac31e58e439efddec1e769c9a25df27520885db2ea5f87",
+        "builtAt": "2026-09-07T21:11:17.896Z",
+        "packageVersion": "0.1.19"
+      }
+    },
+    {
+      "label": "before-managed-snapshot-hydration",
+      "capturedAt": "2026-09-07T21:21:06.779Z",
+      "mode": "shared-backend",
+      "actor": "bob",
+      "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob",
+        "carol": "Carol",
+        "dave": "Dave"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "hydratingSnapshot",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+      "conversationIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "hydratedTimelineIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "cursor": {
+        "eventId": "837c865d-df79-4564-8d65-4e02636d23c3"
+      },
+      "timelineReplayCursor": {
+        "eventId": "837c865d-df79-4564-8d65-4e02636d23c3"
+      },
+      "durableStreams": {},
+      "messages": [
+        {
+          "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+          "canonicalSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 1,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:21:06.313Z"
+          },
+          "projectedSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 1,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:21:06.313Z"
+          }
+        },
+        {
+          "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+          "canonicalSummary": null,
+          "projectedSummary": null
+        }
+      ],
+      "diagnostics": [
+        "conversation.list:completed",
+        "reply.style.preference:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "message.context:aborted",
+        "conversation.detail:completed",
+        "conversation.draft:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.preference.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated",
+        "message.context:aborted",
+        "reply.style.preference:aborted",
+        "conversation.detail:aborted",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated"
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "17ce49152d709f46dbac31e58e439efddec1e769c9a25df27520885db2ea5f87",
+        "builtAt": "2026-09-07T21:11:17.896Z",
+        "packageVersion": "0.1.19"
+      }
+    },
+    {
+      "label": "before-managed-snapshot-hydration",
+      "capturedAt": "2026-09-07T21:21:27.143Z",
+      "mode": "shared-backend",
+      "actor": "bob",
+      "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob",
+        "carol": "Carol",
+        "dave": "Dave"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "hydratingSnapshot",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+      "conversationIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "hydratedTimelineIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "cursor": {
+        "eventId": "837c865d-df79-4564-8d65-4e02636d23c3"
+      },
+      "timelineReplayCursor": {
+        "eventId": "837c865d-df79-4564-8d65-4e02636d23c3"
+      },
+      "durableStreams": {},
+      "messages": [
+        {
+          "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+          "canonicalSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 1,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:21:06.313Z"
+          },
+          "projectedSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 1,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:21:06.313Z"
+          }
+        },
+        {
+          "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+          "canonicalSummary": null,
+          "projectedSummary": null
+        }
+      ],
+      "diagnostics": [
+        "conversation.list:completed",
+        "reply.style.preference:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "message.context:aborted",
+        "conversation.detail:completed",
+        "conversation.draft:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.preference.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated",
+        "message.context:aborted",
+        "reply.style.preference:aborted",
+        "conversation.detail:aborted",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated",
+        "conversation.detail:aborted",
+        "conversation.detail:aborted",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:thread.follow.updated"
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "17ce49152d709f46dbac31e58e439efddec1e769c9a25df27520885db2ea5f87",
+        "builtAt": "2026-09-07T21:11:17.896Z",
+        "packageVersion": "0.1.19"
+      }
+    },
+    {
+      "label": "before-managed-snapshot-hydration",
+      "capturedAt": "2026-09-07T21:21:28.449Z",
+      "mode": "shared-backend",
+      "actor": "bob",
+      "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob",
+        "carol": "Carol",
+        "dave": "Dave"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "hydratingSnapshot",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+      "conversationIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "hydratedTimelineIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "cursor": {
+        "eventId": "8685d0ee-10ef-461d-92dd-8889b89c9d9b"
+      },
+      "timelineReplayCursor": {
+        "eventId": "8685d0ee-10ef-461d-92dd-8889b89c9d9b"
+      },
+      "durableStreams": {},
+      "messages": [
+        {
+          "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+          "canonicalSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 1,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:21:06.313Z"
+          },
+          "projectedSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 1,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 0,
+            "lastReplyAt": "2026-09-07T21:21:06.313Z"
+          }
+        },
+        {
+          "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+          "canonicalSummary": null,
+          "projectedSummary": null
+        }
+      ],
+      "diagnostics": [
+        "conversation.list:completed",
+        "reply.style.preference:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "message.context:aborted",
+        "conversation.detail:completed",
+        "conversation.draft:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.preference.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated",
+        "message.context:aborted",
+        "reply.style.preference:aborted",
+        "conversation.detail:aborted",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated",
+        "conversation.detail:aborted",
+        "conversation.detail:aborted",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:thread.follow.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.draft.updated"
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "17ce49152d709f46dbac31e58e439efddec1e769c9a25df27520885db2ea5f87",
+        "builtAt": "2026-09-07T21:11:17.896Z",
+        "packageVersion": "0.1.19"
+      }
+    },
+    {
+      "label": "before-managed-snapshot-hydration",
+      "capturedAt": "2026-09-07T21:21:37.336Z",
+      "mode": "shared-backend",
+      "actor": "bob",
+      "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob",
+        "carol": "Carol",
+        "dave": "Dave"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "hydratingSnapshot",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+      "conversationIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "hydratedTimelineIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "cursor": {
+        "eventId": "6f084b63-2843-4af3-b448-cc99027463f4"
+      },
+      "timelineReplayCursor": {
+        "eventId": "8c7183bf-1008-41ba-bc35-e548ccbd33a2"
+      },
+      "durableStreams": {
+        "49a6d519-7d47-4406-9d4e-5424005c8a09": {
+          "lastEventId": "6f084b63-2843-4af3-b448-cc99027463f4",
+          "lastOccurredAt": "2026-09-07T21:21:36.936Z"
+        }
+      },
+      "messages": [
+        {
+          "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+          "canonicalSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 2,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 1,
+            "lastReplyAt": "2026-09-07T21:21:36.936Z"
+          },
+          "projectedSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 2,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 1,
+            "lastReplyAt": "2026-09-07T21:21:36.936Z"
+          }
+        },
+        {
+          "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+          "canonicalSummary": null,
+          "projectedSummary": null
+        }
+      ],
+      "diagnostics": [
+        "conversation.list:completed",
+        "reply.style.preference:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "message.context:aborted",
+        "conversation.detail:completed",
+        "conversation.draft:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.preference.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated",
+        "message.context:aborted",
+        "reply.style.preference:aborted",
+        "conversation.detail:aborted",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated",
+        "conversation.detail:aborted",
+        "conversation.detail:aborted",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:thread.follow.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.draft.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.draft.updated"
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "17ce49152d709f46dbac31e58e439efddec1e769c9a25df27520885db2ea5f87",
+        "builtAt": "2026-09-07T21:11:17.896Z",
+        "packageVersion": "0.1.19"
+      }
+    },
+    {
+      "label": "before-managed-snapshot-hydration",
+      "capturedAt": "2026-09-07T21:22:12.432Z",
+      "mode": "shared-backend",
+      "actor": "bob",
+      "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+      "seedProfile": "reply-styles",
+      "availableActors": {
+        "alice": "Alice",
+        "bob": "Bob",
+        "carol": "Carol",
+        "dave": "Dave"
+      },
+      "endpoint": "http://127.0.0.1:4167/api/chat",
+      "identity": null,
+      "realtime": "hydratingSnapshot",
+      "clientLifecycle": "ready",
+      "clientDiagnostic": null,
+      "listError": null,
+      "error": null,
+      "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+      "conversationIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "hydratedTimelineIds": [
+        "49a6d519-7d47-4406-9d4e-5424005c8a09"
+      ],
+      "cursor": {
+        "eventId": "b9b13a11-2e9f-4a6a-a2af-52c64174706e"
+      },
+      "timelineReplayCursor": {
+        "eventId": "49e23d50-f92e-4fd0-af99-2dbf05d73484"
+      },
+      "durableStreams": {
+        "user:bob": {
+          "lastEventId": "b9b13a11-2e9f-4a6a-a2af-52c64174706e",
+          "lastOccurredAt": "2026-09-07T21:21:47.768Z"
+        }
+      },
+      "messages": [
+        {
+          "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+          "canonicalSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 2,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 1,
+            "lastReplyAt": "2026-09-07T21:21:36.936Z"
+          },
+          "projectedSummary": {
+            "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+            "replyCount": 2,
+            "participantIds": [
+              "bob"
+            ],
+            "unreadCount": 1,
+            "lastReplyAt": "2026-09-07T21:21:36.936Z"
+          }
+        },
+        {
+          "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+          "canonicalSummary": null,
+          "projectedSummary": null
+        }
+      ],
+      "diagnostics": [
+        "conversation.list:completed",
+        "reply.style.preference:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "message.context:aborted",
+        "conversation.detail:completed",
+        "conversation.draft:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.preference.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated",
+        "message.context:aborted",
+        "reply.style.preference:aborted",
+        "conversation.detail:aborted",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.read_cursor_updated",
+        "conversation.detail:aborted",
+        "conversation.detail:aborted",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:thread.follow.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.draft.updated",
+        "message_reminder.list:completed",
+        "conversation.list:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "message.context:completed",
+        "conversation.detail:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:conversation.draft.updated",
+        "conversation.detail:completed",
+        "message_reminder.list:completed",
+        "message.timeline:completed",
+        "conversation.list:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "conversation.detail:completed",
+        "message.timeline:completed",
+        "connection_lost",
+        "conversation.draft:completed",
+        "message.context:aborted",
+        "reply.style.preference:completed",
+        "conversation.detail:completed",
+        "durable_event_recovery",
+        "recovery:ordering_gap:thread.lifecycle.updated"
+      ],
+      "provenance": {
+        "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+        "sourceDigest": "17ce49152d709f46dbac31e58e439efddec1e769c9a25df27520885db2ea5f87",
+        "builtAt": "2026-09-07T21:11:17.896Z",
+        "packageVersion": "0.1.19"
+      }
+    }
+  ],
+  "current": {
+    "mode": "shared-backend",
+    "actor": "bob",
+    "instanceId": "9f36e5894d9274feee421e1c0f33261d",
+    "seedProfile": "reply-styles",
+    "availableActors": {
+      "alice": "Alice",
+      "bob": "Bob",
+      "carol": "Carol",
+      "dave": "Dave"
+    },
+    "endpoint": "http://127.0.0.1:4167/api/chat",
+    "identity": {
+      "tenantId": "chat-lab",
+      "userId": "bob",
+      "deviceId": "device-70012861-4d0e-4709-bb6a-ff0dd2064f55-72"
+    },
+    "realtime": "connected",
+    "clientLifecycle": "ready",
+    "clientDiagnostic": null,
+    "listError": null,
+    "error": null,
+    "selectedConversationId": "49a6d519-7d47-4406-9d4e-5424005c8a09",
+    "conversationIds": [
+      "49a6d519-7d47-4406-9d4e-5424005c8a09"
+    ],
+    "hydratedTimelineIds": [
+      "49a6d519-7d47-4406-9d4e-5424005c8a09"
+    ],
+    "cursor": null,
+    "timelineReplayCursor": {
+      "eventId": "49e23d50-f92e-4fd0-af99-2dbf05d73484"
+    },
+    "durableStreams": {
+      "user:bob": {
+        "lastEventId": "b9b13a11-2e9f-4a6a-a2af-52c64174706e",
+        "lastOccurredAt": "2026-09-07T21:21:47.768Z"
+      }
+    },
+    "messages": [
+      {
+        "id": "87a86aff-4eb3-4df7-9580-a7e11f256afc",
+        "canonicalSummary": {
+          "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+          "replyCount": 2,
+          "participantIds": [
+            "bob"
+          ],
+          "unreadCount": 1,
+          "lastReplyAt": "2026-09-07T21:21:36.936Z"
+        },
+        "projectedSummary": {
+          "threadId": "9cd2cb79-e215-42ad-8084-12ad7c657133",
+          "replyCount": 2,
+          "participantIds": [
+            "bob"
+          ],
+          "unreadCount": 1,
+          "lastReplyAt": "2026-09-07T21:21:36.936Z"
+        }
+      },
+      {
+        "id": "5843da6e-68e1-4020-9d8b-68208680b08d",
+        "canonicalSummary": null,
+        "projectedSummary": null
+      }
+    ],
+    "diagnostics": [
+      "conversation.list:completed",
+      "reply.style.preference:completed",
+      "message.timeline:completed",
+      "conversation.detail:completed",
+      "conversation.detail:completed",
+      "message.context:aborted",
+      "conversation.detail:completed",
+      "conversation.draft:completed",
+      "message.context:completed",
+      "conversation.detail:completed",
+      "conversation.detail:completed",
+      "conversation.detail:completed",
+      "durable_event_recovery",
+      "recovery:ordering_gap:conversation.preference.updated",
+      "message_reminder.list:completed",
+      "conversation.list:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "connection_lost",
+      "message.context:aborted",
+      "durable_event_recovery",
+      "recovery:ordering_gap:conversation.read_cursor_updated",
+      "message.context:aborted",
+      "reply.style.preference:aborted",
+      "conversation.detail:aborted",
+      "message_reminder.list:completed",
+      "conversation.list:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "connection_lost",
+      "message.context:aborted",
+      "reply.style.preference:completed",
+      "message.context:completed",
+      "durable_event_recovery",
+      "recovery:ordering_gap:conversation.read_cursor_updated",
+      "conversation.detail:aborted",
+      "conversation.detail:aborted",
+      "message_reminder.list:completed",
+      "conversation.list:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "connection_lost",
+      "message.context:aborted",
+      "reply.style.preference:completed",
+      "message.context:completed",
+      "conversation.detail:completed",
+      "conversation.detail:completed",
+      "durable_event_recovery",
+      "recovery:ordering_gap:thread.follow.updated",
+      "message_reminder.list:completed",
+      "conversation.list:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "connection_lost",
+      "message.context:aborted",
+      "reply.style.preference:completed",
+      "message.context:completed",
+      "conversation.detail:completed",
+      "conversation.detail:completed",
+      "durable_event_recovery",
+      "recovery:ordering_gap:conversation.draft.updated",
+      "message_reminder.list:completed",
+      "conversation.list:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "connection_lost",
+      "message.context:aborted",
+      "reply.style.preference:completed",
+      "message.context:completed",
+      "conversation.detail:completed",
+      "conversation.detail:completed",
+      "durable_event_recovery",
+      "recovery:ordering_gap:conversation.draft.updated",
+      "conversation.detail:completed",
+      "message_reminder.list:completed",
+      "message.timeline:completed",
+      "conversation.list:completed",
+      "message.timeline:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "connection_lost",
+      "conversation.draft:completed",
+      "message.context:aborted",
+      "reply.style.preference:completed",
+      "conversation.detail:completed",
+      "durable_event_recovery",
+      "recovery:ordering_gap:thread.lifecycle.updated",
+      "message_reminder.list:completed",
+      "conversation.list:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "conversation.detail:completed",
+      "message.timeline:completed",
+      "snapshot_hydration_failed",
+      "reply.style.preference:completed",
+      "conversation.detail:completed"
+    ],
+    "provenance": {
+      "sourceRevision": "c82abe8d19a81ec599a9771e0c449ee0605c3242",
+      "sourceDigest": "17ce49152d709f46dbac31e58e439efddec1e769c9a25df27520885db2ea5f87",
+      "builtAt": "2026-09-07T21:11:17.896Z",
+      "packageVersion": "0.1.19"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+name: Browser state regressions
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: browser-state-regressions-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Build package
+        run: npm run build
+      - name: Test critical browser state paths
+        run: node --test test/client-conversation-lifecycle.test.mjs test/client-canonical-state-persistence.test.mjs test/client-offline-send-message-queue.test.mjs test/client-durable-send-dispatch.test.mjs test/client-offline-send-recovery.test.mjs test/cross-tab-coordinator.test.mjs test/client-browser-graph.test.mjs test/ui-browser-graph.test.mjs

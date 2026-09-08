@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": true },
+  "include": ["src/server/thread-list-query.ts", "src/testing/index.ts", "src/server/postgres-schema-migrations.ts"]
+}

@@ -1,0 +1,88 @@
+TAP version 13
+# Subtest: typing timestamps supersede live starts on explicit stop
+ok 1 - typing timestamps supersede live starts on explicit stop
+  ---
+  duration_ms: 77.307013
+  type: 'test'
+  ...
+# Subtest: typing timestamps supersede live starts on backward-clock disconnect
+ok 2 - typing timestamps supersede live starts on backward-clock disconnect
+  ---
+  duration_ms: 39.590785
+  type: 'test'
+  ...
+# Subtest: typing timestamps supersede live starts on expiry
+ok 3 - typing timestamps supersede live starts on expiry
+  ---
+  duration_ms: 38.688038
+  type: 'test'
+  ...
+# Subtest: typing start, refresh, stop, expiry, ordering, and private authorization stay ephemeral
+ok 4 - typing start, refresh, stop, expiry, ordering, and private authorization stay ephemeral
+  ---
+  duration_ms: 116.69208
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on explicit offline, remaining support: false
+ok 5 - presence timestamps supersede live state on explicit offline, remaining support: false
+  ---
+  duration_ms: 40.697934
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on explicit offline, remaining support: true
+ok 6 - presence timestamps supersede live state on explicit offline, remaining support: true
+  ---
+  duration_ms: 39.090313
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on disconnect, remaining support: false
+ok 7 - presence timestamps supersede live state on disconnect, remaining support: false
+  ---
+  duration_ms: 37.636174
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on disconnect, remaining support: true
+ok 8 - presence timestamps supersede live state on disconnect, remaining support: true
+  ---
+  duration_ms: 36.811073
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on expiry, remaining support: false
+ok 9 - presence timestamps supersede live state on expiry, remaining support: false
+  ---
+  duration_ms: 38.11527
+  type: 'test'
+  ...
+# Subtest: presence timestamps supersede live state on expiry, remaining support: true
+ok 10 - presence timestamps supersede live state on expiry, remaining support: true
+  ---
+  duration_ms: 35.113116
+  type: 'test'
+  ...
+# Subtest: presence and typing disconnect cleanup preserve other active sessions
+ok 11 - presence and typing disconnect cleanup preserve other active sessions
+  ---
+  duration_ms: 40.205508
+  type: 'test'
+  ...
+# Subtest: public typing reaches active participants only and rate limits recover
+ok 12 - public typing reaches active participants only and rate limits recover
+  ---
+  duration_ms: 87.693412
+  type: 'test'
+  ...
+# Subtest: external adapter fanout retains local delivery and ephemeral events never advance replay cursors
+ok 13 - external adapter fanout retains local delivery and ephemeral events never advance replay cursors
+  ---
+  duration_ms: 8.542171
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 957.766985

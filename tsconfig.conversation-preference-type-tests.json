@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM"],
+    "noEmit": true,
+    "rootDir": "."
+  },
+  "include": [
+    "src/contracts/conversation-preference-mutation.ts",
+    "type-tests/conversation-preference.test.ts"
+  ]
+}

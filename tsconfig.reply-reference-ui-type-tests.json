@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.reply-reference-ui.json",
+  "compilerOptions": { "noEmit": true, "rootDir": "." },
+  "include": ["src/ui/index.ts", "type-tests/ui-slots.test.ts"]
+}

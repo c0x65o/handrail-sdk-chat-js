@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": true },
+  "include": [
+    "src/server/postgres-schema-migrations.ts",
+    "src/server/synchronize-draft-command.ts",
+    "src/server/conversation-draft-snapshot-query.ts",
+    "src/server/create-chat-server.ts"
+  ]
+}
