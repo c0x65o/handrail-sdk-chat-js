@@ -1,6 +1,6 @@
 {
   "name": "@handrail/chat",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "Embeddable chat SDK for Handrail applications",
   "type": "module",
   "main": "./dist/index.js",
