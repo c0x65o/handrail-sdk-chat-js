@@ -1,0 +1,75 @@
+{
+  "tool": "handrail_dev_service_status",
+  "status": "completed",
+  "owner_goal_turn_behavior": "continue",
+  "result": {
+    "ok": true,
+    "result": {
+      "ok": true,
+      "project_id": "1791fdf7-f197-483c-ba67-5c0da8f4315f",
+      "project_slug": "handrail-chat",
+      "services": [
+        {
+          "service": {
+            "id": "812c4054-6ced-4616-94fb-13f672b3e897",
+            "name": "chat-lab",
+            "repo_id": "04b6b865-7494-407b-91d9-8c3aa7ac9e3a",
+            "repo_name": "handrail-sdk-chat-js",
+            "repo_slug": "c0x65o/handrail-sdk-chat-js",
+            "command": "npm run build && npm --prefix examples/drop-in-react run dev:lab",
+            "healthcheck_path": "/__chat-lab/health",
+            "port": 4167,
+            "dev_runtime_mode": "host_process",
+            "dev_runtime_image": null,
+            "dev_runtime_dockerfile_path": null
+          },
+          "runtime_status": {
+            "status": "stopped",
+            "container_id": null,
+            "dev_url": null,
+            "route": null,
+            "stale_pid": null,
+            "stale_runtime_cleared": false,
+            "stale_runtime_clear_eligible": false,
+            "runtime_reconciliation": {
+              "classification": "stopped",
+              "authoritative_state": "stopped",
+              "supervisor": {
+                "pid": null,
+                "alive": false,
+                "process_group_id": null,
+                "source": "handrail_pid_file"
+              },
+              "listener": {
+                "port": 4167,
+                "present": false,
+                "pid": null,
+                "process_group_id": null,
+                "matches_supervisor": null,
+                "owned_by_service": false,
+                "owner_project_id": null,
+                "owner_service_id": null,
+                "source": "host_loopback_connect_probe"
+              },
+              "probe_provenance": {
+                "scope": "handrail_host_process",
+                "target": "127.0.0.1:4167",
+                "tcp_ready": false,
+                "queued_worker_namespace_checked": false
+              },
+              "qa_browser_route": {
+                "url": null,
+                "scope": null,
+                "status": "missing"
+              }
+            },
+            "runtime_scope": "main",
+            "change_lane_id": null,
+            "runtime_lane_active": null,
+            "runtime_fallback_to_main": false
+          }
+        }
+      ]
+    }
+  }
+}

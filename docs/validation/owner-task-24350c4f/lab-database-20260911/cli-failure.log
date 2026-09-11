@@ -1,0 +1,12 @@
+file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/scripts/chat-lab-database.mjs:16
+    throw new TypeError(`Chat Lab database selection ${source} must be a non-empty PostgreSQL URL; no fallback attempted.`);
+          ^
+
+TypeError: Chat Lab database selection CHAT_LAB_DATABASE_URL must be a non-empty PostgreSQL URL; no fallback attempted.
+    at selectChatLabDatabase (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/scripts/chat-lab-database.mjs:16:11)
+    at startChatLabBackend (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/scripts/chat-lab-backend.mjs:531:21)
+    at startChatLab (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/scripts/chat-lab.mjs:628:21)
+    at startChatLabWithFlutter (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/scripts/chat-lab-startup.mjs:11:21)
+    at file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/scripts/chat-lab.mjs:723:39
+
+Node.js v22.23.1

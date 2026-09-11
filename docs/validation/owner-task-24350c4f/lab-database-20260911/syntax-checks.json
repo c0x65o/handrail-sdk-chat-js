@@ -1,0 +1,66 @@
+[
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/scripts/chat-lab-database.mjs"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/scripts/chat-lab-startup.mjs"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/scripts/chat-lab-backend.mjs"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/scripts/chat-lab.mjs"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/test/ChatLabDatabase.test.mjs"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/test/ChatLabDatabasePostgres.test.mjs"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "scripts/verify-chat-lab-database.mjs"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0
+  }
+]

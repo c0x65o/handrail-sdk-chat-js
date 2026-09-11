@@ -1,0 +1,6 @@
+{
+  "blankSelectedUrlAttemptedContainer": true,
+  "containerStartIntercepted": true,
+  "actualContainerStarted": false,
+  "boundary": "installed @handrail/chat/testing with testcontainers start intercepted; original lab passed blank selection unchanged"
+}

@@ -158,6 +158,20 @@ injected settings. Do not pin the managed Docker host port in this override:
 it can change when the resource restarts and leave Chat Lab connecting to a
 stale port even after Handrail refreshes `DATABASE_URL`.
 
+Programmatic `options.databaseUrl` takes precedence over these environment
+variables. Blank or malformed explicit selections fail without falling back to
+another database or container. Initialization failures report the selecting
+variable and a safe error code, never a connection URL or driver credentials.
+`ECONNREFUSED` alone does not distinguish a stale override from a stopped managed
+resource; inspect both the selected settings and the managed resource status.
+The CLI starts Flutter compilation only after the database and lab server start.
+
+For focused database selection/startup/cleanup checks, reuse PostgreSQL 16 binaries
+with `PG_BINDIR=/path/to/postgresql/16/bin node scripts/verify-chat-lab-database.mjs
+/absolute/path/to/new-evidence-directory` from the SDK root. This runs serially
+against an owned private socket cluster, removes only its disposable resources,
+and does not launch a browser or start a declared Handrail service.
+
 Persistence, repositories, commands, snapshots, realtime delivery, normalized
 browser state, and the React workspace at `/chat-lab.html` are real. The
 default-renderer and Flutter acceptance targets use deterministic local

@@ -11,6 +11,7 @@ import { startChatLabBackend } from "./chat-lab-backend.mjs";
 import { buildFlutterChatLab } from "./build-flutter-chat-lab.mjs";
 import { createChatLabWebRtcServer } from "./chat-lab-webrtc-server.mjs";
 import { chatLabBackendProvenance } from "./chat-lab-provenance.mjs";
+import { startChatLabWithFlutter } from "./chat-lab-startup.mjs";
 import { flutterWebRoot as defaultFlutterWebRoot } from "../../../scripts/sdk-repositories.mjs";
 
 const exampleRoot = fileURLToPath(new URL("..", import.meta.url));
@@ -719,11 +720,10 @@ const isMain = process.argv[1] !== undefined &&
   fileURLToPath(import.meta.url) === fileURLToPath(new URL(`file://${process.argv[1]}`));
 
 if (isMain) {
-  const flutterReady = buildFlutterChatLab();
+  const { lab, flutterReady } = await startChatLabWithFlutter(startChatLab, buildFlutterChatLab);
   void flutterReady.catch((error) => {
     console.error(error instanceof Error ? error.message : error);
   });
-  const lab = await startChatLab({ flutterReady });
   console.log(`Chat Lab backend provenance ${JSON.stringify({ instanceId: lab.instanceId, backend: chatLabBackendProvenance })}`);
   console.log(`React real-stack Chat Lab ready at ${lab.origin}/chat-lab.html`);
   console.log(`Default React message renderer Lab ready at ${lab.origin}/reminder-chat-lab.html`);

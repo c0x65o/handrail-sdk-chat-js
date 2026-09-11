@@ -1,0 +1,36 @@
+{
+  "uid": 993,
+  "checks": {
+    "postgres-version": {
+      "code": 0,
+      "signal": null
+    },
+    "postgres-init": {
+      "code": 0,
+      "signal": null
+    },
+    "postgres-start": {
+      "code": 0,
+      "signal": null
+    },
+    "focused-tests": {
+      "code": 0,
+      "signal": null
+    },
+    "remaining-schemas": {
+      "code": 0,
+      "signal": null
+    },
+    "postgres-stop": {
+      "code": 0,
+      "signal": null
+    }
+  },
+  "cleanup": {
+    "remainingSchemas": [],
+    "postgresStopped": true,
+    "directoryRemoved": true
+  },
+  "passed": true,
+  "version": "postgres (PostgreSQL) 16.15 (Debian 16.15-1.pgdg12+2)"
+}

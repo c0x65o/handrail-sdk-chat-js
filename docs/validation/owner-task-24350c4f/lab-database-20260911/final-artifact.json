@@ -1,0 +1,59 @@
+{
+  "observedAt": "2026-09-11T14:23:35.526Z",
+  "sourceHashes": {
+    "examples/drop-in-react/README.md": "f5522360954d7aa4c3e7d80b36b6f0a5440f178b22b51bf46400559ee629e4a8",
+    "examples/drop-in-react/scripts/chat-lab-backend.mjs": "eaabf0fda75b1f35aea158853c375031ca486074c1e6e5e24b473a7fb3c4eb38",
+    "examples/drop-in-react/scripts/chat-lab.mjs": "353d9d299a2ba9d2adb7bf8e4204c811b9ff4cdacde446442ecf4148ed9ad27a",
+    "examples/drop-in-react/scripts/chat-lab-database.mjs": "f5809e038fb4aa3589c2e3f1e59eb79a77e374526c964c9d47c4a065c21b027c",
+    "examples/drop-in-react/scripts/chat-lab-startup.mjs": "368bf4db896b458861b5e4b94d2d0371748c1027a8c51dcbe3c786fd1e454dd7",
+    "examples/drop-in-react/test/ChatLabDatabase.test.mjs": "f442439041a9482a660ebff9905095a1818665594c036dee32db814f9d1d73ee",
+    "examples/drop-in-react/test/ChatLabDatabasePostgres.test.mjs": "2460b81795e975c588cd8d429de1b577c045a673b0e81d4cdba118ad008226a7",
+    "scripts/verify-chat-lab-database.mjs": "44689b04223c3969557f801e14730eb263799ad543421ae83379ae0b6ebc8e79"
+  },
+  "sourceDigest": "f80b79d80c8b48835d080abd1049460caed46ffdac06a09156e946fbb5f3d6dc",
+  "digestScheme": "sha256 of JSON.stringify ordered sourceHashes object",
+  "unchangedInitialArtifactFiles": 1465,
+  "unexpectedInitialArtifactChanges": [],
+  "generatedVersionPreserved": true,
+  "noConsumerPinOrInstalledSdkChanges": true,
+  "sourcePatch": "source.patch",
+  "checks": {
+    "initialFocused": {
+      "passed": 9,
+      "failed": 0,
+      "postgresBacked": 4
+    },
+    "finalUnit": {
+      "passed": 7,
+      "failed": 0
+    },
+    "actualCliNegative": "passed",
+    "blankFallbackNegativeControl": "reproduced with container startup intercepted",
+    "syntax": "7 modules passed",
+    "gitDiffCheck": "passed",
+    "typedSourceChanged": false
+  },
+  "callback": {
+    "taskId": "24350c4f-985e-4762-ac15-445f69009f18",
+    "strategyId": "df610529-c0a7-4277-817b-c30142cf7c55",
+    "plannerActionId": "dd3e9335-d023-4a3c-a95d-6eebf156665c",
+    "workRequestId": "8fa13e03-c2f6-48d3-bfc0-0daed5107d73",
+    "continuation": "Main resource authority/start -> exact declared service -> existing independent verifier on final installed artifact",
+    "queueMutated": false
+  },
+  "repos": {
+    ".": {
+      "head": "e9c824ac1dde122d60404bebdaff35890f74c711",
+      "status": " M examples/drop-in-react/README.md\n M examples/drop-in-react/scripts/chat-lab-backend.mjs\n M examples/drop-in-react/scripts/chat-lab.mjs\n M src/client/generated/package-version.ts\n?? docs/validation/owner-task-24350c4f/lab-database-20260911/\n?? examples/drop-in-react/scripts/chat-lab-database.mjs\n?? examples/drop-in-react/scripts/chat-lab-startup.mjs\n?? examples/drop-in-react/test/ChatLabDatabase.test.mjs\n?? examples/drop-in-react/test/ChatLabDatabasePostgres.test.mjs\n?? scripts/verify-chat-lab-database.mjs\n"
+    },
+    "../handrail-sdk-chat-flutter": {
+      "head": "dd928dd57c5adbeb5ed8e002270ffb8be9e4b292",
+      "status": ""
+    },
+    "../handrail-chat-preview-flutter": {
+      "head": "f5ff800e6b5d4098250c9f3967ea75cc2c4b13dd",
+      "status": ""
+    }
+  },
+  "sourcePatchSha256": "465b0abea701834a15efce2e10276cfce07e03ab8ce66352d72c6e22834ee766"
+}

@@ -1,0 +1,412 @@
+diff --git a/examples/drop-in-react/README.md b/examples/drop-in-react/README.md
+index 91ea7ae..a33674c 100644
+--- a/examples/drop-in-react/README.md
++++ b/examples/drop-in-react/README.md
+@@ -158,6 +158,20 @@ injected settings. Do not pin the managed Docker host port in this override:
+ it can change when the resource restarts and leave Chat Lab connecting to a
+ stale port even after Handrail refreshes `DATABASE_URL`.
+ 
++Programmatic `options.databaseUrl` takes precedence over these environment
++variables. Blank or malformed explicit selections fail without falling back to
++another database or container. Initialization failures report the selecting
++variable and a safe error code, never a connection URL or driver credentials.
++`ECONNREFUSED` alone does not distinguish a stale override from a stopped managed
++resource; inspect both the selected settings and the managed resource status.
++The CLI starts Flutter compilation only after the database and lab server start.
++
++For focused database selection/startup/cleanup checks, reuse PostgreSQL 16 binaries
++with `PG_BINDIR=/path/to/postgresql/16/bin node scripts/verify-chat-lab-database.mjs
++/absolute/path/to/new-evidence-directory` from the SDK root. This runs serially
++against an owned private socket cluster, removes only its disposable resources,
++and does not launch a browser or start a declared Handrail service.
++
+ Persistence, repositories, commands, snapshots, realtime delivery, normalized
+ browser state, and the React workspace at `/chat-lab.html` are real. The
+ default-renderer and Flutter acceptance targets use deterministic local
+diff --git a/examples/drop-in-react/scripts/chat-lab-backend.mjs b/examples/drop-in-react/scripts/chat-lab-backend.mjs
+index e71a2e9..bf30c52 100644
+--- a/examples/drop-in-react/scripts/chat-lab-backend.mjs
++++ b/examples/drop-in-react/scripts/chat-lab-backend.mjs
+@@ -1,4 +1,5 @@
+ import { createChatTestHarness } from "@handrail/chat/testing";
++import { createChatLabDatabaseHarness, selectChatLabDatabase } from "./chat-lab-database.mjs";
+ 
+ export const CHAT_LAB_PRIVATE_SEARCH_TEXT =
+   "Quarantined orbital telemetry belongs in the private channel.";
+@@ -527,13 +528,8 @@ export async function startChatLabBackend(options = {}) {
+     : seedProfile === CHAT_LAB_DIRECT_MESSAGE_VISUAL_PROFILE
+       ? CHAT_LAB_DIRECT_MESSAGE_VISUAL_ACTORS
+       : CHAT_LAB_ACTORS;
+-  const databaseUrl =
+-    options.databaseUrl ??
+-    process.env.CHAT_LAB_DATABASE_URL ??
+-    process.env.TEST_DATABASE_URL ??
+-    process.env.DATABASE_URL;
+-  const harness = await createChatTestHarness({
+-    ...(databaseUrl === undefined ? {} : { testDatabaseUrl: databaseUrl }),
++  const selection = selectChatLabDatabase(options);
++  const harness = await createChatLabDatabaseHarness(createChatTestHarness, selection, {
+     schemaPrefix: "handrail_chat_lab",
+     httpObservability: {
+       onOutcome(outcome) {
+diff --git a/examples/drop-in-react/scripts/chat-lab.mjs b/examples/drop-in-react/scripts/chat-lab.mjs
+index 37e50b9..61d22df 100644
+--- a/examples/drop-in-react/scripts/chat-lab.mjs
++++ b/examples/drop-in-react/scripts/chat-lab.mjs
+@@ -11,6 +11,7 @@ import { startChatLabBackend } from "./chat-lab-backend.mjs";
+ import { buildFlutterChatLab } from "./build-flutter-chat-lab.mjs";
+ import { createChatLabWebRtcServer } from "./chat-lab-webrtc-server.mjs";
+ import { chatLabBackendProvenance } from "./chat-lab-provenance.mjs";
++import { startChatLabWithFlutter } from "./chat-lab-startup.mjs";
+ import { flutterWebRoot as defaultFlutterWebRoot } from "../../../scripts/sdk-repositories.mjs";
+ 
+ const exampleRoot = fileURLToPath(new URL("..", import.meta.url));
+@@ -719,11 +720,10 @@ const isMain = process.argv[1] !== undefined &&
+   fileURLToPath(import.meta.url) === fileURLToPath(new URL(`file://${process.argv[1]}`));
+ 
+ if (isMain) {
+-  const flutterReady = buildFlutterChatLab();
++  const { lab, flutterReady } = await startChatLabWithFlutter(startChatLab, buildFlutterChatLab);
+   void flutterReady.catch((error) => {
+     console.error(error instanceof Error ? error.message : error);
+   });
+-  const lab = await startChatLab({ flutterReady });
+   console.log(`Chat Lab backend provenance ${JSON.stringify({ instanceId: lab.instanceId, backend: chatLabBackendProvenance })}`);
+   console.log(`React real-stack Chat Lab ready at ${lab.origin}/chat-lab.html`);
+   console.log(`Default React message renderer Lab ready at ${lab.origin}/reminder-chat-lab.html`);
+diff --git a/examples/drop-in-react/scripts/chat-lab-database.mjs b/examples/drop-in-react/scripts/chat-lab-database.mjs
+new file mode 100644
+index 0000000..199da48
+--- /dev/null
++++ b/examples/drop-in-react/scripts/chat-lab-database.mjs
+@@ -0,0 +1,47 @@
++// Keep explicit selection intact, including database-only URLs whose connection
++// settings pg resolves from PG*. Never retry against a lower-priority database.
++export function selectChatLabDatabase(options = {}, env = process.env) {
++  const candidates = [
++    ["options.databaseUrl", options.databaseUrl],
++    ["CHAT_LAB_DATABASE_URL", env.CHAT_LAB_DATABASE_URL],
++    ["TEST_DATABASE_URL", env.TEST_DATABASE_URL],
++    ["DATABASE_URL", env.DATABASE_URL],
++  ];
++  const selected = candidates.find(([, value]) => value !== undefined && value !== null);
++  if (selected === undefined) return { source: "container-default", databaseUrl: undefined };
++  const [source, databaseUrl] = selected;
++  // The SDK treats blank URLs as permission to start a disposable container.
++  // A selected lab override must instead fail visibly.
++  if (typeof databaseUrl !== "string" || databaseUrl.trim() === "") {
++    throw new TypeError(`Chat Lab database selection ${source} must be a non-empty PostgreSQL URL; no fallback attempted.`);
++  }
++  try {
++    const url = new URL(databaseUrl);
++    if (!["postgres:", "postgresql:"].includes(url.protocol)) throw new Error();
++  } catch {
++    throw new TypeError(`Chat Lab database selection ${source} must be a valid PostgreSQL URL; no fallback attempted.`);
++  }
++  return { source, databaseUrl };
++}
++
++export async function createChatLabDatabaseHarness(createHarness, selection, options) {
++  try {
++    return await createHarness({
++      ...options,
++      ...(selection.databaseUrl === undefined ? {} : { testDatabaseUrl: selection.databaseUrl }),
++    });
++  } catch (error) {
++    // Do not retain the driver message, stack or cause: any can include a URL,
++    // database user, password, or query. Only known diagnostic codes are safe.
++    const code = ["ECONNREFUSED", "ENOTFOUND", "ETIMEDOUT", "28P01", "3D000", "42501"]
++      .includes(error?.code) ? error.code : "setup_failed";
++    const cleanupFailed = error instanceof AggregateError;
++    throw new Error(
++      `Chat Lab database initialization failed: selection=${selection.source}, code=${code}. ` +
++      (selection.databaseUrl === undefined
++        ? "Check the disposable PostgreSQL container dependency. "
++        : "Explicit selection retained; no fallback attempted. Check the selected database and its connection settings. ") +
++      (cleanupFailed ? "Harness cleanup also failed; inspect owned resources before retrying." : ""),
++    );
++  }
++}
+diff --git a/examples/drop-in-react/scripts/chat-lab-startup.mjs b/examples/drop-in-react/scripts/chat-lab-startup.mjs
+new file mode 100644
+index 0000000..3ee61e4
+--- /dev/null
++++ b/examples/drop-in-react/scripts/chat-lab-startup.mjs
+@@ -0,0 +1,14 @@
++// The database/runtime must exist before starting an expensive Flutter child.
++// Still pass a readiness promise to the host so Flutter requests wait for build.
++export async function startChatLabWithFlutter(startLab, buildFlutter) {
++  let resolveFlutter;
++  let rejectFlutter;
++  const flutterReady = new Promise((resolve, reject) => {
++    resolveFlutter = resolve;
++    rejectFlutter = reject;
++  });
++  void flutterReady.catch(() => {});
++  const lab = await startLab({ flutterReady });
++  void Promise.resolve().then(buildFlutter).then(resolveFlutter, rejectFlutter);
++  return { lab, flutterReady };
++}
+diff --git a/examples/drop-in-react/test/ChatLabDatabase.test.mjs b/examples/drop-in-react/test/ChatLabDatabase.test.mjs
+new file mode 100644
+index 0000000..d6b6900
+--- /dev/null
++++ b/examples/drop-in-react/test/ChatLabDatabase.test.mjs
+@@ -0,0 +1,102 @@
++import assert from "node:assert/strict";
++import { inspect } from "node:util";
++import test from "node:test";
++import { createChatLabDatabaseHarness, selectChatLabDatabase } from "../scripts/chat-lab-database.mjs";
++import { startChatLabWithFlutter } from "../scripts/chat-lab-startup.mjs";
++
++test("database precedence preserves the exact explicit URL, including database-only PG settings", () => {
++  const env = { CHAT_LAB_DATABASE_URL: "postgresql:///lab", TEST_DATABASE_URL: "postgresql:///test", DATABASE_URL: "postgresql:///app" };
++  assert.deepEqual(selectChatLabDatabase({ databaseUrl: "postgresql:///option" }, env),
++    { source: "options.databaseUrl", databaseUrl: "postgresql:///option" });
++  for (const source of Object.keys(env)) {
++    assert.deepEqual(selectChatLabDatabase({}, env), { source, databaseUrl: env[source] });
++    delete env[source];
++  }
++  assert.deepEqual(selectChatLabDatabase({}, env), { source: "container-default", databaseUrl: undefined });
++});
++
++test("invalid explicit selections fail without using a lower-priority URL or container", () => {
++  for (const invalid of ["", "  ", 42, "password-bearing-invalid-url", "https://example.test/db"]) {
++    for (const source of ["options.databaseUrl", "CHAT_LAB_DATABASE_URL", "TEST_DATABASE_URL", "DATABASE_URL"]) {
++      const env = { DATABASE_URL: "postgresql:///lower" };
++      const options = source === "options.databaseUrl" ? { databaseUrl: invalid } : {};
++      if (source !== "options.databaseUrl") env[source] = invalid;
++      assert.throws(() => selectChatLabDatabase(options, env), error => {
++        assert.ok(error.message.includes(source));
++        assert.match(error.message, /no fallback attempted/);
++        assert.ok(!error.message.includes("password-bearing"));
++        return true;
++      });
++    }
++  }
++});
++
++test("failed initialization calls one selected harness and redacts driver errors and causes", async () => {
++  const url = "postgresql://private-user:private-password@localhost:1234/lab?password=query-secret";
++  const selection = selectChatLabDatabase({ databaseUrl: url }, {});
++  for (const code of ["ECONNREFUSED", "28P01", "3D000", "42501", "private-code"]) {
++    let calls = 0;
++    await assert.rejects(createChatLabDatabaseHarness(async options => {
++      calls++;
++      assert.equal(options.testDatabaseUrl, url);
++      throw Object.assign(new Error(url, { cause: new Error("private-cause") }), { code });
++    }, selection, { schemaPrefix: "handrail_chat_lab" }), error => {
++      assert.match(error.message, /selection=options.databaseUrl/);
++      assert.match(error.message, /no fallback attempted/);
++      assert.ok(!inspect(error).includes("private-"));
++      assert.ok(!inspect(error).includes("query-secret"));
++      assert.equal(error.cause, undefined);
++      return true;
++    });
++    assert.equal(calls, 1);
++  }
++});
++
++test("cleanup failures remain visible without exposing nested driver details", async () => {
++  await assert.rejects(createChatLabDatabaseHarness(async () => {
++    throw new AggregateError([new Error("private-password")], "private-url");
++  }, selectChatLabDatabase({}, {}), {}), error => {
++    assert.match(error.message, /selection=container-default/);
++    assert.match(error.message, /cleanup also failed/);
++    assert.ok(!inspect(error).includes("private-"));
++    return true;
++  });
++});
++
++test("successful harness and teardown ownership pass through unchanged", async () => {
++  const harness = { teardown() {} };
++  assert.equal(await createChatLabDatabaseHarness(async options => {
++    assert.deepEqual(options, { schemaPrefix: "handrail_chat_lab" });
++    return harness;
++  }, selectChatLabDatabase({}, {}), { schemaPrefix: "handrail_chat_lab" }), harness);
++});
++
++test("failed lab startup never launches the Flutter build child", async () => {
++  let builds = 0;
++  await assert.rejects(startChatLabWithFlutter(async () => {
++    throw new Error("database unavailable");
++  }, async () => { builds++; }), /database unavailable/);
++  assert.equal(builds, 0);
++});
++
++test("Flutter readiness follows successful lab startup and preserves build failure", async () => {
++  for (const fail of [false, true]) {
++    const order = [];
++    let hostReady;
++    const lab = { close() {} };
++    const started = await startChatLabWithFlutter(async ({ flutterReady }) => {
++      hostReady = flutterReady;
++      order.push("lab");
++      return lab;
++    }, async () => {
++      order.push("flutter");
++      if (fail) throw new Error("build failed");
++      return "build provenance";
++    });
++    assert.equal(started.lab, lab);
++    assert.equal(started.flutterReady, hostReady);
++    if (fail) await assert.rejects(hostReady, /build failed/);
++    else assert.equal(await hostReady, "build provenance");
++    assert.deepEqual(order, ["lab", "flutter"]);
++  }
++});
+diff --git a/examples/drop-in-react/test/ChatLabDatabasePostgres.test.mjs b/examples/drop-in-react/test/ChatLabDatabasePostgres.test.mjs
+new file mode 100644
+index 0000000..0b6dcc3
+--- /dev/null
++++ b/examples/drop-in-react/test/ChatLabDatabasePostgres.test.mjs
+@@ -0,0 +1,77 @@
++import assert from "node:assert/strict";
++import net from "node:net";
++import test from "node:test";
++import { createRequire } from "node:module";
++import { startChatLab } from "../scripts/chat-lab.mjs";
++
++const { Pool } = createRequire(import.meta.url)("pg");
++const databaseUrl = process.env.CHAT_LAB_DATABASE_CHECK_URL;
++assert.ok(databaseUrl, "Use scripts/verify-chat-lab-database.mjs with its private PostgreSQL 16 cluster");
++
++const listen = server => new Promise((resolve, reject) => {
++  server.once("error", reject);
++  server.listen(0, "127.0.0.1", resolve);
++});
++const close = server => new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
++
++test("installed lab starts on the selected private database and releases its schema and listener", async () => {
++  const admin = new Pool({ connectionString: databaseUrl });
++  let lab;
++  try {
++    await admin.query("CREATE SCHEMA unowned_sentinel");
++    const before = (await admin.query("SELECT count(*)::int AS count FROM pg_namespace")).rows[0].count;
++    // A database-only URL must retain its database and inherit private PG*.
++    const selected = "postgresql:///postgres";
++    lab = await startChatLab({ databaseUrl: selected, seedProfile: "reply-styles", port: 0 });
++    assert.equal(lab.harness.connectionString, selected);
++    assert.equal((await lab.harness.pool.query("SELECT current_database() AS name")).rows[0].name, "postgres");
++    assert.equal(lab.seedProfile, "reply-styles");
++    const schema = lab.harness.schema;
++    const port = new URL(lab.origin).port;
++    await Promise.all([lab.close(), lab.close()]);
++    lab = undefined;
++    assert.equal((await admin.query("SELECT count(*)::int AS count FROM pg_namespace")).rows[0].count, before);
++    assert.equal((await admin.query("SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname=$1) AS found", [schema])).rows[0].found, false);
++    // Rebinding proves the disposable listener was released; no HTTP/browser probe.
++    const rebound = net.createServer();
++    await new Promise((resolve, reject) => { rebound.once("error", reject); rebound.listen(Number(port), "127.0.0.1", resolve); });
++    await close(rebound);
++    assert.equal((await admin.query("SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname='unowned_sentinel') AS found")).rows[0].found, true);
++  } finally {
++    await lab?.close();
++    await admin.query("DROP SCHEMA IF EXISTS unowned_sentinel");
++    await admin.end();
++  }
++});
++
++test("a refused explicit endpoint fails visibly despite a working lower-priority test database", async () => {
++  const reservation = net.createServer();
++  await listen(reservation);
++  const port = reservation.address().port;
++  await close(reservation);
++  await assert.rejects(startChatLab({
++    databaseUrl: `postgresql://handrail_test@127.0.0.1:${port}/postgres`, port: 0,
++  }), /selection=options.databaseUrl, code=ECONNREFUSED.*no fallback attempted/);
++});
++
++test("missing selected database is diagnosed without redirecting to the existing database", async () => {
++  const missing = new URL(databaseUrl);
++  missing.pathname = "/missing_lab_database";
++  await assert.rejects(startChatLab({ databaseUrl: missing.href, port: 0 }),
++    /selection=options.databaseUrl, code=3D000.*no fallback attempted/);
++});
++
++test("failure after database initialization drops only the owned lab schema", async () => {
++  const blocker = net.createServer();
++  const admin = new Pool({ connectionString: databaseUrl });
++  try {
++    await listen(blocker);
++    const before = (await admin.query("SELECT nspname FROM pg_namespace ORDER BY nspname")).rows;
++    await assert.rejects(startChatLab({ databaseUrl, port: blocker.address().port }), /already in use/);
++    assert.deepEqual((await admin.query("SELECT nspname FROM pg_namespace ORDER BY nspname")).rows, before);
++    assert.equal(blocker.listening, true);
++  } finally {
++    await close(blocker);
++    await admin.end();
++  }
++});
+diff --git a/scripts/verify-chat-lab-database.mjs b/scripts/verify-chat-lab-database.mjs
+new file mode 100644
+index 0000000..ed0d780
+--- /dev/null
++++ b/scripts/verify-chat-lab-database.mjs
+@@ -0,0 +1,66 @@
++// Focused lab checks only. No browser, managed resource or declared service startup.
++import assert from "node:assert/strict";
++import { spawnSync } from "node:child_process";
++import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
++import path from "node:path";
++import { isolatedEnvironment } from "../examples/drop-in-react/scripts/accept-flutter-cross-client-recovery.mjs";
++
++const root = path.resolve(import.meta.dirname, "..");
++const output = path.resolve(process.argv[2]);
++mkdirSync(output, { mode: 0o700 }); // Refuse to overwrite saved evidence.
++const bin = process.env.PG_BINDIR;
++assert.ok(bin, "Set PG_BINDIR to the existing PostgreSQL 16 binaries");
++assert.ok(process.getuid() > 0, "Use unprivileged PostgreSQL");
++const env = isolatedEnvironment(process.env);
++const result = { uid: process.getuid(), checks: {}, cleanup: {}, passed: false };
++const run = (name, command, args) => {
++  const child = spawnSync(command, args, { cwd: root, env, encoding: "utf8", timeout: 120_000, maxBuffer: 4 * 1024 * 1024 });
++  // This environment contains only disposable connection settings. Omit URLs
++  // even for these fixtures; never copy inherited env or connection credentials.
++  const log = `${child.stdout ?? ""}${child.stderr ?? ""}`.replace(/postgres(?:ql)?:\/\/[^\s'"<>]+/g, "postgresql://[REDACTED]");
++  writeFileSync(path.join(output, `${name}.log`), log);
++  result.checks[name] = { code: child.status, signal: child.signal };
++  assert.equal(child.status, 0, `${name} failed; see retained log`);
++  return log;
++};
++let directory;
++try {
++  result.version = run("postgres-version", path.join(bin, "postgres"), ["--version"]).trim();
++  assert.match(result.version, /PostgreSQL\) 16\./);
++  directory = mkdtempSync("/tmp/handrail-codex-heavy-command-locks/lab-db-");
++  run("postgres-init", path.join(bin, "initdb"), ["-D", path.join(directory, "data"), "-U", "handrail_test",
++    "--auth-local=trust", "--auth-host=reject", "--encoding=UTF8", "--no-locale"]);
++  run("postgres-start", path.join(bin, "pg_ctl"), ["-D", path.join(directory, "data"), "-l", path.join(directory, "server.log"),
++    "-o", `-c listen_addresses='' -c unix_socket_directories='${directory}' -c unix_socket_permissions=0700 -c max_connections=40 -c shared_buffers=32MB`, "-w", "start"]);
++  env.PGHOST = directory;
++  env.PGPORT = "5432";
++  env.PGUSER = "handrail_test";
++  env.PGDATABASE = "postgres";
++  env.TEST_DATABASE_URL = `postgresql:///postgres?host=${encodeURIComponent(directory)}`;
++  env.CHAT_LAB_DATABASE_CHECK_URL = env.TEST_DATABASE_URL;
++  run("focused-tests", process.execPath, ["--test", "--test-concurrency=1", "--test-timeout=45000",
++    "examples/drop-in-react/test/ChatLabDatabase.test.mjs", "examples/drop-in-react/test/ChatLabDatabasePostgres.test.mjs"]);
++  const remaining = run("remaining-schemas", path.join(bin, "psql"), ["-Atc",
++    "SELECT nspname FROM pg_namespace WHERE nspname NOT IN ('public','information_schema') AND nspname NOT LIKE 'pg_%'"]).trim();
++  assert.equal(remaining, "", "A fixture leaked its schema");
++  result.cleanup.remainingSchemas = [];
++  result.passed = true;
++} finally {
++  try {
++    if (directory && existsSync(path.join(directory, "data/postmaster.pid"))) {
++      run("postgres-stop", path.join(bin, "pg_ctl"), ["-D", path.join(directory, "data"), "-m", "fast", "-w", "stop"]);
++    }
++    result.cleanup.postgresStopped = true;
++    if (directory) {
++      if (existsSync(path.join(directory, "server.log"))) writeFileSync(path.join(output, "postgres-server.log"), readFileSync(path.join(directory, "server.log")));
++      rmSync(directory, { recursive: true });
++      result.cleanup.directoryRemoved = !existsSync(directory);
++    }
++  } catch {
++    result.passed = false;
++    result.cleanup.error = "Owned cluster cleanup failed; directory retained";
++    result.cleanup.retainedDirectory = directory;
++    process.exitCode = 1;
++  }
++  writeFileSync(path.join(output, "result.json"), JSON.stringify(result, null, 2) + "\n");
++}

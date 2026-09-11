@@ -1,0 +1,52 @@
+TAP version 13
+# Subtest: database precedence preserves the exact explicit URL, including database-only PG settings
+ok 1 - database precedence preserves the exact explicit URL, including database-only PG settings
+  ---
+  duration_ms: 1.49947
+  type: 'test'
+  ...
+# Subtest: invalid explicit selections fail without using a lower-priority URL or container
+ok 2 - invalid explicit selections fail without using a lower-priority URL or container
+  ---
+  duration_ms: 1.003716
+  type: 'test'
+  ...
+# Subtest: failed initialization calls one selected harness and redacts driver errors and causes
+ok 3 - failed initialization calls one selected harness and redacts driver errors and causes
+  ---
+  duration_ms: 1.413792
+  type: 'test'
+  ...
+# Subtest: cleanup failures remain visible without exposing nested driver details
+ok 4 - cleanup failures remain visible without exposing nested driver details
+  ---
+  duration_ms: 0.29443
+  type: 'test'
+  ...
+# Subtest: successful harness and teardown ownership pass through unchanged
+ok 5 - successful harness and teardown ownership pass through unchanged
+  ---
+  duration_ms: 0.249885
+  type: 'test'
+  ...
+# Subtest: failed lab startup never launches the Flutter build child
+ok 6 - failed lab startup never launches the Flutter build child
+  ---
+  duration_ms: 0.228754
+  type: 'test'
+  ...
+# Subtest: Flutter readiness follows successful lab startup and preserves build failure
+ok 7 - Flutter readiness follows successful lab startup and preserves build failure
+  ---
+  duration_ms: 0.477522
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 68.966987

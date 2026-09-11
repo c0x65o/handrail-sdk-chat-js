@@ -1,0 +1,65 @@
+TAP version 13
+# Subtest: database precedence preserves the exact explicit URL, including database-only PG settings
+ok 1 - database precedence preserves the exact explicit URL, including database-only PG settings
+  ---
+  duration_ms: 1.460476
+  type: 'test'
+  ...
+# Subtest: invalid explicit selections fail without using a lower-priority URL or container
+ok 2 - invalid explicit selections fail without using a lower-priority URL or container
+  ---
+  duration_ms: 2.006637
+  type: 'test'
+  ...
+# Subtest: failed initialization calls one selected harness and redacts driver errors and causes
+ok 3 - failed initialization calls one selected harness and redacts driver errors and causes
+  ---
+  duration_ms: 1.434435
+  type: 'test'
+  ...
+# Subtest: cleanup failures remain visible without exposing nested driver details
+ok 4 - cleanup failures remain visible without exposing nested driver details
+  ---
+  duration_ms: 0.301714
+  type: 'test'
+  ...
+# Subtest: successful harness and teardown ownership pass through unchanged
+ok 5 - successful harness and teardown ownership pass through unchanged
+  ---
+  duration_ms: 0.257699
+  type: 'test'
+  ...
+# 9:17:00 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+# Subtest: installed lab starts on the selected private database and releases its schema and listener
+ok 6 - installed lab starts on the selected private database and releases its schema and listener
+  ---
+  duration_ms: 865.41274
+  type: 'test'
+  ...
+# Subtest: a refused explicit endpoint fails visibly despite a working lower-priority test database
+ok 7 - a refused explicit endpoint fails visibly despite a working lower-priority test database
+  ---
+  duration_ms: 3.287305
+  type: 'test'
+  ...
+# Subtest: missing selected database is diagnosed without redirecting to the existing database
+ok 8 - missing selected database is diagnosed without redirecting to the existing database
+  ---
+  duration_ms: 3.115257
+  type: 'test'
+  ...
+# Subtest: failure after database initialization drops only the owned lab schema
+ok 9 - failure after database initialization drops only the owned lab schema
+  ---
+  duration_ms: 755.582871
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1984.569421

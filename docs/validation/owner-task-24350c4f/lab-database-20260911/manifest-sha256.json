@@ -1,0 +1,23 @@
+{
+  "cli-failure.json": "6fba7173a1e374f6a608c5f1343808f0c9c10e604a1170b8ea06388d9ff92f65",
+  "cli-failure.log": "8b92f82707cf97e9fb99bf64c99702f424d535965c4c6ff3586cf0a61b08b916",
+  "dependency-resolution.json": "024b0f07f2cf7796f16f69a3cd2925834898ab9e6d2a9906a12c8d26a7b1876c",
+  "diagnosis.json": "e82a44c199df7f4fd2b468386bfc77174a962a0d0e18aaf078774a8ed86c3e12",
+  "final-artifact.json": "86ec6948d5b30ca6a4a84b272cee12ffc32a0ac53d2070ac9e5ac73d710767c7",
+  "final-service-status.json": "12e41652f78b444341869855e065ff3a0910127b926f3a89b02b7e48ed82ede6",
+  "final-unit-tests.log": "bd1e273506d4145044fb886697129c6614885b933bd95e0d17b52e97cf17fdb4",
+  "focused-checks/focused-tests.log": "8e0ca2aaef611f0ea77737f7a8dc25055a8ba919e8efdd1579b4e115eb88dd8f",
+  "focused-checks/postgres-init.log": "b63ed16d0aa82fa464d128f3bcd9ce4ec6dd27fe4c43b5ea4af84cb52b8510d9",
+  "focused-checks/postgres-server.log": "8e23e474b3b5645db2d668e2f9d24350e038774bf230bbaa3951a4aff929c439",
+  "focused-checks/postgres-start.log": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+  "focused-checks/postgres-stop.log": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+  "focused-checks/postgres-version.log": "e59b4a42c3dbff15dcacb5267a27a3aef58466f51bc476823c9c905517ac8f17",
+  "focused-checks/remaining-schemas.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "focused-checks/result.json": "57c5eefc4ed92408d0a3902efd6d8d9a352ef46cf14435e796dcebb3607bbab7",
+  "initial-artifact.json": "e670d50f418c7c1871a180589053537b4be99bcfbb10a73a623aee5afe5c015f",
+  "installed-vs-root-build.diff": "a2e933ecf23ac45a67692154d3598da70b63118e6ba6e0d9d6d0e1355ab055ab",
+  "negative-control.json": "e1f2efd387f52fbeecdd015cee88fcffc32e3c78c721fd3efb0a35e858493e38",
+  "README.md": "65242c5c065359d124394adc29c9a31371b7992dd048b9f85c7f35c9354e542a",
+  "source.patch": "465b0abea701834a15efce2e10276cfce07e03ab8ce66352d72c6e22834ee766",
+  "syntax-checks.json": "c550789a494d18479330f4ea9bf46eab1d29a1ab9640228d0361f5f982472fe1"
+}

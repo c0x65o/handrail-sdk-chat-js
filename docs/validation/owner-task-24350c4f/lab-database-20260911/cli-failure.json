@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "exit": 1,
+  "signal": null,
+  "selected": "CHAT_LAB_DATABASE_URL",
+  "blankExplicitUrlRejected": true,
+  "flutterBuildStarted": false,
+  "declaredServiceStarted": false
+}

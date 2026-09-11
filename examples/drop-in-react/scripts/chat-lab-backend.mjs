@@ -1,4 +1,5 @@
 import { createChatTestHarness } from "@handrail/chat/testing";
+import { createChatLabDatabaseHarness, selectChatLabDatabase } from "./chat-lab-database.mjs";
 
 export const CHAT_LAB_PRIVATE_SEARCH_TEXT =
   "Quarantined orbital telemetry belongs in the private channel.";
@@ -527,13 +528,8 @@ export async function startChatLabBackend(options = {}) {
     : seedProfile === CHAT_LAB_DIRECT_MESSAGE_VISUAL_PROFILE
       ? CHAT_LAB_DIRECT_MESSAGE_VISUAL_ACTORS
       : CHAT_LAB_ACTORS;
-  const databaseUrl =
-    options.databaseUrl ??
-    process.env.CHAT_LAB_DATABASE_URL ??
-    process.env.TEST_DATABASE_URL ??
-    process.env.DATABASE_URL;
-  const harness = await createChatTestHarness({
-    ...(databaseUrl === undefined ? {} : { testDatabaseUrl: databaseUrl }),
+  const selection = selectChatLabDatabase(options);
+  const harness = await createChatLabDatabaseHarness(createChatTestHarness, selection, {
     schemaPrefix: "handrail_chat_lab",
     httpObservability: {
       onOutcome(outcome) {

@@ -1,0 +1,12 @@
+2026-09-11 09:16:59.291 CDT [39] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-09-11 09:16:59.292 CDT [39] LOG:  listening on Unix socket "/tmp/handrail-codex-heavy-command-locks/lab-db-ajhNgU/.s.PGSQL.5432"
+2026-09-11 09:16:59.296 CDT [42] LOG:  database system was shut down at 2026-09-11 09:16:59 CDT
+2026-09-11 09:16:59.302 CDT [39] LOG:  database system is ready to accept connections
+2026-09-11 09:17:00.615 CDT [101] FATAL:  database "missing_lab_database" does not exist
+2026-09-11 09:17:01.408 CDT [39] LOG:  received fast shutdown request
+2026-09-11 09:17:01.410 CDT [39] LOG:  aborting any active transactions
+2026-09-11 09:17:01.412 CDT [39] LOG:  background worker "logical replication launcher" (PID 45) exited with exit code 1
+2026-09-11 09:17:01.412 CDT [40] LOG:  shutting down
+2026-09-11 09:17:01.413 CDT [40] LOG:  checkpoint starting: shutdown immediate
+2026-09-11 09:17:01.444 CDT [40] LOG:  checkpoint complete: wrote 325 buffers (7.9%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.017 s, total=0.032 s; sync files=385, longest=0.002 s, average=0.001 s; distance=4096 kB, estimate=4096 kB; lsn=0/18E96E0, redo lsn=0/18E96E0
+2026-09-11 09:17:01.448 CDT [39] LOG:  database system is shut down

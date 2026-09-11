@@ -1,0 +1,64 @@
+{
+  "installedVersion": "1.0.20",
+  "installedPin": "git+https://github.com/c0x65o/handrail-sdk-chat-js.git#90bff33529df06720ff89ccd821360ac65eaf0d0",
+  "rootPackageVersion": "1.0.26",
+  "rootBuildDoesNotRefreshInstalledPackage": true,
+  "historicalLabComparison": [
+    {
+      "path": "examples/drop-in-react/scripts/chat-lab-backend.mjs",
+      "historical": "2e0f4e0a1d9828538e1f0d220e08d0aa9fcd0f1c2f3f8650fa3ce99281c43917",
+      "beforeWorker": "2e0f4e0a1d9828538e1f0d220e08d0aa9fcd0f1c2f3f8650fa3ce99281c43917",
+      "final": "eaabf0fda75b1f35aea158853c375031ca486074c1e6e5e24b473a7fb3c4eb38"
+    },
+    {
+      "path": "examples/drop-in-react/scripts/chat-lab.mjs",
+      "historical": "fa5680b237cab8f2a1d36a204dfaf78e8f97d2bcfd1fc891481c6951a376880d",
+      "beforeWorker": "fa5680b237cab8f2a1d36a204dfaf78e8f97d2bcfd1fc891481c6951a376880d",
+      "final": "353d9d299a2ba9d2adb7bf8e4204c811b9ff4cdacde446442ecf4148ed9ad27a"
+    },
+    {
+      "path": "examples/drop-in-react/package.json",
+      "historical": "a60bd5c2f92ed2250bc25b732184f39b2e085fa3ac3030a47d81bd9efdbc7bc9",
+      "beforeWorker": "a60bd5c2f92ed2250bc25b732184f39b2e085fa3ac3030a47d81bd9efdbc7bc9",
+      "final": "a60bd5c2f92ed2250bc25b732184f39b2e085fa3ac3030a47d81bd9efdbc7bc9"
+    },
+    {
+      "path": "examples/drop-in-react/package-lock.json",
+      "historical": "1fe71b07860e8f45b9c8835e2ed4648bca43304a4e1bab5cac07ee709ab60cae",
+      "beforeWorker": "1fe71b07860e8f45b9c8835e2ed4648bca43304a4e1bab5cac07ee709ab60cae",
+      "final": "1fe71b07860e8f45b9c8835e2ed4648bca43304a4e1bab5cac07ee709ab60cae"
+    }
+  ],
+  "loadedBackendProvenance": {
+    "scheme": "sha256-loaded-functions-v1",
+    "capturedAt": "2026-09-11T14:20:01.834Z",
+    "fingerprint": "32409d6c98136c4ed5fc030ddcacf8546df6dfdf86237160af4afa649bef0914",
+    "functions": {
+      "createChatTestHarness": "1cd44ec754da756a730e9f007afe23d9c36cf415454af2846ef9424bcf42e24d",
+      "createChatServer": "59c9c955422095e3217cac86414339f29effa70b824307e08cd1e0defa3fad97",
+      "createChatEphemeralSignalController": "a4e453f8cbef00aafe8e4e823a61c5db3bfde13746b654c81e6f51d4efbd0f82"
+    }
+  },
+  "../handrail-sdk-chat-flutter": {
+    "head": "dd928dd57c5adbeb5ed8e002270ffb8be9e4b292",
+    "pubspecHash": "7b17e4efe7985afdd7eb95b04ff92bad177acf231682e240b85ecd587b1c18a9",
+    "lockHash": "eea72d79596aa8f25711079ebe30b6f8b9de269bcb9d92a4bb4576c9aee4e392"
+  },
+  "../handrail-chat-preview-flutter": {
+    "head": "f5ff800e6b5d4098250c9f3967ea75cc2c4b13dd",
+    "pubspecHash": "a2cb6367d96641f80ece29af9d7ad83f2567ddddb4ba200f304a4c899134b833",
+    "lockHash": "5d715f7f6865c57720c7b4cc971c73d3daa662ba9e21e48291992d0c2e45c10b"
+  },
+  "flutterResolvedPackage": {
+    "name": "handrail_chat",
+    "rootUri": "file:///opt/handrail/.handrail/flutter-sdk/bin/cache/pub-cache/git/handrail-sdk-chat-flutter-51bc3e1411858ce38980f5beded683dee957d1a3/",
+    "packageUri": "lib/",
+    "languageVersion": "3.3"
+  },
+  "flutterBuildFiles": {
+    "../handrail-sdk-chat-flutter/example/build/web/index.html": "874da9d860faea73471b510ccbb0f273edfb06c23d5b129cf6598665715443dc",
+    "../handrail-sdk-chat-flutter/example/build/web/main.dart.js": "89c679055096628ab7f9f0e67ba7b498c70e2084094f58460ecea83ffcce65b5",
+    "../handrail-sdk-chat-flutter/example/pubspec.yaml": "37e656cce21d85f3bd1cc53122879c0c9f910b9d044afcef767eb05e695da042",
+    "../handrail-sdk-chat-flutter/example/pubspec.lock": "bd237febdc301ae76228338bd9668e8eab0591d9ee45fa5a399e371c1f3cc946"
+  }
+}
