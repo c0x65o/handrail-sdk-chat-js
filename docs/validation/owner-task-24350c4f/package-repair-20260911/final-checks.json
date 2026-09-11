@@ -1,0 +1,46 @@
+[
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "test/public-declaration-dependencies.test.mjs"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "stdout": "5dde4e190e14b867069e87fd7d5f47dddffde389\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "ls-remote",
+      "https://github.com/c0x65o/handrail-sdk-chat-js.git",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "stdout": "5dde4e190e14b867069e87fd7d5f47dddffde389\tHEAD\n",
+    "stderr": ""
+  },
+  {
+    "publication_patch_reconstruction": "passed"
+  }
+]

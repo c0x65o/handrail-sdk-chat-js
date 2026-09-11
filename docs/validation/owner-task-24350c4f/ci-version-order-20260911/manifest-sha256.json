@@ -1,0 +1,11 @@
+{
+  "WORKER-REPORT.md": "9650a3be4f1dd888bdbc7cafad8aa2b522b2dc27c784ef825a3942799db3caa2",
+  "artifact.json": "3badaa540dedaac6a91d8cbde9234edbe79630e90924e9c1badc2c5c2c1c9aaf",
+  "commands.json": "3eaaa1d913f223e5d937f714c21f497edb91faf8c138c90e3360204c87eebb1c",
+  "corrected-workflow-regression.log": "551c157a01456c4fa70d7214bc15ffb4742f17e3913a1c067296e06775476d26",
+  "former-workflow-regression.log": "d485e4edaa923a17696b798337ed813a20509bdff97578aa1a715e7f40c5b95e",
+  "preservation.json": "aabdc1a19c5a61e900a5c2a9f4697184089cd5cf3db47ab9eb9a85939a245968",
+  "prior-verifier-context.json": "66c704089a5451ada4eb249b2d48b889ebe7666b952d595a7c62a93fcf29fc49",
+  "publication-candidate.patch": "cc19e714cb4344a62a5628ae96de43270351fe08f9a3262669f9e4e2642e9ff5",
+  "repair.patch": "bc02119a3706a88630ed108413f80d311ff17119cc2b20bae3980ca676038a64"
+}

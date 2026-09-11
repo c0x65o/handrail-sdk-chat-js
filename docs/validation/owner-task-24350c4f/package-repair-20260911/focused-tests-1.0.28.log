@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: compiled client package version agrees with package metadata
+ok 1 - compiled client package version agrees with package metadata
+  ---
+  duration_ms: 5.544551
+  type: 'test'
+  ...
+# Subtest: build refreshes package version while main CI checks committed drift
+ok 2 - build refreshes package version while main CI checks committed drift
+  ---
+  duration_ms: 2.84981
+  type: 'test'
+  ...
+# Subtest: npm version lifecycle regenerates the browser package version
+ok 3 - npm version lifecycle regenerates the browser package version
+  ---
+  duration_ms: 334.208384
+  type: 'test'
+  ...
+# Subtest: package.json deterministically drives the generated browser package version
+ok 4 - package.json deterministically drives the generated browser package version
+  ---
+  duration_ms: 3.613602
+  type: 'test'
+  ...
+# Subtest: check mode detects a generated browser package version that trails the manifest
+ok 5 - check mode detects a generated browser package version that trails the manifest
+  ---
+  duration_ms: 117.097571
+  type: 'test'
+  ...
+# Subtest: emitted public declarations need only production dependencies and host React types
+ok 6 - emitted public declarations need only production dependencies and host React types
+  ---
+  duration_ms: 4534.508013
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5146.016593

@@ -26,10 +26,11 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: package-lock.json
+      - name: Check generated package version
+        # npm ci runs prepare/build, which would conceal checked-out drift.
+        run: node scripts/generate-package-version.mjs --check
       - name: Install dependencies
         run: npm ci
-      - name: Check generated package version
-        run: npm run check:package-version
       - name: Build package
         run: npm run build
       - name: Run Node tests

@@ -1,0 +1,50 @@
+{
+  "task_id": "24350c4f-985e-4762-ac15-445f69009f18",
+  "work_request_id": "fa79737f-72ab-4921-834d-0e485bc520f3",
+  "repository": "https://github.com/c0x65o/handrail-sdk-chat-js.git",
+  "original_base_head": "693459fc6dfc21b2f5b061a9c2693325e0c2805c",
+  "publication_base_head": "5dde4e190e14b867069e87fd7d5f47dddffde389",
+  "final_commit_sha": null,
+  "source_sha256": {
+    "examples/drop-in-react/scripts/chat-lab-database.mjs": "ec098eb74d758c765303920a387809e26af048da1d2d0c7a81adc3e1e72af29e",
+    "examples/drop-in-react/scripts/chat-lab.mjs": "f6b093241cbb1558c9984673c1eb07995e292e08f9b6371940fcb738ec8be6c5",
+    "examples/drop-in-react/test/ChatLabCleanup.test.mjs": "3089233217833aebedfd8d681647089ea6c61f9fff0a31ef2c77cabab03c5343",
+    "examples/drop-in-react/test/ChatLabCleanupPostgres.test.mjs": "531262b12b01416083e60e8af0a1a086cfc07d867dffbd5c481f6f82e1b1d8bf",
+    "examples/drop-in-react/test/ChatLabDatabase.test.mjs": "95bff85d50289bc6a69d13f4c1ec6f93a8ede7dd87d34b2b4cada4a884ec5e62",
+    "package-lock.json": "f8efb793623392df6c33d8771a6c4b3b6dfbf68271eb3e61780f0bdd675888fa",
+    "package.json": "0d9ac727c1ab0bc3c14ce0efb04134452f63d4625089fc917d90ee48a978be8c",
+    "src/client/generated/package-version.ts": "24c65b7780e9709a477cca63686f88b4c89831ea8f3fbc4c22cdafe904b4a9ac",
+    "src/testing/index.ts": "1f2f584e7c80c196b4c21c1273e43d941010d6cf3fd5d5c3c274053f5b98ee4c",
+    "test/package-version-generation.test.mjs": "cc97d90cf803f314f76c36109414ca62cd45a79743af2d7c709786c52fac2844",
+    "test/postgres-container-startup-cleanup.test.mjs": "be8e1f80b5916c92996b4817e53c5f65cc9a4d673cc1e2e105f97adb97aa91e5",
+    "test/public-declaration-dependencies.test.mjs": "8e0c4340a52ec9ec708073353fa8b6def2d95400a6888ec1a4a08ab8a4da87f2"
+  },
+  "patch_sha256": {
+    "source.patch": "d048002d26dfcdd1e0484cbd8110eff4e07aadac5de794ee48b1c26c7fe78ba6",
+    "package-repair.patch": "7006464fc9b32608885fe58d74ac827fe331486c118b71dfa446ea1025917c58",
+    "publication.patch": "e2f23a66433d5dd8d7e1927905aa05c9c400db82d91f96f62737ecac09cf04b8"
+  },
+  "new_repair_files": [
+    "package.json",
+    "package-lock.json",
+    "src/client/generated/package-version.ts",
+    "test/package-version-generation.test.mjs",
+    "test/public-declaration-dependencies.test.mjs"
+  ],
+  "reconstruction_passed": true,
+  "preserved_prior_repair_and_evidence": true,
+  "preserved_other_tracked_files_and_linked_pins": true,
+  "normal_build_passed": true,
+  "rebuild_identical": true,
+  "focused_tests": {
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  "strict_declaration_source_check": "passed; skipLibCheck=false; negative control reproduces both TS7016 errors",
+  "package_generated_compiled_version": "1.0.28",
+  "git_install_acceptance": "pending publication and independent verification",
+  "node": "v22.23.1",
+  "npm": "10.9.8",
+  "source_digest_sha256": "bc3dca8bfa8173359a8aff1a213fa6ee9cb584805daf1e6ad074572ba2173619"
+}

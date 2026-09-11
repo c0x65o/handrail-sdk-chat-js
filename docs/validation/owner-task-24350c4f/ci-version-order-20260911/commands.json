@@ -1,0 +1,49 @@
+{
+  "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+  "node": "v22.23.1",
+  "npm": "10.9.8",
+  "test_concurrency": 1,
+  "inherited_VITEST_MAX_WORKERS": "1",
+  "sequential": true,
+  "checks": [
+    {
+      "command": "node --test --test-concurrency=1 --test-name-pattern='CI version gate' test/package-version-generation.test.mjs",
+      "workflow": "original npm ci first",
+      "exit_code": 1,
+      "result": "expected regression failure: stale-case Missing expected rejection; aligned and concealment cases pass",
+      "log": "former-workflow-regression.log",
+      "resource_guard": {
+        "memory_peak_MiB": 108,
+        "swap_peak_MiB": 0,
+        "oom_kill": 0
+      }
+    },
+    {
+      "command": "node --test --test-concurrency=1 --test-name-pattern='CI version gate' test/package-version-generation.test.mjs",
+      "workflow": "corrected check first",
+      "exit_code": 0,
+      "result": "4 TAP tests pass (parent plus three behavioral subtests), zero failures",
+      "log": "corrected-workflow-regression.log"
+    },
+    {
+      "command": "node --check test/package-version-generation.test.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/generate-package-version.mjs --check",
+      "exit_code": 0,
+      "stdout": "Generated package-version source is up to date."
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    },
+    {
+      "command": "git apply <repair.patch or publication-candidate.patch>",
+      "cwd": "two disposable reconstructions populated with git show BASE:path",
+      "exit_code": 0,
+      "result": "both reconstructions match working source byte hashes"
+    }
+  ],
+  "not_rerun": "Unchanged PostgreSQL, Flutter, strict declaration, qualification and full normal-build suites. No typed source changed; compilation evidence retained from prior verifier. Fixture compiler/CSS tail replaced by marker; real npm prepare and generator execute normally."
+}
