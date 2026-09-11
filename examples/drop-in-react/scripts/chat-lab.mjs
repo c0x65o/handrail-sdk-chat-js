@@ -603,40 +603,59 @@ export async function startChatLab(options = {}) {
   const bindHost = options.host ?? process.env.CHAT_LAB_HOST ?? "127.0.0.1";
   const storage = createChatLabLoopbackStorage({ now: options.storageNow });
   let backend;
-  const media = createChatLabWebRtcServer({
-    trustHandrailLoopbackProxy: ["127.0.0.1", "::1", "localhost"].includes(bindHost),
-    iceServers: options.iceServers ?? JSON.parse(process.env.CHAT_LAB_ICE_SERVERS ?? "[]"),
-    authorizeParticipant: async ({ roomId, tenantId, userId }) => {
-      if (!backend) return false;
-      const schema = `"${backend.harness.schema}"`;
-      const result = await backend.harness.pool.query(
-        `SELECT 1 FROM ${schema}.chat_huddle_sessions AS session
-         JOIN ${schema}.chat_huddle_participants AS participant
-           ON participant.tenant_id = session.tenant_id AND participant.huddle_session_id = session.id
-         JOIN ${schema}.chat_conversation_members AS member
-           ON member.tenant_id = session.tenant_id AND member.conversation_id = session.conversation_id
-           AND member.user_id = participant.user_id
-         WHERE session.provider_room_reference = $1 AND session.tenant_id = $2
-           AND participant.user_id = $3 AND participant.left_at IS NULL
-           AND session.status IN ('starting', 'active') AND member.state = 'active'`,
-        [roomId, tenantId, userId],
-      );
-      return result.rowCount > 0;
-    },
-  });
-  try {
-    backend = await startChatLabBackend({ ...options, storage, media: media.adapter });
-  } catch (error) {
-    await media.close();
-    throw error;
-  }
-  const instanceId = randomBytes(16).toString("hex");
-  const flutterWebRoot = options.flutterWebRoot ??
-    process.env.CHAT_LAB_FLUTTER_WEB_ROOT ??
-    defaultFlutterWebRoot;
-  const flutterReady = options.flutterReady ?? Promise.resolve();
+  let media;
   let vite;
+  let closePromise;
+  const close = () => {
+    closePromise ??= (async () => {
+      const errors = [];
+      // Attempt every acquired resource, even if an earlier close rejects.
+      // Storage is idempotent and also needs cleanup before a harness exists.
+      for (const cleanup of [
+        () => media?.close(),
+        () => vite?.close(),
+        () => backend?.harness.teardown(),
+        () => storage.teardown(),
+      ]) {
+        try {
+          await cleanup();
+        } catch (error) {
+          errors.push(error);
+        }
+      }
+      if (errors.length === 1) throw errors[0];
+      if (errors.length > 1) throw new AggregateError(errors, "Chat Lab cleanup failed");
+    })();
+    return closePromise;
+  };
   try {
+    media = createChatLabWebRtcServer({
+      trustHandrailLoopbackProxy: ["127.0.0.1", "::1", "localhost"].includes(bindHost),
+      iceServers: options.iceServers ?? JSON.parse(process.env.CHAT_LAB_ICE_SERVERS ?? "[]"),
+      authorizeParticipant: async ({ roomId, tenantId, userId }) => {
+        if (!backend) return false;
+        const schema = `"${backend.harness.schema}"`;
+        const result = await backend.harness.pool.query(
+          `SELECT 1 FROM ${schema}.chat_huddle_sessions AS session
+           JOIN ${schema}.chat_huddle_participants AS participant
+             ON participant.tenant_id = session.tenant_id AND participant.huddle_session_id = session.id
+           JOIN ${schema}.chat_conversation_members AS member
+             ON member.tenant_id = session.tenant_id AND member.conversation_id = session.conversation_id
+             AND member.user_id = participant.user_id
+           WHERE session.provider_room_reference = $1 AND session.tenant_id = $2
+             AND participant.user_id = $3 AND participant.left_at IS NULL
+             AND session.status IN ('starting', 'active') AND member.state = 'active'`,
+          [roomId, tenantId, userId],
+        );
+        return result.rowCount > 0;
+      },
+    });
+    backend = await startChatLabBackend({ ...options, storage, media: media.adapter });
+    const instanceId = randomBytes(16).toString("hex");
+    const flutterWebRoot = options.flutterWebRoot ??
+      process.env.CHAT_LAB_FLUTTER_WEB_ROOT ??
+      defaultFlutterWebRoot;
+    const flutterReady = options.flutterReady ?? Promise.resolve();
     vite = await createViteServer({
       configFile: false,
       root: exampleRoot,
@@ -674,46 +693,29 @@ export async function startChatLab(options = {}) {
     });
     media.attach(vite.httpServer);
     await vite.listen();
-  } catch (error) {
-    await media.close();
-    await vite?.close();
-    await backend.harness.teardown();
-    throw error;
-  }
-
-  const address = vite.httpServer?.address();
-  if (address === null || address === undefined || typeof address === "string") {
-    await media.close();
-    await vite.close();
-    await backend.harness.teardown();
-    throw new Error("The chat lab web server did not expose a TCP address");
-  }
-  const configuredHost = options.host ?? process.env.CHAT_LAB_HOST ?? "127.0.0.1";
-  const browserHost = configuredHost === "0.0.0.0" ? "127.0.0.1" : configuredHost;
-  const origin = `http://${browserHost}:${address.port}`;
-  try {
+    const address = vite.httpServer?.address();
+    if (address === null || address === undefined || typeof address === "string") {
+      throw new Error("The chat lab web server did not expose a TCP address");
+    }
+    const configuredHost = options.host ?? process.env.CHAT_LAB_HOST ?? "127.0.0.1";
+    const browserHost = configuredHost === "0.0.0.0" ? "127.0.0.1" : configuredHost;
+    const origin = `http://${browserHost}:${address.port}`;
     storage.setOrigin(origin);
+    return Object.freeze({
+      ...backend,
+      instanceId,
+      origin,
+      storageSnapshot: () => storage.snapshot(),
+      close,
+    });
   } catch (error) {
-    await media.close();
-    await vite.close();
-    await backend.harness.teardown();
+    try {
+      await close();
+    } catch (cleanupError) {
+      throw new AggregateError([error, cleanupError], "Chat Lab startup failed and cleanup also failed");
+    }
     throw error;
   }
-  let closePromise;
-  return Object.freeze({
-    ...backend,
-    instanceId,
-    origin,
-    storageSnapshot: () => storage.snapshot(),
-    async close() {
-      closePromise ??= (async () => {
-        await media.close();
-        await vite.close();
-        await backend.harness.teardown();
-      })();
-      return closePromise;
-    },
-  });
 }
 
 const isMain = process.argv[1] !== undefined &&

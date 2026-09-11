@@ -1,0 +1,11 @@
+2026-09-11 10:14:14.477 CDT [29] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-09-11 10:14:14.479 CDT [29] LOG:  listening on Unix socket "/tmp/handrail-codex-heavy-command-locks/lab-db-I3fB5s/.s.PGSQL.5432"
+2026-09-11 10:14:14.483 CDT [32] LOG:  database system was shut down at 2026-09-11 10:14:14 CDT
+2026-09-11 10:14:14.489 CDT [29] LOG:  database system is ready to accept connections
+2026-09-11 10:14:16.187 CDT [29] LOG:  received fast shutdown request
+2026-09-11 10:14:16.189 CDT [29] LOG:  aborting any active transactions
+2026-09-11 10:14:16.191 CDT [29] LOG:  background worker "logical replication launcher" (PID 35) exited with exit code 1
+2026-09-11 10:14:16.192 CDT [30] LOG:  shutting down
+2026-09-11 10:14:16.193 CDT [30] LOG:  checkpoint starting: shutdown immediate
+2026-09-11 10:14:16.220 CDT [30] LOG:  checkpoint complete: wrote 327 buffers (8.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.016 s, total=0.029 s; sync files=391, longest=0.002 s, average=0.001 s; distance=3829 kB, estimate=3829 kB; lsn=0/18A6B40, redo lsn=0/18A6B40
+2026-09-11 10:14:16.223 CDT [29] LOG:  database system is shut down

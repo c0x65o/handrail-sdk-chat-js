@@ -1,0 +1,74 @@
+[
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/scripts/chat-lab-database.mjs"
+    ],
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/scripts/chat-lab.mjs"
+    ],
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/test/ChatLabDatabase.test.mjs"
+    ],
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/test/ChatLabCleanup.test.mjs"
+    ],
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "examples/drop-in-react/test/ChatLabCleanupPostgres.test.mjs"
+    ],
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "test/postgres-container-startup-cleanup.test.mjs"
+    ],
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "docs/validation/owner-task-24350c4f/qa-repair-20260911/verify-postgres.mjs"
+    ],
+    "exitCode": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exitCode": 0,
+    "output": ""
+  }
+]

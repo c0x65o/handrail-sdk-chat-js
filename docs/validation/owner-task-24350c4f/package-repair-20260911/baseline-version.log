@@ -1,0 +1,7 @@
+
+> @handrail/chat@1.0.27 check:package-version
+> node scripts/generate-package-version.mjs --check
+
+Generated package-version source is out of date:
+- src/client/generated/package-version.ts
+Run npm run generate:package-version.

@@ -1,0 +1,13 @@
+{
+  "packages": [
+    {
+      "name": "postgresql-16_16.15-1.pgdg12%2B2_amd64.deb",
+      "sha256": "12b7e33dc5b0711c02248816c02e7a08f85d1372835409de66adcd9f808864f4"
+    },
+    {
+      "name": "postgresql-client-16_16.15-1.pgdg12%2B2_amd64.deb",
+      "sha256": "e4c00577ff40b59ccdf115a585a9a4e766539669473d272885325b674731dc53"
+    }
+  ],
+  "source": "retained reproduce.md exact PGDG URLs; private extraction, no installation"
+}

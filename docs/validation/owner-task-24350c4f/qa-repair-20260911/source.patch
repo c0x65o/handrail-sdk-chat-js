@@ -1,0 +1,542 @@
+diff --git a/examples/drop-in-react/scripts/chat-lab-database.mjs b/examples/drop-in-react/scripts/chat-lab-database.mjs
+index 199da48..a3fc617 100644
+--- a/examples/drop-in-react/scripts/chat-lab-database.mjs
++++ b/examples/drop-in-react/scripts/chat-lab-database.mjs
+@@ -16,6 +16,10 @@ export function selectChatLabDatabase(options = {}, env = process.env) {
+     throw new TypeError(`Chat Lab database selection ${source} must be a non-empty PostgreSQL URL; no fallback attempted.`);
+   }
+   try {
++    // WHATWG URL also accepts opaque forms (postgres:garbage), which pg can
++    // interpret as a different database. PostgreSQL URIs require the // prefix;
++    // an empty authority remains valid for database-only URLs using PG*.
++    if (!/^postgres(?:ql)?:\/\//iu.test(databaseUrl)) throw new Error();
+     const url = new URL(databaseUrl);
+     if (!["postgres:", "postgresql:"].includes(url.protocol)) throw new Error();
+   } catch {
+diff --git a/examples/drop-in-react/scripts/chat-lab.mjs b/examples/drop-in-react/scripts/chat-lab.mjs
+index 61d22df..726efa7 100644
+--- a/examples/drop-in-react/scripts/chat-lab.mjs
++++ b/examples/drop-in-react/scripts/chat-lab.mjs
+@@ -603,40 +603,59 @@ export async function startChatLab(options = {}) {
+   const bindHost = options.host ?? process.env.CHAT_LAB_HOST ?? "127.0.0.1";
+   const storage = createChatLabLoopbackStorage({ now: options.storageNow });
+   let backend;
+-  const media = createChatLabWebRtcServer({
+-    trustHandrailLoopbackProxy: ["127.0.0.1", "::1", "localhost"].includes(bindHost),
+-    iceServers: options.iceServers ?? JSON.parse(process.env.CHAT_LAB_ICE_SERVERS ?? "[]"),
+-    authorizeParticipant: async ({ roomId, tenantId, userId }) => {
+-      if (!backend) return false;
+-      const schema = `"${backend.harness.schema}"`;
+-      const result = await backend.harness.pool.query(
+-        `SELECT 1 FROM ${schema}.chat_huddle_sessions AS session
+-         JOIN ${schema}.chat_huddle_participants AS participant
+-           ON participant.tenant_id = session.tenant_id AND participant.huddle_session_id = session.id
+-         JOIN ${schema}.chat_conversation_members AS member
+-           ON member.tenant_id = session.tenant_id AND member.conversation_id = session.conversation_id
+-           AND member.user_id = participant.user_id
+-         WHERE session.provider_room_reference = $1 AND session.tenant_id = $2
+-           AND participant.user_id = $3 AND participant.left_at IS NULL
+-           AND session.status IN ('starting', 'active') AND member.state = 'active'`,
+-        [roomId, tenantId, userId],
+-      );
+-      return result.rowCount > 0;
+-    },
+-  });
+-  try {
+-    backend = await startChatLabBackend({ ...options, storage, media: media.adapter });
+-  } catch (error) {
+-    await media.close();
+-    throw error;
+-  }
+-  const instanceId = randomBytes(16).toString("hex");
+-  const flutterWebRoot = options.flutterWebRoot ??
+-    process.env.CHAT_LAB_FLUTTER_WEB_ROOT ??
+-    defaultFlutterWebRoot;
+-  const flutterReady = options.flutterReady ?? Promise.resolve();
++  let media;
+   let vite;
++  let closePromise;
++  const close = () => {
++    closePromise ??= (async () => {
++      const errors = [];
++      // Attempt every acquired resource, even if an earlier close rejects.
++      // Storage is idempotent and also needs cleanup before a harness exists.
++      for (const cleanup of [
++        () => media?.close(),
++        () => vite?.close(),
++        () => backend?.harness.teardown(),
++        () => storage.teardown(),
++      ]) {
++        try {
++          await cleanup();
++        } catch (error) {
++          errors.push(error);
++        }
++      }
++      if (errors.length === 1) throw errors[0];
++      if (errors.length > 1) throw new AggregateError(errors, "Chat Lab cleanup failed");
++    })();
++    return closePromise;
++  };
+   try {
++    media = createChatLabWebRtcServer({
++      trustHandrailLoopbackProxy: ["127.0.0.1", "::1", "localhost"].includes(bindHost),
++      iceServers: options.iceServers ?? JSON.parse(process.env.CHAT_LAB_ICE_SERVERS ?? "[]"),
++      authorizeParticipant: async ({ roomId, tenantId, userId }) => {
++        if (!backend) return false;
++        const schema = `"${backend.harness.schema}"`;
++        const result = await backend.harness.pool.query(
++          `SELECT 1 FROM ${schema}.chat_huddle_sessions AS session
++           JOIN ${schema}.chat_huddle_participants AS participant
++             ON participant.tenant_id = session.tenant_id AND participant.huddle_session_id = session.id
++           JOIN ${schema}.chat_conversation_members AS member
++             ON member.tenant_id = session.tenant_id AND member.conversation_id = session.conversation_id
++             AND member.user_id = participant.user_id
++           WHERE session.provider_room_reference = $1 AND session.tenant_id = $2
++             AND participant.user_id = $3 AND participant.left_at IS NULL
++             AND session.status IN ('starting', 'active') AND member.state = 'active'`,
++          [roomId, tenantId, userId],
++        );
++        return result.rowCount > 0;
++      },
++    });
++    backend = await startChatLabBackend({ ...options, storage, media: media.adapter });
++    const instanceId = randomBytes(16).toString("hex");
++    const flutterWebRoot = options.flutterWebRoot ??
++      process.env.CHAT_LAB_FLUTTER_WEB_ROOT ??
++      defaultFlutterWebRoot;
++    const flutterReady = options.flutterReady ?? Promise.resolve();
+     vite = await createViteServer({
+       configFile: false,
+       root: exampleRoot,
+@@ -674,46 +693,29 @@ export async function startChatLab(options = {}) {
+     });
+     media.attach(vite.httpServer);
+     await vite.listen();
+-  } catch (error) {
+-    await media.close();
+-    await vite?.close();
+-    await backend.harness.teardown();
+-    throw error;
+-  }
+-
+-  const address = vite.httpServer?.address();
+-  if (address === null || address === undefined || typeof address === "string") {
+-    await media.close();
+-    await vite.close();
+-    await backend.harness.teardown();
+-    throw new Error("The chat lab web server did not expose a TCP address");
+-  }
+-  const configuredHost = options.host ?? process.env.CHAT_LAB_HOST ?? "127.0.0.1";
+-  const browserHost = configuredHost === "0.0.0.0" ? "127.0.0.1" : configuredHost;
+-  const origin = `http://${browserHost}:${address.port}`;
+-  try {
++    const address = vite.httpServer?.address();
++    if (address === null || address === undefined || typeof address === "string") {
++      throw new Error("The chat lab web server did not expose a TCP address");
++    }
++    const configuredHost = options.host ?? process.env.CHAT_LAB_HOST ?? "127.0.0.1";
++    const browserHost = configuredHost === "0.0.0.0" ? "127.0.0.1" : configuredHost;
++    const origin = `http://${browserHost}:${address.port}`;
+     storage.setOrigin(origin);
++    return Object.freeze({
++      ...backend,
++      instanceId,
++      origin,
++      storageSnapshot: () => storage.snapshot(),
++      close,
++    });
+   } catch (error) {
+-    await media.close();
+-    await vite.close();
+-    await backend.harness.teardown();
++    try {
++      await close();
++    } catch (cleanupError) {
++      throw new AggregateError([error, cleanupError], "Chat Lab startup failed and cleanup also failed");
++    }
+     throw error;
+   }
+-  let closePromise;
+-  return Object.freeze({
+-    ...backend,
+-    instanceId,
+-    origin,
+-    storageSnapshot: () => storage.snapshot(),
+-    async close() {
+-      closePromise ??= (async () => {
+-        await media.close();
+-        await vite.close();
+-        await backend.harness.teardown();
+-      })();
+-      return closePromise;
+-    },
+-  });
+ }
+ 
+ const isMain = process.argv[1] !== undefined &&
+diff --git a/examples/drop-in-react/test/ChatLabDatabase.test.mjs b/examples/drop-in-react/test/ChatLabDatabase.test.mjs
+index d6b6900..fb75477 100644
+--- a/examples/drop-in-react/test/ChatLabDatabase.test.mjs
++++ b/examples/drop-in-react/test/ChatLabDatabase.test.mjs
+@@ -1,6 +1,7 @@
+ import assert from "node:assert/strict";
+ import { inspect } from "node:util";
+ import test from "node:test";
++import { createRequire } from "node:module";
+ import { createChatLabDatabaseHarness, selectChatLabDatabase } from "../scripts/chat-lab-database.mjs";
+ import { startChatLabWithFlutter } from "../scripts/chat-lab-startup.mjs";
+ 
+@@ -16,7 +17,8 @@ test("database precedence preserves the exact explicit URL, including database-o
+ });
+ 
+ test("invalid explicit selections fail without using a lower-priority URL or container", () => {
+-  for (const invalid of ["", "  ", 42, "password-bearing-invalid-url", "https://example.test/db"]) {
++  for (const invalid of ["", "  ", 42, "password-bearing-invalid-url", "https://example.test/db",
++    "postgres:garbage", "postgres:", "postgresql:garbage", "postgresql:", "postgres:/lab"]) {
+     for (const source of ["options.databaseUrl", "CHAT_LAB_DATABASE_URL", "TEST_DATABASE_URL", "DATABASE_URL"]) {
+       const env = { DATABASE_URL: "postgresql:///lower" };
+       const options = source === "options.databaseUrl" ? { databaseUrl: invalid } : {};
+@@ -31,6 +33,49 @@ test("invalid explicit selections fail without using a lower-priority URL or con
+   }
+ });
+ 
++test("opaque selections never invoke the harness, even with a valid fallback", async () => {
++  let calls = 0;
++  for (const databaseUrl of ["postgres:garbage", "postgres:"]) {
++    await assert.rejects(async () => createChatLabDatabaseHarness(async () => {
++      calls++;
++    }, selectChatLabDatabase({ databaseUrl }, { TEST_DATABASE_URL: "postgresql:///lower" }), {}),
++    /valid PostgreSQL URL.*no fallback attempted/);
++  }
++  assert.equal(calls, 0);
++});
++
++test("accepted PostgreSQL URI forms retain downstream pg connection parameters", () => {
++  // Use the lab's installed driver parser, without connecting or reading its env.
++  const { Client } = createRequire(import.meta.url)("pg");
++  const defaults = {
++    PGHOST: "/private/disposable-socket", PGPORT: "5437", PGUSER: "fixture_user",
++    PGPASSWORD: "fixture_password", PGDATABASE: "fixture_default", PGSSLMODE: "disable",
++  };
++  const saved = new Map(Object.keys(defaults).map(key => [key, process.env[key]]));
++  Object.assign(process.env, defaults);
++  try {
++    for (const [url, expected] of [
++      ["postgresql:///lab", [defaults.PGHOST, 5437, "fixture_user", "fixture_password", "lab"]],
++      ["postgres://", [defaults.PGHOST, 5437, "fixture_user", "fixture_password", "fixture_default"]],
++      ["postgresql://localhost", ["localhost", 5437, "fixture_user", "fixture_password", "fixture_default"]],
++      ["postgres://user:password@localhost:5433/lab", ["localhost", 5433, "user", "password", "lab"]],
++      ["postgresql://user:pa%40ss@[::1]:5434/lab", ["[::1]", 5434, "user", "pa@ss", "lab"]],
++      ["postgresql://%2Fprivate%2Fsocket/lab", ["/private/socket", 5437, "fixture_user", "fixture_password", "lab"]],
++      ["postgresql:///lab?host=%2Fprivate%2Fsocket&port=5438&user=query_user", ["/private/socket", 5438, "query_user", "fixture_password", "lab"]],
++    ]) {
++      const selection = selectChatLabDatabase({ databaseUrl: url }, {});
++      assert.equal(selection.databaseUrl, url);
++      const parsed = new Client({ connectionString: selection.databaseUrl }).connectionParameters;
++      assert.deepEqual([parsed.host, parsed.port, parsed.user, parsed.password, parsed.database], expected);
++    }
++  } finally {
++    for (const [key, value] of saved) {
++      if (value === undefined) delete process.env[key];
++      else process.env[key] = value;
++    }
++  }
++});
++
+ test("failed initialization calls one selected harness and redacts driver errors and causes", async () => {
+   const url = "postgresql://private-user:private-password@localhost:1234/lab?password=query-secret";
+   const selection = selectChatLabDatabase({ databaseUrl: url }, {});
+diff --git a/src/testing/index.ts b/src/testing/index.ts
+index cc9f7c3..b3dbefa 100644
+--- a/src/testing/index.ts
++++ b/src/testing/index.ts
+@@ -227,14 +227,21 @@ export async function createPostgresTestBackend(
+       startedContainer,
+     );
+   } catch (cause) {
+-    if (container) {
+-      await container.stop().catch(() => undefined);
+-    }
+-
+-    throw new Error(
++    const startupError = new Error(
+       "Unable to start container-backed PostgreSQL. Set TEST_DATABASE_URL to a test database URL or make Docker available.",
+       { cause },
+     );
++    if (container) {
++      try {
++        await container.stop();
++      } catch (cleanupError) {
++        throw new AggregateError(
++          [startupError, cleanupError],
++          "PostgreSQL container startup and cleanup both failed",
++        );
++      }
++    }
++    throw startupError;
+   }
+ }
+ 
+diff --git a/examples/drop-in-react/test/ChatLabCleanup.test.mjs b/examples/drop-in-react/test/ChatLabCleanup.test.mjs
+new file mode 100644
+index 0000000..88d6ff0
+--- /dev/null
++++ b/examples/drop-in-react/test/ChatLabCleanup.test.mjs
+@@ -0,0 +1,96 @@
++import assert from "node:assert/strict";
++import test, { mock } from "node:test";
++
++// Resource-boundary failure injection exercises startChatLab itself without
++// starting listeners, Docker, Flutter or a database. Real schema cleanup is
++// checked separately in ChatLabCleanupPostgres.test.mjs.
++let fixture;
++mock.module("vite", { namedExports: {
++  createServer: async () => {
++    if (fixture.failCreate) throw fixture.startupError;
++    return {
++      httpServer: { address: () => fixture.badAddress ? null : { port: 12345 } },
++      async listen() { if (fixture.failListen) throw fixture.startupError; },
++      async close() {
++        fixture.calls.push("vite");
++        if (fixture.viteError) throw fixture.viteError;
++      },
++    };
++  },
++} });
++mock.module("../scripts/chat-lab-webrtc-server.mjs", { namedExports: {
++  createChatLabWebRtcServer: () => ({
++    adapter: {},
++    attach() { if (fixture.failAttach) throw fixture.startupError; },
++    async close() {
++      fixture.calls.push("media");
++      if (fixture.mediaError) throw fixture.mediaError;
++    },
++  }),
++} });
++mock.module("../scripts/chat-lab-backend.mjs", { namedExports: {
++  startChatLabBackend: async ({ storage }) => {
++    fixture.storage = storage;
++    if (fixture.failBackend) throw fixture.startupError;
++    return { harness: {
++      endpoint: "http://127.0.0.1:12346",
++      async teardown() {
++        fixture.calls.push("database");
++        if (fixture.databaseError) throw fixture.databaseError;
++      },
++    } };
++  },
++} });
++const { startChatLab } = await import("../scripts/chat-lab.mjs");
++
++const setup = overrides => fixture = {
++  calls: [], startupError: new Error("fixture startup failed"), ...overrides,
++};
++const flatten = error => error instanceof AggregateError ? error.errors.flatMap(flatten) : [error];
++const storageClosed = () => assert.throws(() => fixture.storage.setOrigin("http://127.0.0.1:12345"), /closed/);
++
++test("normal close attempts every resource once and shares success or failure", async () => {
++  for (const failures of [[], ["vite"], ["media"], ["database"], ["media", "vite", "database"]]) {
++    setup(Object.fromEntries(failures.map(name => [`${name}Error`, new Error(`${name} close failed`)])));
++    const lab = await startChatLab({ port: 0 });
++    const first = lab.close();
++    assert.equal(lab.close(), first);
++    if (failures.length) {
++      await assert.rejects(first, error => {
++        assert.deepEqual(flatten(error), failures.map(name => fixture[`${name}Error`]));
++        return true;
++      });
++    } else await first;
++    assert.equal(lab.close(), first);
++    assert.deepEqual(fixture.calls, ["media", "vite", "database"]);
++    storageClosed();
++  }
++});
++
++test("startup failures retain their cause and all cleanup failures at every acquisition stage", async () => {
++  for (const stage of ["failBackend", "failCreate", "failAttach", "failListen", "badAddress", "badOrigin"]) {
++    setup({ [stage]: true, mediaError: new Error("media close failed"),
++      viteError: new Error("vite close failed"), databaseError: new Error("database close failed") });
++    await assert.rejects(startChatLab({ port: 0, ...(stage === "badOrigin" ? { host: "example.test" } : {}) }), error => {
++      assert.ok(error instanceof AggregateError);
++      assert.match(error.message, /startup failed and cleanup also failed/);
++      const errors = flatten(error);
++      if (stage === "badAddress") assert.match(errors[0].message, /TCP address/);
++      else if (stage === "badOrigin") assert.match(errors[0].message, /loopback origin/);
++      else assert.equal(errors[0], fixture.startupError);
++      const acquired = stage === "failBackend" ? ["media"]
++        : stage === "failCreate" ? ["media", "database"] : ["media", "vite", "database"];
++      assert.deepEqual(fixture.calls, acquired);
++      assert.deepEqual(errors.slice(1), acquired.map(name => fixture[`${name}Error`]));
++      return true;
++    });
++    storageClosed();
++  }
++});
++
++test("startup failure is unchanged when cleanup succeeds", async () => {
++  setup({ failListen: true });
++  await assert.rejects(startChatLab({ port: 0 }), error => error === fixture.startupError);
++  assert.deepEqual(fixture.calls, ["media", "vite", "database"]);
++  storageClosed();
++});
+diff --git a/examples/drop-in-react/test/ChatLabCleanupPostgres.test.mjs b/examples/drop-in-react/test/ChatLabCleanupPostgres.test.mjs
+new file mode 100644
+index 0000000..3f3b273
+--- /dev/null
++++ b/examples/drop-in-react/test/ChatLabCleanupPostgres.test.mjs
+@@ -0,0 +1,85 @@
++import assert from "node:assert/strict";
++import { EventEmitter } from "node:events";
++import { createRequire } from "node:module";
++import net from "node:net";
++import test, { mock } from "node:test";
++import { startChatLabBackend } from "../scripts/chat-lab-backend.mjs";
++
++const { Pool } = createRequire(import.meta.url)("pg");
++const databaseUrl = process.env.CHAT_LAB_DATABASE_CHECK_URL;
++assert.ok(databaseUrl, "Run with the private unprivileged PG16 verification runner");
++let ownedBackend;
++let listenFailure;
++let closeCalls;
++let host;
++const closeFailure = new Error("fixture Vite close failure");
++mock.module("../scripts/chat-lab-backend.mjs", { namedExports: {
++  startChatLabBackend: async options => ownedBackend = await startChatLabBackend(options),
++} });
++mock.module("vite", { namedExports: {
++  createServer: async () => {
++    host = new EventEmitter();
++    host.address = () => ({ port: 12345 });
++    return {
++      httpServer: host,
++      async listen() { if (listenFailure) throw listenFailure; },
++      async close() { closeCalls++; throw closeFailure; },
++    };
++  },
++} });
++const { startChatLab } = await import("../scripts/chat-lab.mjs");
++
++for (const duringStartup of [false, true]) {
++  test(`Vite close failure releases real owned schema and backend listener (${duringStartup ? "startup failure" : "normal close"})`, async () => {
++    const admin = new Pool({ connectionString: databaseUrl });
++    ownedBackend = undefined;
++    closeCalls = 0;
++    listenFailure = duringStartup ? new Error("fixture Vite listen failure") : undefined;
++    try {
++      await admin.query("CREATE SCHEMA cleanup_unowned_sentinel");
++      await admin.query("CREATE TABLE cleanup_unowned_sentinel.marker (value text)");
++      await admin.query("INSERT INTO cleanup_unowned_sentinel.marker VALUES ('preserve')");
++      const before = (await admin.query("SELECT nspname FROM pg_namespace ORDER BY nspname")).rows;
++      // Exercise real pg parsing, schema creation/migration and fixture startup
++      // with a database-only URI and the runner's explicit private PG defaults.
++      const options = { databaseUrl: "postgresql:///postgres", seedProfile: "reply-styles", port: 0 };
++      if (duringStartup) {
++        await assert.rejects(startChatLab(options), error => {
++          assert.ok(error instanceof AggregateError);
++          assert.deepEqual(error.errors, [listenFailure, closeFailure]);
++          return true;
++        });
++      } else {
++        const lab = await startChatLab(options);
++        assert.equal(lab.harness.connectionString, options.databaseUrl);
++        assert.equal((await lab.harness.pool.query("SELECT current_database() AS name")).rows[0].name, "postgres");
++        const first = lab.close();
++        assert.equal(lab.close(), first);
++        await assert.rejects(first, error => error === closeFailure);
++        await assert.rejects(lab.close(), error => error === closeFailure);
++      }
++      assert.equal(closeCalls, 1);
++      assert.equal(host.listenerCount("upgrade"), 0, "owned media handler detached");
++      assert.deepEqual((await admin.query("SELECT nspname FROM pg_namespace ORDER BY nspname")).rows, before);
++      assert.deepEqual((await admin.query("SELECT value FROM cleanup_unowned_sentinel.marker")).rows, [{ value: "preserve" }]);
++      // Rebinding the acquired backend's port proves its real listener closed.
++      // No browser or HTTP probe, and no listener is created for mocked Vite.
++      const rebound = net.createServer();
++      try {
++        await new Promise((resolve, reject) => {
++          rebound.once("error", reject);
++          rebound.listen(Number(new URL(ownedBackend.harness.endpoint).port), "127.0.0.1", resolve);
++        });
++      } finally {
++        if (rebound.listening) await new Promise((resolve, reject) => rebound.close(error => error ? reject(error) : resolve()));
++      }
++    } finally {
++      // Rescue only the harness acquired by this test if a regression leaks it.
++      try { await ownedBackend?.harness.teardown(); }
++      finally {
++        try { await admin.query("DROP SCHEMA IF EXISTS cleanup_unowned_sentinel CASCADE"); }
++        finally { await admin.end(); }
++      }
++    }
++  });
++}
+diff --git a/test/postgres-container-startup-cleanup.test.mjs b/test/postgres-container-startup-cleanup.test.mjs
+new file mode 100644
+index 0000000..4328ddb
+--- /dev/null
++++ b/test/postgres-container-startup-cleanup.test.mjs
+@@ -0,0 +1,63 @@
++import assert from "node:assert/strict";
++import test from "node:test";
++import { inspect } from "node:util";
++import { PostgreSqlContainer } from "@testcontainers/postgresql";
++import { createChatTestHarness, createPostgresTestBackend } from "../dist/testing/index.js";
++import { createChatLabDatabaseHarness, selectChatLabDatabase } from "../examples/drop-in-react/scripts/chat-lab-database.mjs";
++
++// Only the container service boundary is intercepted. The actual lower-layer
++// recovery code must construct its own errors; no database or Docker is touched.
++test("container startup recovery retains both failures and the lab redacts them", async t => {
++  const startup = new Error("postgresql://private-user:private-password@private-host/lab");
++  const cleanup = new Error("private-container-stop-secret");
++  let starts = 0;
++  let stops = 0;
++  t.mock.method(PostgreSqlContainer.prototype, "start", async () => {
++    starts++;
++    return {
++      getConnectionUri() { throw startup; },
++      async stop() { stops++; throw cleanup; },
++    };
++  });
++  await assert.rejects(createPostgresTestBackend({ testDatabaseUrl: "" }), error => {
++    assert.ok(error instanceof AggregateError);
++    assert.equal(error.errors.length, 2);
++    assert.equal(error.errors[0].cause, startup);
++    assert.equal(error.errors[1], cleanup);
++    return true;
++  });
++  await assert.rejects(createChatLabDatabaseHarness(createChatTestHarness,
++    selectChatLabDatabase({}, {}), { testDatabaseUrl: "" }), error => {
++    assert.match(error.message, /selection=container-default.*cleanup also failed/);
++    assert.ok(!inspect(error).includes("private-"));
++    assert.equal(error.cause, undefined);
++    return true;
++  });
++  assert.equal(starts, 2);
++  assert.equal(stops, 2);
++});
++
++test("successful startup recovery preserves the original cause without a false cleanup failure", async t => {
++  const startup = new Error("fixture startup failure");
++  let stops = 0;
++  t.mock.method(PostgreSqlContainer.prototype, "start", async () => ({
++    getConnectionUri() { throw startup; },
++    async stop() { stops++; },
++  }));
++  await assert.rejects(createPostgresTestBackend({ testDatabaseUrl: "" }), error => {
++    assert.equal(error.cause, startup);
++    assert.ok(!(error instanceof AggregateError));
++    return true;
++  });
++  assert.equal(stops, 1);
++});
++
++test("failure before acquisition never stops an unrelated container", async t => {
++  const startup = new Error("fixture acquisition failure");
++  t.mock.method(PostgreSqlContainer.prototype, "start", async () => { throw startup; });
++  await assert.rejects(createPostgresTestBackend({ testDatabaseUrl: "" }), error => {
++    assert.equal(error.cause, startup);
++    assert.ok(!(error instanceof AggregateError));
++    return true;
++  });
++});

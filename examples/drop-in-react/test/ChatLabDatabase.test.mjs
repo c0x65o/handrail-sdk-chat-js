@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { inspect } from "node:util";
 import test from "node:test";
+import { createRequire } from "node:module";
 import { createChatLabDatabaseHarness, selectChatLabDatabase } from "../scripts/chat-lab-database.mjs";
 import { startChatLabWithFlutter } from "../scripts/chat-lab-startup.mjs";
 
@@ -16,7 +17,8 @@ test("database precedence preserves the exact explicit URL, including database-o
 });
 
 test("invalid explicit selections fail without using a lower-priority URL or container", () => {
-  for (const invalid of ["", "  ", 42, "password-bearing-invalid-url", "https://example.test/db"]) {
+  for (const invalid of ["", "  ", 42, "password-bearing-invalid-url", "https://example.test/db",
+    "postgres:garbage", "postgres:", "postgresql:garbage", "postgresql:", "postgres:/lab"]) {
     for (const source of ["options.databaseUrl", "CHAT_LAB_DATABASE_URL", "TEST_DATABASE_URL", "DATABASE_URL"]) {
       const env = { DATABASE_URL: "postgresql:///lower" };
       const options = source === "options.databaseUrl" ? { databaseUrl: invalid } : {};
@@ -27,6 +29,49 @@ test("invalid explicit selections fail without using a lower-priority URL or con
         assert.ok(!error.message.includes("password-bearing"));
         return true;
       });
+    }
+  }
+});
+
+test("opaque selections never invoke the harness, even with a valid fallback", async () => {
+  let calls = 0;
+  for (const databaseUrl of ["postgres:garbage", "postgres:"]) {
+    await assert.rejects(async () => createChatLabDatabaseHarness(async () => {
+      calls++;
+    }, selectChatLabDatabase({ databaseUrl }, { TEST_DATABASE_URL: "postgresql:///lower" }), {}),
+    /valid PostgreSQL URL.*no fallback attempted/);
+  }
+  assert.equal(calls, 0);
+});
+
+test("accepted PostgreSQL URI forms retain downstream pg connection parameters", () => {
+  // Use the lab's installed driver parser, without connecting or reading its env.
+  const { Client } = createRequire(import.meta.url)("pg");
+  const defaults = {
+    PGHOST: "/private/disposable-socket", PGPORT: "5437", PGUSER: "fixture_user",
+    PGPASSWORD: "fixture_password", PGDATABASE: "fixture_default", PGSSLMODE: "disable",
+  };
+  const saved = new Map(Object.keys(defaults).map(key => [key, process.env[key]]));
+  Object.assign(process.env, defaults);
+  try {
+    for (const [url, expected] of [
+      ["postgresql:///lab", [defaults.PGHOST, 5437, "fixture_user", "fixture_password", "lab"]],
+      ["postgres://", [defaults.PGHOST, 5437, "fixture_user", "fixture_password", "fixture_default"]],
+      ["postgresql://localhost", ["localhost", 5437, "fixture_user", "fixture_password", "fixture_default"]],
+      ["postgres://user:password@localhost:5433/lab", ["localhost", 5433, "user", "password", "lab"]],
+      ["postgresql://user:pa%40ss@[::1]:5434/lab", ["[::1]", 5434, "user", "pa@ss", "lab"]],
+      ["postgresql://%2Fprivate%2Fsocket/lab", ["/private/socket", 5437, "fixture_user", "fixture_password", "lab"]],
+      ["postgresql:///lab?host=%2Fprivate%2Fsocket&port=5438&user=query_user", ["/private/socket", 5438, "query_user", "fixture_password", "lab"]],
+    ]) {
+      const selection = selectChatLabDatabase({ databaseUrl: url }, {});
+      assert.equal(selection.databaseUrl, url);
+      const parsed = new Client({ connectionString: selection.databaseUrl }).connectionParameters;
+      assert.deepEqual([parsed.host, parsed.port, parsed.user, parsed.password, parsed.database], expected);
+    }
+  } finally {
+    for (const [key, value] of saved) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
     }
   }
 });

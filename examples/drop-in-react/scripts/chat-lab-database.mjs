@@ -16,6 +16,10 @@ export function selectChatLabDatabase(options = {}, env = process.env) {
     throw new TypeError(`Chat Lab database selection ${source} must be a non-empty PostgreSQL URL; no fallback attempted.`);
   }
   try {
+    // WHATWG URL also accepts opaque forms (postgres:garbage), which pg can
+    // interpret as a different database. PostgreSQL URIs require the // prefix;
+    // an empty authority remains valid for database-only URLs using PG*.
+    if (!/^postgres(?:ql)?:\/\//iu.test(databaseUrl)) throw new Error();
     const url = new URL(databaseUrl);
     if (!["postgres:", "postgresql:"].includes(url.protocol)) throw new Error();
   } catch {

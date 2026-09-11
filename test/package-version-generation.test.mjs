@@ -20,6 +20,11 @@ const generatorPath = resolve(
 );
 const execFileAsync = promisify(execFile);
 
+test("compiled client package version agrees with package metadata", async () => {
+  const { CHAT_CLIENT_PACKAGE_VERSION } = await import("../dist/client/generated/package-version.js");
+  assert.equal(CHAT_CLIENT_PACKAGE_VERSION, await readPackageVersion(repositoryRoot));
+});
+
 test("build refreshes package version while main CI checks committed drift", async () => {
   const manifest = JSON.parse(
     await readFile(resolve(repositoryRoot, "package.json"), "utf8"),

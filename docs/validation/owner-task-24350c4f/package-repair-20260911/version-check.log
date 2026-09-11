@@ -1,0 +1,5 @@
+
+> @handrail/chat@1.0.27 check:package-version
+> node scripts/generate-package-version.mjs --check
+
+Generated package-version source is up to date.

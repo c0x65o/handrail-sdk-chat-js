@@ -227,14 +227,21 @@ export async function createPostgresTestBackend(
       startedContainer,
     );
   } catch (cause) {
-    if (container) {
-      await container.stop().catch(() => undefined);
-    }
-
-    throw new Error(
+    const startupError = new Error(
       "Unable to start container-backed PostgreSQL. Set TEST_DATABASE_URL to a test database URL or make Docker available.",
       { cause },
     );
+    if (container) {
+      try {
+        await container.stop();
+      } catch (cleanupError) {
+        throw new AggregateError(
+          [startupError, cleanupError],
+          "PostgreSQL container startup and cleanup both failed",
+        );
+      }
+    }
+    throw startupError;
   }
 }
 

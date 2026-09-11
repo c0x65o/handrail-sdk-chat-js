@@ -1,0 +1,192 @@
+TAP version 13
+# (node:63) ExperimentalWarning: Module mocking is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: normal close attempts every resource once and shares success or failure
+not ok 1 - normal close attempts every resource once and shares success or failure
+  ---
+  duration_ms: 3.082637
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabCleanup.test.mjs:52:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected "actual" to be reference-equal to "expected":
+    + actual - expected
+    
+      Promise {
+        <pending>,
+    +   [Symbol(async_id_symbol)]: 1337,
+    -   [Symbol(async_id_symbol)]: 1333,
+        [Symbol(trigger_async_id_symbol)]: 1311
+      }
+    
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: startup failures retain their cause and all cleanup failures at every acquisition stage
+not ok 2 - startup failures retain their cause and all cleanup failures at every acquisition stage
+  ---
+  duration_ms: 4.513368
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabCleanup.test.mjs:70:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(error instanceof AggregateError)
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    Object.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabCleanup.test.mjs:75:14)
+    expectedException (node:assert:576:17)
+    expectsError (node:assert:701:21)
+    Function.rejects (node:assert:767:3)
+    async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabCleanup.test.mjs:74:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: startup failure is unchanged when cleanup succeeds
+not ok 3 - startup failure is unchanged when cleanup succeeds
+  ---
+  duration_ms: 1.152136
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabCleanup.test.mjs:91:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'throws'
+  stack: |-
+    storageClosed (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabCleanup.test.mjs:50:36)
+    TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabCleanup.test.mjs:95:3)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: database precedence preserves the exact explicit URL, including database-only PG settings
+ok 4 - database precedence preserves the exact explicit URL, including database-only PG settings
+  ---
+  duration_ms: 1.599868
+  type: 'test'
+  ...
+# Subtest: invalid explicit selections fail without using a lower-priority URL or container
+not ok 5 - invalid explicit selections fail without using a lower-priority URL or container
+  ---
+  duration_ms: 1.631983
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabDatabase.test.mjs:19:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  stack: |-
+    TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabDatabase.test.mjs:26:14)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: opaque selections never invoke the harness, even with a valid fallback
+not ok 6 - opaque selections never invoke the harness, even with a valid fallback
+  ---
+  duration_ms: 0.430154
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabDatabase.test.mjs:36:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/examples/drop-in-react/test/ChatLabDatabase.test.mjs:39:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: accepted PostgreSQL URI forms retain downstream pg connection parameters
+ok 7 - accepted PostgreSQL URI forms retain downstream pg connection parameters
+  ---
+  duration_ms: 23.448168
+  type: 'test'
+  ...
+# Subtest: failed initialization calls one selected harness and redacts driver errors and causes
+ok 8 - failed initialization calls one selected harness and redacts driver errors and causes
+  ---
+  duration_ms: 1.222087
+  type: 'test'
+  ...
+# Subtest: cleanup failures remain visible without exposing nested driver details
+ok 9 - cleanup failures remain visible without exposing nested driver details
+  ---
+  duration_ms: 0.372953
+  type: 'test'
+  ...
+# Subtest: successful harness and teardown ownership pass through unchanged
+ok 10 - successful harness and teardown ownership pass through unchanged
+  ---
+  duration_ms: 0.184721
+  type: 'test'
+  ...
+# Subtest: failed lab startup never launches the Flutter build child
+ok 11 - failed lab startup never launches the Flutter build child
+  ---
+  duration_ms: 0.229069
+  type: 'test'
+  ...
+# Subtest: Flutter readiness follows successful lab startup and preserves build failure
+ok 12 - Flutter readiness follows successful lab startup and preserves build failure
+  ---
+  duration_ms: 0.52562
+  type: 'test'
+  ...
+# Subtest: container startup recovery retains both failures and the lab redacts them
+not ok 13 - container startup recovery retains both failures and the lab redacts them
+  ---
+  duration_ms: 7.004755
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-container-startup-cleanup.test.mjs:10:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(error instanceof AggregateError)
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    Object.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-container-startup-cleanup.test.mjs:23:12)
+    expectedException (node:assert:576:17)
+    expectsError (node:assert:701:21)
+    Function.rejects (node:assert:767:3)
+    async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-container-startup-cleanup.test.mjs:22:3)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: successful startup recovery preserves the original cause without a false cleanup failure
+ok 14 - successful startup recovery preserves the original cause without a false cleanup failure
+  ---
+  duration_ms: 0.683907
+  type: 'test'
+  ...
+# Subtest: failure before acquisition never stops an unrelated container
+ok 15 - failure before acquisition never stops an unrelated container
+  ---
+  duration_ms: 0.486568
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 9
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1003.024646
