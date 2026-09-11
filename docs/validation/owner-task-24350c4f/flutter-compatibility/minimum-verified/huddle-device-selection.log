@@ -1,0 +1,94 @@
+cwd: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/package
+command: ["/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter", "test", "--no-pub", "--concurrency=2", "--reporter=expanded", "test/handrail_huddle_panel_test.dart", "--plain-name", "renders participants, active speakers, media toggles, and live devices"]
+00:00 +0: loading /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/package/test/handrail_huddle_panel_test.dart
+00:00 +0: renders participants, active speakers, media toggles, and live devices
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following ChatMediaException was thrown while running async test code:
+ChatMediaException(ChatMediaFailure(code: descriptorUnavailable, operation: connect, retryable:
+true))
+
+When the exception was thrown, this was the stack:
+#2      ChatHuddleMediaSession._fail (package:handrail_chat/src/media_session.dart:576:12)
+#3      ChatHuddleMediaSession._connect (package:handrail_chat/src/media_session.dart:426:14)
+#4      ChatHuddleMediaSession.connect (package:handrail_chat/src/media_session.dart:293:15)
+#5      AutomatedTestWidgetsFlutterBinding.runAsync.<anonymous closure> (package:flutter_test/src/binding.dart:1308:17)
+#8      AutomatedTestWidgetsFlutterBinding.runAsync (package:flutter_test/src/binding.dart:1304:26)
+#9      WidgetTester.runAsync (package:flutter_test/src/widget_tester.dart:831:17)
+#10     main.<anonymous closure> (file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/package/test/handrail_huddle_panel_test.dart:101:20)
+#12     main.<anonymous closure> (file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/package/test/handrail_huddle_panel_test.dart:92:7)
+#13     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:183:29)
+#15     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:181:25)
+#16     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1017:19)
+#18     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1006:5)
+#21     TestWidgetsFlutterBinding._runTest (package:flutter_test/src/binding.dart:995:14)
+#22     AutomatedTestWidgetsFlutterBinding.runTest.<anonymous closure> (package:flutter_test/src/binding.dart:1471:24)
+#23     FakeAsync.run.<anonymous closure>.<anonymous closure> (package:fake_async/fake_async.dart:182:54)
+#28     withClock (package:clock/src/default.dart:52:10)
+#29     FakeAsync.run.<anonymous closure> (package:fake_async/fake_async.dart:182:22)
+#34     FakeAsync.run (package:fake_async/fake_async.dart:182:7)
+#35     AutomatedTestWidgetsFlutterBinding.runTest (package:flutter_test/src/binding.dart:1468:15)
+#36     testWidgets.<anonymous closure> (package:flutter_test/src/widget_tester.dart:175:24)
+#37     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:215:19)
+#39     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:214:9)
+#44     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:213:13)
+#45     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:258:17)
+#50     Invoker._waitForOutstandingCallbacks (package:test_api/src/backend/invoker.dart:254:5)
+#51     Invoker._onRun.<anonymous closure>.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/invoker.dart:394:17)
+#53     Invoker._onRun.<anonymous closure>.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/invoker.dart:392:11)
+#58     Invoker._onRun.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/invoker.dart:383:9)
+#59     Invoker._guardIfGuarded (package:test_api/src/backend/invoker.dart:426:15)
+#60     Invoker._onRun.<anonymous closure> (package:test_api/src/backend/invoker.dart:382:7)
+#67     Invoker._onRun (package:test_api/src/backend/invoker.dart:381:11)
+#68     LiveTestController.run (package:test_api/src/backend/live_test_controller.dart:153:11)
+#69     RemoteListener._runLiveTest.<anonymous closure> (package:test_api/src/backend/remote_listener.dart:273:16)
+#74     RemoteListener._runLiveTest (package:test_api/src/backend/remote_listener.dart:272:5)
+#75     RemoteListener._serializeTest.<anonymous closure> (package:test_api/src/backend/remote_listener.dart:220:7)
+#93     _GuaranteeSink.add (package:stream_channel/src/guarantee_channel.dart:125:12)
+#94     new _MultiChannel.<anonymous closure> (package:stream_channel/src/multi_channel.dart:159:31)
+#96     CastStreamSubscription._onData (dart:_internal/async_cast.dart:85:11)
+#122    new _WebSocketImpl._fromSocket.<anonymous closure> (dart:_http/websocket_impl.dart:1144:21)
+#128    _WebSocketProtocolTransformer._messageFrameEnd (dart:_http/websocket_impl.dart:332:23)
+#129    _WebSocketProtocolTransformer.add (dart:_http/websocket_impl.dart:226:46)
+#137    _Socket._onData (dart:io-patch/socket_patch.dart:2447:41)
+#144    new _RawSocket.<anonymous closure> (dart:io-patch/socket_patch.dart:1936:33)
+#145    _NativeSocket.issueReadEvent.issue (dart:io-patch/socket_patch.dart:1379:14)
+(elided 103 frames from dart:async and package:stack_trace)
+
+The exception was caught asynchronously.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+The expected huddle state was not reached. session=ChatMediaSessionState(status: idle, devices:
+ChatMediaDeviceState(deviceCount: 0, hasAudioInput: false, hasAudioOutput: false),
+microphoneEnabled: false, cameraEnabled: false, screenShareEnabled: false, activeSpeakerCount: 0,
+failure: ChatMediaFailure(code: descriptorUnavailable, operation: connect, retryable: true));
+controller=ChatHuddleState(conversationId: conversation-panel, canonicalStatus: active,
+hydrationStatus: idle, media: ChatHuddleMediaRejoinRequiredState(state: rejoin_required, reason:
+not_joined), pendingOperation: null, recoveryStatus: null, recoveryOperation: null)
+
+When the exception was thrown, this was the stack:
+#0      fail (package:matcher/src/expect/expect.dart:149:31)
+#1      _pumpUntil (file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/package/test/handrail_huddle_panel_test.dart:677:3)
+<asynchronous suspension>
+#2      main.<anonymous closure> (file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/package/test/handrail_huddle_panel_test.dart:122:7)
+<asynchronous suspension>
+#3      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:183:15)
+<asynchronous suspension>
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1017:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  renders participants, active speakers, media toggles, and live devices
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +0 -1: renders participants, active speakers, media toggles, and live devices [E]
+  Test failed. See exception logs above.
+  The test description was: renders participants, active speakers, media toggles, and live devices
+  
+00:02 +0 -1: Some tests failed.

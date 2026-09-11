@@ -1,0 +1,26 @@
+The new artifact "libimobiledevice" was downloaded, but Flutter failed to update its stamp file, receiving the error "FileSystemException: Cannot open file, path = '/opt/handrail/.handrail/flutter-sdk/bin/cache/libimobiledevice.stamp' (OS Error: Read-only file system, errno = 30)". Flutter can continue, but the artifact may be re-downloaded on subsequent invocations until the problem is resolved.
+The new artifact "libusbmuxd" was downloaded, but Flutter failed to update its stamp file, receiving the error "FileSystemException: Cannot open file, path = '/opt/handrail/.handrail/flutter-sdk/bin/cache/libusbmuxd.stamp' (OS Error: Read-only file system, errno = 30)". Flutter can continue, but the artifact may be re-downloaded on subsequent invocations until the problem is resolved.
+00:00 +0: loading /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_chat_workspace_test.dart
+00:00 +0: reply routing unknown capability updates and detaches on client rebinding
+00:01 +1: reply routing excludes pending and deleted sources including an open menu
+00:01 +2: reply routing channel summary=false sends Friday in place
+00:02 +3: reply routing channel summary=true sends Friday in place
+00:02 +4: reply routing direct summary=false sends Friday in place
+00:03 +5: reply routing direct summary=true sends Friday in place
+00:03 +6: reply routing group_direct summary=false sends Friday in place
+00:03 +7: reply routing group_direct summary=true sends Friday in place
+00:04 +8: reply routing existing thread uses its own composer and ID
+Widget fixture render (not runtime UI): docs/validation/owner-task-24350c4f/media/discord-thread-reply-widget.png
+00:04 +9: reply routing Current in thread saved=null inline=false keeps composition
+00:05 +10: reply routing Current in thread saved=null inline=true keeps composition
+00:05 +11: reply routing Current in thread saved=current inline=false keeps composition
+Widget fixture render (not runtime UI): docs/validation/owner-task-24350c4f/media/current-thread-reply-widget.png
+00:05 +12: reply routing Current in thread saved=current inline=true keeps composition
+00:06 +13: reply routing Current standalone thread never creates a nested thread
+00:06 +14: reply routing Current saved=null retains thread behavior
+00:06 +15: reply routing Current saved=current retains thread behavior
+00:07 +16: reply routing absent preference API still allows supported inline replies
+00:07 +17: reply routing missing capability disables without thread fallback
+00:07 +18: reply routing keyboard and long press retain composition across styles
+00:07 +19: reply routing no handler and rejecting handler explain unavailable composer
+00:07 +20: All tests passed!

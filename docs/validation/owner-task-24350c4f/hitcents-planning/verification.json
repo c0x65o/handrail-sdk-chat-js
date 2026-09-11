@@ -1,0 +1,45 @@
+{
+  "work_request_id": "0bb40a03-7913-4993-be3d-d60ef7fcb3cd",
+  "scope": "Documentation and integration planning only; no ERP inspection or runtime verification by this worker.",
+  "tests": [
+    {
+      "command": "node --test --test-concurrency=1 test/server-embedding-docs.test.mjs cross-repo-tests/cross-client-capabilities.test.mjs",
+      "exit_code": 0,
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "includes": "Strict compilation of the marked server embedding TypeScript example against the local built public entry point; capability/source contract checks."
+    }
+  ],
+  "preservation": {
+    "repository_heads": {
+      "handrail-sdk-chat-js": "9f62a562c5235759efa4c0a05858acae755c0aff",
+      "handrail-sdk-chat-flutter": "8926839d7467860a738c5526aacb7330a5510483",
+      "handrail-chat-preview-flutter": "52fe6563bfeb9d1289fa39bcba40cd887ee7914e"
+    },
+    "existing_files_compared": 2062,
+    "existing_files_changed": [
+      "handrail-sdk-chat-js/docs/validation/owner-task-24350c4f/README.md",
+      "handrail-sdk-chat-js/docs/pilot-integration.md"
+    ],
+    "all_other_existing_source_and_evidence_files_unchanged": true,
+    "original_report_sha256": "99bd8d7dfa30f7a53b5b4a3c7a4bb2556dba4aed56612cb355c809996b43ce3a",
+    "historical_manifest_rule": "Historical manifests remain unchanged. Their owner-task README hash applies to hitcents-planning/README.before.md; the current index has a new hash below."
+  },
+  "remaining_evidence": [
+    "Planner ERP working-file hashes were not supplied; HEADs alone do not identify inspected working content.",
+    "Mobile seam details were not supplied.",
+    "Host policy/adapters and independent final runtime/consumer acceptance remain with the existing sole lead and existing independent QA."
+  ],
+  "artifact_sha256": {
+    "docs/hitcents-integration.md": "a2142efb503b7838e1b561474ab9dcff75f207b85f63bd131194de22c43bc4b1",
+    "docs/pilot-integration.md": "b52fb9b064a62b5c35c1e1fa74de165f7aaa53c57086a836f6916a44892b03d4",
+    "docs/validation/owner-task-24350c4f/README.md": "33d2a82a57ca64061363ec519a3f529daf91a0e8ea4d2615de6fb5afe1455989"
+  },
+  "documentation_checks": {
+    "relative_links_and_anchors_checked": 35,
+    "balanced_code_fences": true,
+    "no_trailing_whitespace": true,
+    "git_diff_check_docs_pilot_integration": "passed"
+  }
+}

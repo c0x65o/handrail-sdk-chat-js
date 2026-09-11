@@ -1,0 +1,91 @@
+{
+  "project_id": "0f617308-8c3a-4ad4-83e7-34b1fda024b3",
+  "inspection_date": "2026-09-11",
+  "planner_turn_id": "0b7dc5b6-cc39-4f59-956f-15c446de1e9f",
+  "provenance": "Planner-inspected working-file SHA256 identities supplied verbatim in the continuation work request. Checkout roots/HEADs come from the prior saved integration recipe. Paths expanded from W/M/S/L shorthand; no direct worker ERP inspection or hash recomputation.",
+  "worker_reinspected_erp": false,
+  "clean_worktrees_claimed": false,
+  "committed_blob_identity_claimed": false,
+  "repositories": [
+    {
+      "checkout_root": "/opt/handrail/repos/hitcents/hitcents-erp/hitcents-erp",
+      "reported_head": "ce2d88ba445b23448af59854eb8c25fda793c2b2",
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "a452b81e1d71748d89d2f526f09929d7ca96b2714d53ce3d5df83c543bb36133"
+        },
+        {
+          "path": "src/server/auth/http.ts",
+          "sha256": "399674885dca51ce75fd3d25cdab0d7bf2512740c7e1e0accc040a6b518d254f"
+        },
+        {
+          "path": "src/server/auth/session.ts",
+          "sha256": "68678135c5a0e20bad38675eee18aa37ae7489cc1e5926357a0a691538655677"
+        },
+        {
+          "path": "src/server/database/schema.ts",
+          "sha256": "201a6c50285eb448323d510cf92a65f1caf3d277feaec1198e4a91b3f1dab448"
+        },
+        {
+          "path": "src/server/business/service.ts",
+          "sha256": "3a0da0eb9c4ea1935dd1b61ba8da5cd5a770bbd6624c409dea28a5fd089e2413"
+        },
+        {
+          "path": "src/server/business/http.ts",
+          "sha256": "490a11fcb3ec4e63f7119720ef63bfbae646a31d9d251dea57c3e7cac0d11d60"
+        },
+        {
+          "path": "src/server/database/client.ts",
+          "sha256": "9e1de3ffdaac07dadd33ddfae426efa94b38386eba3f94ff2f7194b5d7644d02"
+        },
+        {
+          "path": "src/server/index.ts",
+          "sha256": "dc05505b3179dbd170438314c205caa45d583910e0d55ed5000c9bce8bb1ec2f"
+        },
+        {
+          "path": "src/server/app.ts",
+          "sha256": "24c730cbd7bb78bc0340a273d92722b21684519421dc8279ed7f050b07a9fa3b"
+        },
+        {
+          "path": "src/server/business/task-notifications.ts",
+          "sha256": "02f307d089f8b0337b8bab1da2cc3105b3be2e2fa70feaf67f93e274ad4123f7"
+        },
+        {
+          "path": "src/browser/App.tsx",
+          "sha256": "53d47d84a3a36757b395d55f3f2141fe3af0b68451c63ce008c6537f92a32c2b"
+        }
+      ]
+    },
+    {
+      "checkout_root": "/opt/handrail/repos/hitcents/hitcents-erp/hitcents-erp-mobile",
+      "reported_head": "5928f56c6c2167a279e5ffa845abb57f1d9211d7",
+      "files": [
+        {
+          "path": "pubspec.yaml",
+          "sha256": "a61d593a6b0d1d4a565669675e4190ecbc66739de8254864b8f68dc346884fa7"
+        },
+        {
+          "path": "lib/auth/native_auth_client.dart",
+          "sha256": "c984038a937df566661261cfa750b96353fcbfb87d7772d18be76871292a5fda"
+        },
+        {
+          "path": "lib/http/api_http_client_web.dart",
+          "sha256": "6d2b4e1aff33d3a3713311245db35259b444892315730dd3f545912d49d4414f"
+        },
+        {
+          "path": "lib/app.dart",
+          "sha256": "9c6a19a436f2ec08553c7f136d043515c9345908e3bf7840011dcc21c58d6e08"
+        },
+        {
+          "path": "lib/config/app_runtime_config.dart",
+          "sha256": "c1947391d734d978e0005bf08ebfdd1bf4ff42a7c78227bfcdbbfbb212b7ca14"
+        },
+        {
+          "path": "lib/navigation/module_access_policy.dart",
+          "sha256": "be22d1c357391e1db24e9c5058eb701348c9a7091727d52a4b204362425cb7cc"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+TAP version 13
+# Subtest: channel thread discovery HTTP integration with real PostgreSQL
+    # Subtest: authorized page and continuation are scoped, canonical, and independent of lifecycle
+    ok 1 - authorized page and continuation are scoped, canonical, and independent of lifecycle
+      ---
+      duration_ms: 32.475603
+      type: 'test'
+      ...
+    # Subtest: malformed pagination, duplicate keys, identity fields and bodies fail before querying
+    ok 2 - malformed pagination, duplicate keys, identity fields and bodies fail before querying
+      ---
+      duration_ms: 22.917396
+      type: 'test'
+      ...
+    # Subtest: private and entity parents retain server authorization and trusted tenant isolation
+    ok 3 - private and entity parents retain server authorization and trusted tenant isolation
+      ---
+      duration_ms: 20.355946
+      type: 'test'
+      ...
+    # Subtest: admission denial precedes trusted context and query, authentication stays safe
+    ok 4 - admission denial precedes trusted context and query, authentication stays safe
+      ---
+      duration_ms: 1.815131
+      type: 'test'
+      ...
+    # Subtest: capability is advertised with the enabled handler; policy never enables lifecycle
+    ok 5 - capability is advertised with the enabled handler; policy never enables lifecycle
+      ---
+      duration_ms: 28.569313
+      type: 'test'
+      ...
+    # Subtest: database failures return safe availability errors without internal details
+    ok 6 - database failures return safe availability errors without internal details
+      ---
+      duration_ms: 4.637397
+      type: 'test'
+      ...
+    # Subtest: unsupported discovery is deliberately disabled by default and explicitly, without a query
+    ok 7 - unsupported discovery is deliberately disabled by default and explicitly, without a query
+      ---
+      duration_ms: 8.219491
+      type: 'test'
+      ...
+    1..7
+ok 1 - channel thread discovery HTTP integration with real PostgreSQL
+  ---
+  duration_ms: 476.484699
+  type: 'test'
+  ...
+# Real PostgreSQL url-backed; isolated schema and canonical migrations
+1..1
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 615.502181

@@ -1,0 +1,1183 @@
+diff --git a/README.md b/README.md
+index 23f46a2..0bad40b 100644
+--- a/README.md
++++ b/README.md
+@@ -7,10 +7,10 @@ The Dart/Flutter SDK lives in `handrail-sdk-chat-flutter`.
+ Install from `https://github.com/c0x65o/handrail-sdk-chat-js.git` at a full committed
+ SDK SHA and commit the matching package-manager lockfile. The install runs the
+ normal `prepare` build; there is no packaging or registry publishing step.
+-The repository split is still awaiting its first committed SDK revision; see
+-[the migration status](docs/sdk-repository-split.md) before changing consumers.
++The repository split has committed SDK revisions; see the exact consumer pins
++and remaining runtime validation in [the migration status](docs/sdk-repository-split.md).
+ 
+-Once an SDK commit is available, set `HANDRAIL_CHAT_JS_SHA` to that verified
++Set `HANDRAIL_CHAT_JS_SHA` to the verified
+ 40-character revision and run:
+ 
+ ```bash
+diff --git a/docs/sdk-repository-split.md b/docs/sdk-repository-split.md
+index e85d5a5..c94ee5c 100644
+--- a/docs/sdk-repository-split.md
++++ b/docs/sdk-repository-split.md
+@@ -1,6 +1,7 @@
+ # SDK repository split
+ 
+-Status: source extracted; consumer and runtime cutover validation is in progress.
++Status: source extracted and committed. Frozen consumers and current SDK source
++are different revisions; current runtime qualification remains in progress.
+ 
+ ## Ownership
+ 
+@@ -46,11 +47,28 @@ Pub resolves its relative SDK dependency within that same Git revision.
+ 
+ ## Consumer revisions
+ 
+-- JS: `90bff33529df06720ff89ccd821360ac65eaf0d0`
+-- Flutter: `51bc3e1411858ce38980f5beded683dee957d1a3`
++Verified from Git and consumer manifests/lockfiles on 2026-09-11:
+ 
+-The JS examples, Flutter lab, native example, and Mobile Preview have matching
+-Git pins. Normal npm install/ci runs the SDK prepare build. Do not disable
++| Consumer | Package | Frozen Git revision |
++| --- | --- | --- |
++| JS drop-in, headless and embedded-server examples | `@handrail/chat` 1.0.20 | `90bff33529df06720ff89ccd821360ac65eaf0d0` |
++| Flutter lab and native ERP example | `handrail_chat` 0.1.20 | `51bc3e1411858ce38980f5beded683dee957d1a3` |
++| Mobile Preview | lab subdirectory | `8926839d7467860a738c5526aacb7330a5510483` |
++| Mobile Preview transitive SDK | `handrail_chat` 0.1.20 | `51bc3e1411858ce38980f5beded683dee957d1a3` |
++
++Each row has a matching npm/pub lockfile. The preview's newer lab pin does not
++upgrade its separately pinned transitive SDK. `sdk-compatibility.json` also
++freezes Flutter at `51bc3e1411858ce38980f5beded683dee957d1a3`.
++
++At the start of this qualification, SDK checkout heads were JS
++`9f62a562c5235759efa4c0a05858acae755c0aff` (1.0.25), Flutter
++`8926839d7467860a738c5526aacb7330a5510483` (0.1.21), and preview host
++`52fe6563bfeb9d1289fa39bcba40cd887ee7914e` (0.1.12+1).
++These are committed source, not proof that consumers contain subsequent workspace
++fixes. See [current qualification evidence](validation/owner-task-24350c4f/README.md)
++for patch identities, results, and remaining QA/publication gates.
++
++Normal npm install/ci runs the SDK prepare build. Do not disable
+ install scripts. npm may canonicalize a GitHub lock entry to SSH when updating
+ it; retain the same SHA and use the manifest's public HTTPS URL in `resolved`,
+ then verify with `npm ci` (which preserves the lockfile).
+diff --git a/docs/server-embedding.md b/docs/server-embedding.md
+index 0f75eef..135df6d 100644
+--- a/docs/server-embedding.md
++++ b/docs/server-embedding.md
+@@ -41,6 +41,11 @@ the resolved actor may access a host entity. Handrail Chat owns chat records,
+ but it does not become a second user directory or application authorization
+ system.
+ 
++`permissions.authorizeThreadSend` is an optional host restriction for thread
++sends. It may narrow existing send authority; it never grants access to an
++inaccessible parent or bypasses membership, capability or lifecycle checks.
++Omit it to retain the SDK's normal authorized thread-send policy.
++
+ ## Complete embedding example
+ 
+ The following marked example is compiled by the documentation regression test
+@@ -601,6 +606,7 @@ the caller explicitly supplies one with `--host`.
+     "ChatPermissionAdapter": ["getCapabilities", "authorizeEntity"]
+   },
+   "optionalAdapterMembers": {
++    "ChatPermissionAdapter": ["authorizeThreadSend"],
+     "ChatAuthAdapter": ["revalidateActiveSession"]
+   },
+   "optionalAdapters": {
+diff --git a/scripts/test-react-reply-routing.mjs b/scripts/test-react-reply-routing.mjs
+index ecc486a..b43aa3e 100644
+--- a/scripts/test-react-reply-routing.mjs
++++ b/scripts/test-react-reply-routing.mjs
+@@ -28,6 +28,7 @@ try {
+       .replaceAll('"@handrail/chat/react"', '"./react/index.js"')
+       .replaceAll('"@handrail/chat/ui"', '"./ui/index.js"')
+       .replaceAll('"../dist/client/reply-style-runtime.js"', '"./client/reply-style-runtime.js"')
++      .replaceAll('"../dist/client/thread-lifecycle.js"', '"./client/thread-lifecycle.js"')
+       .replaceAll("../src/ui/styles.css", "../../src/ui/styles.css");
+     const path = resolve(output, `${file}.test.mjs`);
+     await writeFile(path, source);
+diff --git a/src/client/generated/package-version.ts b/src/client/generated/package-version.ts
+index 34391c4..811fb18 100644
+--- a/src/client/generated/package-version.ts
++++ b/src/client/generated/package-version.ts
+@@ -1,3 +1,3 @@
+ // Generated by scripts/generate-package-version.mjs from package.json.
+ // Do not edit this file directly.
+-export const CHAT_CLIENT_PACKAGE_VERSION = "1.0.24" as const;
++export const CHAT_CLIENT_PACKAGE_VERSION = "1.0.25" as const;
+diff --git a/src/server/conversation-membership-command.ts b/src/server/conversation-membership-command.ts
+index 39fd60d..026be3f 100644
+--- a/src/server/conversation-membership-command.ts
++++ b/src/server/conversation-membership-command.ts
+@@ -24,6 +24,7 @@ import {
+   type PostgresMigrationDatabase,
+ } from "./postgres-migrations.js";
+ import { ChatAuthorizationError } from "./request-context.js";
++import { authorizeThreadAccess } from "./thread-access.js";
+ 
+ export const CONVERSATION_MEMBERSHIP_MANAGE_CAPABILITY =
+   "chat.members.manage" as const;
+@@ -90,6 +91,7 @@ interface ClaimedIdempotencyRow {
+ 
+ interface LockedConversationRow {
+   readonly type: string;
++  readonly parent_conversation_id: string | null;
+   readonly visibility: string;
+   readonly member_list_revision: string | number;
+   readonly current_message_sequence: string | number;
+@@ -845,8 +847,18 @@ export async function mutateConversationMembership(
+       throw new Error("PostgreSQL returned an invalid idempotency state");
+     }
+ 
++    // Match thread lifecycle/send lock order so parent membership revocation
++    // cannot race a successful child mutation or an idempotent replay.
++    const parents = await connection.query<{ id: string }>(
++      `SELECT parent.id FROM ${prefix}.chat_conversations AS parent
++       WHERE parent.tenant_id = $1 AND parent.id = (
++         SELECT parent_conversation_id FROM ${prefix}.chat_conversations
++         WHERE tenant_id = $1 AND id = $2 AND type = 'thread'
++       ) FOR UPDATE`,
++      [options.actor.tenantId, input.conversationId],
++    );
+     const locked = await connection.query<LockedConversationRow>(
+-      `SELECT conversation.type, conversation.visibility,
++      `SELECT conversation.type, conversation.parent_conversation_id, conversation.visibility,
+               conversation.member_list_revision,
+               conversation.current_message_sequence,
+               conversation.archived_at,
+@@ -874,6 +886,26 @@ export async function mutateConversationMembership(
+     }
+     const capabilities = await readCapabilities(options.actor, options.permissions);
+     await authorizeEntity(conversation, options.actor, options.permissions);
++    if (conversation.type === "thread") {
++      const parent = parents.rows[0];
++      if (parent === undefined || conversation.parent_conversation_id !== parent.id) {
++        throw new ChatAuthorizationError();
++      }
++      await connection.query(
++        `SELECT conversation_id FROM ${prefix}.chat_conversation_members
++         WHERE tenant_id = $1 AND conversation_id = ANY($2::text[]) AND user_id = $3
++         ORDER BY conversation_id FOR SHARE`,
++        [options.actor.tenantId, [parent.id, input.conversationId], options.actor.userId],
++      );
++      // Access foundation only: preserve the membership action and the existing
++      // intent-specific role/capability rules below.
++      await authorizeThreadAccess({
++        database: connection, schema, actor: options.actor,
++        threadId: input.conversationId, operation: "read",
++        entityAction: CONVERSATION_MEMBERSHIP_ENTITY_POLICY_ACTION,
++        permissions: options.permissions,
++      });
++    }
+     requireIntentAuthorization(input, conversation, capabilities);
+ 
+     if (claimed.idempotency_state === "completed") {
+@@ -960,7 +992,7 @@ export async function mutateConversationMembership(
+       input.intent === "leave" || input.intent === "change_member_role";
+     const requiresExistingTarget = input.intent === "remove_member";
+     if (target === undefined) {
+-      if (input.intent !== "add_member") {
++      if (input.intent !== "add_member" && input.intent !== "join") {
+         throw new ChatAuthorizationError();
+       }
+     } else if (
+@@ -1057,6 +1089,13 @@ export async function mutateConversationMembership(
+     return result;
+   } catch (error) {
+     await rollback(connection);
++    // The canonical follow guard also protects a newly added member's access
++    // to a private parent. Keep that denial actionable without exposing SQL.
++    if (typeof error === "object" && error !== null &&
++        "code" in error && error.code === "23514" &&
++        "constraint" in error && error.constraint === "chat_thread_follows_active_membership_check") {
++      throw new ChatAuthorizationError();
++    }
+     throw error;
+   } finally {
+     connection.release();
+diff --git a/src/ui/chat-workspace.ts b/src/ui/chat-workspace.ts
+index 9254056..8f32736 100644
+--- a/src/ui/chat-workspace.ts
++++ b/src/ui/chat-workspace.ts
+@@ -3075,6 +3075,7 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
+     if (source.conversationId !== selectedConversationIdRef.current) return;
+     composerControlsRef.current?.selectReply(source);
+   }, []);
++  const focusThreadReplyComposer = useCallback(() => composerControlsRef.current?.focus?.(), []);
+   const requestLatestMessageEdit = useCallback((
+     returnFocusTarget: HTMLTextAreaElement,
+   ): boolean => messageTimelineEditControllerRef.current
+@@ -4501,7 +4502,10 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
+         ...(props.readOnly === true ? {} : { onForwardMessage: openForwardDialog }),
+         onOpenThread: openThreadPanel,
+         ...(props.renderThread === undefined ? { onCreateThread: requestThreadCreation } : {}),
+-        ...(props.renderComposer === undefined ? { onReplyRequested: selectReply } : {}),
++        ...(props.renderComposer === undefined ? {
++          onReplyRequested: selectReply,
++          onThreadReplyRequested: focusThreadReplyComposer,
++        } : {}),
+         readOnly: props.readOnly ?? false,
+         ...(props.composerAvailability === undefined ? {} : { replyAvailability: props.composerAvailability }),
+         ...(props.otherMemberReadState === undefined
+diff --git a/src/ui/message-composer.ts b/src/ui/message-composer.ts
+index 0624863..9b8157a 100644
+--- a/src/ui/message-composer.ts
++++ b/src/ui/message-composer.ts
+@@ -1168,6 +1168,7 @@ function ConnectedMessageComposer(
+     status,
+   ]);
+   const controls = useMemo<ChatComposerControls>(() => Object.freeze({
++    focus: () => focusEditorRef.current?.(),
+     selectReply,
+     setReplyNotifyAuthor,
+     clearReply,
+diff --git a/src/ui/message-timeline.ts b/src/ui/message-timeline.ts
+index eaf4ce2..f6d90ef 100644
+--- a/src/ui/message-timeline.ts
++++ b/src/ui/message-timeline.ts
+@@ -147,7 +147,9 @@ export interface MessageTimelineProps {
+   readonly otherMemberReadState?: ConversationReadState;
+   /** Selects a source in the current conversation composer; never changes destination. */
+   readonly onReplyRequested?: ChatComposerControls["selectReply"];
+-  /** Restrictions on inline Reply; Current thread entry points keep their legacy behavior. */
++  /** Focus the existing thread composer for Current-style Reply, preserving its draft. */
++  readonly onThreadReplyRequested?: () => void;
++  /** Restrictions on replies sent in this conversation. */
+   readonly readOnly?: boolean;
+   readonly replyAvailability?: MessageComposerAvailability;
+   /** Notifies a composing host after the public open-thread action resolves. */
+@@ -1672,6 +1674,8 @@ interface MessageRowProps {
+   readonly onCreateThread?: MessageTimelineProps["onCreateThread"];
+   readonly threadCreationDisabledReason: string | undefined;
+   readonly inlineReply: boolean;
++  readonly isThread: boolean;
++  readonly onThreadReplyRequested?: MessageTimelineProps["onThreadReplyRequested"];
+   readonly replyDisabledReason: string | undefined;
+   readonly onForwardMessage?: MessageTimelineProps["onForwardMessage"];
+   readonly reactionKeys: readonly string[];
+@@ -1752,6 +1756,8 @@ const MessageRow = ({
+   onCreateThread,
+   threadCreationDisabledReason,
+   inlineReply,
++  isThread,
++  onThreadReplyRequested,
+   replyDisabledReason: conversationReplyDisabledReason,
+   onForwardMessage,
+   reactionKeys,
+@@ -1838,8 +1844,8 @@ const MessageRow = ({
+   // Invalidate retained custom-slot callbacks when the row, destination, style or
+   // availability changes. A stale source must never reach a newly bound composer.
+   const replyBinding = useMemo(() => ({
+-    inlineReply, replyDisabledReason, onReplyRequested, viewModel, conversationId, onCreateThread, threadCreationDisabledReason,
+-  }), [inlineReply, replyDisabledReason, onReplyRequested, viewModel, conversationId, onCreateThread, threadCreationDisabledReason]);
++    inlineReply, isThread, onThreadReplyRequested, replyDisabledReason, onReplyRequested, viewModel, conversationId, onCreateThread, threadCreationDisabledReason,
++  }), [inlineReply, isThread, onThreadReplyRequested, replyDisabledReason, onReplyRequested, viewModel, conversationId, onCreateThread, threadCreationDisabledReason]);
+   const replyBindingRef = useRef<typeof replyBinding | undefined>(replyBinding);
+   replyBindingRef.current = replyBinding;
+   useLayoutEffect(() => {
+@@ -1856,8 +1862,8 @@ const MessageRow = ({
+   }, [openBinding]);
+ 
+   const messageActions = useMemo<ChatMessageActions>(() => ({
+-    ...(inlineReply && viewModel.isThreadRoot ? { showOpenThread: true } : {}),
+-    ...(inlineReply && !viewModel.isThreadRoot && onCreateThread !== undefined ? {
++    ...(inlineReply && !isThread && viewModel.isThreadRoot ? { showOpenThread: true } : {}),
++    ...(inlineReply && !isThread && !viewModel.isThreadRoot && onCreateThread !== undefined ? {
+       ...(threadCreationDisabledReason === undefined ? {} : { threadCreationDisabledReason }),
+       requestThreadCreation: (rootMessageId: MessageId) => {
+         if (replyBindingRef.current !== replyBinding || threadCreationDisabledReason !== undefined ||
+@@ -1866,14 +1872,15 @@ const MessageRow = ({
+         onCreateThread(rootMessageId, document.activeElement instanceof HTMLElement ? document.activeElement : null);
+       },
+     } : {}),
+-    ...(inlineReply ? {
++    ...(inlineReply || isThread ? {
+       ...(replyDisabledReason === undefined ? {} : { replyDisabledReason }),
+       selectReply: (sourceMessageId: MessageId) => {
+         if (replyBindingRef.current !== replyBinding || replyDisabledReason !== undefined ||
+           sourceMessageId !== viewModel.id || viewModel.conversationId !== conversationId ||
+           viewModel.delivery.state !== "sent" || viewModel.content === null ||
+           viewModel.deletedAt !== undefined || viewModel.sequence <= 0) return;
+-        onReplyRequested?.({ conversationId, messageId: sourceMessageId });
++        if (inlineReply) onReplyRequested?.({ conversationId, messageId: sourceMessageId });
++        else onThreadReplyRequested?.();
+       },
+     } : {}),
+     retryMessage: (clientMessageId) => run("Retrying message", () => actions.retryMessage(clientMessageId)),
+@@ -1882,6 +1889,11 @@ const MessageRow = ({
+     setReaction: (input) => run("Updating reaction", () => actions.setReaction(input)),
+     markUnread: (input) => run("Marking message unread", () => actions.markUnread(input)),
+     openThread: (rootMessageId) => {
++      // A thread cannot be the parent of another thread, including custom-slot calls.
++      if (isThread) return Promise.resolve(Object.freeze({
++        state: "error", rootMessageId, code: "command_failed",
++        message: "Nested threads are unavailable. Reply in the current thread instead.",
++      }));
+       const returnFocusTarget = typeof document !== "undefined" && document.activeElement instanceof HTMLElement
+         ? document.activeElement
+         : null;
+@@ -1970,7 +1982,7 @@ const MessageRow = ({
+         return Object.freeze({ status: "failed", conflict: false });
+       }
+     },
+-  }), [actions, openBinding, onCreateThread, threadCreationDisabledReason, onForwardMessage, onOpenThread, run, viewModel, inlineReply, replyDisabledReason, onReplyRequested, conversationId, replyBinding]);
++  }), [actions, openBinding, onCreateThread, threadCreationDisabledReason, onForwardMessage, onOpenThread, run, viewModel, inlineReply, isThread, onThreadReplyRequested, replyDisabledReason, onReplyRequested, conversationId, replyBinding]);
+ 
+   const reactionAggregates = useMemo(() => {
+     const preferredOrder = new Map<string, number>();
+@@ -2359,6 +2371,7 @@ export function MessageTimeline({
+   otherMemberReadState,
+   onOpenThread,
+   onReplyRequested,
++  onThreadReplyRequested,
+   onCreateThread,
+   readOnly,
+   replyAvailability,
+@@ -2368,6 +2381,8 @@ export function MessageTimeline({
+   const threadCreationDisabledReason = useThreadCreationRestriction(conversationId, readOnly, replyAvailability);
+   const sourceRuntime = context?.client.messageContext;
+   const inlineReply = useReplyStyle().effectiveStyle === "discord";
++  const isThread = useChatSelector(useCallback((state: NormalizedChatCacheState) =>
++    state.entities.conversations[conversationId]?.type === "thread", [conversationId])) === true;
+   const conversationReplyRestriction = useChatSelector(useCallback((state: NormalizedChatCacheState) => {
+     const conversation = state.entities.conversations[conversationId];
+     const membership = state.currentUser.memberships[conversationId];
+@@ -2379,14 +2394,15 @@ export function MessageTimeline({
+     }
+     return undefined;
+   }, [conversationId]));
+-  const replyDisabledReason = !inlineReply ? undefined : !context?.isReady ? "Chat is not ready to send replies." :
+-    context.state.state !== "ready" || context.state.enabledFeatures?.inlineReplies !== true
++  const replyDisabledReason = !inlineReply && !isThread ? undefined : !context?.isReady ? "Chat is not ready to send replies." :
++    inlineReply && (context.state.state !== "ready" || context.state.enabledFeatures?.inlineReplies !== true)
+       ? "Inline replies are not supported by this server." :
+     readOnly === true ? "This conversation is read-only." :
+     replyAvailability?.canSend === false ? "You do not have permission to send messages." :
+     replyAvailability?.membershipState !== undefined && replyAvailability.membershipState !== "active"
+       ? "You must be an active member to reply." :
+-    conversationReplyRestriction ?? (onReplyRequested === undefined ? "A reply composer is unavailable." : undefined);
++    conversationReplyRestriction ?? ((inlineReply ? onReplyRequested : onThreadReplyRequested) === undefined
++      ? "A reply composer is unavailable." : undefined);
+   const navigationScope = useMemo(() => ({ conversationId, sourceRuntime }), [conversationId, sourceRuntime]);
+   const navigationScopeRef = useRef<typeof navigationScope | undefined>(navigationScope);
+   navigationScopeRef.current = navigationScope;
+@@ -3259,6 +3275,8 @@ export function MessageTimeline({
+       rows.push(createElement(MessageRow, {
+         actions: timelineActions,
+         inlineReply,
++        isThread,
++        ...(onThreadReplyRequested === undefined ? {} : { onThreadReplyRequested }),
+         threadCreationDisabledReason,
+         ...(onCreateThread === undefined ? {} : { onCreateThread }),
+         replyDisabledReason,
+diff --git a/src/ui/slots.ts b/src/ui/slots.ts
+index f9d8145..939f733 100644
+--- a/src/ui/slots.ts
++++ b/src/ui/slots.ts
+@@ -229,9 +229,9 @@ export type ChatMessageActions = Pick<
+   | "markUnread"
+   | "openThread"
+ > & Readonly<{
+-  /** Inline source selection in Discord style; absent in Current style. Never opens a thread. */
++  /** Select an inline source in Discord style, or focus the existing Current thread composer. Never opens a thread. */
+   selectReply?: (sourceMessageId: MessageId) => void;
+-  /** Accessible explanation when inline source selection is unavailable. */
++  /** Accessible explanation when replying in the current conversation is unavailable. */
+   replyDisabledReason?: string;
+   /** Requests a named discussion dialog; never creates from an implicit name. */
+   requestThreadCreation?: (rootMessageId: MessageId) => void;
+@@ -363,6 +363,8 @@ export interface ChatComposerState extends NoPrivateChatRendererFields {
+  * of renderer state or retained by the optional UI.
+  */
+ export interface ChatComposerControls extends NoPrivateChatRendererFields {
++  /** Focus the editor without changing its draft or reply context. */
++  readonly focus?: () => void;
+   /** Select/replace a source in this conversation. Each selection starts with ping on. */
+   readonly selectReply: (source: Readonly<{ conversationId: ConversationId; messageId: MessageId }>) => void;
+   readonly setReplyNotifyAuthor: (notifyAuthor: boolean) => void;
+diff --git a/src/ui/thread-panel.ts b/src/ui/thread-panel.ts
+index 88b668f..d11e582 100644
+--- a/src/ui/thread-panel.ts
++++ b/src/ui/thread-panel.ts
+@@ -258,6 +258,7 @@ function ConnectedThread({
+     if (source.conversationId !== currentThreadIdRef.current) return;
+     composerControlsRef.current?.selectReply(source);
+   }, []);
++  const focusReplyComposer = useCallback(() => composerControlsRef.current?.focus?.(), []);
+   const actions = useChatActions(threadId);
+   const discord = useReplyStyle().effectiveStyle === "discord";
+   const readResult = useReadState(threadId);
+@@ -419,6 +420,7 @@ function ConnectedThread({
+     data.thread === undefined || denied ? null : createElement(MessageTimeline, {
+       ariaLabel: "Thread replies",
+       onReplyRequested: selectReply,
++      onThreadReplyRequested: focusReplyComposer,
+       replyAvailability: availability,
+       readOnly: readOnly ?? false,
+       conversationId: threadId,
+diff --git a/test/chat-workspace-default.test.mjs b/test/chat-workspace-default.test.mjs
+index 89aee3d..24814d3 100644
+--- a/test/chat-workspace-default.test.mjs
++++ b/test/chat-workspace-default.test.mjs
+@@ -3064,7 +3064,7 @@ test("default public actions send, open and close a focus-restoring thread, and
+   await click(openThread);
+   assert.equal(fixture.calls.find(({ name }) => name === "openThread").args[0], rootMessageId);
+   assert.ok(container.querySelector("[data-handrail-thread-panel]"));
+-  await click(container.querySelector('button[aria-label="Close thread"]'));
++  await click(container.querySelector('button[aria-label="Close panel"]'));
+   assert.equal(container.querySelector("[data-handrail-thread-panel]"), null);
+   assert.equal(document.activeElement, openThread);
+ 
+@@ -3225,7 +3225,7 @@ test("docks an opened thread beside a stable independently scrolling timeline pa
+   assert.ok(thread.querySelector('[aria-label="Thread replies"]'));
+   assert.ok(thread.querySelector('textarea[aria-label="Reply to thread"]'));
+ 
+-  await click(thread.querySelector('button[aria-label="Close thread"]'));
++  await click(thread.querySelector('button[aria-label="Close panel"]'));
+   assert.equal(container.querySelector('[aria-label="Conversation thread"]'), null);
+   assert.equal(body.classList.contains("handrail-chat__conversation-body--thread-open"), false);
+   assert.equal(timeline.querySelector(".handrail-chat__timeline-viewport"), timelineViewport);
+@@ -3254,7 +3254,7 @@ test("Reply starts a new thread and is hidden for deleted and unsent messages",
+   assert.ok(container.querySelector('[aria-label="Thread replies"]'));
+   assert.ok(container.querySelector('textarea[aria-label="Reply to thread"]'));
+ 
+-  await click(container.querySelector('button[aria-label="Close thread"]'));
++  await click(container.querySelector('button[aria-label="Close panel"]'));
+   assert.equal(container.querySelector("[data-handrail-thread-panel]"), null);
+   assert.equal(document.activeElement, reply);
+ });
+@@ -4563,3 +4563,43 @@ test("named thread creation excludes deleted and unsent roots, and is independen
+   const panel = container.querySelector("[data-handrail-thread-panel]");
+   assert.equal(panel.querySelector('[aria-label="Create Thread"]'), null);
+ });
++
++
++for (const style of ['default', 'current']) {
++  test(`inline Reply routing: ${style} directly selected thread focuses its existing composer without nested creation`, async () => {
++    const fixture = createFixture();
++    if (style === 'current') await withReplyRouting(fixture, { style, inlineReplies: false });
++    const container = await mount(workspace(fixture, { conversationId: threadId }));
++    const composer = container.querySelector('[aria-label="Conversation composer"]');
++    const textarea = composer.querySelector('textarea');
++    const editor = composer.querySelector('[role="textbox"]') ?? textarea;
++    assert.ok(editor && !editor.hidden, 'Thread composer must expose a visible editor');
++    await input(textarea, 'Keep this directly selected thread draft');
++    const before = structuredClone(fixture.cache.getState().currentUser.readStates);
++    const reply = routingReply(container, 'message-thread');
++    assert.equal(reply.disabled, false);
++    reply.focus();
++    await click(reply);
++    assert.ok(document.activeElement === editor, 'Current Reply should focus the selected thread composer');
++    assert.equal(textarea.value, 'Keep this directly selected thread draft');
++    assert.equal(fixture.client.selectConversationDraft(threadId).draft.content.replyTo, undefined);
++    assert.deepEqual(fixture.cache.getState().currentUser.readStates, before);
++    assert.equal(container.querySelector('[data-handrail-thread-panel]'), null);
++    await click(routingSend(composer));
++    assert.deepEqual(routingSends(fixture), [{ conversationId: threadId,
++      content: { format: 'plain', text: 'Keep this directly selected thread draft' } }]);
++    assertNoThreadCommand(fixture);
++  });
++}
++
++test('inline Reply routing: Current directly selected thread requires a connected composer', async () => {
++  const fixture = createFixture();
++  await withReplyRouting(fixture, { style: 'current', inlineReplies: false });
++  const container = await mount(workspace(fixture, { conversationId: threadId, renderComposer: () => null }));
++  const reply = routingReply(container, 'message-thread');
++  assert.equal(reply.disabled, true);
++  assert.match(reply.getAttribute('aria-description'), /composer is unavailable/);
++  await click(reply);
++  assertNoThreadCommand(fixture);
++  assert.deepEqual(routingSends(fixture), []);
++});
+diff --git a/test/postgres-attachment-lifecycle-http.test.mjs b/test/postgres-attachment-lifecycle-http.test.mjs
+index ba17daa..088bb88 100644
+--- a/test/postgres-attachment-lifecycle-http.test.mjs
++++ b/test/postgres-attachment-lifecycle-http.test.mjs
+@@ -130,9 +130,9 @@ class LifecycleStorage {
+   }
+ }
+ 
+-const createRuntime = (database, storage, { attachments = true } = {}) =>
++const createRuntime = (database, schema, storage, { attachments = true } = {}) =>
+   createChatServer({
+-    database: { pool: database },
++    database: { pool: database, schema },
+     auth: {
+       async resolveActor(request) {
+         if (request.headers.authorization === "Bearer valid") return actor;
+@@ -231,7 +231,7 @@ const withHttpServer = async (runtime, callback) => {
+ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-safe", async (t) => {
+   const backend = await createPostgresTestBackend();
+   const harness = await backend.createHarness({
+-    schemaPrefix: "chat_attachment_lifecycle_http",
++    schemaPrefix: "chat_attachment_http",
+   });
+   const schema = `"${harness.schema.replaceAll('"', '""')}"`;
+   const tables = {
+@@ -305,7 +305,7 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
+       schema: harness.schema,
+       migrations: handrailChatPostgresMigrations,
+     }).apply();
+-    const runtime = createRuntime(harness.pool, storage);
++    const runtime = createRuntime(harness.pool, harness.schema, storage);
+ 
+     await withHttpServer(runtime, async (request) => {
+       await t.test("finalizes once and returns a canonical replay", async () => {
+@@ -471,7 +471,6 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
+           () => request(lifecyclePath(valid.attachmentId), valid, { body: "{" }),
+           () => request(lifecyclePath(valid.attachmentId), valid, { contentType: "text/plain" }),
+           () => request(`${lifecyclePath(valid.attachmentId)}?secret=true`, valid),
+-          () => request(`${lifecyclePath(valid.attachmentId)}/extra`, valid),
+           () => request("/attachments/encoded%2Fchild/lifecycle", valid),
+           () => request(lifecyclePath("path-claim"), { ...valid, attachmentId: "body-claim" }),
+           () => request(lifecyclePath(valid.attachmentId), { ...valid, operation: "prepare_attachment" }),
+@@ -490,6 +489,10 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
+             { idempotencyKey: "unsafe,key" },
+           ),
+         ];
++        // Extra path segments do not match the lifecycle route.
++        const unknownRoute = await request(`${lifecyclePath(valid.attachmentId)}/extra`, valid);
++        assert.equal(unknownRoute.status, 404);
++        assert.equal(unknownRoute.text, "");
+         const beforeVerify = storage.verifyCalls.length;
+         const beforeDelete = storage.deleteCalls.length;
+         for (const makeRequest of invalidRequests) {
+@@ -557,7 +560,7 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
+         },
+       };
+       await withHttpServer(
+-        createRuntime(inProgressDatabase, storage),
++        createRuntime(inProgressDatabase, harness.schema, storage),
+         async (request) => {
+           const input = finalizeInput("in-progress");
+           assertStableError(
+@@ -576,7 +579,7 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
+         },
+       };
+       await withHttpServer(
+-        createRuntime(unavailableDatabase, storage),
++        createRuntime(unavailableDatabase, harness.schema, storage),
+         async (request) => {
+           const input = finalizeInput("runtime-unavailable");
+           assertStableError(
+@@ -589,7 +592,7 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
+       );
+ 
+       await withHttpServer(
+-        createRuntime(harness.pool, storage, { attachments: false }),
++        createRuntime(harness.pool, harness.schema, storage, { attachments: false }),
+         async (request) => {
+           const input = abortInput("disabled");
+           assertStableError(
+diff --git a/test/postgres-conversation-membership-command.test.mjs b/test/postgres-conversation-membership-command.test.mjs
+index 8c33dde..769a67e 100644
+--- a/test/postgres-conversation-membership-command.test.mjs
++++ b/test/postgres-conversation-membership-command.test.mjs
+@@ -140,6 +140,8 @@ test("conversation-membership command applies every intent atomically in Postgre
+              WHERE tenant_id = 'tenant-a' AND target_id = $1) AS audit,
+            (SELECT count(*)::integer FROM ${tables.outbox}
+              WHERE tenant_id = 'tenant-a'
++               AND type = 'conversation.membership.updated'
++               AND payload->'input'->>'conversationId' = $1
+                AND (stream_id = $1 OR stream_id = 'user:' || $2)) AS outbox`,
+         [conversationId, userId],
+       )
+@@ -152,12 +154,11 @@ test("conversation-membership command applies every intent atomically in Postgre
+       migrations: handrailChatPostgresMigrations,
+     }).apply();
+     assert.deepEqual(
+-      applied.applied.map(({ id, order }) => ({ id, order })).at(-1),
+-      {
+-      id: "0017-chat-conversation-member-list-revision",
+-      order: 17,
+-      },
++      applied.applied.map(({ id, order }) => ({ id, order })),
++      handrailChatPostgresMigrations.map(({ id, order }) => ({ id, order })),
+     );
++    assert.ok(applied.applied.some(({ id, order }) =>
++      id === "0017-chat-conversation-member-list-revision" && order === 17));
+ 
+     await harness.pool.query(
+       `INSERT INTO ${tables.conversations}
+@@ -360,6 +361,68 @@ test("conversation-membership command applies every intent atomically in Postgre
+       assert.equal(changed.members.find(({ userId }) => userId === "user-b").role, "moderator");
+     });
+ 
++    await t.test("thread membership requires current parent access even for owners and retries", async () => {
++      await harness.pool.query(`INSERT INTO ${tables.conversations}
++        (tenant_id,id,type,visibility,name,current_message_sequence)
++        VALUES ('tenant-a','membership-parent','channel','private','Membership parent',1)`);
++      await harness.pool.query(`INSERT INTO ${tables.messages}
++        (tenant_id,id,conversation_id,sequence,author_user_id,client_message_id,content)
++        VALUES ('tenant-a','membership-root','membership-parent',1,'actor-a','membership-root',
++          '{"format":"plain","text":"Isolated parent access fixture"}')`);
++      await harness.pool.query(`INSERT INTO ${tables.conversations}
++        (tenant_id,id,type,visibility,parent_conversation_id,root_message_id)
++        VALUES ('tenant-a','membership-child','thread','public','membership-parent','membership-root')`);
++      await harness.pool.query(`INSERT INTO ${tables.members}
++        (tenant_id,conversation_id,user_id,role,state)
++        VALUES ('tenant-a','membership-child','actor-a','owner','active')`);
++      const add = targetedInput("parent-access-add", "add_member", "membership-child", "user-b");
++      // Retained child ownership does not grant private parent access.
++      await assert.rejects(command(add), authorizationFailure);
++      await harness.pool.query(`INSERT INTO ${tables.members}
++        (tenant_id,conversation_id,user_id,role,state)
++        VALUES ('tenant-a','membership-parent','actor-a','member','active'),
++          ('tenant-a','membership-parent','user-b','member','active')`);
++      assert.equal((await command(add)).reconciliationStatus, "applied");
++      assert.equal((await command(add)).reconciliationStatus, "replayed");
++      const afterAdd = await stateCounts("membership-child", "user-b");
++      const deniedTarget = targetedInput("target-without-parent-access", "add_member", "membership-child", "user-c",
++        { expectedMemberListRevision: 2 });
++      const beforeDeniedTarget = await stateCounts("membership-child", "user-c");
++      await assert.rejects(command(deniedTarget), authorizationFailure);
++      assert.deepEqual(await stateCounts("membership-child", "user-c"), beforeDeniedTarget);
++      assert.deepEqual((await harness.pool.query(`SELECT
++        (SELECT count(*)::int FROM ${tables.follows} WHERE tenant_id='tenant-a'
++          AND conversation_id='membership-child' AND user_id='user-c') AS follows,
++        (SELECT count(*)::int FROM ${tables.idempotency} WHERE tenant_id='tenant-a'
++          AND user_id='actor-a' AND client_key=$1) AS claims,
++        (SELECT member_list_revision::int FROM ${tables.conversations}
++          WHERE tenant_id='tenant-a' AND id='membership-child') AS revision`,
++      [deniedTarget.idempotencyKey])).rows, [{ follows: 0, claims: 0, revision: 2 }]);
++      for (const state of ["removed", "left"]) {
++        await harness.pool.query(`UPDATE ${tables.members} SET state=$1
++          WHERE tenant_id='tenant-a' AND conversation_id='membership-parent' AND user_id='actor-a'`, [state]);
++        await assert.rejects(command(add), authorizationFailure);
++        await assert.rejects(command(targetedInput(`parent-${state}`, "add_member", "membership-child", "user-c",
++          { expectedMemberListRevision: 2 })), authorizationFailure);
++        assert.deepEqual(await stateCounts("membership-child", "user-b"), afterAdd);
++      }
++      await harness.pool.query(`UPDATE ${tables.members} SET state='active'
++        WHERE tenant_id='tenant-a' AND conversation_id='membership-parent' AND user_id='actor-a'`);
++      await harness.pool.query(`UPDATE ${tables.conversations}
++        SET archived_at=clock_timestamp(), archived_by_user_id='actor-a'
++        WHERE tenant_id='tenant-a' AND id='membership-parent'`);
++      await assert.rejects(command(add), authorizationFailure);
++      // Public parent readers can join a public child for the first time,
++      // without inventing host capabilities or prior child membership.
++      await harness.pool.query(`UPDATE ${tables.conversations}
++        SET visibility='public', archived_at=NULL, archived_by_user_id=NULL
++        WHERE tenant_id='tenant-a' AND id='membership-parent'`);
++      const joined = await command(membershipInput("public-child-first-join", "join", "membership-child",
++        { expectedMemberListRevision: 2 }), { actor: actor("user-c") });
++      assert.equal(joined.reconciliationStatus, "applied");
++      assert.equal(joined.members.find(member => member.userId === "user-c").state, "active");
++    });
++
+     await t.test("enforces public self-join, entity access, and management policy", async () => {
+       await assert.rejects(
+         command(membershipInput("private", "join", "private-join")),
+@@ -662,8 +725,11 @@ test("conversation-membership command applies every intent atomically in Postgre
+       );
+     });
+   } finally {
+-    await harness.dispose();
+-    await backend.dispose();
++    try {
++      await harness.teardown();
++    } finally {
++      await backend.teardown();
++    }
+   }
+ });
+ 
+diff --git a/test/postgres-conversation-membership-http.test.mjs b/test/postgres-conversation-membership-http.test.mjs
+index 6018d67..20ecb51 100644
+--- a/test/postgres-conversation-membership-http.test.mjs
++++ b/test/postgres-conversation-membership-http.test.mjs
+@@ -295,7 +295,8 @@ test("PATCH /conversations/:conversationId/membership mounts every membership in
+             value.request,
+             { authorization: value.authorization },
+           );
+-          assert.equal(response.status, 200);
++          assert.equal(response.status, 200,
++            `${value.request.intent}: ${await response.clone().text()}`);
+           assert.equal(response.headers.get("cache-control"), "private, no-store");
+           const result = parseConversationMembershipMutationResult(
+             await response.json(),
+@@ -461,7 +462,6 @@ test("PATCH /conversations/:conversationId/membership mounts every membership in
+           }),
+           () => request("/conversations/different/membership", valid),
+           () => request("/conversations/directory-target/membership?intent=add_member", valid),
+-          () => request("/conversations/directory-target/extra/membership", valid),
+           () => request("/conversations/directory-target/membership", {
+             ...valid,
+             targetUserId: " user-d",
+@@ -493,6 +493,12 @@ test("PATCH /conversations/:conversationId/membership mounts every membership in
+           );
+         }
+ 
++        // An extra path segment never matches the membership route. It must not
++        // be treated as a valid membership endpoint with a malformed body.
++        const unknownRoute = await request("/conversations/directory-target/extra/membership", valid);
++        assert.equal(unknownRoute.status, 404);
++        assert.equal(await unknownRoute.text(), "");
++
+         const duplicate = await rawRequest(
+           "/conversations/directory-target/membership",
+           {
+@@ -517,6 +523,28 @@ test("PATCH /conversations/:conversationId/membership mounts every membership in
+         );
+       });
+ 
++      await t.test("target without private parent access receives a stable authorization error", async () => {
++        await harness.pool.query(`INSERT INTO ${conversations}
++          (tenant_id,id,type,visibility,name,current_message_sequence)
++          VALUES ('tenant-a','target-parent','channel','private','Target access lab',1)`);
++        await harness.pool.query(`INSERT INTO ${schema}.chat_messages
++          (tenant_id,id,conversation_id,sequence,author_user_id,client_message_id,content)
++          VALUES ('tenant-a','target-root','target-parent',1,'actor-a','target-root',
++            '{"format":"plain","text":"Isolated membership fixture"}')`);
++        await harness.pool.query(`INSERT INTO ${conversations}
++          (tenant_id,id,type,visibility,parent_conversation_id,root_message_id)
++          VALUES ('tenant-a','target-child','thread','private','target-parent','target-root')`);
++        await harness.pool.query(`INSERT INTO ${members}
++          (tenant_id,conversation_id,user_id,role,state)
++          VALUES ('tenant-a','target-parent','actor-a','member','active'),
++            ('tenant-a','target-child','actor-a','owner','active')`);
++        await assertStableError(await request("/conversations/target-child/membership",
++          targetedInput("target-no-parent", "add_member", "target-child", "user-d")),
++        403, CHAT_AUTHORIZATION_ERROR_CODE, "Chat authorization failed");
++        assert.equal((await harness.pool.query(`SELECT count(*)::int AS n FROM ${members}
++          WHERE tenant_id='tenant-a' AND conversation_id='target-child' AND user_id='user-d'`)).rows[0].n, 0);
++      });
++
+       await t.test("sanitizes directory, auth, missing, and cross-tenant failures", async () => {
+         directoryUnavailable = true;
+         await assertStableError(
+@@ -602,7 +630,10 @@ test("PATCH /conversations/:conversationId/membership mounts every membership in
+       });
+     });
+   } finally {
+-    await harness.dispose();
+-    await backend.dispose();
++    try {
++      await harness.teardown();
++    } finally {
++      await backend.teardown();
++    }
+   }
+ });
+diff --git a/test/postgres-reply-draft-persistence.test.mjs b/test/postgres-reply-draft-persistence.test.mjs
+index f94e68a..134cba6 100644
+--- a/test/postgres-reply-draft-persistence.test.mjs
++++ b/test/postgres-reply-draft-persistence.test.mjs
+@@ -43,7 +43,9 @@ test("reply drafts upgrade safely and use current parent authority", async (t) =
+     const legacyRow = () => sql(`SELECT * FROM ${prefix}.chat_drafts WHERE conversation_id = 'legacy'`);
+     const before = (await legacyRow()).rows;
+     const applied = await migrate(handrailChatPostgresMigrations);
+-    assert.deepEqual(applied.applied.map(({ id }) => id), ["0042-chat-draft-replies"]);
++    assert.deepEqual(applied.applied.map(({ id }) => id),
++      handrailChatPostgresMigrations.filter(({ order }) => order >= 42).map(({ id }) => id));
++    assert.ok(applied.applied.some(({ id }) => id === "0042-chat-draft-replies"));
+     assert.deepEqual((await legacyRow()).rows, before);
+ 
+     await t.test("database retains legacy rules and strictly validates optional reply metadata", async () => {
+diff --git a/test/postgres-send-message-command.test.mjs b/test/postgres-send-message-command.test.mjs
+index c1e3bf6..f2a3fd7 100644
+--- a/test/postgres-send-message-command.test.mjs
++++ b/test/postgres-send-message-command.test.mjs
+@@ -165,9 +165,10 @@ test("atomic send-message command persists and reconciles one authorized message
+        FROM ${schema}.chat_read_cursors r) AS cursors
+   `)).rows[0];
+   const deleteSource = (id) => harness.pool.query(
+-    `UPDATE ${tables.messages} SET content = NULL, deleted_at = clock_timestamp(),
+-       deleted_by_user_id = 'actor-a', updated_at = clock_timestamp()
+-     WHERE tenant_id = 'tenant-a' AND id = $1`, [id],
++    `WITH stamp AS (SELECT clock_timestamp() AS value)
++     UPDATE ${tables.messages} SET content = NULL, deleted_at = stamp.value,
++       deleted_by_user_id = 'actor-a', updated_at = stamp.value
++     FROM stamp WHERE tenant_id = 'tenant-a' AND id = $1`, [id],
+   );
+   const seedThread = async (id, entity) => {
+     await seedConversation({ conversationId: `${id}-parent`, entity });
+@@ -373,7 +374,8 @@ test("atomic send-message command persists and reconciles one authorized message
+                 try {
+                   await contender.query("SET lock_timeout = '100ms'");
+                   for (const statement of [
+-                    `UPDATE ${tables.messages} SET deleted_at = clock_timestamp(), deleted_by_user_id = 'actor-a', updated_at = clock_timestamp() WHERE id = $1`,
++                    `WITH stamp AS (SELECT clock_timestamp() AS value)
++                     UPDATE ${tables.messages} SET deleted_at = stamp.value, deleted_by_user_id = 'actor-a', updated_at = stamp.value FROM stamp WHERE id = $1`,
+                     `UPDATE ${tables.members} SET state = 'removed' WHERE conversation_id = 'locked-thread-parent'`,
+                     `UPDATE ${tables.members} SET state = 'removed' WHERE conversation_id = 'locked-thread'`,
+                     `UPDATE ${tables.conversations} SET archived_at = clock_timestamp(), archived_by_user_id = 'actor-a' WHERE id = 'locked-thread-parent'`,
+diff --git a/test/server-embedding-docs.test.mjs b/test/server-embedding-docs.test.mjs
+index fa1259a..1d64cda 100644
+--- a/test/server-embedding-docs.test.mjs
++++ b/test/server-embedding-docs.test.mjs
+@@ -169,8 +169,8 @@ test("documented adapters and feature gates match the public TypeScript source",
+   assert.equal(sourceMethods.size, Object.keys(documentedAdapters).length);
+   for (const [adapter, members] of Object.entries(documentedAdapters)) {
+     assert.deepEqual(
+-      sourceMethods.get(adapter),
+-      members,
++      new Set(sourceMethods.get(adapter)),
++      new Set(members),
+       `${adapter} documentation drifted from its public members`,
+     );
+     for (const member of members) {
+diff --git a/test/thread-panel.test.mjs b/test/thread-panel.test.mjs
+index a811346..1ce05fe 100644
+--- a/test/thread-panel.test.mjs
++++ b/test/thread-panel.test.mjs
+@@ -1534,3 +1534,63 @@ test('pre-existing optimistic subscription and preference writes remain unconfir
+   assert.equal(leave.disabled, false);
+   assert.equal(preferencesDialog(container).querySelector('select').disabled, false);
+ });
++
++
++for (const style of ['default', 'current']) {
++  test(`${style} Reply inside a thread focuses its composer without nested creation or an inline source`, async () => {
++    const fixture = lifecycleFixture({ initialDraft: { format: 'plain', text: 'Retained current thread draft', attachments: [] } });
++    if (style === 'default') delete fixture.client.replyStyle;
++    fixture.context.state.enabledFeatures = { inlineReplies: false };
++    const container = await renderPanel(fixture);
++    const textarea = container.querySelector('textarea[aria-label="Reply to thread"]');
++    const editor = container.querySelector('[role="textbox"][aria-label="Reply to thread"]') ?? textarea;
++    assert.ok(editor && !editor.hidden, 'Thread composer must expose a visible editor');
++    const replyButton = container.querySelector('[data-message-id="thread-reply-2"] [aria-label="Reply"]');
++    const before = structuredClone(fixture.cache.getState());
++    replyButton.focus();
++    assert.equal(replyButton.disabled, false);
++    await click(replyButton);
++    assert.ok(document.activeElement === editor, 'Current Reply should focus existing visible composer');
++    assert.equal(textarea.value, 'Retained current thread draft');
++    assert.equal(container.querySelector('[aria-label="Reply source"]'), null);
++    assert.equal(fixture.calls.some(c => c.name === 'openThread'), false);
++    assert.deepEqual(fixture.cache.getState().currentUser.readStates, before.currentUser.readStates);
++    await click(findButton(container, 'Send'));
++    const sends = fixture.calls.filter(c => c.name === 'sendMessage');
++    assert.equal(sends.length, 1);
++    assert.equal(sends[0].args[0].conversationId, threadId);
++    assert.equal(sends[0].args[0].content.text, 'Retained current thread draft');
++    assert.equal(sends[0].args[0].replyTo, undefined);
++    assert.equal(textarea.value, 'Retained current thread draft', 'failed send retains the draft');
++    assert.equal(fixture.calls.some(c => c.name === 'openThread'), false);
++  });
++}
++
++for (const restriction of [{ readOnly: true }, { composerAvailability: { canSend: false } }, { composerAvailability: { membershipState: 'removed' } }]) {
++  test(`Current thread Reply respects host restriction ${JSON.stringify(restriction)}`, async () => {
++    const fixture = lifecycleFixture();
++    const container = await renderPanel(fixture, restriction);
++    const replyButton = container.querySelector('[data-message-id="thread-reply-2"] [aria-label="Reply"]');
++    assert.equal(replyButton.disabled, true);
++    await click(replyButton);
++    assert.equal(fixture.calls.some(c => c.name === 'openThread' || c.name === 'sendMessage'), false);
++  });
++}
++
++test('standalone Current thread timeline disables Reply without an existing composer', async () => {
++  const fixture = createFixture();
++  const container = document.createElement('div');
++  document.body.append(container);
++  const root = createRoot(container);
++  mounted.push({ container, root });
++  await act(async () => {
++    root.render(createElement(ChatContext.Provider, { value: fixture.context },
++      createElement(MessageTimeline, { conversationId: threadId })));
++    await flush();
++  });
++  const replyButton = container.querySelector('[aria-label="Reply"]');
++  assert.equal(replyButton.disabled, true);
++  assert.equal(replyButton.getAttribute('aria-description'), 'A reply composer is unavailable.');
++  await click(replyButton);
++  assert.equal(fixture.calls.some(c => c.name === 'openThread'), false);
++});
+diff --git a/test/ui-browser-graph.test.mjs b/test/ui-browser-graph.test.mjs
+index ca551f1..6afcb07 100644
+--- a/test/ui-browser-graph.test.mjs
++++ b/test/ui-browser-graph.test.mjs
+@@ -30,8 +30,12 @@ test("the public UI graph stays within browser-safe public boundaries", async ()
+     "./message-composer.js",
+     "./message-timeline.js",
+     "./notification-preferences.js",
++    "./reply-style-settings.js",
+     "./slots.js",
++    "./thread-creation-dialog.js",
++    "./thread-list.js",
+     "./thread-panel.js",
++    "./timeline-window.js",
+   ]));
+   assert.doesNotMatch(
+     workspaceSource,
+@@ -52,6 +56,10 @@ test("the public UI graph stays within browser-safe public boundaries", async ()
+   assert.deepEqual(new Set(composerImports), new Set([
+     "react",
+     "../react/index.js",
++    "../contracts/index.js",
++    "./reaction-picker.js",
++    "./composer-rich-text-editor.js",
++    "./composer-rich-text.js",
+     "./slots.js",
+   ]));
+   for (const specifier of composerImports) {
+@@ -62,7 +70,7 @@ test("the public UI graph stays within browser-safe public boundaries", async ()
+     );
+     assert.doesNotMatch(
+       specifier,
+-      /\.\.\/(?:client|contracts)\//,
++      /\.\.\/client\//,
+       "MessageComposer must integrate through the public React surface",
+     );
+   }
+diff --git a/scripts/qualify-reply-threads.mjs b/scripts/qualify-reply-threads.mjs
+new file mode 100644
+index 0000000..85c1a92
+--- /dev/null
++++ b/scripts/qualify-reply-threads.mjs
+@@ -0,0 +1,64 @@
++// Current-source PostgreSQL 16 qualification. No application DATABASE_URL fallback.
++// Usage: PG_BINDIR=/path/to/postgresql/16/bin node scripts/qualify-reply-threads.mjs
++import assert from 'node:assert/strict';
++import { spawnSync } from 'node:child_process';
++import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
++import { resolve, join } from 'node:path';
++import { build } from 'esbuild';
++const root = resolve(import.meta.dirname, '..');
++const evidence = resolve(root, 'docs/validation/owner-task-24350c4f');
++const bin = process.env.PG_BINDIR;
++assert.ok(bin, 'PG_BINDIR must identify PostgreSQL 16 server binaries');
++const env = Object.fromEntries(Object.entries(process.env).filter(([key]) =>
++  !key.startsWith('PG') && !['DATABASE_URL', 'TEST_DATABASE_URL'].includes(key)));
++const run = (cmd, args, log) => {
++  const result = spawnSync(cmd, args, { cwd: root, env, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
++  if (log) return writeFile(join(evidence, log), `${result.stdout ?? ''}${result.stderr ?? ''}`).then(() => result);
++  assert.equal(result.status, 0, `${cmd}: ${result.stderr ?? result.error}`);
++  return result;
++};
++await mkdir(evidence, { recursive: true });
++const compiled = await run('npm', ['run', 'build'], 'postgres-build.log');
++assert.equal(compiled.status, 0, 'Current source build failed; see postgres-build.log');
++const version = run(join(bin, 'postgres'), ['--version']).stdout.trim();
++assert.match(version, /PostgreSQL\) 16\./);
++await writeFile(join(evidence, 'postgres-version.txt'), version + '\n');
++// Keep the private socket path below PostgreSQL's Unix socket length limit.
++const directory = await mkdtemp('/tmp/handrail-codex-heavy-command-locks/chat-pg16-');
++const generated = [];
++let started = false;
++let failed = false;
++try {
++  run(join(bin, 'initdb'), ['-D', join(directory, 'data'), '-U', 'handrail_test', '--auth-local=trust', '--auth-host=reject', '--encoding=UTF8', '--no-locale']);
++  run(join(bin, 'pg_ctl'), ['-D', join(directory, 'data'), '-l', join(directory, 'server.log'), '-o', `-c listen_addresses='' -c unix_socket_directories='${directory}' -c unix_socket_permissions=0700 -c max_connections=40 -c shared_buffers=32MB -c timezone=UTC`, '-w', 'start']);
++  started = true;
++  env.TEST_DATABASE_URL = `postgresql://handrail_test@/postgres?host=${encodeURIComponent(directory)}`;
++  const names = process.argv.slice(2);
++  assert.ok(names.length, 'Pass test basenames (without .test.mjs)');
++  for (const name of names) {
++    assert.match(name, /^[a-z0-9-]+$/);
++    const output = join(root, 'test', `.qualification-${name}.mjs`);
++    generated.push(output);
++    await build({ entryPoints: [join(root, 'test', `${name}.test.mjs`)], outfile: output,
++      bundle: true, platform: 'node', format: 'esm', packages: 'external',
++      plugins: [{ name: 'source-manifest-location', setup(builder) {
++        builder.onLoad({ filter: /src\/server\/create-(chat-server|thread-command|conversation-command)\.ts$/ }, async ({ path }) => ({
++          contents: (await readFile(path, 'utf8')).replace('createRequire(import.meta.url)("../../package.json")',
++            `createRequire(import.meta.url)(${JSON.stringify(join(root, 'package.json'))})`), loader: 'ts',
++        }));
++      } }],
++    });
++    const result = await run(process.execPath, ['--test', '--test-concurrency=1', output], `${name}.log`);
++    console.log(`${name}: ${result.status === 0 ? 'PASS' : 'FAIL'} (exit ${result.status})`);
++    failed ||= result.status !== 0;
++  }
++  const remaining = run(join(bin, 'psql'), [env.TEST_DATABASE_URL, '-Atc', "SELECT nspname FROM pg_namespace WHERE nspname NOT IN ('public','information_schema') AND nspname NOT LIKE 'pg_%'"]).stdout.trim();
++  await writeFile(join(evidence, 'postgres-teardown.txt'), `Remaining test schemas: ${remaining || 'none'}\n`);
++  assert.equal(remaining, '', 'A test leaked an isolated schema');
++} finally {
++  if (started) run(join(bin, 'pg_ctl'), ['-D', join(directory, 'data'), '-m', 'fast', '-w', 'stop']);
++  try { await writeFile(join(evidence, 'postgres-server.log'), await readFile(join(directory, 'server.log'))); } catch {}
++  await rm(directory, { recursive: true, force: true });
++  for (const file of generated) await rm(file, { force: true });
++}
++process.exitCode = failed ? 1 : 0;
+diff --git a/test/postgres-react-reply-style-flow.test.mjs b/test/postgres-react-reply-style-flow.test.mjs
+new file mode 100644
+index 0000000..6711abd
+--- /dev/null
++++ b/test/postgres-react-reply-style-flow.test.mjs
+@@ -0,0 +1,180 @@
++import assert from "node:assert/strict";
++import test from "node:test";
++import { setTimeout as delay } from "node:timers/promises";
++import { Window } from "happy-dom";
++import { WebSocket } from "ws";
++import { createChatTestHarness } from "@handrail/chat/testing";
++import { createChatClient, createNormalizedChatCache } from "@handrail/chat/client";
++
++// Public built exports deliberately exercise the consumer install/build surface.
++// The qualification runner builds current source and supplies disposable PG16.
++process.env.NODE_ENV = "test";
++const window = new Window({ url: "https://isolated-react-chat.example.test" });
++Object.assign(globalThis, {
++  window, document: window.document, HTMLElement: window.HTMLElement,
++  Node: window.Node, Event: window.Event,
++});
++globalThis.IS_REACT_ACT_ENVIRONMENT = true;
++const { act, createElement, createRef } = await import("react");
++const { createRoot } = await import("react-dom/client");
++const { ChatProvider } = await import("@handrail/chat/react");
++const { ReplyStyleSettings, MessageComposer } = await import("@handrail/chat/ui");
++
++async function until(predicate, label) {
++  const deadline = Date.now() + 10_000;
++  while (!await predicate()) {
++    assert.ok(Date.now() < deadline, `Timed out waiting for ${label}`);
++    await delay(20);
++  }
++}
++
++test("PG16 mounted React settings persist, recover, propagate and preserve reply destinations", { timeout: 90_000 }, async t => {
++  const actor = { tenantId: "react-reply-lab", userId: "bob", roles: [] };
++  const credential = "isolated-react-reply-credential";
++  let harness;
++  const clients = [], mounts = [], sockets = [];
++  try {
++    harness = await createChatTestHarness({ schemaPrefix: "react_reply_style",
++      actors: [{ credential, actor, capabilities: ["conversation.read", "message.send", "thread.create"],
++        user: { ...actor, displayName: "Bob Lab" } }],
++    });
++    const sql = (query, values) => harness.pool.query(query, values);
++    const prefix = `"${harness.schema}"`;
++    const version = (await sql("SHOW server_version")).rows[0].server_version;
++    assert.match(version, /^16\./, "This qualification requires real PostgreSQL 16");
++    t.diagnostic(`PostgreSQL ${version}; schema ${harness.schema}; mounted happy-dom React (not browser/media evidence)`);
++    await sql(`INSERT INTO ${prefix}.chat_conversations
++      (tenant_id,id,type,visibility,name,current_message_sequence)
++      VALUES ($1,'parent','channel','public','Isolated Reply Lab',1)`, [actor.tenantId]);
++    await sql(`INSERT INTO ${prefix}.chat_conversation_members (tenant_id,conversation_id,user_id,role,state)
++      VALUES ($1,'parent','bob','member','active')`, [actor.tenantId]);
++    await sql(`INSERT INTO ${prefix}.chat_messages
++      (tenant_id,id,conversation_id,sequence,author_user_id,client_message_id,content)
++      VALUES ($1,'root','parent',1,'alice','root','{"format":"plain","text":"Original lab context"}')`, [actor.tenantId]);
++
++    async function clientFor(session) {
++      const client = createChatClient({ endpoint: harness.endpoint, getAccessToken: () => credential,
++        cache: createNormalizedChatCache({ ...actor, sessionId: session }),
++        commands: { retry: { maxAttempts: 1 } },
++        realtime: { webSocketFactory(url, protocols) {
++          const socket = new WebSocket(url, protocols); sockets.push(socket); return socket;
++        } },
++      });
++      clients.push(client);
++      assert.equal((await client.start()).state, "ready");
++      await until(() => client.realtime.state.state === "connected", `${session} real websocket handshake`);
++      assert.equal(client.state.enabledFeatures.reply_style_preference_v1, true);
++      assert.equal(client.state.enabledFeatures.inlineReplies, true);
++      assert.equal(client.state.enabledFeatures.namedThreads, true);
++      assert.equal(client.realtime.state.metadata.enabledFeatures.reply_style_preference_v1, true);
++      assert.equal(client.realtime.state.metadata.enabledFeatures.inlineReplies, true);
++      await client.replyStyle.load();
++      return client;
++    }
++    async function mount(client, child = createElement(ReplyStyleSettings)) {
++      const container = document.createElement("div"); document.body.append(container);
++      const root = createRoot(container); mounts.push({ root, container });
++      await act(async () => root.render(createElement(ChatProvider, { client }, child)));
++      return container;
++    }
++    async function choose(container, style, status = "saved") {
++      const select = container.querySelector("select"); assert.equal(select.disabled, false);
++      await act(async () => {
++        select.value = style;
++        select.dispatchEvent(new window.Event("change", { bubbles: true }));
++        await until(() => first.replyStyle.getState().saveStatus === status, `${style} save ${status}`);
++      });
++    }
++    const first = await clientFor("first"), second = await clientFor("second");
++    const firstView = await mount(first), secondView = await mount(second);
++    assert.match(firstView.textContent, /Effective style: Current — SDK default/);
++    assert.match(firstView.textContent, /No saved choice/);
++
++    await t.test("real settings save reaches PostgreSQL and a second mounted client by websocket", async () => {
++      await choose(firstView, "discord");
++      await act(async () => until(() => second.replyStyle.getState().effectiveStyle === "discord", "second client canonical event"));
++      assert.match(firstView.textContent, /save confirmed/);
++      assert.match(secondView.textContent, /Effective style: Discord-style — saved preference/);
++      assert.deepEqual((await sql(`SELECT style,revision FROM ${prefix}.chat_user_reply_style_preferences
++        WHERE tenant_id=$1 AND user_id=$2`, [actor.tenantId, actor.userId])).rows.map(row => ({ ...row, revision: Number(row.revision) })),
++      [{ style: "discord", revision: 1 }]);
++      const response = await fetch(`${harness.endpoint}/preferences/reply-style`, { headers: { authorization: `Bearer ${credential}` } });
++      assert.equal(response.status, 200);
++      assert.deepEqual(await response.json(), { state: "saved", style: "discord", revision: 1 });
++      const reloaded = await clientFor("reload");
++      const view = await mount(reloaded);
++      assert.match(view.textContent, /Effective style: Discord-style — saved preference/);
++      const socketCount = sockets.length;
++      await act(async () => {
++        second.realtime.restart();
++        await until(() => sockets.length > socketCount && second.realtime.state.state === "connected", "real reconnect handshake");
++        await until(() => second.replyStyle.getState().confirmedPreference?.style === "discord", "reconnected canonical preference");
++      });
++      assert.match(secondView.textContent, /Effective style: Discord-style — saved preference/);
++    });
++
++    await t.test("actual rejected PostgreSQL save retains confirmed mode and mounted retry succeeds", async () => {
++      await sql(`CREATE FUNCTION ${prefix}.reject_style_save() RETURNS trigger LANGUAGE plpgsql AS $$
++        BEGIN RAISE EXCEPTION 'isolated storage fault'; END $$`);
++      await sql(`CREATE TRIGGER reject_style_save BEFORE UPDATE ON ${prefix}.chat_user_reply_style_preferences
++        FOR EACH ROW EXECUTE FUNCTION ${prefix}.reject_style_save()`);
++      try {
++        await choose(firstView, "current", "error");
++        assert.match(firstView.textContent, /Effective style: Discord-style/);
++        assert.match(firstView.querySelector('[role="alert"]').textContent, /Could not confirm/);
++        assert.equal((await sql(`SELECT style FROM ${prefix}.chat_user_reply_style_preferences`)).rows[0].style, "discord");
++      } finally {
++        await sql(`DROP TRIGGER reject_style_save ON ${prefix}.chat_user_reply_style_preferences`);
++        await sql(`DROP FUNCTION ${prefix}.reject_style_save()`);
++      }
++      await act(async () => {
++        firstView.querySelector("button").click();
++        await until(() => first.replyStyle.getState().saveStatus === "saved", "mounted retry commit");
++        await until(() => second.replyStyle.getState().effectiveStyle === "current", "second client Current mode");
++      });
++      assert.match(firstView.textContent, /Effective style: Current — saved preference/);
++      assert.equal(firstView.querySelector('[role="alert"]'), null);
++      await choose(firstView, "discord");
++      await act(async () => until(() => clients.every(client =>
++        client.replyStyle.getState().effectiveStyle === "discord"), "all mounted clients receiving final Discord preference"));
++    });
++
++    await t.test("mounted composer sends immutable same-conversation source with ping off; thread creation stays separate", async () => {
++      assert.equal((await first.getConversation({ conversationId: "parent" })).status, "success");
++      assert.equal((await first.getMessageTimeline({ conversationId: "parent", direction: "backward", limit: 20 })).status, "success");
++      const controlsRef = createRef();
++      const view = await mount(first, createElement(MessageComposer, { conversationId: "parent", controlsRef, availability: { canSend: true } }));
++      await act(async () => until(() => first.selectConversationDraft("parent").status === "ready", "composer draft hydration"));
++      const source = { conversationId: "parent", messageId: "root" };
++      await act(async () => { controlsRef.current.selectReply(source); controlsRef.current.setText("Isolated Discord reply"); });
++      source.messageId = "mutated-source";
++      await act(async () => controlsRef.current.setReplyNotifyAuthor(false));
++      assert.equal(view.querySelector('input[type="checkbox"]').checked, false);
++      assert.throws(() => controlsRef.current.selectReply({ conversationId: "elsewhere", messageId: "root" }), /current conversation/);
++      await act(async () => controlsRef.current.send());
++      const rows = (await sql(`SELECT conversation_id,reply_to_message_id,reply_notify_author
++        FROM ${prefix}.chat_messages WHERE content->>'text'='Isolated Discord reply'`)).rows;
++      assert.deepEqual(rows, [{ conversation_id: "parent", reply_to_message_id: "root", reply_notify_author: false }]);
++      assert.equal((await sql(`SELECT count(*)::int AS n FROM ${prefix}.chat_conversations WHERE type='thread'`)).rows[0].n, 0);
++      let created;
++      await act(async () => { created = await first.createThread({ rootMessageId: "root", name: "Separate discussion" }); });
++      assert.equal(created.state, "ready", JSON.stringify(created));
++      assert.notEqual(created.threadConversationId, "parent");
++      let opened;
++      await act(async () => {
++        assert.equal((await second.getMessageTimeline({ conversationId: "parent", direction: "backward", limit: 20 })).status, "success");
++        opened = await second.openThread("root");
++      });
++      assert.equal(opened.state, "ready", JSON.stringify(opened));
++      assert.equal(opened.threadConversationId, created.threadConversationId);
++      assert.deepEqual((await sql(`SELECT name FROM ${prefix}.chat_conversations WHERE root_message_id='root'`)).rows,
++        [{ name: "Separate discussion" }]);
++    });
++  } finally {
++    for (const { root, container } of mounts.reverse()) { await act(async () => root.unmount()); container.remove(); }
++    for (const client of clients) client.close();
++    for (const socket of sockets) if (socket.readyState !== WebSocket.CLOSED) socket.terminate();
++    await harness?.teardown();
++    await window.happyDOM.close();
++  }
++});

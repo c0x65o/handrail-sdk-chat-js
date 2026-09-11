@@ -1,0 +1,464 @@
+diff --git a/lib/src/handrail_chat_workspace.dart b/lib/src/handrail_chat_workspace.dart
+index 2ef2d46..cd10fc0 100644
+--- a/lib/src/handrail_chat_workspace.dart
++++ b/lib/src/handrail_chat_workspace.dart
+@@ -212,6 +212,9 @@ final class HandrailChatWorkspaceState extends State<HandrailChatWorkspace> {
+   bool _selectReply(MessageContextRequest source) =>
+       _composerKey.currentState?.selectReply(source) ?? false;
+ 
++  bool _continueThreadReply() =>
++      _composerKey.currentState?.focusComposition() ?? false;
++
+   ChatConversationListController? _listController;
+   HandrailChatClient? _listClient;
+   StreamSubscription<ChatConversationListState>? _listSubscription;
+@@ -1186,6 +1189,7 @@ final class HandrailChatWorkspaceState extends State<HandrailChatWorkspace> {
+               onThreadRequested: _openThread,
+               onCreateThreadRequested: _createNamedThread,
+               onReplyRequested: _selectReply,
++              onThreadReplyRequested: _continueThreadReply,
+               onForwardRequested: _showForwardDialog,
+               onReactionRequested: widget.availableReactions.isEmpty
+                   ? null
+diff --git a/lib/src/handrail_message_composer.dart b/lib/src/handrail_message_composer.dart
+index f1db065..15e54be 100644
+--- a/lib/src/handrail_message_composer.dart
++++ b/lib/src/handrail_message_composer.dart
+@@ -187,6 +187,13 @@ class HandrailMessageComposerState extends State<HandrailMessageComposer> {
+ 
+   MessageReplyReference? get replyTo => _replyTo;
+ 
++  /// Continues composition without changing the draft, destination or reference.
++  bool focusComposition() {
++    if (!_canInteract || _sending) return false;
++    _focusNode.requestFocus();
++    return true;
++  }
++
+   /// Selects a source in this composer conversation, including an existing
+   /// thread. This creates a new message; it never edits message ancestry.
+   /// Returns false when disabled, sending, or given another conversation.
+diff --git a/lib/src/handrail_message_timeline.dart b/lib/src/handrail_message_timeline.dart
+index 892933f..98202ea 100644
+--- a/lib/src/handrail_message_timeline.dart
++++ b/lib/src/handrail_message_timeline.dart
+@@ -103,6 +103,7 @@ final class HandrailMessageTimeline extends StatefulWidget {
+     this.onThreadRequested,
+     this.onCreateThreadRequested,
+     this.onReplyRequested,
++    this.onThreadReplyRequested,
+     this.onForwardRequested,
+     this.onReactionRequested,
+     this.reminderClock = _systemReminderClock,
+@@ -137,6 +138,10 @@ final class HandrailMessageTimeline extends StatefulWidget {
+   /// Presents named creation separately from Reply. The host owns navigation.
+   final HandrailThreadRequested? onCreateThreadRequested;
+   final HandrailReplyRequested? onReplyRequested;
++
++  /// Focuses the existing thread composer in Current mode, preserving its draft.
++  /// Return false when composition is unavailable. Never create a thread here.
++  final bool Function()? onThreadReplyRequested;
+   final HandrailForwardRequested? onForwardRequested;
+   final HandrailReactionRequested? onReactionRequested;
+ 
+@@ -286,18 +291,16 @@ final class _HandrailMessageTimelineState
+         namedThreadsEnabled:
+             _styleClient != null && namedThreadsAvailable(_styleClient!),
+         existingRoots: {
+-          for (final thread
+-              in _styleClient?.normalizedState.state.conversations.values
+-                      .whereType<ThreadConversation>() ??
+-                  const <ThreadConversation>[])
++          for (final thread in _styleClient
++                  ?.normalizedState.state.conversations.values
++                  .whereType<ThreadConversation>() ??
++              const <ThreadConversation>[])
+             if (thread.parentConversationId == widget.conversationId)
+               thread.rootMessageId,
+         },
+-        isThread:
+-            _styleClient?.normalizedState.state.conversations[widget
+-                    .conversationId]
+-                is ThreadConversation,
++        isThread: state.conversation is ThreadConversation,
+         onReplyRequested: widget.onReplyRequested,
++        onThreadReplyRequested: widget.onThreadReplyRequested,
+         inlineReply: _styleClient?.replyStyles.state.effectiveStyle ==
+             ReplyStyle.discord,
+         inlineDisabledReason: _inlineDisabledReason,
+@@ -343,6 +346,7 @@ final class _HandrailMessageTimelineBody extends StatefulWidget {
+     required this.isThread,
+     required this.existingRoots,
+     required this.onReplyRequested,
++    required this.onThreadReplyRequested,
+     required this.inlineReply,
+     required this.inlineDisabledReason,
+     required this.onForwardRequested,
+@@ -373,6 +377,7 @@ final class _HandrailMessageTimelineBody extends StatefulWidget {
+   final bool isThread;
+   final Set<MessageId> existingRoots;
+   final HandrailReplyRequested? onReplyRequested;
++  final bool Function()? onThreadReplyRequested;
+   final bool inlineReply;
+   final String? inlineDisabledReason;
+   final HandrailForwardRequested? onForwardRequested;
+@@ -1182,6 +1187,14 @@ final class _HandrailMessageTimelineBodyState
+       }
+       return;
+     }
++    if (widget.isThread) {
++      if (!(widget.onThreadReplyRequested?.call() ?? false)) {
++        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
++          content: Text('The thread composer cannot accept a reply right now.'),
++        ));
++      }
++      return;
++    }
+     final actions = ChatMessageActions.forMessage(
+       controller: widget.controller,
+       message: message,
+diff --git a/lib/src/handrail_thread_view.dart b/lib/src/handrail_thread_view.dart
+index 86e2ea5..40f125d 100644
+--- a/lib/src/handrail_thread_view.dart
++++ b/lib/src/handrail_thread_view.dart
+@@ -160,6 +160,9 @@ final class _HandrailThreadViewState extends State<HandrailThreadView> {
+   bool _selectReply(MessageContextRequest source) =>
+       _composerKey.currentState?.selectReply(source) ?? false;
+ 
++  bool _continueThreadReply() =>
++      _composerKey.currentState?.focusComposition() ?? false;
++
+   ChatThreadOpeningController? _openingController;
+   StreamSubscription<ChatThreadOpeningState>? _openingSubscription;
+   ChatThreadOpenHandle? _handle;
+@@ -727,6 +730,7 @@ final class _HandrailThreadViewState extends State<HandrailThreadView> {
+         builders: widget.builders,
+         scrollController: widget.timelineScrollController,
+         onReplyRequested: _composerEnabled ? _selectReply : null,
++        onThreadReplyRequested: _composerEnabled ? _continueThreadReply : null,
+       );
+     }
+ 
+diff --git a/test/handrail_chat_workspace_test.dart b/test/handrail_chat_workspace_test.dart
+index 0f1c433..739bb8f 100644
+--- a/test/handrail_chat_workspace_test.dart
++++ b/test/handrail_chat_workspace_test.dart
+@@ -10,6 +10,7 @@ import 'package:handrail_chat/src/testing/fake_chat_realtime.dart' show FakeChat
+ import 'package:handrail_chat/src/testing/in_memory_application_chat_storage.dart';
+ 
+ import 'reply_style_runtime_test.dart' as style;
++import 'widget_evidence.dart';
+ import 'reply_style_client_test.dart' as realtime;
+ 
+ import 'fixtures/conversation_list_fixtures.dart';
+@@ -2766,6 +2767,7 @@ Widget _host(
+   TextScaler? textScaler,
+ }) =>
+     MaterialApp(
++      theme: widgetEvidenceTheme,
+       home: ChatScope(
+         key: ValueKey<Object>(client),
+         client: client,
+diff --git a/test/handrail_reply_routing_cases.dart b/test/handrail_reply_routing_cases.dart
+index cfac1c5..bcf8cf0 100644
+--- a/test/handrail_reply_routing_cases.dart
++++ b/test/handrail_reply_routing_cases.dart
+@@ -160,6 +160,8 @@ void replyRoutingTests() {
+     final state = tester.state<HandrailMessageComposerState>(threadComposer);
+     expect(state.replyTo!.messageId, const MessageId('thread-reply'));
+     state.setReplyNotifyAuthor(false);
++    await tester.pump();
++    await captureWidgetEvidence(tester, 'discord-thread-reply-widget.png');
+     client.replyStyles.configure(
+         const ChatReplyStyleConfiguration(override: ReplyStyle.current));
+     await tester.pump();
+@@ -172,11 +174,100 @@ void replyRoutingTests() {
+         isTrue);
+     expect(handle.isReleased, isFalse);
+     expect(identical(state, tester.state(threadComposer)), isTrue);
++    await tester.tap(find.byKey(const ValueKey('handrail-reply-thread-reply')));
++    await tester.pump();
++    expect(state.replyTo!.messageId, const MessageId('thread-reply'));
++    expect(state.replyTo!.notifyAuthor, isFalse);
+     await _sendFriday(tester, http, _thread, const MessageId('thread-reply'),
+         within: find.byType(HandrailThreadView), notify: false);
+     expect(http.threadRequests, hasLength(requestsBefore));
+   });
+ 
++  for (final saved in [null, 'current']) {
++    for (final inline in [false, true]) {
++      testWidgets(
++          'reply routing Current in thread saved=$saved inline=$inline keeps composition',
++          (tester) async {
++        final http =
++            _ReplyRoutingTransport(saved: saved, inline: inline, summary: true);
++        final client = await _replyClient(tester, http);
++        await _mountReplyWorkspace(tester, client);
++        await tester
++            .tap(find.byKey(const ValueKey('handrail-thread-root-alpha')));
++        final reply = find.byKey(const ValueKey('handrail-reply-thread-reply'));
++        await _pumpUntil(tester, () => reply.evaluate().isNotEmpty);
++        final view = find.byType(HandrailThreadView);
++        final handle = tester.widget<HandrailThreadView>(view).openHandle!;
++        final composer = find.descendant(
++            of: view, matching: find.byType(HandrailMessageComposer));
++        final state = tester.state<HandrailMessageComposerState>(composer);
++        final input = find.descendant(
++            of: view,
++            matching:
++                find.byKey(const ValueKey('handrail-message-composer-input')));
++        final send = find.descendant(
++            of: view,
++            matching:
++                find.byKey(const ValueKey('handrail-message-composer-send')));
++        await tester.enterText(input, 'Friday');
++        tester.widget<TextField>(input).focusNode!.unfocus();
++        await tester.pump();
++        final requestsBefore = http.threadRequests.length;
++        await tester.tap(reply);
++        await tester.pump();
++        expect(tester.widget<TextField>(input).focusNode!.hasFocus, isTrue);
++        expect(tester.widget<TextField>(input).controller!.text, 'Friday');
++        expect(identical(state, tester.state(composer)), isTrue);
++        expect(state.replyTo, isNull);
++        expect(
++            identical(
++                handle, tester.widget<HandrailThreadView>(view).openHandle),
++            isTrue);
++        expect(handle.isReleased, isFalse);
++        expect(http.threadRequests, hasLength(requestsBefore));
++        if (saved == 'current' && !inline) {
++          await captureWidgetEvidence(
++              tester, 'current-thread-reply-widget.png');
++        }
++        await tester.tap(send);
++        await _pumpUntil(
++            tester,
++            () =>
++                http.sends.isNotEmpty &&
++                tester.widget<TextField>(input).controller!.text.isEmpty);
++        expect(http.sends.single['conversationId'], _thread.value);
++        expect(http.sends.single.containsKey('replyTo'), isFalse);
++        expect((http.sends.single['content'] as Map)['text'], 'Friday');
++        expect(http.threadRequests, hasLength(requestsBefore));
++      });
++    }
++  }
++
++  testWidgets(
++      'reply routing Current standalone thread never creates a nested thread',
++      (tester) async {
++    final http = _ReplyRoutingTransport(saved: 'current', summary: true);
++    final client = await _replyClient(tester, http);
++    await _mountReplyWorkspace(tester, client);
++    await tester.tap(find.byKey(const ValueKey('handrail-thread-root-alpha')));
++    final reply = find.byKey(const ValueKey('handrail-reply-thread-reply'));
++    await _pumpUntil(tester, () => reply.evaluate().isNotEmpty);
++    final requestsBefore = http.threadRequests.length;
++    await tester.pumpWidget(MaterialApp(
++        home: Scaffold(
++            body: HandrailMessageTimeline(
++                conversationId: _thread,
++                reads: client.reads,
++                controller: client.timelines.forConversation(_thread)))));
++    await _pumpUntil(tester, () => reply.evaluate().isNotEmpty);
++    await tester.tap(reply);
++    await tester.pump();
++    expect(find.text('The thread composer cannot accept a reply right now.'),
++        findsOneWidget);
++    expect(http.threadRequests, hasLength(requestsBefore));
++    expect(http.sends, isEmpty);
++  });
++
+   for (final saved in [null, 'current']) {
+     testWidgets('reply routing Current saved=$saved retains thread behavior',
+         (tester) async {
+@@ -342,9 +433,10 @@ Future<HandrailChatClient> _replyClient(
+ 
+ Future<void> _mountReplyWorkspace(
+     WidgetTester tester, HandrailChatClient client) async {
+-  await tester.pumpWidget(_host(client,
++  await prepareWidgetEvidence(tester);
++  await tester.pumpWidget(widgetEvidenceBoundary(_host(client,
+       width: 1100,
+-      child: const HandrailChatWorkspace(initialConversationId: _alpha)));
++      child: const HandrailChatWorkspace(initialConversationId: _alpha))));
+   await _pumpUntil(
+       tester,
+       () =>
+@@ -441,7 +533,7 @@ class _ReplyRoutingTransport extends _WorkspaceTransport {
+             'updatedAt': _now,
+             'revision': {'revision': 1},
+             'content': body['content'],
+-            'replyTo': body['replyTo']
++            if (body.containsKey('replyTo')) 'replyTo': body['replyTo']
+           },
+         });
+       }
+diff --git a/test/handrail_reply_style_settings_test.dart b/test/handrail_reply_style_settings_test.dart
+index 77aee5d..9b11a24 100644
+--- a/test/handrail_reply_style_settings_test.dart
++++ b/test/handrail_reply_style_settings_test.dart
+@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
+ import 'package:handrail_chat/ui.dart';
+ 
+ import 'reply_style_runtime_test.dart' as f;
++import 'widget_evidence.dart';
+ 
+ void main() {
+   testWidgets('saves only on confirmation and reloads saved choice',
+@@ -30,6 +31,8 @@ void main() {
+     expect(find.text('Effective style: Discord-style — saved preference.'),
+         findsOneWidget);
+     expect(find.text('Saving: Discord-style.'), findsNothing);
++    await captureWidgetEvidence(
++        tester, 'reply-settings-confirmed-discord-widget.png');
+     final reloaded = _client(tester, http);
+     await tester.runAsync(reloaded.initialize);
+     await _mount(tester, reloaded);
+@@ -102,6 +105,8 @@ void main() {
+     expect(find.textContaining('secret diagnostic'), findsNothing);
+     expect(_choice(tester, 'current').onChanged, isNull);
+     expect(http.writes, hasLength(1));
++    await captureWidgetEvidence(
++        tester, 'reply-settings-failed-save-widget.png');
+     http.write = null;
+     await tester.ensureVisible(find.text('Retry saving reply style'));
+     await tester.tap(find.text('Retry saving reply style'));
+@@ -112,6 +117,8 @@ void main() {
+     expect(find.text('Effective style: Discord-style — saved preference.'),
+         findsOneWidget);
+     expect(find.text('Retry saving reply style'), findsNothing);
++    await captureWidgetEvidence(
++        tester, 'reply-settings-recovered-save-widget.png');
+   });
+ 
+   testWidgets('host enforcement preserves and reveals differing saved choice',
+@@ -276,15 +283,18 @@ HandrailChatClient _client(WidgetTester tester, f.Http http,
+ }
+ 
+ Future<void> _mount(WidgetTester tester, HandrailChatClient client,
+-        {double scale = 1}) =>
+-    tester.pumpWidget(MaterialApp(
+-        home: Scaffold(
+-            body: MediaQuery(
+-      data: MediaQueryData(textScaler: TextScaler.linear(scale)),
+-      child: SingleChildScrollView(
+-          padding: const EdgeInsets.all(16),
+-          child: HandrailReplyStyleSettings(client: client)),
+-    ))));
++    {double scale = 1}) async {
++  await prepareWidgetEvidence(tester);
++  await tester.pumpWidget(widgetEvidenceBoundary(MaterialApp(
++      theme: widgetEvidenceTheme,
++      home: Scaffold(
++          body: MediaQuery(
++        data: MediaQueryData(textScaler: TextScaler.linear(scale)),
++        child: SingleChildScrollView(
++            padding: const EdgeInsets.all(16),
++            child: HandrailReplyStyleSettings(client: client)),
++      )))));
++}
+ 
+ Future<void> _pump(WidgetTester tester) async {
+   for (var i = 0; i < 12; i++) {
+diff --git a/test/handrail_timeline_reply_reference_test.dart b/test/handrail_timeline_reply_reference_test.dart
+index 2a3a0c4..796c97e 100644
+--- a/test/handrail_timeline_reply_reference_test.dart
++++ b/test/handrail_timeline_reply_reference_test.dart
+@@ -365,7 +365,10 @@ void main() {
+     expect(tester.takeException(), isNull);
+     final reference = find.textContaining('Reply to alice:');
+     await tester.ensureVisible(reference);
+-    await tester.tap(reference);
++    // Apply the scroll's layout before hit testing the enlarged reference.
++    await tester.pump();
++    expect(reference.hitTestable(), findsOneWidget);
++    await tester.tap(reference.hitTestable());
+     await _settle(tester);
+     expect(find.byType(Dialog), findsOneWidget);
+     expect(tester.takeException(), isNull);
+diff --git a/test/widget_evidence.dart b/test/widget_evidence.dart
+new file mode 100644
+index 0000000..be240fd
+--- /dev/null
++++ b/test/widget_evidence.dart
+@@ -0,0 +1,78 @@
++import 'dart:io';
++import 'dart:ui' as ui;
++
++import 'package:flutter/material.dart';
++import 'package:flutter/rendering.dart';
++import 'package:flutter/services.dart';
++import 'package:flutter_test/flutter_test.dart';
++
++const _evidenceKey = ValueKey('handrail-widget-fixture-evidence');
++const _fontFamily = 'HandrailWidgetEvidence';
++bool _fontsLoaded = false;
++
++bool get _enabled =>
++    Platform.environment['HANDRAIL_WIDGET_EVIDENCE_DIR']?.isNotEmpty == true;
++
++ThemeData? get widgetEvidenceTheme =>
++    _enabled ? ThemeData(fontFamily: _fontFamily) : null;
++
++/// Use fonts already installed with Flutter; never fetch fonts for evidence.
++Future<void> prepareWidgetEvidence(WidgetTester tester) async {
++  if (!_enabled || _fontsLoaded) return;
++  final flutterRoot = Platform.environment['FLUTTER_ROOT'];
++  final directory = Platform.environment['HANDRAIL_WIDGET_FONT_DIR'] ??
++      (flutterRoot == null
++          ? null
++          : '$flutterRoot/bin/cache/artifacts/material_fonts');
++  if (directory == null || directory.isEmpty) {
++    throw StateError('Widget evidence requires HANDRAIL_WIDGET_FONT_DIR or '
++        'FLUTTER_ROOT pointing to existing local Flutter fonts.');
++  }
++  await tester.runAsync(() async {
++    for (final entry in {
++      _fontFamily: [
++        'Roboto-Regular.ttf',
++        'Roboto-Medium.ttf',
++        'Roboto-Bold.ttf'
++      ],
++      'MaterialIcons': ['MaterialIcons-Regular.otf'],
++    }.entries) {
++      final loader = FontLoader(entry.key);
++      for (final filename in entry.value) {
++        final bytes = await File('$directory/$filename').readAsBytes();
++        loader.addFont(Future.value(ByteData.sublistView(bytes)));
++      }
++      await loader.load();
++    }
++    _fontsLoaded = true;
++  });
++}
++
++/// Optional inspectable renders of tested widgets using transport fixtures.
++/// These are neither golden assertions nor evidence of a running backend host.
++Widget widgetEvidenceBoundary(Widget child) =>
++    _enabled ? RepaintBoundary(key: _evidenceKey, child: child) : child;
++
++Future<void> captureWidgetEvidence(WidgetTester tester, String filename) async {
++  final directory = Platform.environment['HANDRAIL_WIDGET_EVIDENCE_DIR'];
++  if (directory == null || directory.isEmpty) return;
++  await tester.pump();
++  final boundary =
++      tester.renderObject<RenderRepaintBoundary>(find.byKey(_evidenceKey));
++  await tester.runAsync(() async {
++    final image = await boundary.toImage(pixelRatio: 1);
++    try {
++      final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
++      if (bytes == null) {
++        throw StateError('Widget evidence PNG encoding failed.');
++      }
++      final file = File('$directory/$filename');
++      await file.parent.create(recursive: true);
++      await file.writeAsBytes(bytes.buffer.asUint8List(), flush: true);
++      // ignore: avoid_print
++      print('Widget fixture render (not runtime UI): ${file.path}');
++    } finally {
++      image.dispose();
++    }
++  });
++}

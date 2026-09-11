@@ -1,0 +1,231 @@
+The new artifact "libimobiledevice" was downloaded, but Flutter failed to update its stamp file, receiving the error "FileSystemException: Cannot open file, path = '/opt/handrail/.handrail/flutter-sdk/bin/cache/libimobiledevice.stamp' (OS Error: Read-only file system, errno = 30)". Flutter can continue, but the artifact may be re-downloaded on subsequent invocations until the problem is resolved.
+The new artifact "libusbmuxd" was downloaded, but Flutter failed to update its stamp file, receiving the error "FileSystemException: Cannot open file, path = '/opt/handrail/.handrail/flutter-sdk/bin/cache/libusbmuxd.stamp' (OS Error: Read-only file system, errno = 30)". Flutter can continue, but the artifact may be re-downloaded on subsequent invocations until the problem is resolved.
+00:00 +0: loading /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart
+00:00 +0: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +1: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +2: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +3: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +4: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +5: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +6: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +7: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +8: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +9: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +10: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +11: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +12: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +13: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +14: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +15: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +16: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +17: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +18: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +19: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +20: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +21: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +22: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +23: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +24: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +25: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +26: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +27: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +28: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +29: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +30: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +31: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +32: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +33: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +34: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +35: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +36: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +37: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +38: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +39: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +40: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +41: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +42: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +43: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +44: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +45: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +46: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +47: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +48: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +49: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +50: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +51: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +52: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +53: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +54: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +55: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +56: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +57: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +58: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +59: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +60: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +61: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +62: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +63: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +64: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +65: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +66: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +67: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +68: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +69: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +70: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +71: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +72: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +73: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +74: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +75: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +76: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +77: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +78: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +79: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +80: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +81: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +82: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +83: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +84: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +85: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +86: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +87: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +88: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +89: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +90: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +91: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +92: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +93: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +94: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +95: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +96: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +97: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +98: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +99: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +100: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +101: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +102: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +103: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +104: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +105: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +106: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +107: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +108: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+00:00 +109: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: saves only on confirmation and reloads saved choice
+Widget fixture render (not runtime UI): /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/docs/validation/owner-task-24350c4f/media/reply-settings-confirmed-discord-widget.png
+00:01 +110: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: absent preference uses editable host default and explicit Current wins
+00:01 +111: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: absent preference uses editable host default and explicit Current wins
+00:01 +112: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: absent preference uses editable host default and explicit Current wins
+00:01 +113: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: absent preference uses editable host default and explicit Current wins
+00:01 +114: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: absent preference uses editable host default and explicit Current wins
+00:01 +115: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/reply_style_client_test.dart: new accepted account cancels old read and never retries its selection
+00:01 +116: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: loading is provisional and failed read refresh recovers
+00:01 +117: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: loading is provisional and failed read refresh recovers
+00:01 +118: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: loading is provisional and failed read refresh recovers
+00:01 +119: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: failed save retains confirmed choice and explicitly retries exact request
+Widget fixture render (not runtime UI): /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/docs/validation/owner-task-24350c4f/media/reply-settings-failed-save-widget.png
+Widget fixture render (not runtime UI): /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/docs/validation/owner-task-24350c4f/media/reply-settings-recovered-save-widget.png
+00:02 +120: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: authorized reference and additive input preserve legacy builders
+00:03 +121: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: authorized reference and additive input preserve legacy builders
+00:03 +122: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: authorized reference and additive input preserve legacy builders
+00:03 +123: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: authorized reference and additive input preserve legacy builders
+00:03 +124: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_reply_style_settings_test.dart: missing action capabilities allow preference saving without rerouting
+00:03 +125: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: tap unloaded source opens bounded window, focuses and returns
+00:03 +126: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: tap unloaded source opens bounded window, focuses and returns
+00:03 +127: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: tap unloaded source opens bounded window, focuses and returns
+00:03 +128: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: source author is current and reply ancestry is never expanded
+00:04 +129: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: source window page error clears text and supports fresh retry
+00:04 +130: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: host parent archive gates composition and stale open menus cannot dispatch
+00:04 +131: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: host parent archive gates composition and stale open menus cannot dispatch
+00:05 +132: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: host parent archive gates composition and stale open menus cannot dispatch
+00:05 +133: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: host parent archive gates composition and stale open menus cannot dispatch
+00:05 +134: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: host parent archive gates composition and stale open menus cannot dispatch
+00:05 +135: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: host parent archive gates composition and stale open menus cannot dispatch
+00:05 +136: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: host parent archive gates composition and stale open menus cannot dispatch
+00:05 +137: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: host parent archive gates composition and stale open menus cannot dispatch
+00:05 +138: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: host parent archive gates composition and stale open menus cannot dispatch
+00:06 +139: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: parent access revoked during window removes text despite stale completion
+00:06 +140: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_timeline_reply_reference_test.dart: parent access revoked during window removes text despite stale completion
+00:06 +141: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: lifecycle menu separates navigation and state-appropriate transitions
+00:06 +142: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: lifecycle menu separates navigation and state-appropriate transitions
+00:06 +143: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: lifecycle menu separates navigation and state-appropriate transitions
+00:06 +144: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: lifecycle menu separates navigation and state-appropriate transitions
+00:06 +145: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: unsupported or missing authority hides actions without breaking legacy composition
+00:07 +146: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: send authority does not imply management or membership-based permission
+00:07 +147: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: send authority does not imply management or membership-based permission
+00:07 +148: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: send authority does not imply management or membership-based permission
+00:07 +149: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: send authority does not imply management or membership-based permission
+00:07 +150: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: send authority does not imply management or membership-based permission
+00:07 +151: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: send authority does not imply management or membership-based permission
+00:07 +152: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: send authority does not imply management or membership-based permission
+00:07 +153: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/thread_list_controller_test.dart: new-thread event refreshes discovery without opening or joining child
+00:07 +154: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +155: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +156: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +157: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +158: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +159: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +160: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +161: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +162: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +163: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +164: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +165: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +166: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +167: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +168: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +169: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +170: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +171: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +172: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +173: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:07 +174: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote thread archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +175: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +176: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +177: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +178: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +179: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +180: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +181: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +182: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +183: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +184: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +185: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +186: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +187: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +188: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +189: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +190: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +191: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +192: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +193: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +194: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:08 +195: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/thread_lifecycle_controller_test.dart: denial preserves composer draft and pending send destination
+00:08 +196: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+00:08 +197: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+00:08 +198: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+00:08 +199: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+00:09 +200: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote thread archive retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+00:09 +201: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+00:09 +202: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: denied command sanitizes feedback and retains draft and original destination
+00:10 +203: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: compact keyboard menu retries exact ambiguous request and restores focus
+00:10 +204: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: conflict shows canonical state without blind retry
+00:10 +205: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: client rebind ignores stale results and retains caller resources
+00:10 +206: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: compact initial loading failure offers a working read retry
+00:11 +207: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: subscriptions map follow and unfollow for style null
+00:11 +208: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: subscriptions map follow and unfollow for style ReplyStyle.current
+00:11 +209: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: subscriptions map follow and unfollow for style ReplyStyle.discord
+00:12 +210: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: subscriptions independently save every notification and mute choice retaining stars
+00:12 +211: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: subscriptions failed Leave retries at compact width retaining draft read and open state
+00:13 +212: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: subscriptions reconcile preference conflict and explicitly retry only the selected field
+00:13 +213: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: subscriptions follow conflict requires explicit retry and style changes preserve the open composer
+00:13 +214: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: subscriptions unavailable canonical preferences load and retry without invented defaults
+00:14 +215: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: subscriptions ignore stale popup callbacks and late results after scope replacement and disposal
+00:14 +216: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: renders a caller-owned existing thread, root, replies, composer, and close callback
+00:14 +217: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: hides cached archived replies after HTTP 401 until recovery
+00:14 +218: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: hides cached archived replies after HTTP 403 until recovery
+00:15 +219: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: opens and creates a canonical thread then releases its retain
+00:15 +220: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: projects unavailable, access-denied, and general error states
+00:15 +221: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: applies root/message builders and Handrail theme tokens
+00:15 +222: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: is safe under narrow, wide, and unbounded-height constraints
+00:15 +223: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/handrail_thread_view_test.dart: rebinds controllers and releases a stale asynchronously opened handle
+00:15 +224: All tests passed!

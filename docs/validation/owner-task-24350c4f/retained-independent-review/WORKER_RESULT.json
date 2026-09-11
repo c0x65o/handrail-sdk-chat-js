@@ -1,0 +1,570 @@
+{
+  "result": "passed",
+  "scope": "Closes only the Flutter 3.19/Dart 3.3 compatibility finding; overall task NOT accepted",
+  "reviewer_run_id": "530e0cd7-ad95-4528-8570-1178e6144464",
+  "artifact": {
+    "artifact_id": "248f3f7986001f99414f5a149c477177059b1dcfc0a49be7c223a6190a5fc2eb",
+    "scope": "Source/tests/docs/locks, including preserved prior fixes; validation evidence separately hashed. Uncommitted, unpublished; subsequent independent QA required.",
+    "repositories": [
+      {
+        "repository": "handrail-sdk-chat-js",
+        "base_head": "9f62a562c5235759efa4c0a05858acae755c0aff",
+        "patch": "patches/handrail-sdk-chat-js.patch",
+        "sha256": "3ead6aa48b22389ed8376caa113013780560ced04075f634c8c67e7ddc25c188",
+        "files": [
+          "README.md",
+          "docs/sdk-repository-split.md",
+          "docs/server-embedding.md",
+          "scripts/qualify-reply-threads.mjs",
+          "scripts/test-react-reply-routing.mjs",
+          "src/client/generated/package-version.ts",
+          "src/server/conversation-membership-command.ts",
+          "src/ui/chat-workspace.ts",
+          "src/ui/message-composer.ts",
+          "src/ui/message-timeline.ts",
+          "src/ui/slots.ts",
+          "src/ui/thread-panel.ts",
+          "test/chat-workspace-default.test.mjs",
+          "test/postgres-attachment-lifecycle-http.test.mjs",
+          "test/postgres-conversation-membership-command.test.mjs",
+          "test/postgres-conversation-membership-http.test.mjs",
+          "test/postgres-react-reply-style-flow.test.mjs",
+          "test/postgres-reply-draft-persistence.test.mjs",
+          "test/postgres-send-message-command.test.mjs",
+          "test/server-embedding-docs.test.mjs",
+          "test/thread-panel.test.mjs",
+          "test/ui-browser-graph.test.mjs"
+        ],
+        "apply_check": "passed against git archive HEAD",
+        "source_correspondence": "all non-evidence tracked/new source files match",
+        "verified_source_file_count": 1126
+      },
+      {
+        "repository": "handrail-sdk-chat-flutter",
+        "base_head": "8926839d7467860a738c5526aacb7330a5510483",
+        "patch": "patches/handrail-sdk-chat-flutter.patch",
+        "sha256": "b0f79227038952d5ba2ceb88b87f327108580009549778cd689edd4ba2edcdd7",
+        "files": [
+          "README.md",
+          "example/README.md",
+          "example/lib/main.dart",
+          "example/pubspec.lock",
+          "example/pubspec.yaml",
+          "lib/src/handrail_chat_theme.dart",
+          "lib/src/handrail_chat_workspace.dart",
+          "lib/src/handrail_huddle_panel.dart",
+          "lib/src/handrail_message_composer.dart",
+          "lib/src/handrail_message_timeline.dart",
+          "lib/src/handrail_thread_view.dart",
+          "pubspec.lock",
+          "pubspec.yaml",
+          "test/handrail_chat_workspace_test.dart",
+          "test/handrail_message_composer_test.dart",
+          "test/handrail_reply_routing_cases.dart",
+          "test/handrail_reply_style_settings_test.dart",
+          "test/handrail_thread_lifecycle_cases.dart",
+          "test/handrail_timeline_reply_reference_test.dart",
+          "test/widget_evidence.dart"
+        ],
+        "apply_check": "passed against git archive HEAD",
+        "source_correspondence": "all non-evidence tracked/new source files match",
+        "verified_source_file_count": 471
+      },
+      {
+        "repository": "handrail-chat-preview-flutter",
+        "base_head": "52fe6563bfeb9d1289fa39bcba40cd887ee7914e",
+        "patch": "patches/handrail-chat-preview-flutter.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "files": [],
+        "apply_check": "passed against git archive HEAD",
+        "source_correspondence": "all non-evidence tracked/new source files match",
+        "verified_source_file_count": 15
+      }
+    ]
+  },
+  "independent_results": {
+    "minimum": {
+      "core": {
+        "environment": {
+          "FLUTTER_ROOT": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter",
+          "PUB_CACHE": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/pub-cache",
+          "CI": "true",
+          "FLUTTER_SUPPRESS_ANALYTICS": "true",
+          "DART_SUPPRESS_ANALYTICS": "true"
+        },
+        "checks": [
+          {
+            "name": "version",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+              "--version",
+              "--machine"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/package",
+            "exit_code": 0,
+            "elapsed_seconds": 0.09,
+            "children_max_rss_kib": 53668
+          },
+          {
+            "name": "package-resolution",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+              "pub",
+              "get",
+              "--no-example"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/package",
+            "exit_code": 0,
+            "elapsed_seconds": 9.17,
+            "children_max_rss_kib": 207252
+          },
+          {
+            "name": "public-library-analysis",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/cache/dart-sdk/bin/dart",
+              "analyze",
+              "lib"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/package",
+            "exit_code": 0,
+            "elapsed_seconds": 12.7,
+            "children_max_rss_kib": 656980
+          },
+          {
+            "name": "scoped-analysis",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/cache/dart-sdk/bin/dart",
+              "analyze",
+              "lib/src/handrail_chat_workspace.dart",
+              "lib/src/handrail_message_composer.dart",
+              "lib/src/handrail_chat_theme.dart",
+              "lib/src/handrail_huddle_panel.dart",
+              "test/handrail_message_composer_test.dart",
+              "test/handrail_reply_routing_cases.dart",
+              "test/handrail_thread_discovery_cases.dart",
+              "test/handrail_reply_style_settings_test.dart",
+              "test/handrail_thread_lifecycle_cases.dart"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/package",
+            "exit_code": 0,
+            "elapsed_seconds": 3.63,
+            "children_max_rss_kib": 656980
+          },
+          {
+            "name": "regressions",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+              "test",
+              "--no-pub",
+              "--concurrency=2",
+              "--reporter=expanded",
+              "test/durable_resource_event_reducer_test.dart",
+              "test/handrail_message_composer_test.dart",
+              "test/handrail_chat_theme_test.dart",
+              "test/handrail_reply_style_settings_test.dart",
+              "test/reply_style_runtime_test.dart",
+              "test/reply_style_client_test.dart",
+              "test/handrail_timeline_reply_reference_test.dart",
+              "test/handrail_thread_view_test.dart",
+              "test/thread_list_controller_test.dart",
+              "test/thread_lifecycle_controller_test.dart"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/package",
+            "exit_code": 0,
+            "elapsed_seconds": 24.14,
+            "children_max_rss_kib": 800224
+          },
+          {
+            "name": "workspace-reply-navigation",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+              "test",
+              "--no-pub",
+              "--concurrency=2",
+              "--reporter=expanded",
+              "test/handrail_chat_workspace_test.dart",
+              "--name",
+              "reply routing|named thread|thread discovery"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/package",
+            "exit_code": 0,
+            "elapsed_seconds": 15.04,
+            "children_max_rss_kib": 800224
+          },
+          {
+            "name": "consumer-resolution",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+              "pub",
+              "get"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/consumer",
+            "exit_code": 0,
+            "elapsed_seconds": 0.97,
+            "children_max_rss_kib": 800224
+          },
+          {
+            "name": "consumer-analysis",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/cache/dart-sdk/bin/dart",
+              "analyze",
+              "test"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/consumer",
+            "exit_code": 0,
+            "elapsed_seconds": 1.41,
+            "children_max_rss_kib": 800224
+          },
+          {
+            "name": "consumer-widget",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+              "test",
+              "--no-pub",
+              "--concurrency=2",
+              "--reporter=expanded",
+              "test/public_import_test.dart"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/consumer",
+            "exit_code": 0,
+            "elapsed_seconds": 9.1,
+            "children_max_rss_kib": 800224
+          }
+        ]
+      },
+      "example": [
+        {
+          "name": "example-pinned-resolution",
+          "command": [
+            "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+            "pub",
+            "get"
+          ],
+          "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/example",
+          "exit_code": 0,
+          "elapsed_seconds": 1.71
+        },
+        {
+          "name": "example-artifact-resolution",
+          "command": [
+            "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+            "pub",
+            "get"
+          ],
+          "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/example",
+          "exit_code": 0,
+          "elapsed_seconds": 0.77
+        },
+        {
+          "name": "example-analysis",
+          "command": [
+            "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/cache/dart-sdk/bin/dart",
+            "analyze",
+            "lib"
+          ],
+          "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/example",
+          "exit_code": 0,
+          "elapsed_seconds": 3.3
+        },
+        {
+          "name": "example-web-build",
+          "command": [
+            "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+            "build",
+            "web",
+            "--release",
+            "--no-pub"
+          ],
+          "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/example",
+          "exit_code": 0,
+          "elapsed_seconds": 48.9
+        }
+      ],
+      "probes": {
+        "command": [
+          "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+          "test",
+          "--no-pub",
+          "--concurrency=2",
+          "--reporter=expanded",
+          "test/reviewer_diagnostic_test.dart",
+          "test/reviewer_component_test.dart",
+          "--name",
+          "reviewer"
+        ],
+        "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/package",
+        "exit_code": 0,
+        "elapsed_seconds": 4.914815187454224
+      },
+      "real_font_diagnostics": {
+        "command": [
+          "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/minimum/flutter/bin/flutter",
+          "test",
+          "--no-pub",
+          "--concurrency=2",
+          "--reporter=expanded",
+          "test/reviewer_diagnostic_test.dart",
+          "--name",
+          "reviewer diagnostic"
+        ],
+        "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-min/package",
+        "exit_code": 0,
+        "elapsed_seconds": 4.888723611831665
+      },
+      "test_counts": {
+        "regressions": 314,
+        "navigation": 54,
+        "public_import_consumer": 1,
+        "final_independent_probes": 7,
+        "real_font_diagnostic_reruns": 6
+      }
+    },
+    "current": {
+      "core": {
+        "environment": {
+          "FLUTTER_ROOT": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current",
+          "PUB_CACHE": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/pub-cache",
+          "CI": "true",
+          "FLUTTER_SUPPRESS_ANALYTICS": "true",
+          "DART_SUPPRESS_ANALYTICS": "true"
+        },
+        "checks": [
+          {
+            "name": "version",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+              "--version",
+              "--machine"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/package",
+            "exit_code": 0,
+            "elapsed_seconds": 0.1,
+            "children_max_rss_kib": 56528
+          },
+          {
+            "name": "package-resolution",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+              "pub",
+              "get",
+              "--no-example"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/package",
+            "exit_code": 0,
+            "elapsed_seconds": 2.07,
+            "children_max_rss_kib": 121876
+          },
+          {
+            "name": "public-library-analysis",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/cache/dart-sdk/bin/dart",
+              "analyze",
+              "lib"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/package",
+            "exit_code": 0,
+            "elapsed_seconds": 11.6,
+            "children_max_rss_kib": 698608
+          },
+          {
+            "name": "scoped-analysis",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/cache/dart-sdk/bin/dart",
+              "analyze",
+              "lib/src/handrail_chat_workspace.dart",
+              "lib/src/handrail_message_composer.dart",
+              "lib/src/handrail_chat_theme.dart",
+              "lib/src/handrail_huddle_panel.dart",
+              "test/handrail_message_composer_test.dart",
+              "test/handrail_reply_routing_cases.dart",
+              "test/handrail_thread_discovery_cases.dart",
+              "test/handrail_reply_style_settings_test.dart",
+              "test/handrail_thread_lifecycle_cases.dart"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/package",
+            "exit_code": 0,
+            "elapsed_seconds": 2.74,
+            "children_max_rss_kib": 698608
+          },
+          {
+            "name": "regressions",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+              "test",
+              "--no-pub",
+              "--concurrency=2",
+              "--reporter=expanded",
+              "test/durable_resource_event_reducer_test.dart",
+              "test/handrail_message_composer_test.dart",
+              "test/handrail_chat_theme_test.dart",
+              "test/handrail_reply_style_settings_test.dart",
+              "test/reply_style_runtime_test.dart",
+              "test/reply_style_client_test.dart",
+              "test/handrail_timeline_reply_reference_test.dart",
+              "test/handrail_thread_view_test.dart",
+              "test/thread_list_controller_test.dart",
+              "test/thread_lifecycle_controller_test.dart"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/package",
+            "exit_code": 0,
+            "elapsed_seconds": 30.18,
+            "children_max_rss_kib": 848000
+          },
+          {
+            "name": "workspace-reply-navigation",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+              "test",
+              "--no-pub",
+              "--concurrency=2",
+              "--reporter=expanded",
+              "test/handrail_chat_workspace_test.dart",
+              "--name",
+              "reply routing|named thread|thread discovery"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/package",
+            "exit_code": 0,
+            "elapsed_seconds": 17.61,
+            "children_max_rss_kib": 848000
+          },
+          {
+            "name": "consumer-resolution",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+              "pub",
+              "get"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/consumer",
+            "exit_code": 0,
+            "elapsed_seconds": 0.45,
+            "children_max_rss_kib": 848000
+          },
+          {
+            "name": "consumer-analysis",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/cache/dart-sdk/bin/dart",
+              "analyze",
+              "test"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/consumer",
+            "exit_code": 0,
+            "elapsed_seconds": 0.97,
+            "children_max_rss_kib": 848000
+          },
+          {
+            "name": "consumer-widget",
+            "command": [
+              "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+              "test",
+              "--no-pub",
+              "--concurrency=2",
+              "--reporter=expanded",
+              "test/public_import_test.dart"
+            ],
+            "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/consumer",
+            "exit_code": 0,
+            "elapsed_seconds": 10.21,
+            "children_max_rss_kib": 848000
+          }
+        ]
+      },
+      "example": [
+        {
+          "name": "example-pinned-resolution",
+          "command": [
+            "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+            "pub",
+            "get"
+          ],
+          "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/example",
+          "exit_code": 0,
+          "elapsed_seconds": 1.22
+        },
+        {
+          "name": "example-artifact-resolution",
+          "command": [
+            "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+            "pub",
+            "get"
+          ],
+          "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/example",
+          "exit_code": 0,
+          "elapsed_seconds": 0.33
+        },
+        {
+          "name": "example-analysis",
+          "command": [
+            "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/cache/dart-sdk/bin/dart",
+            "analyze",
+            "lib"
+          ],
+          "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/example",
+          "exit_code": 0,
+          "elapsed_seconds": 2.49
+        },
+        {
+          "name": "example-web-build",
+          "command": [
+            "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+            "build",
+            "web",
+            "--release",
+            "--no-pub"
+          ],
+          "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/example",
+          "exit_code": 0,
+          "elapsed_seconds": 39.23
+        }
+      ],
+      "probes": {
+        "command": [
+          "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+          "test",
+          "--no-pub",
+          "--concurrency=2",
+          "--reporter=expanded",
+          "test/reviewer_diagnostic_test.dart",
+          "test/reviewer_component_test.dart",
+          "--name",
+          "reviewer"
+        ],
+        "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/package",
+        "exit_code": 0,
+        "elapsed_seconds": 4.80608606338501
+      },
+      "real_font_diagnostics": {
+        "command": [
+          "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/toolchains/current/bin/flutter",
+          "test",
+          "--no-pub",
+          "--concurrency=2",
+          "--reporter=expanded",
+          "test/reviewer_diagnostic_test.dart",
+          "--name",
+          "reviewer diagnostic"
+        ],
+        "cwd": "/opt/handrail/.handrail/validation-runs/530e0cd7-ad95-4528-8570-1178e6144464/review/check-current/package",
+        "exit_code": 0,
+        "elapsed_seconds": 5.147240400314331
+      },
+      "test_counts": {
+        "regressions": 314,
+        "navigation": 54,
+        "public_import_consumer": 1,
+        "final_independent_probes": 7,
+        "real_font_diagnostic_reruns": 6
+      }
+    }
+  },
+  "finding": {
+    "severity": "low",
+    "description": "At 350px height, keyboard focus can clip 4px of outer Send touch padding; the painted 40px button and icon remain fully visible, focused and hit-testable. Initial full-outer-box assertions failed and are retained. Refined geometry and state probes pass on both SDKs. No blocking patch regression found."
+  },
+  "coverage_limits": [
+    "HTTP/widget/component fixtures, not live app/DB/media acceptance",
+    "No fresh JS/preview checks beyond unchanged source/patch identity",
+    "PostgreSQL16 verification, final Flutter-to-PostgreSQL/cross-client runtime acceptance and concrete read-only ERP mapping remain required",
+    "No registry publication, consumer pin change, deployment or adoption"
+  ],
+  "report_markdown": "RESULT: passed\n\n# Independent Flutter compatibility re-review\n\nThe Flutter 3.19.0 / Dart 3.3.0 compatibility finding is closed for the exact uncommitted artifact below. Flutter 3.41.7 / Dart 3.11.5 also passes the focused package and widget checks. This verdict does not accept owner task 24350c4f-985e-4762-ac15-445f69009f18, establish live runtime readiness, publish the SDK, or approve ERP adoption.\n\nReviewer: independent validation run `530e0cd7-ad95-4528-8570-1178e6144464`, work request `57d62709-f258-4f62-ab23-56b4e1101769`, September 11, 2026. This reviewer did not implement the repaired source. Review target: implementation work request `c8df7449-ae38-4d90-b806-1bc1f8237c1a`, run `00bb50b4-2369-4fb4-a65f-1a65ac6eafd0`.\n\n## Authority and preservation\n\nHandrail MCP current context confirmed the active Chat SDK project `1791fdf7-f197-483c-ba67-5c0da8f4315f`, this read-only validation request, and read-only Hitcents context. All four attached frozen memories were fetched and applied; their guidance does not expand this focused review into implementation or deployment. No source/lead worktree, original evidence, consumer pin, shared SDK source, service, identity, database, queue, or ERP change was made. No commit, push, publication, deployment, raw-listener visit, or external message occurred. No target URL was supplied or visited: live route/Vault acceptance is explicitly excluded from this focused re-review.\n\nDisposable reconstruction, toolchains, packages, consumers, review-only test probes, logs and this report are under this report's directory. Review probes add separate files only inside disposable packages; production `lib/` and existing artifact tests were not edited. SDKs are independent writable copies, not hard links. Pub caches are separate for each SDK. Expensive checks ran sequentially with `flutter test --concurrency=2`; inherited `VITEST_MAX_WORKERS=1` was retained. Configured memory limits were disabled (`HANDRAIL_CODEX_MEMORY_LIMITS_ENABLED=0` and worker memory bounds infinity). No artificial run/time/token budget was imposed.\n\n## Exact artifact and correspondence \u2014 PASS\n\nCombined artifact: `248f3f7986001f99414f5a149c477177059b1dcfc0a49be7c223a6190a5fc2eb`.\n\n| Repository | Base commit | Complete patch SHA256 | Verified source files |\n| --- | --- | --- | ---: |\n| Flutter | `8926839d7467860a738c5526aacb7330a5510483` | `b0f79227038952d5ba2ceb88b87f327108580009549778cd689edd4ba2edcdd7` | 471 |\n| JS | `9f62a562c5235759efa4c0a05858acae755c0aff` | `3ead6aa48b22389ed8376caa113013780560ced04075f634c8c67e7ddc25c188` | 1126 |\n| Preview | `52fe6563bfeb9d1289fa39bcba40cd887ee7914e` | empty patch: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | 15 |\n\n`reconstruct.py` independently recalculated the combined identity using the saved canonical repository records, verified each base HEAD and patch digest, extracted each base with `git archive`, and ran `git apply --check` followed by application in disposable directories. All 1,612 non-evidence source files match both saved hashes and the supplied source worktrees. The tracked/new source-file sets match the manifests, not just a selected subset. All 226 saved evidence digests match. Original evidence and source are checked again in `final-integrity.json`.\n\nThe saved `minimum-final-pass` and `current-final-pass` initial manifests plus their two-file layout overlays each match all 348 final package inputs. Fresh independent runs started from the complete final reconstruction, including `handrail_thread_view.dart` and `handrail_thread_lifecycle_cases.dart`; no earlier snapshot is substituted for the layout change. Saved implementation `results.json`, `layout-results.json`, example results, README, patch identities and toolchain provenance were inspected as supporting evidence, then checks were freshly executed. See `identity-verification.json`, `final-integrity.json`, and each independent run's `input-sha256.json`.\n\n## Toolchains and commands\n\nMinimum SDK was downloaded from the recorded official archive URL `https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.19.0-stable.tar.xz`. Independently calculated SHA256: `4cc1706fbd6e2a5c0ee34a6f8de875aae20904c9f47e18c88d2fcb25d9ea1a79`. Framework revision is `bae5e49bc2a867403c43b2aae2de8f8c33b037e4`, Dart 3.3.0. Initial extraction encountered the worker namespace's unsupported uid/gid ownership restoration; repeating extraction with `tar --no-same-owner` completed successfully. This was an extraction issue, not a compatibility failure.\n\nCurrent SDK was independently copied from the installed read-only `/opt/handrail/.handrail/flutter-sdk` using `cp -a --no-preserve=ownership --reflink=auto`. It reports Flutter 3.41.7, framework `cc0734ac716fbb8b90f3f9db8020958b1553afa7`, Dart 3.11.5. Its Git source status is clean; its channel reports `[user-branch]` and repository URL `unknown source`, so this is explicitly verification of the installed SDK at that release revision, not a claim that a fresh official 3.41.7 archive was downloaded. Key executable/framework hashes match the installed SDK and are saved in `final-integrity.json`. Package configuration points to private SDK/package/pub-cache paths.\n\nFrom this report directory, the performed high-level commands were:\n\n```sh\npython3 reconstruct.py\npython3 verify.py \"$PWD/toolchains/minimum/flutter\" minimum \"$PWD/check-min\" \"$PWD/artifact/handrail-sdk-chat-flutter\"\npython3 verify_example.py \"$PWD/toolchains/minimum/flutter\" minimum \"$PWD/check-min\" \"$PWD/artifact/handrail-sdk-chat-flutter\"\npython3 run_probes.py minimum\npython3 verify.py \"$PWD/toolchains/current\" current \"$PWD/check-current\" \"$PWD/artifact/handrail-sdk-chat-flutter\"\npython3 verify_example.py \"$PWD/toolchains/current\" current \"$PWD/check-current\" \"$PWD/artifact/handrail-sdk-chat-flutter\"\npython3 run_probes.py current\npython3 run_diagnostics.py minimum\npython3 run_diagnostics.py current\npython3 finish_probes.py\npython3 final_integrity.py\n```\n\nFor reproduction choose new output labels/directories for `verify.py`; its outputs deliberately require unused locations. `run_probes.py`, `run_diagnostics.py`, and `finish_probes.py` contain explicit label-to-scratch mappings. Copied verification scripts were read before execution and execute the existing relevant test suites; review-only probe generators are independently authored. Logs and result JSON retain exact executable paths, arguments, working directories, exit statuses and durations. No pipeline return value is used instead of the per-check statuses (the probe runner intentionally records a failed test exit in JSON even when the Python process itself completes).\n\nUnderlying commands include clean `flutter pub get --no-example`, `dart analyze lib`, scoped `dart analyze`, `flutter test --no-pub --concurrency=2 --reporter=expanded`, clean consumer `flutter pub get`, consumer `dart analyze test`, and `flutter build web --release --no-pub`. Example validation first resolves its actual unchanged HTTPS Git pin `51bc3e1411858ce38980f5beded683dee957d1a3`, saving that lock, then uses a disposable path override to build the repaired uncommitted artifact. The source/real consumer pins remain unchanged. Both sets of package, consumer, pinned-example and artifact-example lockfiles are saved.\n\n## Independent results\n\n| Check | 3.19.0 / 3.3.0 | 3.41.7 / 3.11.5 | Evidence |\n| --- | --- | --- | --- |\n| Clean package and fresh local consumer resolution | PASS | PASS | `minimum/results.json`, `current/results.json`, resolution logs and locks |\n| Entire public library analysis | PASS; 65 informational diagnostics | PASS; 66 informational diagnostics | `*/public-library-analysis.log`; exit 0, no errors/warnings |\n| Scoped changed-source/test analysis | PASS | PASS | `*/scoped-analysis.log` |\n| Reply/settings/composer/thread/reducer/theme regressions, complete final artifact | 314 PASS | 314 PASS | `*/regressions.log` |\n| Workspace reply/named-thread/discovery navigation | 54 PASS | 54 PASS | `*/workspace-reply-navigation.log` |\n| Six public imports; widget mount, actual stream update and teardown | 1 PASS | 1 PASS | `*/consumer-analysis.log`, `*/consumer-widget.log` |\n| Example actual Git-pin resolution; local artifact resolution | PASS | PASS | `*/example-results.json` and saved locks |\n| Example analysis and release web compilation, final layout included | PASS | PASS | `*/example-analysis.log`, `*/example-web-build.log` |\n| Reviewer short-height keyboard/geometry/preservation probes plus extracted huddle selector | 7 PASS | 7 PASS | `*/reviewer-final-probes.log` and JSON |\n| Same six short-height probes with real-font widget captures | 6 PASS | 6 PASS | `*/reviewer-diagnostics.log`, `*/media/` |\n\nExisting library informational lints/deprecations are not presented as zero diagnostics. Both builds retain the example's missing Cupertino icon-font warning. The current SDK also performs a successful Wasm dry run; no independent Wasm runtime acceptance is inferred. JS and preview were reconstructed and verified unchanged; unchanged JS/Node/React validation was not repeated in this Flutter-focused request.\n\n## Behavior and accessibility review\n\n**Composer portal identity and preservation \u2014 PASS at widget boundary.** The stable LayoutBuilder key preserves the TextField/OverlayPortal subtree when reply and attachment rows are inserted or removed. The actual composer suite runs offline/failure, reference cancellation/retry, attachments, send, formatting, typing and input-action paths on both SDKs. It no longer triggers Flutter 3.19's duplicate portal-controller attachment. The thread restriction cases verify the same mounted composer, same retained draft, reference `reply-1`, `notifyAuthor=false`, retained attachment, and unchanged thread conversation through remote lock/archive/restore and host disable states. The independent short-height probes additionally assert these values after keyboard traversal and scrolling.\n\n**Actual reply destination and mode distinction \u2014 PASS at HTTP-fixture boundary.** Reviewed `handrail_reply_routing_cases.dart` checks outgoing request bodies, not only the widget's conversation property. Discord channel/DM/group-DM Reply sends into the current conversation with the selected source and mention choice and creates no thread. Reply within an existing thread uses that thread's ID. Default/current Reply opens the appropriate thread from a parent, while Reply in an existing thread focuses and preserves composition without creating a nested thread or new reference. Switching style while composing preserves the existing reference/mention choice and canonical thread handle. Create/Open Thread remains distinct. Disabled/missing capabilities do not silently substitute thread creation. Successful local send assertions do not establish PostgreSQL persistence.\n\n**Back/Escape \u2014 PASS at widget boundary.** The supported `onPopInvoked` replacement preserves the existing `canPop` and `_backPanel()` logic; the unused route result is not dropped from any business operation. The compact discovery test uses `handlePopRoute()` twice, checks return to the thread row and then channel control, and asserts the original composer/draft survives. Escape cases exercise return/cleanup after client replacement; keyboard reference activation and lifecycle menus are also covered. Real operating-system navigation and predictive-back/device behavior remain outside this widget run.\n\n**Narrow height \u2014 PASS for Send reachability, with a documented nonblocking geometry observation.** The new body gives the keyed composer a bounded scroll view and leaves remaining height to the timeline. Original six restriction cases keep the default viewport and use `ensureVisible` to verify the full Send box is reachable without overflow. Independent probes use 360px width with 600, 450 and 350px heights in both modes, focus the input and Tab through to Send without calling `ensureVisible`, then check focus, hit testing, icon/Material bounds and preserved state. Font-loaded screenshots were inspected on both SDKs.\n\nThe initial stricter probes expected the entire 48px outer IconButton box to fit following automatic focus scrolling. Four cases per SDK failed (450/350px with the default test font): outer bottom 454/354 versus viewport 450/350. This result is retained in `reviewer-probes.log`/JSON, not discarded. Follow-up measurements show the extra 4px is outer touch padding: at 350px the painted Material button occupies y310\u2013350, icon y318\u2013342, while the outer box is y306\u2013354. Send remains keyboard focused, visible and hit-testable. The same assertion on painted bounds passes with both the normal test font and real font; reviewed images show the full Send circle. Classification: low-severity clipping of outer touch padding, not an inaccessible Send control or a blocking compatibility defect. At severely constrained heights a full reference/attachment composer can consume all remaining timeline space, and upper composer controls are scrolled offscreen while Send has focus. This review does not claim a polished physical mobile-keyboard/transcript experience at all heights or text scales. Host mobile acceptance should cover that tradeoff.\n\n**Semantics changes \u2014 PASS, meaningful assertions retained.** Settings still checks the `Discord-style` label, checked-state presence and unchecked value, mutually-exclusive-group membership, enabled-state presence/value, focusability, and tap action. It removes framework-specific selected/focus-action expectations, then actually Tabs to the radio and activates with Space, asserting an outgoing `style=discord` write. This is stronger behavioral coverage than merely loosening a semantics matcher. The composer still asserts its composer/input semantic labels and Send tooltip after settling, and its test executes the keyboard input Send action. No screen-reader/device certification is claimed.\n\n**Material/dependency/example substitutions \u2014 PASS.** ColorScheme native members take precedence over the imported extension on current Flutter; the extension supplies surface/surfaceVariant roles on 3.19. Source and captures are consistent with that intentional fallback. `withAlpha(115)` is the stated approximately-45% 8-bit list highlight and existing formatting assertions exercise it. Runtime dependency `unorm_dart ^0.3.2` resolves on both. Development constraints and the example's broadened `web` range resolve cleanly at both exact SDK versions. The separate native example's Dart ^3.11.5 floor was not widened or misrepresented.\n\n**Huddle dropdown substitution \u2014 PASS for the changed control; full media lifecycle UNVERIFIED.** Current Flutter maps `initialValue ?? value` to FormField.initialValue; 3.19 maps `value` to the same field, and both update state on initialValue changes. An independent probe extracts the exact final `_deviceSelector` method body, mounts it, selects a different device, changes the selected ID externally, replaces the device list, and disables the control. These operations pass on both SDKs. This establishes the changed parameter's selection/update behavior only. The previously documented descriptorUnavailable media-fixture issue was not used as a new failure attributable to this patch, and the full huddle connection/device-provider lifecycle was not accepted. Optional media parity is not elevated into a new pilot requirement.\n\n## Inspected media and limits\n\nAll five saved owner-task widget PNGs were opened: default thread Reply, Discord thread Reply, confirmed Discord setting, failed save, and recovered save. They show visibly distinct reply controls/reference UI and clear effective-versus-unconfirmed settings messaging. The Discord thread capture displays an unavailable source fixture, so it cannot prove successful authorized source retrieval. They are fixture renders, not live app captures, and their saved evidence hashes do not alone establish final-layout visual coverage.\n\nThis reviewer additionally generated six final-artifact real-font keyboard captures per SDK, and opened the 350px and 450px Discord captures for both. The images show the retained text and attachment and fully painted Send button after keyboard scrolling. Their font-backed geometry and assertions are saved alongside default-test-font probes. They still use the existing narrow HTTP transport fixture; they prove neither a functioning backend nor live browser/mobile acceptance.\n\n## Remaining readiness requirements and next action\n\nNo new blocking defect attributable to this compatibility repair was found. Only the false Flutter floor finding is closed. Overall owner-task readiness remains **not accepted**:\n\n* Independent PostgreSQL16 verification remains required in a permitted isolated harness, including teardown. The unchanged prior root-UID failure was not repeated.\n* Final-artifact Flutter-to-PostgreSQL and cross-client runtime acceptance, preference propagation/reload/reconnect/failure recovery, and authorized live browser/mobile/accessibility evidence remain required. No stopped-service/Vault setup or raw listener was attempted.\n* Concrete read-only Hitcents ERP auth/tenant/directory/storage/realtime/UI/mobile integration mapping remains required. Absent ERP paths were not retried.\n* Git publication, actual consumer pin advancement, deployment and adoption are not implied by disposable path-consumer passes.\n\nReturn this report and the essential worker-result summary to the existing accountable lead/planner for task `24350c4f-985e-4762-ac15-445f69009f18`. Next acceptance evidence is independent permitted PostgreSQL16 results, authorized final-artifact cross-client/UI results, and concrete read-only ERP mapping; retain the existing owner/controller and release gates. No duplicate task/controller or queue mutation was created by this reviewer.\n"
+}

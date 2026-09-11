@@ -1,0 +1,192 @@
+TAP version 13
+# Subtest: attachment lifecycle HTTP route is actor-bound, idempotent, and secret-safe
+    # Subtest: finalizes once and returns a canonical replay
+    not ok 1 - finalizes once and returns a canonical replay
+      ---
+      duration_ms: 31.137399
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:292:15'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        503 !== 200
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 200
+      actual: 503
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:300:16)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:292:7
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:208:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:291:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: aborts once and resumes cleanup without duplicate effects
+    not ok 2 - aborts once and resumes cleanup without duplicate effects
+      ---
+      duration_ms: 8.171472
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:333:15'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        503 !== 200
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 200
+      actual: 503
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:337:16)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:333:7
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:208:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:291:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: returns canonical metadata and provider-neutral rejection outcomes
+    not ok 3 - returns canonical metadata and provider-neutral rejection outcomes
+      ---
+      duration_ms: 6.009696
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:378:15'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        503 !== 200
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 200
+      actual: 503
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:388:18)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:378:7
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:208:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:291:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: does not enumerate invalid state, uploader, tenant, or absence
+    not ok 4 - does not enumerate invalid state, uploader, tenant, or absence
+      ---
+      duration_ms: 10.700294
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:400:15'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        503 !== 404
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 404
+      actual: 503
+      operator: 'strictEqual'
+      stack: |-
+        assertStableError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:71:10)
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:427:11)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:400:7
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:208:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:291:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: rejects malformed, mismatched, and spoofed requests before effects
+    not ok 5 - rejects malformed, mismatched, and spoofed requests before effects
+      ---
+      duration_ms: 13.905367
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:438:15'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        404 !== 400
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 400
+      actual: 404
+      operator: 'strictEqual'
+      stack: |-
+        assertStableError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:71:10)
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:466:11)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:438:7
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:208:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:291:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: preserves stable authentication, authorization, and storage failures
+    ok 6 - preserves stable authentication, authorization, and storage failures
+      ---
+      duration_ms: 12.392644
+      type: 'test'
+      ...
+    # Subtest: maps idempotency-in-progress and runtime unavailability safely
+    not ok 7 - maps idempotency-in-progress and runtime unavailability safely
+      ---
+      duration_ms: 16.103214
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:505:13'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        503 !== 409
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 409
+      actual: 503
+      operator: 'strictEqual'
+      stack: |-
+        assertStableError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:71:10)
+        file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:526:11
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:208:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:522:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:505:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    1..7
+not ok 1 - attachment lifecycle HTTP route is actor-bound, idempotent, and secret-safe
+  ---
+  duration_ms: 462.354591
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-attachment-lifecycle-http.mjs:216:1'
+  failureType: 'subtestsFailed'
+  error: '6 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..1
+# tests 8
+# suites 0
+# pass 1
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 676.298037

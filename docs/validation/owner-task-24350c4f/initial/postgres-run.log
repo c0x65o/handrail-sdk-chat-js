@@ -1,0 +1,43 @@
+postgres-react-reply-style-flow: PASS (exit 0)
+postgres-reply-thread-capabilities-http: PASS (exit 0)
+postgres-reply-style-preference-http: PASS (exit 0)
+postgres-reply-draft-persistence: PASS (exit 0)
+postgres-conversation-reply-unread: PASS (exit 0)
+postgres-thread-lifecycle-http: PASS (exit 0)
+postgres-thread-list-http: PASS (exit 0)
+postgres-message-context-http: PASS (exit 0)
+postgres-thread-snapshot-access: PASS (exit 0)
+postgres-websocket-thread-authorization: PASS (exit 0)
+postgres-reconnect-idempotency: PASS (exit 0)
+postgres-create-thread-command: PASS (exit 0)
+postgres-send-message-command: FAIL (exit 1)
+postgres-edit-message-command: PASS (exit 0)
+postgres-soft-delete-message-command: PASS (exit 0)
+postgres-notification-dispatcher: PASS (exit 0)
+postgres-thread-read-cursor-command: PASS (exit 0)
+postgres-attachment-lifecycle-http: FAIL (exit 1)
+postgres-attachment-download-query: PASS (exit 0)
+postgres-message-search-query: PASS (exit 0)
+postgres-conversation-membership-http: FAIL (exit 1)
+postgres-chat-harness: PASS (exit 0)
+postgres-websocket-replay: PASS (exit 0)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: A test leaked an isolated schema
++ actual - expected
+
++ 'chat_membership_http_4f05faa0cffc407d9108ff4885be4330'
+- ''
+
+    at file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/scripts/qualify-reply-threads.mjs:57:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'chat_membership_http_4f05faa0cffc407d9108ff4885be4330',
+  expected: '',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.23.1

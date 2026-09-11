@@ -1,0 +1,107 @@
+TAP version 13
+# Subtest: soft-delete-message is tenant-safe, revision-aware, idempotent, and atomic
+    # Subtest: deletion and replay retain reply metadata (ping-true)
+    ok 1 - deletion and replay retain reply metadata (ping-true)
+      ---
+      duration_ms: 26.642398
+      type: 'test'
+      ...
+    # Subtest: deletion and replay retain reply metadata (ping-false)
+    ok 2 - deletion and replay retain reply metadata (ping-false)
+      ---
+      duration_ms: 15.26418
+      type: 'test'
+      ...
+    # Subtest: deletion and replay retain reply metadata (legacy)
+    ok 3 - deletion and replay retain reply metadata (legacy)
+      ---
+      duration_ms: 12.489657
+      type: 'test'
+      ...
+    # Subtest: reply revision conflict and replay have no deletion effects (ping-true)
+    ok 4 - reply revision conflict and replay have no deletion effects (ping-true)
+      ---
+      duration_ms: 11.263682
+      type: 'test'
+      ...
+    # Subtest: reply revision conflict and replay have no deletion effects (ping-false)
+    ok 5 - reply revision conflict and replay have no deletion effects (ping-false)
+      ---
+      duration_ms: 11.206086
+      type: 'test'
+      ...
+    # Subtest: deleting a source retains its inline child and revision history
+    ok 6 - deleting a source retains its inline child and revision history
+      ---
+      duration_ms: 15.964673
+      type: 'test'
+      ...
+    # Subtest: author deletion keeps identity, sequence, history, attachments, and reactions
+    ok 7 - author deletion keeps identity, sequence, history, attachments, and reactions
+      ---
+      duration_ms: 15.426176
+      type: 'test'
+      ...
+    # Subtest: the exported moderation capability permits non-author deletion
+    ok 8 - the exported moderation capability permits non-author deletion
+      ---
+      duration_ms: 7.420395
+      type: 'test'
+      ...
+    # Subtest: unauthorized and cross-tenant actors receive the same sanitized rejection
+    ok 9 - unauthorized and cross-tenant actors receive the same sanitized rejection
+      ---
+      duration_ms: 7.807512
+      type: 'test'
+      ...
+    # Subtest: deleting a root retains its canonical summary and leaves replies untouched
+    ok 10 - deleting a root retains its canonical summary and leaves replies untouched
+      ---
+      duration_ms: 22.564909
+      type: 'test'
+      ...
+    # Subtest: a stale revision stores a deterministic conflict without deletion effects
+    ok 11 - a stale revision stores a deterministic conflict without deletion effects
+      ---
+      duration_ms: 12.333127
+      type: 'test'
+      ...
+    # Subtest: a fractional-millisecond claim completes and replays a revision conflict
+    ok 12 - a fractional-millisecond claim completes and replays a revision conflict
+      ---
+      duration_ms: 11.938034
+      type: 'test'
+      ...
+    # Subtest: successful retry replays the canonical outcome and changed payload conflicts
+    ok 13 - successful retry replays the canonical outcome and changed payload conflicts
+      ---
+      duration_ms: 9.424186
+      type: 'test'
+      ...
+    # Subtest: audit insertion failure rolls back the tombstone and pending key
+    ok 14 - audit insertion failure rolls back the tombstone and pending key
+      ---
+      duration_ms: 6.778172
+      type: 'test'
+      ...
+    # Subtest: outbox insertion failure rolls back the tombstone and pending key
+    ok 15 - outbox insertion failure rolls back the tombstone and pending key
+      ---
+      duration_ms: 6.722826
+      type: 'test'
+      ...
+    1..15
+ok 1 - soft-delete-message is tenant-safe, revision-aware, idempotent, and atomic
+  ---
+  duration_ms: 502.221068
+  type: 'test'
+  ...
+1..1
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 700.844449

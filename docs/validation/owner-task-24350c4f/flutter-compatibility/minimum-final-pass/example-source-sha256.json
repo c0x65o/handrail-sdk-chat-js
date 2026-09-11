@@ -1,0 +1,16 @@
+{
+  "lib/backend_lab/browser_transport.dart": "da3eaf6a416461b6f9764e26198989102363b1b455575539ac84ededeaa0340d",
+  "lib/backend_lab/reply_contexts.dart": "4e7c7e9294b6b3d444ac475ea9138b5a8af023086636211a815481432136427b",
+  "lib/backend_lab/surface.dart": "63bcb5f6800637e9977480974325a115096706afeeca25000b75e641713d9887",
+  "lib/backend_lab/thread_lifecycles.dart": "a4be9b1e70220f34d27417ad41948f023d2d8c2346f3cc37afd8a960c8ca24e0",
+  "lib/backend_lab/unsupported.dart": "660992ffef1dbd37e3510bb59f9e76eb2834e42760c9a4636135874a21cc2930",
+  "lib/backend_lab.dart": "fec0a961f51fb90f58d62216028963b0006d4fb984b57752a66dcf04df070d6e",
+  "lib/main.dart": "ea97015f386cb2b94da04debe820ef6af6f68ee7f34b1f07955628b2d5b20077",
+  "lib/reply_style_scenario.dart": "561676f5da05e3ac815eac82fb1fcb154597f3a9912e89fd4272af89bab2bec6",
+  "lib/shared_storage/controller.dart": "d57417c40347a44769fdf159c8e6d50c266ce3001ef41a9448438e68e3b857a1",
+  "lib/shared_storage/fixture.dart": "4e40b597f10dde8fed66eaefa1d75b90e008496543dc7797222b4516ec2fb61f",
+  "lib/shared_storage/indexed_db_storage.dart": "b26c0357505f45b8e23d18f6157680f4153dae70880933c387c3744018db8a2e",
+  "lib/shared_storage/surface.dart": "7f3614b0fcbce8cf5d4a8b04b4068ef4629da2d3c79e93182f879296e14ce2d7",
+  "lib/shared_storage/unsupported.dart": "d389c86457f4ec9d5886a732d804b11a6c1f687b12cd6eaaa2c20116e4560c71",
+  "lib/shared_storage_lab.dart": "ba6e6dd02cdd3d4430e02d5e783d65588d0f276fe8d3e62c61980140739d7eb4"
+}

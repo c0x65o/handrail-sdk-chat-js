@@ -1,0 +1,27 @@
+cwd: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package
+command: ["/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/flutter", "test", "--no-pub", "--concurrency=2", "--reporter=expanded", "test/handrail_huddle_panel_test.dart", "--plain-name", "renders participants, active speakers, media toggles, and live devices"]
+00:00 +0: loading /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package/test/handrail_huddle_panel_test.dart
+00:00 +0: renders participants, active speakers, media toggles, and live devices
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following ArgumentError was thrown running a test:
+Invalid argument(s): storageIdentity requires an ApplicationChatStorage.
+
+When the exception was thrown, this was the stack:
+#0      new HandrailChatClient (package:handrail_chat/src/handrail_chat_client.dart:435:7)
+#1      new _Harness (file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package/test/handrail_huddle_panel_test.dart:727:14)
+#2      main.<anonymous closure> (file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package/test/handrail_huddle_panel_test.dart:91:23)
+#3      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:29)
+<asynchronous suspension>
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  renders participants, active speakers, media toggles, and live devices
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: renders participants, active speakers, media toggles, and live devices [E]
+  Test failed. See exception logs above.
+  The test description was: renders participants, active speakers, media toggles, and live devices
+  
+00:00 +0 -1: Some tests failed.

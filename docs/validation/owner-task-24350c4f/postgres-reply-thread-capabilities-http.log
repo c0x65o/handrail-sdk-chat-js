@@ -1,0 +1,72 @@
+TAP version 13
+# Subtest: reply/thread deployment gates use real PostgreSQL independently of actor permissions
+    # Subtest: absent and false flags disable new actions but retain ordinary sends/openThread
+    ok 1 - absent and false flags disable new actions but retain ordinary sends/openThread
+      ---
+      duration_ms: 134.835067
+      type: 'test'
+      ...
+    # Subtest: each capability can be enabled independently; inactivity needs discovery and policy
+    ok 2 - each capability can be enabled independently; inactivity needs discovery and policy
+      ---
+      duration_ms: 81.663741
+      type: 'test'
+      ...
+    # Subtest: enabled Reply stays in its conversation, creates no thread, and retains authorization
+    ok 3 - enabled Reply stays in its conversation, creates no thread, and retains authorization
+      ---
+      duration_ms: 21.136374
+      type: 'test'
+      ...
+    # Subtest: named creation and lifecycle remain authorized with availability enabled
+    ok 4 - named creation and lifecycle remain authorized with availability enabled
+      ---
+      duration_ms: 54.996277
+      type: 'test'
+      ...
+    # Subtest: turning flags off preserves named-thread reads and canonical legacy opening
+    ok 5 - turning flags off preserves named-thread reads and canonical legacy opening
+      ---
+      duration_ms: 36.809016
+      type: 'test'
+      ...
+    # Subtest: a high schema version cannot substitute for the named-thread migration
+    ok 6 - a high schema version cannot substitute for the named-thread migration
+      ---
+      duration_ms: 8.584542
+      type: 'test'
+      ...
+    # Subtest: deployment table privileges are checked without granting actor permissions
+    ok 7 - deployment table privileges are checked without granting actor permissions
+      ---
+      duration_ms: 28.937944
+      type: 'test'
+      ...
+    # Subtest: missing reply column suppresses dependent capabilities, not saved style
+    ok 8 - missing reply column suppresses dependent capabilities, not saved style
+      ---
+      duration_ms: 41.781656
+      type: 'test'
+      ...
+    # Subtest: read-only storage suppresses writes while discovery remains available
+    ok 9 - read-only storage suppresses writes while discovery remains available
+      ---
+      duration_ms: 25.518454
+      type: 'test'
+      ...
+    1..9
+ok 1 - reply/thread deployment gates use real PostgreSQL independently of actor permissions
+  ---
+  duration_ms: 747.679106
+  type: 'test'
+  ...
+# Real PostgreSQL url-backed, canonical migrations and isolated schema
+1..1
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 882.090727

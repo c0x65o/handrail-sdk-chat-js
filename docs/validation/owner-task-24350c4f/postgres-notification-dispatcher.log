@@ -1,0 +1,966 @@
+TAP version 13
+# Subtest: durable notification dispatch selects, leases, retries, and isolates real PostgreSQL rows
+    # Subtest: reply recipient materialization: ping on
+    ok 1 - reply recipient materialization: ping on
+      ---
+      duration_ms: 36.788288
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: ping off
+    ok 2 - reply recipient materialization: ping off
+      ---
+      duration_ms: 30.624593
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: missing ping flag
+    ok 3 - reply recipient materialization: missing ping flag
+      ---
+      duration_ms: 26.465181
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: non-boolean ping flag
+    ok 4 - reply recipient materialization: non-boolean ping flag
+      ---
+      duration_ms: 26.675209
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: explicit mention deduplicates ping
+    ok 5 - reply recipient materialization: explicit mention deduplicates ping
+      ---
+      duration_ms: 31.35478
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: explicit mention survives ping off
+    ok 6 - reply recipient materialization: explicit mention survives ping off
+      ---
+      duration_ms: 29.859822
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: all-message delivery survives ping off
+    ok 7 - reply recipient materialization: all-message delivery survives ping off
+      ---
+      duration_ms: 30.622015
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: none suppresses ping
+    ok 8 - reply recipient materialization: none suppresses ping
+      ---
+      duration_ms: 24.592009
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: mute suppresses ping
+    ok 9 - reply recipient materialization: mute suppresses ping
+      ---
+      duration_ms: 24.949148
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: future mute suppresses ping
+    ok 10 - reply recipient materialization: future mute suppresses ping
+      ---
+      duration_ms: 25.36604
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: expired mute permits ping
+    ok 11 - reply recipient materialization: expired mute permits ping
+      ---
+      duration_ms: 29.232065
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: self reply suppresses ping
+    ok 12 - reply recipient materialization: self reply suppresses ping
+      ---
+      duration_ms: 23.387271
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: missing source
+    ok 13 - reply recipient materialization: missing source
+      ---
+      duration_ms: 24.657114
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: deleted source
+    ok 14 - reply recipient materialization: deleted source
+      ---
+      duration_ms: 24.717421
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: other tenant source
+    ok 15 - reply recipient materialization: other tenant source
+      ---
+      duration_ms: 25.886079
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: other conversation source
+    ok 16 - reply recipient materialization: other conversation source
+      ---
+      duration_ms: 25.070587
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: absent recipient access
+    ok 17 - reply recipient materialization: absent recipient access
+      ---
+      duration_ms: 25.446364
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: removed recipient access
+    ok 18 - reply recipient materialization: removed recipient access
+      ---
+      duration_ms: 23.605642
+      type: 'test'
+      ...
+    # Subtest: reply recipient materialization: left recipient access
+    ok 19 - reply recipient materialization: left recipient access
+      ---
+      duration_ms: 24.818799
+      type: 'test'
+      ...
+    # Subtest: reply metadata does not create thread participation or follows
+    ok 20 - reply metadata does not create thread participation or follows
+      ---
+      duration_ms: 26.024977
+      type: 'test'
+      ...
+    # Subtest: thread selection: followed all
+    ok 21 - thread selection: followed all
+      ---
+      duration_ms: 37.808356
+      type: 'test'
+      ...
+    # Subtest: thread selection: legacy active child
+    ok 22 - thread selection: legacy active child
+      ---
+      duration_ms: 34.65053
+      type: 'test'
+      ...
+    # Subtest: thread selection: explicit false
+    ok 23 - thread selection: explicit false
+      ---
+      duration_ms: 29.53073
+      type: 'test'
+      ...
+    # Subtest: thread selection: parent reader only
+    ok 24 - thread selection: parent reader only
+      ---
+      duration_ms: 27.66504
+      type: 'test'
+      ...
+    # Subtest: thread selection: public reader only
+    ok 25 - thread selection: public reader only
+      ---
+      duration_ms: 26.973043
+      type: 'test'
+      ...
+    # Subtest: thread selection: follow without child
+    ok 26 - thread selection: follow without child
+      ---
+      duration_ms: 33.578394
+      type: 'test'
+      ...
+    # Subtest: thread selection: mentions preference excludes general
+    ok 27 - thread selection: mentions preference excludes general
+      ---
+      duration_ms: 27.432466
+      type: 'test'
+      ...
+    # Subtest: thread selection: unfollowed explicit all
+    ok 28 - thread selection: unfollowed explicit all
+      ---
+      duration_ms: 33.422701
+      type: 'test'
+      ...
+    # Subtest: thread selection: unfollowed synthetic all
+    ok 29 - thread selection: unfollowed synthetic all
+      ---
+      duration_ms: 37.048506
+      type: 'test'
+      ...
+    # Subtest: thread selection: nonparticipant explicit all
+    ok 30 - thread selection: nonparticipant explicit all
+      ---
+      duration_ms: 34.147766
+      type: 'test'
+      ...
+    # Subtest: thread selection: nonparticipant synthetic all
+    ok 31 - thread selection: nonparticipant synthetic all
+      ---
+      duration_ms: 32.366553
+      type: 'test'
+      ...
+    # Subtest: thread selection: unfollowed explicit mentions
+    ok 32 - thread selection: unfollowed explicit mentions
+      ---
+      duration_ms: 33.689412
+      type: 'test'
+      ...
+    # Subtest: thread selection: unfollowed synthetic mentions
+    ok 33 - thread selection: unfollowed synthetic mentions
+      ---
+      duration_ms: 36.335352
+      type: 'test'
+      ...
+    # Subtest: thread selection: nonparticipant explicit mentions
+    ok 34 - thread selection: nonparticipant explicit mentions
+      ---
+      duration_ms: 33.43139
+      type: 'test'
+      ...
+    # Subtest: thread selection: nonparticipant synthetic mentions
+    ok 35 - thread selection: nonparticipant synthetic mentions
+      ---
+      duration_ms: 33.087636
+      type: 'test'
+      ...
+    # Subtest: thread selection: none suppresses both mentions
+    ok 36 - thread selection: none suppresses both mentions
+      ---
+      duration_ms: 28.10308
+      type: 'test'
+      ...
+    # Subtest: thread selection: mute suppresses both mentions
+    ok 37 - thread selection: mute suppresses both mentions
+      ---
+      duration_ms: 28.486143
+      type: 'test'
+      ...
+    # Subtest: thread selection: timed mute suppresses mention
+    ok 38 - thread selection: timed mute suppresses mention
+      ---
+      duration_ms: 28.930051
+      type: 'test'
+      ...
+    # Subtest: thread selection: expired mute permits mention
+    ok 39 - thread selection: expired mute permits mention
+      ---
+      duration_ms: 32.926681
+      type: 'test'
+      ...
+    # Subtest: thread selection: explicit and synthetic deduplicated
+    ok 40 - thread selection: explicit and synthetic deduplicated
+      ---
+      duration_ms: 36.707272
+      type: 'test'
+      ...
+    # Subtest: public-parent concrete mention needs no membership; readers are not enumerated
+    ok 41 - public-parent concrete mention needs no membership; readers are not enumerated
+      ---
+      duration_ms: 32.50596
+      type: 'test'
+      ...
+    # Subtest: thread notifications fail closed without directory
+    ok 42 - thread notifications fail closed without directory
+      ---
+      duration_ms: 19.083929
+      type: 'test'
+      ...
+    # Subtest: thread notifications fail closed without permissions
+    ok 43 - thread notifications fail closed without permissions
+      ---
+      duration_ms: 22.167997
+      type: 'test'
+      ...
+    # Subtest: thread general: unfollow before materialization
+    ok 44 - thread general: unfollow before materialization
+      ---
+      duration_ms: 23.751736
+      type: 'test'
+      ...
+    # Subtest: thread general: child leave before materialization
+    ok 45 - thread general: child leave before materialization
+      ---
+      duration_ms: 20.122123
+      type: 'test'
+      ...
+    # Subtest: thread general: mute before materialization
+    ok 46 - thread general: mute before materialization
+      ---
+      duration_ms: 18.548448
+      type: 'test'
+      ...
+    # Subtest: thread general: mentions level before materialization
+    ok 47 - thread general: mentions level before materialization
+      ---
+      duration_ms: 20.715278
+      type: 'test'
+      ...
+    # Subtest: thread general: none level before materialization
+    ok 48 - thread general: none level before materialization
+      ---
+      duration_ms: 18.8136
+      type: 'test'
+      ...
+    # Subtest: thread general: parent leave before materialization
+    ok 49 - thread general: parent leave before materialization
+      ---
+      duration_ms: 20.71264
+      type: 'test'
+      ...
+    # Subtest: thread general: parent removed before materialization
+    ok 50 - thread general: parent removed before materialization
+      ---
+      duration_ms: 21.785544
+      type: 'test'
+      ...
+    # Subtest: thread general: entity before materialization
+    ok 51 - thread general: entity before materialization
+      ---
+      duration_ms: 23.293948
+      type: 'test'
+      ...
+    # Subtest: thread general: child archive before materialization
+    ok 52 - thread general: child archive before materialization
+      ---
+      duration_ms: 21.653961
+      type: 'test'
+      ...
+    # Subtest: thread general: parent archive before materialization
+    ok 53 - thread general: parent archive before materialization
+      ---
+      duration_ms: 20.770689
+      type: 'test'
+      ...
+    # Subtest: thread general: directory missing before materialization
+    ok 54 - thread general: directory missing before materialization
+      ---
+      duration_ms: 17.77304
+      type: 'test'
+      ...
+    # Subtest: thread general: directory redacted before materialization
+    ok 55 - thread general: directory redacted before materialization
+      ---
+      duration_ms: 18.135665
+      type: 'test'
+      ...
+    # Subtest: thread general: directory unavailable before materialization
+    ok 56 - thread general: directory unavailable before materialization
+      ---
+      duration_ms: 18.853778
+      type: 'test'
+      ...
+    # Subtest: thread general: directory wrong tenant before materialization
+    ok 57 - thread general: directory wrong tenant before materialization
+      ---
+      duration_ms: 18.60757
+      type: 'test'
+      ...
+    # Subtest: thread general: directory wrong user before materialization
+    ok 58 - thread general: directory wrong user before materialization
+      ---
+      duration_ms: 17.658624
+      type: 'test'
+      ...
+    # Subtest: thread explicit: mute before materialization
+    ok 59 - thread explicit: mute before materialization
+      ---
+      duration_ms: 18.003526
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: mute before materialization
+    ok 60 - thread synthetic: mute before materialization
+      ---
+      duration_ms: 20.96431
+      type: 'test'
+      ...
+    # Subtest: thread explicit: none level before materialization
+    ok 61 - thread explicit: none level before materialization
+      ---
+      duration_ms: 19.377703
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: none level before materialization
+    ok 62 - thread synthetic: none level before materialization
+      ---
+      duration_ms: 19.687602
+      type: 'test'
+      ...
+    # Subtest: thread explicit: parent leave before materialization
+    ok 63 - thread explicit: parent leave before materialization
+      ---
+      duration_ms: 19.894709
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: parent leave before materialization
+    ok 64 - thread synthetic: parent leave before materialization
+      ---
+      duration_ms: 19.666959
+      type: 'test'
+      ...
+    # Subtest: thread explicit: entity before materialization
+    ok 65 - thread explicit: entity before materialization
+      ---
+      duration_ms: 18.270611
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: entity before materialization
+    ok 66 - thread synthetic: entity before materialization
+      ---
+      duration_ms: 19.647105
+      type: 'test'
+      ...
+    # Subtest: thread explicit: child archive before materialization
+    ok 67 - thread explicit: child archive before materialization
+      ---
+      duration_ms: 19.014945
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: child archive before materialization
+    ok 68 - thread synthetic: child archive before materialization
+      ---
+      duration_ms: 19.382897
+      type: 'test'
+      ...
+    # Subtest: thread explicit: parent archive before materialization
+    ok 69 - thread explicit: parent archive before materialization
+      ---
+      duration_ms: 19.798413
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: parent archive before materialization
+    ok 70 - thread synthetic: parent archive before materialization
+      ---
+      duration_ms: 19.346573
+      type: 'test'
+      ...
+    # Subtest: thread explicit: directory redacted before materialization
+    ok 71 - thread explicit: directory redacted before materialization
+      ---
+      duration_ms: 18.231192
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: directory redacted before materialization
+    ok 72 - thread synthetic: directory redacted before materialization
+      ---
+      duration_ms: 18.360105
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: source deleted before materialization
+    ok 73 - thread synthetic: source deleted before materialization
+      ---
+      duration_ms: 19.655426
+      type: 'test'
+      ...
+    # Subtest: thread general: unfollow after materialization
+    ok 74 - thread general: unfollow after materialization
+      ---
+      duration_ms: 23.514384
+      type: 'test'
+      ...
+    # Subtest: thread general: child leave after materialization
+    ok 75 - thread general: child leave after materialization
+      ---
+      duration_ms: 23.79868
+      type: 'test'
+      ...
+    # Subtest: thread general: mute after materialization
+    ok 76 - thread general: mute after materialization
+      ---
+      duration_ms: 25.079842
+      type: 'test'
+      ...
+    # Subtest: thread general: mentions level after materialization
+    ok 77 - thread general: mentions level after materialization
+      ---
+      duration_ms: 25.508706
+      type: 'test'
+      ...
+    # Subtest: thread general: none level after materialization
+    ok 78 - thread general: none level after materialization
+      ---
+      duration_ms: 25.063986
+      type: 'test'
+      ...
+    # Subtest: thread general: parent leave after materialization
+    ok 79 - thread general: parent leave after materialization
+      ---
+      duration_ms: 23.710386
+      type: 'test'
+      ...
+    # Subtest: thread general: parent removed after materialization
+    ok 80 - thread general: parent removed after materialization
+      ---
+      duration_ms: 24.722057
+      type: 'test'
+      ...
+    # Subtest: thread general: entity after materialization
+    ok 81 - thread general: entity after materialization
+      ---
+      duration_ms: 23.944696
+      type: 'test'
+      ...
+    # Subtest: thread general: child archive after materialization
+    ok 82 - thread general: child archive after materialization
+      ---
+      duration_ms: 22.870085
+      type: 'test'
+      ...
+    # Subtest: thread general: parent archive after materialization
+    ok 83 - thread general: parent archive after materialization
+      ---
+      duration_ms: 28.288711
+      type: 'test'
+      ...
+    # Subtest: thread general: directory missing after materialization
+    ok 84 - thread general: directory missing after materialization
+      ---
+      duration_ms: 22.605979
+      type: 'test'
+      ...
+    # Subtest: thread general: directory redacted after materialization
+    ok 85 - thread general: directory redacted after materialization
+      ---
+      duration_ms: 24.046611
+      type: 'test'
+      ...
+    # Subtest: thread general: directory unavailable after materialization
+    ok 86 - thread general: directory unavailable after materialization
+      ---
+      duration_ms: 21.556969
+      type: 'test'
+      ...
+    # Subtest: thread general: directory wrong tenant after materialization
+    ok 87 - thread general: directory wrong tenant after materialization
+      ---
+      duration_ms: 23.85115
+      type: 'test'
+      ...
+    # Subtest: thread general: directory wrong user after materialization
+    ok 88 - thread general: directory wrong user after materialization
+      ---
+      duration_ms: 25.183606
+      type: 'test'
+      ...
+    # Subtest: thread explicit: mute after materialization
+    ok 89 - thread explicit: mute after materialization
+      ---
+      duration_ms: 25.875556
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: mute after materialization
+    ok 90 - thread synthetic: mute after materialization
+      ---
+      duration_ms: 26.104228
+      type: 'test'
+      ...
+    # Subtest: thread explicit: none level after materialization
+    ok 91 - thread explicit: none level after materialization
+      ---
+      duration_ms: 24.877449
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: none level after materialization
+    ok 92 - thread synthetic: none level after materialization
+      ---
+      duration_ms: 32.643083
+      type: 'test'
+      ...
+    # Subtest: thread explicit: parent leave after materialization
+    ok 93 - thread explicit: parent leave after materialization
+      ---
+      duration_ms: 28.692976
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: parent leave after materialization
+    ok 94 - thread synthetic: parent leave after materialization
+      ---
+      duration_ms: 27.70028
+      type: 'test'
+      ...
+    # Subtest: thread explicit: entity after materialization
+    ok 95 - thread explicit: entity after materialization
+      ---
+      duration_ms: 26.447444
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: entity after materialization
+    ok 96 - thread synthetic: entity after materialization
+      ---
+      duration_ms: 22.758934
+      type: 'test'
+      ...
+    # Subtest: thread explicit: child archive after materialization
+    ok 97 - thread explicit: child archive after materialization
+      ---
+      duration_ms: 23.054497
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: child archive after materialization
+    ok 98 - thread synthetic: child archive after materialization
+      ---
+      duration_ms: 23.827541
+      type: 'test'
+      ...
+    # Subtest: thread explicit: parent archive after materialization
+    ok 99 - thread explicit: parent archive after materialization
+      ---
+      duration_ms: 22.864749
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: parent archive after materialization
+    ok 100 - thread synthetic: parent archive after materialization
+      ---
+      duration_ms: 23.75109
+      type: 'test'
+      ...
+    # Subtest: thread explicit: directory redacted after materialization
+    ok 101 - thread explicit: directory redacted after materialization
+      ---
+      duration_ms: 22.619042
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: directory redacted after materialization
+    ok 102 - thread synthetic: directory redacted after materialization
+      ---
+      duration_ms: 21.967382
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: source deleted after materialization
+    ok 103 - thread synthetic: source deleted after materialization
+      ---
+      duration_ms: 27.20403
+      type: 'test'
+      ...
+    # Subtest: thread general: unfollow on retry
+    ok 104 - thread general: unfollow on retry
+      ---
+      duration_ms: 32.48117
+      type: 'test'
+      ...
+    # Subtest: thread general: child leave on retry
+    ok 105 - thread general: child leave on retry
+      ---
+      duration_ms: 32.243221
+      type: 'test'
+      ...
+    # Subtest: thread general: mute on retry
+    ok 106 - thread general: mute on retry
+      ---
+      duration_ms: 35.653478
+      type: 'test'
+      ...
+    # Subtest: thread general: mentions level on retry
+    ok 107 - thread general: mentions level on retry
+      ---
+      duration_ms: 34.771337
+      type: 'test'
+      ...
+    # Subtest: thread general: none level on retry
+    ok 108 - thread general: none level on retry
+      ---
+      duration_ms: 32.101489
+      type: 'test'
+      ...
+    # Subtest: thread general: parent leave on retry
+    ok 109 - thread general: parent leave on retry
+      ---
+      duration_ms: 31.697619
+      type: 'test'
+      ...
+    # Subtest: thread general: parent removed on retry
+    ok 110 - thread general: parent removed on retry
+      ---
+      duration_ms: 31.926286
+      type: 'test'
+      ...
+    # Subtest: thread general: entity on retry
+    ok 111 - thread general: entity on retry
+      ---
+      duration_ms: 35.400502
+      type: 'test'
+      ...
+    # Subtest: thread general: child archive on retry
+    ok 112 - thread general: child archive on retry
+      ---
+      duration_ms: 36.999283
+      type: 'test'
+      ...
+    # Subtest: thread general: parent archive on retry
+    ok 113 - thread general: parent archive on retry
+      ---
+      duration_ms: 32.129847
+      type: 'test'
+      ...
+    # Subtest: thread general: directory missing on retry
+    ok 114 - thread general: directory missing on retry
+      ---
+      duration_ms: 30.772071
+      type: 'test'
+      ...
+    # Subtest: thread general: directory redacted on retry
+    ok 115 - thread general: directory redacted on retry
+      ---
+      duration_ms: 33.913156
+      type: 'test'
+      ...
+    # Subtest: thread general: directory unavailable on retry
+    ok 116 - thread general: directory unavailable on retry
+      ---
+      duration_ms: 31.008951
+      type: 'test'
+      ...
+    # Subtest: thread general: directory wrong tenant on retry
+    ok 117 - thread general: directory wrong tenant on retry
+      ---
+      duration_ms: 31.823044
+      type: 'test'
+      ...
+    # Subtest: thread general: directory wrong user on retry
+    ok 118 - thread general: directory wrong user on retry
+      ---
+      duration_ms: 43.074775
+      type: 'test'
+      ...
+    # Subtest: thread explicit: mute on retry
+    ok 119 - thread explicit: mute on retry
+      ---
+      duration_ms: 33.987614
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: mute on retry
+    ok 120 - thread synthetic: mute on retry
+      ---
+      duration_ms: 31.145315
+      type: 'test'
+      ...
+    # Subtest: thread explicit: none level on retry
+    ok 121 - thread explicit: none level on retry
+      ---
+      duration_ms: 30.752251
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: none level on retry
+    ok 122 - thread synthetic: none level on retry
+      ---
+      duration_ms: 31.266269
+      type: 'test'
+      ...
+    # Subtest: thread explicit: parent leave on retry
+    ok 123 - thread explicit: parent leave on retry
+      ---
+      duration_ms: 31.768682
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: parent leave on retry
+    ok 124 - thread synthetic: parent leave on retry
+      ---
+      duration_ms: 31.399606
+      type: 'test'
+      ...
+    # Subtest: thread explicit: entity on retry
+    ok 125 - thread explicit: entity on retry
+      ---
+      duration_ms: 30.025208
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: entity on retry
+    ok 126 - thread synthetic: entity on retry
+      ---
+      duration_ms: 30.917975
+      type: 'test'
+      ...
+    # Subtest: thread explicit: child archive on retry
+    ok 127 - thread explicit: child archive on retry
+      ---
+      duration_ms: 36.807548
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: child archive on retry
+    ok 128 - thread synthetic: child archive on retry
+      ---
+      duration_ms: 30.988764
+      type: 'test'
+      ...
+    # Subtest: thread explicit: parent archive on retry
+    ok 129 - thread explicit: parent archive on retry
+      ---
+      duration_ms: 34.429948
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: parent archive on retry
+    ok 130 - thread synthetic: parent archive on retry
+      ---
+      duration_ms: 38.786819
+      type: 'test'
+      ...
+    # Subtest: thread explicit: directory redacted on retry
+    ok 131 - thread explicit: directory redacted on retry
+      ---
+      duration_ms: 31.0075
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: directory redacted on retry
+    ok 132 - thread synthetic: directory redacted on retry
+      ---
+      duration_ms: 30.062694
+      type: 'test'
+      ...
+    # Subtest: thread synthetic: source deleted on retry
+    ok 133 - thread synthetic: source deleted on retry
+      ---
+      duration_ms: 32.342647
+      type: 'test'
+      ...
+    # Subtest: queued explicit mention survives leave
+    ok 134 - queued explicit mention survives leave
+      ---
+      duration_ms: 24.74076
+      type: 'test'
+      ...
+    # Subtest: queued synthetic mention survives leave
+    ok 135 - queued synthetic mention survives leave
+      ---
+      duration_ms: 24.413702
+      type: 'test'
+      ...
+    # Subtest: applies levels, mute, self, active-session, tenant, and minimization rules
+    ok 136 - applies levels, mute, self, active-session, tenant, and minimization rules
+      ---
+      duration_ms: 36.69858
+      type: 'test'
+      ...
+    # Subtest: resolves only bounded active protected targets in stable device order
+    ok 137 - resolves only bounded active protected targets in stable device order
+      ---
+      duration_ms: 35.633751
+      type: 'test'
+      ...
+    # Subtest: suppresses delivery when no active protected target exists
+    ok 138 - suppresses delivery when no active protected target exists
+      ---
+      duration_ms: 14.854623
+      type: 'test'
+      ...
+    # Subtest: rejects a malformed target before any decryption or send
+    ok 139 - rejects a malformed target before any decryption or send
+      ---
+      duration_ms: 16.538405
+      type: 'test'
+      ...
+    # Subtest: keeps decryption failures retryable and secret-free
+    ok 140 - keeps decryption failures retryable and secret-free
+      ---
+      duration_ms: 22.643894
+      type: 'test'
+      ...
+    # Subtest: two workers make exactly one concurrent adapter call
+    ok 141 - two workers make exactly one concurrent adapter call
+      ---
+      duration_ms: 34.169242
+      type: 'test'
+      ...
+    # Subtest: transient and rate-limited failures retry with stable ids
+    ok 142 - transient and rate-limited failures retry with stable ids
+      ---
+      duration_ms: 52.651861
+      type: 'test'
+      ...
+    # Subtest: message retry rechecks current eligibility: removed
+    ok 143 - message retry rechecks current eligibility: removed
+      ---
+      duration_ms: 38.380894
+      type: 'test'
+      ...
+    # Subtest: message retry rechecks current eligibility: left
+    ok 144 - message retry rechecks current eligibility: left
+      ---
+      duration_ms: 29.914648
+      type: 'test'
+      ...
+    # Subtest: message retry rechecks current eligibility: missing-member
+    ok 145 - message retry rechecks current eligibility: missing-member
+      ---
+      duration_ms: 30.771161
+      type: 'test'
+      ...
+    # Subtest: message retry rechecks current eligibility: archived
+    ok 146 - message retry rechecks current eligibility: archived
+      ---
+      duration_ms: 30.474067
+      type: 'test'
+      ...
+    # Subtest: message retry rechecks current eligibility: missing-conversation
+    ok 147 - message retry rechecks current eligibility: missing-conversation
+      ---
+      duration_ms: 27.845858
+      type: 'test'
+      ...
+    # Subtest: message retry rechecks current eligibility: active
+    ok 148 - message retry rechecks current eligibility: active
+      ---
+      duration_ms: 23.730282
+      type: 'test'
+      ...
+    # Subtest: an expired lease is recovered
+    ok 149 - an expired lease is recovered
+      ---
+      duration_ms: 15.6374
+      type: 'test'
+      ...
+    # Subtest: retry exhaustion is bounded and terminal failures are isolated
+    ok 150 - retry exhaustion is bounded and terminal failures are isolated
+      ---
+      duration_ms: 46.464642
+      type: 'test'
+      ...
+    # Subtest: emits sanitized aggregate telemetry for PostgreSQL outcomes and failures
+    ok 151 - emits sanitized aggregate telemetry for PostgreSQL outcomes and failures
+      ---
+      duration_ms: 27.241936
+      type: 'test'
+      ...
+    # Subtest: disabled or missing notification support is a clean no-op
+    ok 152 - disabled or missing notification support is a clean no-op
+      ---
+      duration_ms: 13.629044
+      type: 'test'
+      ...
+    1..152
+ok 1 - durable notification dispatch selects, leases, retries, and isolates real PostgreSQL rows
+  ---
+  duration_ms: 4470.726968
+  type: 'test'
+  ...
+# Subtest: notification materialization pages replay positions transactionally
+    # Subtest: bounds each page and resumes strictly after a gapped offset
+    ok 1 - bounds each page and resumes strictly after a gapped offset
+      ---
+      duration_ms: 41.582869
+      type: 'test'
+      ...
+    # Subtest: ineligible inspected events advance progress without recipients
+    ok 2 - ineligible inspected events advance progress without recipients
+      ---
+      duration_ms: 30.758697
+      type: 'test'
+      ...
+    # Subtest: a failed transaction leaves no progress and replays its page
+    ok 3 - a failed transaction leaves no progress and replays its page
+      ---
+      duration_ms: 22.804437
+      type: 'test'
+      ...
+    # Subtest: concurrent dispatchers serialize pages without gaps or duplicates
+    ok 4 - concurrent dispatchers serialize pages without gaps or duplicates
+      ---
+      duration_ms: 29.378267
+      type: 'test'
+      ...
+    1..4
+ok 2 - notification materialization pages replay positions transactionally
+  ---
+  duration_ms: 433.102614
+  type: 'test'
+  ...
+# Subtest: dispatcher claims the deterministic global candidate boundary
+ok 3 - dispatcher claims the deterministic global candidate boundary
+  ---
+  duration_ms: 338.785062
+  type: 'test'
+  ...
+1..3
+# tests 159
+# suites 0
+# pass 159
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5445.900863

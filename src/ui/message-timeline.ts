@@ -147,7 +147,9 @@ export interface MessageTimelineProps {
   readonly otherMemberReadState?: ConversationReadState;
   /** Selects a source in the current conversation composer; never changes destination. */
   readonly onReplyRequested?: ChatComposerControls["selectReply"];
-  /** Restrictions on inline Reply; Current thread entry points keep their legacy behavior. */
+  /** Focus the existing thread composer for Current-style Reply, preserving its draft. */
+  readonly onThreadReplyRequested?: () => void;
+  /** Restrictions on replies sent in this conversation. */
   readonly readOnly?: boolean;
   readonly replyAvailability?: MessageComposerAvailability;
   /** Notifies a composing host after the public open-thread action resolves. */
@@ -1672,6 +1674,8 @@ interface MessageRowProps {
   readonly onCreateThread?: MessageTimelineProps["onCreateThread"];
   readonly threadCreationDisabledReason: string | undefined;
   readonly inlineReply: boolean;
+  readonly isThread: boolean;
+  readonly onThreadReplyRequested?: MessageTimelineProps["onThreadReplyRequested"];
   readonly replyDisabledReason: string | undefined;
   readonly onForwardMessage?: MessageTimelineProps["onForwardMessage"];
   readonly reactionKeys: readonly string[];
@@ -1752,6 +1756,8 @@ const MessageRow = ({
   onCreateThread,
   threadCreationDisabledReason,
   inlineReply,
+  isThread,
+  onThreadReplyRequested,
   replyDisabledReason: conversationReplyDisabledReason,
   onForwardMessage,
   reactionKeys,
@@ -1838,8 +1844,8 @@ const MessageRow = ({
   // Invalidate retained custom-slot callbacks when the row, destination, style or
   // availability changes. A stale source must never reach a newly bound composer.
   const replyBinding = useMemo(() => ({
-    inlineReply, replyDisabledReason, onReplyRequested, viewModel, conversationId, onCreateThread, threadCreationDisabledReason,
-  }), [inlineReply, replyDisabledReason, onReplyRequested, viewModel, conversationId, onCreateThread, threadCreationDisabledReason]);
+    inlineReply, isThread, onThreadReplyRequested, replyDisabledReason, onReplyRequested, viewModel, conversationId, onCreateThread, threadCreationDisabledReason,
+  }), [inlineReply, isThread, onThreadReplyRequested, replyDisabledReason, onReplyRequested, viewModel, conversationId, onCreateThread, threadCreationDisabledReason]);
   const replyBindingRef = useRef<typeof replyBinding | undefined>(replyBinding);
   replyBindingRef.current = replyBinding;
   useLayoutEffect(() => {
@@ -1856,8 +1862,8 @@ const MessageRow = ({
   }, [openBinding]);
 
   const messageActions = useMemo<ChatMessageActions>(() => ({
-    ...(inlineReply && viewModel.isThreadRoot ? { showOpenThread: true } : {}),
-    ...(inlineReply && !viewModel.isThreadRoot && onCreateThread !== undefined ? {
+    ...(inlineReply && !isThread && viewModel.isThreadRoot ? { showOpenThread: true } : {}),
+    ...(inlineReply && !isThread && !viewModel.isThreadRoot && onCreateThread !== undefined ? {
       ...(threadCreationDisabledReason === undefined ? {} : { threadCreationDisabledReason }),
       requestThreadCreation: (rootMessageId: MessageId) => {
         if (replyBindingRef.current !== replyBinding || threadCreationDisabledReason !== undefined ||
@@ -1866,14 +1872,15 @@ const MessageRow = ({
         onCreateThread(rootMessageId, document.activeElement instanceof HTMLElement ? document.activeElement : null);
       },
     } : {}),
-    ...(inlineReply ? {
+    ...(inlineReply || isThread ? {
       ...(replyDisabledReason === undefined ? {} : { replyDisabledReason }),
       selectReply: (sourceMessageId: MessageId) => {
         if (replyBindingRef.current !== replyBinding || replyDisabledReason !== undefined ||
           sourceMessageId !== viewModel.id || viewModel.conversationId !== conversationId ||
           viewModel.delivery.state !== "sent" || viewModel.content === null ||
           viewModel.deletedAt !== undefined || viewModel.sequence <= 0) return;
-        onReplyRequested?.({ conversationId, messageId: sourceMessageId });
+        if (inlineReply) onReplyRequested?.({ conversationId, messageId: sourceMessageId });
+        else onThreadReplyRequested?.();
       },
     } : {}),
     retryMessage: (clientMessageId) => run("Retrying message", () => actions.retryMessage(clientMessageId)),
@@ -1882,6 +1889,11 @@ const MessageRow = ({
     setReaction: (input) => run("Updating reaction", () => actions.setReaction(input)),
     markUnread: (input) => run("Marking message unread", () => actions.markUnread(input)),
     openThread: (rootMessageId) => {
+      // A thread cannot be the parent of another thread, including custom-slot calls.
+      if (isThread) return Promise.resolve(Object.freeze({
+        state: "error", rootMessageId, code: "command_failed",
+        message: "Nested threads are unavailable. Reply in the current thread instead.",
+      }));
       const returnFocusTarget = typeof document !== "undefined" && document.activeElement instanceof HTMLElement
         ? document.activeElement
         : null;
@@ -1970,7 +1982,7 @@ const MessageRow = ({
         return Object.freeze({ status: "failed", conflict: false });
       }
     },
-  }), [actions, openBinding, onCreateThread, threadCreationDisabledReason, onForwardMessage, onOpenThread, run, viewModel, inlineReply, replyDisabledReason, onReplyRequested, conversationId, replyBinding]);
+  }), [actions, openBinding, onCreateThread, threadCreationDisabledReason, onForwardMessage, onOpenThread, run, viewModel, inlineReply, isThread, onThreadReplyRequested, replyDisabledReason, onReplyRequested, conversationId, replyBinding]);
 
   const reactionAggregates = useMemo(() => {
     const preferredOrder = new Map<string, number>();
@@ -2359,6 +2371,7 @@ export function MessageTimeline({
   otherMemberReadState,
   onOpenThread,
   onReplyRequested,
+  onThreadReplyRequested,
   onCreateThread,
   readOnly,
   replyAvailability,
@@ -2368,6 +2381,8 @@ export function MessageTimeline({
   const threadCreationDisabledReason = useThreadCreationRestriction(conversationId, readOnly, replyAvailability);
   const sourceRuntime = context?.client.messageContext;
   const inlineReply = useReplyStyle().effectiveStyle === "discord";
+  const isThread = useChatSelector(useCallback((state: NormalizedChatCacheState) =>
+    state.entities.conversations[conversationId]?.type === "thread", [conversationId])) === true;
   const conversationReplyRestriction = useChatSelector(useCallback((state: NormalizedChatCacheState) => {
     const conversation = state.entities.conversations[conversationId];
     const membership = state.currentUser.memberships[conversationId];
@@ -2379,14 +2394,15 @@ export function MessageTimeline({
     }
     return undefined;
   }, [conversationId]));
-  const replyDisabledReason = !inlineReply ? undefined : !context?.isReady ? "Chat is not ready to send replies." :
-    context.state.state !== "ready" || context.state.enabledFeatures?.inlineReplies !== true
+  const replyDisabledReason = !inlineReply && !isThread ? undefined : !context?.isReady ? "Chat is not ready to send replies." :
+    inlineReply && (context.state.state !== "ready" || context.state.enabledFeatures?.inlineReplies !== true)
       ? "Inline replies are not supported by this server." :
     readOnly === true ? "This conversation is read-only." :
     replyAvailability?.canSend === false ? "You do not have permission to send messages." :
     replyAvailability?.membershipState !== undefined && replyAvailability.membershipState !== "active"
       ? "You must be an active member to reply." :
-    conversationReplyRestriction ?? (onReplyRequested === undefined ? "A reply composer is unavailable." : undefined);
+    conversationReplyRestriction ?? ((inlineReply ? onReplyRequested : onThreadReplyRequested) === undefined
+      ? "A reply composer is unavailable." : undefined);
   const navigationScope = useMemo(() => ({ conversationId, sourceRuntime }), [conversationId, sourceRuntime]);
   const navigationScopeRef = useRef<typeof navigationScope | undefined>(navigationScope);
   navigationScopeRef.current = navigationScope;
@@ -3259,6 +3275,8 @@ export function MessageTimeline({
       rows.push(createElement(MessageRow, {
         actions: timelineActions,
         inlineReply,
+        isThread,
+        ...(onThreadReplyRequested === undefined ? {} : { onThreadReplyRequested }),
         threadCreationDisabledReason,
         ...(onCreateThread === undefined ? {} : { onCreateThread }),
         replyDisabledReason,

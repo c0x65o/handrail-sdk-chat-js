@@ -1,0 +1,58 @@
+cwd: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum-final-pass/package
+command: ["/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter", "test", "--no-pub", "--concurrency=2", "--reporter=expanded", "test/handrail_chat_workspace_test.dart", "--name", "reply routing|named thread|thread discovery"]
+00:00 +0: loading /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum-final-pass/package/test/handrail_chat_workspace_test.dart
+00:00 +0: reply routing unknown capability updates and detaches on client rebinding
+00:00 +1: reply routing excludes pending and deleted sources including an open menu
+00:01 +2: reply routing channel summary=false sends Friday in place
+00:01 +3: reply routing channel summary=true sends Friday in place
+00:02 +4: reply routing direct summary=false sends Friday in place
+00:02 +5: reply routing direct summary=true sends Friday in place
+00:02 +6: reply routing group_direct summary=false sends Friday in place
+00:02 +7: reply routing group_direct summary=true sends Friday in place
+00:02 +8: reply routing existing thread uses its own composer and ID
+00:03 +9: reply routing Current in thread saved=null inline=false keeps composition
+00:03 +10: reply routing Current in thread saved=null inline=true keeps composition
+00:03 +11: reply routing Current in thread saved=current inline=false keeps composition
+00:04 +12: reply routing Current in thread saved=current inline=true keeps composition
+00:04 +13: reply routing Current standalone thread never creates a nested thread
+00:04 +14: reply routing Current saved=null retains thread behavior
+00:04 +15: reply routing Current saved=current retains thread behavior
+00:04 +16: reply routing absent preference API still allows supported inline replies
+00:05 +17: reply routing missing capability disables without thread fallback
+00:05 +18: reply routing keyboard and long press retain composition across styles
+00:05 +19: reply routing no handler and rejecting handler explain unavailable composer
+00:05 +20: named thread current creates canonical discussion without changing draft
+00:05 +21: named thread discord creates canonical discussion without changing draft
+00:06 +22: named thread server existing-root reconciliation never renames
+00:06 +23: named thread compact validation keyboard semantics and cancel restores focus
+00:06 +24: named thread canonical Unicode scalar limit accepts 100 emoji unchanged
+00:07 +25: named thread failed create retry freezes payload and preserves inline draft
+00:07 +26: named thread pending cancel ignores late completion
+00:07 +27: named thread pending switch ignores late completion
+00:07 +28: named thread pending dispose ignores late completion
+00:07 +29: named thread unavailable capability keeps existing and Current entry points
+00:08 +30: named thread excludes deleted optimistic and newly deleted roots
+00:08 +31: named thread legacy header custom builders and caller handle ownership
+00:08 +32: named thread parent context redacts on denied access and deleted roots stay open
+00:08 +33: named thread failed cancel keeps attachment draft and a new intent gets a new key
+00:08 +34: named thread host delegate failure=false releases its retain
+00:09 +35: named thread host delegate failure=true releases its retain
+00:09 +36: named thread compact success keeps header close and returns to parent draft
+00:09 +37: named thread disposal during host navigation releases before late delegate returns
+00:09 +38: thread discovery current opens unfollowed canonical deleted-root history without writes
+00:10 +39: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:10 +40: thread discovery compact keyboard back restores row and channel focus and draft
+00:10 +41: thread discovery pagination retry follow unread and supported filters
+00:10 +42: thread discovery unsupported filters empty initial retry and denied state
+00:10 +43: thread discovery parent revocation closes and releases open history
+00:11 +44: thread discovery stale list cannot display previous channel
+00:11 +45: thread discovery pending canonical open releases after dismiss
+00:11 +46: thread discovery pending canonical open releases after channel
+00:11 +47: thread discovery pending canonical open releases after dispose
+00:11 +48: thread discovery delegate handled releases canonical retain
+00:11 +49: thread discovery delegate throws releases canonical retain
+00:11 +50: thread discovery delegate late releases canonical retain
+00:12 +51: thread discovery client replacement releases history and Escape returns to channel
+00:12 +52: thread discovery pending list rejects revoked and changed identity authority
+00:12 +53: thread discovery supplied list controller survives disposal and authority changes clear data
+00:12 +54: All tests passed!

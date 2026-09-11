@@ -3064,7 +3064,7 @@ test("default public actions send, open and close a focus-restoring thread, and 
   await click(openThread);
   assert.equal(fixture.calls.find(({ name }) => name === "openThread").args[0], rootMessageId);
   assert.ok(container.querySelector("[data-handrail-thread-panel]"));
-  await click(container.querySelector('button[aria-label="Close thread"]'));
+  await click(container.querySelector('button[aria-label="Close panel"]'));
   assert.equal(container.querySelector("[data-handrail-thread-panel]"), null);
   assert.equal(document.activeElement, openThread);
 
@@ -3225,7 +3225,7 @@ test("docks an opened thread beside a stable independently scrolling timeline pa
   assert.ok(thread.querySelector('[aria-label="Thread replies"]'));
   assert.ok(thread.querySelector('textarea[aria-label="Reply to thread"]'));
 
-  await click(thread.querySelector('button[aria-label="Close thread"]'));
+  await click(thread.querySelector('button[aria-label="Close panel"]'));
   assert.equal(container.querySelector('[aria-label="Conversation thread"]'), null);
   assert.equal(body.classList.contains("handrail-chat__conversation-body--thread-open"), false);
   assert.equal(timeline.querySelector(".handrail-chat__timeline-viewport"), timelineViewport);
@@ -3254,7 +3254,7 @@ test("Reply starts a new thread and is hidden for deleted and unsent messages", 
   assert.ok(container.querySelector('[aria-label="Thread replies"]'));
   assert.ok(container.querySelector('textarea[aria-label="Reply to thread"]'));
 
-  await click(container.querySelector('button[aria-label="Close thread"]'));
+  await click(container.querySelector('button[aria-label="Close panel"]'));
   assert.equal(container.querySelector("[data-handrail-thread-panel]"), null);
   assert.equal(document.activeElement, reply);
 });
@@ -4562,4 +4562,44 @@ test("named thread creation excludes deleted and unsent roots, and is independen
   await click(namedCreate(container)); await namedInput(container, "Independent discussion"); await namedSubmit(container);
   const panel = container.querySelector("[data-handrail-thread-panel]");
   assert.equal(panel.querySelector('[aria-label="Create Thread"]'), null);
+});
+
+
+for (const style of ['default', 'current']) {
+  test(`inline Reply routing: ${style} directly selected thread focuses its existing composer without nested creation`, async () => {
+    const fixture = createFixture();
+    if (style === 'current') await withReplyRouting(fixture, { style, inlineReplies: false });
+    const container = await mount(workspace(fixture, { conversationId: threadId }));
+    const composer = container.querySelector('[aria-label="Conversation composer"]');
+    const textarea = composer.querySelector('textarea');
+    const editor = composer.querySelector('[role="textbox"]') ?? textarea;
+    assert.ok(editor && !editor.hidden, 'Thread composer must expose a visible editor');
+    await input(textarea, 'Keep this directly selected thread draft');
+    const before = structuredClone(fixture.cache.getState().currentUser.readStates);
+    const reply = routingReply(container, 'message-thread');
+    assert.equal(reply.disabled, false);
+    reply.focus();
+    await click(reply);
+    assert.ok(document.activeElement === editor, 'Current Reply should focus the selected thread composer');
+    assert.equal(textarea.value, 'Keep this directly selected thread draft');
+    assert.equal(fixture.client.selectConversationDraft(threadId).draft.content.replyTo, undefined);
+    assert.deepEqual(fixture.cache.getState().currentUser.readStates, before);
+    assert.equal(container.querySelector('[data-handrail-thread-panel]'), null);
+    await click(routingSend(composer));
+    assert.deepEqual(routingSends(fixture), [{ conversationId: threadId,
+      content: { format: 'plain', text: 'Keep this directly selected thread draft' } }]);
+    assertNoThreadCommand(fixture);
+  });
+}
+
+test('inline Reply routing: Current directly selected thread requires a connected composer', async () => {
+  const fixture = createFixture();
+  await withReplyRouting(fixture, { style: 'current', inlineReplies: false });
+  const container = await mount(workspace(fixture, { conversationId: threadId, renderComposer: () => null }));
+  const reply = routingReply(container, 'message-thread');
+  assert.equal(reply.disabled, true);
+  assert.match(reply.getAttribute('aria-description'), /composer is unavailable/);
+  await click(reply);
+  assertNoThreadCommand(fixture);
+  assert.deepEqual(routingSends(fixture), []);
 });

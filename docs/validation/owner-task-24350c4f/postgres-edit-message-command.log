@@ -1,0 +1,83 @@
+TAP version 13
+# Subtest: edit-message command is tenant-safe, revisioned, idempotent, and atomic
+    # Subtest: edits preserve reply-true metadata across results, events, and retries
+    ok 1 - edits preserve reply-true metadata across results, events, and retries
+      ---
+      duration_ms: 26.720552
+      type: 'test'
+      ...
+    # Subtest: edits preserve reply-false metadata across results, events, and retries
+    ok 2 - edits preserve reply-false metadata across results, events, and retries
+      ---
+      duration_ms: 16.470346
+      type: 'test'
+      ...
+    # Subtest: edits preserve legacy metadata across results, events, and retries
+    ok 3 - edits preserve legacy metadata across results, events, and retries
+      ---
+      duration_ms: 15.944795
+      type: 'test'
+      ...
+    # Subtest: author edit appends one immutable revision and preserves read position
+    ok 4 - author edit appends one immutable revision and preserves read position
+      ---
+      duration_ms: 13.820494
+      type: 'test'
+      ...
+    # Subtest: configured capability permits a non-author edit
+    ok 5 - configured capability permits a non-author edit
+      ---
+      duration_ms: 18.319412
+      type: 'test'
+      ...
+    # Subtest: stale revision returns and stores the current canonical state
+    ok 6 - stale revision returns and stores the current canonical state
+      ---
+      duration_ms: 10.578221
+      type: 'test'
+      ...
+    # Subtest: a fractional-millisecond claim completes and replays a revision conflict
+    ok 7 - a fractional-millisecond claim completes and replays a revision conflict
+      ---
+      duration_ms: 13.094732
+      type: 'test'
+      ...
+    # Subtest: unauthorized and cross-tenant actors receive sanitized rejection
+    ok 8 - unauthorized and cross-tenant actors receive sanitized rejection
+      ---
+      duration_ms: 6.175627
+      type: 'test'
+      ...
+    # Subtest: completed retry is exact except replay status and has no duplicate side effects
+    ok 9 - completed retry is exact except replay status and has no duplicate side effects
+      ---
+      duration_ms: 13.854748
+      type: 'test'
+      ...
+    # Subtest: injected late failure rolls back every edit side effect
+    ok 10 - injected late failure rolls back every edit side effect
+      ---
+      duration_ms: 11.255092
+      type: 'test'
+      ...
+    # Subtest: caller-supplied trusted identity is rejected before access
+    ok 11 - caller-supplied trusted identity is rejected before access
+      ---
+      duration_ms: 0.609428
+      type: 'test'
+      ...
+    1..11
+ok 1 - edit-message command is tenant-safe, revisioned, idempotent, and atomic
+  ---
+  duration_ms: 461.328485
+  type: 'test'
+  ...
+1..1
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 661.155752

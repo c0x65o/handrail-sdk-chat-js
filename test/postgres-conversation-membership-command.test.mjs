@@ -140,6 +140,8 @@ test("conversation-membership command applies every intent atomically in Postgre
              WHERE tenant_id = 'tenant-a' AND target_id = $1) AS audit,
            (SELECT count(*)::integer FROM ${tables.outbox}
              WHERE tenant_id = 'tenant-a'
+               AND type = 'conversation.membership.updated'
+               AND payload->'input'->>'conversationId' = $1
                AND (stream_id = $1 OR stream_id = 'user:' || $2)) AS outbox`,
         [conversationId, userId],
       )
@@ -152,12 +154,11 @@ test("conversation-membership command applies every intent atomically in Postgre
       migrations: handrailChatPostgresMigrations,
     }).apply();
     assert.deepEqual(
-      applied.applied.map(({ id, order }) => ({ id, order })).at(-1),
-      {
-      id: "0017-chat-conversation-member-list-revision",
-      order: 17,
-      },
+      applied.applied.map(({ id, order }) => ({ id, order })),
+      handrailChatPostgresMigrations.map(({ id, order }) => ({ id, order })),
     );
+    assert.ok(applied.applied.some(({ id, order }) =>
+      id === "0017-chat-conversation-member-list-revision" && order === 17));
 
     await harness.pool.query(
       `INSERT INTO ${tables.conversations}
@@ -358,6 +359,68 @@ test("conversation-membership command applies every intent atomically in Postgre
       );
       assert.equal(changed.reconciliationStatus, "applied");
       assert.equal(changed.members.find(({ userId }) => userId === "user-b").role, "moderator");
+    });
+
+    await t.test("thread membership requires current parent access even for owners and retries", async () => {
+      await harness.pool.query(`INSERT INTO ${tables.conversations}
+        (tenant_id,id,type,visibility,name,current_message_sequence)
+        VALUES ('tenant-a','membership-parent','channel','private','Membership parent',1)`);
+      await harness.pool.query(`INSERT INTO ${tables.messages}
+        (tenant_id,id,conversation_id,sequence,author_user_id,client_message_id,content)
+        VALUES ('tenant-a','membership-root','membership-parent',1,'actor-a','membership-root',
+          '{"format":"plain","text":"Isolated parent access fixture"}')`);
+      await harness.pool.query(`INSERT INTO ${tables.conversations}
+        (tenant_id,id,type,visibility,parent_conversation_id,root_message_id)
+        VALUES ('tenant-a','membership-child','thread','public','membership-parent','membership-root')`);
+      await harness.pool.query(`INSERT INTO ${tables.members}
+        (tenant_id,conversation_id,user_id,role,state)
+        VALUES ('tenant-a','membership-child','actor-a','owner','active')`);
+      const add = targetedInput("parent-access-add", "add_member", "membership-child", "user-b");
+      // Retained child ownership does not grant private parent access.
+      await assert.rejects(command(add), authorizationFailure);
+      await harness.pool.query(`INSERT INTO ${tables.members}
+        (tenant_id,conversation_id,user_id,role,state)
+        VALUES ('tenant-a','membership-parent','actor-a','member','active'),
+          ('tenant-a','membership-parent','user-b','member','active')`);
+      assert.equal((await command(add)).reconciliationStatus, "applied");
+      assert.equal((await command(add)).reconciliationStatus, "replayed");
+      const afterAdd = await stateCounts("membership-child", "user-b");
+      const deniedTarget = targetedInput("target-without-parent-access", "add_member", "membership-child", "user-c",
+        { expectedMemberListRevision: 2 });
+      const beforeDeniedTarget = await stateCounts("membership-child", "user-c");
+      await assert.rejects(command(deniedTarget), authorizationFailure);
+      assert.deepEqual(await stateCounts("membership-child", "user-c"), beforeDeniedTarget);
+      assert.deepEqual((await harness.pool.query(`SELECT
+        (SELECT count(*)::int FROM ${tables.follows} WHERE tenant_id='tenant-a'
+          AND conversation_id='membership-child' AND user_id='user-c') AS follows,
+        (SELECT count(*)::int FROM ${tables.idempotency} WHERE tenant_id='tenant-a'
+          AND user_id='actor-a' AND client_key=$1) AS claims,
+        (SELECT member_list_revision::int FROM ${tables.conversations}
+          WHERE tenant_id='tenant-a' AND id='membership-child') AS revision`,
+      [deniedTarget.idempotencyKey])).rows, [{ follows: 0, claims: 0, revision: 2 }]);
+      for (const state of ["removed", "left"]) {
+        await harness.pool.query(`UPDATE ${tables.members} SET state=$1
+          WHERE tenant_id='tenant-a' AND conversation_id='membership-parent' AND user_id='actor-a'`, [state]);
+        await assert.rejects(command(add), authorizationFailure);
+        await assert.rejects(command(targetedInput(`parent-${state}`, "add_member", "membership-child", "user-c",
+          { expectedMemberListRevision: 2 })), authorizationFailure);
+        assert.deepEqual(await stateCounts("membership-child", "user-b"), afterAdd);
+      }
+      await harness.pool.query(`UPDATE ${tables.members} SET state='active'
+        WHERE tenant_id='tenant-a' AND conversation_id='membership-parent' AND user_id='actor-a'`);
+      await harness.pool.query(`UPDATE ${tables.conversations}
+        SET archived_at=clock_timestamp(), archived_by_user_id='actor-a'
+        WHERE tenant_id='tenant-a' AND id='membership-parent'`);
+      await assert.rejects(command(add), authorizationFailure);
+      // Public parent readers can join a public child for the first time,
+      // without inventing host capabilities or prior child membership.
+      await harness.pool.query(`UPDATE ${tables.conversations}
+        SET visibility='public', archived_at=NULL, archived_by_user_id=NULL
+        WHERE tenant_id='tenant-a' AND id='membership-parent'`);
+      const joined = await command(membershipInput("public-child-first-join", "join", "membership-child",
+        { expectedMemberListRevision: 2 }), { actor: actor("user-c") });
+      assert.equal(joined.reconciliationStatus, "applied");
+      assert.equal(joined.members.find(member => member.userId === "user-c").state, "active");
     });
 
     await t.test("enforces public self-join, entity access, and management policy", async () => {
@@ -662,8 +725,11 @@ test("conversation-membership command applies every intent atomically in Postgre
       );
     });
   } finally {
-    await harness.dispose();
-    await backend.dispose();
+    try {
+      await harness.teardown();
+    } finally {
+      await backend.teardown();
+    }
   }
 });
 

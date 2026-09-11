@@ -1,0 +1,4 @@
+
+> @handrail/chat@1.0.25 build
+> node scripts/generate-package-version.mjs && tsc --project tsconfig.json && node scripts/copy-ui-styles.mjs
+

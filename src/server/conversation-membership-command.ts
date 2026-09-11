@@ -24,6 +24,7 @@ import {
   type PostgresMigrationDatabase,
 } from "./postgres-migrations.js";
 import { ChatAuthorizationError } from "./request-context.js";
+import { authorizeThreadAccess } from "./thread-access.js";
 
 export const CONVERSATION_MEMBERSHIP_MANAGE_CAPABILITY =
   "chat.members.manage" as const;
@@ -90,6 +91,7 @@ interface ClaimedIdempotencyRow {
 
 interface LockedConversationRow {
   readonly type: string;
+  readonly parent_conversation_id: string | null;
   readonly visibility: string;
   readonly member_list_revision: string | number;
   readonly current_message_sequence: string | number;
@@ -845,8 +847,18 @@ export async function mutateConversationMembership(
       throw new Error("PostgreSQL returned an invalid idempotency state");
     }
 
+    // Match thread lifecycle/send lock order so parent membership revocation
+    // cannot race a successful child mutation or an idempotent replay.
+    const parents = await connection.query<{ id: string }>(
+      `SELECT parent.id FROM ${prefix}.chat_conversations AS parent
+       WHERE parent.tenant_id = $1 AND parent.id = (
+         SELECT parent_conversation_id FROM ${prefix}.chat_conversations
+         WHERE tenant_id = $1 AND id = $2 AND type = 'thread'
+       ) FOR UPDATE`,
+      [options.actor.tenantId, input.conversationId],
+    );
     const locked = await connection.query<LockedConversationRow>(
-      `SELECT conversation.type, conversation.visibility,
+      `SELECT conversation.type, conversation.parent_conversation_id, conversation.visibility,
               conversation.member_list_revision,
               conversation.current_message_sequence,
               conversation.archived_at,
@@ -874,6 +886,26 @@ export async function mutateConversationMembership(
     }
     const capabilities = await readCapabilities(options.actor, options.permissions);
     await authorizeEntity(conversation, options.actor, options.permissions);
+    if (conversation.type === "thread") {
+      const parent = parents.rows[0];
+      if (parent === undefined || conversation.parent_conversation_id !== parent.id) {
+        throw new ChatAuthorizationError();
+      }
+      await connection.query(
+        `SELECT conversation_id FROM ${prefix}.chat_conversation_members
+         WHERE tenant_id = $1 AND conversation_id = ANY($2::text[]) AND user_id = $3
+         ORDER BY conversation_id FOR SHARE`,
+        [options.actor.tenantId, [parent.id, input.conversationId], options.actor.userId],
+      );
+      // Access foundation only: preserve the membership action and the existing
+      // intent-specific role/capability rules below.
+      await authorizeThreadAccess({
+        database: connection, schema, actor: options.actor,
+        threadId: input.conversationId, operation: "read",
+        entityAction: CONVERSATION_MEMBERSHIP_ENTITY_POLICY_ACTION,
+        permissions: options.permissions,
+      });
+    }
     requireIntentAuthorization(input, conversation, capabilities);
 
     if (claimed.idempotency_state === "completed") {
@@ -960,7 +992,7 @@ export async function mutateConversationMembership(
       input.intent === "leave" || input.intent === "change_member_role";
     const requiresExistingTarget = input.intent === "remove_member";
     if (target === undefined) {
-      if (input.intent !== "add_member") {
+      if (input.intent !== "add_member" && input.intent !== "join") {
         throw new ChatAuthorizationError();
       }
     } else if (
@@ -1057,6 +1089,13 @@ export async function mutateConversationMembership(
     return result;
   } catch (error) {
     await rollback(connection);
+    // The canonical follow guard also protects a newly added member's access
+    // to a private parent. Keep that denial actionable without exposing SQL.
+    if (typeof error === "object" && error !== null &&
+        "code" in error && error.code === "23514" &&
+        "constraint" in error && error.constraint === "chat_thread_follows_active_membership_check") {
+      throw new ChatAuthorizationError();
+    }
     throw error;
   } finally {
     connection.release();

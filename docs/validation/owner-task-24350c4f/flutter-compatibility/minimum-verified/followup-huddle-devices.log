@@ -1,0 +1,4 @@
+cwd: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/package
+command: ["/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter", "test", "--no-pub", "--concurrency=2", "--reporter=expanded", "test/handrail_huddle_panel_test.dart", "--plain-name", "renders participants, active speakers, media toggles, and live devices"]
+00:00 +0: loading /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/package/test/handrail_huddle_panel_test.dart
+00:00 +0: renders participants, active speakers, media toggles, and live devices

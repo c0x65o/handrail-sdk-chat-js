@@ -1534,3 +1534,63 @@ test('pre-existing optimistic subscription and preference writes remain unconfir
   assert.equal(leave.disabled, false);
   assert.equal(preferencesDialog(container).querySelector('select').disabled, false);
 });
+
+
+for (const style of ['default', 'current']) {
+  test(`${style} Reply inside a thread focuses its composer without nested creation or an inline source`, async () => {
+    const fixture = lifecycleFixture({ initialDraft: { format: 'plain', text: 'Retained current thread draft', attachments: [] } });
+    if (style === 'default') delete fixture.client.replyStyle;
+    fixture.context.state.enabledFeatures = { inlineReplies: false };
+    const container = await renderPanel(fixture);
+    const textarea = container.querySelector('textarea[aria-label="Reply to thread"]');
+    const editor = container.querySelector('[role="textbox"][aria-label="Reply to thread"]') ?? textarea;
+    assert.ok(editor && !editor.hidden, 'Thread composer must expose a visible editor');
+    const replyButton = container.querySelector('[data-message-id="thread-reply-2"] [aria-label="Reply"]');
+    const before = structuredClone(fixture.cache.getState());
+    replyButton.focus();
+    assert.equal(replyButton.disabled, false);
+    await click(replyButton);
+    assert.ok(document.activeElement === editor, 'Current Reply should focus existing visible composer');
+    assert.equal(textarea.value, 'Retained current thread draft');
+    assert.equal(container.querySelector('[aria-label="Reply source"]'), null);
+    assert.equal(fixture.calls.some(c => c.name === 'openThread'), false);
+    assert.deepEqual(fixture.cache.getState().currentUser.readStates, before.currentUser.readStates);
+    await click(findButton(container, 'Send'));
+    const sends = fixture.calls.filter(c => c.name === 'sendMessage');
+    assert.equal(sends.length, 1);
+    assert.equal(sends[0].args[0].conversationId, threadId);
+    assert.equal(sends[0].args[0].content.text, 'Retained current thread draft');
+    assert.equal(sends[0].args[0].replyTo, undefined);
+    assert.equal(textarea.value, 'Retained current thread draft', 'failed send retains the draft');
+    assert.equal(fixture.calls.some(c => c.name === 'openThread'), false);
+  });
+}
+
+for (const restriction of [{ readOnly: true }, { composerAvailability: { canSend: false } }, { composerAvailability: { membershipState: 'removed' } }]) {
+  test(`Current thread Reply respects host restriction ${JSON.stringify(restriction)}`, async () => {
+    const fixture = lifecycleFixture();
+    const container = await renderPanel(fixture, restriction);
+    const replyButton = container.querySelector('[data-message-id="thread-reply-2"] [aria-label="Reply"]');
+    assert.equal(replyButton.disabled, true);
+    await click(replyButton);
+    assert.equal(fixture.calls.some(c => c.name === 'openThread' || c.name === 'sendMessage'), false);
+  });
+}
+
+test('standalone Current thread timeline disables Reply without an existing composer', async () => {
+  const fixture = createFixture();
+  const container = document.createElement('div');
+  document.body.append(container);
+  const root = createRoot(container);
+  mounted.push({ container, root });
+  await act(async () => {
+    root.render(createElement(ChatContext.Provider, { value: fixture.context },
+      createElement(MessageTimeline, { conversationId: threadId })));
+    await flush();
+  });
+  const replyButton = container.querySelector('[aria-label="Reply"]');
+  assert.equal(replyButton.disabled, true);
+  assert.equal(replyButton.getAttribute('aria-description'), 'A reply composer is unavailable.');
+  await click(replyButton);
+  assert.equal(fixture.calls.some(c => c.name === 'openThread'), false);
+});

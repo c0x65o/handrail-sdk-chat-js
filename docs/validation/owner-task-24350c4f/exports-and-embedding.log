@@ -1,0 +1,178 @@
+TAP version 13
+# Subtest: README relative links point to repository files
+ok 1 - README relative links point to repository files
+  ---
+  duration_ms: 8.496265
+  type: 'test'
+  ...
+# Subtest: README dependency and import snippets track the package manifest
+ok 2 - README dependency and import snippets track the package manifest
+  ---
+  duration_ms: 7.200668
+  type: 'test'
+  ...
+# Subtest: README platform and realtime claims remain source-backed
+ok 3 - README platform and realtime claims remain source-backed
+  ---
+  duration_ms: 24.14573
+  type: 'test'
+  ...
+# Subtest: built public subpaths resolve and import independently
+ok 4 - built public subpaths resolve and import independently
+  ---
+  duration_ms: 161.969823
+  type: 'test'
+  ...
+# Subtest: package conditions expose only browser-safe entries to browser resolvers
+ok 5 - package conditions expose only browser-safe entries to browser resolvers
+  ---
+  duration_ms: 4.050083
+  type: 'test'
+  ...
+# Subtest: a browser resolver rejects the Node-only server subpath
+ok 6 - a browser resolver rejects the Node-only server subpath
+  ---
+  duration_ms: 11.517857
+  type: 'test'
+  ...
+# Subtest: each subpath emits runtime, declaration, and map artifacts
+ok 7 - each subpath emits runtime, declaration, and map artifacts
+  ---
+  duration_ms: 0.873414
+  type: 'test'
+  ...
+# Subtest: TypeScript resolves declarations for every public subpath
+ok 8 - TypeScript resolves declarations for every public subpath
+  ---
+  duration_ms: 195.60476
+  type: 'test'
+  ...
+# Subtest: the browser client bundle excludes testing, server, and Node graphs
+ok 9 - the browser client bundle excludes testing, server, and Node graphs
+  ---
+  duration_ms: 407.303422
+  type: 'test'
+  ...
+# Subtest: the root JavaScript bundle excludes the optional stylesheet
+ok 10 - the root JavaScript bundle excludes the optional stylesheet
+  ---
+  duration_ms: 50.078387
+  type: 'test'
+  ...
+# Subtest: the production server bundle excludes the testing graph
+ok 11 - the production server bundle excludes the testing graph
+  ---
+  duration_ms: 334.504117
+  type: 'test'
+  ...
+# Subtest: an explicit stylesheet import emits CSS and remains in the bundle graph
+ok 12 - an explicit stylesheet import emits CSS and remains in the bundle graph
+  ---
+  duration_ms: 8.400204
+  type: 'test'
+  ...
+# Subtest: the browser react bundle excludes React, server, testing, and Node graphs
+ok 13 - the browser react bundle excludes React, server, testing, and Node graphs
+  ---
+  duration_ms: 263.190374
+  type: 'test'
+  ...
+# Subtest: the browser ui bundle excludes React, server, testing, and Node graphs
+ok 14 - the browser ui bundle excludes React, server, testing, and Node graphs
+  ---
+  duration_ms: 310.181155
+  type: 'test'
+  ...
+# Subtest: pilot guide links stay in the repository and README exposes it
+ok 15 - pilot guide links stay in the repository and README exposes it
+  ---
+  duration_ms: 6.174955
+  type: 'test'
+  ...
+# Subtest: pilot guide keeps framework, lifecycle, feature, and deferral boundaries explicit
+ok 16 - pilot guide keeps framework, lifecycle, feature, and deferral boundaries explicit
+  ---
+  duration_ms: 1.677548
+  type: 'test'
+  ...
+# Subtest: pilot guide documents the implemented authorized message-search boundary
+ok 17 - pilot guide documents the implemented authorized message-search boundary
+  ---
+  duration_ms: 2.346319
+  type: 'test'
+  ...
+# Subtest: server embedding guide links remain inside the repository
+ok 18 - server embedding guide links remain inside the repository
+  ---
+  duration_ms: 6.054441
+  type: 'test'
+  ...
+# Subtest: marked embedding configuration, mount, and lifecycle compile against the server entry point
+ok 19 - marked embedding configuration, mount, and lifecycle compile against the server entry point
+  ---
+  duration_ms: 180.254068
+  type: 'test'
+  ...
+# Subtest: documented adapters and feature gates match the public TypeScript source
+ok 20 - documented adapters and feature gates match the public TypeScript source
+  ---
+  duration_ms: 4.086188
+  type: 'test'
+  ...
+# Subtest: realtime delivery documentation locks single-process and clustered boundaries
+ok 21 - realtime delivery documentation locks single-process and clustered boundaries
+  ---
+  duration_ms: 1.924747
+  type: 'test'
+  ...
+# Subtest: audit export documentation preserves authority, delivery, and lifecycle boundaries
+ok 22 - audit export documentation preserves authority, delivery, and lifecycle boundaries
+  ---
+  duration_ms: 3.325439
+  type: 'test'
+  ...
+# Subtest: attachment cleanup documentation preserves ownership and shutdown boundaries
+ok 23 - attachment cleanup documentation preserves ownership and shutdown boundaries
+  ---
+  duration_ms: 2.167082
+  type: 'test'
+  ...
+# Subtest: documented CLI usage and mounted paths match the built public implementation
+ok 24 - documented CLI usage and mounted paths match the built public implementation
+  ---
+  duration_ms: 148.459259
+  type: 'test'
+  ...
+# Subtest: request admission documentation preserves the host-auth and fail-closed contract
+ok 25 - request admission documentation preserves the host-auth and fail-closed contract
+  ---
+  duration_ms: 1.332934
+  type: 'test'
+  ...
+# Subtest: PostgreSQL compatibility and rollback gates remain explicit
+ok 26 - PostgreSQL compatibility and rollback gates remain explicit
+  ---
+  duration_ms: 1.667553
+  type: 'test'
+  ...
+# Subtest: server embedding safety boundaries remain explicit
+ok 27 - server embedding safety boundaries remain explicit
+  ---
+  duration_ms: 1.901322
+  type: 'test'
+  ...
+# Subtest: the public UI graph stays within browser-safe public boundaries
+ok 28 - the public UI graph stays within browser-safe public boundaries
+  ---
+  duration_ms: 260.712549
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2755.86332

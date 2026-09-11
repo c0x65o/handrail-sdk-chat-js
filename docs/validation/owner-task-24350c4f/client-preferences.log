@@ -1,0 +1,280 @@
+TAP version 13
+# Subtest: precedence {} {"state":"absent","revision":0}
+ok 1 - precedence {} {"state":"absent","revision":0}
+  ---
+  duration_ms: 4.239481
+  type: 'test'
+  ...
+# Subtest: precedence {"hostDefault":"discord"} {"state":"absent","revision":0}
+ok 2 - precedence {"hostDefault":"discord"} {"state":"absent","revision":0}
+  ---
+  duration_ms: 0.687145
+  type: 'test'
+  ...
+# Subtest: precedence {"hostDefault":"discord"} {"state":"saved","revision":1,"style":"current"}
+ok 3 - precedence {"hostDefault":"discord"} {"state":"saved","revision":1,"style":"current"}
+  ---
+  duration_ms: 0.600252
+  type: 'test'
+  ...
+# Subtest: precedence {"hostDefault":"discord"} {"state":"saved","revision":1,"style":" future "}
+ok 4 - precedence {"hostDefault":"discord"} {"state":"saved","revision":1,"style":" future "}
+  ---
+  duration_ms: 0.362564
+  type: 'test'
+  ...
+# Subtest: precedence {"hostDefault":"discord"} {"state":"saved","revision":1,"style":""}
+ok 5 - precedence {"hostDefault":"discord"} {"state":"saved","revision":1,"style":""}
+  ---
+  duration_ms: 0.388566
+  type: 'test'
+  ...
+# Subtest: precedence {"enforcedOverride":"current"} {"state":"saved","revision":1,"style":"discord"}
+ok 6 - precedence {"enforcedOverride":"current"} {"state":"saved","revision":1,"style":"discord"}
+  ---
+  duration_ms: 0.475821
+  type: 'test'
+  ...
+# Subtest: precedence {"enforcedOverride":"unknown","hostDefault":"discord"} {"state":"saved","revision":1,"style":"discord"}
+ok 7 - precedence {"enforcedOverride":"unknown","hostDefault":"discord"} {"state":"saved","revision":1,"style":"discord"}
+  ---
+  duration_ms: 0.406498
+  type: 'test'
+  ...
+# Subtest: precedence {"enforcedOverride":"discord"} {"state":"saved","revision":1,"style":"unknown"}
+ok 8 - precedence {"enforcedOverride":"discord"} {"state":"saved","revision":1,"style":"unknown"}
+  ---
+  duration_ms: 0.345837
+  type: 'test'
+  ...
+# Subtest: precedence {"hostDefault":"unknown"} {"state":"absent","revision":0}
+ok 9 - precedence {"hostDefault":"unknown"} {"state":"absent","revision":0}
+  ---
+  duration_ms: 0.994166
+  type: 'test'
+  ...
+# Subtest: unresolved, failed reads, and unsupported capabilities never fabricate an absent/saved choice
+ok 10 - unresolved, failed reads, and unsupported capabilities never fabricate an absent/saved choice
+  ---
+  duration_ms: 1.488664
+  type: 'test'
+  ...
+# Subtest: successful save retains confirmed style while pending, survives reload, and host changes never PATCH
+ok 11 - successful save retains confirmed style while pending, survives reload, and host changes never PATCH
+  ---
+  duration_ms: 2.624629
+  type: 'test'
+  ...
+# Subtest: newer private events notify, preserve raw values and ignore foreign/malformed/stale events and late reads
+ok 12 - newer private events notify, preserve raw values and ignore foreign/malformed/stale events and late reads
+  ---
+  duration_ms: 2.355176
+  type: 'test'
+  ...
+# Subtest: uncertain outcome requires GET before exact replay; old replay cannot regress a newer private choice
+ok 13 - uncertain outcome requires GET before exact replay; old replay cannot regress a newer private choice
+  ---
+  duration_ms: 1.142848
+  type: 'test'
+  ...
+# Subtest: failed reconciliation does not resend an uncertain write
+ok 14 - failed reconciliation does not resend an uncertain write
+  ---
+  duration_ms: 0.775692
+  type: 'test'
+  ...
+# Subtest: 409 conflict exposes authority and explicit retry creates fresh key/base without automatic overwrite
+ok 15 - 409 conflict exposes authority and explicit retry creates fresh key/base without automatic overwrite
+  ---
+  duration_ms: 1.271008
+  type: 'test'
+  ...
+# Subtest: mismatched HTTP idempotencyKey never confirms a write
+ok 16 - mismatched HTTP idempotencyKey never confirms a write
+  ---
+  duration_ms: 0.857294
+  type: 'test'
+  ...
+# Subtest: mismatched HTTP baseRevision never confirms a write
+ok 17 - mismatched HTTP baseRevision never confirms a write
+  ---
+  duration_ms: 0.734843
+  type: 'test'
+  ...
+# Subtest: mismatched HTTP requestedStyle never confirms a write
+ok 18 - mismatched HTTP requestedStyle never confirms a write
+  ---
+  duration_ms: 0.89623
+  type: 'test'
+  ...
+# Subtest: mismatched HTTP operation never confirms a write
+ok 19 - mismatched HTTP operation never confirms a write
+  ---
+  duration_ms: 0.417943
+  type: 'test'
+  ...
+# Subtest: only exact event correlation acknowledges pending mutation; unrelated updates preserve retry intent
+ok 20 - only exact event correlation acknowledges pending mutation; unrelated updates preserve retry intent
+  ---
+  duration_ms: 3.745377
+  type: 'test'
+  ...
+# Subtest: load ignores late result after logout
+ok 21 - load ignores late result after logout
+  ---
+  duration_ms: 1.209248
+  type: 'test'
+  ...
+# Subtest: load ignores late result after user
+ok 22 - load ignores late result after user
+  ---
+  duration_ms: 0.655585
+  type: 'test'
+  ...
+# Subtest: load ignores late result after tenant
+ok 23 - load ignores late result after tenant
+  ---
+  duration_ms: 0.529293
+  type: 'test'
+  ...
+# Subtest: load ignores late result after away-back
+ok 24 - load ignores late result after away-back
+  ---
+  duration_ms: 0.957024
+  type: 'test'
+  ...
+# Subtest: load ignores late result after close
+ok 25 - load ignores late result after close
+  ---
+  duration_ms: 0.555657
+  type: 'test'
+  ...
+# Subtest: save ignores late result after logout
+ok 26 - save ignores late result after logout
+  ---
+  duration_ms: 0.767074
+  type: 'test'
+  ...
+# Subtest: save ignores late result after user
+ok 27 - save ignores late result after user
+  ---
+  duration_ms: 0.841468
+  type: 'test'
+  ...
+# Subtest: save ignores late result after tenant
+ok 28 - save ignores late result after tenant
+  ---
+  duration_ms: 0.84751
+  type: 'test'
+  ...
+# Subtest: save ignores late result after away-back
+ok 29 - save ignores late result after away-back
+  ---
+  duration_ms: 0.77673
+  type: 'test'
+  ...
+# Subtest: save ignores late result after close
+ok 30 - save ignores late result after close
+  ---
+  duration_ms: 0.624856
+  type: 'test'
+  ...
+# Subtest: switch-away-and-back rejects old GET while a new GET independently establishes absence
+ok 31 - switch-away-and-back rejects old GET while a new GET independently establishes absence
+  ---
+  duration_ms: 0.683152
+  type: 'test'
+  ...
+# Subtest: offline request remains unsaved; reconnect rehydrates without writing, explicit retry saves
+ok 32 - offline request remains unsaved; reconnect rehydrates without writing, explicit retry saves
+  ---
+  duration_ms: 0.679575
+  type: 'test'
+  ...
+# Subtest: a host key generator cannot reuse a key for a changed request
+ok 33 - a host key generator cannot reuse a key for a changed request
+  ---
+  duration_ms: 0.903495
+  type: 'test'
+  ...
+# Subtest: public client loads at startup, receives validated socket events by revision, and rehydrates reconnect
+ok 34 - public client loads at startup, receives validated socket events by revision, and rehydrates reconnect
+  ---
+  duration_ms: 24.537861
+  type: 'test'
+  ...
+# Subtest: events from the old identity lifetime are ignored even after switch-away-and-back loads
+ok 35 - events from the old identity lifetime are ignored even after switch-away-and-back loads
+  ---
+  duration_ms: 0.639714
+  type: 'test'
+  ...
+# Subtest: public preference save, conflict, retry and policy updates preserve an open thread, reply draft and frozen queued send
+ok 36 - public preference save, conflict, retry and policy updates preserve an open thread, reply draft and frozen queued send
+  ---
+  duration_ms: 39.354272
+  type: 'test'
+  ...
+# Subtest: follower receives the canonical cross-tab path and can load/save without owning a socket
+ok 37 - follower receives the canonical cross-tab path and can load/save without owning a socket
+  ---
+  duration_ms: 6.782513
+  type: 'test'
+  ...
+# Subtest: HTTP 404 disables persistence until reconnect without claiming success
+ok 38 - HTTP 404 disables persistence until reconnect without claiming success
+  ---
+  duration_ms: 0.723587
+  type: 'test'
+  ...
+# Subtest: HTTP 501 disables persistence until reconnect without claiming success
+ok 39 - HTTP 501 disables persistence until reconnect without claiming success
+  ---
+  duration_ms: 0.433991
+  type: 'test'
+  ...
+# Subtest: offline edits cannot change the request bound to an uncertain idempotency key
+ok 40 - offline edits cannot change the request bound to an uncertain idempotency key
+  ---
+  duration_ms: 0.33659
+  type: 'test'
+  ...
+# Subtest: reentrant logout cancels a save before dispatch
+ok 41 - reentrant logout cancels a save before dispatch
+  ---
+  duration_ms: 0.334706
+  type: 'test'
+  ...
+# Subtest: server rejection retains explicit intent; retry after a successful fresh read uses a new request
+ok 42 - server rejection retains explicit intent; retry after a successful fresh read uses a new request
+  ---
+  duration_ms: 0.442937
+  type: 'test'
+  ...
+# Subtest: explicit Current persists absence and canonical no-op results settle without inventing revisions
+ok 43 - explicit Current persists absence and canonical no-op results settle without inventing revisions
+  ---
+  duration_ms: 0.381485
+  type: 'test'
+  ...
+# Subtest: reconnect interrupts a pending write, loads authority and waits for an explicit exact replay
+ok 44 - reconnect interrupts a pending write, loads authority and waits for an explicit exact replay
+  ---
+  duration_ms: 0.734196
+  type: 'test'
+  ...
+# Subtest: private event reducer diagnostics reject foreign actors/streams before cursor admission
+ok 45 - private event reducer diagnostics reject foreign actors/streams before cursor admission
+  ---
+  duration_ms: 0.551848
+  type: 'test'
+  ...
+1..45
+# tests 45
+# suites 0
+# pass 45
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 231.444204

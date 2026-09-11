@@ -1,0 +1,96 @@
+TAP version 13
+# Subtest: secure attachment download query authorizes, sanitizes, and never persists provider material
+    # Subtest: allows public and active-member access with one trusted storage call
+    ok 1 - allows public and active-member access with one trusted storage call
+      ---
+      duration_ms: 6.531349
+      type: 'test'
+      ...
+    # Subtest: thread readers need current parent access without participant or private-state writes
+    ok 2 - thread readers need current parent access without participant or private-state writes
+      ---
+      duration_ms: 30.963015
+      type: 'test'
+      ...
+    # Subtest: stale active child owners cannot bypass absent or revoked private-parent membership
+    ok 3 - stale active child owners cannot bypass absent or revoked private-parent membership
+      ---
+      duration_ms: 15.715892
+      type: 'test'
+      ...
+    # Subtest: thread parent entity policy uses attachment.download and sanitizes denials
+    ok 4 - thread parent entity policy uses attachment.download and sanitizes denials
+      ---
+      duration_ms: 9.930886
+      type: 'test'
+      ...
+    # Subtest: administrative parent and child archive deny downloads while closed and locked history remains readable
+    ok 5 - administrative parent and child archive deny downloads while closed and locked history remains readable
+      ---
+      duration_ms: 22.563173
+      type: 'test'
+      ...
+    # Subtest: thread downloads retain exact message binding, tenant isolation and deleted-message denial
+    ok 6 - thread downloads retain exact message binding, tenant isolation and deleted-message denial
+      ---
+      duration_ms: 18.919155
+      type: 'test'
+      ...
+    # Subtest: requires the dedicated host entity authorization action
+    ok 7 - requires the dedicated host entity authorization action
+      ---
+      duration_ms: 2.271601
+      type: 'test'
+      ...
+    # Subtest: builds safe Content-Disposition for spaces and Unicode
+    ok 8 - builds safe Content-Disposition for spaces and Unicode
+      ---
+      duration_ms: 2.648914
+      type: 'test'
+      ...
+    # Subtest: makes every unavailable row indistinguishable and avoids storage
+    ok 9 - makes every unavailable row indistinguishable and avoids storage
+      ---
+      duration_ms: 6.105049
+      type: 'test'
+      ...
+    # Subtest: rejects unsafe persisted filenames before storage
+    ok 10 - rejects unsafe persisted filenames before storage
+      ---
+      duration_ms: 3.846675
+      type: 'test'
+      ...
+    # Subtest: validates caller input before database, permissions, or storage
+    ok 11 - validates caller input before database, permissions, or storage
+      ---
+      duration_ms: 0.341028
+      type: 'test'
+      ...
+    # Subtest: normalizes expired, overlong, malformed, and credential-bearing provider responses
+    ok 12 - normalizes expired, overlong, malformed, and credential-bearing provider responses
+      ---
+      duration_ms: 8.769289
+      type: 'test'
+      ...
+    # Subtest: leaves descriptor and provider secrets out of durable and logged state
+    ok 13 - leaves descriptor and provider secrets out of durable and logged state
+      ---
+      duration_ms: 2.306829
+      type: 'test'
+      ...
+    1..13
+ok 1 - secure attachment download query authorizes, sanitizes, and never persists provider material
+  ---
+  duration_ms: 495.738628
+  type: 'test'
+  ...
+# Real PostgreSQL url-backed; isolated schema with canonical migrations
+1..1
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 658.967049

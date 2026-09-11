@@ -165,9 +165,10 @@ test("atomic send-message command persists and reconciles one authorized message
        FROM ${schema}.chat_read_cursors r) AS cursors
   `)).rows[0];
   const deleteSource = (id) => harness.pool.query(
-    `UPDATE ${tables.messages} SET content = NULL, deleted_at = clock_timestamp(),
-       deleted_by_user_id = 'actor-a', updated_at = clock_timestamp()
-     WHERE tenant_id = 'tenant-a' AND id = $1`, [id],
+    `WITH stamp AS (SELECT clock_timestamp() AS value)
+     UPDATE ${tables.messages} SET content = NULL, deleted_at = stamp.value,
+       deleted_by_user_id = 'actor-a', updated_at = stamp.value
+     FROM stamp WHERE tenant_id = 'tenant-a' AND id = $1`, [id],
   );
   const seedThread = async (id, entity) => {
     await seedConversation({ conversationId: `${id}-parent`, entity });
@@ -373,7 +374,8 @@ test("atomic send-message command persists and reconciles one authorized message
                 try {
                   await contender.query("SET lock_timeout = '100ms'");
                   for (const statement of [
-                    `UPDATE ${tables.messages} SET deleted_at = clock_timestamp(), deleted_by_user_id = 'actor-a', updated_at = clock_timestamp() WHERE id = $1`,
+                    `WITH stamp AS (SELECT clock_timestamp() AS value)
+                     UPDATE ${tables.messages} SET deleted_at = stamp.value, deleted_by_user_id = 'actor-a', updated_at = stamp.value FROM stamp WHERE id = $1`,
                     `UPDATE ${tables.members} SET state = 'removed' WHERE conversation_id = 'locked-thread-parent'`,
                     `UPDATE ${tables.members} SET state = 'removed' WHERE conversation_id = 'locked-thread'`,
                     `UPDATE ${tables.conversations} SET archived_at = clock_timestamp(), archived_by_user_id = 'actor-a' WHERE id = 'locked-thread-parent'`,

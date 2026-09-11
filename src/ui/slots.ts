@@ -229,9 +229,9 @@ export type ChatMessageActions = Pick<
   | "markUnread"
   | "openThread"
 > & Readonly<{
-  /** Inline source selection in Discord style; absent in Current style. Never opens a thread. */
+  /** Select an inline source in Discord style, or focus the existing Current thread composer. Never opens a thread. */
   selectReply?: (sourceMessageId: MessageId) => void;
-  /** Accessible explanation when inline source selection is unavailable. */
+  /** Accessible explanation when replying in the current conversation is unavailable. */
   replyDisabledReason?: string;
   /** Requests a named discussion dialog; never creates from an implicit name. */
   requestThreadCreation?: (rootMessageId: MessageId) => void;
@@ -363,6 +363,8 @@ export interface ChatComposerState extends NoPrivateChatRendererFields {
  * of renderer state or retained by the optional UI.
  */
 export interface ChatComposerControls extends NoPrivateChatRendererFields {
+  /** Focus the editor without changing its draft or reply context. */
+  readonly focus?: () => void;
   /** Select/replace a source in this conversation. Each selection starts with ping on. */
   readonly selectReply: (source: Readonly<{ conversationId: ConversationId; messageId: MessageId }>) => void;
   readonly setReplyNotifyAuthor: (notifyAuthor: boolean) => void;

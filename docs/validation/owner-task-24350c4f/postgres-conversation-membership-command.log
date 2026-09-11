@@ -1,0 +1,77 @@
+TAP version 13
+# Subtest: conversation-membership command applies every intent atomically in PostgreSQL
+    # Subtest: applies join, leave, add, remove, and role-change intents
+    ok 1 - applies join, leave, add, remove, and role-change intents
+      ---
+      duration_ms: 42.358926
+      type: 'test'
+      ...
+    # Subtest: thread membership requires current parent access even for owners and retries
+    ok 2 - thread membership requires current parent access even for owners and retries
+      ---
+      duration_ms: 44.826329
+      type: 'test'
+      ...
+    # Subtest: enforces public self-join, entity access, and management policy
+    ok 3 - enforces public self-join, entity access, and management policy
+      ---
+      duration_ms: 13.518583
+      type: 'test'
+      ...
+    # Subtest: rejects malformed roles, unsafe owner/member loss, and direct/group identity changes
+    ok 4 - rejects malformed roles, unsafe owner/member loss, and direct/group identity changes
+      ---
+      duration_ms: 10.995554
+      type: 'test'
+      ...
+    # Subtest: fails directory and tenant identity mismatches without leaking membership
+    ok 5 - fails directory and tenant identity mismatches without leaking membership
+      ---
+      duration_ms: 11.5756
+      type: 'test'
+      ...
+    # Subtest: returns revision conflicts and exact idempotent replays
+    ok 6 - returns revision conflicts and exact idempotent replays
+      ---
+      duration_ms: 13.012287
+      type: 'test'
+      ...
+    # Subtest: concurrent duplicate additions converge to one mutation
+    ok 7 - concurrent duplicate additions converge to one mutation
+      ---
+      duration_ms: 11.702413
+      type: 'test'
+      ...
+    # Subtest: persists sanitized audit and versioned conversation/user events
+    ok 8 - persists sanitized audit and versioned conversation/user events
+      ---
+      duration_ms: 1.264628
+      type: 'test'
+      ...
+    # Subtest: rolls back membership, related state, events, and idempotency
+    ok 9 - rolls back membership, related state, events, and idempotency
+      ---
+      duration_ms: 6.962986
+      type: 'test'
+      ...
+    1..9
+ok 1 - conversation-membership command applies every intent atomically in PostgreSQL
+  ---
+  duration_ms: 487.809683
+  type: 'test'
+  ...
+# Subtest: a fractional-millisecond membership claim completes and replays a member-list conflict
+ok 2 - a fractional-millisecond membership claim completes and replays a member-list conflict
+  ---
+  duration_ms: 300.918294
+  type: 'test'
+  ...
+1..2
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 991.716322

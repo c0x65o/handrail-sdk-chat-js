@@ -1,0 +1,42 @@
+2026-09-10 23:27:31.429 CDT [32] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-09-10 23:27:31.430 CDT [32] LOG:  listening on Unix socket "/tmp/handrail-codex-heavy-command-locks/chat-pg16-tVKUo1/.s.PGSQL.5432"
+2026-09-10 23:27:31.435 CDT [35] LOG:  database system was shut down at 2026-09-10 23:27:31 CDT
+2026-09-10 23:27:31.440 CDT [32] LOG:  database system is ready to accept connections
+2026-09-10 23:27:33.337 CDT [136] ERROR:  insert or update on table "chat_messages" violates foreign key constraint "chat_messages_reply_source_fkey"
+2026-09-10 23:27:33.337 CDT [136] DETAIL:  Key (tenant_id, conversation_id, reply_to_message_id)=(tenant-a, isolated-empty, missing-source) is not present in table "chat_messages".
+2026-09-10 23:27:33.337 CDT [136] STATEMENT:  INSERT INTO "reply_unread_56fdf2f639f04f7ba939c298a01b5be1".chat_messages
+	           (tenant_id, conversation_id, id, sequence, author_user_id,
+	            client_message_id, content, reply_to_message_id, reply_notify_author,
+	            deleted_at, deleted_by_user_id, created_at, updated_at)
+	         VALUES ($1, $2, $3, $4, $5, $3, $6, $7, $8,
+	           CASE WHEN $9 THEN '2026-01-01'::timestamptz END,
+	           CASE WHEN $9 THEN $5 END, '2026-01-01', '2026-01-01')
+2026-09-10 23:27:33.339 CDT [135] ERROR:  insert or update on table "chat_messages" violates foreign key constraint "chat_messages_reply_source_fkey"
+2026-09-10 23:27:33.339 CDT [135] DETAIL:  Key (tenant_id, conversation_id, reply_to_message_id)=(tenant-a, isolated-empty, dedup-source) is not present in table "chat_messages".
+2026-09-10 23:27:33.339 CDT [135] STATEMENT:  INSERT INTO "reply_unread_56fdf2f639f04f7ba939c298a01b5be1".chat_messages
+	           (tenant_id, conversation_id, id, sequence, author_user_id,
+	            client_message_id, content, reply_to_message_id, reply_notify_author,
+	            deleted_at, deleted_by_user_id, created_at, updated_at)
+	         VALUES ($1, $2, $3, $4, $5, $3, $6, $7, $8,
+	           CASE WHEN $9 THEN '2026-01-01'::timestamptz END,
+	           CASE WHEN $9 THEN $5 END, '2026-01-01', '2026-01-01')
+2026-09-10 23:27:33.341 CDT [134] ERROR:  insert or update on table "chat_messages" violates foreign key constraint "chat_messages_reply_source_fkey"
+2026-09-10 23:27:33.341 CDT [134] DETAIL:  Key (tenant_id, conversation_id, reply_to_message_id)=(tenant-a, isolated-empty, tenant-b-only-source) is not present in table "chat_messages".
+2026-09-10 23:27:33.341 CDT [134] STATEMENT:  INSERT INTO "reply_unread_56fdf2f639f04f7ba939c298a01b5be1".chat_messages
+	           (tenant_id, conversation_id, id, sequence, author_user_id,
+	            client_message_id, content, reply_to_message_id, reply_notify_author,
+	            deleted_at, deleted_by_user_id, created_at, updated_at)
+	         VALUES ($1, $2, $3, $4, $5, $3, $6, $7, $8,
+	           CASE WHEN $9 THEN '2026-01-01'::timestamptz END,
+	           CASE WHEN $9 THEN $5 END, '2026-01-01', '2026-01-01')
+2026-09-10 23:27:34.748 CDT [196] WARNING:  there is no transaction in progress
+2026-09-10 23:27:34.753 CDT [196] WARNING:  there is no transaction in progress
+2026-09-10 23:27:35.161 CDT [201] WARNING:  there is no transaction in progress
+2026-09-10 23:27:35.177 CDT [201] WARNING:  there is no transaction in progress
+2026-09-10 23:27:37.316 CDT [32] LOG:  received fast shutdown request
+2026-09-10 23:27:37.318 CDT [32] LOG:  aborting any active transactions
+2026-09-10 23:27:37.320 CDT [32] LOG:  background worker "logical replication launcher" (PID 38) exited with exit code 1
+2026-09-10 23:27:37.321 CDT [33] LOG:  shutting down
+2026-09-10 23:27:37.322 CDT [33] LOG:  checkpoint starting: shutdown immediate
+2026-09-10 23:27:37.376 CDT [33] LOG:  checkpoint complete: wrote 734 buffers (17.9%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.036 s, total=0.056 s; sync files=1037, longest=0.002 s, average=0.001 s; distance=10561 kB, estimate=10561 kB; lsn=0/1F39AE8, redo lsn=0/1F39AE8
+2026-09-10 23:27:37.380 CDT [32] LOG:  database system is shut down

@@ -1,0 +1,96 @@
+TAP version 13
+# Subtest: detail snapshots enforce current parent access without participation writes
+    # Subtest: public and private parent readers need no child membership, follow or cursor
+    ok 1 - public and private parent readers need no child membership, follow or cursor
+      ---
+      duration_ms: 13.228357
+      type: 'test'
+      ...
+    # Subtest: retained membership and unfollow state survive reads but cannot override parent revocation
+    ok 2 - retained membership and unfollow state survive reads but cannot override parent revocation
+      ---
+      duration_ms: 17.540153
+      type: 'test'
+      ...
+    # Subtest: deleted root and archived child retain history; archived parent denies
+    ok 3 - deleted root and archived child retain history; archived parent denies
+      ---
+      duration_ms: 8.947554
+      type: 'test'
+      ...
+    # Subtest: parent entity policy inherits the query action and sanitizes host denial/errors
+    ok 4 - parent entity policy inherits the query action and sanitizes host denial/errors
+      ---
+      duration_ms: 8.570759
+      type: 'test'
+      ...
+    # Subtest: missing parent fails closed before storage resolution
+    ok 5 - missing parent fails closed before storage resolution
+      ---
+      duration_ms: 4.523932
+      type: 'test'
+      ...
+    # Subtest: same IDs in another tenant cannot supply current parent membership
+    ok 6 - same IDs in another tenant cannot supply current parent membership
+      ---
+      duration_ms: 5.505016
+      type: 'test'
+      ...
+    1..6
+ok 1 - detail snapshots enforce current parent access without participation writes
+  ---
+  duration_ms: 392.290294
+  type: 'test'
+  ...
+# Subtest: timeline snapshots enforce current parent access without participation writes
+    # Subtest: public and private parent readers need no child membership, follow or cursor
+    ok 1 - public and private parent readers need no child membership, follow or cursor
+      ---
+      duration_ms: 34.037199
+      type: 'test'
+      ...
+    # Subtest: retained membership and unfollow state survive reads but cannot override parent revocation
+    ok 2 - retained membership and unfollow state survive reads but cannot override parent revocation
+      ---
+      duration_ms: 30.105208
+      type: 'test'
+      ...
+    # Subtest: deleted root and archived child retain history; archived parent denies
+    ok 3 - deleted root and archived child retain history; archived parent denies
+      ---
+      duration_ms: 12.170878
+      type: 'test'
+      ...
+    # Subtest: parent entity policy inherits the query action and sanitizes host denial/errors
+    ok 4 - parent entity policy inherits the query action and sanitizes host denial/errors
+      ---
+      duration_ms: 10.623462
+      type: 'test'
+      ...
+    # Subtest: missing parent fails closed before storage resolution
+    ok 5 - missing parent fails closed before storage resolution
+      ---
+      duration_ms: 4.925901
+      type: 'test'
+      ...
+    # Subtest: same IDs in another tenant cannot supply current parent membership
+    ok 6 - same IDs in another tenant cannot supply current parent membership
+      ---
+      duration_ms: 7.183734
+      type: 'test'
+      ...
+    1..6
+ok 2 - timeline snapshots enforce current parent access without participation writes
+  ---
+  duration_ms: 416.57722
+  type: 'test'
+  ...
+1..2
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1008.956729

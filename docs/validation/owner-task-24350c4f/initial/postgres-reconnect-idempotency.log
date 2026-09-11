@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: real clients converge after an acknowledgement-lost send retry, reconnect replay, and cross-device read
+ok 1 - real clients converge after an acknowledgement-lost send retry, reconnect replay, and cross-device read
+  ---
+  duration_ms: 1124.144021
+  type: 'test'
+  ...
+# Subtest: a retained request replay creates one message and one completed send outcome
+ok 2 - a retained request replay creates one message and one completed send outcome
+  ---
+  duration_ms: 367.111044
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1710.284427

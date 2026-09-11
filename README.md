@@ -7,10 +7,10 @@ The Dart/Flutter SDK lives in `handrail-sdk-chat-flutter`.
 Install from `https://github.com/c0x65o/handrail-sdk-chat-js.git` at a full committed
 SDK SHA and commit the matching package-manager lockfile. The install runs the
 normal `prepare` build; there is no packaging or registry publishing step.
-The repository split is still awaiting its first committed SDK revision; see
-[the migration status](docs/sdk-repository-split.md) before changing consumers.
+The repository split has committed SDK revisions; see the exact consumer pins
+and remaining runtime validation in [the migration status](docs/sdk-repository-split.md).
 
-Once an SDK commit is available, set `HANDRAIL_CHAT_JS_SHA` to that verified
+Set `HANDRAIL_CHAT_JS_SHA` to the verified
 40-character revision and run:
 
 ```bash

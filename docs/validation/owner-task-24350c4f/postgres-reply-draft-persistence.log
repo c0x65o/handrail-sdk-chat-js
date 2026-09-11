@@ -1,0 +1,78 @@
+TAP version 13
+# Subtest: reply drafts upgrade safely and use current parent authority
+    # Subtest: database retains legacy rules and strictly validates optional reply metadata
+    ok 1 - database retains legacy rules and strictly validates optional reply metadata
+      ---
+      duration_ms: 293.440424
+      type: 'test'
+      ...
+    # Subtest: unfollowed unenrolled thread persists target and both ping choices, replays and conflicts
+    ok 2 - unfollowed unenrolled thread persists target and both ping choices, replays and conflicts
+      ---
+      duration_ms: 59.108077
+      type: 'test'
+      ...
+    # Subtest: deleted and mismatched source identities remain recoverable drafts
+    ok 3 - deleted and mismatched source identities remain recoverable drafts
+      ---
+      duration_ms: 13.993909
+      type: 'test'
+      ...
+    # Subtest: channel parent revocation denies save, read and replay despite child state
+    ok 4 - channel parent revocation denies save, read and replay despite child state
+      ---
+      duration_ms: 16.605205
+      type: 'test'
+      ...
+    # Subtest: direct parent revocation denies save, read and replay despite child state
+    ok 5 - direct parent revocation denies save, read and replay despite child state
+      ---
+      duration_ms: 16.445428
+      type: 'test'
+      ...
+    # Subtest: group_direct parent revocation denies save, read and replay despite child state
+    ok 6 - group_direct parent revocation denies save, read and replay despite child state
+      ---
+      duration_ms: 16.179167
+      type: 'test'
+      ...
+    # Subtest: host policy is refreshed for save/read/replay and missing or throwing adapters fail closed
+    ok 7 - host policy is refreshed for save/read/replay and missing or throwing adapters fail closed
+      ---
+      duration_ms: 34.512743
+      type: 'test'
+      ...
+    # Subtest: reactivation preserves role, join time, cursors, preferences and follow state
+    ok 8 - reactivation preserves role, join time, cursors, preferences and follow state
+      ---
+      duration_ms: 35.188298
+      type: 'test'
+      ...
+    # Subtest: late outbox failure rolls back enrollment and established state with idempotency
+    ok 9 - late outbox failure rolls back enrollment and established state with idempotency
+      ---
+      duration_ms: 23.795724
+      type: 'test'
+      ...
+    # Subtest: archive policy and tenant/actor isolation remain enforced
+    ok 10 - archive policy and tenant/actor isolation remain enforced
+      ---
+      duration_ms: 14.732745
+      type: 'test'
+      ...
+    1..10
+ok 1 - reply drafts upgrade safely and use current parent authority
+  ---
+  duration_ms: 838.250876
+  type: 'test'
+  ...
+# Real PostgreSQL url-backed, isolated schema, canonical migrations
+1..1
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 919.248053

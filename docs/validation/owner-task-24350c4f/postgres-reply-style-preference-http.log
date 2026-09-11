@@ -1,0 +1,90 @@
+TAP version 13
+# Subtest: reply-style preference HTTP with isolated real PostgreSQL
+    # Subtest: admission metadata and denial precede authentication and persistence for both methods
+    ok 1 - admission metadata and denial precede authentication and persistence for both methods
+      ---
+      duration_ms: 11.598872
+      type: 'test'
+      ...
+    # Subtest: trusted authentication rejects null, malformed actors and thrown secrets
+    ok 2 - trusted authentication rejects null, malformed actors and thrown secrets
+      ---
+      duration_ms: 12.598617
+      type: 'test'
+      ...
+    # Subtest: canonical absent GET, explicit Current save, switch and saved GET
+    ok 3 - canonical absent GET, explicit Current save, switch and saved GET
+      ---
+      duration_ms: 25.236833
+      type: 'test'
+      ...
+    # Subtest: replay, no-op, stale revision and key reuse map without losing reconciliation
+    ok 4 - replay, no-op, stale revision and key reuse map without losing reconciliation
+      ---
+      duration_ms: 26.643616
+      type: 'test'
+      ...
+    # Subtest: user and tenant isolation includes identical idempotency keys
+    ok 5 - user and tenant isolation includes identical idempotency keys
+      ---
+      duration_ms: 24.937067
+      type: 'test'
+      ...
+    # Subtest: malformed transport, strict body and identity injection fail before database access
+    ok 6 - malformed transport, strict body and identity injection fail before database access
+      ---
+      duration_ms: 25.959726
+      type: 'test'
+      ...
+    # Subtest: unknown stored styles remain saved in GET and revision conflicts
+    ok 7 - unknown stored styles remain saved in GET and revision conflicts
+      ---
+      duration_ms: 15.742809
+      type: 'test'
+      ...
+    # Subtest: typed in-progress conflict rolls back the save and uses a stable 409
+    ok 8 - typed in-progress conflict rolls back the save and uses a stable 409
+      ---
+      duration_ms: 8.612119
+      type: 'test'
+      ...
+    # Subtest: true metadata requires opt-in and installed writable persistence, independent of realtime
+    ok 9 - true metadata requires opt-in and installed writable persistence, independent of realtime
+      ---
+      duration_ms: 8.754087
+      type: 'test'
+      ...
+    # Subtest: lost required persistence disables advertisement and never fakes a successful save
+    ok 10 - lost required persistence disables advertisement and never fakes a successful save
+      ---
+      duration_ms: 27.907879
+      type: 'test'
+      ...
+    # Subtest: default and explicitly disabled routes return 501 with false metadata and no preference queries
+    ok 11 - default and explicitly disabled routes return 501 with false metadata and no preference queries
+      ---
+      duration_ms: 12.953824
+      type: 'test'
+      ...
+    # Subtest: uninstalled and pre-preference schemas do not advertise or return success
+    ok 12 - uninstalled and pre-preference schemas do not advertise or return success
+      ---
+      duration_ms: 323.32331
+      type: 'test'
+      ...
+    1..12
+ok 1 - reply-style preference HTTP with isolated real PostgreSQL
+  ---
+  duration_ms: 834.571303
+  type: 'test'
+  ...
+# Real PostgreSQL url-backed; canonical migrations and isolated schema
+1..1
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 999.49411

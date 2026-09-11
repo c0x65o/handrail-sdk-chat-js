@@ -1,0 +1,643 @@
+cwd: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package
+command: ["/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter", "test", "--no-pub", "--concurrency=2", "--reporter=expanded", "test/durable_resource_event_reducer_test.dart", "test/handrail_chat_workspace_test.dart", "test/handrail_message_composer_test.dart", "test/handrail_chat_theme_test.dart", "test/handrail_reply_style_settings_test.dart", "test/reply_style_runtime_test.dart", "test/reply_style_client_test.dart", "test/handrail_timeline_reply_reference_test.dart", "test/handrail_thread_view_test.dart", "test/thread_list_controller_test.dart", "test/thread_lifecycle_controller_test.dart"]
+00:00 +0: loading /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart
+00:00 +0: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: unloaded private resources identify the snapshot needed for recovery
+00:00 +1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation membership observer clock collisions tied clock applies revision 6 leave and replay
+00:00 +2: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation membership observer clock collisions tied clock rejects equal revision conflict atomically
+00:00 +3: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation membership observer clock collisions tied clock rejects wrong stream identities atomically
+00:00 +4: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation membership observer clock collisions 1ms older clock applies revision 6 leave and replay
+00:00 +5: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation membership observer clock collisions 1ms older clock rejects equal revision conflict atomically
+00:00 +6: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation membership observer clock collisions 1ms older clock rejects wrong stream identities atomically
+00:00 +7: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation.membership.updated stream clock collisions tied clock applies leave revision and replay
+00:00 +8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation.membership.updated stream clock collisions tied clock applies remove_member revision and replay
+00:00 +9: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation.membership.updated stream clock collisions tied clock rejects a wrong membership user atomically
+00:00 +10: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation.membership.updated stream clock collisions 1ms older clock applies leave revision and replay
+00:00 +11: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation.membership.updated stream clock collisions 1ms older clock applies remove_member revision and replay
+00:00 +12: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation.membership.updated stream clock collisions 1ms older clock rejects a wrong membership user atomically
+00:00 +13: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation.read_cursor_updated stream clock collisions tied clock preserves per-conversation reads and replay
+00:00 +14: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation.read_cursor_updated stream clock collisions tied clock rejects a wrong read actor atomically
+00:00 +15: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation.read_cursor_updated stream clock collisions 1ms older clock preserves per-conversation reads and replay
+00:00 +16: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: conversation.read_cursor_updated stream clock collisions 1ms older clock rejects a wrong read actor atomically
+00:00 +17: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: saved_message.updated stream clock collisions tied clock preserves per-message revisions and replay
+00:00 +18: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: saved_message.updated stream clock collisions tied malformed state is rejected atomically
+00:00 +19: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: saved_message.updated stream clock collisions tied wrong actor is rejected atomically
+00:00 +20: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: saved_message.updated stream clock collisions tied equal revision conflict is rejected atomically
+00:00 +21: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: saved_message.updated stream clock collisions 1ms older clock preserves per-message revisions and replay
+00:00 +22: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: saved_message.updated stream clock collisions 1ms older malformed state is rejected atomically
+00:00 +23: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: saved_message.updated stream clock collisions 1ms older wrong actor is rejected atomically
+00:00 +24: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: saved_message.updated stream clock collisions 1ms older equal revision conflict is rejected atomically
+00:00 +25: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: preference.updated stream clock collisions tied clock preserves independent revisions and replay
+00:00 +26: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: preference.updated stream clock collisions tied clock does not hide a wrong actor
+00:00 +27: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: preference.updated stream clock collisions 1ms older clock preserves independent revisions and replay
+00:00 +28: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: preference.updated stream clock collisions 1ms older clock does not hide a wrong actor
+00:00 +29: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: draft.updated stream clock collisions tied clock accepts draft after draft
+00:00 +30: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: draft.updated stream clock collisions tied clock accepts draft after preference
+00:00 +31: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: draft.updated stream clock collisions tied lower draft revision is consumed without overwriting
+00:00 +32: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: draft.updated stream clock collisions tied draft clock does not hide a wrong actor
+00:00 +33: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: draft.updated stream clock collisions 1ms older clock accepts draft after draft
+00:00 +34: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: draft.updated stream clock collisions 1ms older clock accepts draft after preference
+00:00 +35: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: draft.updated stream clock collisions 1ms older lower draft revision is consumed without overwriting
+00:00 +36: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: draft.updated stream clock collisions 1ms older draft clock does not hide a wrong actor
+00:00 +37: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: attachment.updated durable reduction enriches metadata, settles upload, persists, and stays immutable
+00:00 +38: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: attachment.updated durable reduction allows metadata to lead its message, gaps missing references, and rejects regression
+00:00 +39: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: huddle.updated durable reduction accepts stable states and direct starting-to-ended transition
+00:00 +40: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: huddle.updated durable reduction accepts legal lifecycle, participant, and replacement transitions
+00:00 +41: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: huddle.updated durable reduction accepts a renewed participant join and ignores its duplicate replay
+00:00 +42: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: huddle.updated durable reduction rejects missing baselines, illegal sessions, and participant rewrites
+00:00 +43: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/durable_resource_event_reducer_test.dart: huddle.updated durable reduction client settlement prevents an older command response from winning
+00:00 +44: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing unknown capability updates and detaches on client rebinding
+00:01 +45: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: offline Send persists one reply intent before reconnect (retries=0)
+00:02 +46: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: offline Send persists one reply intent before reconnect (retries=0)
+00:02 +47: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing channel summary=false sends Friday in place
+00:02 +48: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: offline Send persists one reply intent before reconnect (retries=1)
+00:03 +49: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: offline Send persists one reply intent before reconnect (retries=1)
+00:03 +50: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing direct summary=false sends Friday in place
+00:03 +51: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing direct summary=false sends Friday in place
+00:03 +52: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: offline Send retains editable reply on storage failure ApplicationChatStorageRecordKind.queuedSendMessageIntents
+00:03 +53: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing direct summary=true sends Friday in place
+00:03 +54: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: local persistence pending keeps content and freezes binding across style changes
+00:03 +55: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing group_direct summary=false sends Friday in place
+00:03 +56: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: deferred online draft cleanup preserves the next composition
+00:03 +57: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing group_direct summary=true sends Friday in place
+00:03 +58: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: pending local persistence guards identity change
+00:04 +59: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing existing thread uses its own composer and ID
+00:04 +60: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing existing thread uses its own composer and ID
+00:04 +61: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing existing thread uses its own composer and ID
+00:04 +62: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing existing thread uses its own composer and ID
+00:04 +63: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: cancel reply retains restored text and attachments across style rebuilds
+00:04 +64: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current in thread saved=null inline=false keeps composition
+00:04 +65: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current in thread saved=null inline=false keeps composition
+00:04 +66: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: pending send rebind preserves new draft (success=true)
+00:04 +67: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current in thread saved=null inline=true keeps composition
+00:04 +68: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current in thread saved=null inline=true keeps composition
+00:05 +69: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: source errors deletion revocation and identity changes redact preview with recovery
+00:05 +70: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current in thread saved=current inline=false keeps composition
+00:05 +71: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current in thread saved=current inline=false keeps composition
+00:05 +72: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: new host edits survive an original send completion (success=true)
+00:05 +73: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current in thread saved=current inline=true keeps composition
+00:05 +74: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current in thread saved=current inline=true keeps composition
+00:05 +75: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: unavailable source send rejection retains reference and attachments for retry
+00:05 +76: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current standalone thread never creates a nested thread
+00:05 +77: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current standalone thread never creates a nested thread
+00:05 +78: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current standalone thread never creates a nested thread
+00:05 +79: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: restores markdown draft, debounces changes, and clears on send
+00:05 +80: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing Current saved=null retains thread behavior
+00:05 +81: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: formats delimiter-free text and serializes the supported Markdown subset
+00:06 +82: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: formats delimiter-free text and serializes the supported Markdown subset
+00:06 +83: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing absent preference API still allows supported inline replies
+00:06 +84: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: plain unformatted entry keeps the plain payload contract
+00:06 +85: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing missing capability disables without thread fallback
+00:06 +86: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: toolbar stays bounded at compact width and honors chat theme
+00:06 +87: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing keyboard and long press retain composition across styles
+00:06 +88: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing keyboard and long press retain composition across styles
+00:06 +89: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: reply routing keyboard and long press retain composition across styles
+00:06 +90: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: uploads a host-selected source and includes its attachment
+00:06 +91: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: uploads a host-selected source and includes its attachment
+00:06 +92: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread current creates canonical discussion without changing draft
+00:06 +93: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread current creates canonical discussion without changing draft
+00:06 +94: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread current creates canonical discussion without changing draft
+00:07 +95: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread current creates canonical discussion without changing draft
+00:07 +96: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: renders loading, disabled, access-revoked, and error states
+00:07 +97: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread discord creates canonical discussion without changing draft
+00:07 +98: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: filters active members and keyboard selection sends one canonical mention
+00:07 +99: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread server existing-root reconciliation never renames
+00:07 +100: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread server existing-root reconciliation never renames
+00:07 +101: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: restores only a resolved active mention into draft and send
+00:07 +102: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread compact validation keyboard semantics and cancel restores focus
+00:07 +103: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread compact validation keyboard semantics and cancel restores focus
+00:07 +104: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: stale directory results cannot replace a newer query
+00:08 +105: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread canonical Unicode scalar limit accepts 100 emoji unchanged
+00:08 +106: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_message_composer_test.dart: disposal stops typing and cancels pending local work
+00:08 +107: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread failed create retry freezes payload and preserves inline draft
+00:08 +108: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread pending cancel ignores late completion
+00:08 +109: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread pending switch ignores late completion
+00:08 +110: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread pending dispose ignores late completion
+00:08 +111: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_theme_test.dart: HandrailChatTheme resolution inherits defaults from the host ThemeData
+00:09 +112: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_theme_test.dart: HandrailChatTheme resolution inherits defaults from the host ThemeData
+00:09 +113: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread excludes deleted optimistic and newly deleted roots
+00:09 +114: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread excludes deleted optimistic and newly deleted roots
+00:09 +115: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread excludes deleted optimistic and newly deleted roots
+00:09 +116: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread excludes deleted optimistic and newly deleted roots
+00:09 +117: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread excludes deleted optimistic and newly deleted roots
+00:09 +118: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread excludes deleted optimistic and newly deleted roots
+00:09 +119: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread excludes deleted optimistic and newly deleted roots
+00:09 +120: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread excludes deleted optimistic and newly deleted roots
+00:09 +121: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread legacy header custom builders and caller handle ownership
+test/handrail_reply_style_settings_test.dart:235:13: Error: No named parameter with the name 'hasSelectedState'.
+            hasSelectedState: true,
+            ^^^^^^^^^^^^^^^^
+../../minimum/flutter/packages/flutter_test/lib/src/matchers.dart:626:9: Context: Found this candidate, but the arguments don't match.
+Matcher matchesSemantics({
+        ^^^^^^^^^^^^^^^^
+00:09 +122: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread parent context redacts on denied access and deleted roots stay open
+00:09 +122 -1: loading /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_reply_style_settings_test.dart [E]
+  Failed to load "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_reply_style_settings_test.dart": Compilation failed for testPath=/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_reply_style_settings_test.dart
+00:09 +123 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread failed cancel keeps attachment draft and a new intent gets a new key
+00:09 +124 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread host delegate failure=false releases its retain
+00:10 +125 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread host delegate failure=true releases its retain
+00:10 +126 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread compact success keeps header close and returns to parent draft
+00:10 +127 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: named thread disposal during host navigation releases before late delegate returns
+00:10 +128 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery current opens unfollowed canonical deleted-root history without writes
+00:11 +129 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +130 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +131 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +132 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +133 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +134 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +135 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +136 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +137 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +138 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +139 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +140 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery discord opens unfollowed canonical deleted-root history without writes
+00:11 +141 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/reply_style_runtime_test.dart: precedence override=null saved=discord default=null
+00:11 +142 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +143 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +144 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +145 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +146 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +147 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +148 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +149 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +150 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +151 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +152 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +153 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +154 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +155 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +156 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +157 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +158 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +159 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +160 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +161 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +162 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +163 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +164 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +165 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +166 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +167 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +168 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +169 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +170 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +171 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +172 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +173 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +174 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +175 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +176 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +177 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +178 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +179 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +180 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +181 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +182 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +183 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +184 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +185 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +186 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +187 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +188 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +189 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +190 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +191 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +192 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +193 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +194 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +195 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +196 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +197 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +198 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +199 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +200 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +201 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +202 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +203 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +204 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery compact keyboard back restores row and channel focus and draft
+00:11 +205 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/reply_style_runtime_test.dart: precedence override=future saved=discord default=future
+00:11 +206 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +207 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +208 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +209 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +210 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +211 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +212 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +213 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +214 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +215 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +216 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +217 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +218 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +219 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +220 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +221 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +222 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +223 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +224 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +225 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +226 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +227 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +228 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +229 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +230 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +231 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +232 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +233 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +234 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +235 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +236 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +237 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +238 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +239 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +240 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pagination retry follow unread and supported filters
+00:11 +241 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery unsupported filters empty initial retry and denied state
+00:11 +242 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery parent revocation closes and releases open history
+00:12 +243 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery stale list cannot display previous channel
+00:12 +244 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pending canonical open releases after dismiss
+00:12 +245 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/reply_style_client_test.dart: accepted identity hydrates without storage; same actor and new device reconnect reload
+00:12 +246 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pending canonical open releases after channel
+00:12 +247 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/reply_style_client_test.dart: capability absence, regain and loss are rechecked on every accepted session
+00:12 +248 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pending canonical open releases after dispose
+00:12 +249 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pending canonical open releases after dispose
+00:12 +250 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pending canonical open releases after dispose
+00:12 +251 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/reply_style_client_test.dart: new accepted account cancels old read and never retries its selection
+00:12 +252 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery delegate handled releases canonical retain
+00:12 +253 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery delegate handled releases canonical retain
+00:12 +254 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery delegate handled releases canonical retain
+00:12 +255 -1: loading /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_timeline_reply_reference_test.dart
+00:12 +255 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery delegate throws releases canonical retain
+00:13 +256 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery delegate late releases canonical retain
+00:13 +257 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery client replacement releases history and Escape returns to channel
+00:13 +258 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery pending list rejects revoked and changed identity authority
+00:13 +259 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: thread discovery supplied list controller survives disposal and authority changes clear data
+00:13 +260 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: full workspace header fits and preserves navigation at 320.0
+00:14 +261 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_timeline_reply_reference_test.dart: authorized reference and additive input preserve legacy builders
+00:14 +262 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: full workspace header fits and preserves navigation at 390.0
+00:14 +263 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_timeline_reply_reference_test.dart: tap unloaded source opens bounded window, focuses and returns
+00:14 +264 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: full workspace header fits and preserves navigation at 1400.0
+00:14 +265 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: full workspace header fits and preserves navigation at 1400.0
+00:14 +266 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: full workspace header fits and preserves navigation at 1400.0
+00:15 +267 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: full workspace header fits and preserves navigation at 1400.0
+00:15 +268 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: full workspace header fits and preserves navigation at 1400.0
+00:15 +269 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_timeline_reply_reference_test.dart: loading, error and explicit retry replace source context
+00:15 +270 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: settings entry works empty at large text and closes with its workspace
+00:15 +271 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_timeline_reply_reference_test.dart: unconfigured authority never borrows loaded source text
+00:15 +272 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: settings overlay retains composition, thread and queued intents at 1100.0
+00:15 +273 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: settings overlay retains composition, thread and queued intents at 1100.0
+00:15 +274 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: settings overlay retains composition, thread and queued intents at 1100.0
+00:15 +275 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: settings overlay retains composition, thread and queued intents at 1100.0
+00:15 +276 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: settings overlay retains composition, thread and queued intents at 1100.0
+00:15 +277 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: settings overlay retains composition, thread and queued intents at 1100.0
+00:15 +278 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: settings overlay retains composition, thread and queued intents at 1100.0
+00:15 +279 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: settings overlay retains composition, thread and queued intents at 1100.0
+00:15 +280 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_timeline_reply_reference_test.dart: narrow large text wraps reference and source window without overflow
+00:15 +281 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: settings overlay retains composition, thread and queued intents at 390.0
+00:15 +282 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:17 +283 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:18 +284 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:18 +285 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:18 +286 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:18 +287 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:19 +287 -1: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 3.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column
+  Column:file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/lib/src/handrail_thread_view.dart:384:18
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#d3ccd OVERFLOWING:
+  needs compositing
+  creator: Column ← DefaultTextStyle ← AnimatedDefaultTextStyle ← _InkFeatures-[GlobalKey#d3bf7 ink
+    renderer] ← NotificationListener<LayoutChangedNotification> ← PhysicalModel ←
+    AnimatedPhysicalModel ← Material ← LayoutBuilder ← HandrailThreadView ← SizedBox ←
+    KeyedSubtree-[GlobalKey#0de9d] ← ⋯
+  parentData: <none> (can use size)
+  constraints: BoxConstraints(w=360.0, h=600.0)
+  size: Size(360.0, 600.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: stretch
+  verticalDirection: down
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:19 +287 -2: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:19 +287 -2: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current [E]
+  Test failed. See exception logs above.
+  The test description was: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+  
+00:19 +287 -2: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote thread archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 3.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column
+  Column:file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/lib/src/handrail_thread_view.dart:384:18
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#8d1b1:
+  needs compositing
+  creator: Column ← DefaultTextStyle ← AnimatedDefaultTextStyle ← _InkFeatures-[GlobalKey#aa401 ink
+    renderer] ← NotificationListener<LayoutChangedNotification> ← PhysicalModel ←
+    AnimatedPhysicalModel ← Material ← LayoutBuilder ← HandrailThreadView ← SizedBox ←
+    KeyedSubtree-[GlobalKey#d7a1b] ← ⋯
+  parentData: <none> (can use size)
+  constraints: BoxConstraints(w=360.0, h=600.0)
+  size: Size(360.0, 600.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: stretch
+  verticalDirection: down
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:19 +287 -3: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:19 +287 -3: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote thread archive retains mounted draft/reference/attachments and destination in ReplyStyle.current [E]
+  Test failed. See exception logs above.
+  The test description was: remote thread archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+  
+00:19 +287 -3: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 3.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column
+  Column:file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/lib/src/handrail_thread_view.dart:384:18
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#11cff:
+  needs compositing
+  creator: Column ← DefaultTextStyle ← AnimatedDefaultTextStyle ← _InkFeatures-[GlobalKey#00421 ink
+    renderer] ← NotificationListener<LayoutChangedNotification> ← PhysicalModel ←
+    AnimatedPhysicalModel ← Material ← LayoutBuilder ← HandrailThreadView ← SizedBox ←
+    KeyedSubtree-[GlobalKey#f21b2] ← ⋯
+  parentData: <none> (can use size)
+  constraints: BoxConstraints(w=360.0, h=600.0)
+  size: Size(360.0, 600.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: stretch
+  verticalDirection: down
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:19 +287 -4: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:19 +287 -4: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current [E]
+  Test failed. See exception logs above.
+  The test description was: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+  
+00:19 +287 -4: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 3.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column
+  Column:file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/lib/src/handrail_thread_view.dart:384:18
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#30c4e OVERFLOWING:
+  needs compositing
+  creator: Column ← DefaultTextStyle ← AnimatedDefaultTextStyle ← _InkFeatures-[GlobalKey#bfc2e ink
+    renderer] ← NotificationListener<LayoutChangedNotification> ← PhysicalModel ←
+    AnimatedPhysicalModel ← Material ← LayoutBuilder ← HandrailThreadView ← SizedBox ←
+    KeyedSubtree-[GlobalKey#0cbfa] ← ⋯
+  parentData: <none> (can use size)
+  constraints: BoxConstraints(w=360.0, h=600.0)
+  size: Size(360.0, 600.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: stretch
+  verticalDirection: down
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:19 +287 -5: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:19 +287 -5: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.discord [E]
+  Test failed. See exception logs above.
+  The test description was: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+  
+00:20 +287 -5: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote thread archive retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 3.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column
+  Column:file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/lib/src/handrail_thread_view.dart:384:18
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#bcb54:
+  needs compositing
+  creator: Column ← DefaultTextStyle ← AnimatedDefaultTextStyle ← _InkFeatures-[GlobalKey#ebf06 ink
+    renderer] ← NotificationListener<LayoutChangedNotification> ← PhysicalModel ←
+    AnimatedPhysicalModel ← Material ← LayoutBuilder ← HandrailThreadView ← SizedBox ←
+    KeyedSubtree-[GlobalKey#61ac5] ← ⋯
+  parentData: <none> (can use size)
+  constraints: BoxConstraints(w=360.0, h=600.0)
+  size: Size(360.0, 600.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: stretch
+  verticalDirection: down
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:20 +287 -6: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:20 +287 -6: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote thread archive retains mounted draft/reference/attachments and destination in ReplyStyle.discord [E]
+  Test failed. See exception logs above.
+  The test description was: remote thread archive retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+  
+00:20 +287 -6: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 3.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column
+  Column:file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/lib/src/handrail_thread_view.dart:384:18
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#af754:
+  needs compositing
+  creator: Column ← DefaultTextStyle ← AnimatedDefaultTextStyle ← _InkFeatures-[GlobalKey#b2706 ink
+    renderer] ← NotificationListener<LayoutChangedNotification> ← PhysicalModel ←
+    AnimatedPhysicalModel ← Material ← LayoutBuilder ← HandrailThreadView ← SizedBox ←
+    KeyedSubtree-[GlobalKey#b0a8f] ← ⋯
+  parentData: <none> (can use size)
+  constraints: BoxConstraints(w=360.0, h=600.0)
+  size: Size(360.0, 600.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: stretch
+  verticalDirection: down
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:20 +287 -7: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:20 +287 -7: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.discord [E]
+  Test failed. See exception logs above.
+  The test description was: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+  
+00:20 +287 -7: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: denied command sanitizes feedback and retains draft and original destination
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 3.0 pixels on the bottom.
+
+The relevant error-causing widget was:
+  Column
+  Column:file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/lib/src/handrail_thread_view.dart:384:18
+
+The overflowing RenderFlex has an orientation of Axis.vertical.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#91730 OVERFLOWING:
+  needs compositing
+  creator: Column ← DefaultTextStyle ← AnimatedDefaultTextStyle ← _InkFeatures-[GlobalKey#039a1 ink
+    renderer] ← NotificationListener<LayoutChangedNotification> ← PhysicalModel ←
+    AnimatedPhysicalModel ← Material ← LayoutBuilder ← HandrailThreadView ← SizedBox ←
+    KeyedSubtree-[GlobalKey#4924d] ← ⋯
+  parentData: <none> (can use size)
+  constraints: BoxConstraints(w=360.0, h=600.0)
+  size: Size(360.0, 600.0)
+  direction: vertical
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: stretch
+  verticalDirection: down
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:20 +287 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:20 +287 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_thread_view_test.dart: denied command sanitizes feedback and retains draft and original destination [E]
+  Test failed. See exception logs above.
+  The test description was: denied command sanitizes feedback and retains draft and original destination
+  
+00:20 +288 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:20 +289 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:20 +290 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:21 +291 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:21 +292 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:21 +293 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:21 +294 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:21 +295 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:22 +296 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:22 +297 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:22 +298 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:22 +299 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:23 +300 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:23 +301 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:23 +302 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:23 +303 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:23 +304 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:23 +305 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:23 +306 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:23 +307 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:23 +308 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +309 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +310 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +311 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +312 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +313 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +314 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +315 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +316 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +317 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +318 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +319 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +320 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +321 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +322 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +323 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +324 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +325 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +326 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +327 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +328 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +329 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +330 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +331 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +332 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +333 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:24 +334 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +335 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +336 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +337 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +338 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +339 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +340 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +341 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +342 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +343 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +344 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +345 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +346 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +347 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +348 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +349 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +350 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +351 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +352 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +353 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +354 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +355 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +356 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits
+00:25 +357 -8: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package/test/handrail_chat_workspace_test.dart: negotiated client search appears after readiness, paginates, and opens hits

@@ -1,0 +1,96 @@
+TAP version 13
+# Subtest: createThread uses PostgreSQL-safe tuple advisory-lock keys
+ok 1 - createThread uses PostgreSQL-safe tuple advisory-lock keys
+  ---
+  duration_ms: 332.806337
+  type: 'test'
+  ...
+# Subtest: atomic create-thread command authorizes, converges, emits summaries, and rolls back PostgreSQL state
+    # Subtest: creates linked state with inherited visibility and no reply
+    ok 1 - creates linked state with inherited visibility and no reply
+      ---
+      duration_ms: 15.486292
+      type: 'test'
+      ...
+    # Subtest: distinct concurrent keys proposing different names converge on one persisted thread and event
+    ok 2 - distinct concurrent keys proposing different names converge on one persisted thread and event
+      ---
+      duration_ms: 25.402748
+      type: 'test'
+      ...
+    # Subtest: persists named responses and events, reloads and replays, and rejects conflicting key reuse
+    ok 3 - persists named responses and events, reloads and replays, and rejects conflicting key reuse
+      ---
+      duration_ms: 27.716321
+      type: 'test'
+      ...
+    # Subtest: legacy unnamed hashes replay stored outcomes with default and explicit follow semantics
+    ok 4 - legacy unnamed hashes replay stored outcomes with default and explicit follow semantics
+      ---
+      duration_ms: 39.575564
+      type: 'test'
+      ...
+    # Subtest: a named request against an unnamed thread retains its canonical ID and absent name
+    ok 5 - a named request against an unnamed thread retains its canonical ID and absent name
+      ---
+      duration_ms: 12.258879
+      type: 'test'
+      ...
+    # Subtest: reconciliation retains role, private state and follow revision despite initialFollow
+    ok 6 - reconciliation retains role, private state and follow revision despite initialFollow
+      ---
+      duration_ms: 20.603447
+      type: 'test'
+      ...
+    # Subtest: creation retains its missing-follow default and explicit false behavior
+    ok 7 - creation retains its missing-follow default and explicit false behavior
+      ---
+      duration_ms: 27.417684
+      type: 'test'
+      ...
+    # Subtest: private-parent revocation rejects reconciliation and replay without setup
+    ok 8 - private-parent revocation rejects reconciliation and replay without setup
+      ---
+      duration_ms: 11.83904
+      type: 'test'
+      ...
+    # Subtest: sanitizes wrong-parent, nested, cross-tenant, archived, deleted, and unauthorized targets
+    ok 9 - sanitizes wrong-parent, nested, cross-tenant, archived, deleted, and unauthorized targets
+      ---
+      duration_ms: 9.805536
+      type: 'test'
+      ...
+    # Subtest: supplied names retain canonical validation without normalization
+    ok 10 - supplied names retain canonical validation without normalization
+      ---
+      duration_ms: 0.709792
+      type: 'test'
+      ...
+    # Subtest: a named request cannot reconcile to an archived existing thread
+    ok 11 - a named request cannot reconcile to an archived existing thread
+      ---
+      duration_ms: 4.36278
+      type: 'test'
+      ...
+    # Subtest: an injected late event failure rolls back every mutation
+    ok 12 - an injected late event failure rolls back every mutation
+      ---
+      duration_ms: 13.211758
+      type: 'test'
+      ...
+    1..12
+ok 2 - atomic create-thread command authorizes, converges, emits summaries, and rolls back PostgreSQL state
+  ---
+  duration_ms: 538.498115
+  type: 'test'
+  ...
+# Real PostgreSQL url-backed; isolated schema with canonical migrations
+1..2
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 952.056594

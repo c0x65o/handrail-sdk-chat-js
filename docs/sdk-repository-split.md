@@ -1,6 +1,7 @@
 # SDK repository split
 
-Status: source extracted; consumer and runtime cutover validation is in progress.
+Status: source extracted and committed. Frozen consumers and current SDK source
+are different revisions; current runtime qualification remains in progress.
 
 ## Ownership
 
@@ -46,11 +47,28 @@ Pub resolves its relative SDK dependency within that same Git revision.
 
 ## Consumer revisions
 
-- JS: `90bff33529df06720ff89ccd821360ac65eaf0d0`
-- Flutter: `51bc3e1411858ce38980f5beded683dee957d1a3`
+Verified from Git and consumer manifests/lockfiles on 2026-09-11:
 
-The JS examples, Flutter lab, native example, and Mobile Preview have matching
-Git pins. Normal npm install/ci runs the SDK prepare build. Do not disable
+| Consumer | Package | Frozen Git revision |
+| --- | --- | --- |
+| JS drop-in, headless and embedded-server examples | `@handrail/chat` 1.0.20 | `90bff33529df06720ff89ccd821360ac65eaf0d0` |
+| Flutter lab and native ERP example | `handrail_chat` 0.1.20 | `51bc3e1411858ce38980f5beded683dee957d1a3` |
+| Mobile Preview | lab subdirectory | `8926839d7467860a738c5526aacb7330a5510483` |
+| Mobile Preview transitive SDK | `handrail_chat` 0.1.20 | `51bc3e1411858ce38980f5beded683dee957d1a3` |
+
+Each row has a matching npm/pub lockfile. The preview's newer lab pin does not
+upgrade its separately pinned transitive SDK. `sdk-compatibility.json` also
+freezes Flutter at `51bc3e1411858ce38980f5beded683dee957d1a3`.
+
+At the start of this qualification, SDK checkout heads were JS
+`9f62a562c5235759efa4c0a05858acae755c0aff` (1.0.25), Flutter
+`8926839d7467860a738c5526aacb7330a5510483` (0.1.21), and preview host
+`52fe6563bfeb9d1289fa39bcba40cd887ee7914e` (0.1.12+1).
+These are committed source, not proof that consumers contain subsequent workspace
+fixes. See [current qualification evidence](validation/owner-task-24350c4f/README.md)
+for patch identities, results, and remaining QA/publication gates.
+
+Normal npm install/ci runs the SDK prepare build. Do not disable
 install scripts. npm may canonicalize a GitHub lock entry to SSH when updating
 it; retain the same SHA and use the manifest's public HTTPS URL in `resolved`,
 then verify with `npm ci` (which preserves the lockfile).

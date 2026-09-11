@@ -1,0 +1,5 @@
+
+> @handrail/chat@1.0.25 check:flutter-contracts
+> node scripts/sync-flutter-contracts.mjs --check
+
+Flutter shared contracts verified: 112 files.

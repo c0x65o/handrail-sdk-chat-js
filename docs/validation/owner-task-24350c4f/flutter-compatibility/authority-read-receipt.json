@@ -1,0 +1,81 @@
+{
+  "run_id": "00bb50b4-2369-4fb4-a65f-1a65ac6eafd0",
+  "source": {
+    "task_id": "24350c4f-985e-4762-ac15-445f69009f18",
+    "action_id": "6bf7dd87-c656-4763-b690-5c426890cd1c",
+    "project_id": "1791fdf7-f197-483c-ba67-5c0da8f4315f",
+    "task_title": "Chat SDK — Discord threads and Hitcents readiness",
+    "planner_turn_id": "5959df85-fb54-4d50-a269-fb6868414b99",
+    "project_revision": 1,
+    "assistant_project_id": "be9c7aa2-8800-466e-aa1b-43f8d68fd853"
+  },
+  "brief_content_sha256": "c013cfc5f77bf25bc5f88bebb9ac9958d323b46f8440b685e72c627ccdbb02fb",
+  "project_rules": {
+    "text": "Owner activation September 10, 2026: perform a thorough Handrail Chat SDK readiness and quality pass, including end-to-end Discord reply/thread settings, in preparation for possible Hitcents ERP adoption. This is the Slack/Discord-style chat product @handrail/chat and handrail_chat, not the separately completed AI Assistant SDK hardening task. Use one accountable lead and scoped implementation plus independent QA helpers. Inspect actual current JS/server/React/UI/Flutter and preview-host source, package revisions, feature flags, tests and runtime; current documentation and ledger status are evidence to reconcile, not proof of readiness. Fix demonstrated SDK defects and essential missing behavior required for the intended drop-in chat experience, with compatible changes, tests and accurate docs. Do not stop at an audit or leave identified release blockers without an owner, concrete next step and callback. Judge must-haves against Hitcents ERP's real identity, authorization, directory, UI, persistence, realtime, attachment and notification needs; separate optional Slack/Discord parity from integration essentials. Read Hitcents ERP as a prospective consumer; installing, modifying or deploying that ERP is not requested yet. SDK repository changes are authorized; runtime configuration, production database writes, deployment and external provider messages still require their existing action-specific controls. Test fixture messages in isolated SDK test/lab environments are allowed; never send real Slack/Discord messages or synthetic business data to production. Validate saved reply style through reload/reconnect and real client/server/storage behavior with PostgreSQL test schemas, React and Flutter UX, routing, unread/notification semantics and disabled/unavailable feature handling. Run scoped compile/typecheck/analyze and meaningful tests sequentially with configured worker limits. Use authorized Mobile Preview and QA Vault handoff, never the raw listener. Keep valid concurrent work and existing controllers. No artificial Codex token/time/run budgets. Save actual revisions, test reports and inspectable UI evidence; independent QA must review the final changed revision. Prepare a concrete ready/not-ready recommendation and minimal Hitcents integration recipe. Source changes/tests do not prove production deployment, registry publication or live consumer adoption. Main reviews any publication/release boundary. Routine overnight results join the existing September 11 8 a.m. America/Chicago brief; route internal blockers to Main and continue independent authorized work.",
+    "truncated": false
+  },
+  "criteria": {
+    "text": "discord_setting: Verify default and Discord reply styles end to end across React and Flutter: setting UI, save/read API and PostgreSQL persistence, reload/reconnect, failed-save recovery and effective readiness. Inline replies preserve destination/source context; thread creation/opening remains distinct. Cover disabled/unavailable behavior, parent authorization and relevant unread/mention state with functional UI evidence.\npilot_quality: Fix reproduced SDK defects and essential Hitcents pilot gaps. Validate membership/access controls, message actions and retry/idempotency/replay, and classify attachments/search/unread/notifications/accessibility coverage using an explicit tested/unsupported/optional matrix. No unresolved fixable must-have is hidden by successful worker status.\npackage_readiness: Verify clean consumer install/build and public exports, scoped JS compile and Flutter analyze, exact JS/Dart revisions/pins and compatibility. Reconcile provisional repository/release documentation with actual artifacts and distinguish source-tested, Git-published and deployed states.\nhitcents_fit: Inspect Hitcents ERP read-only and deliver a concrete minimal integration recipe covering existing auth, tenant, directory, storage, websocket, React and mobile seams. Separate adoption blockers from optional Slack/Discord parity. Do not install or deploy the SDK into ERP in this task.\nindependent_acceptance: An independent reviewer inspects the exact final artifact revision, functional evidence and relevant UI media. Deliver a concise evidence-backed ready/not-ready recommendation, prioritized remaining gaps and explicit next action/continuation for any real blocker; dispatch, historical evidence or reports alone are insufficient.",
+    "truncated": false
+  },
+  "memory_publications": [
+    {
+      "type": "memory",
+      "id": "20635dae-2186-49a6-9223-05b0b53a86f0",
+      "title": "Owner Assistant — equip Teams to work independently",
+      "revision": 2,
+      "revision_id": "4ddd3205-dcf1-41e3-acd2-b9186b77926c",
+      "content_sha256": "4dcaddfecd7a595e91bd231f92502ee18129eeaa3a7574cd57287e91ef780774",
+      "application_scope": "global",
+      "project_id": null,
+      "inherited_from": "assistant_project",
+      "first_read_at": "2026-09-11T05:14:55.929Z"
+    },
+    {
+      "type": "memory",
+      "id": "438bbf55-3b9d-420d-82a4-1972ab8a942f",
+      "title": "Owner Assistant — finish entrusted work without Codex budgets",
+      "revision": 1,
+      "revision_id": "b05e78cc-3aff-4d9e-af34-fe1f360b13c3",
+      "content_sha256": "4ef8d28752fb25989a2d3ff64bf87db6bedb2159e02d2abb2a45afd475f30667",
+      "application_scope": "global",
+      "project_id": null,
+      "inherited_from": "assistant_project",
+      "first_read_at": "2026-09-11T05:14:56.096Z"
+    },
+    {
+      "type": "memory",
+      "id": "b47ae04f-5f40-4616-b924-f8972da06a49",
+      "title": "Owner Assistant — initiative, quality, and continuous improvement",
+      "revision": 2,
+      "revision_id": "85c7f454-bc77-425c-820f-b3f53fcc4c34",
+      "content_sha256": "fb97fa2000bf056426e917fe0103a7e50758a53a3401b801a372831ed11d2dfb",
+      "application_scope": "global",
+      "project_id": null,
+      "inherited_from": "assistant_project",
+      "first_read_at": "2026-09-11T05:14:56.234Z"
+    },
+    {
+      "type": "memory",
+      "id": "12837f02-bf38-486b-9629-a044d593a23a",
+      "title": "Owner Assistant — concise updates and escalation triage",
+      "revision": 1,
+      "revision_id": "93381f00-b9cc-457f-ac92-c351c0991a71",
+      "content_sha256": "f8f72a4fa3e966c9fff2152eed7f177cc7b060110362a2230405a68f6a115f8e",
+      "application_scope": "global",
+      "project_id": null,
+      "inherited_from": "assistant_project",
+      "first_read_at": "2026-09-11T05:14:56.371Z"
+    }
+  ],
+  "unavailable_count": 0,
+  "qa_full_evidence_access": {
+    "aggregate_reader": "get_goal_completed_work_result",
+    "error": "An owner_goal_id is required (none was provided and the Codex run is not owner-goal scoped).",
+    "missing_paths": [
+      "/opt/handrail/.handrail/validation-runs/c718b243-d356-4973-bf05-c8d3394801fa/REVIEW.md",
+      "/opt/handrail/.handrail/validation-runs/c718b243-d356-4973-bf05-c8d3394801fa/reproduce-independent.md"
+    ],
+    "available": "get_work_request saved outcome and registered evidence references retained in qa-review-summary.json"
+  }
+}

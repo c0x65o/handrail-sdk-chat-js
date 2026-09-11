@@ -1,0 +1,42 @@
+TAP version 13
+# Subtest: thread websocket access follows current parent authority in PostgreSQL
+    # Subtest: unfollowed eligible readers subscribe; follow state neither grants nor revokes access
+    ok 1 - unfollowed eligible readers subscribe; follow state neither grants nor revokes access
+      ---
+      duration_ms: 110.843396
+      type: 'test'
+      ...
+    # Subtest: parent denial excludes fresh and reconnect subscriptions, replay and buffered replay with retained child membership
+    ok 2 - parent denial excludes fresh and reconnect subscriptions, replay and buffered replay with retained child membership
+      ---
+      duration_ms: 42.095981
+      type: 'test'
+      ...
+    # Subtest: parent-scoped revocation reaches child-only sessions, drops queued delivery and isolates users/tenants
+    ok 3 - parent-scoped revocation reaches child-only sessions, drops queued delivery and isolates users/tenants
+      ---
+      duration_ms: 39.091124
+      type: 'test'
+      ...
+    # Subtest: host denial and failed relationship lookup revoke safely; archives and actor-private streams remain restricted
+    ok 4 - host denial and failed relationship lookup revoke safely; archives and actor-private streams remain restricted
+      ---
+      duration_ms: 28.166862
+      type: 'test'
+      ...
+    1..4
+ok 1 - thread websocket access follows current parent authority in PostgreSQL
+  ---
+  duration_ms: 596.182838
+  type: 'test'
+  ...
+# Real PostgreSQL url-backed; isolated schema with canonical migrations
+1..1
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 732.155689

@@ -1,0 +1,59 @@
+TAP version 13
+# Subtest: PATCH /conversations/:conversationId/membership mounts every membership intent safely
+    # Subtest: returns canonical full results for all five intents
+    ok 1 - returns canonical full results for all five intents
+      ---
+      duration_ms: 70.788687
+      type: 'test'
+      ...
+    # Subtest: preserves canonical retry and revision-conflict outcomes
+    ok 2 - preserves canonical retry and revision-conflict outcomes
+      ---
+      duration_ms: 33.581131
+      type: 'test'
+      ...
+    # Subtest: returns canonical owner and active-member safety conflicts
+    ok 3 - returns canonical owner and active-member safety conflicts
+      ---
+      duration_ms: 10.214498
+      type: 'test'
+      ...
+    # Subtest: maps role and conversation identity invariants
+    ok 4 - maps role and conversation identity invariants
+      ---
+      duration_ms: 8.801995
+      type: 'test'
+      ...
+    # Subtest: rejects malformed, ambiguous, oversized, and spoofed input
+    ok 5 - rejects malformed, ambiguous, oversized, and spoofed input
+      ---
+      duration_ms: 35.007004
+      type: 'test'
+      ...
+    # Subtest: target without private parent access receives a stable authorization error
+    ok 6 - target without private parent access receives a stable authorization error
+      ---
+      duration_ms: 13.202226
+      type: 'test'
+      ...
+    # Subtest: sanitizes directory, auth, missing, and cross-tenant failures
+    ok 7 - sanitizes directory, auth, missing, and cross-tenant failures
+      ---
+      duration_ms: 21.735465
+      type: 'test'
+      ...
+    1..7
+ok 1 - PATCH /conversations/:conversationId/membership mounts every membership intent safely
+  ---
+  duration_ms: 531.855244
+  type: 'test'
+  ...
+1..1
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 751.757103

@@ -1,0 +1,60 @@
+TAP version 13
+# Subtest: thread lifecycle HTTP dispatch preserves archive compatibility with isolated PostgreSQL
+    # Subtest: authenticated path/body normalization returns applied, replayed and no-op canonical responses
+    ok 1 - authenticated path/body normalization returns applied, replayed and no-op canonical responses
+      ---
+      duration_ms: 33.06421
+      type: 'test'
+      ...
+    # Subtest: stale revision and key reuse have safe 409 outcomes
+    ok 2 - stale revision and key reuse have safe 409 outcomes
+      ---
+      duration_ms: 11.253694
+      type: 'test'
+      ...
+    # Subtest: caller identity, moderation, canonical state, unknown fields and body threadId are rejected before command work
+    ok 3 - caller identity, moderation, canonical state, unknown fields and body threadId are rejected before command work
+      ---
+      duration_ms: 19.519879
+      type: 'test'
+      ...
+    # Subtest: authentication and admission reject before commands; authorization discloses no canonical state
+    ok 4 - authentication and admission reject before commands; authorization discloses no canonical state
+      ---
+      duration_ms: 12.624593
+      type: 'test'
+      ...
+    # Subtest: archive and restore still use the same URL with their original validation and response contract
+    ok 5 - archive and restore still use the same URL with their original validation and response contract
+      ---
+      duration_ms: 24.52276
+      type: 'test'
+      ...
+    # Subtest: explicit lifecycle opt-in advertises ready support
+    ok 6 - explicit lifecycle opt-in advertises ready support
+      ---
+      duration_ms: 3.211042
+      type: 'test'
+      ...
+    # Subtest: internal command failures use sanitized lifecycle availability errors
+    ok 7 - internal command failures use sanitized lifecycle availability errors
+      ---
+      duration_ms: 6.307454
+      type: 'test'
+      ...
+    1..7
+ok 1 - thread lifecycle HTTP dispatch preserves archive compatibility with isolated PostgreSQL
+  ---
+  duration_ms: 433.129232
+  type: 'test'
+  ...
+# Real PostgreSQL url-backed; isolated schema, canonical migrations and source bundle
+1..1
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 572.209778

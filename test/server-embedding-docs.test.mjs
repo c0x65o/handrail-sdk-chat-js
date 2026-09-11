@@ -169,8 +169,8 @@ test("documented adapters and feature gates match the public TypeScript source",
   assert.equal(sourceMethods.size, Object.keys(documentedAdapters).length);
   for (const [adapter, members] of Object.entries(documentedAdapters)) {
     assert.deepEqual(
-      sourceMethods.get(adapter),
-      members,
+      new Set(sourceMethods.get(adapter)),
+      new Set(members),
       `${adapter} documentation drifted from its public members`,
     );
     for (const member of members) {

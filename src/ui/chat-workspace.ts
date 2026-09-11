@@ -3075,6 +3075,7 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
     if (source.conversationId !== selectedConversationIdRef.current) return;
     composerControlsRef.current?.selectReply(source);
   }, []);
+  const focusThreadReplyComposer = useCallback(() => composerControlsRef.current?.focus?.(), []);
   const requestLatestMessageEdit = useCallback((
     returnFocusTarget: HTMLTextAreaElement,
   ): boolean => messageTimelineEditControllerRef.current
@@ -4501,7 +4502,10 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
         ...(props.readOnly === true ? {} : { onForwardMessage: openForwardDialog }),
         onOpenThread: openThreadPanel,
         ...(props.renderThread === undefined ? { onCreateThread: requestThreadCreation } : {}),
-        ...(props.renderComposer === undefined ? { onReplyRequested: selectReply } : {}),
+        ...(props.renderComposer === undefined ? {
+          onReplyRequested: selectReply,
+          onThreadReplyRequested: focusThreadReplyComposer,
+        } : {}),
         readOnly: props.readOnly ?? false,
         ...(props.composerAvailability === undefined ? {} : { replyAvailability: props.composerAvailability }),
         ...(props.otherMemberReadState === undefined

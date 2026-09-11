@@ -295,7 +295,8 @@ test("PATCH /conversations/:conversationId/membership mounts every membership in
             value.request,
             { authorization: value.authorization },
           );
-          assert.equal(response.status, 200);
+          assert.equal(response.status, 200,
+            `${value.request.intent}: ${await response.clone().text()}`);
           assert.equal(response.headers.get("cache-control"), "private, no-store");
           const result = parseConversationMembershipMutationResult(
             await response.json(),
@@ -461,7 +462,6 @@ test("PATCH /conversations/:conversationId/membership mounts every membership in
           }),
           () => request("/conversations/different/membership", valid),
           () => request("/conversations/directory-target/membership?intent=add_member", valid),
-          () => request("/conversations/directory-target/extra/membership", valid),
           () => request("/conversations/directory-target/membership", {
             ...valid,
             targetUserId: " user-d",
@@ -493,6 +493,12 @@ test("PATCH /conversations/:conversationId/membership mounts every membership in
           );
         }
 
+        // An extra path segment never matches the membership route. It must not
+        // be treated as a valid membership endpoint with a malformed body.
+        const unknownRoute = await request("/conversations/directory-target/extra/membership", valid);
+        assert.equal(unknownRoute.status, 404);
+        assert.equal(await unknownRoute.text(), "");
+
         const duplicate = await rawRequest(
           "/conversations/directory-target/membership",
           {
@@ -515,6 +521,28 @@ test("PATCH /conversations/:conversationId/membership mounts every membership in
           CHAT_CONVERSATION_MEMBERSHIP_INVALID_REQUEST_CODE,
           "Invalid conversation membership request",
         );
+      });
+
+      await t.test("target without private parent access receives a stable authorization error", async () => {
+        await harness.pool.query(`INSERT INTO ${conversations}
+          (tenant_id,id,type,visibility,name,current_message_sequence)
+          VALUES ('tenant-a','target-parent','channel','private','Target access lab',1)`);
+        await harness.pool.query(`INSERT INTO ${schema}.chat_messages
+          (tenant_id,id,conversation_id,sequence,author_user_id,client_message_id,content)
+          VALUES ('tenant-a','target-root','target-parent',1,'actor-a','target-root',
+            '{"format":"plain","text":"Isolated membership fixture"}')`);
+        await harness.pool.query(`INSERT INTO ${conversations}
+          (tenant_id,id,type,visibility,parent_conversation_id,root_message_id)
+          VALUES ('tenant-a','target-child','thread','private','target-parent','target-root')`);
+        await harness.pool.query(`INSERT INTO ${members}
+          (tenant_id,conversation_id,user_id,role,state)
+          VALUES ('tenant-a','target-parent','actor-a','member','active'),
+            ('tenant-a','target-child','actor-a','owner','active')`);
+        await assertStableError(await request("/conversations/target-child/membership",
+          targetedInput("target-no-parent", "add_member", "target-child", "user-d")),
+        403, CHAT_AUTHORIZATION_ERROR_CODE, "Chat authorization failed");
+        assert.equal((await harness.pool.query(`SELECT count(*)::int AS n FROM ${members}
+          WHERE tenant_id='tenant-a' AND conversation_id='target-child' AND user_id='user-d'`)).rows[0].n, 0);
       });
 
       await t.test("sanitizes directory, auth, missing, and cross-tenant failures", async () => {
@@ -602,7 +630,10 @@ test("PATCH /conversations/:conversationId/membership mounts every membership in
       });
     });
   } finally {
-    await harness.dispose();
-    await backend.dispose();
+    try {
+      await harness.teardown();
+    } finally {
+      await backend.teardown();
+    }
   }
 });

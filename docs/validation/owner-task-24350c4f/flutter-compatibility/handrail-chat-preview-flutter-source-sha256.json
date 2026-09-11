@@ -1,0 +1,17 @@
+{
+  ".gitignore": "ccf779db366852e0088c291daa662028b95246b774d21d11cd62fecf3b9e4fb4",
+  ".metadata": "690ba50c95e50f9cd9fc6b6c358cfaed21ce6ae50315f5c0fbbf6ea11b92b6ee",
+  "README.md": "449623714b5b40eeef2d66c2d89d39b54d6c4f329170b5814abb98a2c2437184",
+  "analysis_options.yaml": "c1e9534c05acb3643e72a82ad3d92d56d2ba9b0df2add014c18f7e1d462f24e4",
+  "lib/main.dart": "1935d998ab121291c3589e89a2b96c07a409aa232fcdd60ed6c4836acb277278",
+  "pubspec.lock": "18ddeb08f3766d6186a7eece9fd8e32ac5ccf501aec4a4897858ab7ed1d9efce",
+  "pubspec.yaml": "28e38781c8a8ba4f1a8c49d6f6da1062b509a4e199da4b4d90c5d219d3b228e0",
+  "test/mobile_preview_launcher_test.dart": "8ce708e9a2b5109153df6b05147c0ce6556fbe5fef498d502fc27cf392f86f87",
+  "web/favicon.png": "7ab2525f4b86b65d3e4c70358a17e5a1aaf6f437f99cbcc046dad73d59bb9015",
+  "web/icons/Icon-192.png": "3dce99077602f70421c1c6b2a240bc9b83d64d86681d45f2154143310c980be3",
+  "web/icons/Icon-512.png": "baccb205ae45f0b421be1657259b4943ac40c95094ab877f3bcbe12cd544dcbe",
+  "web/icons/Icon-maskable-192.png": "d2c842e22a9f4ec9d996b23373a905c88d9a203b220c5c151885ad621f974b5c",
+  "web/icons/Icon-maskable-512.png": "6aee06cdcab6b2aef74b1734c4778f4421d2da100b0ff9e52b21b55240202929",
+  "web/index.html": "221f022865de789d1f135c0a2332f4b5e3a99f4701501f8b66e2e9698178be26",
+  "web/manifest.json": "e76534a518217d7da8a9cb3d7f95f7328c7b8ec1590e8536bfd49468164f2b20"
+}

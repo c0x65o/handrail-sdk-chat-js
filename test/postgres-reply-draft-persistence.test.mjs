@@ -43,7 +43,9 @@ test("reply drafts upgrade safely and use current parent authority", async (t) =
     const legacyRow = () => sql(`SELECT * FROM ${prefix}.chat_drafts WHERE conversation_id = 'legacy'`);
     const before = (await legacyRow()).rows;
     const applied = await migrate(handrailChatPostgresMigrations);
-    assert.deepEqual(applied.applied.map(({ id }) => id), ["0042-chat-draft-replies"]);
+    assert.deepEqual(applied.applied.map(({ id }) => id),
+      handrailChatPostgresMigrations.filter(({ order }) => order >= 42).map(({ id }) => id));
+    assert.ok(applied.applied.some(({ id }) => id === "0042-chat-draft-replies"));
     assert.deepEqual((await legacyRow()).rows, before);
 
     await t.test("database retains legacy rules and strictly validates optional reply metadata", async () => {

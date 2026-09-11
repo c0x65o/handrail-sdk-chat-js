@@ -1,0 +1,155 @@
+{
+  "revision": "revision-2026-09-11",
+  "work_request_id": "fbbb5fd9-1672-413b-84d0-42ae5d06a564",
+  "worker_run_id": "1fa598f9-7da1-40f7-9f20-548365df30e6",
+  "original_work_request_id": "0bb40a03-7913-4993-be3d-d60ef7fcb3cd",
+  "task_id": "24350c4f-985e-4762-ac15-445f69009f18",
+  "strategy_id": "04195e83-6774-46f8-af9e-216d41186860",
+  "scope": "Documentation only; planning corrections saved for independent management review. No independent acceptance or ERP implementation/adoption claimed.",
+  "checks": {
+    "relative_links_and_anchors": {
+      "status": "passed",
+      "count": 21,
+      "links": [
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "validation/owner-task-24350c4f/README.md"
+        },
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "pilot-integration.md"
+        },
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "validation/owner-task-24350c4f/hitcents-planning/README.md"
+        },
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "validation/owner-task-24350c4f/hitcents-planning/revision-2026-09-11/erp-source-provenance.json"
+        },
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "pilot-integration.md#reactvite-client"
+        },
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "../contracts/cross-client-capabilities.v1.json"
+        },
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "server-embedding.md#postgresql-and-migrations"
+        },
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "server-embedding.md#complete-embedding-example"
+        },
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "pilot-integration.md#flutter-pilot"
+        },
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "reply-thread-capabilities.md"
+        },
+        {
+          "document": "docs/hitcents-integration.md",
+          "target": "validation/owner-task-24350c4f/flutter-compatibility/README.md"
+        },
+        {
+          "document": "docs/validation/owner-task-24350c4f/hitcents-planning/README.md",
+          "target": "../../../hitcents-integration.md"
+        },
+        {
+          "document": "docs/validation/owner-task-24350c4f/hitcents-planning/README.md",
+          "target": "revision-2026-09-11/hitcents-integration.before.md"
+        },
+        {
+          "document": "docs/validation/owner-task-24350c4f/hitcents-planning/README.md",
+          "target": "revision-2026-09-11/hitcents-integration.md"
+        },
+        {
+          "document": "docs/validation/owner-task-24350c4f/hitcents-planning/README.md",
+          "target": "revision-2026-09-11/erp-source-provenance.json"
+        },
+        {
+          "document": "docs/validation/owner-task-24350c4f/hitcents-planning/README.md",
+          "target": "revision-2026-09-11/verification.json"
+        },
+        {
+          "document": "docs/validation/owner-task-24350c4f/hitcents-planning/README.md",
+          "target": "revision-2026-09-11/SHA256SUMS"
+        },
+        {
+          "document": "docs/validation/owner-task-24350c4f/hitcents-planning/README.md",
+          "target": "../flutter-compatibility/patch-identities.json"
+        },
+        {
+          "document": "docs/validation/owner-task-24350c4f/hitcents-planning/README.md",
+          "target": "verification.json"
+        },
+        {
+          "document": "docs/validation/owner-task-24350c4f/hitcents-planning/README.md",
+          "target": "README.before.md"
+        },
+        {
+          "document": "docs/validation/owner-task-24350c4f/hitcents-planning/README.md",
+          "target": "../retained-independent-review/README.md"
+        }
+      ]
+    },
+    "markdown_fences_final_newlines_and_trailing_whitespace": "passed for both current documents",
+    "git_diff_check_docs": "passed; explicit checks also cover the untracked current documents",
+    "json_parse_and_provenance_shape": "passed; 11 web and 6 mobile supplied identities, no ERP re-hashing",
+    "before_after_snapshot_correspondence": "passed",
+    "runtime_artifact_identity_and_three_patch_hashes": "passed",
+    "manual_consistency_review": "Passed against the supplied corrections: auth versus transport, guarded placement/lifecycle, trusted config, identity cleanup, source constraints, provenance, lead delivery versus independent management acceptance, planning versus adoption, and retained limitations."
+  },
+  "preservation": {
+    "scope": "All entry Git-tracked and untracked nonignored files in the three Chat checkouts; ignored build/cache state is outside this check.",
+    "entry_file_count": 2069,
+    "unchanged_entry_files": 2068,
+    "changed_entry_files": [
+      "handrail-sdk-chat-js/docs/hitcents-integration.md"
+    ],
+    "repository_heads": {
+      "handrail-sdk-chat-js": "9f62a562c5235759efa4c0a05858acae755c0aff",
+      "handrail-sdk-chat-flutter": "8926839d7467860a738c5526aacb7330a5510483",
+      "handrail-chat-preview-flutter": "52fe6563bfeb9d1289fa39bcba40cd887ee7914e"
+    },
+    "pending_git_operations": [],
+    "historical_manifests_and_runtime_source_unchanged": true,
+    "runtime_artifact_id": "248f3f7986001f99414f5a149c477177059b1dcfc0a49be7c223a6190a5fc2eb",
+    "historical_identity_files_sha256": {
+      "docs/validation/owner-task-24350c4f/hitcents-planning/verification.json": "1b2c25427f86ca4a880fbb08ada6720ce99bdd82bebd92f377b1737ec7b91d76",
+      "docs/validation/owner-task-24350c4f/hitcents-planning/README.before.md": "99bd8d7dfa30f7a53b5b4a3c7a4bb2556dba4aed56612cb355c809996b43ce3a",
+      "docs/validation/owner-task-24350c4f/flutter-compatibility/patch-identities.json": "60803283a02388ae78082a929ed23bd64caa9def95ed0101918fc99ff88c243e",
+      "docs/validation/owner-task-24350c4f/evidence-sha256.json": "105feed4703d64ac18fe1cd97e69bbbe7f318ca6f912cfc099c4c6c9e1e6cd4a",
+      "docs/validation/owner-task-24350c4f/flutter-compatibility/evidence-sha256.json": "2e9f8d89949e6a1bea1e1d84f9b68b8e08ca246c3ba68957127a307834159cd7"
+    },
+    "upstream_synchronization": "Deferred at worker start: main_workspace_in_use. No synchronization or Git repair performed; prior edits retained."
+  },
+  "artifact_sha256": {
+    "docs/hitcents-integration.md": "3f005260e999e4b12e1d3033dcca68b778998a011163aefbfdeb2ea15b979eea",
+    "docs/validation/owner-task-24350c4f/hitcents-planning/README.md": "66731bf09c0ff67b9215efdd20d6f27a3eede4bce9b4cd46ec99513b1899e97d",
+    "docs/validation/owner-task-24350c4f/hitcents-planning/revision-2026-09-11/hitcents-integration.before.md": "a2142efb503b7838e1b561474ab9dcff75f207b85f63bd131194de22c43bc4b1",
+    "docs/validation/owner-task-24350c4f/hitcents-planning/revision-2026-09-11/hitcents-integration.md": "3f005260e999e4b12e1d3033dcca68b778998a011163aefbfdeb2ea15b979eea",
+    "docs/validation/owner-task-24350c4f/hitcents-planning/revision-2026-09-11/erp-source-provenance.json": "854debf0fcedacddbe5ca7c038da40d857d1ae4aa9d76c1bd05733128fd0212c"
+  },
+  "not_run": [
+    "ERP inspection or install/build",
+    "compatibility reruns or typed compilation (no typed source changed)",
+    "PostgreSQL/runtime/consumer tests",
+    "new evidence import or capture",
+    "services/configuration/provisioning/publication/deployment"
+  ],
+  "retained_limits": [
+    "original inconclusive history",
+    "fresh_capture=false",
+    "low-severity 4px Send-padding clipping",
+    "independent PG16/nonroot harness",
+    "live save/read/reconnect and cross-client proof",
+    "native keyboard/touch/screen-reader acceptance",
+    "future ERP adapters, consumer pins/locks/builds and adoption"
+  ],
+  "next_step": "Existing lead delivers this exact manifest to independent management through the current planner action on the same task. No acceptance, callback or queue mutation performed."
+}

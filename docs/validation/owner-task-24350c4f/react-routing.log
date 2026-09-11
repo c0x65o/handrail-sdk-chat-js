@@ -1,0 +1,680 @@
+TAP version 13
+# Subtest: default public actions send, open and close a focus-restoring thread, and start a huddle
+ok 1 - default public actions send, open and close a focus-restoring thread, and start a huddle
+  ---
+  duration_ms: 231.166535
+  type: 'test'
+  ...
+# Subtest: Reply starts a new thread and is hidden for deleted and unsent messages
+ok 2 - Reply starts a new thread and is hidden for deleted and unsent messages
+  ---
+  duration_ms: 135.60753
+  type: 'test'
+  ...
+# Subtest: reply style settings opens with keyboard, contains focus and restores the trigger
+ok 3 - reply style settings opens with keyboard, contains focus and restores the trigger
+  ---
+  duration_ms: 116.392934
+  type: 'test'
+  ...
+# Subtest: host settings content and custom settings slot retain ownership
+ok 4 - host settings content and custom settings slot retain ownership
+  ---
+  duration_ms: 83.727143
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-public without opening threads
+ok 5 - inline Reply routing sends Alice/Bob payload in conversation-public without opening threads
+  ---
+  duration_ms: 93.42039
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-direct without opening threads
+ok 6 - inline Reply routing sends Alice/Bob payload in conversation-direct without opening threads
+  ---
+  duration_ms: 52.731717
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-group-direct without opening threads
+ok 7 - inline Reply routing sends Alice/Bob payload in conversation-group-direct without opening threads
+  ---
+  duration_ms: 60.781253
+  type: 'test'
+  ...
+# Subtest: inline Reply routing in an already-open ThreadPanel keeps its thread ID and parent draft
+ok 8 - inline Reply routing in an already-open ThreadPanel keeps its thread ID and parent draft
+  ---
+  duration_ms: 128.655303
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables unsupported with an accessible explanation
+ok 9 - inline Reply routing disables unsupported with an accessible explanation
+  ---
+  duration_ms: 39.505102
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables unknown with an accessible explanation
+ok 10 - inline Reply routing disables unknown with an accessible explanation
+  ---
+  duration_ms: 43.801284
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables read-only with an accessible explanation
+ok 11 - inline Reply routing disables read-only with an accessible explanation
+  ---
+  duration_ms: 39.660725
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables send-disabled with an accessible explanation
+ok 12 - inline Reply routing disables send-disabled with an accessible explanation
+  ---
+  duration_ms: 36.837236
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables inactive member with an accessible explanation
+ok 13 - inline Reply routing disables inactive member with an accessible explanation
+  ---
+  duration_ms: 44.110305
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables custom composer without connection with an accessible explanation
+ok 14 - inline Reply routing disables custom composer without connection with an accessible explanation
+  ---
+  duration_ms: 38.61488
+  type: 'test'
+  ...
+# Subtest: inline Reply routing is independent of preference persistence support and excludes deleted/unsent sources
+ok 15 - inline Reply routing is independent of preference persistence support and excludes deleted/unsent sources
+  ---
+  duration_ms: 51.193134
+  type: 'test'
+  ...
+# Subtest: inline Reply routing preserves attachments, mentions and text when replacing a source
+ok 16 - inline Reply routing preserves attachments, mentions and text when replacing a source
+  ---
+  duration_ms: 51.819336
+  type: 'test'
+  ...
+# Subtest: inline Reply routing freezes a pending send across style and conversation switches and rejects stale slot callbacks
+ok 17 - inline Reply routing freezes a pending send across style and conversation switches and rejects stale slot callbacks
+  ---
+  duration_ms: 102.067331
+  type: 'test'
+  ...
+# Subtest: inline Reply routing respects ThreadPanel restrictions {"readOnly":true}
+ok 18 - inline Reply routing respects ThreadPanel restrictions {"readOnly":true}
+  ---
+  duration_ms: 56.626617
+  type: 'test'
+  ...
+# Subtest: inline Reply routing respects ThreadPanel restrictions {"composerAvailability":{"canSend":false}}
+ok 19 - inline Reply routing respects ThreadPanel restrictions {"composerAvailability":{"canSend":false}}
+  ---
+  duration_ms: 57.443287
+  type: 'test'
+  ...
+# Subtest: inline Reply routing retains a selected source when switching to Current before sending
+ok 20 - inline Reply routing retains a selected source when switching to Current before sending
+  ---
+  duration_ms: 55.867138
+  type: 'test'
+  ...
+# Subtest: inline Reply routing can replace the next draft source while a send retains its frozen payload
+ok 21 - inline Reply routing can replace the next draft source while a send retains its frozen payload
+  ---
+  duration_ms: 35.365961
+  type: 'test'
+  ...
+# Subtest: inline Reply routing: default directly selected thread focuses its existing composer without nested creation
+ok 22 - inline Reply routing: default directly selected thread focuses its existing composer without nested creation
+  ---
+  duration_ms: 35.656973
+  type: 'test'
+  ...
+# Subtest: inline Reply routing: current directly selected thread focuses its existing composer without nested creation
+ok 23 - inline Reply routing: current directly selected thread focuses its existing composer without nested creation
+  ---
+  duration_ms: 52.925081
+  type: 'test'
+  ...
+# Subtest: inline Reply routing: Current directly selected thread requires a connected composer
+ok 24 - inline Reply routing: Current directly selected thread requires a connected composer
+  ---
+  duration_ms: 29.711169
+  type: 'test'
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2129.74695
+TAP version 13
+# Subtest: renders unread and DM receipt state, reactions, renderers, safe fallback, and root thread summaries
+ok 1 - renders unread and DM receipt state, reactions, renderers, safe fallback, and root thread summaries
+  ---
+  duration_ms: 96.20255
+  type: 'test'
+  ...
+# Subtest: reply references render immediate bounded text, escape markup, and preserve legacy thread Reply
+ok 2 - reply references render immediate bounded text, escape markup, and preserve legacy thread Reply
+  ---
+  duration_ms: 37.926036
+  type: 'test'
+  ...
+# Subtest: default and custom reply slots refresh on edits, reconnect, deletion and revocation without stale disclosure
+ok 3 - default and custom reply slots refresh on edits, reconnect, deletion and revocation without stale disclosure
+  ---
+  duration_ms: 81.095793
+  type: 'test'
+  ...
+# Subtest: reply loading and retryable errors are explicit and never disclose failed response data
+ok 4 - reply loading and retryable errors are explicit and never disclose failed response data
+  ---
+  duration_ms: 24.145581
+  type: 'test'
+  ...
+# Subtest: reply jump failures and cancellation restore focus and late navigation cannot focus another conversation
+ok 5 - reply jump failures and cancellation restore focus and late navigation cannot focus another conversation
+  ---
+  duration_ms: 78.606973
+  type: 'test'
+  ...
+# Subtest: custom reply actions stay inside an existing thread and retained callbacks cannot navigate a later scope
+ok 6 - custom reply actions stay inside an existing thread and retained callbacks cannot navigate a later scope
+  ---
+  duration_ms: 40.481884
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 781.949927
+TAP version 13
+# Subtest: opens a new canonical thread and composes its isolated timeline and composer
+ok 1 - opens a new canonical thread and composes its isolated timeline and composer
+  ---
+  duration_ms: 85.951863
+  type: 'test'
+  ...
+# Subtest: shows immutable parent context and keeps parent messages out of an existing thread
+ok 2 - shows immutable parent context and keeps parent messages out of an existing thread
+  ---
+  duration_ms: 26.671762
+  type: 'test'
+  ...
+# Subtest: forwards normalized link-preview overrides through the thread timeline
+ok 3 - forwards normalized link-preview overrides through the thread timeline
+  ---
+  duration_ms: 26.915591
+  type: 'test'
+  ...
+# Subtest: opens the reaction picker for replies without rendering empty configured aggregates
+ok 4 - opens the reaction picker for replies without rendering empty configured aggregates
+  ---
+  duration_ms: 68.12296
+  type: 'test'
+  ...
+# Subtest: paginates only the thread and exposes its unread, follow, unfollow, and mark-read actions
+ok 5 - paginates only the thread and exposes its unread, follow, unfollow, and mark-read actions
+  ---
+  duration_ms: 104.452412
+  type: 'test'
+  ...
+# Subtest: renders accessible loading and retryable error states and retries through the public action
+ok 6 - renders accessible loading and retryable error states and retries through the public action
+  ---
+  duration_ms: 22.05362
+  type: 'test'
+  ...
+# Subtest: renders an unavailable state outside ChatProvider without touching private context
+ok 7 - renders an unavailable state outside ChatProvider without touching private context
+  ---
+  duration_ms: 2.2063
+  type: 'test'
+  ...
+# Subtest: moves focus from Reply into the named panel once and preserves it through live replies
+ok 8 - moves focus from Reply into the named panel once and preserves it through live replies
+  ---
+  duration_ms: 61.975794
+  type: 'test'
+  ...
+# Subtest: closes by Escape and Close while restoring the connected Reply opener
+ok 9 - closes by Escape and Close while restoring the connected Reply opener
+  ---
+  duration_ms: 78.357624
+  type: 'test'
+  ...
+# Subtest: does not try to restore a Reply opener that was removed
+ok 10 - does not try to restore a Reply opener that was removed
+  ---
+  duration_ms: 49.300186
+  type: 'test'
+  ...
+# Subtest: a conflicting follow result announces reconciliation rather than an unapplied change
+ok 11 - a conflicting follow result announces reconciliation rather than an unapplied change
+  ---
+  duration_ms: 26.905764
+  type: 'test'
+  ...
+# Subtest: unfollow conflict is announced in the live region and can retry with refreshed authority
+ok 12 - unfollow conflict is announced in the live region and can retry with refreshed authority
+  ---
+  duration_ms: 39.799438
+  type: 'test'
+  ...
+# Subtest: follow conflict is announced in the live region and can retry with refreshed authority
+ok 13 - follow conflict is announced in the live region and can retry with refreshed authority
+  ---
+  duration_ms: 37.000722
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for applied, isFollowing=true
+ok 14 - unfollow announcement checks authority for applied, isFollowing=true
+  ---
+  duration_ms: 33.958444
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for applied, isFollowing=false
+ok 15 - unfollow announcement checks authority for applied, isFollowing=false
+  ---
+  duration_ms: 31.416181
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for replayed, isFollowing=true
+ok 16 - unfollow announcement checks authority for replayed, isFollowing=true
+  ---
+  duration_ms: 27.175051
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for replayed, isFollowing=false
+ok 17 - unfollow announcement checks authority for replayed, isFollowing=false
+  ---
+  duration_ms: 27.986708
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for already_requested_state, isFollowing=true
+ok 18 - unfollow announcement checks authority for already_requested_state, isFollowing=true
+  ---
+  duration_ms: 23.726083
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for already_requested_state, isFollowing=false
+ok 19 - unfollow announcement checks authority for already_requested_state, isFollowing=false
+  ---
+  duration_ms: 30.506542
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for follow_revision_conflict, isFollowing=true
+ok 20 - unfollow announcement checks authority for follow_revision_conflict, isFollowing=true
+  ---
+  duration_ms: 30.354021
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for follow_revision_conflict, isFollowing=false
+ok 21 - unfollow announcement checks authority for follow_revision_conflict, isFollowing=false
+  ---
+  duration_ms: 27.20116
+  type: 'test'
+  ...
+# Subtest: offline Follow announces retry, preserves authority, and recovers without login
+ok 22 - offline Follow announces retry, preserves authority, and recovers without login
+  ---
+  duration_ms: 64.722693
+  type: 'test'
+  ...
+# Subtest: offline Unfollow announces retry, preserves authority, and recovers without login
+ok 23 - offline Unfollow announces retry, preserves authority, and recovers without login
+  ---
+  duration_ms: 42.737395
+  type: 'test'
+  ...
+# Subtest: recovers missing thread after canonical hydration before mount
+ok 24 - recovers missing thread after canonical hydration before mount
+  ---
+  duration_ms: 25.970576
+  type: 'test'
+  ...
+# Subtest: recovers missing thread after canonical hydration while mounted
+ok 25 - recovers missing thread after canonical hydration while mounted
+  ---
+  duration_ms: 40.822211
+  type: 'test'
+  ...
+# Subtest: recovers missing root and thread after canonical hydration before mount
+ok 26 - recovers missing root and thread after canonical hydration before mount
+  ---
+  duration_ms: 19.829473
+  type: 'test'
+  ...
+# Subtest: recovers missing root and thread after canonical hydration while mounted
+ok 27 - recovers missing root and thread after canonical hydration while mounted
+  ---
+  duration_ms: 38.842495
+  type: 'test'
+  ...
+# Subtest: failed snapshot_failed hydration recovery stops at a visible Retry and recovers on request
+ok 28 - failed snapshot_failed hydration recovery stops at a visible Retry and recovers on request
+  ---
+  duration_ms: 32.564344
+  type: 'test'
+  ...
+# Subtest: failed root_message_unavailable hydration recovery stops at a visible Retry and recovers on request
+ok 29 - failed root_message_unavailable hydration recovery stops at a visible Retry and recovers on request
+  ---
+  duration_ms: 32.167924
+  type: 'test'
+  ...
+# Subtest: canonical root restoration releases an earlier root-unavailable panel
+ok 30 - canonical root restoration releases an earlier root-unavailable panel
+  ---
+  duration_ms: 18.282248
+  type: 'test'
+  ...
+# Subtest: leaving then sending an inline thread reply keeps lifecycle controls usable after membership refresh
+ok 31 - leaving then sending an inline thread reply keeps lifecycle controls usable after membership refresh
+  ---
+  duration_ms: 60.965234
+  type: 'test'
+  ...
+# Subtest: lifecycle dismissal, Escape, unmount and custom close label never mutate shared discussion
+ok 32 - lifecycle dismissal, Escape, unmount and custom close label never mutate shared discussion
+  ---
+  duration_ms: 73.01089
+  type: 'test'
+  ...
+# Subtest: lifecycle visibility: supported manager
+ok 33 - lifecycle visibility: supported manager
+  ---
+  duration_ms: 17.573442
+  type: 'test'
+  ...
+# Subtest: lifecycle visibility: unsupported manager
+ok 34 - lifecycle visibility: unsupported manager
+  ---
+  duration_ms: 17.126517
+  type: 'test'
+  ...
+# Subtest: lifecycle visibility: unknown authority
+ok 35 - lifecycle visibility: unknown authority
+  ---
+  duration_ms: 14.255282
+  type: 'test'
+  ...
+# Subtest: lifecycle visibility: explicit denial
+ok 36 - lifecycle visibility: explicit denial
+  ---
+  duration_ms: 15.284656
+  type: 'test'
+  ...
+# Subtest: lifecycle visibility: send-only authority
+ok 37 - lifecycle visibility: send-only authority
+  ---
+  duration_ms: 19.044546
+  type: 'test'
+  ...
+# Subtest: lifecycle close, reopen, lock, unlock use canonical transitions; unlock leaves closed
+ok 38 - lifecycle close, reopen, lock, unlock use canonical transitions; unlock leaves closed
+  ---
+  duration_ms: 38.703181
+  type: 'test'
+  ...
+# Subtest: lifecycle pending actions reject duplicates and transport retry keeps exact command
+ok 39 - lifecycle pending actions reject duplicates and transport retry keeps exact command
+  ---
+  duration_ms: 23.809029
+  type: 'test'
+  ...
+# Subtest: lifecycle conflict shows canonical state and retries original revision after remote updates
+ok 40 - lifecycle conflict shows canonical state and retries original revision after remote updates
+  ---
+  duration_ms: 30.920733
+  type: 'test'
+  ...
+# Subtest: remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: current, root panel
+ok 41 - remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: current, root panel
+  ---
+  duration_ms: 46.731094
+  type: 'test'
+  ...
+# Subtest: remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: current, discovery panel
+ok 42 - remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: current, discovery panel
+  ---
+  duration_ms: 49.299602
+  type: 'test'
+  ...
+# Subtest: remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: discord, root panel
+ok 43 - remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: discord, root panel
+  ---
+  duration_ms: 52.668665
+  type: 'test'
+  ...
+# Subtest: remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: discord, discovery panel
+ok 44 - remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: discord, discovery panel
+  ---
+  duration_ms: 77.765067
+  type: 'test'
+  ...
+# Subtest: lifecycle denial retains composer draft while revoked history is removed
+ok 45 - lifecycle denial retains composer draft while revoked history is removed
+  ---
+  duration_ms: 63.142315
+  type: 'test'
+  ...
+# Subtest: eligible unlock never weakens host restriction {"readOnly":true}
+ok 46 - eligible unlock never weakens host restriction {"readOnly":true}
+  ---
+  duration_ms: 29.413906
+  type: 'test'
+  ...
+# Subtest: eligible unlock never weakens host restriction {"composerAvailability":{"canSend":false}}
+ok 47 - eligible unlock never weakens host restriction {"composerAvailability":{"canSend":false}}
+  ---
+  duration_ms: 27.61123
+  type: 'test'
+  ...
+# Subtest: eligible unlock never weakens host restriction {"composerAvailability":{"membershipState":"removed"}}
+ok 48 - eligible unlock never weakens host restriction {"composerAvailability":{"membershipState":"removed"}}
+  ---
+  duration_ms: 31.255232
+  type: 'test'
+  ...
+# Subtest: lifecycle loading and legacy metadata are accessible with no mutation controls
+ok 49 - lifecycle loading and legacy metadata are accessible with no mutation controls
+  ---
+  duration_ms: 25.649315
+  type: 'test'
+  ...
+# Subtest: explicit reopen requires independent send authority: undefined
+ok 50 - explicit reopen requires independent send authority: undefined
+  ---
+  duration_ms: 19.960973
+  type: 'test'
+  ...
+# Subtest: explicit reopen requires independent send authority: {"canManage":true}
+ok 51 - explicit reopen requires independent send authority: {"canManage":true}
+  ---
+  duration_ms: 19.768373
+  type: 'test'
+  ...
+# Subtest: explicit reopen requires independent send authority: {"canSend":true}
+ok 52 - explicit reopen requires independent send authority: {"canSend":true}
+  ---
+  duration_ms: 23.462652
+  type: 'test'
+  ...
+# Subtest: lifecycle read failure retries hydration without creating a command
+ok 53 - lifecycle read failure retries hydration without creating a command
+  ---
+  duration_ms: 32.560841
+  type: 'test'
+  ...
+# Subtest: current subscription labels bind to thread APIs and leave retains history, draft, unread and private state
+ok 54 - current subscription labels bind to thread APIs and leave retains history, draft, unread and private state
+  ---
+  duration_ms: 40.765463
+  type: 'test'
+  ...
+# Subtest: discord subscription labels bind to thread APIs and leave retains history, draft, unread and private state
+ok 55 - discord subscription labels bind to thread APIs and leave retains history, draft, unread and private state
+  ---
+  duration_ms: 38.107039
+  type: 'test'
+  ...
+# Subtest: Discord subscription pending prevents duplicate mutations and explicit retry recovers from rejection
+ok 56 - Discord subscription pending prevents duplicate mutations and explicit retry recovers from rejection
+  ---
+  duration_ms: 36.836809
+  type: 'test'
+  ...
+# Subtest: thread preference pending uses canonical values, prevents duplicates, and owns nested Escape at compact width
+ok 57 - thread preference pending uses canonical values, prevents duplicates, and owns nested Escape at compact width
+  ---
+  duration_ms: 47.702264
+  type: 'test'
+  ...
+# Subtest: thread notification level and timed mute are independent; conflicts load authority and permit explicit retry
+ok 58 - thread notification level and timed mute are independent; conflicts load authority and permit explicit retry
+  ---
+  duration_ms: 50.715374
+  type: 'test'
+  ...
+# Subtest: missing thread preferences load without fabricated defaults and retry an unavailable read
+ok 59 - missing thread preferences load without fabricated defaults and retry an unavailable read
+  ---
+  duration_ms: 23.30883
+  type: 'test'
+  ...
+# Subtest: Discord follow conflict reconciles authority and explicit subscription retry retains keyboard focus
+ok 60 - Discord follow conflict reconciles authority and explicit subscription retry retains keyboard focus
+  ---
+  duration_ms: 26.574356
+  type: 'test'
+  ...
+# Subtest: pre-existing optimistic subscription and preference writes remain unconfirmed and cannot be duplicated
+ok 61 - pre-existing optimistic subscription and preference writes remain unconfirmed and cannot be duplicated
+  ---
+  duration_ms: 25.527846
+  type: 'test'
+  ...
+# Subtest: default Reply inside a thread focuses its composer without nested creation or an inline source
+ok 62 - default Reply inside a thread focuses its composer without nested creation or an inline source
+  ---
+  duration_ms: 29.176511
+  type: 'test'
+  ...
+# Subtest: current Reply inside a thread focuses its composer without nested creation or an inline source
+ok 63 - current Reply inside a thread focuses its composer without nested creation or an inline source
+  ---
+  duration_ms: 25.766296
+  type: 'test'
+  ...
+# Subtest: Current thread Reply respects host restriction {"readOnly":true}
+ok 64 - Current thread Reply respects host restriction {"readOnly":true}
+  ---
+  duration_ms: 17.090255
+  type: 'test'
+  ...
+# Subtest: Current thread Reply respects host restriction {"composerAvailability":{"canSend":false}}
+ok 65 - Current thread Reply respects host restriction {"composerAvailability":{"canSend":false}}
+  ---
+  duration_ms: 21.251951
+  type: 'test'
+  ...
+# Subtest: Current thread Reply respects host restriction {"composerAvailability":{"membershipState":"removed"}}
+ok 66 - Current thread Reply respects host restriction {"composerAvailability":{"membershipState":"removed"}}
+  ---
+  duration_ms: 16.499891
+  type: 'test'
+  ...
+# Subtest: standalone Current thread timeline disables Reply without an existing composer
+ok 67 - standalone Current thread timeline disables Reply without an existing composer
+  ---
+  duration_ms: 6.759645
+  type: 'test'
+  ...
+1..67
+# tests 67
+# suites 0
+# pass 67
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2822.8029
+TAP version 13
+# Subtest: inline reply source-only drafts survive replacement, ping edits, remount and cancellation
+ok 1 - inline reply source-only drafts survive replacement, ping edits, remount and cancellation
+  ---
+  duration_ms: 121.104884
+  type: 'test'
+  ...
+# Subtest: cancel reply preserves text and attachments and restores the rich editor focus
+ok 2 - cancel reply preserves text and attachments and restores the rich editor focus
+  ---
+  duration_ms: 25.312678
+  type: 'test'
+  ...
+# Subtest: inline reply submission stays in the current channel across style rerenders and source rejection
+ok 3 - inline reply submission stays in the current channel across style rerenders and source rejection
+  ---
+  duration_ms: 51.928395
+  type: 'test'
+  ...
+# Subtest: inline reply submission stays in the current thread across style rerenders and source rejection
+ok 4 - inline reply submission stays in the current thread across style rerenders and source rejection
+  ---
+  duration_ms: 47.860997
+  type: 'test'
+  ...
+# Subtest: reply source errors recover and access loss removes source content from DOM and slots
+ok 5 - reply source errors recover and access loss removes source content from DOM and slots
+  ---
+  duration_ms: 36.782259
+  type: 'test'
+  ...
+# Subtest: retry matches source and ping and retains its original intent after composer reply changes
+ok 6 - retry matches source and ping and retains its original intent after composer reply changes
+  ---
+  duration_ms: 42.091433
+  type: 'test'
+  ...
+# Subtest: editing a sent message never submits composer reply context or changes its ancestry
+ok 7 - editing a sent message never submits composer reply context or changes its ancestry
+  ---
+  duration_ms: 41.391352
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 796.294638
+TAP version 13
+# Subtest: ThreadPanel imports only React, public hooks/contracts, and public UI primitives
+ok 1 - ThreadPanel imports only React, public hooks/contracts, and public UI primitives
+  ---
+  duration_ms: 4.911349
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 62.071765

@@ -1,0 +1,150 @@
+{
+  "environment": {
+    "FLUTTER_ROOT": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter",
+    "PUB_CACHE": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/pub-cache",
+    "CI": "true",
+    "FLUTTER_SUPPRESS_ANALYTICS": "true",
+    "DART_SUPPRESS_ANALYTICS": "true"
+  },
+  "checks": [
+    {
+      "name": "version",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/flutter",
+        "--version",
+        "--machine"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package",
+      "exit_code": 0,
+      "elapsed_seconds": 0.16,
+      "children_max_rss_kib": 56528
+    },
+    {
+      "name": "package-resolution",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/flutter",
+        "pub",
+        "get",
+        "--no-example"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package",
+      "exit_code": 0,
+      "elapsed_seconds": 1.96,
+      "children_max_rss_kib": 113900
+    },
+    {
+      "name": "public-library-analysis",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/cache/dart-sdk/bin/dart",
+        "analyze",
+        "lib"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package",
+      "exit_code": 0,
+      "elapsed_seconds": 11.85,
+      "children_max_rss_kib": 718452
+    },
+    {
+      "name": "scoped-analysis",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/cache/dart-sdk/bin/dart",
+        "analyze",
+        "lib/src/handrail_chat_workspace.dart",
+        "lib/src/handrail_message_composer.dart",
+        "lib/src/handrail_chat_theme.dart",
+        "lib/src/handrail_huddle_panel.dart",
+        "test/handrail_message_composer_test.dart",
+        "test/handrail_reply_routing_cases.dart",
+        "test/handrail_thread_discovery_cases.dart",
+        "test/handrail_reply_style_settings_test.dart",
+        "test/handrail_thread_lifecycle_cases.dart"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package",
+      "exit_code": 0,
+      "elapsed_seconds": 2.83,
+      "children_max_rss_kib": 718452
+    },
+    {
+      "name": "regressions",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/flutter",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "--reporter=expanded",
+        "test/durable_resource_event_reducer_test.dart",
+        "test/handrail_message_composer_test.dart",
+        "test/handrail_chat_theme_test.dart",
+        "test/handrail_reply_style_settings_test.dart",
+        "test/reply_style_runtime_test.dart",
+        "test/reply_style_client_test.dart",
+        "test/handrail_timeline_reply_reference_test.dart",
+        "test/handrail_thread_view_test.dart",
+        "test/thread_list_controller_test.dart",
+        "test/thread_lifecycle_controller_test.dart"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package",
+      "exit_code": 1,
+      "elapsed_seconds": 31.22,
+      "children_max_rss_kib": 820188
+    },
+    {
+      "name": "workspace-reply-navigation",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/flutter",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "--reporter=expanded",
+        "test/handrail_chat_workspace_test.dart",
+        "--name",
+        "reply routing|named thread|thread discovery"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package",
+      "exit_code": 0,
+      "elapsed_seconds": 18.22,
+      "children_max_rss_kib": 820188
+    },
+    {
+      "name": "huddle-device-selection",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/flutter",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "--reporter=expanded",
+        "test/handrail_huddle_panel_test.dart",
+        "--plain-name",
+        "renders participants, active speakers, media toggles, and live devices"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package",
+      "exit_code": 1,
+      "elapsed_seconds": 2.6,
+      "children_max_rss_kib": 820188
+    },
+    {
+      "name": "consumer-resolution",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/flutter",
+        "pub",
+        "get"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/consumer",
+      "exit_code": 0,
+      "elapsed_seconds": 0.5,
+      "children_max_rss_kib": 820188
+    },
+    {
+      "name": "consumer-analysis",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/cache/dart-sdk/bin/dart",
+        "analyze",
+        "test"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/consumer",
+      "exit_code": 0,
+      "elapsed_seconds": 1.01,
+      "children_max_rss_kib": 820188
+    }
+  ]
+}

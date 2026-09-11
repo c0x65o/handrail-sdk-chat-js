@@ -1,0 +1,5 @@
+cwd: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/consumer
+command: ["/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/current/flutter/bin/flutter", "test", "--no-pub", "--concurrency=2", "--reporter=expanded", "test/public_import_test.dart"]
+00:00 +0: loading /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/consumer/test/public_import_test.dart
+00:00 +0: public imports compile and chat widget mounts
+00:00 +1: All tests passed!

@@ -1,0 +1,108 @@
+TAP version 13
+# Subtest: detail and list count eligible reply pings as unread read facts
+    # Subtest: ping-on
+    ok 1 - ping-on
+      ---
+      duration_ms: 16.734599
+      type: 'test'
+      ...
+    # Subtest: ping-off
+    ok 2 - ping-off
+      ---
+      duration_ms: 7.070326
+      type: 'test'
+      ...
+    # Subtest: legacy
+    ok 3 - legacy
+      ---
+      duration_ms: 6.564746
+      type: 'test'
+      ...
+    # Subtest: self-reply
+    ok 4 - self-reply
+      ---
+      duration_ms: 6.309069
+      type: 'test'
+      ...
+    # Subtest: self-explicit
+    ok 5 - self-explicit
+      ---
+      duration_ms: 9.173816
+      type: 'test'
+      ...
+    # Subtest: dedup
+    ok 6 - dedup
+      ---
+      duration_ms: 6.456295
+      type: 'test'
+      ...
+    # Subtest: explicit-off
+    ok 7 - explicit-off
+      ---
+      duration_ms: 7.7834
+      type: 'test'
+      ...
+    # Subtest: deleted-source
+    ok 8 - deleted-source
+      ---
+      duration_ms: 7.784835
+      type: 'test'
+      ...
+    # Subtest: explicit-deleted-source
+    ok 9 - explicit-deleted-source
+      ---
+      duration_ms: 7.839894
+      type: 'test'
+      ...
+    # Subtest: deleted-reply
+    ok 10 - deleted-reply
+      ---
+      duration_ms: 6.639579
+      type: 'test'
+      ...
+    # Subtest: other-source-author
+    ok 11 - other-source-author
+      ---
+      duration_ms: 7.56692
+      type: 'test'
+      ...
+    # Subtest: non-user-mention
+    ok 12 - non-user-mention
+      ---
+      duration_ms: 7.737465
+      type: 'test'
+      ...
+    # Subtest: source deletion changes only the synthetic contribution
+    ok 13 - source deletion changes only the synthetic contribution
+      ---
+      duration_ms: 25.269189
+      type: 'test'
+      ...
+    # Subtest: tenant and conversation isolation with enforced source foreign keys
+    ok 14 - tenant and conversation isolation with enforced source foreign keys
+      ---
+      duration_ms: 26.766376
+      type: 'test'
+      ...
+    # Subtest: mark-read boundaries, manual-unread restoration, and preferences
+    ok 15 - mark-read boundaries, manual-unread restoration, and preferences
+      ---
+      duration_ms: 60.676912
+      type: 'test'
+      ...
+    1..15
+ok 1 - detail and list count eligible reply pings as unread read facts
+  ---
+  duration_ms: 562.078098
+  type: 'test'
+  ...
+# PostgreSQL backend: url-backed
+1..1
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 773.163961

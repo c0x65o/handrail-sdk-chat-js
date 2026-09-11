@@ -130,9 +130,9 @@ class LifecycleStorage {
   }
 }
 
-const createRuntime = (database, storage, { attachments = true } = {}) =>
+const createRuntime = (database, schema, storage, { attachments = true } = {}) =>
   createChatServer({
-    database: { pool: database },
+    database: { pool: database, schema },
     auth: {
       async resolveActor(request) {
         if (request.headers.authorization === "Bearer valid") return actor;
@@ -231,7 +231,7 @@ const withHttpServer = async (runtime, callback) => {
 test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-safe", async (t) => {
   const backend = await createPostgresTestBackend();
   const harness = await backend.createHarness({
-    schemaPrefix: "chat_attachment_lifecycle_http",
+    schemaPrefix: "chat_attachment_http",
   });
   const schema = `"${harness.schema.replaceAll('"', '""')}"`;
   const tables = {
@@ -305,7 +305,7 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
       schema: harness.schema,
       migrations: handrailChatPostgresMigrations,
     }).apply();
-    const runtime = createRuntime(harness.pool, storage);
+    const runtime = createRuntime(harness.pool, harness.schema, storage);
 
     await withHttpServer(runtime, async (request) => {
       await t.test("finalizes once and returns a canonical replay", async () => {
@@ -471,7 +471,6 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
           () => request(lifecyclePath(valid.attachmentId), valid, { body: "{" }),
           () => request(lifecyclePath(valid.attachmentId), valid, { contentType: "text/plain" }),
           () => request(`${lifecyclePath(valid.attachmentId)}?secret=true`, valid),
-          () => request(`${lifecyclePath(valid.attachmentId)}/extra`, valid),
           () => request("/attachments/encoded%2Fchild/lifecycle", valid),
           () => request(lifecyclePath("path-claim"), { ...valid, attachmentId: "body-claim" }),
           () => request(lifecyclePath(valid.attachmentId), { ...valid, operation: "prepare_attachment" }),
@@ -490,6 +489,10 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
             { idempotencyKey: "unsafe,key" },
           ),
         ];
+        // Extra path segments do not match the lifecycle route.
+        const unknownRoute = await request(`${lifecyclePath(valid.attachmentId)}/extra`, valid);
+        assert.equal(unknownRoute.status, 404);
+        assert.equal(unknownRoute.text, "");
         const beforeVerify = storage.verifyCalls.length;
         const beforeDelete = storage.deleteCalls.length;
         for (const makeRequest of invalidRequests) {
@@ -557,7 +560,7 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
         },
       };
       await withHttpServer(
-        createRuntime(inProgressDatabase, storage),
+        createRuntime(inProgressDatabase, harness.schema, storage),
         async (request) => {
           const input = finalizeInput("in-progress");
           assertStableError(
@@ -576,7 +579,7 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
         },
       };
       await withHttpServer(
-        createRuntime(unavailableDatabase, storage),
+        createRuntime(unavailableDatabase, harness.schema, storage),
         async (request) => {
           const input = finalizeInput("runtime-unavailable");
           assertStableError(
@@ -589,7 +592,7 @@ test("attachment lifecycle HTTP route is actor-bound, idempotent, and secret-saf
       );
 
       await withHttpServer(
-        createRuntime(harness.pool, storage, { attachments: false }),
+        createRuntime(harness.pool, harness.schema, storage, { attachments: false }),
         async (request) => {
           const input = abortInput("disabled");
           assertStableError(

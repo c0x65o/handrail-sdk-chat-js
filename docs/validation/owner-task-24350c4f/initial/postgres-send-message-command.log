@@ -1,0 +1,113 @@
+TAP version 13
+# Subtest: atomic send-message command persists and reconciles one authorized message
+    # Subtest: Alice's channel message and Bob's inline reply persist without creating a thread
+    not ok 1 - Alice's channel message and Bob's inline reply persist without creating a thread
+      ---
+      duration_ms: 47.960784
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-send-message-command.mjs:6332:13'
+      failureType: 'testCodeFailure'
+      error: 'new row for relation "chat_messages" violates check constraint "chat_messages_timestamp_order_check"'
+      code: '23514'
+      name: 'error'
+      stack: |-
+        /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/node_modules/pg-pool/index.js:45:11
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-send-message-command.mjs:6392:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-send-message-command.mjs:6332:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: missing, deleted, cross-conversation and cross-tenant reply sources roll back every effect
+    ok 2 - missing, deleted, cross-conversation and cross-tenant reply sources roll back every effect
+      ---
+      duration_ms: 36.780032
+      type: 'test'
+      ...
+    # Subtest: inline thread replies retain their destination and parent summary; retries check current access
+    ok 3 - inline thread replies retain their destination and parent summary; retries check current access
+      ---
+      duration_ms: 56.970272
+      type: 'test'
+      ...
+    # Subtest: thread parent membership, entity denial and send capability cannot be bypassed by a reply
+    ok 4 - thread parent membership, entity denial and send capability cannot be bypassed by a reply
+      ---
+      duration_ms: 45.65601
+      type: 'test'
+      ...
+    # Subtest: reply source and inherited access locks prevent deletion and revocation during persistence
+    ok 5 - reply source and inherited access locks prevent deletion and revocation during persistence
+      ---
+      duration_ms: 430.414958
+      type: 'test'
+      ...
+    # Subtest: persists message, revision, attachment, sanitized audit, outbox, and outcome
+    ok 6 - persists message, revision, attachment, sanitized audit, outbox, and outcome
+      ---
+      duration_ms: 15.635448
+      type: 'test'
+      ...
+    # Subtest: a fractional-millisecond claim completes and replays one send
+    ok 7 - a fractional-millisecond claim completes and replays one send
+      ---
+      duration_ms: 16.201897
+      type: 'test'
+      ...
+    # Subtest: rolls every write back after an injected late outbox failure
+    ok 8 - rolls every write back after an injected late outbox failure
+      ---
+      duration_ms: 12.753649
+      type: 'test'
+      ...
+    # Subtest: allocates contiguous unique sequences for concurrent sends
+    ok 9 - allocates contiguous unique sequences for concurrent sends
+      ---
+      duration_ms: 66.1907
+      type: 'test'
+      ...
+    # Subtest: replays the canonical result and rejects a conflicting key
+    ok 10 - replays the canonical result and rejects a conflicting key
+      ---
+      duration_ms: 10.099607
+      type: 'test'
+      ...
+    # Subtest: requires capability, active membership, tenant scope, archive state, and entity access
+    ok 11 - requires capability, active membership, tenant scope, archive state, and entity access
+      ---
+      duration_ms: 15.841651
+      type: 'test'
+      ...
+    # Subtest: rejects cross-tenant, unowned, unfinished, expired, and attached references
+    ok 12 - rejects cross-tenant, unowned, unfinished, expired, and attached references
+      ---
+      duration_ms: 17.0403
+      type: 'test'
+      ...
+    # Subtest: validates mentioned users and rejects caller-supplied identity
+    ok 13 - validates mentioned users and rejects caller-supplied identity
+      ---
+      duration_ms: 2.728725
+      type: 'test'
+      ...
+    1..13
+not ok 1 - atomic send-message command persists and reconciles one authorized message
+  ---
+  duration_ms: 1148.528426
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-send-message-command.mjs:6177:1'
+  failureType: 'subtestsFailed'
+  error: '1 subtest failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Real PostgreSQL url-backed; isolated schema with canonical migrations
+1..1
+# tests 14
+# suites 0
+# pass 12
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1230.381261

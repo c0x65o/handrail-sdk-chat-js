@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: PATCH /conversations/:conversationId/membership mounts every membership intent safely
+    # Subtest: returns canonical full results for all five intents
+    not ok 1 - returns canonical full results for all five intents
+      ---
+      duration_ms: 26.535426
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:218:15'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        403 !== 200
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 200
+      actual: 403
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:271:18)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:218:7
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:77:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:217:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: preserves canonical retry and revision-conflict outcomes
+    ok 2 - preserves canonical retry and revision-conflict outcomes
+      ---
+      duration_ms: 41.17579
+      type: 'test'
+      ...
+    # Subtest: returns canonical owner and active-member safety conflicts
+    ok 3 - returns canonical owner and active-member safety conflicts
+      ---
+      duration_ms: 13.800907
+      type: 'test'
+      ...
+    # Subtest: maps role and conversation identity invariants
+    ok 4 - maps role and conversation identity invariants
+      ---
+      duration_ms: 12.889624
+      type: 'test'
+      ...
+    # Subtest: rejects malformed, ambiguous, oversized, and spoofed input
+    not ok 5 - rejects malformed, ambiguous, oversized, and spoofed input
+      ---
+      duration_ms: 24.659935
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:397:15'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        404 !== 400
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 400
+      actual: 404
+      operator: 'strictEqual'
+      stack: |-
+        assertStableError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:101:10)
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:450:17)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:397:7
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:77:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:217:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: sanitizes directory, auth, missing, and cross-tenant failures
+    ok 6 - sanitizes directory, auth, missing, and cross-tenant failures
+      ---
+      duration_ms: 22.482345
+      type: 'test'
+      ...
+    1..6
+not ok 1 - PATCH /conversations/:conversationId/membership mounts every membership intent safely
+  ---
+  duration_ms: 483.371271
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:109:1'
+  failureType: 'testCodeFailure'
+  error: 'harness.dispose is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-conversation-membership-http.mjs:563:19)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..1
+# tests 7
+# suites 0
+# pass 4
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10680.934564

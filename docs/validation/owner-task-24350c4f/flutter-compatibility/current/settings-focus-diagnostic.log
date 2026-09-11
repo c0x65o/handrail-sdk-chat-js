@@ -1,0 +1,33 @@
+00:00 +0: loading /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package/test/handrail_reply_style_settings_test.dart
+00:00 +0: large text at 320 pixels wraps with keyboard operable radio semantics
+focus: FocusNode#aec7a([PRIMARY FOCUS])(context: Focus, PRIMARY FOCUS); context: Focus(focusNode: FocusNode#aec7a([PRIMARY FOCUS]))
+focus: FocusNode#bde4d([PRIMARY FOCUS])(context: Focus, PRIMARY FOCUS); context: Focus(focusNode: FocusNode#bde4d([PRIMARY FOCUS]))
+focus: FocusNode#aec7a([PRIMARY FOCUS])(context: Focus, PRIMARY FOCUS); context: Focus(focusNode: FocusNode#aec7a([PRIMARY FOCUS]))
+focus: FocusNode#bde4d([PRIMARY FOCUS])(context: Focus, PRIMARY FOCUS); context: Focus(focusNode: FocusNode#bde4d([PRIMARY FOCUS]))
+focus: FocusNode#aec7a([PRIMARY FOCUS])(context: Focus, PRIMARY FOCUS); context: Focus(focusNode: FocusNode#aec7a([PRIMARY FOCUS]))
+focus: FocusNode#bde4d([PRIMARY FOCUS])(context: Focus, PRIMARY FOCUS); context: Focus(focusNode: FocusNode#bde4d([PRIMARY FOCUS]))
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: true
+  Actual: <false>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package/test/handrail_reply_style_settings_test.dart:265:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-current/package/test/handrail_reply_style_settings_test.dart line 265
+The test description was:
+  large text at 320 pixels wraps with keyboard operable radio semantics
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -1: large text at 320 pixels wraps with keyboard operable radio semantics [E]
+  Test failed. See exception logs above.
+  The test description was: large text at 320 pixels wraps with keyboard operable radio semantics
+  
+00:01 +0 -1: Some tests failed.

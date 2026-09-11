@@ -1,0 +1,27 @@
+{
+  "historical_evidence_count": 80,
+  "hash_mismatches": [],
+  "repos": [
+    {
+      "repo": "handrail-sdk-chat-js",
+      "head": "9f62a562c5235759efa4c0a05858acae755c0aff",
+      "historical_patch_sha256": "3ead6aa48b22389ed8376caa113013780560ced04075f634c8c67e7ddc25c188",
+      "source_drift": [],
+      "git_operations": []
+    },
+    {
+      "repo": "handrail-sdk-chat-flutter",
+      "head": "8926839d7467860a738c5526aacb7330a5510483",
+      "historical_patch_sha256": "67815c080f73c3268911679d1a8471ed30a57c8d68e9eec752e3caa1e8be23d9",
+      "source_drift": [],
+      "git_operations": []
+    },
+    {
+      "repo": "handrail-chat-preview-flutter",
+      "head": "52fe6563bfeb9d1289fa39bcba40cd887ee7914e",
+      "historical_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_drift": [],
+      "git_operations": []
+    }
+  ]
+}

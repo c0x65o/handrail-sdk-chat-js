@@ -1,0 +1,67 @@
+cwd: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum-final-pass/package
+command: ["/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter", "test", "--no-pub", "--concurrency=2", "--reporter=expanded", "test/handrail_thread_view_test.dart"]
+
+  ╔════════════════════════════════════════════════════════════════════════════╗
+  ║                 Welcome to Flutter! - https://flutter.dev                  ║
+  ║                                                                            ║
+  ║ The Flutter tool uses Google Analytics to anonymously report feature usage ║
+  ║ statistics and basic crash reports. This data is used to help improve      ║
+  ║ Flutter tools over time.                                                   ║
+  ║                                                                            ║
+  ║ Flutter tool analytics are not sent on the very first run. To disable      ║
+  ║ reporting, type 'flutter config --no-analytics'. To display the current    ║
+  ║ setting, type 'flutter config'. If you opt out of analytics, an opt-out    ║
+  ║ event will be sent, and then no further information will be sent by the    ║
+  ║ Flutter tool.                                                              ║
+  ║                                                                            ║
+  ║ By downloading the Flutter SDK, you agree to the Google Terms of Service.  ║
+  ║ The Google Privacy Policy describes how data is handled in this service.   ║
+  ║                                                                            ║
+  ║ Moreover, Flutter includes the Dart SDK, which may send usage metrics and  ║
+  ║ crash reports to Google.                                                   ║
+  ║                                                                            ║
+  ║ Read about data we send with crash reports:                                ║
+  ║ https://flutter.dev/docs/reference/crash-reporting                         ║
+  ║                                                                            ║
+  ║ See Google's privacy policy:                                               ║
+  ║ https://policies.google.com/privacy                                        ║
+  ║                                                                            ║
+  ║ To disable animations in this tool, use                                    ║
+  ║ 'flutter config --no-cli-animations'.                                      ║
+  ╚════════════════════════════════════════════════════════════════════════════╝
+
+00:00 +0: loading /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum-final-pass/package/test/handrail_thread_view_test.dart
+00:00 +0: host parent archive gates composition and stale open menus cannot dispatch
+00:01 +1: unconfigured lifecycle still observes remote send restrictions
+00:01 +2: lifecycle menu separates navigation and state-appropriate transitions
+00:02 +3: unsupported or missing authority hides actions without breaking legacy composition
+00:02 +4: send authority does not imply management or membership-based permission
+00:02 +5: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:02 +6: remote thread archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:03 +7: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.current
+00:03 +8: remote lock retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+00:03 +9: remote thread archive retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+00:03 +10: remote parent archive retains mounted draft/reference/attachments and destination in ReplyStyle.discord
+00:04 +11: denied command sanitizes feedback and retains draft and original destination
+00:04 +12: compact keyboard menu retries exact ambiguous request and restores focus
+00:04 +13: conflict shows canonical state without blind retry
+00:04 +14: client rebind ignores stale results and retains caller resources
+00:04 +15: compact initial loading failure offers a working read retry
+00:04 +16: subscriptions map follow and unfollow for style null
+00:04 +17: subscriptions map follow and unfollow for style ReplyStyle.current
+00:05 +18: subscriptions map follow and unfollow for style ReplyStyle.discord
+00:05 +19: subscriptions independently save every notification and mute choice retaining stars
+00:05 +20: subscriptions failed Leave retries at compact width retaining draft read and open state
+00:05 +21: subscriptions reconcile preference conflict and explicitly retry only the selected field
+00:06 +22: subscriptions follow conflict requires explicit retry and style changes preserve the open composer
+00:06 +23: subscriptions unavailable canonical preferences load and retry without invented defaults
+00:06 +24: subscriptions ignore stale popup callbacks and late results after scope replacement and disposal
+00:06 +25: renders a caller-owned existing thread, root, replies, composer, and close callback
+00:06 +26: hides cached archived replies after HTTP 401 until recovery
+00:06 +27: hides cached archived replies after HTTP 403 until recovery
+00:07 +28: opens and creates a canonical thread then releases its retain
+00:07 +29: projects unavailable, access-denied, and general error states
+00:07 +30: applies root/message builders and Handrail theme tokens
+00:07 +31: is safe under narrow, wide, and unbounded-height constraints
+00:07 +32: rebinds controllers and releases a stale asynchronously opened handle
+00:07 +33: All tests passed!

@@ -1,0 +1,66 @@
+TAP version 13
+# Subtest: message context HTTP uses trusted actor and read-only real PostgreSQL
+    # Subtest: admitted canonical success passes trusted actor and configured schema; decodes both identifiers
+    ok 1 - admitted canonical success passes trusted actor and configured schema; decodes both identifiers
+      ---
+      duration_ms: 20.664443
+      type: 'test'
+      ...
+    # Subtest: malformed encoding and bounded identifiers in either parameter fail before SQL
+    ok 2 - malformed encoding and bounded identifiers in either parameter fail before SQL
+      ---
+      duration_ms: 19.057913
+      type: 'test'
+      ...
+    # Subtest: query fields, GET bodies and spoofed trusted-context headers are rejected
+    ok 3 - query fields, GET bodies and spoofed trusted-context headers are rejected
+      ---
+      duration_ms: 12.572682
+      type: 'test'
+      ...
+    # Subtest: missing, tenant-isolated and inaccessible targets share canonical unavailable shape
+    ok 4 - missing, tenant-isolated and inaccessible targets share canonical unavailable shape
+      ---
+      duration_ms: 15.207317
+      type: 'test'
+      ...
+    # Subtest: deleted sources serialize only the canonical redacted shell
+    ok 5 - deleted sources serialize only the canonical redacted shell
+      ---
+      duration_ms: 2.512623
+      type: 'test'
+      ...
+    # Subtest: admission denial precedes authentication and validation; unauthenticated stays 401
+    ok 6 - admission denial precedes authentication and validation; unauthenticated stays 401
+      ---
+      duration_ms: 1.749007
+      type: 'test'
+      ...
+    # Subtest: permission outages and malformed canonical results stay sanitized retryable errors
+    ok 7 - permission outages and malformed canonical results stay sanitized retryable errors
+      ---
+      duration_ms: 6.474461
+      type: 'test'
+      ...
+    # Subtest: real database failure returns sanitized 503 rather than unavailable result
+    ok 8 - real database failure returns sanitized 503 rather than unavailable result
+      ---
+      duration_ms: 4.965847
+      type: 'test'
+      ...
+    1..8
+ok 1 - message context HTTP uses trusted actor and read-only real PostgreSQL
+  ---
+  duration_ms: 442.94274
+  type: 'test'
+  ...
+# Real PostgreSQL url-backed; isolated schema and canonical migrations
+1..1
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 580.842307

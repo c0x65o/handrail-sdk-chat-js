@@ -1,0 +1,317 @@
+{
+  "note": "Per-suite final retained logs; TAP counts include parent/subtests and may overlap between runners. Earlier aggregate run logs are historical. Widget/DOM testing is not runtime acceptance.",
+  "results": [
+    {
+      "log": "build.log",
+      "status": "pass"
+    },
+    {
+      "log": "capabilities.log",
+      "tests": 7,
+      "pass": 7,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "client-preferences.log",
+      "tests": 45,
+      "pass": 45,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "exports-and-embedding.log",
+      "tests": 28,
+      "pass": 28,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "flutter-analyze-final.log",
+      "status": "pass-with-informational-notices"
+    },
+    {
+      "log": "flutter-contracts.log",
+      "status": "pass"
+    },
+    {
+      "log": "flutter-narrow-source.log",
+      "tests": 1,
+      "status": "pass"
+    },
+    {
+      "log": "flutter-reducer.log",
+      "tests": 44,
+      "status": "pass"
+    },
+    {
+      "log": "flutter-routing.log",
+      "tests": 20,
+      "status": "pass"
+    },
+    {
+      "log": "flutter-settings-and-threads.log",
+      "tests": 224,
+      "status": "pass"
+    },
+    {
+      "log": "membership-typecheck.log",
+      "status": "pass"
+    },
+    {
+      "log": "postgres-attachment-download-query.log",
+      "tests": 14,
+      "pass": 14,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-attachment-lifecycle-http.log",
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-build.log",
+      "status": "pass"
+    },
+    {
+      "log": "postgres-chat-harness.log",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-conversation-membership-command.log",
+      "tests": 11,
+      "pass": 11,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-conversation-membership-http.log",
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-conversation-reply-unread.log",
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-create-thread-command.log",
+      "tests": 14,
+      "pass": 14,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-edit-message-command.log",
+      "tests": 12,
+      "pass": 12,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-message-context-http.log",
+      "tests": 9,
+      "pass": 9,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-message-search-query.log",
+      "tests": 9,
+      "pass": 9,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-notification-dispatcher.log",
+      "tests": 159,
+      "pass": 159,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-react-reply-style-flow.log",
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-reconnect-idempotency.log",
+      "tests": 2,
+      "pass": 2,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-reply-draft-persistence.log",
+      "tests": 11,
+      "pass": 11,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-reply-style-preference-http.log",
+      "tests": 13,
+      "pass": 13,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-reply-thread-capabilities-http.log",
+      "tests": 10,
+      "pass": 10,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-send-message-command.log",
+      "tests": 14,
+      "pass": 14,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-soft-delete-message-command.log",
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-thread-lifecycle-http.log",
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-thread-list-http.log",
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-thread-read-cursor-command.log",
+      "tests": 19,
+      "pass": 19,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-thread-snapshot-access.log",
+      "tests": 14,
+      "pass": 14,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-websocket-replay.log",
+      "tests": 10,
+      "pass": 10,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "postgres-websocket-thread-authorization.log",
+      "tests": 5,
+      "pass": 5,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "react-routing.log",
+      "tests": 105,
+      "pass": 105,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "react-settings.log",
+      "tests": 20,
+      "pass": 20,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "pass"
+    },
+    {
+      "log": "react-thread-negative.log",
+      "tests": 6,
+      "pass": 0,
+      "fail": 6,
+      "skipped": 0,
+      "cancelled": 0,
+      "status": "expected-negative"
+    }
+  ],
+  "final_postgres_run": "postgres-final-all-run.log",
+  "final_postgres_version": "postgres (PostgreSQL) 16.15 (Debian 16.15-1.pgdg12+2)"
+}

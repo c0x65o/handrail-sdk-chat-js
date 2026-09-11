@@ -1,0 +1,4 @@
+cwd: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/example
+command: ["/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/cache/dart-sdk/bin/dart", "analyze", "lib"]
+Analyzing lib...
+No issues found!

@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-09-11T08:20:00Z",
+  "reviewer": "Main Owner Assistant; independent of implementation worker",
+  "codex_run_id": "ea8de278-69fa-4c7f-bd02-80ed1f10a031",
+  "uid": 993,
+  "postgres": "16.15",
+  "runtime_artifact": "248f3f7986001f99414f5a149c477177059b1dcfc0a49be7c223a6190a5fc2eb",
+  "js_base": "9f62a562c5235759efa4c0a05858acae755c0aff",
+  "js_patch_sha256": "3ead6aa48b22389ed8376caa113013780560ced04075f634c8c67e7ddc25c188",
+  "verified_source_files": 638,
+  "source_mismatches": [],
+  "command": "PG_BINDIR=<private extracted PGDG16 bin> node scripts/qualify-reply-threads.mjs postgres-react-reply-style-flow postgres-conversation-membership-command postgres-conversation-membership-http",
+  "suite_pass_counts": [
+    4,
+    11,
+    8
+  ],
+  "failed": 0,
+  "skipped": 0,
+  "teardown": {
+    "schemas_remaining": 0,
+    "server_stopped": true,
+    "owned_cluster_removed": true,
+    "generated_tests_removed": true
+  },
+  "scope": "Disposable copy; current build plus3previously blocked independentPG checks; no production access. Original source/evidence and prior inconclusive receipt unchanged. New evidence directory only.",
+  "limitations": [
+    "Mounted happy-dom React is not live browser capture",
+    "No new Flutter-to-PG16/cross-client/native device acceptance",
+    "No adoption/configuration/deployment/publication",
+    "Historical fixtures remain fresh_capture=false;4pxSend-padding finding remains"
+  ]
+}

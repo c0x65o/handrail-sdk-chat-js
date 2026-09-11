@@ -28,6 +28,7 @@ try {
       .replaceAll('"@handrail/chat/react"', '"./react/index.js"')
       .replaceAll('"@handrail/chat/ui"', '"./ui/index.js"')
       .replaceAll('"../dist/client/reply-style-runtime.js"', '"./client/reply-style-runtime.js"')
+      .replaceAll('"../dist/client/thread-lifecycle.js"', '"./client/thread-lifecycle.js"')
       .replaceAll("../src/ui/styles.css", "../../src/ui/styles.css");
     const path = resolve(output, `${file}.test.mjs`);
     await writeFile(path, source);

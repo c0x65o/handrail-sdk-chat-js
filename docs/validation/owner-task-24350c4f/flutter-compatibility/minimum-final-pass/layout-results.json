@@ -1,0 +1,54 @@
+[
+  {
+    "name": "layout-analysis",
+    "command": [
+      "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/cache/dart-sdk/bin/dart",
+      "analyze",
+      "lib/src/handrail_thread_view.dart",
+      "test/handrail_thread_view_test.dart"
+    ],
+    "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum-final-pass/package",
+    "exit_code": 0
+  },
+  {
+    "name": "layout-thread-regressions",
+    "command": [
+      "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter",
+      "test",
+      "--no-pub",
+      "--concurrency=2",
+      "--reporter=expanded",
+      "test/handrail_thread_view_test.dart"
+    ],
+    "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum-final-pass/package",
+    "exit_code": 0
+  },
+  {
+    "name": "layout-workspace-regressions",
+    "command": [
+      "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter",
+      "test",
+      "--no-pub",
+      "--concurrency=2",
+      "--reporter=expanded",
+      "test/handrail_chat_workspace_test.dart",
+      "--name",
+      "reply routing|named thread|thread discovery"
+    ],
+    "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum-final-pass/package",
+    "exit_code": 0
+  },
+  {
+    "name": "layout-consumer-widget",
+    "command": [
+      "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter",
+      "test",
+      "--no-pub",
+      "--concurrency=2",
+      "--reporter=expanded",
+      "test/public_import_test.dart"
+    ],
+    "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum-final-pass/consumer",
+    "exit_code": 0
+  }
+]

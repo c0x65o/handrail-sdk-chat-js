@@ -6,6 +6,11 @@ from its exact public Git commit; the TypeScript and Flutter packages have
 independent versions. Do not publish or apply migrations implicitly from
 application startup.
 
+For Hitcents ERP, use the [concrete integration recipe](hitcents-integration.md)
+and the [essential/optional evidence matrix](validation/owner-task-24350c4f/README.md#prioritized-pilot-matrix).
+That supplement separates supplied planner source inspection from runtime
+verification and keeps the remaining host adapters and adoption gates explicit.
+
 ## React/Vite client
 
 Vite is the build tool, not the UI framework. The supplied drop-in UI is React.

@@ -1,0 +1,80 @@
+{
+  "artifact_id": "248f3f7986001f99414f5a149c477177059b1dcfc0a49be7c223a6190a5fc2eb",
+  "scope": "Source/tests/docs/locks, including preserved prior fixes; validation evidence separately hashed. Uncommitted, unpublished; subsequent independent QA required.",
+  "repositories": [
+    {
+      "repository": "handrail-sdk-chat-js",
+      "base_head": "9f62a562c5235759efa4c0a05858acae755c0aff",
+      "patch": "patches/handrail-sdk-chat-js.patch",
+      "sha256": "3ead6aa48b22389ed8376caa113013780560ced04075f634c8c67e7ddc25c188",
+      "files": [
+        "README.md",
+        "docs/sdk-repository-split.md",
+        "docs/server-embedding.md",
+        "scripts/qualify-reply-threads.mjs",
+        "scripts/test-react-reply-routing.mjs",
+        "src/client/generated/package-version.ts",
+        "src/server/conversation-membership-command.ts",
+        "src/ui/chat-workspace.ts",
+        "src/ui/message-composer.ts",
+        "src/ui/message-timeline.ts",
+        "src/ui/slots.ts",
+        "src/ui/thread-panel.ts",
+        "test/chat-workspace-default.test.mjs",
+        "test/postgres-attachment-lifecycle-http.test.mjs",
+        "test/postgres-conversation-membership-command.test.mjs",
+        "test/postgres-conversation-membership-http.test.mjs",
+        "test/postgres-react-reply-style-flow.test.mjs",
+        "test/postgres-reply-draft-persistence.test.mjs",
+        "test/postgres-send-message-command.test.mjs",
+        "test/server-embedding-docs.test.mjs",
+        "test/thread-panel.test.mjs",
+        "test/ui-browser-graph.test.mjs"
+      ],
+      "apply_check": "passed against git archive HEAD",
+      "source_correspondence": "all non-evidence tracked/new source files match",
+      "verified_source_file_count": 1126
+    },
+    {
+      "repository": "handrail-sdk-chat-flutter",
+      "base_head": "8926839d7467860a738c5526aacb7330a5510483",
+      "patch": "patches/handrail-sdk-chat-flutter.patch",
+      "sha256": "b0f79227038952d5ba2ceb88b87f327108580009549778cd689edd4ba2edcdd7",
+      "files": [
+        "README.md",
+        "example/README.md",
+        "example/lib/main.dart",
+        "example/pubspec.lock",
+        "example/pubspec.yaml",
+        "lib/src/handrail_chat_theme.dart",
+        "lib/src/handrail_chat_workspace.dart",
+        "lib/src/handrail_huddle_panel.dart",
+        "lib/src/handrail_message_composer.dart",
+        "lib/src/handrail_message_timeline.dart",
+        "lib/src/handrail_thread_view.dart",
+        "pubspec.lock",
+        "pubspec.yaml",
+        "test/handrail_chat_workspace_test.dart",
+        "test/handrail_message_composer_test.dart",
+        "test/handrail_reply_routing_cases.dart",
+        "test/handrail_reply_style_settings_test.dart",
+        "test/handrail_thread_lifecycle_cases.dart",
+        "test/handrail_timeline_reply_reference_test.dart",
+        "test/widget_evidence.dart"
+      ],
+      "apply_check": "passed against git archive HEAD",
+      "source_correspondence": "all non-evidence tracked/new source files match",
+      "verified_source_file_count": 471
+    },
+    {
+      "repository": "handrail-chat-preview-flutter",
+      "base_head": "52fe6563bfeb9d1289fa39bcba40cd887ee7914e",
+      "patch": "patches/handrail-chat-preview-flutter.patch",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "files": [],
+      "apply_check": "passed against git archive HEAD",
+      "source_correspondence": "all non-evidence tracked/new source files match",
+      "verified_source_file_count": 15
+    }
+  ]
+}

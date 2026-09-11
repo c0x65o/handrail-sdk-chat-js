@@ -1,0 +1,77 @@
+TAP version 13
+# Subtest: WebSocket cursor replay is ordered, bounded, authorized, and tenant-safe on PostgreSQL
+    # Subtest: buffered reminders are dropped and stored types remain authoritative
+    ok 1 - buffered reminders are dropped and stored types remain authoritative
+      ---
+      duration_ms: 3.664532
+      type: 'test'
+      ...
+    # Subtest: internal-only streams skip authorization and reminders do not consume the page
+    ok 2 - internal-only streams skip authorization and reminders do not consume the page
+      ---
+      duration_ms: 3.751619
+      type: 'test'
+      ...
+    # Subtest: an internal reminder cursor requires a snapshot and closes the socket
+    ok 3 - an internal reminder cursor requires a snapshot and closes the socket
+      ---
+      duration_ms: 19.098394
+      type: 'test'
+      ...
+    # Subtest: replay boundary subscription overflow closes before session acceptance
+    ok 4 - replay boundary subscription overflow closes before session acceptance
+      ---
+      duration_ms: 318.605035
+      type: 'test'
+      ...
+    1..4
+ok 1 - WebSocket cursor replay is ordered, bounded, authorized, and tenant-safe on PostgreSQL
+  ---
+  duration_ms: 761.23735
+  type: 'test'
+  ...
+# PostgreSQL url-backed: subscription admission overflow after 1,000 candidates + private stream + 24 boundary streams
+# Subtest: WebSocket replay bounds candidate authorization on PostgreSQL
+    # Subtest: 999 candidate streams
+    ok 1 - 999 candidate streams
+      ---
+      duration_ms: 589.899588
+      type: 'test'
+      ...
+    # PostgreSQL url-backed: candidates=999, returned=999, conversation queries=999, permission calls=999
+    # Subtest: 1000 candidate streams
+    ok 2 - 1000 candidate streams
+      ---
+      duration_ms: 573.533818
+      type: 'test'
+      ...
+    # PostgreSQL url-backed: candidates=1000, returned=1000, conversation queries=1000, permission calls=1000
+    # Subtest: 1001 candidate streams
+    ok 3 - 1001 candidate streams
+      ---
+      duration_ms: 320.461778
+      type: 'test'
+      ...
+    # PostgreSQL url-backed: candidates=1001, returned=1001, conversation queries=0, permission calls=0
+    # Subtest: 1025 candidate streams
+    ok 4 - 1025 candidate streams
+      ---
+      duration_ms: 325.778746
+      type: 'test'
+      ...
+    # PostgreSQL url-backed: candidates=1025, returned=1001, conversation queries=0, permission calls=0
+    1..4
+ok 2 - WebSocket replay bounds candidate authorization on PostgreSQL
+  ---
+  duration_ms: 1811.845981
+  type: 'test'
+  ...
+1..2
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2778.760414

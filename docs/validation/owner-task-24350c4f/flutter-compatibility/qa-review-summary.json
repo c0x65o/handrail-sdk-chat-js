@@ -1,0 +1,74 @@
+{
+  "request_id": "c7cbe614-489d-413b-a33a-2f9832910afc",
+  "result": {
+    "runId": "c718b243-d356-4973-bf05-c8d3394801fa",
+    "status": "failed",
+    "summary": "RESULT: failed\n\nIndependent review completed. **Not ready for adoption.** Both patches apply cleanly, match the requested hashes, and reproduce current source without drift. All 80 saved evidence hashes match.\n\n| Team criterion | Verdict |\n|---|---|\n| discord_setting | Unverified end to end |\n| pilot_quality | Unverified overall |\n| package_readiness | Failed |\n| hitcents_fit | Unverified |\n| independent_acceptance | Review complete; acceptance withheld |\n\nThe package failure predates these patches: Flutter declares support from 3.19 but uses newer APIs, including `Color.withValues`, introduced in Flutter 3.27. The existing lead must correct and test the compatibility floor. [Flutter migration guide](https://docs.flutter.dev/release/breaking-changes/wide-gamut-framework)\n\nIndependent React/Flutter regressions, JS build and typing, Flutter analysis, and clean local-package consumers passed. React 18.2 and Node 22.0 smoke checks also passed.\n\nRemaining dependencies:\n\n- PostgreSQL rerun: `initdb` rejects this worker’s root UID; the container fallback is unavailable. Owned temporary-directory cleanup verified.\n- Live acceptance: services remain stopped, with no authorized QA route or development Vault profiles. Flutter-to-PostgreSQL and cross-client runtime behavior remain unverified.\n- Hitcents integration: supplied ERP paths are absent from this worker’s scoped filesystem.\n\nExact reviewed artifacts:\n\n- **JS base:** `9f62a562c5235759efa4c0a05858acae755c0aff`  \n  **Patch SHA256:** `3ead6aa48b22389ed8376caa113013780560ced04075f634c8c67e7ddc25c188`\n- **Flutter base:** `8926839d7467860a738c5526aacb7330a5510483`  \n  **Patch SHA256:** `67815c080f73c3268911679d1a8471ed30a57c8d68e9eec752e3caa1e8be23d9`\n- **Preview unchanged:** `52fe6563bfeb9d1289fa39bcba40cd887ee7914e`\n\nThe [full independent report](/opt/handrail/.handrail/validation-runs/c718b243-d356-4973-bf05-c8d3394801fa/REVIEW.md) contains prioritized findings, test logs, five PNG assessments, coverage gaps and concrete continuation steps. Existing lead, source changes and consumer pins were preserved.\n\nRead-only Codex review reported touched files: /opt/handrail/.handrail/validation-runs/c718b243-d356-4973-bf05-c8d3394801fa/REVIEW.md, /opt/handrail/.handrail/validation-runs/c718b243-d356-4973-bf05-c8d3394801fa/reproduce-independent.md, /opt/handrail/.handrail/validation-runs/c718b243-d356-4973-bf05-c8d3394801fa/scope-runtime-evidence.json",
+    "diagnosis": null,
+    "startedAt": null,
+    "assertions": [],
+    "completedAt": "2026-09-11T05:12:13.933Z",
+    "reproCommand": null,
+    "blockedReason": null,
+    "schemaVersion": 1,
+    "failure_reason": "RESULT: failed\n\nIndependent review completed. **Not ready for adoption.** Both patches apply cleanly, match the requested hashes, and reproduce current source without drift. All 80 saved evidence hashes match.\n\n| Team criterion | Verdict |\n|---|---|\n| discord_setting | Unverified end to end |\n| pilot_quality | Unverified overall |\n| package_readiness | Failed |\n| hitcents_fit | Unverified |\n| independent_acceptance | Review complete; acceptance withheld |\n\nThe package failure predates these patches: Flutter declares support from 3.19 but uses newer APIs, including `Color.withValues`, introduced in Flutter 3.27. The existing lead must correct and test the compatibility floor. [Flutter migration guide](https://docs.flutter.dev/release/breaking-changes/wide-gamut-framework)\n\nIndependent React/Flutter regressions, JS build and typing, Flutter analysis, and clean local-package consumers passed. React 18.2 and Node 22.0 smoke checks also passed.\n\nRemaining dependencies:\n\n- PostgreSQL rerun: `initdb` rejects this worker’s root UID; the container fallback is unavailable. Owned temporary-directory cleanup verified.\n- Live acceptance: services remain stopped, with no authorized QA route or development Vault profiles. Flutter-to-PostgreSQL and cross-client runtime behavior remain unverified.\n- Hitcents integration: supplied ERP paths are absent from this worker’s scoped filesystem.\n\nExact reviewed artifacts:\n\n- **JS base:** `9f62a562c5235759efa4c0a05858acae755c0aff`  \n  **Patch SHA256:** `3ead6aa48b22389ed8376caa113013780560ced04075f634c8c67e7ddc25c188`\n- **Flutter base:** `8926839d7467860a738c5526aacb7330a5510483`  \n  **Patch SHA256:** `67815c080f73c3268911679d1a8471ed30a57c8d68e9eec752e3caa1e8be23d9`\n- **Preview unchanged:** `52fe6563bfeb9d1289fa39bcba40cd887ee7914e`\n\nThe [full independent report](/opt/handrail/.handrail/validation-runs/c718b243-d356-4973-bf05-c8d3394801fa/REVIEW.md) contains prioritized findings, test logs, five PNG assessments, coverage gaps and concrete continuation steps. Existing lead, source changes and consumer pins were preserved.\n\nRead-only Codex review reported touched files: /opt/handrail/.handrail/validation-runs/c718b243-d356-4973-bf05-c8d3394801fa/REVIEW.md, /opt/handrail/.handrail/validation-runs/c718b243-d356-4973-bf05-c8d3394801fa/reproduce-independent.md, /opt/handrail/.handrail/validation-runs/c718b243-d356-4973-bf05-c8d3394801fa/scope-runtime-evidence.json",
+    "evidenceManifestPath": null
+  },
+  "evidence": {
+    "evidence_refs": [
+      {
+        "id": "c4bcf0a6-f5ba-42e8-87db-39f6adef1bcf",
+        "kind": "log",
+        "type": "work_request_validation_evidence",
+        "storage_key": "validation-evidence/c7cbe614-489d-413b-a33a-2f9832910afc/c718b243-d356-4973-bf05-c8d3394801fa/c4bcf0a6-f5ba-42e8-87db-39f6adef1bcf.txt"
+      }
+    ],
+    "evidence_count": 1,
+    "manifest_status": "passed",
+    "finalizer_result": {
+      "ok": true,
+      "inserted": [
+        {
+          "id": "c4bcf0a6-f5ba-42e8-87db-39f6adef1bcf",
+          "kind": "log",
+          "storage_key": "validation-evidence/c7cbe614-489d-413b-a33a-2f9832910afc/c718b243-d356-4973-bf05-c8d3394801fa/c4bcf0a6-f5ba-42e8-87db-39f6adef1bcf.txt"
+        }
+      ],
+      "execution_step_result": {
+        "ok": true,
+        "env": null,
+        "raw": {
+          "ok": true,
+          "inserted": [
+            {
+              "id": "c4bcf0a6-f5ba-42e8-87db-39f6adef1bcf",
+              "kind": "log",
+              "storage_key": "validation-evidence/c7cbe614-489d-413b-a33a-2f9832910afc/c718b243-d356-4973-bf05-c8d3394801fa/c4bcf0a6-f5ba-42e8-87db-39f6adef1bcf.txt"
+            }
+          ]
+        },
+        "kind": "ExecutionStepResult",
+        "status": "passed",
+        "summary": "Persisted 1 validation evidence artifact(s).",
+        "validation": {
+          "semantic": "passed",
+          "assertions": [],
+          "blocked_reason": null,
+          "evidence_count": 1,
+          "validation_attempt_id": null
+        },
+        "commit_shas": [],
+        "reason_code": null,
+        "remediation": null,
+        "source_step": "validation_evidence_finalizer",
+        "codex_run_id": "c718b243-d356-4973-bf05-c8d3394801fa",
+        "deployment_ids": [],
+        "schema_version": 1,
+        "commit_repo_ids": [],
+        "selected_lane_ids": [],
+        "build_candidate_id": null,
+        "committed_repo_ids": []
+      }
+    }
+  }
+}

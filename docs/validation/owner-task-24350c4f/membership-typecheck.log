@@ -1,0 +1,4 @@
+
+> @handrail/chat@1.0.25 typecheck:conversation-membership
+> tsc --project tsconfig.conversation-membership-type-tests.json
+

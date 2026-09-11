@@ -1,0 +1,15 @@
+[
+  {
+    "name": "settings",
+    "command": [
+      "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter",
+      "test",
+      "--no-pub",
+      "--concurrency=2",
+      "--reporter=expanded",
+      "test/handrail_reply_style_settings_test.dart"
+    ],
+    "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/package",
+    "exit_code": 1
+  }
+]

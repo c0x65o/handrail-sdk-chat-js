@@ -1,0 +1,140 @@
+TAP version 13
+# Subtest: renders runtime precedence {} absent
+ok 1 - renders runtime precedence {} absent
+  ---
+  duration_ms: 41.577897
+  type: 'test'
+  ...
+# Subtest: renders runtime precedence {"hostDefault":"discord"} absent
+ok 2 - renders runtime precedence {"hostDefault":"discord"} absent
+  ---
+  duration_ms: 5.636601
+  type: 'test'
+  ...
+# Subtest: renders runtime precedence {"hostDefault":"discord"} current
+ok 3 - renders runtime precedence {"hostDefault":"discord"} current
+  ---
+  duration_ms: 5.016618
+  type: 'test'
+  ...
+# Subtest: renders runtime precedence {"enforcedOverride":"current"} discord
+ok 4 - renders runtime precedence {"enforcedOverride":"current"} discord
+  ---
+  duration_ms: 4.316546
+  type: 'test'
+  ...
+# Subtest: renders runtime precedence {"hostDefault":"discord"} future
+ok 5 - renders runtime precedence {"hostDefault":"discord"} future
+  ---
+  duration_ms: 4.320049
+  type: 'test'
+  ...
+# Subtest: requested selection stays saving until confirmation; reload and reconnect update authority
+ok 6 - requested selection stays saving until confirmation; reload and reconnect update authority
+  ---
+  duration_ms: 11.348656
+  type: 'test'
+  ...
+# Subtest: unresolved loading is not absence; failed read is safe and explicitly retryable
+ok 7 - unresolved loading is not absence; failed read is safe and explicitly retryable
+  ---
+  duration_ms: 6.595854
+  type: 'test'
+  ...
+# Subtest: failed uncertain save uses reconciliation-aware retry and retains confirmed style
+ok 8 - failed uncertain save uses reconciliation-aware retry and retains confirmed style
+  ---
+  duration_ms: 8.279193
+  type: 'test'
+  ...
+# Subtest: conflict shows authoritative choice and explicit retry creates a new mutation
+ok 9 - conflict shows authoritative choice and explicit retry creates a new mutation
+  ---
+  duration_ms: 7.725521
+  type: 'test'
+  ...
+# Subtest: persistence gating is independent null
+ok 10 - persistence gating is independent null
+  ---
+  duration_ms: 4.315147
+  type: 'test'
+  ...
+# Subtest: persistence gating is independent {}
+ok 11 - persistence gating is independent {}
+  ---
+  duration_ms: 3.426783
+  type: 'test'
+  ...
+# Subtest: persistence gating is independent {"inlineReplies":true,"namedThreads":true}
+ok 12 - persistence gating is independent {"inlineReplies":true,"namedThreads":true}
+  ---
+  duration_ms: 2.896686
+  type: 'test'
+  ...
+# Subtest: offline read explains recovery without claiming absence or saving
+ok 13 - offline read explains recovery without claiming absence or saving
+  ---
+  duration_ms: 4.812005
+  type: 'test'
+  ...
+# Subtest: hooks replace subscriptions and actions with the context client and clean up on unmount
+ok 14 - hooks replace subscriptions and actions with the context client and clean up on unmount
+  ---
+  duration_ms: 3.061027
+  type: 'test'
+  ...
+# Subtest: settings selection and retry preserve a mounted composer, populated draft, open thread and queued destination
+ok 15 - settings selection and retry preserve a mounted composer, populated draft, open thread and queued destination
+  ---
+  duration_ms: 73.620835
+  type: 'test'
+  ...
+# Subtest: canonical subscription and host override updates stay visible without persistence side effects
+ok 16 - canonical subscription and host override updates stay visible without persistence side effects
+  ---
+  duration_ms: 5.430917
+  type: 'test'
+  ...
+# Subtest: enabled native choice stays keyboard accessible inside a StrictMode dialog
+ok 17 - enabled native choice stays keyboard accessible inside a StrictMode dialog
+  ---
+  duration_ms: 11.804137
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 897.701591
+TAP version 13
+# Subtest: WorkspaceHeader preserves defaults, renders safe identity, and composes wired controls
+ok 1 - WorkspaceHeader preserves defaults, renders safe identity, and composes wired controls
+  ---
+  duration_ms: 306.328087
+  type: 'test'
+  ...
+# Subtest: reply style settings opens with keyboard, contains focus and restores the trigger
+ok 2 - reply style settings opens with keyboard, contains focus and restores the trigger
+  ---
+  duration_ms: 123.429803
+  type: 'test'
+  ...
+# Subtest: host settings content and custom settings slot retain ownership
+ok 3 - host settings content and custom settings slot retain ownership
+  ---
+  duration_ms: 108.153446
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1028.027453

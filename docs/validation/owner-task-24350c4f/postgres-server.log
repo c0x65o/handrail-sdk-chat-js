@@ -1,0 +1,541 @@
+2026-09-10 23:51:33.242 CDT [116] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-09-10 23:51:33.243 CDT [116] LOG:  listening on Unix socket "/tmp/handrail-codex-heavy-command-locks/chat-pg16-x2i0oF/.s.PGSQL.5432"
+2026-09-10 23:51:33.248 CDT [119] LOG:  database system was shut down at 2026-09-10 23:51:33 CDT
+2026-09-10 23:51:33.253 CDT [116] LOG:  database system is ready to accept connections
+2026-09-10 23:51:36.149 CDT [230] ERROR:  chat_thread_follows user must have active access to the parent conversation
+2026-09-10 23:51:36.149 CDT [230] CONTEXT:  PL/pgSQL function validate_chat_thread_follow() line 72 at RAISE
+2026-09-10 23:51:36.149 CDT [230] STATEMENT:  INSERT INTO "chat_membership_387a99ce51df41eb8c0a25d78b6c4365".chat_thread_follows (
+	       tenant_id, conversation_id, user_id, is_following,
+	       follow_source, created_at, updated_at
+	     ) SELECT $1, conversation.id, $3, false, 'manual', $4, $4
+	         FROM "chat_membership_387a99ce51df41eb8c0a25d78b6c4365".chat_conversations AS conversation
+	        WHERE conversation.tenant_id = $1
+	          AND conversation.id = $2
+	          AND conversation.type = 'thread'
+	     ON CONFLICT (tenant_id, conversation_id, user_id)
+	     DO UPDATE SET is_following = false, follow_source = 'manual',
+	                   updated_at = EXCLUDED.updated_at
+2026-09-10 23:51:36.242 CDT [231] ERROR:  injected membership audit failure
+2026-09-10 23:51:36.242 CDT [231] CONTEXT:  PL/pgSQL function reject_membership_audit() line 4 at RAISE
+2026-09-10 23:51:36.242 CDT [231] STATEMENT:  INSERT INTO "chat_membership_387a99ce51df41eb8c0a25d78b6c4365".chat_audit_events (
+	       tenant_id, event_id, actor_user_id, action, target_type, target_id,
+	       occurred_at, metadata, request_id
+	     ) VALUES ($1, $2, $3, $4, 'conversation', $5, $6, $7, $8)
+2026-09-10 23:51:37.316 CDT [249] ERROR:  chat_thread_follows user must have active access to the parent conversation
+2026-09-10 23:51:37.316 CDT [249] CONTEXT:  PL/pgSQL function validate_chat_thread_follow() line 72 at RAISE
+2026-09-10 23:51:37.316 CDT [249] STATEMENT:  INSERT INTO "chat_membership_http_afc08ca28f9440b2816c4b0f7a6eb274".chat_thread_follows (
+	       tenant_id, conversation_id, user_id, is_following,
+	       follow_source, created_at, updated_at
+	     ) SELECT $1, conversation.id, $3, false, 'manual', $4, $4
+	         FROM "chat_membership_http_afc08ca28f9440b2816c4b0f7a6eb274".chat_conversations AS conversation
+	        WHERE conversation.tenant_id = $1
+	          AND conversation.id = $2
+	          AND conversation.type = 'thread'
+	     ON CONFLICT (tenant_id, conversation_id, user_id)
+	     DO UPDATE SET is_following = false, follow_source = 'manual',
+	                   updated_at = EXCLUDED.updated_at
+2026-09-10 23:51:38.074 CDT [267] ERROR:  insert or update on table "chat_messages" violates foreign key constraint "chat_messages_reply_source_fkey"
+2026-09-10 23:51:38.074 CDT [267] DETAIL:  Key (tenant_id, conversation_id, reply_to_message_id)=(tenant-a, isolated-empty, missing-source) is not present in table "chat_messages".
+2026-09-10 23:51:38.074 CDT [267] STATEMENT:  INSERT INTO "reply_unread_6712dde1d7d44cdeab99df91ac8dd813".chat_messages
+	           (tenant_id, conversation_id, id, sequence, author_user_id,
+	            client_message_id, content, reply_to_message_id, reply_notify_author,
+	            deleted_at, deleted_by_user_id, created_at, updated_at)
+	         VALUES ($1, $2, $3, $4, $5, $3, $6, $7, $8,
+	           CASE WHEN $9 THEN '2026-01-01'::timestamptz END,
+	           CASE WHEN $9 THEN $5 END, '2026-01-01', '2026-01-01')
+2026-09-10 23:51:38.076 CDT [266] ERROR:  insert or update on table "chat_messages" violates foreign key constraint "chat_messages_reply_source_fkey"
+2026-09-10 23:51:38.076 CDT [266] DETAIL:  Key (tenant_id, conversation_id, reply_to_message_id)=(tenant-a, isolated-empty, dedup-source) is not present in table "chat_messages".
+2026-09-10 23:51:38.076 CDT [266] STATEMENT:  INSERT INTO "reply_unread_6712dde1d7d44cdeab99df91ac8dd813".chat_messages
+	           (tenant_id, conversation_id, id, sequence, author_user_id,
+	            client_message_id, content, reply_to_message_id, reply_notify_author,
+	            deleted_at, deleted_by_user_id, created_at, updated_at)
+	         VALUES ($1, $2, $3, $4, $5, $3, $6, $7, $8,
+	           CASE WHEN $9 THEN '2026-01-01'::timestamptz END,
+	           CASE WHEN $9 THEN $5 END, '2026-01-01', '2026-01-01')
+2026-09-10 23:51:38.079 CDT [268] ERROR:  insert or update on table "chat_messages" violates foreign key constraint "chat_messages_reply_source_fkey"
+2026-09-10 23:51:38.079 CDT [268] DETAIL:  Key (tenant_id, conversation_id, reply_to_message_id)=(tenant-a, isolated-empty, tenant-b-only-source) is not present in table "chat_messages".
+2026-09-10 23:51:38.079 CDT [268] STATEMENT:  INSERT INTO "reply_unread_6712dde1d7d44cdeab99df91ac8dd813".chat_messages
+	           (tenant_id, conversation_id, id, sequence, author_user_id,
+	            client_message_id, content, reply_to_message_id, reply_notify_author,
+	            deleted_at, deleted_by_user_id, created_at, updated_at)
+	         VALUES ($1, $2, $3, $4, $5, $3, $6, $7, $8,
+	           CASE WHEN $9 THEN '2026-01-01'::timestamptz END,
+	           CASE WHEN $9 THEN $5 END, '2026-01-01', '2026-01-01')
+2026-09-10 23:51:39.176 CDT [288] ERROR:  injected late thread failure
+2026-09-10 23:51:39.176 CDT [288] CONTEXT:  PL/pgSQL function reject_thread_parent_event() line 4 at RAISE
+2026-09-10 23:51:39.176 CDT [288] STATEMENT:  INSERT INTO "chat_create_thread_9a9b9656b40b4998a93f971512d082d9".chat_outbox_events (
+	           event_id, protocol_version, tenant_id, stream_id, type,
+	           occurred_at, payload, expires_at
+	         ) VALUES (
+	           $1, $2, $3, $4, 'message.thread_summary.updated', $5, $6,
+	           $5::timestamptz + ($7::double precision * interval '1 millisecond')
+	         )
+2026-09-10 23:51:39.798 CDT [304] ERROR:  chat_message_revisions are append-only
+2026-09-10 23:51:39.798 CDT [304] CONTEXT:  PL/pgSQL function reject_chat_message_revision_mutation() line 3 at RAISE
+2026-09-10 23:51:39.798 CDT [304] STATEMENT:  UPDATE "chat_edit_637563f9a8fd4f3485640b32c688a48d".chat_message_revisions
+	           SET content = '{"format":"plain","text":"tampered"}'
+	           WHERE tenant_id = $1 AND message_id = $2 AND revision_number = 1
+2026-09-10 23:51:40.556 CDT [321] ERROR:  relation "uninstalled_context.chat_conversations" does not exist at character 88
+2026-09-10 23:51:40.556 CDT [321] STATEMENT:  SELECT conversation.type, conversation.entity_type, conversation.entity_id
+	       FROM "uninstalled_context".chat_conversations AS conversation
+	       LEFT JOIN "uninstalled_context".chat_conversation_members AS current_member
+	         ON current_member.tenant_id = conversation.tenant_id
+	        AND current_member.conversation_id = conversation.id
+	        AND current_member.user_id = $2
+	      WHERE conversation.tenant_id = $1 AND conversation.id = $3
+	        AND ((conversation.type = 'channel' AND conversation.visibility = 'public')
+	             OR conversation.type = 'thread' OR current_member.state = 'active')
+	      LIMIT 1
+2026-09-10 23:51:49.514 CDT [398] ERROR:  isolated storage fault
+2026-09-10 23:51:49.514 CDT [398] CONTEXT:  PL/pgSQL function reject_style_save() line 2 at RAISE
+2026-09-10 23:51:49.514 CDT [398] STATEMENT:  INSERT INTO "react_reply_style_197f3c2ba2c642868fa62c32cb7d9d94".chat_user_reply_style_preferences
+	         (tenant_id, user_id, style, revision, updated_at)
+	       VALUES ($1, $2, $3, $4, $5)
+	       ON CONFLICT (tenant_id, user_id) DO UPDATE
+	         SET style = EXCLUDED.style, revision = EXCLUDED.revision, updated_at = EXCLUDED.updated_at
+	       WHERE chat_user_reply_style_preferences.revision = $6
+	       RETURNING style, revision, updated_at
+2026-09-10 23:51:52.325 CDT [440] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.325 CDT [440] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 20, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.325801+00).
+2026-09-10 23:51:52.325 CDT [440] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.332 CDT [441] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.332 CDT [441] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 21, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.331068+00).
+2026-09-10 23:51:52.332 CDT [441] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.338 CDT [442] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.338 CDT [442] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 22, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.33676+00).
+2026-09-10 23:51:52.338 CDT [442] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.343 CDT [443] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.343 CDT [443] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 23, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.341877+00).
+2026-09-10 23:51:52.343 CDT [443] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.348 CDT [444] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.348 CDT [444] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 24, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.346877+00).
+2026-09-10 23:51:52.348 CDT [444] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.353 CDT [445] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.353 CDT [445] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 25, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.351769+00).
+2026-09-10 23:51:52.353 CDT [445] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.358 CDT [446] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.358 CDT [446] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 26, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.356776+00).
+2026-09-10 23:51:52.358 CDT [446] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.363 CDT [447] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.363 CDT [447] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 27, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.362133+00).
+2026-09-10 23:51:52.363 CDT [447] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.368 CDT [448] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.368 CDT [448] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 28, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.36709+00).
+2026-09-10 23:51:52.368 CDT [448] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.374 CDT [449] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.374 CDT [449] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 29, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.372347+00).
+2026-09-10 23:51:52.374 CDT [449] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.379 CDT [450] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.379 CDT [450] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 30, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.377364+00).
+2026-09-10 23:51:52.379 CDT [450] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.383 CDT [451] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.383 CDT [451] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 31, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.382235+00).
+2026-09-10 23:51:52.383 CDT [451] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.388 CDT [452] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.388 CDT [452] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 32, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.387169+00).
+2026-09-10 23:51:52.388 CDT [452] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.393 CDT [453] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.393 CDT [453] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 33, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.392223+00).
+2026-09-10 23:51:52.393 CDT [453] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.398 CDT [454] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.398 CDT [454] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 34, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.39717+00).
+2026-09-10 23:51:52.398 CDT [454] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.404 CDT [455] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.404 CDT [455] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 35, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.402354+00).
+2026-09-10 23:51:52.404 CDT [455] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.409 CDT [456] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.409 CDT [456] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 36, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.407845+00).
+2026-09-10 23:51:52.409 CDT [456] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.415 CDT [457] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.415 CDT [457] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 37, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.413718+00).
+2026-09-10 23:51:52.415 CDT [457] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.420 CDT [458] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.420 CDT [458] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 38, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.418986+00).
+2026-09-10 23:51:52.420 CDT [458] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.425 CDT [459] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.425 CDT [459] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 39, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.424134+00).
+2026-09-10 23:51:52.425 CDT [459] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.431 CDT [460] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.431 CDT [460] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 40, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.429133+00).
+2026-09-10 23:51:52.431 CDT [460] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.436 CDT [461] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.436 CDT [461] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 41, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.434214+00).
+2026-09-10 23:51:52.436 CDT [461] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.441 CDT [462] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.441 CDT [462] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 42, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.439334+00).
+2026-09-10 23:51:52.441 CDT [462] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.446 CDT [463] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.446 CDT [463] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 43, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.444433+00).
+2026-09-10 23:51:52.446 CDT [463] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.451 CDT [464] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.451 CDT [464] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 44, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.449823+00).
+2026-09-10 23:51:52.451 CDT [464] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.456 CDT [465] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.456 CDT [465] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 45, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.454992+00).
+2026-09-10 23:51:52.456 CDT [465] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.462 CDT [466] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.462 CDT [466] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 46, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.460274+00).
+2026-09-10 23:51:52.462 CDT [466] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.467 CDT [467] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.467 CDT [467] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 47, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.46534+00).
+2026-09-10 23:51:52.467 CDT [467] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.472 CDT [468] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.472 CDT [468] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 48, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.470406+00).
+2026-09-10 23:51:52.472 CDT [468] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.477 CDT [469] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.477 CDT [469] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 49, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.475545+00).
+2026-09-10 23:51:52.477 CDT [469] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.482 CDT [470] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.482 CDT [470] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 50, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.48051+00).
+2026-09-10 23:51:52.482 CDT [470] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.487 CDT [471] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.487 CDT [471] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 51, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.485717+00).
+2026-09-10 23:51:52.487 CDT [471] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.492 CDT [472] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.492 CDT [472] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 52, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.490973+00).
+2026-09-10 23:51:52.492 CDT [472] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.498 CDT [473] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.498 CDT [473] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 53, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.49615+00).
+2026-09-10 23:51:52.498 CDT [473] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.503 CDT [474] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.503 CDT [474] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 54, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.501478+00).
+2026-09-10 23:51:52.503 CDT [474] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.509 CDT [475] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.509 CDT [475] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 55, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.507014+00).
+2026-09-10 23:51:52.509 CDT [475] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.514 CDT [476] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.514 CDT [476] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 56, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.512323+00).
+2026-09-10 23:51:52.514 CDT [476] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.519 CDT [477] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.519 CDT [477] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 57, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.5177+00).
+2026-09-10 23:51:52.519 CDT [477] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.525 CDT [478] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.525 CDT [478] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 58, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.523317+00).
+2026-09-10 23:51:52.525 CDT [478] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.528 CDT [479] ERROR:  unsupported Unicode escape sequence
+2026-09-10 23:51:52.528 CDT [479] DETAIL:  \u0000 cannot be converted to text.
+2026-09-10 23:51:52.528 CDT [479] CONTEXT:  JSON data, line 1: ...retained":true}}],"replyTo":{"messageId":"a\u0000...
+	unnamed portal parameter $1 = '...'
+2026-09-10 23:51:52.528 CDT [479] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.531 CDT [480] ERROR:  invalid input syntax for type json
+2026-09-10 23:51:52.531 CDT [480] DETAIL:  Unicode low surrogate must follow a high surrogate.
+2026-09-10 23:51:52.531 CDT [480] CONTEXT:  JSON data, line 1: ...retained":true}}],"replyTo":{"messageId":"\ud800"...
+	unnamed portal parameter $1 = '...'
+2026-09-10 23:51:52.531 CDT [480] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.534 CDT [481] ERROR:  invalid input syntax for type json
+2026-09-10 23:51:52.534 CDT [481] DETAIL:  Unicode low surrogate must follow a high surrogate.
+2026-09-10 23:51:52.534 CDT [481] CONTEXT:  JSON data, line 1: ..."retained":true}}],"replyTo":{"messageId":"\udc00...
+	unnamed portal parameter $1 = '...'
+2026-09-10 23:51:52.534 CDT [481] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.538 CDT [482] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.538 CDT [482] DETAIL:  Failing row contains (tenant-a, legacy, drafter, null, 62, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.537564+00).
+2026-09-10 23:51:52.538 CDT [482] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.543 CDT [483] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.543 CDT [483] DETAIL:  Failing row contains (tenant-a, legacy, drafter, [], 63, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.541943+00).
+2026-09-10 23:51:52.543 CDT [483] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.546 CDT [484] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.546 CDT [484] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "x", "format": "other"}, 64, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.545958+00).
+2026-09-10 23:51:52.546 CDT [484] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.551 CDT [485] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.551 CDT [485] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"format": "plain"}, 65, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.550151+00).
+2026-09-10 23:51:52.551 CDT [485] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.555 CDT [486] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.555 CDT [486] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": 1, "format": "plain"}, 66, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.554537+00).
+2026-09-10 23:51:52.555 CDT [486] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.559 CDT [487] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.559 CDT [487] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 67, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.558871+00).
+2026-09-10 23:51:52.559 CDT [487] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.565 CDT [488] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.565 CDT [488] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 68, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.563809+00).
+2026-09-10 23:51:52.565 CDT [488] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.569 CDT [489] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.569 CDT [489] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 69, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.568263+00).
+2026-09-10 23:51:52.569 CDT [489] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.574 CDT [490] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.574 CDT [490] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 70, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.572793+00).
+2026-09-10 23:51:52.574 CDT [490] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.578 CDT [491] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.578 CDT [491] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 71, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.577268+00).
+2026-09-10 23:51:52.578 CDT [491] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.583 CDT [492] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.583 CDT [492] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 72, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.581768+00).
+2026-09-10 23:51:52.583 CDT [492] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.587 CDT [493] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.587 CDT [493] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"data": {"retained": true},..., 73, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.586316+00).
+2026-09-10 23:51:52.587 CDT [493] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.592 CDT [494] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.592 CDT [494] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": {}, "format": "markdown", "me..., 74, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.590826+00).
+2026-09-10 23:51:52.592 CDT [494] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.596 CDT [495] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.596 CDT [495] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{}], "format": "markdown", "..., 75, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.595278+00).
+2026-09-10 23:51:52.596 CDT [495] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:52.601 CDT [496] ERROR:  new row for relation "chat_drafts" violates check constraint "chat_drafts_content_check"
+2026-09-10 23:51:52.601 CDT [496] DETAIL:  Failing row contains (tenant-a, legacy, drafter, {"text": "legacy draft", "blocks": [{"type": "block"}], "format"..., 76, 2026-09-11 04:51:52.30493+00, 2026-09-11 04:51:52.599716+00).
+2026-09-10 23:51:52.601 CDT [496] STATEMENT:  UPDATE "chat_reply_drafts_c54d6280a7754df2b1305c5652d13fa6".chat_drafts
+	        SET content = $1, revision = $2, updated_at = clock_timestamp()
+	        WHERE conversation_id = 'legacy' RETURNING content
+2026-09-10 23:51:53.574 CDT [513] ERROR:  relation "chat_reply_style_http_19e09bf592b24c23ac59b7ad88f5bc6d.chat_user_reply_style_preferences" does not exist
+2026-09-10 23:51:53.574 CDT [513] STATEMENT:  SELECT current_setting('transaction_read_only') = 'off'
+	          AND has_schema_privilege($1, 'USAGE')
+	          AND has_function_privilege($2, 'EXECUTE')
+	          AND bool_and(has_table_privilege(relation, privilege)) AS ready
+	         FROM (VALUES
+	           ($3::text, 'SELECT'), ($3, 'INSERT'), ($3, 'UPDATE'),
+	           ($4, 'SELECT'), ($4, 'INSERT'), ($4, 'UPDATE'),
+	           ($5, 'INSERT'), ($6, 'INSERT')
+	         ) AS required(relation, privilege)
+2026-09-10 23:51:53.581 CDT [514] ERROR:  relation "chat_reply_style_http_19e09bf592b24c23ac59b7ad88f5bc6d.chat_user_reply_style_preferences" does not exist
+2026-09-10 23:51:53.581 CDT [514] STATEMENT:  SELECT current_setting('transaction_read_only') = 'off'
+	          AND has_schema_privilege($1, 'USAGE')
+	          AND has_function_privilege($2, 'EXECUTE')
+	          AND bool_and(has_table_privilege(relation, privilege)) AS ready
+	         FROM (VALUES
+	           ($3::text, 'SELECT'), ($3, 'INSERT'), ($3, 'UPDATE'),
+	           ($4, 'SELECT'), ($4, 'INSERT'), ($4, 'UPDATE'),
+	           ($5, 'INSERT'), ($6, 'INSERT')
+	         ) AS required(relation, privilege)
+2026-09-10 23:51:53.586 CDT [515] ERROR:  relation "chat_reply_style_http_19e09bf592b24c23ac59b7ad88f5bc6d.chat_user_reply_style_preferences" does not exist
+2026-09-10 23:51:53.586 CDT [515] STATEMENT:  SELECT current_setting('transaction_read_only') = 'off'
+	          AND has_schema_privilege($1, 'USAGE')
+	          AND has_function_privilege($2, 'EXECUTE')
+	          AND bool_and(has_table_privilege(relation, privilege)) AS ready
+	         FROM (VALUES
+	           ($3::text, 'SELECT'), ($3, 'INSERT'), ($3, 'UPDATE'),
+	           ($4, 'SELECT'), ($4, 'INSERT'), ($4, 'UPDATE'),
+	           ($5, 'INSERT'), ($6, 'INSERT')
+	         ) AS required(relation, privilege)
+2026-09-10 23:51:53.596 CDT [516] ERROR:  secret internal storage failure
+2026-09-10 23:51:53.596 CDT [516] CONTEXT:  PL/pgSQL function reject_reply_save() line 2 at RAISE
+2026-09-10 23:51:53.596 CDT [516] STATEMENT:  INSERT INTO "chat_reply_style_http_19e09bf592b24c23ac59b7ad88f5bc6d".chat_user_reply_style_preferences
+	         (tenant_id, user_id, style, revision, updated_at)
+	       VALUES ($1, $2, $3, $4, $5)
+	       ON CONFLICT (tenant_id, user_id) DO UPDATE
+	         SET style = EXCLUDED.style, revision = EXCLUDED.revision, updated_at = EXCLUDED.updated_at
+	       WHERE chat_user_reply_style_preferences.revision = $6
+	       RETURNING style, revision, updated_at
+2026-09-10 23:51:54.825 CDT [534] ERROR:  permission denied for table chat_idempotency_keys
+2026-09-10 23:51:54.825 CDT [534] STATEMENT:  WITH expired_keys AS MATERIALIZED (
+	         SELECT expires_at, tenant_id, user_id, operation_name, client_key
+	         FROM "reply_thread_gates_9c5eeb9eda434f5886094646cafad2ad".chat_idempotency_keys
+	         WHERE expires_at <= clock_timestamp()
+	         ORDER BY expires_at, tenant_id, user_id, operation_name, client_key
+	         LIMIT $1
+	         FOR UPDATE SKIP LOCKED
+	       ),
+	       deleted_keys AS (
+	         DELETE FROM "reply_thread_gates_9c5eeb9eda434f5886094646cafad2ad".chat_idempotency_keys AS stored
+	         USING expired_keys
+	         WHERE stored.tenant_id = expired_keys.tenant_id
+	           AND stored.user_id = expired_keys.user_id
+	           AND stored.operation_name = expired_keys.operation_name
+	           AND stored.client_key = expired_keys.client_key
+	         RETURNING
+	           stored.expires_at,
+	           stored.tenant_id,
+	           stored.user_id,
+	           stored.operation_name,
+	           stored.client_key
+	       )
+	       SELECT expires_at, tenant_id, user_id, operation_name, client_key
+	       FROM deleted_keys
+	       ORDER BY expires_at, tenant_id, user_id, operation_name, client_key
+2026-09-10 23:51:54.854 CDT [534] ERROR:  column "reply_to_message_id" does not exist at character 8
+2026-09-10 23:51:54.854 CDT [534] STATEMENT:  SELECT reply_to_message_id, reply_notify_author
+	        FROM "reply_thread_gates_9c5eeb9eda434f5886094646cafad2ad".chat_messages LIMIT 0
+2026-09-10 23:51:54.855 CDT [533] ERROR:  column "reply_to_message_id" does not exist at character 8
+2026-09-10 23:51:54.855 CDT [533] STATEMENT:  SELECT reply_to_message_id, reply_notify_author
+	        FROM "reply_thread_gates_9c5eeb9eda434f5886094646cafad2ad".chat_messages LIMIT 0
+2026-09-10 23:51:54.861 CDT [535] ERROR:  column "reply_to_message_id" does not exist at character 8
+2026-09-10 23:51:54.861 CDT [535] STATEMENT:  SELECT reply_to_message_id, reply_notify_author
+	        FROM "reply_thread_gates_9c5eeb9eda434f5886094646cafad2ad".chat_messages LIMIT 0
+2026-09-10 23:51:54.868 CDT [536] ERROR:  column "reply_to_message_id" does not exist at character 8
+2026-09-10 23:51:54.868 CDT [536] STATEMENT:  SELECT reply_to_message_id, reply_notify_author
+	        FROM "reply_thread_gates_9c5eeb9eda434f5886094646cafad2ad".chat_messages LIMIT 0
+2026-09-10 23:51:54.877 CDT [537] ERROR:  column "reply_to_message_id" does not exist at character 8
+2026-09-10 23:51:54.877 CDT [537] STATEMENT:  SELECT reply_to_message_id, reply_notify_author
+	        FROM "reply_thread_gates_9c5eeb9eda434f5886094646cafad2ad".chat_messages LIMIT 0
+2026-09-10 23:51:54.885 CDT [538] ERROR:  column "reply_to_message_id" does not exist at character 8
+2026-09-10 23:51:54.885 CDT [538] STATEMENT:  SELECT reply_to_message_id, reply_notify_author
+	        FROM "reply_thread_gates_9c5eeb9eda434f5886094646cafad2ad".chat_messages LIMIT 0
+2026-09-10 23:51:54.892 CDT [539] ERROR:  cannot execute SELECT FOR UPDATE in a read-only transaction
+2026-09-10 23:51:54.892 CDT [539] STATEMENT:  WITH expired_keys AS MATERIALIZED (
+	         SELECT expires_at, tenant_id, user_id, operation_name, client_key
+	         FROM "reply_thread_gates_9c5eeb9eda434f5886094646cafad2ad".chat_idempotency_keys
+	         WHERE expires_at <= clock_timestamp()
+	         ORDER BY expires_at, tenant_id, user_id, operation_name, client_key
+	         LIMIT $1
+	         FOR UPDATE SKIP LOCKED
+	       ),
+	       deleted_keys AS (
+	         DELETE FROM "reply_thread_gates_9c5eeb9eda434f5886094646cafad2ad".chat_idempotency_keys AS stored
+	         USING expired_keys
+	         WHERE stored.tenant_id = expired_keys.tenant_id
+	           AND stored.user_id = expired_keys.user_id
+	           AND stored.operation_name = expired_keys.operation_name
+	           AND stored.client_key = expired_keys.client_key
+	         RETURNING
+	           stored.expires_at,
+	           stored.tenant_id,
+	           stored.user_id,
+	           stored.operation_name,
+	           stored.client_key
+	       )
+	       SELECT expires_at, tenant_id, user_id, operation_name, client_key
+	       FROM deleted_keys
+	       ORDER BY expires_at, tenant_id, user_id, operation_name, client_key
+2026-09-10 23:51:55.654 CDT [557] ERROR:  canceling statement due to lock timeout
+2026-09-10 23:51:55.654 CDT [557] CONTEXT:  while updating tuple (0,15) in relation "chat_messages"
+2026-09-10 23:51:55.654 CDT [557] STATEMENT:  WITH stamp AS (SELECT clock_timestamp() AS value)
+	                     UPDATE "chat_send_a185a59207344c5db3488aa9a64a1370".chat_messages SET deleted_at = stamp.value, deleted_by_user_id = 'actor-a', updated_at = stamp.value FROM stamp WHERE id = $1
+2026-09-10 23:51:55.755 CDT [557] ERROR:  canceling statement due to lock timeout
+2026-09-10 23:51:55.755 CDT [557] CONTEXT:  while updating tuple (0,13) in relation "chat_conversation_members"
+2026-09-10 23:51:55.755 CDT [557] STATEMENT:  UPDATE "chat_send_a185a59207344c5db3488aa9a64a1370".chat_conversation_members SET state = 'removed' WHERE conversation_id = 'locked-thread-parent'
+2026-09-10 23:51:55.856 CDT [557] ERROR:  canceling statement due to lock timeout
+2026-09-10 23:51:55.856 CDT [557] CONTEXT:  while updating tuple (0,14) in relation "chat_conversation_members"
+2026-09-10 23:51:55.856 CDT [557] STATEMENT:  UPDATE "chat_send_a185a59207344c5db3488aa9a64a1370".chat_conversation_members SET state = 'removed' WHERE conversation_id = 'locked-thread'
+2026-09-10 23:51:55.956 CDT [557] ERROR:  canceling statement due to lock timeout
+2026-09-10 23:51:55.956 CDT [557] CONTEXT:  while updating tuple (0,23) in relation "chat_conversations"
+2026-09-10 23:51:55.956 CDT [557] STATEMENT:  UPDATE "chat_send_a185a59207344c5db3488aa9a64a1370".chat_conversations SET archived_at = clock_timestamp(), archived_by_user_id = 'actor-a' WHERE id = 'locked-thread-parent'
+2026-09-10 23:51:59.018 CDT [621] ERROR:  injected thread cursor outbox failure
+2026-09-10 23:51:59.018 CDT [621] CONTEXT:  PL/pgSQL function reject_thread_cursor() line 2 at RAISE
+2026-09-10 23:51:59.018 CDT [621] STATEMENT:  INSERT INTO "chat_thread_cursor_61d6a8993d274cb79febeb724ca42b3a".chat_outbox_events (
+	         event_id, protocol_version, tenant_id, stream_id, type,
+	         occurred_at, payload, expires_at
+	       )
+	       VALUES (
+	         $1, $2, $3, $4, $5, $6, $7,
+	         $6::timestamptz + ($8::double precision * interval '1 millisecond')
+	       )
+2026-09-10 23:51:59.041 CDT [621] ERROR:  injected thread cursor outbox failure
+2026-09-10 23:51:59.041 CDT [621] CONTEXT:  PL/pgSQL function reject_thread_cursor() line 2 at RAISE
+2026-09-10 23:51:59.041 CDT [621] STATEMENT:  INSERT INTO "chat_thread_cursor_61d6a8993d274cb79febeb724ca42b3a".chat_outbox_events (
+	         event_id, protocol_version, tenant_id, stream_id, type,
+	         occurred_at, payload, expires_at
+	       )
+	       VALUES (
+	         $1, $2, $3, $4, $5, $6, $7,
+	         $6::timestamptz + ($8::double precision * interval '1 millisecond')
+	       )
+2026-09-10 23:51:59.613 CDT [639] WARNING:  there is no transaction in progress
+2026-09-10 23:51:59.618 CDT [639] WARNING:  there is no transaction in progress
+2026-09-10 23:52:00.000 CDT [645] WARNING:  there is no transaction in progress
+2026-09-10 23:52:00.018 CDT [645] WARNING:  there is no transaction in progress
+2026-09-10 23:52:03.803 CDT [116] LOG:  received fast shutdown request
+2026-09-10 23:52:03.805 CDT [116] LOG:  aborting any active transactions
+2026-09-10 23:52:03.807 CDT [116] LOG:  background worker "logical replication launcher" (PID 122) exited with exit code 1
+2026-09-10 23:52:03.807 CDT [117] LOG:  shutting down
+2026-09-10 23:52:03.808 CDT [117] LOG:  checkpoint starting: shutdown immediate
+2026-09-10 23:52:04.073 CDT [117] LOG:  checkpoint complete: wrote 3369 buffers (82.3%); 0 WAL file(s) added, 0 removed, 5 recycled; write=0.021 s, sync=0.199 s, total=0.267 s; sync files=6257, longest=0.003 s, average=0.001 s; distance=78130 kB, estimate=78130 kB; lsn=0/6135E68, redo lsn=0/6135E68
+2026-09-10 23:52:04.080 CDT [116] LOG:  database system is shut down

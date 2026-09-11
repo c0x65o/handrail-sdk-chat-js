@@ -258,6 +258,7 @@ function ConnectedThread({
     if (source.conversationId !== currentThreadIdRef.current) return;
     composerControlsRef.current?.selectReply(source);
   }, []);
+  const focusReplyComposer = useCallback(() => composerControlsRef.current?.focus?.(), []);
   const actions = useChatActions(threadId);
   const discord = useReplyStyle().effectiveStyle === "discord";
   const readResult = useReadState(threadId);
@@ -419,6 +420,7 @@ function ConnectedThread({
     data.thread === undefined || denied ? null : createElement(MessageTimeline, {
       ariaLabel: "Thread replies",
       onReplyRequested: selectReply,
+      onThreadReplyRequested: focusReplyComposer,
       replyAvailability: availability,
       readOnly: readOnly ?? false,
       conversationId: threadId,

@@ -1,0 +1,52 @@
+2026-09-11 03:18:27.353 CDT [2974632] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-09-11 03:18:27.355 CDT [2974632] LOG:  listening on Unix socket "/tmp/handrail-codex-heavy-command-locks/chat-pg16-9b4qje/.s.PGSQL.5432"
+2026-09-11 03:18:27.359 CDT [2974640] LOG:  database system was shut down at 2026-09-11 03:18:27 CDT
+2026-09-11 03:18:27.364 CDT [2974632] LOG:  database system is ready to accept connections
+2026-09-11 03:18:28.720 CDT [2974935] ERROR:  isolated storage fault
+2026-09-11 03:18:28.720 CDT [2974935] CONTEXT:  PL/pgSQL function reject_style_save() line 2 at RAISE
+2026-09-11 03:18:28.720 CDT [2974935] STATEMENT:  INSERT INTO "react_reply_style_e153cb33a8184cb69e2b083f79dfc515".chat_user_reply_style_preferences
+	         (tenant_id, user_id, style, revision, updated_at)
+	       VALUES ($1, $2, $3, $4, $5)
+	       ON CONFLICT (tenant_id, user_id) DO UPDATE
+	         SET style = EXCLUDED.style, revision = EXCLUDED.revision, updated_at = EXCLUDED.updated_at
+	       WHERE chat_user_reply_style_preferences.revision = $6
+	       RETURNING style, revision, updated_at
+2026-09-11 03:18:30.060 CDT [2975573] ERROR:  chat_thread_follows user must have active access to the parent conversation
+2026-09-11 03:18:30.060 CDT [2975573] CONTEXT:  PL/pgSQL function validate_chat_thread_follow() line 72 at RAISE
+2026-09-11 03:18:30.060 CDT [2975573] STATEMENT:  INSERT INTO "chat_membership_50bc2954d58b4286a396816f85a1d29d".chat_thread_follows (
+	       tenant_id, conversation_id, user_id, is_following,
+	       follow_source, created_at, updated_at
+	     ) SELECT $1, conversation.id, $3, false, 'manual', $4, $4
+	         FROM "chat_membership_50bc2954d58b4286a396816f85a1d29d".chat_conversations AS conversation
+	        WHERE conversation.tenant_id = $1
+	          AND conversation.id = $2
+	          AND conversation.type = 'thread'
+	     ON CONFLICT (tenant_id, conversation_id, user_id)
+	     DO UPDATE SET is_following = false, follow_source = 'manual',
+	                   updated_at = EXCLUDED.updated_at
+2026-09-11 03:18:30.166 CDT [2975678] ERROR:  injected membership audit failure
+2026-09-11 03:18:30.166 CDT [2975678] CONTEXT:  PL/pgSQL function reject_membership_audit() line 4 at RAISE
+2026-09-11 03:18:30.166 CDT [2975678] STATEMENT:  INSERT INTO "chat_membership_50bc2954d58b4286a396816f85a1d29d".chat_audit_events (
+	       tenant_id, event_id, actor_user_id, action, target_type, target_id,
+	       occurred_at, metadata, request_id
+	     ) VALUES ($1, $2, $3, $4, 'conversation', $5, $6, $7, $8)
+2026-09-11 03:18:31.331 CDT [2975926] ERROR:  chat_thread_follows user must have active access to the parent conversation
+2026-09-11 03:18:31.331 CDT [2975926] CONTEXT:  PL/pgSQL function validate_chat_thread_follow() line 72 at RAISE
+2026-09-11 03:18:31.331 CDT [2975926] STATEMENT:  INSERT INTO "chat_membership_http_fd45bc79fda34af7b941b69a7bb38c77".chat_thread_follows (
+	       tenant_id, conversation_id, user_id, is_following,
+	       follow_source, created_at, updated_at
+	     ) SELECT $1, conversation.id, $3, false, 'manual', $4, $4
+	         FROM "chat_membership_http_fd45bc79fda34af7b941b69a7bb38c77".chat_conversations AS conversation
+	        WHERE conversation.tenant_id = $1
+	          AND conversation.id = $2
+	          AND conversation.type = 'thread'
+	     ON CONFLICT (tenant_id, conversation_id, user_id)
+	     DO UPDATE SET is_following = false, follow_source = 'manual',
+	                   updated_at = EXCLUDED.updated_at
+2026-09-11 03:18:31.421 CDT [2974632] LOG:  received fast shutdown request
+2026-09-11 03:18:31.424 CDT [2974632] LOG:  aborting any active transactions
+2026-09-11 03:18:31.425 CDT [2974632] LOG:  background worker "logical replication launcher" (PID 2974644) exited with exit code 1
+2026-09-11 03:18:31.426 CDT [2974633] LOG:  shutting down
+2026-09-11 03:18:31.427 CDT [2974633] LOG:  checkpoint starting: shutdown immediate
+2026-09-11 03:18:31.468 CDT [2974633] LOG:  checkpoint complete: wrote 529 buffers (12.9%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.026 s, total=0.043 s; sync files=711, longest=0.002 s, average=0.001 s; distance=7304 kB, estimate=7304 kB; lsn=0/1C0B850, redo lsn=0/1C0B850
+2026-09-11 03:18:31.472 CDT [2974632] LOG:  database system is shut down

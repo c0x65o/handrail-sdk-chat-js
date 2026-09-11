@@ -41,6 +41,11 @@ the resolved actor may access a host entity. Handrail Chat owns chat records,
 but it does not become a second user directory or application authorization
 system.
 
+`permissions.authorizeThreadSend` is an optional host restriction for thread
+sends. It may narrow existing send authority; it never grants access to an
+inaccessible parent or bypasses membership, capability or lifecycle checks.
+Omit it to retain the SDK's normal authorized thread-send policy.
+
 ## Complete embedding example
 
 The following marked example is compiled by the documentation regression test
@@ -601,6 +606,7 @@ the caller explicitly supplies one with `--host`.
     "ChatPermissionAdapter": ["getCapabilities", "authorizeEntity"]
   },
   "optionalAdapterMembers": {
+    "ChatPermissionAdapter": ["authorizeThreadSend"],
     "ChatAuthAdapter": ["revalidateActiveSession"]
   },
   "optionalAdapters": {

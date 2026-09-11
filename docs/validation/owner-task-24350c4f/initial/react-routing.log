@@ -1,0 +1,169 @@
+TAP version 13
+# Subtest: default public actions send, open and close a focus-restoring thread, and start a huddle
+not ok 1 - default public actions send, open and close a focus-restoring thread, and start a huddle
+  ---
+  duration_ms: 185.174655
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/react-reply-routing-YYwOwy/chat-workspace-default.test.mjs:3050:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of null (reading 'dispatchEvent')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/react-reply-routing-YYwOwy/chat-workspace-default.test.mjs:1047:13
+    process.env.NODE_ENV.exports.act (/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/node_modules/react/cjs/react.development.js:814:22)
+    click (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/react-reply-routing-YYwOwy/chat-workspace-default.test.mjs:1046:9)
+    TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/react-reply-routing-YYwOwy/chat-workspace-default.test.mjs:3067:9)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: Reply starts a new thread and is hidden for deleted and unsent messages
+not ok 2 - Reply starts a new thread and is hidden for deleted and unsent messages
+  ---
+  duration_ms: 103.635925
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/react-reply-routing-YYwOwy/chat-workspace-default.test.mjs:3236:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of null (reading 'dispatchEvent')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/react-reply-routing-YYwOwy/chat-workspace-default.test.mjs:1047:13
+    process.env.NODE_ENV.exports.act (/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/node_modules/react/cjs/react.development.js:814:22)
+    click (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/react-reply-routing-YYwOwy/chat-workspace-default.test.mjs:1046:9)
+    TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/react-reply-routing-YYwOwy/chat-workspace-default.test.mjs:3257:9)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: reply style settings opens with keyboard, contains focus and restores the trigger
+ok 3 - reply style settings opens with keyboard, contains focus and restores the trigger
+  ---
+  duration_ms: 112.085855
+  type: 'test'
+  ...
+# Subtest: host settings content and custom settings slot retain ownership
+ok 4 - host settings content and custom settings slot retain ownership
+  ---
+  duration_ms: 82.117757
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-public without opening threads
+ok 5 - inline Reply routing sends Alice/Bob payload in conversation-public without opening threads
+  ---
+  duration_ms: 66.458216
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-direct without opening threads
+ok 6 - inline Reply routing sends Alice/Bob payload in conversation-direct without opening threads
+  ---
+  duration_ms: 61.626686
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-group-direct without opening threads
+ok 7 - inline Reply routing sends Alice/Bob payload in conversation-group-direct without opening threads
+  ---
+  duration_ms: 62.130442
+  type: 'test'
+  ...
+# Subtest: inline Reply routing in an already-open ThreadPanel keeps its thread ID and parent draft
+ok 8 - inline Reply routing in an already-open ThreadPanel keeps its thread ID and parent draft
+  ---
+  duration_ms: 117.590324
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables unsupported with an accessible explanation
+ok 9 - inline Reply routing disables unsupported with an accessible explanation
+  ---
+  duration_ms: 31.716665
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables unknown with an accessible explanation
+ok 10 - inline Reply routing disables unknown with an accessible explanation
+  ---
+  duration_ms: 35.249125
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables read-only with an accessible explanation
+ok 11 - inline Reply routing disables read-only with an accessible explanation
+  ---
+  duration_ms: 37.392025
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables send-disabled with an accessible explanation
+ok 12 - inline Reply routing disables send-disabled with an accessible explanation
+  ---
+  duration_ms: 36.759035
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables inactive member with an accessible explanation
+ok 13 - inline Reply routing disables inactive member with an accessible explanation
+  ---
+  duration_ms: 33.631238
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables custom composer without connection with an accessible explanation
+ok 14 - inline Reply routing disables custom composer without connection with an accessible explanation
+  ---
+  duration_ms: 30.33459
+  type: 'test'
+  ...
+# Subtest: inline Reply routing is independent of preference persistence support and excludes deleted/unsent sources
+ok 15 - inline Reply routing is independent of preference persistence support and excludes deleted/unsent sources
+  ---
+  duration_ms: 40.421208
+  type: 'test'
+  ...
+# Subtest: inline Reply routing preserves attachments, mentions and text when replacing a source
+ok 16 - inline Reply routing preserves attachments, mentions and text when replacing a source
+  ---
+  duration_ms: 44.385077
+  type: 'test'
+  ...
+# Subtest: inline Reply routing freezes a pending send across style and conversation switches and rejects stale slot callbacks
+ok 17 - inline Reply routing freezes a pending send across style and conversation switches and rejects stale slot callbacks
+  ---
+  duration_ms: 113.362443
+  type: 'test'
+  ...
+# Subtest: inline Reply routing respects ThreadPanel restrictions {"readOnly":true}
+ok 18 - inline Reply routing respects ThreadPanel restrictions {"readOnly":true}
+  ---
+  duration_ms: 62.304198
+  type: 'test'
+  ...
+# Subtest: inline Reply routing respects ThreadPanel restrictions {"composerAvailability":{"canSend":false}}
+ok 19 - inline Reply routing respects ThreadPanel restrictions {"composerAvailability":{"canSend":false}}
+  ---
+  duration_ms: 53.014974
+  type: 'test'
+  ...
+# Subtest: inline Reply routing retains a selected source when switching to Current before sending
+ok 20 - inline Reply routing retains a selected source when switching to Current before sending
+  ---
+  duration_ms: 51.385328
+  type: 'test'
+  ...
+# Subtest: inline Reply routing can replace the next draft source while a send retains its frozen payload
+ok 21 - inline Reply routing can replace the next draft source while a send retains its frozen payload
+  ---
+  duration_ms: 33.284204
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 19
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1835.685035
+file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/scripts/test-react-reply-routing.mjs:14
+  if (result.status !== 0) throw new Error(`Scoped check exited ${result.status ?? result.signal}`);
+                                 ^
+
+Error: Scoped check exited 1
+    at run (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/scripts/test-react-reply-routing.mjs:14:34)
+    at file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/scripts/test-react-reply-routing.mjs:34:5
+
+Node.js v22.23.1

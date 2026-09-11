@@ -1,0 +1,66 @@
+{
+  "environment": {
+    "FLUTTER_ROOT": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter",
+    "PUB_CACHE": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/pub-cache",
+    "CI": "true",
+    "FLUTTER_SUPPRESS_ANALYTICS": "true",
+    "DART_SUPPRESS_ANALYTICS": "true"
+  },
+  "checks": [
+    {
+      "name": "version",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter",
+        "--version",
+        "--machine"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package",
+      "exit_code": 0,
+      "elapsed_seconds": 0.1,
+      "children_max_rss_kib": 55772
+    },
+    {
+      "name": "package-resolution",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/flutter",
+        "pub",
+        "get",
+        "--no-example"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package",
+      "exit_code": 0,
+      "elapsed_seconds": 4.02,
+      "children_max_rss_kib": 187108
+    },
+    {
+      "name": "public-library-analysis",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/cache/dart-sdk/bin/dart",
+        "analyze",
+        "lib"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package",
+      "exit_code": 0,
+      "elapsed_seconds": 13.37,
+      "children_max_rss_kib": 658832
+    },
+    {
+      "name": "scoped-analysis",
+      "command": [
+        "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/cache/dart-sdk/bin/dart",
+        "analyze",
+        "lib/src/handrail_chat_workspace.dart",
+        "lib/src/handrail_message_composer.dart",
+        "lib/src/handrail_chat_theme.dart",
+        "lib/src/handrail_huddle_panel.dart",
+        "test/handrail_message_composer_test.dart",
+        "test/handrail_reply_routing_cases.dart",
+        "test/handrail_thread_discovery_cases.dart"
+      ],
+      "cwd": "/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-final/package",
+      "exit_code": 0,
+      "elapsed_seconds": 3.51,
+      "children_max_rss_kib": 658832
+    }
+  ]
+}

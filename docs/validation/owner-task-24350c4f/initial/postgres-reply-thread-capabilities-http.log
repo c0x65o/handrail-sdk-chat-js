@@ -1,0 +1,44 @@
+TAP version 13
+# node:internal/modules/cjs/loader:1430
+#   const err = new Error(message);
+#               ^
+# Error: Cannot find module '../../package.json'
+# Require stack:
+# - /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-reply-thread-capabilities-http.mjs
+#     at Function._resolveFilename (node:internal/modules/cjs/loader:1430:15)
+#     at defaultResolveImpl (node:internal/modules/cjs/loader:1040:19)
+#     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1045:22)
+#     at Function._load (node:internal/modules/cjs/loader:1216:25)
+#     at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
+#     at Module.require (node:internal/modules/cjs/loader:1527:12)
+#     at require (node:internal/modules/helpers:147:16)
+#     at file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-reply-thread-capabilities-http.mjs:18136:53
+#     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+#     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26) {
+#   code: 'MODULE_NOT_FOUND',
+#   requireStack: [
+#     '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-reply-thread-capabilities-http.mjs'
+#   ]
+# }
+# Node.js v22.23.1
+# Subtest: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-reply-thread-capabilities-http.mjs
+not ok 1 - /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-reply-thread-capabilities-http.mjs
+  ---
+  duration_ms: 146.270225
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/.qualification-postgres-reply-thread-capabilities-http.mjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 156.382914

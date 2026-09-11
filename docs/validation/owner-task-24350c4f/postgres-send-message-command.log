@@ -1,0 +1,96 @@
+TAP version 13
+# Subtest: atomic send-message command persists and reconciles one authorized message
+    # Subtest: Alice's channel message and Bob's inline reply persist without creating a thread
+    ok 1 - Alice's channel message and Bob's inline reply persist without creating a thread
+      ---
+      duration_ms: 45.389992
+      type: 'test'
+      ...
+    # Subtest: missing, deleted, cross-conversation and cross-tenant reply sources roll back every effect
+    ok 2 - missing, deleted, cross-conversation and cross-tenant reply sources roll back every effect
+      ---
+      duration_ms: 28.081104
+      type: 'test'
+      ...
+    # Subtest: inline thread replies retain their destination and parent summary; retries check current access
+    ok 3 - inline thread replies retain their destination and parent summary; retries check current access
+      ---
+      duration_ms: 38.559904
+      type: 'test'
+      ...
+    # Subtest: thread parent membership, entity denial and send capability cannot be bypassed by a reply
+    ok 4 - thread parent membership, entity denial and send capability cannot be bypassed by a reply
+      ---
+      duration_ms: 29.900834
+      type: 'test'
+      ...
+    # Subtest: reply source and inherited access locks prevent deletion and revocation during persistence
+    ok 5 - reply source and inherited access locks prevent deletion and revocation during persistence
+      ---
+      duration_ms: 423.420324
+      type: 'test'
+      ...
+    # Subtest: persists message, revision, attachment, sanitized audit, outbox, and outcome
+    ok 6 - persists message, revision, attachment, sanitized audit, outbox, and outcome
+      ---
+      duration_ms: 13.038515
+      type: 'test'
+      ...
+    # Subtest: a fractional-millisecond claim completes and replays one send
+    ok 7 - a fractional-millisecond claim completes and replays one send
+      ---
+      duration_ms: 9.511615
+      type: 'test'
+      ...
+    # Subtest: rolls every write back after an injected late outbox failure
+    ok 8 - rolls every write back after an injected late outbox failure
+      ---
+      duration_ms: 6.606028
+      type: 'test'
+      ...
+    # Subtest: allocates contiguous unique sequences for concurrent sends
+    ok 9 - allocates contiguous unique sequences for concurrent sends
+      ---
+      duration_ms: 51.373381
+      type: 'test'
+      ...
+    # Subtest: replays the canonical result and rejects a conflicting key
+    ok 10 - replays the canonical result and rejects a conflicting key
+      ---
+      duration_ms: 8.715705
+      type: 'test'
+      ...
+    # Subtest: requires capability, active membership, tenant scope, archive state, and entity access
+    ok 11 - requires capability, active membership, tenant scope, archive state, and entity access
+      ---
+      duration_ms: 12.336994
+      type: 'test'
+      ...
+    # Subtest: rejects cross-tenant, unowned, unfinished, expired, and attached references
+    ok 12 - rejects cross-tenant, unowned, unfinished, expired, and attached references
+      ---
+      duration_ms: 13.505028
+      type: 'test'
+      ...
+    # Subtest: validates mentioned users and rejects caller-supplied identity
+    ok 13 - validates mentioned users and rejects caller-supplied identity
+      ---
+      duration_ms: 2.38544
+      type: 'test'
+      ...
+    1..13
+ok 1 - atomic send-message command persists and reconciles one authorized message
+  ---
+  duration_ms: 986.215102
+  type: 'test'
+  ...
+# Real PostgreSQL url-backed; isolated schema with canonical migrations
+1..1
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1067.669415

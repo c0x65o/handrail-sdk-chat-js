@@ -1,0 +1,4 @@
+cwd: /opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/check-minimum-verified/package
+command: ["/opt/handrail/.handrail/codex-runs/00bb50b4-2369-4fb4-a65f-1a65ac6eafd0/tmp/flutter-compat/minimum/flutter/bin/cache/dart-sdk/bin/dart", "analyze", "test/handrail_reply_style_settings_test.dart", "test/handrail_huddle_panel_test.dart"]
+Analyzing handrail_reply_style_settings_test.dart, handrail_huddle_panel_test.dart...
+No issues found!

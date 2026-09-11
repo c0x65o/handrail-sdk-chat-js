@@ -1168,6 +1168,7 @@ function ConnectedMessageComposer(
     status,
   ]);
   const controls = useMemo<ChatComposerControls>(() => Object.freeze({
+    focus: () => focusEditorRef.current?.(),
     selectReply,
     setReplyNotifyAuthor,
     clearReply,

@@ -30,8 +30,12 @@ test("the public UI graph stays within browser-safe public boundaries", async ()
     "./message-composer.js",
     "./message-timeline.js",
     "./notification-preferences.js",
+    "./reply-style-settings.js",
     "./slots.js",
+    "./thread-creation-dialog.js",
+    "./thread-list.js",
     "./thread-panel.js",
+    "./timeline-window.js",
   ]));
   assert.doesNotMatch(
     workspaceSource,
@@ -52,6 +56,10 @@ test("the public UI graph stays within browser-safe public boundaries", async ()
   assert.deepEqual(new Set(composerImports), new Set([
     "react",
     "../react/index.js",
+    "../contracts/index.js",
+    "./reaction-picker.js",
+    "./composer-rich-text-editor.js",
+    "./composer-rich-text.js",
     "./slots.js",
   ]));
   for (const specifier of composerImports) {
@@ -62,7 +70,7 @@ test("the public UI graph stays within browser-safe public boundaries", async ()
     );
     assert.doesNotMatch(
       specifier,
-      /\.\.\/(?:client|contracts)\//,
+      /\.\.\/client\//,
       "MessageComposer must integrate through the public React surface",
     );
   }

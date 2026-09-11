@@ -1,0 +1,13 @@
+{
+  "command": [
+    "flutter",
+    "build",
+    "web",
+    "--release",
+    "--no-pub"
+  ],
+  "sdk": "3.19.0",
+  "exit_code": 0,
+  "log": "example-web-release.log",
+  "note": "The earlier --debug command was rejected; the successful release build supersedes that CLI attempt."
+}
