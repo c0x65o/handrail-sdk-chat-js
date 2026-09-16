@@ -5442,3 +5442,10 @@
 .handrail-chat__thread-list button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 
 .handrail-chat__thread > .handrail-chat__thread-list { block-size: 100%; min-block-size: 0; box-sizing: border-box; }
+
+.hr-chat-native-tokens { padding: 1rem; max-inline-size: 36rem; overflow-wrap: anywhere; }
+.hr-chat-native-tokens form, .hr-chat-native-tokens label { display: grid; gap: .5rem; }
+.hr-chat-native-tokens form { gap: 1rem; }
+.hr-chat-native-tokens input { min-inline-size: 0; inline-size: 100%; box-sizing: border-box; padding: .5rem; }
+.hr-chat-native-tokens li { margin-block: .75rem; }
+.hr-chat-native-tokens button { margin: .5rem; }

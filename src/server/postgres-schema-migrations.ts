@@ -4438,6 +4438,39 @@ export const chatThreadLifecycleMigration: PostgresMigration = Object.freeze({
   ]),
 });
 
+/** Additive v1 credentials; no raw secret is persisted. */
+export const chatNativeTokensMigration: PostgresMigration = Object.freeze({
+  id: "0044-chat-native-tokens",
+  order: 44,
+  statements: Object.freeze([
+    `CREATE TABLE chat_native_tokens (
+      tenant_id text NOT NULL, id text NOT NULL, name text NOT NULL,
+      sender_user_id text NOT NULL, verifier text NOT NULL UNIQUE,
+      created_by_user_id text NOT NULL,
+      created_at timestamptz NOT NULL DEFAULT clock_timestamp(),
+      revoked_at timestamptz,
+      PRIMARY KEY (tenant_id, id), UNIQUE (tenant_id, sender_user_id),
+      CHECK (length(name) BETWEEN 1 AND 80),
+      CHECK (verifier ~ '^[a-f0-9]{64}$')
+    )`,
+    `CREATE TABLE chat_native_token_channels (
+      tenant_id text NOT NULL, token_id text NOT NULL, conversation_id text NOT NULL,
+      PRIMARY KEY (tenant_id, token_id, conversation_id),
+      FOREIGN KEY (tenant_id, token_id) REFERENCES chat_native_tokens (tenant_id, id),
+      FOREIGN KEY (tenant_id, conversation_id) REFERENCES chat_conversations (tenant_id, id)
+    )`,
+    `CREATE TABLE chat_native_message_receipts (
+      tenant_id text NOT NULL, token_id text NOT NULL, client_key text NOT NULL,
+      request_hash text NOT NULL, response_body jsonb,
+      PRIMARY KEY (tenant_id, token_id, client_key),
+      FOREIGN KEY (tenant_id, token_id) REFERENCES chat_native_tokens (tenant_id, id)
+    )`,
+    `CREATE TABLE chat_native_auth_limits (
+      key text PRIMARY KEY, attempts timestamptz[] NOT NULL
+    )`,
+  ]),
+});
+
 /** Built-in migrations for the single-version `@handrail/chat` product. */
 export const handrailChatPostgresMigrations: readonly PostgresMigration[] =
   Object.freeze([
@@ -4484,4 +4517,5 @@ export const handrailChatPostgresMigrations: readonly PostgresMigration[] =
     chatUserReplyStylePreferencesMigration,
     chatDraftRepliesMigration,
     chatThreadLifecycleMigration,
+    chatNativeTokensMigration,
   ]);

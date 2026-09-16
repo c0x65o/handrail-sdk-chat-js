@@ -149,6 +149,12 @@ export function resolveChatRequestContext<
   auth: ChatAuthAdapter<Request>,
   permissions: ChatPermissionAdapter<Capability, EntityAction>,
 ): Promise<TrustedChatRequestContext<Capability>> {
+  // This namespace belongs exclusively to the native inbound endpoint, including
+  // for WebSocket upgrade requests. Never pass these credentials to host auth.
+  const authorization = (request as { headers?: { authorization?: unknown } }).headers?.authorization;
+  if (typeof authorization === "string" && /^Bearer hrnt_/i.test(authorization)) {
+    return Promise.reject(new ChatAuthenticationError());
+  }
   const carrier = request as ContextCarrier<Capability>;
   const existingContext = carrier[CHAT_REQUEST_CONTEXT];
   if (existingContext !== undefined) {

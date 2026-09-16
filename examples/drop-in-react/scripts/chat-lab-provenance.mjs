@@ -1,6 +1,7 @@
+import "./candidate-binding.mjs";
 import { createHash } from "node:crypto";
-import { createChatServer } from "@handrail/chat/server";
-import { createChatTestHarness } from "@handrail/chat/testing";
+const { createChatServer } = await import("@handrail/chat/server");
+const { createChatTestHarness } = await import("@handrail/chat/testing");
 
 // Resolve from the same installed SDK as the harness, so Node returns the
 // controller module used by createChatServer, including when it is cached.

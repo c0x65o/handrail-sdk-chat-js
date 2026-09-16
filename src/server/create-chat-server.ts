@@ -1,3 +1,4 @@
+import { NativeTokenError, limitNativeTokenAuthentication, manageNativeTokens, postNativeMessage, nativeIntegrationUser, readNativeTokenBody, writeNativeTokenResult } from "./native-tokens.js";
 import { CHAT_REPLY_THREAD_FEATURES as REPLY_THREAD_FEATURES, type ChatReplyThreadFeature } from "../contracts/generated/realtime-handshake.js";
 import { replyThreadStorageReady } from "./reply-thread-readiness.js";
 import { randomUUID } from "node:crypto";
@@ -5416,6 +5417,10 @@ const THREAD_LIST_PATH_PATTERN = /^\/conversations\/([^/]+)\/threads$/u;
 /** The single authoritative set of recognized chat HTTP method/path shapes. */
 const CHAT_HTTP_ROUTE_MATCHERS: readonly ChatHttpRouteMatcher[] = Object.freeze([
   staticChatRoute("GET", "/_meta"),
+  staticChatRoute("GET", "/native-tokens"),
+  staticChatRoute("POST", "/native-tokens"),
+  parameterizedChatRoute("DELETE", "/native-tokens/:tokenId", /^\/native-tokens\/([^/]+)$/u),
+  staticChatRoute("POST", "/native-inbound/messages"),
   staticChatRoute("GET", REPLY_STYLE_PREFERENCE_ROUTE),
   staticChatRoute("PATCH", REPLY_STYLE_PREFERENCE_ROUTE),
   staticChatRoute("POST", HOST_DIRECTORY_BATCH_ROUTE),
@@ -7290,7 +7295,8 @@ export function createChatServer<
 
     const users = await Promise.all(
       input.userIds.map(async (userId): Promise<HostDirectoryUserSummary> => {
-        const result = await adapters.directory.getUser({ actor, userId });
+        const result = await nativeIntegrationUser({ database, schema: databaseConfig.schema }, actor.tenantId, userId)
+          ?? await adapters.directory.getUser({ actor, userId });
         if (result === null) {
           return { kind: "unavailable", userId, reason: "missing" };
         }
@@ -8624,12 +8630,33 @@ export function createChatServer<
         return;
       }
 
+      const nativeOptions = { database, schema: databaseConfig.schema,
+        permissions: adapters.permissions as ChatPermissionAdapter,
+        directory: adapters.directory };
+      const isNativeRoute = route.routeTemplate.startsWith("/native-");
+      if (isNativeRoute) {
+        response.setHeader("cache-control", "no-store");
+        await limitNativeTokenAuthentication(nativeOptions, request);
+        if (new URL(request.url ?? "/", "http://chat.invalid").search) throw new NativeTokenError(400, "invalid_native_token_request");
+      }
+      if (route.routeTemplate === "/native-inbound/messages") {
+        writeNativeTokenResult(response, await postNativeMessage(nativeOptions, request.headers.authorization, await readNativeTokenBody(request)));
+        return;
+      }
+      // Restricted credentials cannot become ordinary host sessions, even with a permissive adapter.
+      if (request.headers.authorization?.startsWith("Bearer hrnt_")) throw new ChatAuthenticationError();
       const context = await resolveChatRequestContext(
         request as IncomingMessage & Request,
         adapters.auth as ChatAuthAdapter<IncomingMessage & Request>,
         adapters.permissions,
       );
       lifecycle.trustActor(context.actor);
+      if (isNativeRoute) {
+        writeNativeTokenResult(response, await manageNativeTokens(nativeOptions, context.actor, route.method,
+          route.method === "POST" ? await readNativeTokenBody(request) : undefined,
+          route.method === "DELETE" ? decodeURIComponent(new URL(request.url!, "http://chat.invalid").pathname.split("/")[2]!) : undefined));
+        return;
+      }
       if (isReplyStylePreference) {
         await handleReplyStylePreference(
           request, response, context.actor, lifecycle.requestId,
@@ -8892,7 +8919,8 @@ export function createChatServer<
       }
       response.end();
     })().then(() => lifecycle.settle()).catch((error: unknown) => {
-      const safeError =
+      if (error instanceof NativeTokenError && error.statusCode === 429) response.setHeader("retry-after", "60");
+      const safeError = error instanceof NativeTokenError ? error :
         isAttachmentDownload
           ? error instanceof ChatAuthenticationError
             ? error

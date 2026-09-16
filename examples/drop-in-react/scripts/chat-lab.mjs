@@ -1,3 +1,5 @@
+import { candidateViteConfig } from "./candidate-vite.mjs";
+import { candidate } from "./candidate-binding.mjs";
 import { createHash, randomBytes } from "node:crypto";
 import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
@@ -5,7 +7,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { createServer as createViteServer } from "vite";
-import { MAX_ATTACHMENT_SIZE_BYTES } from "@handrail/chat";
+const { MAX_ATTACHMENT_SIZE_BYTES } = await import("@handrail/chat");
 
 import { startChatLabBackend } from "./chat-lab-backend.mjs";
 import { buildFlutterChatLab } from "./build-flutter-chat-lab.mjs";
@@ -501,7 +503,7 @@ const chatLabHostPlugin = (
         response.statusCode = 200;
         response.setHeader("content-type", "application/json; charset=utf-8");
         response.setHeader("cache-control", "no-store");
-        response.end(JSON.stringify({ instanceId, seedProfile: backend.seedProfile, backend: chatLabBackendProvenance,
+        response.end(JSON.stringify({ instanceId, candidate, schema: backend.harness.schema, seedProfile: backend.seedProfile, backend: chatLabBackendProvenance,
           ...(backend.prerequisites ? { prerequisites: backend.prerequisites.snapshot() } : {}) }));
         return;
       }
@@ -658,6 +660,7 @@ export async function startChatLab(options = {}) {
     const flutterReady = options.flutterReady ?? Promise.resolve();
     vite = await createViteServer({
       configFile: false,
+      define: candidateViteConfig().define,
       root: exampleRoot,
       appType: "spa",
       optimizeDeps: {
@@ -674,6 +677,7 @@ export async function startChatLab(options = {}) {
         ),
       ],
       resolve: {
+        alias: candidateViteConfig().alias,
         dedupe: ["react", "react-dom"],
       },
       server: {

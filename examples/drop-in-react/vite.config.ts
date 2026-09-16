@@ -1,3 +1,6 @@
+// @ts-expect-error Local Node-only candidate configuration.
+import { candidateViteConfig } from "./scripts/candidate-vite.mjs";
+const candidate = candidateViteConfig();
 import { defineConfig, type Plugin } from "vite";
 import { fileURLToPath } from "node:url";
 
@@ -21,7 +24,9 @@ function browserModuleGraph(): Plugin {
 
 export default defineConfig({
   plugins: [browserModuleGraph()],
+  define: candidate.define,
   resolve: {
+    alias: candidate.alias,
     dedupe: ["react", "react-dom"],
   },
   build: {

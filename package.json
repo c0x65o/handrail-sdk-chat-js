@@ -1,6 +1,6 @@
 {
   "name": "@handrail/chat",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "description": "Embeddable chat SDK for Handrail applications",
   "type": "module",
   "main": "./dist/index.js",
@@ -53,7 +53,7 @@
   ],
   "scripts": {
     "prepare": "npm run build",
-    "build": "node scripts/generate-package-version.mjs && tsc --project tsconfig.json && node scripts/copy-ui-styles.mjs",
+    "build": "node scripts/generate-package-version.mjs && tsc --project tsconfig.json && node scripts/copy-ui-styles.mjs && node scripts/candidate-provenance.mjs",
     "generate:attachments": "node scripts/generate-attachments.mjs",
     "generate:conversation-archive": "node scripts/generate-conversation-archive.mjs",
     "generate:conversation-creation": "node scripts/generate-conversation-creation.mjs",

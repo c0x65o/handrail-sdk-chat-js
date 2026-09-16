@@ -7,12 +7,12 @@
     "dev": "vite",
     "dev:states": "vite --host 127.0.0.1",
     "build:flutter:lab": "node scripts/build-flutter-chat-lab.mjs",
-    "dev:lab": "node scripts/chat-lab.mjs",
+    "dev:lab": "node --import ./scripts/candidate-binding.mjs scripts/chat-lab.mjs",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "build": "vite build",
     "check:graph": "node scripts/assert-browser-graph.mjs",
     "test:smoke": "NODE_ENV=test vitest run test/DropInChatExample.test.tsx test/ChatLabShell.test.tsx test/ConversationStateChatLab.test.tsx",
-    "test:lab": "node --test --test-concurrency=1 test/ChatLabServer.test.mjs test/ChatLabThreadFollow.test.mjs test/ChatLabReplyStylesPrerequisites.test.mjs && NODE_ENV=test vitest run test/ChatLabCreation.test.tsx test/ChatLabHuddles.test.tsx test/ChatLabMedia.test.ts test/ChatLabMembers.test.tsx test/ChatLabNotifications.test.tsx test/ChatLabSearch.test.tsx test/ChatLabReactionsThreads.test.tsx test/ChatLabUnread.test.tsx test/ChatLabDrafts.test.tsx",
+    "test:lab": "node --import ./scripts/candidate-binding.mjs --test --test-concurrency=1 test/ChatLabServer.test.mjs test/ChatLabThreadFollow.test.mjs test/ChatLabReplyStylesPrerequisites.test.mjs && NODE_ENV=test vitest run test/ChatLabCreation.test.tsx test/ChatLabHuddles.test.tsx test/ChatLabMedia.test.ts test/ChatLabMembers.test.tsx test/ChatLabNotifications.test.tsx test/ChatLabSearch.test.tsx test/ChatLabReactionsThreads.test.tsx test/ChatLabUnread.test.tsx test/ChatLabDrafts.test.tsx",
     "accept:conversation-discovery": "node scripts/accept-conversation-discovery.mjs",
     "test:discovery-harness": "node --test --test-concurrency=1 test/ConversationDiscoveryAcceptance.test.mjs test/FlutterCrossClientAcceptance.test.mjs",
     "accept:flutter-cross-client-recovery": "node scripts/accept-flutter-cross-client-recovery.mjs",
@@ -20,7 +20,8 @@
     "test:browser": "playwright test --project=chromium",
     "test:browser:states": "playwright test e2e/conversation-state-chat-lab.spec.mjs --project=chromium",
     "check:static": "node scripts/static-check.mjs",
-    "check": "npm run typecheck && npm run build && npm run check:graph && npm run test:smoke && npm run check:static"
+    "check": "npm run typecheck && npm run build && npm run check:graph && npm run test:smoke && npm run check:static",
+    "test:native-tokens": "NODE_ENV=test vitest run --maxWorkers=1 --minWorkers=1 test/NativeTokenManager.test.tsx"
   },
   "engines": {
     "node": ">=22.0.0"

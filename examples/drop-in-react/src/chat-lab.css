@@ -1026,3 +1026,6 @@ select {
   background: var(--hr-chat-color-canvas);
   border: 1px solid var(--hr-chat-color-border);
 }
+
+.chat-lab__native-token-dialog { max-inline-size: min(40rem, calc(100vw - 2rem)); max-block-size: calc(100dvh - 2rem); overflow: auto; border: 1px solid currentColor; border-radius: .75rem; background: Canvas; color: CanvasText; }
+.chat-lab__native-token-dialog::backdrop { background: rgb(0 0 0 / .45); }

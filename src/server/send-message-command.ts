@@ -31,7 +31,7 @@ import {
   type PostgresMigrationConnection,
   type PostgresMigrationDatabase,
 } from "./postgres-migrations.js";
-import { ChatAuthorizationError } from "./request-context.js";
+import { ChatAuthenticationError, ChatAuthorizationError } from "./request-context.js";
 import { authorizeThreadAccess } from "./thread-access.js";
 import { ensureThreadParticipant } from "./thread-participant.js";
 import { selectRootThreadSummary } from "./thread-summary-query.js";
@@ -67,6 +67,8 @@ export class SendMessageCommandError extends Error {
 export interface SendMessageCommandOptions<
   Block extends MessageBlock = MessageBlock,
 > {
+  /** Server-only credential proof. Never populated from ordinary message input. */
+  readonly nativeTokenVerifier?: string;
   readonly database: PostgresMigrationDatabase;
   readonly directory: Pick<ChatDirectoryAdapter, "getUser">;
   readonly permissions: Pick<
@@ -415,8 +417,57 @@ export async function sendMessage<Block extends MessageBlock = MessageBlock>(
 
   const connection = await options.database.connect();
   let reconciling = false;
+  let nativeTokenId: string | undefined;
   try {
     await connection.query("BEGIN");
+    if (options.nativeTokenVerifier !== undefined) {
+      // Lock through persistence/replay. Revocation serializes on this same row.
+      const token = await connection.query<{ id: string }>(
+        `SELECT id FROM ${prefix}.chat_native_tokens WHERE tenant_id=$1
+         AND sender_user_id=$2 AND verifier=$3 AND revoked_at IS NULL FOR SHARE`,
+        [options.actor.tenantId, options.actor.userId, options.nativeTokenVerifier],
+      );
+      if (!token.rows[0]) throw new ChatAuthenticationError();
+      const scope = await connection.query(
+        `SELECT 1 FROM ${prefix}.chat_native_token_channels s
+         JOIN ${prefix}.chat_conversations c ON c.tenant_id=s.tenant_id AND c.id=s.conversation_id
+         WHERE s.tenant_id=$1 AND s.token_id=$2 AND s.conversation_id=$3
+         AND c.type='channel' AND c.archived_at IS NULL`,
+        [options.actor.tenantId, token.rows[0].id, input.conversationId],
+      );
+      if (scope.rowCount !== 1) throw new ChatAuthorizationError();
+      nativeTokenId = token.rows[0].id;
+      // Native sender retry receipts outlive the ordinary session retry TTL.
+      // The unique claim serializes concurrent retries inside this transaction.
+      const receipt = await connection.query<{ response_body: unknown | null }>(
+        `INSERT INTO ${prefix}.chat_native_message_receipts (tenant_id,token_id,client_key,request_hash)
+         VALUES ($1,$2,$3,$4) ON CONFLICT (tenant_id,token_id,client_key)
+         DO UPDATE SET request_hash=chat_native_message_receipts.request_hash
+         WHERE chat_native_message_receipts.request_hash=EXCLUDED.request_hash
+         RETURNING response_body`,
+        [options.actor.tenantId, nativeTokenId, input.idempotencyKey, requestHash],
+      );
+      if (!receipt.rows[0]) throw new SendMessageCommandError("idempotency_conflict", "The idempotency key was already used for a different request");
+      if (receipt.rows[0].response_body !== null) {
+        reconciling = true;
+        await lockDestinationAccess(connection, prefix, schema, options, input.conversationId, false);
+        const channel = await connection.query<{ entity_type: string | null; entity_id: string | null }>(
+          `SELECT entity_type,entity_id FROM ${prefix}.chat_conversations WHERE tenant_id=$1 AND id=$2`,
+          [options.actor.tenantId, input.conversationId]);
+        const entity = channel.rows[0];
+        if (entity?.entity_type && entity.entity_id) {
+          let allowed = false;
+          try { allowed = await options.permissions.authorizeEntity({ actor: options.actor,
+            entity: { type: entity.entity_type, id: entity.entity_id }, action: SEND_MESSAGE_ENTITY_POLICY_ACTION }); }
+          catch { throw new ChatAuthorizationError(); }
+          if (!allowed) throw new ChatAuthorizationError();
+        }
+        const replay = replayStoredResult<Block>(receipt.rows[0].response_body);
+        await connection.query("COMMIT");
+        return replay;
+      }
+    }
+
 
     const claim = await connection.query<ClaimedIdempotencyRow>(
       `SELECT *
@@ -746,6 +797,12 @@ export async function sendMessage<Block extends MessageBlock = MessageBlock>(
           outboxRetentionMs,
         ],
       );
+    }
+
+    if (nativeTokenId !== undefined) {
+      await connection.query(`UPDATE ${prefix}.chat_native_message_receipts SET response_body=$4
+        WHERE tenant_id=$1 AND token_id=$2 AND client_key=$3`,
+        [options.actor.tenantId, nativeTokenId, input.idempotencyKey, applied]);
     }
 
     const completed = await connection.query(

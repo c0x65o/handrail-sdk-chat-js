@@ -1,4 +1,5 @@
-import { createChatTestHarness } from "@handrail/chat/testing";
+import "./candidate-binding.mjs";
+const { createChatTestHarness } = await import("@handrail/chat/testing");
 import { createChatLabDatabaseHarness, selectChatLabDatabase } from "./chat-lab-database.mjs";
 
 export const CHAT_LAB_PRIVATE_SEARCH_TEXT =
@@ -92,6 +93,7 @@ export const CHAT_LAB_ACTORS = Object.freeze([
       "conversation.read",
       "conversation.archive",
       "chat.members.manage",
+      "native_tokens.manage",
       "message.send",
       "attachment.prepare",
       "message.edit",

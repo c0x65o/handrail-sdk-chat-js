@@ -183,3 +183,5 @@ export type {
   NormalizedChatWebSocketOptions,
 } from "./websocket-upgrade.js";
 export * from "../contracts/thread-list.js";
+
+export { NATIVE_TOKEN_MANAGE_CAPABILITY } from "./native-tokens.js";

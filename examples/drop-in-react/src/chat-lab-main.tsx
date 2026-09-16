@@ -15,6 +15,9 @@ import { isChatLabActorId } from "./chat-lab-config";
 
 const root = document.querySelector<HTMLDivElement>("#root");
 if (root === null) throw new Error("The chat lab root is missing.");
+declare const __HANDRAIL_CHAT_CANDIDATE__: { source: string; package: string };
+root.dataset.candidateSource = __HANDRAIL_CHAT_CANDIDATE__.source;
+root.dataset.candidatePackage = __HANDRAIL_CHAT_CANDIDATE__.package;
 
 const huddleFixtureEnabled = isChatLabHuddleFixtureEnabled(globalThis.location.href);
 const directMessageVisualFixtureEnabled =

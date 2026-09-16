@@ -15,6 +15,7 @@ import type { ConversationReadState, HostDirectoryUserStatus } from "@handrail/c
 import { ChatProvider, useChat } from "@handrail/chat/react";
 import {
   ChatWorkspace,
+  NativeTokenManager,
   ReplyStyleSettings,
   UserStatusSelector,
   type ChatWorkspaceProps,
@@ -30,6 +31,15 @@ import {
   type ChatLabActorId,
 } from "./chat-lab-config";
 import { ChatLabThemeSettings, useChatLabTheme } from "./chat-lab-theme";
+
+function NativeTokenDialog({ getHeaders, onClose }: { getHeaders: () => Promise<Record<string, string>>; onClose: () => void }) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => { dialog.current?.showModal(); }, []);
+  return <dialog ref={dialog} className="chat-lab__native-token-dialog" aria-label="Manage inbound channel tokens" onCancel={onClose}>
+    <button type="button" onClick={onClose}>Close token settings</button>
+    <NativeTokenManager endpoint="/api/chat" getHeaders={getHeaders} />
+  </dialog>;
+}
 
 export { chatLabThemeStorageKey } from "./chat-lab-theme";
 
@@ -170,6 +180,9 @@ export function ChatLabApp({
   const mountedRef = useRef(false);
   const lifecycleGenerationRef = useRef(0);
   const actorId = activeActorSession.actorId;
+  const [tokenPanelOpen, setTokenPanelOpen] = useState(false);
+  const tokenHeaders = useCallback(async () => ({ authorization: `Bearer chat-lab-${actorId}` }), [actorId]);
+  useEffect(() => setTokenPanelOpen(false), [actorId]);
   const { effectiveTheme, selectTheme, themePreference } = useChatLabTheme();
   const [realtimeStates, setRealtimeStates] = useState<
     Partial<Record<ChatLabActorId, ChatRealtimeSessionState>>
@@ -333,6 +346,8 @@ export function ChatLabApp({
         )}
         workspaceSettingsContent={(
           <>
+            <button type="button" onClick={() => setTokenPanelOpen(open => !open)}>Inbound channel tokens</button>
+            {tokenPanelOpen && <NativeTokenDialog key={actorId} getHeaders={tokenHeaders} onClose={() => setTokenPanelOpen(false)} />}
             <ChatLabThemeSettings onThemeChange={selectTheme} themePreference={themePreference} />
             {replyStylesScenario && <details className="chat-lab__reply-settings">
               <summary>Reply settings</summary>

@@ -47,6 +47,9 @@ export type ChatRequestAdmissionMethod =
 
 /** Stable, low-cardinality templates for recognized HTTP routes and upgrades. */
 export type ChatRequestAdmissionRouteTemplate =
+  | "/native-tokens"
+  | "/native-tokens/:tokenId"
+  | "/native-inbound/messages"
   | "/_meta"
   | "/_realtime"
   | "/preferences/reply-style"
