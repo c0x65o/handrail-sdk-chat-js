@@ -241,6 +241,52 @@ test("rejoin, leave, identity change, and close stop every track and unsubscribe
   assert.equal(session.state.connectionStatus, "closed");
 });
 
+test("terminal provider disconnect releases tracks and subscriptions before rejoin", async () => {
+  const first = new FakeConnection();
+  const replacement = new FakeConnection();
+  const session = new ChatHuddleMediaSession(new FakeAdapter(first, replacement));
+  await session.connect(descriptor("-first"));
+  await session.setMicrophoneMuted(false);
+  await session.startScreenShare();
+  first.state = { ...first.state, connectionStatus: "disconnected" };
+  first.emit();
+  await Promise.resolve();
+  await Promise.resolve();
+  assert.equal(first.disconnectCount, 1);
+  assert.equal(first.unsubscribeCount, 1);
+  assert.ok(first.tracks.every(track => track.stopCount === 1));
+  assert.equal(session.state.connectionStatus, "idle");
+  assert.equal(session.state.microphoneMuted, true);
+  assert.equal(session.state.screenShareActive, false);
+  assert.deepEqual(session.state.activeSpeakers, []);
+  await assert.rejects(session.setMicrophoneMuted(false), error =>
+    error.failure.code === "not_connected");
+
+  await session.rejoin(descriptor("-replacement"));
+  first.emit();
+  assert.equal(session.state.connectionStatus, "connected");
+  await session.setMicrophoneMuted(false);
+  assert.equal(replacement.state.microphoneMuted, false);
+  await session.close();
+  assert.equal(first.disconnectCount, 1);
+  assert.equal(replacement.disconnectCount, 1);
+});
+
+test("provider reconnecting retains tracks until a terminal disconnect", async () => {
+  const connection = new FakeConnection();
+  const session = new ChatHuddleMediaSession(new FakeAdapter(connection));
+  await session.connect(descriptor());
+  connection.state = { ...connection.state, connectionStatus: "reconnecting" };
+  connection.emit();
+  assert.equal(session.state.connectionStatus, "reconnecting");
+  assert.equal(connection.disconnectCount, 0);
+  assert.ok(connection.tracks.every(track => track.stopCount === 0));
+  connection.state = { ...connection.state, connectionStatus: "connected" };
+  connection.emit();
+  assert.equal(session.state.connectionStatus, "connected");
+  await session.close();
+});
+
 test("maps arbitrary provider failures without raw error or descriptor leakage", async () => {
   const connection = new FakeConnection();
   const rawSentinel = `RAW_PROVIDER_FAILURE_${descriptorSentinel}`;

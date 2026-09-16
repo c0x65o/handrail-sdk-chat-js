@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { updateConversationPreference } from "../src/server/update-conversation-preference-command.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { updateConversationPreference } from "../dist/server/update-conversation-preference-command.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const actor = { tenantId: "tenant-a", userId: "reader", roles: [] };
 const denied = (error) => error instanceof ChatAuthorizationError && error.statusCode === 403;

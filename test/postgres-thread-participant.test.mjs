@@ -4,12 +4,12 @@ import test from "node:test";
 // Fresh canonical sources, no shared dist or broad build (run suites sequentially):
 // node_modules/.bin/esbuild test/postgres-thread-participant.test.mjs test/postgres-create-thread-command.test.mjs test/postgres-thread-access.test.mjs --bundle --platform=node --format=esm --packages=external --out-extension:.js=.mjs --outdir=node_modules/.cache
 // node --test --test-concurrency=1 "$PWD/node_modules/.cache/postgres-thread-participant.test.mjs" "$PWD/node_modules/.cache/postgres-create-thread-command.test.mjs" "$PWD/node_modules/.cache/postgres-thread-access.test.mjs"
-import { ensureThreadParticipant } from "../src/server/thread-participant.ts";
-import { authorizeThreadAccess } from "../src/server/thread-access.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { ensureThreadParticipant } from "../dist/server/thread-participant.js";
+import { authorizeThreadAccess } from "../dist/server/thread-access.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const actor = Object.freeze({ tenantId: "tenant-a", userId: "participant", roles: [] });
 

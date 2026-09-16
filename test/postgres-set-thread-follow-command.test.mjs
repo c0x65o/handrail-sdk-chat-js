@@ -5,7 +5,7 @@ import test from "node:test";
 // Bundle fresh canonical sources before running; never use shared dist output:
 // node_modules/.bin/esbuild test/postgres-set-thread-follow-command.test.mjs --bundle --platform=node --format=esm --packages=external --outfile=node_modules/.cache/thread-follow/postgres-set-thread-follow-command.test.mjs
 // node --test --test-concurrency=1 "$PWD/node_modules/.cache/thread-follow/postgres-set-thread-follow-command.test.mjs"
-import { CHAT_PROTOCOL_VERSION } from "../src/contracts/realtime.ts";
+import { CHAT_PROTOCOL_VERSION } from "../dist/contracts/realtime.js";
 import {
   SET_THREAD_FOLLOW_AUDIT_ACTION,
   SET_THREAD_FOLLOW_ENTITY_POLICY_ACTION,
@@ -13,12 +13,12 @@ import {
   SET_THREAD_FOLLOW_OUTBOX_EVENT_TYPE,
   SetThreadFollowCommandError,
   setThreadFollow,
-} from "../src/server/set-thread-follow-command.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { ThreadFollowMutationParseError } from "../src/contracts/thread-follow-mutation.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+} from "../dist/server/set-thread-follow-command.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { ThreadFollowMutationParseError } from "../dist/contracts/thread-follow-mutation.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const quoteIdentifier = (identifier) =>
   `"${identifier.replaceAll('"', '""')}"`;

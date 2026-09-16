@@ -51,6 +51,7 @@ test("cross-runtime conformance workflow preserves the CI gate contract", async 
     (match) => match[1],
   );
   assert.deepEqual(commands, [
+    "node scripts/generate-package-version.mjs --check",
     "npm ci --include=dev",
     "node scripts/read-flutter-revision.mjs",
     "flutter pub get --no-example",

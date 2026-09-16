@@ -55,7 +55,7 @@ test("browser state regression workflow preserves the focused CI gate contract",
   const commands = [...workflow.matchAll(/^        run: (.+)$/gmu)].map(
     (match) => match[1],
   );
-  assert.deepEqual(commands.slice(0, 2), ["npm ci", "npm run build"]);
+  assert.deepEqual(commands.slice(0, 3), ["node scripts/generate-package-version.mjs --check", "npm ci", "npm run build"]);
   assert.equal(
     commands.filter((command) => command === "npm run build").length,
     1,
@@ -67,7 +67,7 @@ test("browser state regression workflow preserves the focused CI gate contract",
   );
   assert.equal(testCommands.length, 1, "tests must run in one node --test command");
   assert.deepEqual(testCommands[0].split(/\s+/u).slice(2), criticalTests);
-  assert.deepEqual(commands, ["npm ci", "npm run build", testCommands[0]]);
+  assert.deepEqual(commands, ["node scripts/generate-package-version.mjs --check", "npm ci", "npm run build", testCommands[0]]);
 
   assert.doesNotMatch(workflow, /^\s*(?:services|env):$/mu);
   assert.doesNotMatch(workflow, /\$\{\{\s*secrets\./iu);

@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { queryMessageContext } from "../src/server/message-context-query.ts";
-import { queryMessageTimeline } from "../src/server/message-timeline-query.ts";
-import { MessageContextParseError, parseMessageContextResult } from "../src/contracts/message-context.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { createChatTestHarness, createPostgresTestBackend } from "../src/testing/index.ts";
+import { queryMessageContext } from "../dist/server/message-context-query.js";
+import { queryMessageTimeline } from "../dist/server/message-timeline-query.js";
+import { MessageContextParseError, parseMessageContextResult } from "../dist/contracts/message-context.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { createChatTestHarness, createPostgresTestBackend } from "../dist/testing/index.js";
 
 // Bundle current source directly; no shared dist build or fake database fallback:
 // GOMAXPROCS=2 node_modules/.bin/esbuild test/postgres-message-context-query.test.mjs --bundle --platform=node --format=esm --packages=external --outfile=node_modules/.cache/postgres-message-context-query.test.mjs

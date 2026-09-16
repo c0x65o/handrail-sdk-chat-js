@@ -1,0 +1,806 @@
+{
+  "node-tests": {
+    "counts": {
+      "tests": "2859",
+      "pass": "2745",
+      "fail": "106",
+      "cancelled": "7",
+      "skipped": "1"
+    },
+    "result": "failed diagnostic before final focused repairs; not a final-candidate pass",
+    "failures": [
+      {
+        "test": "not ok 6 - active-huddle route rejects malformed, query, body, and spoofed input before querying",
+        "location": "test/active-huddle-snapshot-http.test.mjs:363:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    404 !== 400"
+      },
+      {
+        "test": "not ok 16 - attachment download HTTP rejects malformed and spoofed query input before querying",
+        "location": "test/attachment-download-http.test.mjs:230:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    404 !== 400"
+      },
+      {
+        "test": "not ok 48 - browser state regression workflow preserves the focused CI gate contract",
+        "location": "test/browser-state-regressions-workflow.test.mjs:23:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n    +   'node scripts/generate-package-version.mjs --check',\n        'npm ci',\n    -   'npm run build'\n      ]"
+      },
+      {
+        "test": "not ok 49 - every action delegates exact arguments once and preserves its client result",
+        "location": "test/chat-actions.test.mjs:136:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        'sendMessage',\n        'retryMessage',\n        'forwardMessage',\n        'editMessage',\n    ...\n        'openThread',\n    +   'createThread',\n        'openConversationDraft',\n        'replaceConversationDraft',\n        'clearConversationDraft',\n        'flushConversationDraft',\n        'retryConversationDraft',"
+      },
+      {
+        "test": "not ok 163 - named thread dialog uses the constrained workspace shell at a narrow viewport",
+        "location": "test/chat-workspace-default.test.mjs:4523:1",
+        "error": "'Expected \"actual\" to be strictly unequal to: null'"
+      },
+      {
+        "test": "not ok 177 - initial and pagination failures retain actionable retry paths",
+        "location": "test/chat-workspace-message-search.test.mjs:609:1",
+        "error": "|-\n    The input did not match the regular expression /could not be completed/. Input:\n    \n    'Chat is closed.'"
+      },
+      {
+        "test": "not ok 188 - conversation rows distinguish types and expose only nonzero canonical unread counts",
+        "location": "test/chat-workspace.test.mjs:841:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n    +   'direct',\n        'public-channel',\n        'private-channel',\n    -   'direct',\n        'group-direct'\n      ]"
+      },
+      {
+        "test": "not ok 195 - fifty direct-message rows use list participant snapshots without detail or per-row hydration",
+        "location": "test/chat-workspace.test.mjs:1489:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    17 !== 50"
+      },
+      {
+        "test": "not ok 197 - mixed conversation kinds render Starred first with projection-scoped row identity",
+        "location": "test/chat-workspace.test.mjs:1558:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n        '1',\n        '1',\n    +   '1',\n        '2',\n    -   '2',\n        '1',\n        '1'\n      ]"
+      },
+      {
+        "test": "not ok 201 - conversation sections collapse independently without changing the selected detail",
+        "location": "test/chat-workspace.test.mjs:1944:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n    +   'conversation-collapse-direct',\n        'conversation-collapse-private',\n    -   'conversation-collapse-direct',\n        'conversation-collapse-group',\n        'conversation-collapse-thread'\n      ]"
+      },
+      {
+        "test": "not ok 207 - filtered keyboard navigation uses contiguous visual order across sections",
+        "location": "test/chat-workspace.test.mjs:2512:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n    +   'conversation-filter-keyboard-direct',\n        'conversation-filter-keyboard-public',\n        'conversation-filter-keyboard-private',\n    -   'conversation-filter-keyboard-direct',\n        'conversation-filter-keyboard-group',\n        'conversation-filter-keyboard-thread'\n      ]"
+      },
+      {
+        "test": "not ok 210 - visual-order keyboard navigation crosses section boundaries and keeps one current row",
+        "location": "test/chat-workspace.test.mjs:2687:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n    +   'conversation-keyboard-direct',\n        'conversation-keyboard-public-first',\n        'conversation-keyboard-public-second',\n        'conversation-keyboard-private',\n    -   'conversation-keyboard-direct',\n        'conversation-keyboard-group',\n        'conversation-keyboard-thread'\n      ]"
+      },
+      {
+        "test": "not ok 221 - a definitively unavailable created conversation falls back to the first current row",
+        "location": "test/chat-workspace.test.mjs:3307:1",
+        "error": "|-\n    The input did not match the regular expression /Older organization chat/. Input:\n    \n    'Unavailable creation'"
+      },
+      {
+        "test": "not ok 240 - notification preferences author every level and mute shape with authoritative SDK revisions",
+        "location": "test/chat-workspace.test.mjs:4780:1",
+        "error": "'input must contain exactly: conversationId, expectedPreferenceRevision, idempotencyKey, isStarred, mute, notificationPreference, operation'"
+      },
+      {
+        "test": "not ok 241 - notification preference pending and conflict states reconcile canonical choices before an explicit retry",
+        "location": "test/chat-workspace.test.mjs:4919:1",
+        "error": "'input must contain exactly: conversationId, expectedPreferenceRevision, idempotencyKey, isStarred, mute, notificationPreference, operation'"
+      },
+      {
+        "test": "not ok 242 - notification preference failures are actionable and read-only workspaces cannot submit",
+        "location": "test/chat-workspace.test.mjs:5026:1",
+        "error": "'input must contain exactly: conversationId, expectedPreferenceRevision, idempotencyKey, isStarred, mute, notificationPreference, operation'"
+      },
+      {
+        "test": "not ok 289 - adapter quarantine and logout clearing affect only the exact identity and kind",
+        "location": "test/client-application-chat-draft-storage.test.mjs:320:1",
+        "error": "|-\n    The input did not match the regular expression /invalid JSON/. Input:\n    \n    'ApplicationChatStorageValidationError: Application chat storage record failed validation'"
+      },
+      {
+        "test": "not ok 371 - dispatch validates before transport and returns only the parsed canonical result",
+        "location": "test/client-command-dispatcher.test.mjs:50:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    true !== false"
+      },
+      {
+        "test": "not ok 386 - creation actions deduplicate, retain retry identity, and reuse canonical directs",
+        "location": "test/client-conversation-lifecycle.test.mjs:145:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + 'malformed_response'\n    - 'success'"
+      },
+      {
+        "test": "not ok 388 - lifecycle conflicts, safety rejection, malformed results, and auth failures refresh or roll back safely",
+        "location": "test/client-conversation-lifecycle.test.mjs:306:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + 'rejected'\n    - 'authentication'"
+      },
+      {
+        "test": "not ok 438 - canonical event wins an in-flight request and newer divergent authority conflicts",
+        "location": "test/client-durable-conversation-archive-recovery.test.mjs:573:1",
+        "error": "'condition was not reached'"
+      },
+      {
+        "test": "not ok 615 - a follower announces only a retained follow correlation for leader dispatch and bounded result settlement",
+        "location": "test/client-durable-thread-follow-recovery.test.mjs:928:1",
+        "error": "'Invalid chat client configuration: normalizedCachePersistence.storage.compareExchange must be a function when crossTab is configured'"
+      },
+      {
+        "test": "not ok 616 - follow then unfollow coalesces before leader reload to the latest retained correlation",
+        "location": "test/client-durable-thread-follow-recovery.test.mjs:994:1",
+        "error": "'Invalid chat client configuration: normalizedCachePersistence.storage.compareExchange must be a function when crossTab is configured'"
+      },
+      {
+        "test": "not ok 617 - leadership transfer preserves the retained key and dispatches it once",
+        "location": "test/client-durable-thread-follow-recovery.test.mjs:1041:1",
+        "error": "'Invalid chat client configuration: normalizedCachePersistence.storage.compareExchange must be a function when crossTab is configured'"
+      },
+      {
+        "test": "not ok 618 - unavailable coordination fails open and recovers the retained follow locally",
+        "location": "test/client-durable-thread-follow-recovery.test.mjs:1080:1",
+        "error": "'Invalid chat client configuration: normalizedCachePersistence.storage.compareExchange must be a function when crossTab is configured'"
+      },
+      {
+        "test": "not ok 624 - terminal failures are not replayed by an already queued duplicate",
+        "location": "test/client-forward-message.test.mjs:193:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + 'rejected'\n    - 'authentication'"
+      },
+      {
+        "test": "not ok 58 - test/client-message-context.test.mjs",
+        "location": "test/client-message-context.test.mjs:1:1",
+        "error": "'test failed'"
+      },
+      {
+        "test": "not ok 691 - hydrates present/absent drafts and paginated saved entries without retaining unavailable data",
+        "location": "test/client-private-state-hydration.test.mjs:129:1",
+        "error": "\"Cannot read properties of undefined (reading 'conversationId')\""
+      },
+      {
+        "test": "not ok 693 - older HTTP private snapshots preserve newer realtime and optimistic state",
+        "location": "test/client-private-state-hydration.test.mjs:292:1",
+        "error": "\"Cannot read properties of undefined (reading 'conversationId')\""
+      },
+      {
+        "test": "not ok 67 - test/client-reply-style.test.mjs",
+        "location": "test/client-reply-style.test.mjs:1:1",
+        "error": "'test failed'"
+      },
+      {
+        "test": "not ok 719 - a follower announces a durable read intent, closes, and only the leader dispatches it",
+        "location": "test/client-retained-read-state-recovery.test.mjs:614:1",
+        "error": "'Invalid chat client configuration: normalizedCachePersistence.storage.compareExchange must be a function when crossTab is configured'"
+      },
+      {
+        "test": "not ok 720 - leadership failover reloads retained read work before dispatch",
+        "location": "test/client-retained-read-state-recovery.test.mjs:653:1",
+        "error": "'Invalid chat client configuration: normalizedCachePersistence.storage.compareExchange must be a function when crossTab is configured'"
+      },
+      {
+        "test": "not ok 721 - unsupported, malformed, and nonmatching announcements cannot cross identity scope",
+        "location": "test/client-retained-read-state-recovery.test.mjs:694:1",
+        "error": "'Invalid chat client configuration: normalizedCachePersistence.storage.compareExchange must be a function when crossTab is configured'"
+      },
+      {
+        "test": "not ok 722 - coordinated read results settle only the exactly matching correlation",
+        "location": "test/client-retained-read-state-recovery.test.mjs:753:1",
+        "error": "'Invalid chat client configuration: normalizedCachePersistence.storage.compareExchange must be a function when crossTab is configured'"
+      },
+      {
+        "test": "not ok 737 - authorization rollback and identity/private-stream checks isolate saved state",
+        "location": "test/client-saved-messages.test.mjs:448:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + 'rejected'\n    - 'authentication'"
+      },
+      {
+        "test": "not ok 749 - conflict adopts canonical state, authorization rolls back, and invalid targets never mutate the network",
+        "location": "test/client-thread-follows.test.mjs:333:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + 'rejected'\n    - 'authentication'"
+      },
+      {
+        "test": "not ok 74 - test/client-thread-list.test.mjs",
+        "location": "test/client-thread-list.test.mjs:1:1",
+        "error": "'test failed'"
+      },
+      {
+        "test": "not ok 1 - archives, repeats, restores, and replays canonically",
+        "location": "test/conversation-archive-http.test.mjs:340:13",
+        "error": "'result.error is not supported'"
+      },
+      {
+        "test": "not ok 3 - rejects malformed, ambiguous, mismatched, and spoofed transport input before database work",
+        "location": "test/conversation-archive-http.test.mjs:450:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        404 !== 400"
+      },
+      {
+        "test": "not ok 850 - PATCH /conversations/:conversationId/lifecycle mounts canonical archive lifecycle",
+        "location": "test/conversation-archive-http.test.mjs:303:1",
+        "error": "'2 subtests failed'"
+      },
+      {
+        "test": "not ok 1 - creates channel, direct, and group-direct conversations once",
+        "location": "test/conversation-creation-http.test.mjs:383:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 201"
+      },
+      {
+        "test": "not ok 2 - retries and equivalent directs do not duplicate side effects",
+        "location": "test/conversation-creation-http.test.mjs:421:13",
+        "error": "'result.type must be channel, direct, or group_direct'"
+      },
+      {
+        "test": "not ok 4 - maps authentication, authorization, conflicts, and member availability",
+        "location": "test/conversation-creation-http.test.mjs:537:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 409"
+      },
+      {
+        "test": "not ok 862 - POST /conversations mounts the canonical actor-scoped creation command",
+        "location": "test/conversation-creation-http.test.mjs:339:1",
+        "error": "'3 subtests failed'"
+      },
+      {
+        "test": "not ok 869 - JSON-round-trips created, existing-equivalent, and replayed canonical results",
+        "location": "test/conversation-creation.test.mjs:227:1",
+        "error": "'result.conversation must be a valid conversation detail snapshot: unreadMentionCount must be a non-negative safe integer'"
+      },
+      {
+        "test": "not ok 870 - rejects malformed and mismatched canonical result shapes",
+        "location": "test/conversation-creation.test.mjs:285:1",
+        "error": "|-\n    The validation function is expected to return \"true\". Received false\n    \n    Caught error:\n    \n    ConversationCreationParseError: result.conversation must be a valid conversation detail snapshot: unreadMentionCount must be a non-negative safe integer"
+      },
+      {
+        "test": "not ok 874 - draft snapshot rejects malformed paths, queries, bodies, transfer encoding, and spoofed trusted context before querying",
+        "location": "test/conversation-draft-snapshot-http.test.mjs:409:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    404 !== 400"
+      },
+      {
+        "test": "not ok 888 - membership endpoint validates its HTTP boundary before command invocation",
+        "location": "test/conversation-membership-http.test.mjs:124:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    404 !== 400"
+      },
+      {
+        "test": "not ok 905 - conversation-preference HTTP transport rejects untrusted input before command work",
+        "location": "test/conversation-preference-http.test.mjs:122:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    404 !== 400"
+      },
+      {
+        "test": "not ok 922 - GET conversation snapshots are canonical, paginated, actor-scoped, and read-only",
+        "location": "test/conversation-snapshot-http.test.mjs:240:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    503 !== 200"
+      },
+      {
+        "test": "not ok 969 - HTTP request id correlates the response and existing message audit",
+        "location": "test/create-chat-server-http-outcomes.test.mjs:444:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    503 !== 201"
+      },
+      {
+        "test": "not ok 105 - test/create-chat-server-http-outcomes.test.mjs",
+        "location": "test/create-chat-server-http-outcomes.test.mjs:1:1",
+        "error": "'test timed out after 120000ms'"
+      },
+      {
+        "test": "not ok 1002 - cross-runtime conformance workflow preserves the CI gate contract",
+        "location": "test/cross-runtime-conformance-workflow.test.mjs:12:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n    +   'node scripts/generate-package-version.mjs --check',\n        'npm ci --include=dev',\n        'node scripts/read-flutter-revision.mjs',\n        'flutter pub get --no-example',\n        'npm run check:conformance'\n      ]"
+      },
+      {
+        "test": "not ok 1 - allows the author and preserves canonical tombstone identifiers",
+        "location": "test/delete-message-http.test.mjs:360:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 200"
+      },
+      {
+        "test": "not ok 2 - allows a moderator through message.delete capability",
+        "location": "test/delete-message-http.test.mjs:393:13",
+        "error": "'result.error is not supported'"
+      },
+      {
+        "test": "not ok 3 - replays an exact key with only one mutation",
+        "location": "test/delete-message-http.test.mjs:409:13",
+        "error": "'result.error is not supported'"
+      },
+      {
+        "test": "not ok 4 - returns and replays canonical stale-revision state",
+        "location": "test/delete-message-http.test.mjs:442:13",
+        "error": "'result.error is not supported'"
+      },
+      {
+        "test": "not ok 5 - rejects malformed transport and spoofed identity before execution",
+        "location": "test/delete-message-http.test.mjs:468:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        404 !== 400"
+      },
+      {
+        "test": "not ok 1029 - DELETE /messages/:messageId mounts the canonical soft-delete command",
+        "location": "test/delete-message-http.test.mjs:325:1",
+        "error": "'5 subtests failed'"
+      },
+      {
+        "test": "not ok 1033 - device push-token HTTP transport rejects malformed and untrusted requests without leaking tokens",
+        "location": "test/device-push-token-http.test.mjs:147:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    404 !== 400"
+      },
+      {
+        "test": "not ok 3 - rejects malformed, oversized, mismatched, and spoofed input before command work",
+        "location": "test/draft-synchronization-http.test.mjs:509:15",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        404 !== 400"
+      },
+      {
+        "test": "not ok 1067 - PATCH /conversations/:conversationId/draft mounts actor-private draft synchronization",
+        "location": "test/draft-synchronization-http.test.mjs:322:1",
+        "error": "'1 subtest failed'"
+      },
+      {
+        "test": "not ok 1069 - drop-in React Playwright workflow preserves the browser gate contract",
+        "location": "test/drop-in-react-playwright-workflow.test.mjs:20:1",
+        "error": "|-\n    actions and commands must remain in the required deterministic order\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        [\n          'uses',\n          'actions/checkout@v4'\n        ],\n    ...\n          'run',\n    +     'node scripts/generate-package-version.mjs --check'\n    +   ],\n    +   [\n    +     'run',\n          'npm ci --include=dev'\n        ],\n        [\n          'run',\n          'node scripts/read-flutter-revision.mjs'"
+      },
+      {
+        "test": "not ok 1 - applies an edit without changing message sequence",
+        "location": "test/edit-message-http.test.mjs:373:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        400 !== 200"
+      },
+      {
+        "test": "not ok 2 - replays an exact key without a second mutation",
+        "location": "test/edit-message-http.test.mjs:397:13",
+        "error": "'result.error is not supported'"
+      },
+      {
+        "test": "not ok 3 - returns canonical state for stale revisions and conflict replay",
+        "location": "test/edit-message-http.test.mjs:430:13",
+        "error": "'result.error is not supported'"
+      },
+      {
+        "test": "not ok 4 - rejects malformed transport and spoofed identity before command execution",
+        "location": "test/edit-message-http.test.mjs:455:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        404 !== 400"
+      },
+      {
+        "test": "not ok 6 - maps in-progress command conflicts and unexpected failures safely",
+        "location": "test/edit-message-http.test.mjs:564:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        400 !== 409"
+      },
+      {
+        "test": "not ok 1307 - PATCH /messages/:messageId mounts the canonical edit command",
+        "location": "test/edit-message-http.test.mjs:340:1",
+        "error": "'5 subtests failed'"
+      },
+      {
+        "test": "not ok 1362 - documented hooks and actions exactly match the shipped React source",
+        "location": "test/headless-client-react-docs.test.mjs:423:1",
+        "error": "|-\n    documented hooks drifted from public exports\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        'useChatSelector',\n        'useChat',\n        'useConversations',\n        'useConversation',\n    ...\n        'useDirectoryUser',\n    -   'useConversationParticipants',\n        'useDirectorySearch',\n    -   'useMessageSearch',\n        'useSavedMessages',\n    -   'useMessageReminders',\n        'useThread',\n        'useMembers',\n        'useReadState',\n        'useDirectMessageReceipt',\n        'usePresence',"
+      },
+      {
+        "test": "not ok 1413 - huddle screen-share HTTP route rejects unsafe input before command effects",
+        "location": "test/huddle-screen-share-http.test.mjs:182:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    2 !== 0"
+      },
+      {
+        "test": "not ok 1434 - join-huddle HTTP route rejects unsafe transport input before database effects",
+        "location": "test/join-huddle-http.test.mjs:134:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    2 !== 0"
+      },
+      {
+        "test": "not ok 1435 - leave-huddle HTTP route rejects unsafe transport input before command effects",
+        "location": "test/leave-huddle-http.test.mjs:136:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    2 !== 0"
+      },
+      {
+        "test": "not ok 1674 - POST /messages/search returns parsed private pages with opaque continuation",
+        "location": "test/message-search-http.test.mjs:170:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    503 !== 200"
+      },
+      {
+        "test": "not ok 1690 - MessageTimeline imports only React, public hooks, contracts, and UI slots",
+        "location": "test/message-timeline-import-guard.test.mjs:8:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n    + Set(9) {\n    +   '../client/index.js',\n    - Set(5) {\n        '../contracts/index.js',\n        '../react/index.js',\n        './message-composer.js',\n    +   './reaction-picker.js',\n        './slots.js',\n    +   './thread-creation-dialog.js',\n    +   './timeline-window.js',\n        'react'\n      }"
+      },
+      {
+        "test": "not ok 1765 - Node test workflow preserves its install, build, and safety contract",
+        "location": "test/node-tests-workflow.test.mjs:127:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n    +   'node scripts/generate-package-version.mjs --check',\n        'npm ci',\n    -   'npm run check:package-version',\n        'npm run build',\n        'npm run test:node'\n      ]"
+      },
+      {
+        "test": "not ok 1775 - stale list preferences preserve newer canonical and pending optimistic state",
+        "location": "test/normalized-cache.test.mjs:638:1",
+        "error": "'input must contain exactly: conversationId, expectedPreferenceRevision, idempotencyKey, isStarred, mute, notificationPreference, operation'"
+      },
+      {
+        "test": "not ok 1783 - onBatch aggregates retryable and terminal failures without sensitive fields",
+        "location": "test/notification-dispatcher.test.mjs:276:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          claimed: 3,\n          delivered: 1,\n    +     durationMs: 40,\n    -     durationMs: 35,\n          failed: 2,\n          failureClassCounts: {\n            configuration: 0,\n            database: 0,\n            none: 1,\n    ...\n          materialized: 0,\n    +     oldestDueDeliveryAgeMs: 2040,\n    -     oldestDueDeliveryAgeMs: 2035,\n          outcome: 'partially_failed',\n          suppressed: 0\n        }\n      ]"
+      },
+      {
+        "test": "not ok 1785 - coalescing and throwing telemetry observers do not alter settlement or stop",
+        "location": "test/notification-dispatcher.test.mjs:435:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n    +   undefined,\n        17,\n    +   undefined\n      ]"
+      },
+      {
+        "test": "not ok 169 - test/notification-dispatcher.test.mjs",
+        "location": "test/notification-dispatcher.test.mjs:1:1",
+        "error": "'test timed out after 120000ms'"
+      },
+      {
+        "test": "not ok 1795 - a matching durable delete settles before the HTTP response and guards rollback",
+        "location": "test/optimistic-message-deletion.test.mjs:261:1",
+        "error": "'Promise resolution is still pending but the event loop has already resolved'"
+      },
+      {
+        "test": "not ok 1796 - automatic transient retry preserves the exact delete body and idempotency identity",
+        "location": "test/optimistic-message-deletion.test.mjs:287:1",
+        "error": "'Promise resolution is still pending but the event loop has already resolved'"
+      },
+      {
+        "test": "not ok 1797 - stale revision restores the authoritative canonical conflict message",
+        "location": "test/optimistic-message-deletion.test.mjs:307:1",
+        "error": "'Promise resolution is still pending but the event loop has already resolved'"
+      },
+      {
+        "test": "not ok 1798 - authentication and permanent failures restore the prior projection unless an event settled",
+        "location": "test/optimistic-message-deletion.test.mjs:344:1",
+        "error": "'Promise resolution is still pending but the event loop has already resolved'"
+      },
+      {
+        "test": "not ok 1 - returns one opaque reservation and reconciles an identical retry",
+        "location": "test/prepare-attachment-http.test.mjs:385:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 200"
+      },
+      {
+        "test": "not ok 3 - rejects malformed, spoofed, secret-bearing, and mismatched requests",
+        "location": "test/prepare-attachment-http.test.mjs:489:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        404 !== 400"
+      },
+      {
+        "test": "not ok 4 - uses trusted authentication and denies capability, membership, tenant, and entity access",
+        "location": "test/prepare-attachment-http.test.mjs:558:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 403"
+      },
+      {
+        "test": "not ok 1848 - prepare-attachment HTTP route reserves, replays, validates, authorizes, and redacts",
+        "location": "test/prepare-attachment-http.test.mjs:378:1",
+        "error": "'3 subtests failed'"
+      },
+      {
+        "test": "not ok 1849 - prepare-attachment HTTP route reports disabled attachment storage stably",
+        "location": "test/prepare-attachment-http.test.mjs:677:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    2 !== 0"
+      },
+      {
+        "test": "not ok 184 - test/react-reply-style.test.mjs",
+        "location": "test/react-reply-style.test.mjs:1:1",
+        "error": "'test failed'"
+      },
+      {
+        "test": "not ok 3 - rejects malformed, mismatched, toggle, spoofed, and invalid idempotency input before command work",
+        "location": "test/reaction-mutation-http.test.mjs:466:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        404 !== 400"
+      },
+      {
+        "test": "not ok 1885 - PATCH /messages/:messageId/reactions/:reactionKey mounts setReaction",
+        "location": "test/reaction-mutation-http.test.mjs:329:1",
+        "error": "'1 subtest failed'"
+      },
+      {
+        "test": "not ok 2053 - trusted adapters resolve once and attach one deeply immutable context",
+        "location": "test/request-context.test.mjs:49:1",
+        "error": "'Chat authentication failed'"
+      },
+      {
+        "test": "not ok 2054 - null, missing, empty, and malformed actors fail closed",
+        "location": "test/request-context.test.mjs:134:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    false !== true"
+      },
+      {
+        "test": "not ok 2055 - adapter failures and malformed capabilities become sanitized typed errors",
+        "location": "test/request-context.test.mjs:173:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    false !== true"
+      },
+      {
+        "test": "not ok 2056 - standalone router responses expose only stable sanitized failures",
+        "location": "test/request-context.test.mjs:226:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    404 !== 401"
+      },
+      {
+        "test": "not ok 2057 - interleaved requests retain distinct trusted contexts",
+        "location": "test/request-context.test.mjs:262:1",
+        "error": "'releases.get(...) is not a function'"
+      },
+      {
+        "test": "not ok 203 - test/request-context.test.mjs",
+        "location": "test/request-context.test.mjs:1:1",
+        "error": "'test timed out after 120000ms'"
+      },
+      {
+        "test": "not ok 4 - rejects malformed transport, notes, aliases, toggles, unknown fields, and spoofed identity before command work",
+        "location": "test/saved-message-http.test.mjs:678:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        404 !== 400"
+      },
+      {
+        "test": "not ok 2059 - PATCH /messages/:messageId/saved mounts setSavedMessage",
+        "location": "test/saved-message-http.test.mjs:443:1",
+        "error": "'1 subtest failed'"
+      },
+      {
+        "test": "not ok 2061 - GET /saved-messages returns private, safe, actor-scoped keyset pages",
+        "location": "test/saved-message-list-http.test.mjs:390:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    503 !== 200"
+      },
+      {
+        "test": "not ok 1 - accepts plain and rich markdown content with canonical actor identity",
+        "location": "test/send-message-http.test.mjs:468:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 201"
+      },
+      {
+        "test": "not ok 2 - replays an exact retry and rejects conflicting key reuse",
+        "location": "test/send-message-http.test.mjs:525:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 201"
+      },
+      {
+        "test": "not ok 3 - rejects malformed transport and trusted identity spoofing before command dispatch",
+        "location": "test/send-message-http.test.mjs:568:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        404 !== 400"
+      },
+      {
+        "test": "not ok 4 - maps authentication and safe authorization failures",
+        "location": "test/send-message-http.test.mjs:647:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 403"
+      },
+      {
+        "test": "not ok 5 - maps invalid mentions and unfinished attachments",
+        "location": "test/send-message-http.test.mjs:696:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 422"
+      },
+      {
+        "test": "not ok 2078 - POST /conversations/:conversationId/messages mounts the canonical send command",
+        "location": "test/send-message-http.test.mjs:424:1",
+        "error": "'5 subtests failed'"
+      },
+      {
+        "test": "not ok 2079 - reply references cross HTTP parsing and malformed references never dispatch",
+        "location": "test/send-message-http.test.mjs:770:1",
+        "error": "|-\n    {\"error\":{\"code\":\"chat_inline_replies_disabled\",\"message\":\"Inline replies are not supported\"}}\n    \n    501 !== 403"
+      },
+      {
+        "test": "not ok 1 - returns created, existing-for-root, and stable replay results",
+        "location": "test/thread-creation-http.test.mjs:393:15",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 201"
+      },
+      {
+        "test": "not ok 2 - rejects malformed paths, bodies, and idempotency before database work",
+        "location": "test/thread-creation-http.test.mjs:472:15",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        404 !== 400"
+      },
+      {
+        "test": "not ok 4 - maps idempotency conflicts and in-progress completion to 409",
+        "location": "test/thread-creation-http.test.mjs:633:15",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        503 !== 201"
+      },
+      {
+        "test": "not ok 2098 - POST /messages/:messageId/thread mounts canonical thread creation",
+        "location": "test/thread-creation-http.test.mjs:355:1",
+        "error": "'3 subtests failed'"
+      },
+      {
+        "test": "not ok 2116 - thread-follow HTTP transport rejects malformed or spoofed requests before command work",
+        "location": "test/thread-follow-http.test.mjs:142:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    404 !== 400"
+      }
+    ]
+  },
+  "postgres-tests": {
+    "counts": {
+      "tests": "1029",
+      "pass": "986",
+      "fail": "43",
+      "cancelled": "0",
+      "skipped": "0"
+    },
+    "result": "failed diagnostic before final focused repairs; not a final-candidate pass",
+    "failures": [
+      {
+        "test": "not ok 2 - active-huddle snapshot is actor-scoped, canonical, and provider-secret-free",
+        "location": "test/postgres-active-huddle-snapshot-query.test.mjs:60:1",
+        "error": "'chat_huddle_participants must be created joined'"
+      },
+      {
+        "test": "not ok 4 - attachment cleanup delivery migration is frozen, deterministic, expand-only, and last",
+        "location": "test/postgres-attachment-cleanup-delivery-schema.test.mjs:38:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    36 !== 42"
+      },
+      {
+        "test": "not ok 5 - attachment cleanup delivery migration upgrades order 36 with guarded durable work",
+        "location": "test/postgres-attachment-cleanup-delivery-schema.test.mjs:91:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n        {\n          id: '0037-chat-attachment-cleanup-deliveries',\n          order: 37\n        },\n    +   {\n    +     id: '0038-chat-huddle-rejoin',\n    +     order: 38\n    +   },\n    +   {\n    +     id: '0039-chat-message-replies',\n    +     order: 39\n    +   },\n    +   {\n    +     id: '0040-chat-thread-names',\n    +     order: 40\n    +   },\n    +   {\n    +     id: '0041-chat-user-reply-style-preferences',\n    +     order: 41\n    +   },\n    +   {\n    +     id: '0042-chat-draft-replies',\n    +     order: 42\n    +   },\n    +   {\n    +     id: '0043-chat-thread-lifecycle',\n    +     order: 43\n    +   }\n      ]"
+      },
+      {
+        "test": "not ok 14 - attachment migration enforces tenant-safe one-way upload metadata",
+        "location": "test/postgres-attachment-schema.test.mjs:27:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0017-chat-conversation-member-list-revision',\n    +     order: 17\n    +   },\n    +   {\n    +     id: '0018-chat-conversation-preference-revision',\n    +     order: 18\n    +   },\n    +   {\n    +     id: '0019-chat-saved-message-mutation-state',\n    +     order: 19\n    +   },\n    +   {\n    +     id: '0020-chat-huddle-participant-leave-reason',\n    +     order: 20\n    +   },\n    +   {\n    +     id: '0021-chat-huddle-ending-recovery',\n    +     order: 21\n    +   },\n    +   {\n    +     id: '0022-chat-device-push-tokens',\n    +     order: 22\n    +   },\n    +   {\n    +     id: '0023-chat-conversation-list-ordering',\n    +     order: 23\n    +   },\n    +   {\n    +     id: '0024-chat-outbox-unpublished-stream-heads',\n    +     order: 24\n    +   },\n    +   {\n    +     id: '0025-chat-outbox-tenant-replay-positions',\n    +     order: 25\n    +   },\n    +   {\n    +     id: '0026-chat-notification-global-claim-indexes',\n    +     order: 26\n    +   },\n    + "
+      },
+      {
+        "test": "not ok 15 - audit delivery migration is frozen, deterministic, expand-only, and ordered",
+        "location": "test/postgres-audit-delivery-schema.test.mjs:39:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    35 !== 41"
+      },
+      {
+        "test": "not ok 18 - audit migration stores immutable tenant-safe history",
+        "location": "test/postgres-audit-event-schema.test.mjs:25:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0017-chat-conversation-member-list-revision',\n    +     order: 17\n    +   },\n    +   {\n    +     id: '0018-chat-conversation-preference-revision',\n    +     order: 18\n    +   },\n    +   {\n    +     id: '0019-chat-saved-message-mutation-state',\n    +     order: 19\n    +   },\n    +   {\n    +     id: '0020-chat-huddle-participant-leave-reason',\n    +     order: 20\n    +   },\n    +   {\n    +     id: '0021-chat-huddle-ending-recovery',\n    +     order: 21\n    +   },\n    +   {\n    +     id: '0022-chat-device-push-tokens',\n    +     order: 22\n    +   },\n    +   {\n    +     id: '0023-chat-conversation-list-ordering',\n    +     order: 23\n    +   },\n    +   {\n    +     id: '0024-chat-outbox-unpublished-stream-heads',\n    +     order: 24\n    +   },\n    +   {\n    +     id: '0025-chat-outbox-tenant-replay-positions',\n    +     order: 25\n    +   },\n    +   {\n    +     id: '0026-chat-notification-global-claim-indexes',\n    +     order: 26\n    +   },\n    + "
+      },
+      {
+        "test": "not ok 20 - CLI observes, applies, serializes, and reports real PostgreSQL migrations",
+        "location": "test/postgres-cli-migrations.test.mjs:61:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    2 !== 0"
+      },
+      {
+        "test": "not ok 33 - conversation list keyset queries use active organization and entity indexes",
+        "location": "test/postgres-conversation-list-query.test.mjs:344:1",
+        "error": "'UNION types text and timestamp with time zone cannot be matched'"
+      },
+      {
+        "test": "not ok 1 - supports notification, starred, and mute forms with one command invocation",
+        "location": "test/postgres-conversation-preference-http.test.mjs:257:15",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        3 !== 1"
+      },
+      {
+        "test": "not ok 41 - PATCH /conversations/:conversationId/preference mounts the actor-private preference command",
+        "location": "test/postgres-conversation-preference-http.test.mjs:124:1",
+        "error": "'1 subtest failed'"
+      },
+      {
+        "test": "not ok 43 - starred preference migration upgrades existing rows and remains idempotent",
+        "location": "test/postgres-conversation-preference-schema.test.mjs:54:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n        '0032-chat-conversation-preference-starred',\n    +   '0033-chat-device-push-token-protection-metadata',\n    +   '0034-chat-device-push-token-free-revocation',\n    +   '0035-chat-device-push-token-legacy-retirement',\n    +   '0036-chat-audit-deliveries',\n    +   '0037-chat-attachment-cleanup-deliveries',\n    +   '0038-chat-huddle-rejoin',\n    +   '0039-chat-message-replies',\n    +   '0040-chat-thread-names',\n    +   '0041-chat-user-reply-style-preferences',\n    +   '0042-chat-draft-replies',\n    +   '0043-chat-thread-lifecycle'\n      ]"
+      },
+      {
+        "test": "not ok 44 - conversation preference migration stores tenant-safe member settings",
+        "location": "test/postgres-conversation-preference-schema.test.mjs:195:1",
+        "error": "'schemaPrefix must be a lowercase PostgreSQL identifier of at most 24 characters'"
+      },
+      {
+        "test": "not ok 5 - replays exact outcomes and rejects conflicting key reuse",
+        "location": "test/postgres-create-conversation-command.test.mjs:327:13",
+        "error": "'new row for relation \"chat_idempotency_keys\" violates check constraint \"chat_idempotency_keys_timestamp_order_check\"'"
+      },
+      {
+        "test": "not ok 50 - atomic create-conversation command authorizes, reconciles, and rolls back PostgreSQL state",
+        "location": "test/postgres-create-conversation-command.test.mjs:56:1",
+        "error": "'1 subtest failed'"
+      },
+      {
+        "test": "not ok 54 - PUT /devices/:deviceId/push-token mounts token-safe register, replay, refresh, and unregister behavior",
+        "location": "test/postgres-device-push-token-http.test.mjs:147:1",
+        "error": "'schemaPrefix must be a lowercase PostgreSQL identifier of at most 24 characters'"
+      },
+      {
+        "test": "not ok 55 - device push-token migrations are immutable and ordered",
+        "location": "test/postgres-device-push-token-schema.test.mjs:52:1",
+        "error": "|-\n    Expected values to be strictly equal:\n    \n    32 !== 40"
+      },
+      {
+        "test": "not ok 56 - device push-token migration retains tenant-safe revocable registrations",
+        "location": "test/postgres-device-push-token-schema.test.mjs:159:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n        {\n          id: '0035-chat-device-push-token-legacy-retirement',\n          order: 35\n        },\n    +   {\n    +     id: '0036-chat-audit-deliveries',\n    +     order: 36\n    +   },\n    +   {\n    +     id: '0037-chat-attachment-cleanup-deliveries',\n    +     order: 37\n    +   },\n    +   {\n    +     id: '0038-chat-huddle-rejoin',\n    +     order: 38\n    +   },\n    +   {\n    +     id: '0039-chat-message-replies',\n    +     order: 39\n    +   },\n    +   {\n    +     id: '0040-chat-thread-names',\n    +     order: 40\n    +   },\n    +   {\n    +     id: '0041-chat-user-reply-style-preferences',\n    +     order: 41\n    +   },\n    +   {\n    +     id: '0042-chat-draft-replies',\n    +     order: 42\n    +   },\n    +   {\n    +     id: '0043-chat-thread-lifecycle',\n    +     order: 43\n    +   }\n      ]"
+      },
+      {
+        "test": "not ok 67 - huddle migration persists tenant-safe lifecycle and participant history",
+        "location": "test/postgres-huddle-session-schema.test.mjs:25:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0030-chat-message-reminders',\n    +     order: 30\n    +   },\n    +   {\n    +     id: '0031-chat-message-reminder-notifications',\n    +     order: 31\n    +   },\n    +   {\n    +     id: '0032-chat-conversation-preference-starred',\n    +     order: 32\n    +   },\n    +   {\n    +     id: '0033-chat-device-push-token-protection-metadata',\n    +     order: 33\n    +   },\n    +   {\n    +     id: '0034-chat-device-push-token-free-revocation',\n    +     order: 34\n    +   },\n    +   {\n    +     id: '0035-chat-device-push-token-legacy-retirement',\n    +     order: 35\n    +   },\n    +   {\n    +     id: '0036-chat-audit-deliveries',\n    +     order: 36\n    +   },\n    +   {\n    +     id: '0037-chat-attachment-cleanup-deliveries',\n    +     order: 37\n    +   },\n    +   {\n    +     id: '0038-chat-huddle-rejoin',\n    +     order: 38\n    +   },\n    +   {\n    +     id: '0039-chat-message-replies',\n    +     order: 39\n    +   },\n    +   {\n    +     id: '0040-chat"
+      },
+      {
+        "test": "not ok 68 - expired idempotency-key maintenance is bounded, ordered, and concurrent",
+        "location": "test/postgres-idempotency-maintenance.test.mjs:49:1",
+        "error": "'schemaPrefix must be a lowercase PostgreSQL identifier of at most 24 characters'"
+      },
+      {
+        "test": "not ok 69 - idempotency migration stores one actor-scoped mutation outcome",
+        "location": "test/postgres-idempotency-schema.test.mjs:28:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0017-chat-conversation-member-list-revision',\n    +     order: 17\n    +   },\n    +   {\n    +     id: '0018-chat-conversation-preference-revision',\n    +     order: 18\n    +   },\n    +   {\n    +     id: '0019-chat-saved-message-mutation-state',\n    +     order: 19\n    +   },\n    +   {\n    +     id: '0020-chat-huddle-participant-leave-reason',\n    +     order: 20\n    +   },\n    +   {\n    +     id: '0021-chat-huddle-ending-recovery',\n    +     order: 21\n    +   },\n    +   {\n    +     id: '0022-chat-device-push-tokens',\n    +     order: 22\n    +   },\n    +   {\n    +     id: '0023-chat-conversation-list-ordering',\n    +     order: 23\n    +   },\n    +   {\n    +     id: '0024-chat-outbox-unpublished-stream-heads',\n    +     order: 24\n    +   },\n    +   {\n    +     id: '0025-chat-outbox-tenant-replay-positions',\n    +     order: 25\n    +   },\n    +   {\n    +     id: '0026-chat-notification-global-claim-indexes',\n    +     order: 26\n    +   },\n    + "
+      },
+      {
+        "test": "not ok 3 - maps idempotency and already-joined conflicts and allows a new visit after leaving",
+        "location": "test/postgres-join-huddle-http.test.mjs:486:13",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        200 !== 409"
+      },
+      {
+        "test": "not ok 73 - join-huddle HTTP route validates, authorizes, projects, and redacts",
+        "location": "test/postgres-join-huddle-http.test.mjs:148:1",
+        "error": "'1 subtest failed'"
+      },
+      {
+        "test": "not ok 80 - expired outbox maintenance locks, rechecks, and deletes one bounded transaction",
+        "location": "test/postgres-maintenance.test.mjs:123:1",
+        "error": "'Expired outbox cleanup failed and could not be rolled back'"
+      },
+      {
+        "test": "not ok 1 - fresh install enforces reminder identity, lifecycle, and visibility",
+        "location": "test/postgres-message-reminder-schema.test.mjs:87:13",
+        "error": "|-\n        Expected values to be strictly deep-equal:\n        + actual - expected\n        \n          {\n        +   id: '0043-chat-thread-lifecycle',\n        +   order: 43\n        -   id: '0032-chat-conversation-preference-starred',\n        -   order: 32\n          }"
+      },
+      {
+        "test": "not ok 2 - upgrade reports coherent status and repeated apply is idempotent",
+        "location": "test/postgres-message-reminder-schema.test.mjs:647:13",
+        "error": "|-\n        Expected values to be strictly deep-equal:\n        + actual - expected\n        \n          [\n            '0030-chat-message-reminders',\n            '0031-chat-message-reminder-notifications',\n            '0032-chat-conversation-preference-starred',\n        +   '0033-chat-device-push-token-protection-metadata',\n        +   '0034-chat-device-push-token-free-revocation',\n        +   '0035-chat-device-push-token-legacy-retirement',\n        +   '0036-chat-audit-deliveries',\n        +   '0037-chat-attachment-cleanup-deliveries',\n        +   '0038-chat-huddle-rejoin',\n        +   '0039-chat-message-replies',\n        +   '0040-chat-thread-names',\n        +   '0041-chat-user-reply-style-preferences',\n        +   '0042-chat-draft-replies',\n        +   '0043-chat-thread-lifecycle'\n          ]"
+      },
+      {
+        "test": "not ok 96 - message-reminder migration supports fresh installs and 0029 upgrades",
+        "location": "test/postgres-message-reminder-schema.test.mjs:76:1",
+        "error": "'2 subtests failed'"
+      },
+      {
+        "test": "not ok 99 - message and revision migration enforces ordered tenant-scoped history",
+        "location": "test/postgres-message-schema.test.mjs:25:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0017-chat-conversation-member-list-revision',\n    +     order: 17\n    +   },\n    +   {\n    +     id: '0018-chat-conversation-preference-revision',\n    +     order: 18\n    +   },\n    +   {\n    +     id: '0019-chat-saved-message-mutation-state',\n    +     order: 19\n    +   },\n    +   {\n    +     id: '0020-chat-huddle-participant-leave-reason',\n    +     order: 20\n    +   },\n    +   {\n    +     id: '0021-chat-huddle-ending-recovery',\n    +     order: 21\n    +   },\n    +   {\n    +     id: '0022-chat-device-push-tokens',\n    +     order: 22\n    +   },\n    +   {\n    +     id: '0023-chat-conversation-list-ordering',\n    +     order: 23\n    +   },\n    +   {\n    +     id: '0024-chat-outbox-unpublished-stream-heads',\n    +     order: 24\n    +   },\n    +   {\n    +     id: '0025-chat-outbox-tenant-replay-positions',\n    +     order: 25\n    +   },\n    +   {\n    +     id: '0026-chat-notification-global-claim-indexes',\n    +     order: 26\n    +   },\n    + "
+      },
+      {
+        "test": "not ok 113 - notification delivery migration enforces content-minimized retry state",
+        "location": "test/postgres-notification-delivery-schema.test.mjs:136:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0030-chat-message-reminders',\n    +     order: 30\n    +   },\n    +   {\n    +     id: '0031-chat-message-reminder-notifications',\n    +     order: 31\n    +   },\n    +   {\n    +     id: '0032-chat-conversation-preference-starred',\n    +     order: 32\n    +   },\n    +   {\n    +     id: '0033-chat-device-push-token-protection-metadata',\n    +     order: 33\n    +   },\n    +   {\n    +     id: '0034-chat-device-push-token-free-revocation',\n    +     order: 34\n    +   },\n    +   {\n    +     id: '0035-chat-device-push-token-legacy-retirement',\n    +     order: 35\n    +   },\n    +   {\n    +     id: '0036-chat-audit-deliveries',\n    +     order: 36\n    +   },\n    +   {\n    +     id: '0037-chat-attachment-cleanup-deliveries',\n    +     order: 37\n    +   },\n    +   {\n    +     id: '0038-chat-huddle-rejoin',\n    +     order: 38\n    +   },\n    +   {\n    +     id: '0039-chat-message-replies',\n    +     order: 39\n    +   },\n    +   {\n    +     id: '0040-chat"
+      },
+      {
+        "test": "not ok 4 - an expired stream head is skipped without being claimed",
+        "location": "test/postgres-outbox-publisher.test.mjs:181:13",
+        "error": "'new row for relation \"chat_outbox_events\" violates check constraint \"chat_outbox_events_timestamp_check\"'"
+      },
+      {
+        "test": "not ok 6 - an all-expired batch never calls the realtime provider",
+        "location": "test/postgres-outbox-publisher.test.mjs:316:13",
+        "error": "'new row for relation \"chat_outbox_events\" violates check constraint \"chat_outbox_events_timestamp_check\"'"
+      },
+      {
+        "test": "not ok 7 - concurrent publishers preserve valid order past an expired head",
+        "location": "test/postgres-outbox-publisher.test.mjs:360:13",
+        "error": "'new row for relation \"chat_outbox_events\" violates check constraint \"chat_outbox_events_timestamp_check\"'"
+      },
+      {
+        "test": "not ok 118 - transactional outbox publisher leases, orders, and retries real PostgreSQL rows",
+        "location": "test/postgres-outbox-publisher.test.mjs:24:1",
+        "error": "'3 subtests failed'"
+      },
+      {
+        "test": "not ok 122 - outbox migration provides transactional delivery and replay storage",
+        "location": "test/postgres-outbox-schema.test.mjs:130:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0030-chat-message-reminders',\n    +     order: 30\n    +   },\n    +   {\n    +     id: '0031-chat-message-reminder-notifications',\n    +     order: 31\n    +   },\n    +   {\n    +     id: '0032-chat-conversation-preference-starred',\n    +     order: 32\n    +   },\n    +   {\n    +     id: '0033-chat-device-push-token-protection-metadata',\n    +     order: 33\n    +   },\n    +   {\n    +     id: '0034-chat-device-push-token-free-revocation',\n    +     order: 34\n    +   },\n    +   {\n    +     id: '0035-chat-device-push-token-legacy-retirement',\n    +     order: 35\n    +   },\n    +   {\n    +     id: '0036-chat-audit-deliveries',\n    +     order: 36\n    +   },\n    +   {\n    +     id: '0037-chat-attachment-cleanup-deliveries',\n    +     order: 37\n    +   },\n    +   {\n    +     id: '0038-chat-huddle-rejoin',\n    +     order: 38\n    +   },\n    +   {\n    +     id: '0039-chat-message-replies',\n    +     order: 39\n    +   },\n    +   {\n    +     id: '0040-chat"
+      },
+      {
+        "test": "not ok 127 - reaction migration enforces canonical tenant-scoped toggles",
+        "location": "test/postgres-reaction-schema.test.mjs:25:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0017-chat-conversation-member-list-revision',\n    +     order: 17\n    +   },\n    +   {\n    +     id: '0018-chat-conversation-preference-revision',\n    +     order: 18\n    +   },\n    +   {\n    +     id: '0019-chat-saved-message-mutation-state',\n    +     order: 19\n    +   },\n    +   {\n    +     id: '0020-chat-huddle-participant-leave-reason',\n    +     order: 20\n    +   },\n    +   {\n    +     id: '0021-chat-huddle-ending-recovery',\n    +     order: 21\n    +   },\n    +   {\n    +     id: '0022-chat-device-push-tokens',\n    +     order: 22\n    +   },\n    +   {\n    +     id: '0023-chat-conversation-list-ordering',\n    +     order: 23\n    +   },\n    +   {\n    +     id: '0024-chat-outbox-unpublished-stream-heads',\n    +     order: 24\n    +   },\n    +   {\n    +     id: '0025-chat-outbox-tenant-replay-positions',\n    +     order: 25\n    +   },\n    +   {\n    +     id: '0026-chat-notification-global-claim-indexes',\n    +     order: 26\n    +   },\n    + "
+      },
+      {
+        "test": "not ok 1 - returns the exact canonical actor-private response and advances monotonically",
+        "location": "test/postgres-read-cursor-http.test.mjs:241:15",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        3 !== 1"
+      },
+      {
+        "test": "not ok 3 - maps regression and sequence bounds to one safe state conflict",
+        "location": "test/postgres-read-cursor-http.test.mjs:321:15",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        200 !== 409"
+      },
+      {
+        "test": "not ok 4 - rejects malformed, ambiguous, mismatched, and spoofed transport input before command work",
+        "location": "test/postgres-read-cursor-http.test.mjs:349:15",
+        "error": "|-\n        Expected values to be strictly equal:\n        \n        404 !== 400"
+      },
+      {
+        "test": "not ok 128 - PATCH /conversations/:conversationId/read-cursor mounts the private read-state command",
+        "location": "test/postgres-read-cursor-http.test.mjs:133:1",
+        "error": "'3 subtests failed'"
+      },
+      {
+        "test": "not ok 129 - read cursor migration persists tenant-safe sequence state",
+        "location": "test/postgres-read-cursor-schema.test.mjs:25:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0017-chat-conversation-member-list-revision',\n    +     order: 17\n    +   },\n    +   {\n    +     id: '0018-chat-conversation-preference-revision',\n    +     order: 18\n    +   },\n    +   {\n    +     id: '0019-chat-saved-message-mutation-state',\n    +     order: 19\n    +   },\n    +   {\n    +     id: '0020-chat-huddle-participant-leave-reason',\n    +     order: 20\n    +   },\n    +   {\n    +     id: '0021-chat-huddle-ending-recovery',\n    +     order: 21\n    +   },\n    +   {\n    +     id: '0022-chat-device-push-tokens',\n    +     order: 22\n    +   },\n    +   {\n    +     id: '0023-chat-conversation-list-ordering',\n    +     order: 23\n    +   },\n    +   {\n    +     id: '0024-chat-outbox-unpublished-stream-heads',\n    +     order: 24\n    +   },\n    +   {\n    +     id: '0025-chat-outbox-tenant-replay-positions',\n    +     order: 25\n    +   },\n    +   {\n    +     id: '0026-chat-notification-global-claim-indexes',\n    +     order: 26\n    +   },\n    + "
+      },
+      {
+        "test": "not ok 145 - saved-message migration persists tenant-safe per-user saves",
+        "location": "test/postgres-saved-message-schema.test.mjs:25:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0020-chat-huddle-participant-leave-reason',\n    +     order: 20\n    +   },\n    +   {\n    +     id: '0021-chat-huddle-ending-recovery',\n    +     order: 21\n    +   },\n    +   {\n    +     id: '0022-chat-device-push-tokens',\n    +     order: 22\n    +   },\n    +   {\n    +     id: '0023-chat-conversation-list-ordering',\n    +     order: 23\n    +   },\n    +   {\n    +     id: '0024-chat-outbox-unpublished-stream-heads',\n    +     order: 24\n    +   },\n    +   {\n    +     id: '0025-chat-outbox-tenant-replay-positions',\n    +     order: 25\n    +   },\n    +   {\n    +     id: '0026-chat-notification-global-claim-indexes',\n    +     order: 26\n    +   },\n    +   {\n    +     id: '0027-chat-notification-materializer-offsets',\n    +     order: 27\n    +   },\n    +   {\n    +     id: '0028-chat-outbox-expiry-cleanup',\n    +     order: 28\n    +   },\n    +   {\n    +     id: '0029-chat-message-search-vector',\n    +     order: 29\n    +   },\n    +   {\n    +     id: "
+      },
+      {
+        "test": "not ok 159 - PATCH /conversations/:threadId/follow mounts the private transactional thread-follow command",
+        "location": "test/postgres-thread-follow-http.test.mjs:146:1",
+        "error": "'new row for relation \"chat_messages\" violates check constraint \"chat_messages_content_check\"'"
+      },
+      {
+        "test": "not ok 160 - thread follow migration persists tenant-safe durable follow state",
+        "location": "test/postgres-thread-follow-schema.test.mjs:25:1",
+        "error": "|-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    ... Skipped lines\n    \n      [\n        {\n          id: '0001-chat-conversations-membership',\n          order: 1\n        },\n    ...\n        },\n    +   {\n    +     id: '0017-chat-conversation-member-list-revision',\n    +     order: 17\n    +   },\n    +   {\n    +     id: '0018-chat-conversation-preference-revision',\n    +     order: 18\n    +   },\n    +   {\n    +     id: '0019-chat-saved-message-mutation-state',\n    +     order: 19\n    +   },\n    +   {\n    +     id: '0020-chat-huddle-participant-leave-reason',\n    +     order: 20\n    +   },\n    +   {\n    +     id: '0021-chat-huddle-ending-recovery',\n    +     order: 21\n    +   },\n    +   {\n    +     id: '0022-chat-device-push-tokens',\n    +     order: 22\n    +   },\n    +   {\n    +     id: '0023-chat-conversation-list-ordering',\n    +     order: 23\n    +   },\n    +   {\n    +     id: '0024-chat-outbox-unpublished-stream-heads',\n    +     order: 24\n    +   },\n    +   {\n    +     id: '0025-chat-outbox-tenant-replay-positions',\n    +     order: 25\n    +   },\n    +   {\n    +     id: '0026-chat-notification-global-claim-indexes',\n    +     order: 26\n    +   },\n    + "
+      },
+      {
+        "test": "not ok 170 - reply summaries reach an unopened observer and replay without inflation",
+        "location": "test/postgres-thread-reply-summary.test.mjs:30:1",
+        "error": "|-\n    reconnect uses durable replay without HTTP recovery\n    \n    6 !== 3"
+      }
+    ]
+  }
+}

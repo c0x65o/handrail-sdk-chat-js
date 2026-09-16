@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { queryThreadList } from "../src/server/thread-list-query.ts";
-import { parseThreadListResult, compareThreadListPositions, ThreadListParseError } from "../src/contracts/thread-list.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { queryThreadList } from "../dist/server/thread-list-query.js";
+import { parseThreadListResult, compareThreadListPositions, ThreadListParseError } from "../dist/contracts/thread-list.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 // No shared dist and no fake/skip fallback:
 // node_modules/.bin/esbuild test/postgres-thread-list-query.test.mjs --bundle --platform=node --format=esm --packages=external --outfile=node_modules/.cache/thread-list-tests.mjs

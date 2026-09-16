@@ -154,7 +154,7 @@ const requestHash = ({ operation, huddleSessionId, intent }) =>
     .update(JSON.stringify({ operation, huddleSessionId, intent }))
     .digest("hex")}`;
 
-test("huddle screen-share HTTP route applies exclusive canonical ownership and redacts failures", async () => {
+test("huddle screen-share HTTP route applies exclusive canonical ownership and redacts failures", async (t) => {
   const backend = await createPostgresTestBackend();
 
   const harness = await createChatTestHarness({

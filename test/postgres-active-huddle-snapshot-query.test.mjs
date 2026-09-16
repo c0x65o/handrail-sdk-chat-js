@@ -142,11 +142,17 @@ test("active-huddle snapshot is actor-scoped, canonical, and provider-secret-fre
          ('tenant-a', 'huddle-active', 'participant-beta',
           '2030-01-02T00:00:01Z', NULL),
          ('tenant-a', 'huddle-active', 'participant-alpha',
-          '2030-01-02T00:00:01Z', '2030-01-02T00:01:00Z'),
+          '2030-01-02T00:00:01Z', NULL),
          ('tenant-a', 'huddle-active', 'user-a',
           '2030-01-02T00:00:02Z', NULL),
          ('tenant-a', 'huddle-thread', 'user-a',
           '2030-01-03T00:00:01Z', NULL)`,
+    );
+    await harness.pool.query(
+      `UPDATE ${tables.participants}
+          SET left_at = '2030-01-02T00:01:00Z', leave_reason = 'explicit_leave'
+        WHERE tenant_id = 'tenant-a' AND huddle_session_id = 'huddle-active'
+          AND user_id = 'participant-alpha'`,
     );
     await harness.pool.query(
       `UPDATE ${tables.sessions}

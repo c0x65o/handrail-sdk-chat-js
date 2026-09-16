@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { synchronizeDraft } from "../src/server/synchronize-draft-command.ts";
-import { queryConversationDraftSnapshot } from "../src/server/conversation-draft-snapshot-query.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { synchronizeDraft } from "../dist/server/synchronize-draft-command.js";
+import { queryConversationDraftSnapshot } from "../dist/server/conversation-draft-snapshot-query.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const actor = { tenantId: "tenant-a", userId: "drafter", roles: [] };
 const inputFor = (conversationId, suffix, notifyAuthor = false, baseRevision = 0) => ({

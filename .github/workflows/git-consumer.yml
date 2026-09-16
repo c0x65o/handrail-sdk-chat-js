@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - name: Check committed package versions
+        # Run before npm ci/prepare can regenerate checked-out source.
+        run: node scripts/generate-package-version.mjs --check
       - name: Install and build SDK
         run: npm ci --include=dev
       - name: Verify public Git consumer

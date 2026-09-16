@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
-import { createChatServer, MAX_CONVERSATION_ARCHIVE_REQUEST_BYTES } from "../src/server/create-chat-server.ts";
-import { parseThreadLifecycleResult } from "../src/contracts/thread-lifecycle.ts";
-import { parseConversationArchiveResult } from "../src/contracts/conversation-archive.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { createChatServer, MAX_CONVERSATION_ARCHIVE_REQUEST_BYTES } from "../dist/server/create-chat-server.js";
+import { parseThreadLifecycleResult } from "../dist/contracts/thread-lifecycle.js";
+import { parseConversationArchiveResult } from "../dist/contracts/conversation-archive.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 // Bundle canonical sources before running; do not use shared dist artifacts.
 const actor = { tenantId: "tenant-a", userId: "actor", roles: ["employee"] };

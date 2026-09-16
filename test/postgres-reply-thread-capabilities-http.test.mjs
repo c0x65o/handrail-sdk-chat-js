@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import test from "node:test";
-import { createChatServer } from "../src/server/create-chat-server.ts";
-import { CHAT_REPLY_THREAD_FEATURES as F } from "../src/contracts/generated/realtime-handshake.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { createChatServer } from "../dist/server/create-chat-server.js";
+import { CHAT_REPLY_THREAD_FEATURES as F } from "../dist/contracts/generated/realtime-handshake.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const actor = { tenantId: "tenant", userId: "bob", roles: [] };
 const reply = key => ({ operation: "send", conversationId: "parent", clientMessageId: key,

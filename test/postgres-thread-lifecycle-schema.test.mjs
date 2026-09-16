@@ -4,10 +4,10 @@ import test from "node:test";
 // Compile canonical sources into isolated output; never overwrite shared dist:
 // node_modules/.bin/esbuild test/postgres-thread-lifecycle-schema.test.mjs --bundle --platform=node --format=esm --packages=external --outfile=node_modules/.cache/thread-lifecycle-schema-tests.mjs
 // node --test --test-concurrency=1 "$PWD/node_modules/.cache/thread-lifecycle-schema-tests.mjs"
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { chatThreadLifecycleMigration, handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createThread } from "../src/server/create-thread-command.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { chatThreadLifecycleMigration, handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createThread } from "../dist/server/create-thread-command.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 import conversationContract from "../contracts/models/conversation.json" with { type: "json" };
 
 const migrationIndex = handrailChatPostgresMigrations.indexOf(chatThreadLifecycleMigration);

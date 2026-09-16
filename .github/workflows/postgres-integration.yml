@@ -44,6 +44,9 @@ jobs:
           cache-dependency-path: package-lock.json
       - name: Confirm PostgreSQL is ready
         run: pg_isready --dbname "$TEST_DATABASE_URL"
+      - name: Check committed package versions
+        # Run before npm ci/prepare can regenerate checked-out source.
+        run: node scripts/generate-package-version.mjs --check
       - name: Install dependencies
         run: npm ci
       - name: Run PostgreSQL integration tests

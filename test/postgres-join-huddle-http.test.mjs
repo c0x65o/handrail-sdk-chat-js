@@ -483,7 +483,7 @@ test("join-huddle HTTP route validates, authorizes, projects, and redacts", asyn
       );
     });
 
-    await t.test("maps idempotency and already-joined conflicts and allows a new visit after leaving", async (t) => {
+    await t.test("maps idempotency conflicts, renews joined media, and allows a new visit after leaving", async (t) => {
       const sharedKey = "join-http-conflict-key";
       assert.equal(
         (await requestJoin(
@@ -512,16 +512,18 @@ test("join-huddle HTTP route validates, authorizes, projects, and redacts", asyn
         )).status,
         200,
       );
-      await assertStableError(
-        await requestJoin(
-          harness.endpoint,
-          "session-already-joined",
-          joinInput("session-already-joined", "join-http-already-b"),
-        ),
-        409,
-        CHAT_HUDDLE_JOIN_CONFLICT_CODE,
-        "Huddle join conflicts with current server state",
+      const beforeRenewal = await harness.pool.query(
+        `SELECT * FROM ${tables.participants} WHERE huddle_session_id = 'session-already-joined'`,
       );
+      const renewalInput = joinInput("session-already-joined", "join-http-already-b");
+      const renewal = await requestJoin(harness.endpoint, "session-already-joined", renewalInput);
+      assert.equal(renewal.status, 200);
+      const renewed = parseHuddleCommandResult(await renewal.json(), renewalInput);
+      assert.equal(renewed.state.participants.find(value => value.userId === actorContext.userId).status, "joined");
+      assert.ok(renewed.mediaJoin, "a joined actor can obtain fresh ephemeral media material");
+      assert.deepEqual((await harness.pool.query(
+        `SELECT * FROM ${tables.participants} WHERE huddle_session_id = 'session-already-joined'`,
+      )).rows, beforeRenewal.rows, "media renewal does not create another visit or participant transition");
 
       assert.equal(
         (await requestJoin(

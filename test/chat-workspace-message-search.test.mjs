@@ -635,7 +635,7 @@ test("initial and pagination failures retain actionable retry paths", async () =
   );
   await enterText(container.querySelector('input[name="messageSearchQuery"]'), "retry");
   await wait(45);
-  assert.match(container.querySelector('[role="alert"]').textContent, /could not be completed/);
+  assert.match(container.querySelector('.handrail-chat__message-search-error[role="alert"]').textContent, /could not be completed/);
   await click([...container.querySelectorAll("button")]
     .find((button) => button.textContent === "Retry search"));
   assert.match(container.textContent, /Searching messages/);
@@ -648,7 +648,7 @@ test("initial and pagination failures retain actionable retry paths", async () =
   assert.equal(container.querySelector(".handrail-chat__message-search-load-more").disabled, true);
   await wait(35);
   assert.equal(container.querySelectorAll('[role="option"]').length, 1);
-  assert.match(container.querySelector('[role="alert"]').textContent, /More results could not be loaded/);
+  assert.match(container.querySelector('.handrail-chat__message-search-error[role="alert"]').textContent, /More results could not be loaded/);
   await click([...container.querySelectorAll("button")]
     .find((button) => button.textContent === "Retry loading more"));
   await wait(15);

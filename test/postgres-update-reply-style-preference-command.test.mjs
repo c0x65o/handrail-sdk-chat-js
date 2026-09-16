@@ -6,12 +6,12 @@ import test from "node:test";
 // No package self-imports or shared dist output: concurrent builds cannot supply stale command code.
 import { updateReplyStylePreference, UpdateReplyStylePreferenceCommandError,
   UPDATE_REPLY_STYLE_PREFERENCE_IDEMPOTENCY_OPERATION,
-  UPDATE_REPLY_STYLE_PREFERENCE_AUDIT_ACTION } from "../src/server/update-reply-style-preference-command.ts";
-import { parseUpdateReplyStylePreferenceResult } from "../src/contracts/reply-style-preference.ts";
-import { parseKnownDurableEvent } from "../src/contracts/generated/durable-events.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+  UPDATE_REPLY_STYLE_PREFERENCE_AUDIT_ACTION } from "../dist/server/update-reply-style-preference-command.js";
+import { parseUpdateReplyStylePreferenceResult } from "../dist/contracts/reply-style-preference.js";
+import { parseKnownDurableEvent } from "../dist/contracts/generated/durable-events.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const actor = { tenantId: "tenant-a", userId: "alice", roles: [] };
 const input = (key, style = "discord", baseRevision = 0) => ({

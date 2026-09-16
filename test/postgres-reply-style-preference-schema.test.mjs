@@ -5,12 +5,12 @@ import test from "node:test";
 // node_modules/.bin/esbuild test/postgres-reply-style-preference-schema.test.mjs --bundle --platform=node --format=esm --packages=external --outfile=node_modules/.cache/reply-style-preference-schema-tests.mjs
 // node --test --test-concurrency=1 "$PWD/node_modules/.cache/reply-style-preference-schema-tests.mjs"
 // node_modules/.bin/tsc --project tsconfig.message-reply-schema-type-tests.json
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
 import {
   chatUserReplyStylePreferencesMigration,
   handrailChatPostgresMigrations,
-} from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+} from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const migration = chatUserReplyStylePreferencesMigration;
 const migrationIndex = handrailChatPostgresMigrations.indexOf(migration);

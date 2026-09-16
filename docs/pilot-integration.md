@@ -1,5 +1,11 @@
 # First-project pilot integration
 
+**Scope update (2026-09-16):** The current owner readiness gate includes
+Discord-style threads and working huddles on supported clients, followed by
+independent full QA before owner-approved ERP integration. The historical text
+pilot below is an integration reference; its exclusions do not waive these
+requirements. See the [current matrix](validation/sdk-finish-2026-09-16/README.md).
+
 This is the supported path for the first text-chat pilot. Neither the npm nor
 Flutter package is published yet. Consume the distribution needed by the host
 from its exact public Git commit; the TypeScript and Flutter packages have
@@ -129,10 +135,10 @@ authorization for entity-backed conversations, and any host-controlled feature
 gating.
 
 This is a text-chat pilot, not broad Slack parity. Production push delivery,
-OS notifications, provider object storage, voice/video/screen sharing, a media
-provider, retention/eDiscovery, moderation, malware scanning, analytics,
+OS notifications, provider object storage, video/screen sharing beyond the required huddle acceptance, retention/eDiscovery, moderation, malware scanning, analytics,
 federation, and operational scale/SLO validation remain host work or later SDK
-milestones.
+milestones. Huddle audio and lifecycle are required for the current gate;
+the host must supply and qualify its media provider and client delegates.
 
 ## Flutter pilot
 

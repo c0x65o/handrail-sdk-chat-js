@@ -35,7 +35,8 @@ export async function generatePackageVersion({
   check = false,
   root = repositoryRoot,
 } = {}) {
-  const generated = generatePackageVersionSource(await readPackageVersion(root));
+  const version = await readPackageVersion(root);
+  const generated = generatePackageVersionSource(version);
   const output = resolve(root, packageVersionOutputPath);
   if (check) {
     let existing;
@@ -44,7 +45,19 @@ export async function generatePackageVersion({
     } catch (error) {
       if (error?.code !== "ENOENT") throw error;
     }
-    return existing === generated ? [] : [packageVersionOutputPath];
+    const drifted = existing === generated ? [] : [packageVersionOutputPath];
+    // Check the committed lock metadata too: npm ci/prepare can otherwise
+    // regenerate source before CI observes a partially applied version bump.
+    let lock;
+    try {
+      lock = JSON.parse(await readFile(resolve(root, "package-lock.json"), "utf8"));
+    } catch (error) {
+      if (error?.code !== "ENOENT" && !(error instanceof SyntaxError)) throw error;
+    }
+    if (lock?.version !== version || lock?.packages?.[""]?.version !== version) {
+      drifted.push("package-lock.json");
+    }
+    return drifted;
   }
 
   await mkdir(dirname(output), { recursive: true });
@@ -78,7 +91,7 @@ async function main() {
     console.error(
       `Generated package-version source is out of date:\n${drifted
         .map((path) => `- ${relative(options.root, resolve(options.root, path))}`)
-        .join("\n")}\nRun npm run generate:package-version.`,
+        .join("\n")}\nRun npm run generate:package-version. Align package-lock.json version metadata with package.json if listed.`,
     );
     process.exitCode = 1;
   } else if (options.check) {

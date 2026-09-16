@@ -3,13 +3,13 @@ import { createHash } from "node:crypto";
 import test from "node:test";
 
 // Bundle canonical sources with esbuild before running; never use shared dist.
-import { CHAT_PROTOCOL_VERSION } from "../src/contracts/realtime.ts";
-import { MessageMutationParseError } from "../src/contracts/message-mutations.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { SendMessageCommandError, sendMessage } from "../src/server/send-message-command.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { CHAT_PROTOCOL_VERSION } from "../dist/contracts/realtime.js";
+import { MessageMutationParseError } from "../dist/contracts/message-mutations.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { SendMessageCommandError, sendMessage } from "../dist/server/send-message-command.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const quoteIdentifier = (identifier) =>
   `"${identifier.replaceAll('"', '""')}"`;

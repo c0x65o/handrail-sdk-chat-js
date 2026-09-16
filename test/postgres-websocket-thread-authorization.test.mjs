@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import test from "node:test";
 import { WebSocket } from "ws";
-import { CHAT_PROTOCOL_VERSION } from "../src/contracts/realtime.ts";
-import { createChatServer } from "../src/server/create-chat-server.ts";
-import { authorizeChatWebSocketStream } from "../src/server/websocket-subscriptions.ts";
-import { readChatWebSocketReplay, resolveBufferedReplayEvents } from "../src/server/websocket-replay.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { CHAT_PROTOCOL_VERSION } from "../dist/contracts/realtime.js";
+import { createChatServer } from "../dist/server/create-chat-server.js";
+import { authorizeChatWebSocketStream } from "../dist/server/websocket-subscriptions.js";
+import { readChatWebSocketReplay, resolveBufferedReplayEvents } from "../dist/server/websocket-replay.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 // Bundle canonical sources into an isolated artifact; never use shared dist.
 test("thread websocket access follows current parent authority in PostgreSQL", { timeout: 60_000 }, async (t) => {

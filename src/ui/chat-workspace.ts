@@ -2719,7 +2719,7 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
     const pendingCreatedConversationId = pendingCreatedConversationIdRef.current;
     if (
       pendingCreatedConversationId !== undefined &&
-      navigationConversations.some(({ id }) => id === pendingCreatedConversationId)
+      listedConversations.some(({ id }) => id === pendingCreatedConversationId)
     ) {
       pendingCreatedConversationIdRef.current = undefined;
     }
@@ -2741,7 +2741,7 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
       }
       return navigationConversations[0]?.id;
     });
-  }, [controlled, navigationConversations, props.defaultConversationId]);
+  }, [controlled, listedConversations, navigationConversations, props.defaultConversationId]);
 
   const detailResult = useConversation(
     selectedConversationId ?? EMPTY_CONVERSATION_ID,
@@ -2758,7 +2758,7 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
     if (
       pendingCreatedConversationId === undefined ||
       selectedConversationId !== pendingCreatedConversationId ||
-      navigationConversations.some(({ id }) => id === pendingCreatedConversationId)
+      listedConversations.some(({ id }) => id === pendingCreatedConversationId)
     ) {
       return;
     }
@@ -2771,15 +2771,18 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
       if (current !== pendingCreatedConversationId) return current;
       if (
         props.defaultConversationId !== undefined &&
-        navigationConversations.some(({ id }) => id === props.defaultConversationId)
+        navigationConversations.some(({ id }) =>
+          id !== pendingCreatedConversationId && id === props.defaultConversationId)
       ) {
         return props.defaultConversationId;
       }
-      return navigationConversations[0]?.id;
+      return navigationConversations.find(({ id }) =>
+        id !== pendingCreatedConversationId)?.id;
     });
   }, [
     controlled,
     createdConversationDefinitivelyUnavailable,
+    listedConversations,
     navigationConversations,
     props.defaultConversationId,
     selectedConversationId,

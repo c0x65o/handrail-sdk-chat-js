@@ -4,11 +4,11 @@ import test from "node:test";
 // Bundle this focused suite from canonical sources, without using shared dist:
 // node_modules/.bin/esbuild test/postgres-thread-access.test.mjs --bundle --platform=node --format=esm --packages=external --outfile=node_modules/.cache/thread-access-tests.mjs
 // node --test --test-concurrency=1 "$PWD/node_modules/.cache/thread-access-tests.mjs"
-import { authorizeThreadAccess } from "../src/server/thread-access.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { authorizeThreadAccess } from "../dist/server/thread-access.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const actor = Object.freeze({ tenantId: "tenant-a", userId: "reader", roles: [] });
 const sanitizedDenial = (error) =>

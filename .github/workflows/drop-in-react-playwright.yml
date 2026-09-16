@@ -30,6 +30,9 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             examples/drop-in-react/package-lock.json
+      - name: Check committed package versions
+        # Run before npm ci/prepare can regenerate checked-out source.
+        run: node scripts/generate-package-version.mjs --check
       - name: Install root dependencies
         run: npm ci --include=dev
       - name: Read frozen Flutter revision

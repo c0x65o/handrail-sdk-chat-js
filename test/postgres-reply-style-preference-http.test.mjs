@@ -1,15 +1,15 @@
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
-import { createChatServer } from "../src/server/create-chat-server.ts";
+import { createChatServer } from "../dist/server/create-chat-server.js";
 import {
   REPLY_STYLE_PREFERENCE_FEATURE,
   parseReplyStylePreferenceState,
   parseUpdateReplyStylePreferenceResult,
-} from "../src/contracts/reply-style-preference.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+} from "../dist/contracts/reply-style-preference.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 // Source bundle belongs in node_modules/.cache; shared dist is never overwritten.
 const route = "/preferences/reply-style";

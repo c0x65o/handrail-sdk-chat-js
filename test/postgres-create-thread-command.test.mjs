@@ -3,17 +3,17 @@ import { createHash } from "node:crypto";
 import test from "node:test";
 
 // Bundle canonical sources as documented in postgres-thread-participant.test.mjs.
-import { CHAT_PROTOCOL_VERSION } from "../src/contracts/realtime.ts";
-import { ThreadCreationParseError } from "../src/contracts/thread-creation.ts";
+import { CHAT_PROTOCOL_VERSION } from "../dist/contracts/realtime.js";
+import { ThreadCreationParseError } from "../dist/contracts/thread-creation.js";
 import {
   CREATE_THREAD_ENTITY_POLICY_ACTION,
   CreateThreadCommandError,
   createThread,
-} from "../src/server/create-thread-command.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+} from "../dist/server/create-thread-command.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const quoteIdentifier = (identifier) =>
   `"${identifier.replaceAll('"', '""')}"`;

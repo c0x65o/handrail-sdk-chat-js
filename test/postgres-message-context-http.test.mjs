@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
-import { createChatServer } from "../src/server/create-chat-server.ts";
-import { MESSAGE_CONTEXT_PATH, parseMessageContextResult } from "../src/contracts/message-context.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { createChatServer } from "../dist/server/create-chat-server.js";
+import { MESSAGE_CONTEXT_PATH, parseMessageContextResult } from "../dist/contracts/message-context.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 // Bundle canonical sources into node_modules/.cache (two levels below package.json).
 // Use the existing isolated PostgreSQL backend; no database fake or skip fallback.

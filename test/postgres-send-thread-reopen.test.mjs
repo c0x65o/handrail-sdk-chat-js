@@ -2,12 +2,12 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 // Bundle canonical sources with esbuild before running; never use shared dist.
-import { sendMessage, SendMessageCommandError } from "../src/server/send-message-command.ts";
-import { updateThreadLifecycle } from "../src/server/update-thread-lifecycle-command.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+import { sendMessage, SendMessageCommandError } from "../dist/server/send-message-command.js";
+import { updateThreadLifecycle } from "../dist/server/update-thread-lifecycle-command.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const actor = { tenantId: "tenant", userId: "sender", roles: ["employee"] };
 const input = (id, suffix = "send", extra = {}) => ({

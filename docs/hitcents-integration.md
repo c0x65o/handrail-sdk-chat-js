@@ -1,5 +1,13 @@
 # Hitcents ERP integration recipe — planning supplement
 
+**Current sdk_finish gate (2026-09-16):** Discord-style threads, saved reply
+settings and working huddles are required before ERP adoption. The current
+[candidate acceptance matrix](validation/sdk-finish-2026-09-16/README.md) supersedes
+older text-pilot exclusions. This recipe remains planning only; independent
+full QA, reviewed Git publication and explicit owner readiness/integration
+approval must precede any ERP modification. Historical source mappings below
+have not been refreshed against ERP in this worker.
+
 This is documentation for owner task `24350c4f-985e-4762-ac15-445f69009f18`,
 original work request `0bb40a03-7913-4993-be3d-d60ef7fcb3cd`, continued by
 `fbbb5fd9-1672-413b-84d0-42ae5d06a564`, dated 2026-09-11, under strategy
@@ -133,7 +141,7 @@ until this policy is defined; a missing tenant claim is not a default grant.
   identities. Flutter directory search needs the host delegate described in the
   [capability manifest](../contracts/cross-client-capabilities.v1.json).
 
-Authentication requirements snapshot `cf4c7a5e0f82` remains authoritative for
+Authentication requirements snapshot `d1901171900c` is authoritative for
 this assignment: host authentication API rate limiting is enabled at **10
 requests / 60 seconds**. SDK Chat admission does not cover the login API.
 Ordinary passwords have no minimum or character-class requirements; MFA is not
@@ -298,9 +306,13 @@ HTTP/snapshot/WebSocket readiness passes the
 Discord styles, failed-save recovery, reload/reconnect, two-client propagation,
 same-conversation references, mention opt-out and independent unread streams.
 Create/Open Thread remains distinct and one-per-root; no flag or saved setting
-grants permission or reroutes a queued send. Naming/lifecycle/discovery are
-optional for basic text adoption, mandatory to verify if advertised; inactivity
-also needs explicit host policy.
+grants permission or reroutes a queued send. Discord-style thread creation, naming, navigation, source context and unread/notification
+semantics are required for this readiness gate; inactivity also needs explicit
+host policy. Huddles require a trusted server media adapter and matching React
+and Flutter media delegates. Verify two participants exchanging real audio,
+join/leave/rejoin, mute, permission denial, transport loss and cleanup. The lab
+Flutter media delegate is a fixture, so its controls cannot establish native
+media acceptance. No media provider or ERP adapter is selected by this recipe.
 
 The existing lead delivers this separate documentation revision through the
 current planner action `326c9a8e-a7c9-4871-a314-817741f5d86e`, preserving the
@@ -330,3 +342,15 @@ import, compatibility rerun, capture or runtime check. It creates no
 callback/queue/database record and performs no ERP adoption; the existing lead
 delivers evidence and independent management decides acceptance. The existing
 Main monitor retains routine reporting at September 11 13:00Z.
+
+
+## Current continuation
+
+Use the sdk_finish evidence package linked above for current candidate hashes
+and commands. The September 11 task, reviewer, cancelled states and monitoring
+references above are retained history, not new instructions to create controllers
+or evidence of current acceptance. The existing task planner owns the next QA
+handoff. Refresh the supplied ERP seam hashes in a separately scoped read before
+implementation; the current worker has only the three SDK checkouts. Preserve
+enabled host authentication API limits of 10 requests per 60 seconds. Do not
+apply SDK request rate limits indiscriminately to ordinary message traffic.

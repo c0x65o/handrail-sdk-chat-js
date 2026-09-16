@@ -166,8 +166,8 @@ test("trusted leave-huddle is tenant-safe, atomic, replayable, and used by disco
     }).apply();
     assert.deepEqual(
       {
-        id: migrationResult.applied.at(-1).id,
-        order: migrationResult.applied.at(-1).order,
+        id: migrationResult.applied.find(migration => migration.id === "0038-chat-huddle-rejoin").id,
+        order: migrationResult.applied.find(migration => migration.id === "0038-chat-huddle-rejoin").order,
       },
       { id: "0038-chat-huddle-rejoin", order: 38 },
     );

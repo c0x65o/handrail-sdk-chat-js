@@ -1,5 +1,10 @@
 # Chat SDK qualification — 2026-09-11
 
+Historical evidence. The [2026-09-16 sdk_finish matrix](../sdk-finish-2026-09-16/README.md)
+records current candidate verification. Its required threads and huddles
+supersede the conditional/optional text-pilot classifications below. Retained
+passes, blockers, fixture captures and cancellation states remain history.
+
 Owner task `24350c4f-985e-4762-ac15-445f69009f18`; worker request
 `973fc624-c6aa-4cb0-acf2-8e3da58bdef6`; run
 `7d122530-c788-48fb-bfaa-02378eeecb48`. This is implementation verification,

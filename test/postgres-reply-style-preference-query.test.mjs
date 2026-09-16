@@ -10,8 +10,8 @@ import {
   handrailChatPostgresMigrations,
   queryReplyStylePreference,
   ReplyStylePreferenceParseError,
-} from "../src/server/index.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+} from "../dist/server/index.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const actor = { tenantId: "tenant-a", userId: "alice", roles: [] };
 const optionsWithoutDatabase = {

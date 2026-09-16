@@ -1,23 +1,21 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-// Bundle canonical sources without reading or writing shared dist:
-// node_modules/.bin/esbuild test/postgres-attachment-download-query.test.mjs --bundle --platform=node --format=esm --packages=external --outfile=node_modules/.cache/attachment-download-postgres-tests.mjs
-// node --test --test-concurrency=1 "$PWD/node_modules/.cache/attachment-download-postgres-tests.mjs"
+// npm run test:postgres builds the current candidate before these imports.
 import {
   AttachmentTransportError,
   MAX_ATTACHMENT_DOWNLOAD_DESCRIPTOR_TTL_MS,
-} from "../src/contracts/attachment-transport.ts";
+} from "../dist/contracts/attachment-transport.js";
 import {
   ATTACHMENT_DOWNLOAD_ENTITY_POLICY_ACTION,
   AttachmentDownloadQueryError,
   queryAttachmentDownload,
-} from "../src/server/attachment-download-query.ts";
-import { CHAT_AUTHORIZATION_ERROR_CODE, ChatAuthorizationError } from "../src/server/request-context.ts";
+} from "../dist/server/attachment-download-query.js";
+import { CHAT_AUTHORIZATION_ERROR_CODE, ChatAuthorizationError } from "../dist/server/request-context.js";
 import {
   createChatTestHarness,
   createPostgresTestBackend,
-} from "../src/testing/index.ts";
+} from "../dist/testing/index.js";
 
 const actorInput = Object.freeze({
   credential: "attachment-download-actor",

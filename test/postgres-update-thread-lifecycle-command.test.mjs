@@ -8,12 +8,12 @@ import {
   updateThreadLifecycle,
   UpdateThreadLifecycleCommandError,
   UPDATE_THREAD_LIFECYCLE_IDEMPOTENCY_OPERATION,
-} from "../src/server/update-thread-lifecycle-command.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { CHAT_PROTOCOL_VERSION } from "../src/contracts/realtime.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+} from "../dist/server/update-thread-lifecycle-command.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { CHAT_PROTOCOL_VERSION } from "../dist/contracts/realtime.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const actor = Object.freeze({ tenantId: "tenant-a", userId: "actor", roles: ["host-owner"] });
 const denial = (error) => error instanceof ChatAuthorizationError &&

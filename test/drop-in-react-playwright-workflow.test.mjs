@@ -50,6 +50,7 @@ test("drop-in React Playwright workflow preserves the browser gate contract", as
     [
       ["uses", "actions/checkout@v4"],
       ["uses", "actions/setup-node@v4"],
+      ["run", "node scripts/generate-package-version.mjs --check"],
       ["run", "npm ci --include=dev"],
       ["run", "node scripts/read-flutter-revision.mjs"],
       ["uses", "actions/checkout@v4"],

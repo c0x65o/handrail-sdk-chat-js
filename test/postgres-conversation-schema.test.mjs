@@ -4,13 +4,13 @@ import test from "node:test";
 // Bundle canonical sources without overwriting the shared dist directory:
 // node_modules/.bin/esbuild test/postgres-conversation-schema.test.mjs --bundle --platform=node --format=esm --packages=external --outfile=node_modules/.cache/conversation-schema-tests.mjs
 // node --test --test-concurrency=1 "$PWD/node_modules/.cache/conversation-schema-tests.mjs"
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
 import {
   chatThreadNamesMigration,
   handrailChatPostgresMigrations,
-} from "../src/server/postgres-schema-migrations.ts";
-import { createThread } from "../src/server/create-thread-command.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+} from "../dist/server/postgres-schema-migrations.js";
+import { createThread } from "../dist/server/create-thread-command.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 import conversationContract from "../contracts/models/conversation.json" with { type: "json" };
 
 const quoteIdentifier = (identifier) =>

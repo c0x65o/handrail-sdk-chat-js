@@ -616,12 +616,16 @@ export class ChatHuddleMediaSession {
       this.#publish({ ...this.#state, lastFailure: mapped.failure });
       return;
     }
+    if (providerState.connectionStatus === "disconnected") {
+      // Terminal provider loss releases tracks and subscriptions just like leave.
+      // Reconnecting remains a live provider state and does not take this path.
+      void this.#disconnect(false).catch(() => undefined);
+      return;
+    }
     this.#publish({
       connectionStatus: providerState.connectionStatus === "reconnecting"
         ? "reconnecting"
-        : providerState.connectionStatus === "disconnected"
-          ? "idle"
-          : "connected",
+        : "connected",
       microphoneMuted: providerState.microphoneMuted === true,
       screenShareActive: providerState.screenShareActive === true,
       devices: immutableDeviceState(providerState.devices),

@@ -4532,7 +4532,7 @@ test("named thread dialog uses the constrained workspace shell at a narrow viewp
     assert.match(css, /thread-header h2 \{[^}]*overflow-wrap: anywhere/);
     assert.match(css, /timeline-thread \{[^}]*overflow-wrap: anywhere;[^}]*max-inline-size: 100%/);
     await namedInput(container, "🚀".repeat(100)); await namedSubmit(container);
-    assert.notEqual(container.querySelector('[aria-label="Close thread"]'), null);
+    assert.notEqual(container.querySelector('[aria-label="Close panel"]'), null);
   } finally { window.innerWidth = previousWidth; }
 });
 

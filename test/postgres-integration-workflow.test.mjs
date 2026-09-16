@@ -78,6 +78,7 @@ test("PostgreSQL integration workflow preserves the disposable database contract
   );
   assert.deepEqual(commands, [
     'pg_isready --dbname "$TEST_DATABASE_URL"',
+    "node scripts/generate-package-version.mjs --check",
     "npm ci",
     "npm run test:postgres",
   ]);

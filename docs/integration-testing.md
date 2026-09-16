@@ -216,6 +216,24 @@ PostgreSQL migrations, queries, and WebSocket delivery through the existing
 URL-backed harness; it does not provision a persistent backend for future workers
 or change project environment configuration. PostgreSQL 16 was not run locally.
 
+## Candidate verification order
+
+Before any installation or build, run `node scripts/generate-package-version.mjs --check`.
+It checks package.json against both root lockfile version fields and the generated
+client constant without changing files. All SDK CI workflows gate installation
+with this check; `npm ci` runs prepare/build and would otherwise conceal drift.
+After recording any failure, repair generated source with
+`npm run generate:package-version` and explicitly reconcile lock metadata.
+
+`npm run test:postgres` builds the candidate and tests its compiled output.
+PostgreSQL tests import compiled `dist` modules (or public package exports), so
+Node strip-only TypeScript support is not a prerequisite. Do not bypass the build.
+The native cluster recipe above may run this full command in place of its focused
+Node command. Use PostgreSQL 16 for the React/storage qualification, which checks
+the actual server major version. Keep preparation, test results and schema/cluster
+cleanup receipts separate. See [current readiness](validation/sdk-finish-2026-09-16/README.md)
+for the exact candidate results, including failures and unverified runtime checks.
+
 ## Actors and host-edge fixtures
 
 An actor fixture contains an opaque credential and a trusted server-side actor

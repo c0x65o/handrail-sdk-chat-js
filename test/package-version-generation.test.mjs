@@ -58,9 +58,10 @@ test("build refreshes package version while main CI checks committed drift", asy
   assert.match(nodeWorkflow, /pull_request:/);
 });
 
-test("CI version gate protects checked-out bytes before install lifecycles", async (t) => {
+for (const workflowName of ["node-tests", "postgres-integration"]) {
+test(`${workflowName} version gate protects checked-out bytes before install lifecycles`, async (t) => {
   const manifest = JSON.parse(await readFile(resolve(repositoryRoot, "package.json"), "utf8"));
-  const workflow = await readFile(resolve(repositoryRoot, ".github/workflows/node-tests.yml"), "utf8");
+  const workflow = await readFile(resolve(repositoryRoot, `.github/workflows/${workflowName}.yml`), "utf8");
   // Execute the workflow's actual single-line run steps, stopping on failure as
   // Actions does. Fail closed if its command shape changes (including block YAML).
   const commands = [...workflow.matchAll(/^\s+run: (.+)$/gm)].map((match) => match[1].trim());
@@ -69,9 +70,12 @@ test("CI version gate protects checked-out bytes before install lifecycles", asy
     command === "npm run check:package-version",
   );
   assert.ok(checkCommand);
-  assert.deepEqual([...commands].sort(), [checkCommand, "npm ci", "npm run build", "npm run test:node"].sort());
-  assert.equal(commands.at(-1), "npm run test:node");
-  const lifecycleCommands = commands.slice(0, -1);
+  const expected = workflowName === "node-tests"
+    ? [checkCommand, "npm ci", "npm run build", "npm run test:node"]
+    : ['pg_isready --dbname "$TEST_DATABASE_URL"', checkCommand, "npm ci", "npm run test:postgres"];
+  assert.deepEqual([...commands].sort(), expected.sort());
+  // PostgreSQL readiness is external to version lifecycles; test:postgres builds.
+  const lifecycleCommands = commands.filter(command => !command.startsWith("pg_isready") && !command.startsWith("npm run test:"));
   const generationCommand = manifest.scripts.build.split("&&")[0].trim();
   assert.equal(manifest.scripts.prepare, "npm run build");
   assert.equal(generationCommand, "node scripts/generate-package-version.mjs");
@@ -147,7 +151,7 @@ test("CI version gate protects checked-out bytes before install lifecycles", asy
     const f = await fixture(t, false);
     await runSteps(t, f.root, lifecycleCommands);
     assert.deepEqual(await readFile(f.generatedPath), f.before);
-    assert.equal(await readFile(resolve(f.root, "lifecycle.log"), "utf8"), "preinstall\nbuild\nbuild\n");
+    assert.equal(await readFile(resolve(f.root, "lifecycle.log"), "utf8"), (workflowName === "node-tests" ? "preinstall\nbuild\nbuild\n" : "preinstall\nbuild\n"));
   });
 
   await t.test("former install-first ordering conceals stale checked-out source", async (t) => {
@@ -158,6 +162,7 @@ test("CI version gate protects checked-out bytes before install lifecycles", asy
     assert.equal(await readFile(resolve(f.root, "lifecycle.log"), "utf8"), "preinstall\nbuild\nbuild\n");
   });
 });
+}
 
 test("npm version lifecycle regenerates the browser package version", async (t) => {
   const temporaryRoot = await mkdtemp(join(tmpdir(), "handrail-package-version-"));
@@ -248,6 +253,7 @@ test("check mode detects a generated browser package version that trails the man
     JSON.stringify({ version: "9.8.7-test" }),
     "utf8",
   );
+  await writeFile(resolve(temporaryRoot, "package-lock.json"), JSON.stringify({ version: "9.8.7-test", packages: { "": { version: "9.8.7-test" } } }));
   await generatePackageVersion({ root: temporaryRoot });
   assert.deepEqual(
     await generatePackageVersion({ check: true, root: temporaryRoot }),
@@ -259,6 +265,7 @@ test("check mode detects a generated browser package version that trails the man
     JSON.stringify({ version: "9.8.8-test" }),
     "utf8",
   );
+  await writeFile(resolve(temporaryRoot, "package-lock.json"), JSON.stringify({ version: "9.8.8-test", packages: { "": { version: "9.8.8-test" } } }));
   const generatedPath = resolve(temporaryRoot, packageVersionOutputPath);
   const generatedBeforeCheck = await readFile(generatedPath);
   assert.deepEqual(
@@ -294,4 +301,40 @@ test("check mode detects a generated browser package version that trails the man
     generatePackageVersionSource("9.8.8-test"),
   );
   assert.deepEqual(await generatePackageVersion({ check: true, root: temporaryRoot }), []);
+});
+
+test("version check rejects missing, malformed, or independently stale lock metadata without rewriting it", async (t) => {
+  const root = await mkdtemp(join(tmpdir(), "handrail-version-lock-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await writeFile(resolve(root, "package.json"), JSON.stringify({ version: "2.3.4" }));
+  await generatePackageVersion({ root });
+  const lockPath = resolve(root, "package-lock.json");
+  const generated = await readFile(resolve(root, packageVersionOutputPath));
+  for (const lock of [undefined, "{broken", {},
+    { version: "2.3.3", packages: { "": { version: "2.3.4" } } },
+    { version: "2.3.4", packages: { "": { version: "2.3.3" } } },
+  ]) {
+    if (lock !== undefined) await writeFile(lockPath, typeof lock === "string" ? lock : JSON.stringify(lock));
+    const before = await readFile(lockPath).catch(() => null);
+    assert.deepEqual(await generatePackageVersion({ check: true, root }), ["package-lock.json"]);
+    await assert.rejects(execFileAsync(process.execPath, [generatorPath, "--check", "--root", root]), error => {
+      assert.equal(error.code, 1);
+      assert.match(error.stderr, /package-lock.json/);
+      return true;
+    });
+    assert.deepEqual(await readFile(lockPath).catch(() => null), before);
+    assert.deepEqual(await readFile(resolve(root, packageVersionOutputPath)), generated);
+  }
+  await writeFile(lockPath, JSON.stringify({ version: "2.3.4", packages: { "": { version: "2.3.4" } } }));
+  assert.deepEqual(await generatePackageVersion({ check: true, root }), []);
+});
+
+test("every SDK CI installation is preceded by the dependency-free committed version gate", async () => {
+  for (const name of ["node-tests", "node-typecheck", "postgres-integration", "browser-state-regressions", "cross-runtime-conformance", "drop-in-react-playwright", "git-consumer"]) {
+    const workflow = await readFile(resolve(repositoryRoot, `.github/workflows/${name}.yml`), "utf8");
+    const commands = [...workflow.matchAll(/^\s+run: (.+)$/gm)].map(match => match[1].trim());
+    const gate = commands.indexOf("node scripts/generate-package-version.mjs --check");
+    const install = commands.findIndex(command => command.startsWith("npm ci"));
+    assert.ok(gate >= 0 && install > gate, `${name}: guard must precede installation`);
+  }
 });

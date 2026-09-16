@@ -4,18 +4,18 @@ import test from "node:test";
 import {
   AttachmentTransportError,
   MAX_ATTACHMENT_SIZE_BYTES,
-} from "../src/contracts/attachment-transport.ts";
+} from "../dist/contracts/attachment-transport.js";
 import {
   PREPARE_ATTACHMENT_CAPABILITY,
   PREPARE_ATTACHMENT_ENTITY_POLICY_ACTION,
   PrepareAttachmentCommandError,
   prepareAttachment,
-} from "../src/server/prepare-attachment-command.ts";
-import { ChatAuthorizationError } from "../src/server/request-context.ts";
-import { createPostgresMigrationRunner } from "../src/server/postgres-migrations.ts";
-import { handrailChatPostgresMigrations } from "../src/server/postgres-schema-migrations.ts";
-import { sendMessage } from "../src/server/send-message-command.ts";
-import { createPostgresTestBackend } from "../src/testing/index.ts";
+} from "../dist/server/prepare-attachment-command.js";
+import { ChatAuthorizationError } from "../dist/server/request-context.js";
+import { createPostgresMigrationRunner } from "../dist/server/postgres-migrations.js";
+import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
+import { sendMessage } from "../dist/server/send-message-command.js";
+import { createPostgresTestBackend } from "../dist/testing/index.js";
 
 const quoteIdentifier = (identifier) =>
   `"${identifier.replaceAll('"', '""')}"`;

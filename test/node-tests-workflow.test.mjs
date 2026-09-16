@@ -157,7 +157,7 @@ test("Node test workflow preserves its install, build, and safety contract", asy
   const commands = [...workflow.matchAll(/^        run: (.+)$/gmu)].map(
     (match) => match[1],
   );
-  assert.deepEqual(commands, ["npm ci", "npm run check:package-version", "npm run build", "npm run test:node"]);
+  assert.deepEqual(commands, ["node scripts/generate-package-version.mjs --check", "npm ci", "npm run build", "npm run test:node"]);
   assert.equal(commands.filter((command) => command === "npm run build").length, 1);
   assert.equal(commands.filter((command) => command === "npm run test:node").length, 1);
 

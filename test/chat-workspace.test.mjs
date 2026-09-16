@@ -318,6 +318,7 @@ const seedMembershipMembers = (cache, members, revision = 7) => {
 };
 
 const preferenceDesiredState = (input) => ({
+  isStarred: input.isStarred,
   notificationPreference: input.notificationPreference,
   mute: input.mute,
 });
@@ -349,6 +350,7 @@ const seedPreferenceRevision = (
       conversationId: firstId,
       expectedPreferenceRevision: expected,
       idempotencyKey: `seed-preference-${expected}`,
+      isStarred: false,
       ...preference,
     };
     cache.reconcileCurrentUserConversationPreference(
@@ -862,7 +864,9 @@ test("conversation rows distinguish types and expose only nonzero canonical unre
   }))));
   const container = document.createElement("div");
   container.innerHTML = markup;
-  const buttons = [...container.querySelectorAll(".handrail-chat__conversation-button")];
+  const buttons = conversations.map(({ id }) => container.querySelector(
+    `[data-conversation-id="${id}"]`,
+  ));
 
   assert.deepEqual(
     buttons.map((button) => button.dataset.conversationKind),
@@ -1524,17 +1528,32 @@ test("fifty direct-message rows use list participant snapshots without detail or
     conversationId: null,
     currentUserId: actorId,
   }));
-  const rows = [...container.querySelectorAll(".handrail-chat__conversation-button")];
-
+  const navigation = container.querySelector(".handrail-chat__navigation");
+  const rendered = new Map();
+  for (let offset = 0; offset <= 3200; offset += 400) {
+    await act(async () => {
+      navigation.scrollTop = offset;
+      navigation.dispatchEvent(new Event("scroll"));
+      await flush();
+    });
+    const mountedRows = [...container.querySelectorAll(".handrail-chat__conversation-button")];
+    assert.ok(mountedRows.length < 50, "navigation keeps a bounded mounted window");
+    for (const row of mountedRows) rendered.set(row.dataset.conversationId, row.cloneNode(true));
+  }
+  const rows = [...rendered.values()];
   assert.equal(rows.length, 50);
   assert.equal(rows.every((button) =>
     !["Direct conversation", "Group conversation"].includes(
       button.querySelector(".handrail-chat__conversation-label").textContent,
     )), true);
-  assert.equal(container.querySelectorAll(".handrail-chat__conversation-avatar-stack").length, 25);
-  assert.equal([...container.querySelectorAll(".handrail-chat__conversation-avatar-stack")]
-    .every((stack) => stack.querySelectorAll(".handrail-chat__conversation-avatar-wrap").length === 3), true);
-  assert.equal(container.querySelectorAll(".handrail-chat__conversation-avatar-overflow").length, 25);
+  const groupRows = rows.filter(row => row.dataset.conversationKind === "group-direct");
+  assert.equal(groupRows.length, 25);
+  assert.equal(groupRows.every(row => row.querySelectorAll(
+    ".handrail-chat__conversation-avatar-stack .handrail-chat__conversation-avatar-wrap",
+  ).length === 3), true);
+  assert.equal(groupRows.every(row => row.querySelector(
+    ".handrail-chat__conversation-avatar-overflow",
+  ) !== null), true);
   assert.deepEqual(calls, { detail: 0, directory: 0 });
 });
 
@@ -1619,7 +1638,7 @@ test("mixed conversation kinds render Starred first with projection-scoped row i
     sections.map((section) => section.querySelector(
       ".handrail-chat__conversation-section-count",
     )?.textContent),
-    ["1", "1", "2", "2", "1", "1"],
+    ["1", "1", "1", "2", "1", "1"],
   );
   assert.deepEqual(
     sections.map((section) => [
@@ -1630,7 +1649,7 @@ test("mixed conversation kinds render Starred first with projection-scoped row i
     [
       ["starred", [publicFirst.id]],
       ["direct-messages", [directSecond.id]],
-      ["public-channels", [publicFirst.id, publicSecond.id]],
+      ["public-channels", [publicSecond.id]],
       ["private-channels", [privateFirst.id, privateSecond.id]],
       ["group-conversations", [groupFirst.id]],
       ["threads", [thread.id]],
@@ -1664,7 +1683,7 @@ test("mixed conversation kinds render Starred first with projection-scoped row i
 
   const buttons = [...container.querySelectorAll(".handrail-chat__conversation-button")];
   const renderedIds = buttons.map((button) => button.dataset.conversationId);
-  assert.equal(renderedIds.length, serverOrder.length + 1);
+  assert.equal(renderedIds.length, serverOrder.length);
   assert.equal(new Set(renderedIds).size, serverOrder.length);
   assert.deepEqual(new Set(renderedIds), new Set(serverOrder.map(({ id }) => id)));
   assert.equal(new Set(buttons.map(({ id }) => id)).size, buttons.length);
@@ -1675,12 +1694,9 @@ test("mixed conversation kinds render Starred first with projection-scoped row i
   const projectedPublicRows = buttons.filter(
     (button) => button.dataset.conversationId === publicFirst.id,
   );
-  assert.equal(projectedPublicRows.length, 2);
-  assert.deepEqual(projectedPublicRows.map((button) => button.getAttribute("aria-current")), [
-    null,
-    null,
-  ]);
-  assert.deepEqual(projectedPublicRows.map(({ tabIndex }) => tabIndex), [-1, -1]);
+  assert.equal(projectedPublicRows.length, 1);
+  assert.deepEqual(projectedPublicRows.map((button) => button.getAttribute("aria-current")), [null]);
+  assert.deepEqual(projectedPublicRows.map(({ tabIndex }) => tabIndex), [-1]);
   assert.deepEqual(projectedPublicRows.map((button) => ({
     mentionCount: button.dataset.unreadMentionCount,
     mentionBadge: button.querySelector(
@@ -1695,16 +1711,9 @@ test("mixed conversation kinds render Starred first with projection-scoped row i
       notificationLevel: "all",
       unreadLabel: true,
     },
-    {
-      mentionBadge: "@1",
-      mentionCount: "1",
-      notificationLevel: "all",
-      unreadLabel: true,
-    },
   ]);
   assert.deepEqual(projectedPublicRows.map((button) => button.closest("li")
     .querySelector(".handrail-chat__conversation-star")?.getAttribute("aria-pressed")), [
-    "true",
     "true",
   ]);
   assert.equal(
@@ -1995,20 +2004,20 @@ test("conversation sections collapse independently without changing the selected
   assert.equal(container.querySelector("article").dataset.timelineFor, publicFirst.id);
   assert.deepEqual(
     visibleConversationIds(),
-    [privateChannel.id, direct.id, group.id, thread.id],
+    [direct.id, privateChannel.id, group.id, thread.id],
   );
   assert.equal(
-    container.querySelector(`[data-conversation-id="${privateChannel.id}"]`).tabIndex,
+    container.querySelector(`[data-conversation-id="${direct.id}"]`).tabIndex,
     0,
   );
 
   await click(publicDisclosure);
   assert.equal(publicDisclosure.getAttribute("aria-expanded"), "true");
   assert.deepEqual(visibleConversationIds(), [
+    direct.id,
     publicFirst.id,
     publicSecond.id,
     privateChannel.id,
-    direct.id,
     group.id,
     thread.id,
   ]);
@@ -2039,17 +2048,17 @@ test("conversation sections collapse independently without changing the selected
   assert.equal(document.activeElement.dataset.conversationId, thread.id);
 
   await click(disclosure("direct-messages"));
-  assert.deepEqual(visibleConversationIds(), [privateChannel.id, direct.id, thread.id]);
+  assert.deepEqual(visibleConversationIds(), [direct.id, privateChannel.id, thread.id]);
   container.querySelector(`[data-conversation-id="${privateChannel.id}"]`).focus();
-  await press(privateChannel.id, "ArrowDown");
+  await press(privateChannel.id, "ArrowUp");
   assert.equal(document.activeElement.dataset.conversationId, direct.id);
 
   await click(disclosure("group-conversations"));
   assert.deepEqual(
     visibleConversationIds(),
-    [privateChannel.id, direct.id, group.id, thread.id],
+    [direct.id, privateChannel.id, group.id, thread.id],
   );
-  await press(direct.id, "ArrowDown");
+  await press(privateChannel.id, "ArrowDown");
   assert.equal(document.activeElement.dataset.conversationId, group.id);
 });
 
@@ -2534,9 +2543,9 @@ test("filtered keyboard navigation uses contiguous visual order across sections"
     group,
   ];
   const expectedOrder = [
+    direct.id,
     publicChannel.id,
     privateChannel.id,
-    direct.id,
     group.id,
     thread.id,
   ];
@@ -2581,19 +2590,17 @@ test("filtered keyboard navigation uses contiguous visual order across sections"
     buttons().map((button) => button.dataset.conversationId),
     expectedOrder,
   );
-  buttons()[0].focus();
+  buttons().find(row => row.dataset.conversationId === publicChannel.id).focus();
   assertCurrent(publicChannel.id);
   await press(publicChannel.id, "ArrowRight");
   assertCurrent(privateChannel.id);
   await press(privateChannel.id, "ArrowDown");
-  assertCurrent(direct.id);
-  await press(direct.id, "ArrowDown");
   assertCurrent(group.id);
   await press(group.id, "End");
   assertCurrent(thread.id);
   await press(thread.id, "Home");
-  assertCurrent(publicChannel.id);
-  await press(publicChannel.id, "ArrowLeft");
+  assertCurrent(direct.id);
+  await press(direct.id, "ArrowLeft");
   assertCurrent(thread.id);
 });
 
@@ -2695,7 +2702,7 @@ test("visual-order keyboard navigation crosses section boundaries and keeps one 
   const group = groupDirectConversation("conversation-keyboard-group");
   const thread = threadConversation("conversation-keyboard-thread", publicFirst.id);
   const serverOrder = [privateChannel, direct, publicFirst, thread, group, publicSecond];
-  const visualOrder = [publicFirst.id, publicSecond.id, privateChannel.id, direct.id, group.id, thread.id];
+  const visualOrder = [direct.id, publicFirst.id, publicSecond.id, privateChannel.id, group.id, thread.id];
   const container = await renderWorkspace(workspace(createClient(createCache({
     organization: serverOrder,
     details: serverOrder,
@@ -2727,6 +2734,8 @@ test("visual-order keyboard navigation crosses section boundaries and keeps one 
 
   assert.deepEqual(buttons().map((button) => button.dataset.conversationId), visualOrder);
   buttons()[0].focus();
+  assertCurrent(direct.id);
+  await press(direct.id, "ArrowDown");
   assertCurrent(publicFirst.id);
   await press(publicFirst.id, "ArrowDown");
   assertCurrent(publicSecond.id);
@@ -2737,13 +2746,15 @@ test("visual-order keyboard navigation crosses section boundaries and keeps one 
   await press(publicSecond.id, "ArrowUp");
   assertCurrent(publicFirst.id);
   await press(publicFirst.id, "ArrowUp");
+  assertCurrent(direct.id);
+  await press(direct.id, "ArrowUp");
   assertCurrent(thread.id);
   await press(thread.id, "ArrowDown");
-  assertCurrent(publicFirst.id);
+  assertCurrent(direct.id);
   await press(publicFirst.id, "End");
   assertCurrent(thread.id);
   await press(thread.id, "Home");
-  assertCurrent(publicFirst.id);
+  assertCurrent(direct.id);
 });
 
 test("controlled selection reports requests without overriding the controlled value", async () => {
@@ -4940,6 +4951,7 @@ test("notification preference pending and conflict states reconcile canonical ch
             reconciliationStatus: "preference_revision_conflict",
             preferenceRevision: 14,
             preference: {
+              isStarred: false,
               notificationPreference: "mentions",
               mute: { muted: true },
             },
