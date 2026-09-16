@@ -2,6 +2,9 @@
 
 Producing run: `5d4c3c1c-1b0c-41fc-a0a1-d33b1a9c196b` (2026-09-16 UTC).
 These are engineering checks of working files, not independent acceptance.
+The delivery manifest prepares exact bytes for task retention; saved artifact
+references and independent review are supplied after this worker returns. Local
+files alone do not establish delivery or acceptance.
 See [candidate matrix](README.md), [reproduction](reproduce.md) and
 [diagnostic failures](failures.json). No full-suite green result is claimed.
 
@@ -44,7 +47,10 @@ exit codes and logs are retained in the deliverable checks.json/execution-logs.t
 | Final focused real PostgreSQL16 run (24 files) | **350/350 pass, zero skipped** | Mounted React preference HTTP/WebSocket/storage save/reload/reconnect, retry; threads/cursors/access, huddle lifecycle/auth/rejoin/screenshare, attachments, notification dispatcher and replay/idempotency |
 | Flutter media + panel | **19/19 pass** | Actual current SDK provider-neutral cleanup/denial/leave/rejoin/control ownership fixtures |
 | Flutter seven settings/thread/durable-event files | **252/252 pass** | Current SDK preference and thread widgets/controllers plus durable reducers |
+| Preview host (existing Git pins), after normal pub preparation | Analysis clean; 8/8 widgets pass; web build exit 0 | Executable pinned preview only, not the dirty SDK patch |
+| Flutter full workspace file | **86/86 pass** | Saved settings, thread navigation, source context, search, actions and keyboard traversal; bounded teardown |
 | Flutter analysis `lib` and changed tests | Exit 0, 39 informational lints, no warnings/errors | SDK static analysis; existing generated/style notices remain |
+| Final Flutter analysis of all six changed runtime/test files | Exit 0, no issues | Exact changed Flutter source/test static check |
 
 ## Failed diagnostic runs
 
@@ -65,8 +71,12 @@ The complete logs remain failures even where subsequent focused reruns pass.
   Tests now import the normal freshly built dist modules. Initial receipts are
   retained; they are not final-candidate evidence.
 - Earlier Flutter combined/media runs failed or were interrupted at hanging
-  widget teardown. The media/panel fixture now drives real and FakeAsync queues
-  while disposing; the final 19-test run passes. Timeout exits remain recorded.
+  widget teardown. Media/panel and workspace fixtures now drive real and FakeAsync
+  queues while disposing. The final media/panel 19-test run passes; workspace
+  teardown no longer hangs. Timeout exits remain recorded. A subsequent full-file run exposed a
+  stale keyboard expectation skipping the required Threads action before Search.
+  The test now explicitly asserts that focus stop; the final full workspace
+  file passes all 86 tests and changed-file analysis has no issues.
 
 ## Repair ownership and callback
 
@@ -83,7 +93,9 @@ without reconciling the source contract.
 | Supported current UI/native/media QA | Planner prepares scoped service/QA Vault/Mobile Preview handoff; independent QA tests final React/Flutter candidate, real two-participant media, microphone denial, disconnect/rejoin and device cleanup. Historical PNGs and fake providers are insufficient. |
 | Reviewed installable release and ERP gate | Main/release reviewer freezes approved public HTTPS Git commits and matching locks; clean consumers install/build through normal pipelines. Independent QA reviews final changed identity. Owner receives evidence and explicitly approves readiness/integration before ERP changes. |
 
-The preview currently consumes older committed SDK bytes; its build/test results,
-when present, qualify that pin only. No reviewed installable release of this dirty
+The preview currently consumes older committed SDK bytes; its passing build/test
+results qualify that pin only. Web compilation emitted a missing CupertinoIcons
+font-family warning; inspect affected icons in the later supported browser QA
+handoff rather than treating compilation as visual acceptance. No reviewed installable release of this dirty
 candidate exists. Native app-store builds, provider credentials, OS notifications,
 real storage adapters and ERP host integration remain unverified here.

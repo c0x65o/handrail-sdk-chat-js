@@ -114,3 +114,41 @@ and their SHA256 cache metadata, then used `pub get --enforce-lockfile` for norm
 resolution of the unchanged public HTTPS Git pins. The preview lockfile remained
 unchanged. A fresh writable cache also works with normal authorized network
 access. Keep these preparation receipts separate from test/build results.
+
+## Exact focused PostgreSQL selection
+
+After the normal JS build and inside the disposable PG16 harness described above,
+the following selection produced the 350-test passing receipt. It complements
+the failed full run; it does not replace the required full rerun.
+
+```sh
+node --test --test-concurrency=1 test/postgres-chat-harness.test.mjs test/postgres-react-reply-style-flow.test.mjs test/postgres-reply-style-preference-http.test.mjs test/postgres-update-reply-style-preference-command.test.mjs test/postgres-thread-lifecycle-http.test.mjs test/postgres-thread-list-http.test.mjs test/postgres-thread-read-cursor-command.test.mjs test/postgres-thread-snapshot-access.test.mjs test/postgres-websocket-thread-authorization.test.mjs test/postgres-start-huddle-command.test.mjs test/postgres-join-huddle-command.test.mjs test/postgres-leave-huddle-command.test.mjs test/postgres-end-huddle-command.test.mjs test/postgres-start-huddle-http.test.mjs test/postgres-join-huddle-http.test.mjs test/postgres-leave-huddle-http.test.mjs test/postgres-end-huddle-http.test.mjs test/postgres-active-huddle-snapshot-query.test.mjs test/postgres-huddle-screen-share-http.test.mjs test/postgres-attachment-download-query.test.mjs test/postgres-attachment-lifecycle-http.test.mjs test/postgres-notification-dispatcher.test.mjs test/postgres-reconnect-idempotency.test.mjs test/postgres-conversation-reply-unread.test.mjs
+```
+
+The complete owned-cluster setup/teardown scripts are also retained verbatim in
+execution-logs.txt under run-postgres.sh and run-postgres-focused.sh.
+
+## Private PG16 binary preparation
+
+The earlier recipe’s exact package identities were rechecked in this run. On a
+compatible Debian12 worker, this is the reproducible preparation (not a database
+test or system installation):
+
+```sh
+set -e
+mkdir -p "$TMPDIR/pg16"
+curl --fail --location 'https://apt.postgresql.org/pub/repos/apt/pool/main/p/postgresql-16/postgresql-16_16.15-1.pgdg12%2B2_amd64.deb' --output "$TMPDIR/pg16/server.deb"
+curl --fail --location 'https://apt.postgresql.org/pub/repos/apt/pool/main/p/postgresql-16/postgresql-client-16_16.15-1.pgdg12%2B2_amd64.deb' --output "$TMPDIR/pg16/client.deb"
+cd "$TMPDIR/pg16"
+sha256sum --check <<'SUMS'
+12b7e33dc5b0711c02248816c02e7a08f85d1372835409de66adcd9f808864f4  server.deb
+e4c00577ff40b59ccdf115a585a9a4e766539669473d272885325b674731dc53  client.deb
+SUMS
+dpkg-deb --extract server.deb .
+dpkg-deb --extract client.deb .
+./usr/lib/postgresql/16/bin/postgres --version
+```
+
+Stop on any failed download/checksum before extracting. The retained preparation
+receipt reports both checksums OK and PostgreSQL16.15; SQL receipts start with
+the separate private initdb/start commands, not this preparation step.

@@ -1,0 +1,704 @@
+{
+  "flutter-checks.json": [
+    {
+      "name": "flutter-analyze",
+      "command": [
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "analyze",
+        "lib",
+        "test/media_session_test.dart",
+        "test/handrail_huddle_panel_test.dart"
+      ],
+      "env": {
+        "FLUTTER_ROOT": "/opt/handrail/.handrail/flutter-sdk",
+        "FLUTTER_ALREADY_LOCKED": "true"
+      },
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 0,
+      "seconds": 15.01
+    }
+  ],
+  "flutter-current-checks.json": [
+    {
+      "name": "flutter-media-current",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "--timeout=30s",
+        "test/media_session_test.dart",
+        "test/handrail_huddle_panel_test.dart"
+      ],
+      "exit": 0,
+      "seconds": 12.94
+    },
+    {
+      "name": "flutter-core-current",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "test/durable_resource_event_reducer_test.dart",
+        "test/handrail_reply_style_settings_test.dart",
+        "test/reply_style_runtime_test.dart",
+        "test/reply_style_client_test.dart",
+        "test/handrail_thread_view_test.dart",
+        "test/thread_list_controller_test.dart",
+        "test/thread_lifecycle_controller_test.dart"
+      ],
+      "exit": 0,
+      "seconds": 22.96
+    }
+  ],
+  "flutter-verified-checks.json": [
+    {
+      "name": "flutter-media-verified",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "test/media_session_test.dart",
+        "test/handrail_huddle_panel_test.dart"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 124,
+      "seconds": 120.07
+    },
+    {
+      "name": "flutter-settings-threads",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "test/durable_resource_event_reducer_test.dart",
+        "test/handrail_reply_style_settings_test.dart",
+        "test/reply_style_runtime_test.dart",
+        "test/reply_style_client_test.dart",
+        "test/handrail_thread_view_test.dart",
+        "test/thread_list_controller_test.dart",
+        "test/thread_lifecycle_controller_test.dart",
+        "test/handrail_chat_workspace_test.dart"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 124,
+      "seconds": 120.05
+    },
+    {
+      "name": "flutter-analyze-verified",
+      "command": [
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "analyze",
+        "lib",
+        "test/media_session_test.dart",
+        "test/handrail_huddle_panel_test.dart",
+        "test/handrail_chat_workspace_test.dart"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 0,
+      "seconds": 14.28
+    }
+  ],
+  "flutter-workspace-complete-checks.json": [
+    {
+      "name": "flutter-workspace-complete",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "--timeout=30s",
+        "test/handrail_chat_workspace_test.dart"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 1,
+      "seconds": 33.0
+    },
+    {
+      "name": "flutter-changed-analysis-complete",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "analyze",
+        "--no-pub",
+        "--no-fatal-infos",
+        "lib/src/media_session.dart",
+        "lib/src/core/huddle_controller.dart",
+        "lib/src/handrail_huddle_panel.dart",
+        "test/media_session_test.dart",
+        "test/handrail_huddle_panel_test.dart",
+        "test/handrail_chat_workspace_test.dart"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 0,
+      "seconds": 19.65
+    }
+  ],
+  "flutter-workspace-current-checks.json": [
+    {
+      "name": "flutter-workspace-search-current",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "--timeout=30s",
+        "test/handrail_chat_workspace_test.dart",
+        "--plain-name",
+        "negotiated client search appears after readiness, paginates, and opens hits"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 0,
+      "seconds": 4.5
+    },
+    {
+      "name": "flutter-workspace-current",
+      "exit": 130,
+      "reason": "Interrupted after +61: same cross-zone client teardown stall in explicit search override test"
+    }
+  ],
+  "flutter-workspace-final-checks.json": [
+    {
+      "name": "flutter-workspace-final",
+      "exit": 130,
+      "reason": "Interrupted after +63, known teardown stall in header fixture; subsequent isolated header repair passes"
+    }
+  ],
+  "flutter-workspace-pass-checks.json": [
+    {
+      "name": "flutter-workspace-pass",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "--timeout=30s",
+        "test/handrail_chat_workspace_test.dart"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 0,
+      "seconds": 29.97
+    },
+    {
+      "name": "flutter-changed-analysis-pass",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "analyze",
+        "--no-pub",
+        "--no-fatal-infos",
+        "lib/src/media_session.dart",
+        "lib/src/core/huddle_controller.dart",
+        "lib/src/handrail_huddle_panel.dart",
+        "test/media_session_test.dart",
+        "test/handrail_huddle_panel_test.dart",
+        "test/handrail_chat_workspace_test.dart"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 0,
+      "seconds": 18.52
+    }
+  ],
+  "flutter-workspace-verified-checks.json": [
+    {
+      "name": "flutter-workspace-verified",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "--timeout=30s",
+        "test/handrail_chat_workspace_test.dart"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 1,
+      "seconds": 35.07
+    },
+    {
+      "name": "flutter-final-changed-analysis",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "analyze",
+        "--no-pub",
+        "--no-fatal-infos",
+        "lib/src/media_session.dart",
+        "lib/src/core/huddle_controller.dart",
+        "lib/src/handrail_huddle_panel.dart",
+        "test/media_session_test.dart",
+        "test/handrail_huddle_panel_test.dart",
+        "test/handrail_chat_workspace_test.dart"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "exit": 0,
+      "seconds": 21.25
+    }
+  ],
+  "initial-preview-checks.json": [
+    {
+      "name": "preview-analyze",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-chat-preview-flutter",
+      "command": [
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "analyze",
+        "lib",
+        "test"
+      ],
+      "exit": 3,
+      "seconds": 0.63,
+      "scope": "Existing committed preview pins; not dirty Flutter candidate"
+    },
+    {
+      "name": "preview-test",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-chat-preview-flutter",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "--timeout=30s",
+        "test/mobile_preview_launcher_test.dart"
+      ],
+      "exit": 1,
+      "seconds": 2.02,
+      "scope": "Existing committed preview pins; not dirty Flutter candidate"
+    },
+    {
+      "name": "preview-build",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-chat-preview-flutter",
+      "command": [
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "build",
+        "web",
+        "--no-pub"
+      ],
+      "exit": 1,
+      "seconds": 1.5,
+      "scope": "Existing committed preview pins; not dirty Flutter candidate"
+    }
+  ],
+  "js-checks.json": [
+    {
+      "name": "version-check",
+      "command": [
+        "npm",
+        "run",
+        "check:package-version"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 0.28
+    },
+    {
+      "name": "build-final",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 2.35
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 4.32
+    },
+    {
+      "name": "scoped-contract-types",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tsconfig.reply-style-preference-type-tests.json"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 0.12
+    },
+    {
+      "name": "version-and-ci",
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "test/package-version-generation.test.mjs",
+        "test/browser-state-regressions-workflow.test.mjs",
+        "test/cross-runtime-conformance-workflow.test.mjs",
+        "test/drop-in-react-playwright-workflow.test.mjs",
+        "test/node-tests-workflow.test.mjs",
+        "test/postgres-integration-workflow.test.mjs"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 4.36
+    },
+    {
+      "name": "reply-style",
+      "command": [
+        "npm",
+        "run",
+        "test:reply-style-preference"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 0.66
+    },
+    {
+      "name": "thread-lifecycle",
+      "command": [
+        "npm",
+        "run",
+        "test:thread-lifecycle"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 0.86
+    },
+    {
+      "name": "thread-list",
+      "command": [
+        "npm",
+        "run",
+        "test:thread-list"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 0.46
+    },
+    {
+      "name": "huddle-contract",
+      "command": [
+        "npm",
+        "run",
+        "test:huddle-contract"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 2.93
+    },
+    {
+      "name": "huddle-ui",
+      "command": [
+        "npm",
+        "run",
+        "test:ui-huddle"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 3.75
+    },
+    {
+      "name": "huddle-media",
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "test/client-huddle-media-session.test.mjs",
+        "test/client-huddle-state.test.mjs",
+        "test/client-durable-huddle-recovery.test.mjs"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 0.81
+    },
+    {
+      "name": "react-workspace",
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=2",
+        "test/chat-workspace.test.mjs",
+        "test/chat-workspace-default.test.mjs",
+        "test/chat-workspace-message-search.test.mjs"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 1,
+      "seconds": 13.8
+    }
+  ],
+  "js-final-checks.json": [
+    {
+      "name": "build-verified",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 2.6
+    },
+    {
+      "name": "typecheck-verified",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 4.43
+    },
+    {
+      "name": "js-repaired",
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=2",
+        "test/package-version-generation.test.mjs",
+        "test/client-huddle-media-session.test.mjs",
+        "test/huddle-controls.test.mjs",
+        "test/chat-workspace.test.mjs",
+        "test/chat-workspace-default.test.mjs",
+        "test/chat-workspace-message-search.test.mjs"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 17.54
+    },
+    {
+      "name": "client-reply-runner",
+      "command": [
+        "node",
+        "scripts/test-client-reply-style.mjs"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 1.96
+    },
+    {
+      "name": "react-reply-runner",
+      "command": [
+        "node",
+        "scripts/test-react-reply-style.mjs"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 5.12
+    },
+    {
+      "name": "client-thread-list-runner",
+      "command": [
+        "node",
+        "scripts/test-client-thread-list.mjs"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 2.99
+    },
+    {
+      "name": "client-context-runner",
+      "command": [
+        "node",
+        "scripts/test-client-message-context.mjs"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 2.35
+    },
+    {
+      "name": "cross-client-conformance",
+      "command": [
+        "npm",
+        "run",
+        "check:conformance"
+      ],
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "exit": 0,
+      "seconds": 19.64
+    }
+  ],
+  "preview-checks.json": [
+    {
+      "name": "preview-analyze",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-chat-preview-flutter",
+      "command": [
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "analyze",
+        "lib",
+        "test"
+      ],
+      "exit": 0,
+      "seconds": 12.85,
+      "scope": "Existing committed preview pins; not dirty Flutter candidate"
+    },
+    {
+      "name": "preview-test",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-chat-preview-flutter",
+      "command": [
+        "timeout",
+        "--signal=INT",
+        "--kill-after=10s",
+        "120s",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "test",
+        "--no-pub",
+        "--concurrency=2",
+        "--timeout=30s",
+        "test/mobile_preview_launcher_test.dart"
+      ],
+      "exit": 0,
+      "seconds": 21.92,
+      "scope": "Existing committed preview pins; not dirty Flutter candidate"
+    },
+    {
+      "name": "preview-build",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-chat-preview-flutter",
+      "command": [
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+        "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+        "build",
+        "web",
+        "--no-pub"
+      ],
+      "exit": 0,
+      "seconds": 45.69,
+      "scope": "Existing committed preview pins; not dirty Flutter candidate"
+    }
+  ],
+  "preview-preparation.json": {
+    "command": [
+      "/opt/handrail/.handrail/flutter-sdk/bin/cache/dart-sdk/bin/dart",
+      "/opt/handrail/.handrail/flutter-sdk/bin/cache/flutter_tools.snapshot",
+      "pub",
+      "get",
+      "--enforce-lockfile"
+    ],
+    "environment": {
+      "PUB_CACHE": "/opt/handrail/.handrail/codex-runs/5d4c3c1c-1b0c-41fc-a0a1-d33b1a9c196b/tmp/preview-pub-cache",
+      "FLUTTER_ROOT": "/opt/handrail/.handrail/flutter-sdk",
+      "FLUTTER_ALREADY_LOCKED": "true"
+    },
+    "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-chat-preview-flutter",
+    "exit": 0,
+    "seconds": 1.44
+  },
+  "additional-recorded-results": [
+    {
+      "command": "node scripts/generate-package-version.mjs --check",
+      "stage": "before install/build",
+      "exit": 1,
+      "log": "pre-install-check.log"
+    },
+    {
+      "command": "npm run test:node",
+      "exit": 1,
+      "log": "node-tests.log",
+      "counts": {
+        "tests": 2859,
+        "pass": 2745,
+        "fail": 106,
+        "cancelled": 7,
+        "skipped": 1
+      },
+      "note": "Diagnostic before final focused repairs; not final-candidate pass"
+    },
+    {
+      "command": "bash $TMPDIR/sdk-finish-evidence/run-postgres.sh",
+      "underlying_command": "npm run test:postgres",
+      "exit": 1,
+      "log": "postgres-tests.log",
+      "counts": {
+        "tests": 1029,
+        "pass": 986,
+        "fail": 43,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "note": "Diagnostic before final focused huddle fixture repairs"
+    },
+    {
+      "command": "bash $TMPDIR/sdk-finish-evidence/run-postgres-focused.sh",
+      "exit": 0,
+      "log": "postgres-focused.log",
+      "counts": {
+        "tests": 350,
+        "pass": 350,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "cleanup": "zero remaining custom schemas; owned cluster stopped/removed"
+    },
+    {
+      "command": "git diff --check",
+      "cwd": "all three checkouts",
+      "exit": 0
+    },
+    {
+      "command": "node scripts/generate-package-version.mjs --check",
+      "stage": "after final JS changes",
+      "exit": 0
+    }
+  ]
+}

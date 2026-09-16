@@ -62,7 +62,9 @@ remaining-schema output is retained independently.
   share parent passes its test context to subtests.
 - Stale UI fixtures were reconciled with required isStarred metadata, exclusive
   Starred grouping, DM-first order, virtualized rows and actual accessible labels.
-  These fixture repairs do not count as new product behavior.
+  Flutter widget teardown now drives both async queues; keyboard traversal
+  explicitly includes the existing Threads action. These fixture repairs do not
+  count as new product behavior.
 
 ## Acceptance matrix
 
@@ -105,7 +107,9 @@ The earlier 4px Send-padding observation remains historical until fresh QA.
 
 Preview pubspec/lock pin the demo at dd928dd…, while its transitive SDK is still
 51bc3e1411858ce38980f5beded683dee957d1a3. A normal preview rebuild therefore does
-not exercise this uncommitted Flutter patch. README now distinguishes those pins.
+not exercise this uncommitted Flutter patch. README now distinguishes those pins. After regenerating stale worker-specific
+package configuration through `pub get --enforce-lockfile`, preview analysis,
+all eight widget tests and web build passed with unchanged pins/lock.
 The preview is web-only. The existing SDK ERP native example declares Android
 INTERNET in the main manifest and iOS ITSAppUsesNonExemptEncryption=false. No
 new native scaffold was created; those settings do not establish microphone

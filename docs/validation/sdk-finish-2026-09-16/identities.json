@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "work_request_id": "acc42b17-72fa-44ca-94b1-ee74e0a72785",
+  "producing_run": "5d4c3c1c-1b0c-41fc-a0a1-d33b1a9c196b",
+  "scope": "Engineering working-tree candidate; base HEAD is not the patched artifact. No commits/publication. New readiness documents are separately hashed by delivery manifest and excluded from tracked diff identity. No ignored dependency/build output forms part of the source identity.",
+  "repositories": [
+    {
+      "repository_id": "04b6b865-7494-407b-91d9-8c3aa7ac9e3a",
+      "path": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "head": "a1f82cfe45f1d499b2441c19dacd4fa66adaf4cf",
+      "branch": "main",
+      "tracked_diff_sha256": "1c75ce59d0d21d5d0feabbed82e083cbf2424fb4471e42d49fe36d1507815050",
+      "working_file_sha256": {
+        "docs/validation/sdk-finish-2026-09-16/README.md": "320b7b25a15eae0955c4248e1b1b3eb9c2ac14bd1e4df64b7a08532d074363f2",
+        "docs/validation/sdk-finish-2026-09-16/reproduce.md": "f2bbec10f4c0854cdd0610d146d718da2775232e98a37e344c4692a67761d8e0",
+        "docs/validation/sdk-finish-2026-09-16/verification.md": "5c3ff67a77aef0f19621dcc94e8d7373661d01d8d32a2cd8c3aced83d5672a3e",
+        "package-lock.json": "e785d05ef82e069fb8d1945b84b9382edd20d7ba09c194d24ad9cd36cec37e2f",
+        "package.json": "c7d94230b58dfc33e4012b45e278d08abc263f25e9159840825b122fd9a1124a",
+        "src/client/generated/package-version.ts": "bcb8d994adf72d862ae989b7e7ff234df289ddcd8bf8de0aed97494ec0ab89fa"
+      },
+      "status": " M docs/validation/sdk-finish-2026-09-16/README.md\n M docs/validation/sdk-finish-2026-09-16/reproduce.md\n M docs/validation/sdk-finish-2026-09-16/verification.md\n",
+      "candidate_identity_sha256": "1ae64a34b449c1a6a43b3295dcf3ea4745583a942dbacbe1871515a752c19561"
+    },
+    {
+      "repository_id": "f0884fb5-9f55-42be-90b9-2efb2b586f53",
+      "path": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter",
+      "head": "2609cf187552332df5f27013fef3e02289af8bbc",
+      "branch": "main",
+      "tracked_diff_sha256": "fba4e6c13927565aeb9d7765b9da249e9026d007a49e626eb145cc8a2aad8b84",
+      "working_file_sha256": {
+        "pubspec.lock": "eea72d79596aa8f25711079ebe30b6f8b9de269bcb9d92a4bb4576c9aee4e392",
+        "pubspec.yaml": "bae9685d0e97c932ee723788a8459db1e6c9988cbf2ffbe1a7e1227395d03511",
+        "test/handrail_chat_workspace_test.dart": "aa936bea767dd7f04948618088d1c03b17f7f48056277091f5ee280e5b083b9f"
+      },
+      "status": " M test/handrail_chat_workspace_test.dart\n",
+      "candidate_identity_sha256": "cd61537bc49b1ddef05f55dc4a4454bc59428bd33ccb809791ab4fcb3084f7ee"
+    },
+    {
+      "repository_id": "64eb222b-8334-4446-bc7d-5332d9ff2f71",
+      "path": "/opt/handrail/repos/handrail/handrail-chat/handrail-chat-preview-flutter",
+      "head": "0093fb669f81c8c7f00034fc088176ca567b0cee",
+      "branch": "main",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "working_file_sha256": {
+        "pubspec.lock": "5d715f7f6865c57720c7b4cc971c73d3daa662ba9e21e48291992d0c2e45c10b",
+        "pubspec.yaml": "cf3fc203912edb63a533894b4336385f76948bbf5e067b72335c0f6823c4959e"
+      },
+      "status": "",
+      "candidate_identity_sha256": "b3e5e78d260bec3170450d0286430c2666c5c77f1f1b4b4c1a655166e440efc5"
+    }
+  ],
+  "preview_pins": {
+    "demo": "dd928dd57c5adbeb5ed8e002270ffb8be9e4b292",
+    "sdk": "51bc3e1411858ce38980f5beded683dee957d1a3"
+  }
+}
