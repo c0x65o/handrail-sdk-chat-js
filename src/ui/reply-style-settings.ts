@@ -1,4 +1,4 @@
-import { createElement, useEffect, useId, useRef, type ChangeEvent, type KeyboardEvent, type ReactElement } from "react";
+import { createElement, useEffect, useId, useRef, type ChangeEvent, type KeyboardEvent, type MouseEvent, type ReactElement } from "react";
 import { useReplyStyle, useReplyStyleActions } from "../react/reply-style-hooks.js";
 import type { ChatReplyStyleState } from "../client/reply-style-runtime.js";
 
@@ -96,7 +96,7 @@ export function ReplyStyleSettingsDialog({ onClose }: { readonly onClose: () => 
       event.preventDefault(); first?.focus();
     }
   };
-  return createElement("div", { className: "handrail-chat__channel-creation", onClick: event => { if (event.target === event.currentTarget) onClose(); } },
+  return createElement("div", { className: "handrail-chat__channel-creation", onClick: (event: MouseEvent<HTMLDivElement>) => { if (event.target === event.currentTarget) onClose(); } },
     createElement("div", { role: "dialog", "aria-modal": true, "aria-labelledby": titleId,
       className: "handrail-chat__channel-creation-dialog", ref: dialog, tabIndex: -1, onKeyDown },
     createElement("h3", { id: titleId }, "Workspace settings"),

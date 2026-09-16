@@ -20,7 +20,8 @@ Object.assign(globalThis, {
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 const React = await import("react");
-const { act, createElement } = React;
+const { createElement } = React;
+const { act } = await import("./helpers/react-act.mjs");
 const { createRoot } = await import("react-dom/client");
 const { renderToStaticMarkup } = await import("react-dom/server");
 const { CHAT_PROTOCOL_VERSION } = await import("@handrail/chat");
@@ -2992,7 +2993,7 @@ test("the header members count opens a named panel and close actions restore foc
   assert.equal(trigger.getAttribute("aria-expanded"), "true");
   assert.equal(trigger.getAttribute("aria-controls"), dialog.id);
   assert.equal(
-    dialog.querySelector(`#${dialog.getAttribute("aria-labelledby")}`).textContent,
+    dialog.querySelector(`[id="${dialog.getAttribute("aria-labelledby")}"]`).textContent,
     "Conversation members",
   );
   const close = dialog.querySelector('button[aria-label="Close conversation members"]');

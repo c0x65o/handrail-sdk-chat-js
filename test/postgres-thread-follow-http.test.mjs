@@ -182,9 +182,9 @@ test("PATCH /conversations/:threadId/follow mounts the private transactional thr
          (tenant_id, id, conversation_id, sequence, author_user_id,
           client_message_id, content)
        VALUES
-         ('tenant-a', 'public-root', 'public-parent', 1, 'author', 'public-root-client', '{}'),
-         ('tenant-a', 'private-root', 'private-parent', 1, 'author', 'private-root-client', '{}'),
-         ('tenant-b', 'cross-root', 'cross-parent', 1, 'author', 'cross-root-client', '{}')`,
+         ('tenant-a', 'public-root', 'public-parent', 1, 'author', 'public-root-client', '{"format":"plain","text":"Thread root"}'),
+         ('tenant-a', 'private-root', 'private-parent', 1, 'author', 'private-root-client', '{"format":"plain","text":"Thread root"}'),
+         ('tenant-b', 'cross-root', 'cross-parent', 1, 'author', 'cross-root-client', '{"format":"plain","text":"Thread root"}')`,
     );
     await harness.pool.query(
       `INSERT INTO ${tables.conversations}
@@ -251,6 +251,10 @@ test("PATCH /conversations/:threadId/follow mounts the private transactional thr
           ],
         )
       ).rows[0];
+
+    // Drain automatic workers before measuring this HTTP command boundary.
+    await runtime.postgresMaintenance.stop();
+    await runtime.outboxPublisher.stop();
 
     await withHttpServer(runtime, async ({ request }) => {
       await t.test("follows, reports already-requested state, rejects stale state, and unfollows", async () => {

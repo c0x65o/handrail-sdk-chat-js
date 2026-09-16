@@ -214,6 +214,13 @@ function createStorageHarness() {
       calls.push({ operation: "replace", scope, kind });
       rows.set(key(scope, kind), encoded);
     },
+    async compareExchange(scope, kind, expected, replacement) {
+      const recordKey = key(scope, kind);
+      if ((rows.get(recordKey) ?? null) !== expected) return false;
+      if (replacement === null) rows.delete(recordKey);
+      else rows.set(recordKey, replacement);
+      return true;
+    },
     async remove(scope, kind) {
       calls.push({ operation: "remove", scope, kind });
       rows.delete(key(scope, kind));

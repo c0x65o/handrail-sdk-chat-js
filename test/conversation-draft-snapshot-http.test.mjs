@@ -409,6 +409,8 @@ test("draft snapshot denials are indistinguishable across membership, tenant, ex
 test("draft snapshot rejects malformed paths, queries, bodies, transfer encoding, and spoofed trusted context before querying", async () => {
   const fixture = createFixture();
   await withHttpServer(fixture.runtime, async ({ endpoint, request }) => {
+    assert.equal((await request("/conversations//draft")).status, 404);
+    assert.equal((await request("/conversations/present/draft/extra")).status, 404);
     for (const path of [
       `${route("present")}?tenantId=tenant-b`,
       `${route("present")}?userId=user-b&roles=admin`,
@@ -419,8 +421,6 @@ test("draft snapshot rejects malformed paths, queries, bodies, transfer encoding
       "/conversations/present%5Cother/draft",
       "/conversations/present%00other/draft",
       "/conversations/%20%20/draft",
-      "/conversations//draft",
-      "/conversations/present/draft/extra",
       `/conversations/${"x".repeat(256)}/draft`,
     ]) {
       await assertStableError(

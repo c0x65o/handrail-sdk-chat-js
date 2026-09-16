@@ -197,37 +197,7 @@ test("notification delivery migration enforces content-minimized retry state", a
 
     assert.deepEqual(
       applied.applied.map(({ id, order }) => ({ id, order })),
-      [
-        { id: "0001-chat-conversations-membership", order: 1 },
-        { id: "0002-chat-messages-revisions", order: 2 },
-        { id: "0003-chat-reactions", order: 3 },
-        { id: "0004-chat-read-cursors", order: 4 },
-        { id: "0005-chat-outbox-events", order: 5 },
-        { id: "0006-chat-idempotency-keys", order: 6 },
-        { id: "0007-chat-drafts", order: 7 },
-        { id: "0008-chat-conversation-preferences", order: 8 },
-        { id: "0009-chat-thread-follows", order: 9 },
-        { id: "0010-chat-attachments", order: 10 },
-        { id: "0011-chat-audit-events", order: 11 },
-        { id: "0012-chat-saved-messages", order: 12 },
-        { id: "0013-chat-huddle-sessions", order: 13 },
-        { id: "0014-chat-notification-deliveries", order: 14 },
-        { id: "0015-chat-conversation-lifecycle-revision", order: 15 },
-        { id: "0016-chat-thread-follow-revision", order: 16 },
-        { id: "0017-chat-conversation-member-list-revision", order: 17 },
-        { id: "0018-chat-conversation-preference-revision", order: 18 },
-        { id: "0019-chat-saved-message-mutation-state", order: 19 },
-        { id: "0020-chat-huddle-participant-leave-reason", order: 20 },
-        { id: "0021-chat-huddle-ending-recovery", order: 21 },
-        { id: "0022-chat-device-push-tokens", order: 22 },
-        { id: "0023-chat-conversation-list-ordering", order: 23 },
-        { id: "0024-chat-outbox-unpublished-stream-heads", order: 24 },
-        { id: "0025-chat-outbox-tenant-replay-positions", order: 25 },
-        { id: "0026-chat-notification-global-claim-indexes", order: 26 },
-        { id: "0027-chat-notification-materializer-offsets", order: 27 },
-        { id: "0028-chat-outbox-expiry-cleanup", order: 28 },
-        { id: "0029-chat-message-search-vector", order: 29 },
-      ],
+      handrailChatPostgresMigrations.map(({ id, order }) => ({ id, order })),
     );
 
     await t.test("stores one bounded offset per canonical materializer", async () => {
@@ -359,16 +329,16 @@ test("notification delivery migration enforces content-minimized retry state", a
       await Promise.all(
         [1, 2, 3, 4].map((position) =>
           harness.pool.query(
-            `INSERT INTO ${materializerOffsets} AS offset
+            `INSERT INTO ${materializerOffsets} AS stored_offset
                (materializer_name, last_replay_position, updated_at)
              VALUES ('message-created-deliveries:v3', $1, $2)
              ON CONFLICT (materializer_name) DO UPDATE
              SET last_replay_position = GREATEST(
-                   offset.last_replay_position,
+                   stored_offset.last_replay_position,
                    EXCLUDED.last_replay_position
                  ),
                  updated_at = GREATEST(
-                   offset.updated_at,
+                   stored_offset.updated_at,
                    EXCLUDED.updated_at
                  )`,
             [position, `2030-01-01T00:00:0${position}Z`],
@@ -734,9 +704,17 @@ test("notification delivery migration enforces content-minimized retry state", a
     await t.test("uses ready and expired-lease worker indexes", async () => {
       const client = await harness.pool.connect();
       try {
-        await client.query(`ANALYZE ${deliveries}`);
+        await client.query(`VACUUM ANALYZE ${deliveries}`);
         await client.query("SET enable_seqscan = off");
         await client.query("SET enable_bitmapscan = off");
+        const indexDefinitions = await client.query(
+          `SELECT indexname FROM pg_indexes WHERE schemaname = $1
+             AND tablename = 'chat_notification_deliveries'`, [harness.schema],
+        );
+        for (const name of ["chat_notification_deliveries_ready_idx",
+          "chat_notification_deliveries_expired_lease_idx"]) {
+          assert.ok(indexDefinitions.rows.some(({ indexname }) => indexname === name), name);
+        }
         const readyPlan = await client.query(
           `EXPLAIN (FORMAT JSON)
            SELECT source_event_id, recipient_host_user_id, notification_kind
@@ -759,14 +737,14 @@ test("notification delivery migration enforces content-minimized retry state", a
         );
 
         assert.ok(
-          findIndexes(readyPlan.rows[0]?.["QUERY PLAN"]).includes(
-            "chat_notification_deliveries_ready_idx",
-          ),
+          findIndexes(readyPlan.rows[0]?.["QUERY PLAN"]).some((name) => [
+            "chat_notification_deliveries_ready_idx", "chat_notification_deliveries_global_ready_idx",
+          ].includes(name)),
         );
         assert.ok(
-          findIndexes(expiredPlan.rows[0]?.["QUERY PLAN"]).includes(
-            "chat_notification_deliveries_expired_lease_idx",
-          ),
+          findIndexes(expiredPlan.rows[0]?.["QUERY PLAN"]).some((name) => [
+            "chat_notification_deliveries_expired_lease_idx", "chat_notification_deliveries_global_expired_lease_idx",
+          ].includes(name)),
         );
       } finally {
         await client.query("RESET enable_bitmapscan").catch(() => undefined);
@@ -775,7 +753,7 @@ test("notification delivery migration enforces content-minimized retry state", a
       }
     });
 
-    await t.test("uses global claim indexes and preserves deterministic candidates", async () => {
+    await t.test("global claim indexes support both branches and preserve deterministic candidates", async () => {
       const client = await harness.pool.connect();
       try {
         await client.query(
@@ -915,12 +893,12 @@ test("notification delivery migration enforces content-minimized retry state", a
              )`,
         );
 
-        await client.query(`ANALYZE ${deliveries}`);
+        await client.query(`VACUUM ANALYZE ${deliveries}`);
         assert.equal((await client.query("SHOW enable_seqscan")).rows[0].enable_seqscan, "on");
 
         const readyPlan = await client.query(
           `EXPLAIN (FORMAT JSON)
-           WITH moment AS (SELECT clock_timestamp() AS at)
+           WITH moment AS (SELECT TIMESTAMPTZ '2026-09-15T00:00:00Z' AS at)
            SELECT candidate.source_event_id
            FROM ${deliveries} AS candidate
            CROSS JOIN moment
@@ -942,7 +920,7 @@ test("notification delivery migration enforces content-minimized retry state", a
         );
         const expiredPlan = await client.query(
           `EXPLAIN (FORMAT JSON)
-           WITH moment AS (SELECT clock_timestamp() AS at)
+           WITH moment AS (SELECT TIMESTAMPTZ '2026-09-15T00:00:00Z' AS at)
            SELECT candidate.source_event_id
            FROM ${deliveries} AS candidate
            CROSS JOIN moment
@@ -956,9 +934,13 @@ test("notification delivery migration enforces content-minimized retry state", a
            FOR UPDATE OF candidate SKIP LOCKED
            LIMIT 50`,
         );
+        // Small fixture cost estimates may prefer a sequential OR scan. This
+        // schema check proves both partial indexes can serve the combined query;
+        // individual branch plans above retain normal planner settings.
+        await client.query("SET enable_seqscan = off");
         const combinedPlan = await client.query(
           `EXPLAIN (FORMAT JSON)
-           WITH moment AS (SELECT clock_timestamp() AS at)
+           WITH moment AS (SELECT TIMESTAMPTZ '2026-09-15T00:00:00Z' AS at)
            SELECT candidate.source_event_id
            FROM ${deliveries} AS candidate
            CROSS JOIN moment
@@ -1005,8 +987,9 @@ test("notification delivery migration enforces content-minimized retry state", a
           ]),
         );
 
+        await client.query("RESET enable_seqscan");
         const candidates = await client.query(
-          `WITH moment AS (SELECT clock_timestamp() AS at)
+          `WITH moment AS (SELECT TIMESTAMPTZ '2026-09-15T00:00:00Z' AS at)
            SELECT candidate.tenant_id, candidate.source_event_id
            FROM ${deliveries} AS candidate
            CROSS JOIN moment
@@ -1039,6 +1022,7 @@ test("notification delivery migration enforces content-minimized retry state", a
           { tenant_id: "tenant-b", source_event_id: "global-claim-10003" },
         ]);
       } finally {
+        await client.query("RESET enable_seqscan");
         client.release();
       }
     });

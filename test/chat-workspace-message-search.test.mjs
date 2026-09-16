@@ -5,7 +5,8 @@ process.env.NODE_ENV = "test";
 
 const { Window } = await import("happy-dom");
 const React = await import("react");
-const { act, createElement, useEffect, useState } = React;
+const { createElement, useEffect, useState } = React;
+const { act } = await import("./helpers/react-act.mjs");
 const { createRoot } = await import("react-dom/client");
 const { ChatProvider } = await import("@handrail/chat/react");
 const { ChatWorkspace } = await import("@handrail/chat/ui");

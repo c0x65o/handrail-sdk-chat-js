@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 export const NODE_TEST_CONCURRENCY = 2;
 export const NODE_TEST_TIMEOUT_MS = 120_000;
@@ -57,10 +57,19 @@ export async function enumerateNodeTestFiles(root = repositoryRoot) {
   return selectNodeTestFiles(testEntries.map((entry) => `test/${entry.name}`));
 }
 
-export function createNodeTestInvocation(testFiles) {
+export function createNodeTestInvocation(testFiles, root = repositoryRoot) {
   const selectedFiles = selectNodeTestFiles(testFiles);
   return {
     command: process.execPath,
+    // The full build contains the same modules as the focused compiler projects.
+    // Explicit locations prevent scoped tests from using missing or stale output.
+    env: {
+      ...process.env,
+      ...Object.fromEntries([
+        "HANDRAIL_REPLY_STYLE_BUILD", "HANDRAIL_THREAD_LIST_BUILD",
+        "HANDRAIL_THREAD_LIFECYCLE_BUILD", "HANDRAIL_MESSAGE_CONTEXT_BUILD",
+      ].map((key) => [key, pathToFileURL(resolve(root, "dist")).href])),
+    },
     args: [
       "--experimental-strip-types",
       "--test",
@@ -76,18 +85,28 @@ export async function runNodeTests(root = repositoryRoot) {
     throw new Error("This runner does not accept a partial test selection");
   }
 
-  const invocation = createNodeTestInvocation(await enumerateNodeTestFiles(root));
-  const result = spawnSync(invocation.command, invocation.args, {
-    cwd: root,
-    stdio: "inherit",
-  });
+  const run = (command, args, env = process.env) => {
+    const result = spawnSync(command, args, { cwd: root, env, stdio: "inherit" });
+    if (result.error) throw result.error;
+    if (result.status === null) throw new Error(`Process terminated by signal ${result.signal}`);
+    return result;
+  };
+  // Check before build can regenerate and conceal checked-out version drift.
+  for (const [command, args] of [
+    [process.execPath, ["scripts/generate-package-version.mjs", "--check"]],
+    process.platform === "win32"
+      ? [process.env.ComSpec || "cmd.exe", ["/d", "/s", "/c", "npm run build"]]
+      : ["npm", ["run", "build"]],
+  ]) {
+    const prepared = run(command, args);
+    if (prepared.status !== 0) {
+      process.exitCode = prepared.status;
+      return;
+    }
+  }
+  const invocation = createNodeTestInvocation(await enumerateNodeTestFiles(root), root);
+  const result = run(invocation.command, invocation.args, invocation.env);
 
-  if (result.error) {
-    throw result.error;
-  }
-  if (result.status === null) {
-    throw new Error(`Node test process terminated by signal ${result.signal}`);
-  }
 
   process.exitCode = result.status;
 }

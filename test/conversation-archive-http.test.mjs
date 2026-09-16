@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -11,7 +12,6 @@ import {
   CHAT_CONVERSATION_ARCHIVE_INVALID_REQUEST_CODE,
   CHAT_CONVERSATION_ARCHIVE_UNAVAILABLE_CODE,
   MAX_CONVERSATION_ARCHIVE_REQUEST_BYTES,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actor = Object.freeze({
@@ -236,8 +236,9 @@ const createScriptedArchiveDatabase = () => {
             };
           }
           if (sql.includes("UPDATE") && sql.includes("chat_conversations")) {
-            const [occurredAt, userId, nextRevision, tenantId, conversationId] =
-              values;
+            const restoring = sql.includes("archived_at = NULL");
+            const [occurredAt, userId, nextRevision, tenantId, conversationId] = restoring
+              ? [values[0], null, values[1], values[2], values[3]] : values;
             const current = working.conversations.get(
               `${tenantId}\0${conversationId}`,
             );
@@ -449,10 +450,13 @@ test("PATCH /conversations/:conversationId/lifecycle mounts canonical archive li
 
     await t.test("rejects malformed, ambiguous, mismatched, and spoofed transport input before database work", async () => {
       const valid = archiveInput("invalid-base");
+      // Unknown routes delegate to the host without command work.
+      const beforeUnknownRoutes = [database.connectCount, database.directQueryCount];
+      assert.equal((await request("/conversations//lifecycle", valid)).status, 404);
+      assert.equal((await request("/conversations/owner-target/lifecycle/extra", valid)).status, 404);
+      assert.deepEqual([database.connectCount, database.directQueryCount], beforeUnknownRoutes);
       const invalidRequests = [
-        () => request("/conversations//lifecycle", valid),
         () => request("/conversations/owner%2Ftarget/lifecycle", valid),
-        () => request("/conversations/owner-target/lifecycle/extra", valid),
         () => request("/conversations/owner-target/lifecycle?toggle=true", valid),
         () =>
           request("/conversations/other-target/lifecycle", valid),

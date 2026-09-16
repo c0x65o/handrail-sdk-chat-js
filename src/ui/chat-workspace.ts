@@ -11,6 +11,7 @@ import {
   type CSSProperties,
   type FormEvent,
   type KeyboardEvent,
+  type PointerEvent as ReactPointerEvent,
   type MouseEvent as ReactMouseEvent,
   type ReactElement,
   type ReactNode,
@@ -1222,8 +1223,8 @@ const ConversationNavigationRow = ({
         className: "handrail-chat__conversation-star",
         disabled: starDisabled,
         onClick: toggleStar,
-        onKeyDown: (event) => event.stopPropagation(),
-        onPointerDown: (event) => event.stopPropagation(),
+        onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => event.stopPropagation(),
+        onPointerDown: (event: ReactPointerEvent<HTMLButtonElement>) => event.stopPropagation(),
         title: `${isStarred ? "Unstar" : "Star"} ${identityLabel}`,
         type: "button",
       },
@@ -2089,7 +2090,7 @@ const MessageSearchResults = ({
                   onFocus: () => setActiveIndex(index),
                   onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) =>
                     onResultKeyDown(event, index),
-                  ref: (element: HTMLButtonElement | null) => {
+                  ref: (element: HTMLButtonElement | null): void => {
                     if (element === null) resultRefs.current.delete(key);
                     else resultRefs.current.set(key, element);
                   },
@@ -2544,6 +2545,8 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
   const searchSelectedConversationIdRef = useRef<ConversationId | undefined>(undefined);
   const pendingCreatedConversationIdRef = useRef<ConversationId | undefined>(undefined);
   const rootRef = useRef<HTMLElement | null>(null);
+  const navigationContentRef = useRef<HTMLElement | null>(null);
+  const detailContentRef = useRef<HTMLElement | null>(null);
   const modalLifecycleGenerationRef = useRef(0);
   const modalOpenerRef = useRef<HTMLElement | null>(null);
   const navigationRef = useRef<HTMLElement | null>(null);
@@ -3059,11 +3062,18 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
       if (target?.isConnected) target.focus();
     });
   }, []);
+  const cancelledThreadCreationFocusRef = useRef<{ scope: object; target: HTMLElement | null } | undefined>(undefined);
   const threadCreationScopeRef = useRef(threadCreationScope);
   threadCreationScopeRef.current = threadCreationScope;
   const threadCreationRequestScopeRef = useRef(threadCreationScope);
   const activeThreadCreationRequest = threadCreationRequestScopeRef.current === threadCreationScope &&
     threadCreationRequest?.conversationId === selectedConversationId ? threadCreationRequest : undefined;
+  useLayoutEffect(() => {
+    if (activeThreadCreationRequest !== undefined) return;
+    const pending = cancelledThreadCreationFocusRef.current;
+    cancelledThreadCreationFocusRef.current = undefined;
+    if (pending?.scope === threadCreationScope && pending.target?.isConnected) pending.target.focus();
+  }, [activeThreadCreationRequest, threadCreationScope]);
   const requestThreadCreation = useCallback((rootMessageId: MessageId, returnFocusTarget: HTMLElement | null) => {
     if (selectedConversationId === undefined || threadCreationDisabledReason !== undefined ||
       threadCreationScopeRef.current !== threadCreationScope) return;
@@ -3452,11 +3462,16 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
           })],
     );
   }, [conversations, forwardRequest?.source.sourceConversationId]);
+  const forwardFocusAfterCommitRef = useRef<HTMLElement | null>(null);
   const restoreForwardFocus = useCallback((target: HTMLElement | null) => {
-    setTimeout(() => {
-      if (target?.isConnected === true) target.focus();
-    }, 0);
+    forwardFocusAfterCommitRef.current = target;
   }, []);
+  useLayoutEffect(() => {
+    if (forwardRequest !== undefined) return;
+    const target = forwardFocusAfterCommitRef.current;
+    forwardFocusAfterCommitRef.current = null;
+    if (target?.isConnected === true) target.focus();
+  }, [forwardRequest, forwardNotice]);
   const openForwardDialog = useCallback((
     source: MessageForwardRequest,
     returnFocusTarget: HTMLElement | null,
@@ -4030,7 +4045,7 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
                     item.kind,
                     creationAddTriggerRef.current,
                   ),
-                  ref: (element: HTMLButtonElement | null) => {
+                  ref: (element: HTMLButtonElement | null): void => {
                     if (element === null) creationMenuItemRefs.current.delete(item.kind);
                     else creationMenuItemRefs.current.set(item.kind, element);
                   },
@@ -5012,7 +5027,15 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
       "div",
       {
         className: "handrail-chat__workspace-content",
-        inert: ordinaryWorkspaceContentInert ? true : undefined,
+        // React 18 treats inert as an unknown boolean prop and drops it.
+        // Set the DOM attribute on both supported React generations.
+        ref: (element: HTMLElement | null): void => {
+          // Release the old attribute during the mutation phase, before child
+          // layout effects restore focus into newly available content.
+          navigationContentRef.current?.removeAttribute("inert");
+          navigationContentRef.current = element;
+          element?.toggleAttribute("inert", ordinaryWorkspaceContentInert);
+        },
         style: { display: "contents" },
       },
       navigation,
@@ -5022,7 +5045,10 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
       key: activeThreadCreationRequest.rootMessageId,
       request: activeThreadCreationRequest,
       disabledReason: threadCreationDisabledReason,
-      onCancel: () => setThreadCreationRequest(undefined),
+      onCancel: () => {
+        cancelledThreadCreationFocusRef.current = { scope: threadCreationScope, target: activeThreadCreationRequest.returnFocusTarget };
+        setThreadCreationRequest(undefined);
+      },
       onCreated: () => {
         if (threadCreationScopeRef.current !== threadCreationScope) return;
         setThreadCreationRequest(undefined);
@@ -5060,7 +5086,15 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
           (selectedConversationId !== undefined && detailResult.status === "loading"),
         className: "handrail-chat__detail handrail-chat__workspace-content",
         hidden: isCompactLayout && compactPane !== "detail",
-        inert: ordinaryWorkspaceContentInert ? true : undefined,
+        // React 18 treats inert as an unknown boolean prop and drops it.
+        // Set the DOM attribute on both supported React generations.
+        ref: (element: HTMLElement | null): void => {
+          // Release the old attribute during the mutation phase, before child
+          // layout effects restore focus into newly available content.
+          detailContentRef.current?.removeAttribute("inert");
+          detailContentRef.current = element;
+          element?.toggleAttribute("inert", ordinaryWorkspaceContentInert);
+        },
       },
       detailContent,
     ),

@@ -27,8 +27,11 @@ contract, see the separate [server embedding guide](server-embedding.md).
     "useMessages",
     "useDirectoryUsers",
     "useDirectoryUser",
+    "useConversationParticipants",
     "useDirectorySearch",
+    "useMessageSearch",
     "useSavedMessages",
+    "useMessageReminders",
     "useThread",
     "useMembers",
     "useReadState",
@@ -59,6 +62,7 @@ contract, see the separate [server embedding guide](server-embedding.md).
     "markRead",
     "markUnread",
     "openThread",
+    "createThread",
     "openConversationDraft",
     "replaceConversationDraft",
     "clearConversationDraft",
@@ -72,6 +76,9 @@ contract, see the separate [server embedding guide](server-embedding.md).
     "saveMessage",
     "unsaveMessage",
     "retrySavedMessage",
+    "setMessageReminder",
+    "cancelMessageReminder",
+    "retryMessageReminder",
     "uploadAttachment",
     "startTyping",
     "stopTyping",
@@ -556,7 +563,7 @@ The complete shipped action surface is:
 - Messages: `sendMessage`, `retryMessage`, `forwardMessage`, `editMessage`, `deleteMessage`, `setReaction`.
 - Conversations: `createChannel`, `createDirect`, `createGroupDirect`, `archiveConversation`, `restoreConversation`.
 - Membership: `joinConversation`, `leaveConversation`, `addConversationMember`, `removeConversationMember`, `changeConversationMemberRole`.
-- Reads and threads: `markRead`, `markUnread`, `openThread`, `setThreadFollow`, `followThread`, `unfollowThread`.
+- Reads and threads: `markRead`, `markUnread`, `openThread`, `createThread`, `setThreadFollow`, `followThread`, `unfollowThread`.
 - Drafts: `openConversationDraft`, `replaceConversationDraft`, `clearConversationDraft`, `flushConversationDraft`, `retryConversationDraft`, `closeConversationDraft`.
 - Preferences and saved messages: `updateConversationPreference`, `saveMessage`, `unsaveMessage`, `retrySavedMessage`.
 - Attachments: `uploadAttachment`.
@@ -723,3 +730,9 @@ boundary.
   reconnect with a hand-written socket or attempt to downgrade the protocol.
 - On logout or identity change, close the externally owned client before
   starting the next identity. Never reuse secret-derived cross-tab scope.
+
+`createThread({ rootMessageId, name })` creates a named thread through the same canonical client command.
+
+`useConversationParticipants` reads directory-backed members. `useMessageSearch` searches authorized messages; `useMessageReminders` reads actor-private reminders.
+
+Use `setMessageReminder`, `cancelMessageReminder`, and `retryMessageReminder` to manage actor-private reminder commands.

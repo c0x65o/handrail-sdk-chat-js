@@ -40,24 +40,7 @@ test("message and revision migration enforces ordered tenant-scoped history", as
 
     assert.deepEqual(
       applied.applied.map(({ id, order }) => ({ id, order })),
-      [
-        { id: "0001-chat-conversations-membership", order: 1 },
-        { id: "0002-chat-messages-revisions", order: 2 },
-        { id: "0003-chat-reactions", order: 3 },
-        { id: "0004-chat-read-cursors", order: 4 },
-        { id: "0005-chat-outbox-events", order: 5 },
-        { id: "0006-chat-idempotency-keys", order: 6 },
-        { id: "0007-chat-drafts", order: 7 },
-        { id: "0008-chat-conversation-preferences", order: 8 },
-        { id: "0009-chat-thread-follows", order: 9 },
-        { id: "0010-chat-attachments", order: 10 },
-        { id: "0011-chat-audit-events", order: 11 },
-        { id: "0012-chat-saved-messages", order: 12 },
-        { id: "0013-chat-huddle-sessions", order: 13 },
-        { id: "0014-chat-notification-deliveries", order: 14 },
-        { id: "0015-chat-conversation-lifecycle-revision", order: 15 },
-        { id: "0016-chat-thread-follow-revision", order: 16 },
-      ],
+      handrailChatPostgresMigrations.map(({ id, order }) => ({ id, order })),
     );
 
     await harness.pool.query(
@@ -374,7 +357,7 @@ test("message and revision migration enforces ordered tenant-scoped history", as
 
       const client = await harness.pool.connect();
       try {
-        await client.query(`ANALYZE ${messages}`);
+        await client.query(`VACUUM ANALYZE ${messages}`);
         await client.query("SET enable_seqscan = off");
         await client.query("SET enable_bitmapscan = off");
 

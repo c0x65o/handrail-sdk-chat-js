@@ -206,8 +206,8 @@ test("terminal failures are not replayed by an already queued duplicate", async 
   await new Promise(setImmediate);
   const queued = fixture.client.forwardMessage(authored);
   release();
-  assert.equal((await first).status, "authentication");
-  assert.equal((await queued).status, "authentication");
+  assert.equal((await first).status, "rejected");
+  assert.equal((await queued).status, "rejected");
   assert.equal(requests, 1);
 });
 

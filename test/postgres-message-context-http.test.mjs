@@ -69,7 +69,7 @@ test("message context HTTP uses trusted actor and read-only real PostgreSQL", { 
         VALUES ($1,$2,$3,$4,'author',$2,$5,'2026-01-01','2026-01-01')`, [tenant,id,conversation,sequence,JSON.stringify(content)]);
     await message('source','public',1);
     await message('deleted','public',2,'tenant-a',{ format: 'plain', text: 'deleted secret content' });
-    await sql(`UPDATE ${prefix}.chat_messages SET deleted_at='2026-01-02',deleted_by_user_id='author',updated_at='2026-01-02'
+    await sql(`UPDATE ${prefix}.chat_messages SET deleted_at='2026-01-02T00:00:00Z',deleted_by_user_id='author',updated_at='2026-01-02T00:00:00Z'
       WHERE tenant_id='tenant-a' AND id='deleted'`);
     await message('malformed','public',3,'tenant-a',{ format: 'plain', text: 'bad persisted block', blocks: [{ type: 'text' }] });
     await message('private-root','private',1);

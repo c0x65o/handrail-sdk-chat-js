@@ -1,6 +1,8 @@
 # Reproduce and independently review this candidate
 
-Inspect all three checkout heads and dirty patches against identities.json. Do
+Inspect all three refreshed checkout heads and dirty patches against identities.json.
+Initial and concurrently advanced HEADs are recorded separately; never infer
+independent acceptance from those external commits or local origin/main refs. Do
 not run npm ci/build before retaining package/lock/generated source hashes and
 running `node scripts/generate-package-version.mjs --check`. Dependencies in this
 worker were already installed. New SDK installations must use reviewed full

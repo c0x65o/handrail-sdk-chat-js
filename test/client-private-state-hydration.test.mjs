@@ -49,6 +49,11 @@ function seedConversation(cache) {
       createdAt: at(0),
       updatedAt: at(0),
       latestSequence: 4,
+      unreadMentionCount: 0,
+      currentPreference: {
+        conversationId, userId, notificationPreference: "all", isStarred: false,
+        mute: { muted: false }, updatedAt: at(0),
+      },
       activityAt: at(0),
       currentMember: {
         tenantId,

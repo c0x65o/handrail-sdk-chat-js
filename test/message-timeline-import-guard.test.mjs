@@ -11,9 +11,13 @@ test("MessageTimeline imports only React, public hooks, contracts, and UI slots"
   assert.deepEqual(new Set(imports), new Set([
     "react",
     "./message-composer.js",
+    "./thread-creation-dialog.js",
     "../contracts/index.js",
     "../react/index.js",
     "./slots.js",
+    "./reaction-picker.js",
+    "./timeline-window.js",
+    "../client/index.js",
   ]));
   assert.doesNotMatch(source, /dangerouslySetInnerHTML/);
   assert.doesNotMatch(imports.join("\n"), /(?:socket|normalized-cache|ChatContext|create-chat-client|server|testing|provider|node:)/i);

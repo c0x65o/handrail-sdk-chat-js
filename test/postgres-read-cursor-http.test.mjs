@@ -237,6 +237,10 @@ test("PATCH /conversations/:conversationId/read-cursor mounts the private read-s
         )
       ).rows[0];
 
+    // Drain automatic workers before measuring this HTTP command boundary.
+    await runtime.postgresMaintenance.stop();
+    await runtime.outboxPublisher.stop();
+
     await withHttpServer(runtime, async ({ request, rawRequest }) => {
       await t.test("returns the exact canonical actor-private response and advances monotonically", async () => {
         const before = commandConnectCount;
@@ -352,7 +356,6 @@ test("PATCH /conversations/:conversationId/read-cursor mounts the private read-s
           () => request(`${route("read-target")}?tenantId=tenant-b`, valid),
           () => request(route("read-target"), { ...valid, conversationId: "other" }),
           () => request("/conversations/read%2Ftarget/read-cursor", valid),
-          () => request("/conversations//read-cursor", valid),
           () => request(route("read-target"), valid, { contentType: "text/plain" }),
           () => request(route("read-target"), valid, { body: "{" }),
           () => request(route("read-target"), { ...valid, unknown: true }),
@@ -379,6 +382,10 @@ test("PATCH /conversations/:conversationId/read-cursor mounts the private read-s
             "Invalid read-cursor request",
           );
         }
+
+        // An absent path segment does not match the mounted read-cursor route.
+        const unknownRoute = await request("/conversations//read-cursor", valid);
+        assert.equal(unknownRoute.status, 404);
 
         const duplicate = await rawRequest(route("read-target"), {
           body: JSON.stringify(valid),

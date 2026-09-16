@@ -169,9 +169,9 @@ test("reply drafts upgrade safely and use current parent authority", async (t) =
     await t.test("deleted and mismatched source identities remain recoverable drafts", async () => {
       await seed("deleted-source");
       await sql(`INSERT INTO ${prefix}.chat_messages
-        (tenant_id, id, conversation_id, sequence, author_user_id, client_message_id, content, deleted_at, deleted_by_user_id)
+        (tenant_id, id, conversation_id, sequence, author_user_id, client_message_id, content, created_at, updated_at, deleted_at, deleted_by_user_id)
         VALUES ('tenant-a', 'deleted-target', 'deleted-source', 1, 'author', 'deleted-target',
-          '{"format":"plain","text":"deleted"}', clock_timestamp(), 'author')`);
+          '{"format":"plain","text":"deleted"}', statement_timestamp(), statement_timestamp(), statement_timestamp(), 'author')`);
       for (const [revision, messageId] of ["deleted-target", "deleted-source-root"].entries()) {
         const input = inputFor("deleted-source", `source-${revision}`, false, revision);
         input.content.replyTo.messageId = messageId;

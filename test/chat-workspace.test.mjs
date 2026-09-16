@@ -5,7 +5,8 @@ process.env.NODE_ENV = "test";
 
 const { Window } = await import("happy-dom");
 const React = await import("react");
-const { act, createElement } = React;
+const { createElement } = React;
+const { act } = await import("./helpers/react-act.mjs");
 const { renderToStaticMarkup } = await import("react-dom/server");
 const { createRoot } = await import("react-dom/client");
 const { ChatProvider } = await import("@handrail/chat/react");
@@ -2191,7 +2192,7 @@ test("conversation filter matches every current label case-insensitively and pre
   assert.equal(filterIcon?.hasAttribute("tabindex"), false);
   const shortcutHintId = filter.getAttribute("aria-describedby");
   assert.ok(shortcutHintId, "the filter names its shortcut description");
-  const shortcutHint = container.querySelector(`#${shortcutHintId}`);
+  const shortcutHint = container.querySelector(`[id="${shortcutHintId}"]`);
   assert.equal(shortcutHint?.tagName, "KBD");
   assert.equal(
     shortcutHint?.classList.contains("handrail-chat__conversation-filter-shortcut"),

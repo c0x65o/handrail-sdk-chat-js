@@ -4,7 +4,8 @@ import test from "node:test";
 process.env.NODE_ENV = "test";
 
 const React = await import("react");
-const { act, createElement } = React;
+const { createElement } = React;
+const { act } = await import("./helpers/react-act.mjs");
 const ReactTestRenderer = await import("react-test-renderer");
 const { create } = ReactTestRenderer.default;
 const { ChatProvider, useMessageSearch } = await import("@handrail/chat/react");

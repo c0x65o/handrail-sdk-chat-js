@@ -1,4 +1,4 @@
-import { createElement, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactElement } from "react";
+import { createElement, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactElement } from "react";
 import type { ConversationId, MessageId } from "../contracts/index.js";
 import { useChat, useChatSelector, useThreadList } from "../react/index.js";
 
@@ -107,9 +107,9 @@ export function ThreadList({ parentConversationId, parentLabel, onOpen, onBack, 
       const unread = Math.max(0, thread.latestSequence - thread.currentReadState.lastReadSequence);
       return createElement("li", { key: thread.id }, createElement("button", {
         type: "button", "data-thread-id": thread.id, tabIndex: tabStop === thread.id ? 0 : -1,
-        ref: (element: HTMLButtonElement | null) => { if (element) rows.current.set(thread.id, element); else rows.current.delete(thread.id); },
+        ref: (element: HTMLButtonElement | null): void => { if (element) rows.current.set(thread.id, element); else rows.current.delete(thread.id); },
         onFocus: () => setFocusedId(thread.id), onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => navigate(event, index),
-        onClick: (event) => void open(thread.id, event.currentTarget),
+        onClick: (event: MouseEvent<HTMLButtonElement>) => void open(thread.id, event.currentTarget),
       }, createElement("strong", null, name),
       createElement("span", null, item.currentThreadFollow.follow?.isFollowing === true ? "Following" : "Not following"),
       createElement("span", null, `${unread} unread`),

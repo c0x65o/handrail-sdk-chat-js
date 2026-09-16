@@ -6,7 +6,8 @@ import { Window } from "happy-dom";
 
 process.env.NODE_ENV = "test";
 const React = await import("react");
-const { act, createElement } = React;
+const { createElement } = React;
+const { act } = await import("./helpers/react-act.mjs");
 const { createRoot } = await import("react-dom/client");
 
 const buildModule = (path) => new URL(path, process.env.HANDRAIL_REPLY_UI_BUILD ?? new URL("../dist/", import.meta.url)).href;

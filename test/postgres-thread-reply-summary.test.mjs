@@ -131,7 +131,17 @@ test("reply summaries reach an unopened observer and replay without inflation", 
     setOnline(true);
     await waitFor(() => summary()?.replyCount === 3, "replayed third summary");
     noHydration();
-    assert.equal(requests.length, requestsBeforeDisconnect, "reconnect uses durable replay without HTTP recovery");
+    // Reconnect refreshes actor-private settings and SQL-derived unread state.
+    // Summary delivery must still use durable replay, without a thread/timeline fetch.
+    const recoveryRequests = requests.slice(requestsBeforeDisconnect);
+    assert.ok(recoveryRequests.length > 0);
+    for (const { url, method } of recoveryRequests) {
+      assert.equal(method, "GET");
+      assert.ok([
+        `/conversations/${parentId}`,
+        "/preferences/reply-style",
+      ].includes(new URL(url).pathname), `Unexpected recovery request: ${url}`);
+    }
     assert.ok(frames.some((frame) => frame.type === "chat.session.accepted" && frame.resumeFrom?.eventId === cursorBeforeDisconnect.eventId));
     const rows = await summaries();
     assert.deepEqual(rows.map((row) => row.payload.rootThreadSummary.replyCount), [0, 1, 2, 3]);
@@ -160,12 +170,16 @@ test("reply summaries reach an unopened observer and replay without inflation", 
     await harness.runtime.realtimeHub.publish(thirdFrame);
     assert.equal(summary().replyCount, 3);
     assert.deepEqual(observerClient.cache.getState().metadata.realtimeCursor, cursorAfterReplay);
+    await waitFor(() => frames.filter((frame) => frame.eventId === thirdFrame.eventId).length === 2, "injected duplicate delivery");
+    const duplicateFrameCount = frames.filter((frame) => frame.eventId === thirdFrame.eventId).length;
     const acceptedCount = frames.filter((frame) => frame.type === "chat.session.accepted").length;
+    const subscriptionsBeforeReconnect = frames.filter((frame) => frame.type === "chat.subscription.accepted" && frame.streamId === parentId).length;
     setOnline(false);
     setOnline(true);
     await waitFor(() => frames.filter((frame) => frame.type === "chat.session.accepted").length > acceptedCount, "second reconnect");
+    await waitFor(() => frames.filter((frame) => frame.type === "chat.subscription.accepted" && frame.streamId === parentId).length > subscriptionsBeforeReconnect, "parent resubscription");
     assert.equal(summary().replyCount, 3);
-    assert.equal(frames.filter((frame) => frame.eventId === thirdFrame.eventId).length, 1);
+    assert.equal(frames.filter((frame) => frame.eventId === thirdFrame.eventId).length, duplicateFrameCount);
     noHydration();
     const observerOpened = await observerClient.openThread(rootId);
     assert.equal(observerOpened.state, "ready");

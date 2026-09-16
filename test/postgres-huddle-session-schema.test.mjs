@@ -65,37 +65,7 @@ test("huddle migration persists tenant-safe lifecycle and participant history", 
 
     assert.deepEqual(
       applied.applied.map(({ id, order }) => ({ id, order })),
-      [
-        { id: "0001-chat-conversations-membership", order: 1 },
-        { id: "0002-chat-messages-revisions", order: 2 },
-        { id: "0003-chat-reactions", order: 3 },
-        { id: "0004-chat-read-cursors", order: 4 },
-        { id: "0005-chat-outbox-events", order: 5 },
-        { id: "0006-chat-idempotency-keys", order: 6 },
-        { id: "0007-chat-drafts", order: 7 },
-        { id: "0008-chat-conversation-preferences", order: 8 },
-        { id: "0009-chat-thread-follows", order: 9 },
-        { id: "0010-chat-attachments", order: 10 },
-        { id: "0011-chat-audit-events", order: 11 },
-        { id: "0012-chat-saved-messages", order: 12 },
-        { id: "0013-chat-huddle-sessions", order: 13 },
-        { id: "0014-chat-notification-deliveries", order: 14 },
-        { id: "0015-chat-conversation-lifecycle-revision", order: 15 },
-        { id: "0016-chat-thread-follow-revision", order: 16 },
-        { id: "0017-chat-conversation-member-list-revision", order: 17 },
-        { id: "0018-chat-conversation-preference-revision", order: 18 },
-        { id: "0019-chat-saved-message-mutation-state", order: 19 },
-        { id: "0020-chat-huddle-participant-leave-reason", order: 20 },
-        { id: "0021-chat-huddle-ending-recovery", order: 21 },
-        { id: "0022-chat-device-push-tokens", order: 22 },
-        { id: "0023-chat-conversation-list-ordering", order: 23 },
-        { id: "0024-chat-outbox-unpublished-stream-heads", order: 24 },
-        { id: "0025-chat-outbox-tenant-replay-positions", order: 25 },
-        { id: "0026-chat-notification-global-claim-indexes", order: 26 },
-        { id: "0027-chat-notification-materializer-offsets", order: 27 },
-        { id: "0028-chat-outbox-expiry-cleanup", order: 28 },
-        { id: "0029-chat-message-search-vector", order: 29 },
-      ],
+      handrailChatPostgresMigrations.map(({ id, order }) => ({ id, order })),
     );
 
     await harness.pool.query(
@@ -373,6 +343,7 @@ test("huddle migration persists tenant-safe lifecycle and participant history", 
         "user_id",
         "joined_at",
         "left_at",
+        "leave_reason",
       ]);
     });
 

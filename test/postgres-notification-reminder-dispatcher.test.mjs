@@ -190,11 +190,14 @@ test("due message reminders use the durable notification pipeline", async (t) =>
       assert.equal(calls.length, 1);
       assert.equal(calls[0].recipientUserId, fixture.ownerUserId);
       assert.equal(calls[0].type, "message.reminder");
-      assert.deepEqual(calls[0].metadata, {
+      assert.deepEqual({
+        ...calls[0].metadata,
+        reminderDueAt: new Date(calls[0].metadata.reminderDueAt).toISOString(),
+      }, {
         conversationId: fixture.conversationId,
         messageId: fixture.messageId,
         sequence: 1,
-        reminderDueAt: "2020-01-02T00:00:00+00:00",
+        reminderDueAt: "2020-01-02T00:00:00.000Z",
         reminderRevision: 1,
       });
       assert.doesNotMatch(JSON.stringify(calls[0]), /secret body/u);

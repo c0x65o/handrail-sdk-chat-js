@@ -7,6 +7,7 @@ const React = await import("react");
 const { StrictMode, createElement, useContext } = React;
 const { renderToString } = await import("react-dom/server");
 const { act, create } = await import("react-test-renderer");
+const { createDomRenderer } = await import("./helpers/react-dom-renderer.mjs");
 const { ChatContext, ChatProvider } = await import("@handrail/chat/react");
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
@@ -375,7 +376,7 @@ test("refresh-required compatibility and startup failures expose safe typed stat
   }
 });
 
-test("StrictMode effect replay ignores stale startup and leaves the owned client ready", async () => {
+test("StrictMode effect replay ignores stale startup and leaves the owned client ready", async (t) => {
   const firstToken = deferred();
   let tokenCalls = 0;
   let fetchCalls = 0;
@@ -384,7 +385,7 @@ test("StrictMode effect replay ignores stale startup and leaves the owned client
   let renderer;
 
   await act(async () => {
-    renderer = create(
+    renderer = createDomRenderer(
       createElement(
         StrictMode,
         null,
@@ -406,6 +407,7 @@ test("StrictMode effect replay ignores stale startup and leaves the owned client
           createElement(Capture),
         ),
       ),
+      t,
     );
     await Promise.resolve();
     await Promise.resolve();
@@ -428,14 +430,14 @@ test("StrictMode effect replay ignores stale startup and leaves the owned client
   assert.equal(readyValue.client.state.state, "idle");
 });
 
-test("StrictMode replay balances lifecycle subscriptions and removes stale listeners", async () => {
+test("StrictMode replay balances lifecycle subscriptions and removes stale listeners", async (t) => {
   const external = createExternalClient();
   const values = [];
   const Capture = captureContext(values, "strict-subscription");
   let renderer;
 
   await act(async () => {
-    renderer = create(
+    renderer = createDomRenderer(
       createElement(
         StrictMode,
         null,
@@ -445,6 +447,7 @@ test("StrictMode replay balances lifecycle subscriptions and removes stale liste
           createElement(Capture),
         ),
       ),
+      t,
     );
   });
 

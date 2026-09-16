@@ -94,7 +94,8 @@ test("dispatch validates before transport and returns only the parsed canonical 
   });
   assert.equal(requests[0].init.body, JSON.stringify({ message: "sensitive message content" }));
   assert.equal(client.state, before);
-  assert.equal("cache" in client, false);
+  assert.equal(client.cache.getState().identity, null);
+  assert.deepEqual(client.cache.getState().entities.messages, {});
 });
 
 test("refreshes authentication at most once and reuses one generated idempotency key", async () => {

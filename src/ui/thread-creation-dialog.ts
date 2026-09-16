@@ -132,7 +132,7 @@ export function ThreadCreationDialog({ request, disabledReason, onCancel, onCrea
     createElement("div", { role: "dialog", "aria-modal": true, "aria-labelledby": `${id}-title`,
       className: "handrail-chat__channel-creation-dialog", ref: dialog, tabIndex: -1, onKeyDown },
     createElement("h3", { id: `${id}-title` }, "Create Thread"),
-    createElement("form", { className: "handrail-chat__channel-creation-form", onSubmit: event => void submit(event), "aria-busy": pending },
+    createElement("form", { className: "handrail-chat__channel-creation-form", onSubmit: (event: FormEvent<HTMLFormElement>) => void submit(event), "aria-busy": pending },
       createElement("label", { htmlFor: id }, "Thread name"),
       createElement("input", { id, ref: input, value: name, type: "text", className: "handrail-chat__channel-creation-input",
         readOnly: request.draft.submittedName !== undefined, "aria-invalid": invalid,

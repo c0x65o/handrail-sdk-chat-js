@@ -719,10 +719,12 @@ export async function createConversation<Feature extends string = string>(
       },
       input,
     );
+    // One PostgreSQL statement time keeps completion and update ordered even
+    // when target expressions are evaluated in physical column order.
     const completed = await connection.query(
       `UPDATE ${prefix}.chat_idempotency_keys
          SET state = 'completed', response_status = $1, response_body = $2,
-             completed_at = clock_timestamp(), updated_at = clock_timestamp()
+             completed_at = statement_timestamp(), updated_at = statement_timestamp()
        WHERE tenant_id = $3 AND user_id = $4 AND operation_name = $5
          AND client_key = $6 AND request_hash = $7 AND state = 'pending'`,
       [

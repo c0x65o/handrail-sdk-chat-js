@@ -4,7 +4,8 @@ import test from "node:test";
 process.env.NODE_ENV = "test";
 
 const React = await import("react");
-const { act, createElement } = React;
+const { createElement } = React;
+const { act } = await import("./helpers/react-act.mjs");
 const { renderToString } = await import("react-dom/server");
 const ReactTestRenderer = await import("react-test-renderer");
 const { create } = ReactTestRenderer.default;
@@ -38,6 +39,7 @@ const actionNames = [
   "markRead",
   "markUnread",
   "openThread",
+  "createThread",
   "openConversationDraft",
   "replaceConversationDraft",
   "clearConversationDraft",
@@ -163,6 +165,7 @@ test("every action delegates exact arguments once and preserves its client resul
     ["markRead", [{ throughSequence: 11 }], [{ conversationId, throughSequence: 11 }]],
     ["markUnread", [{ fromSequence: 12 }], [{ conversationId, fromSequence: 12 }]],
     ["openThread", ["root-message-1"]],
+    ["createThread", [{ rootMessageId: "root-message-1", name: "Discussion" }]],
     ["openConversationDraft", [], [conversationId]],
     ["replaceConversationDraft", [{ content }], [{ conversationId, content }]],
     ["clearConversationDraft", [], [conversationId]],

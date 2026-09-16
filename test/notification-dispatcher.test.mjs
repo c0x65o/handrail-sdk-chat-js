@@ -49,6 +49,7 @@ const fakeNotificationDatabase = ({ batches = [], onQuery, targets = [protectedT
   let claimIndex = 0;
   const database = {
     async query(sql, values) {
+      if (sql.includes("exhausted AS MATERIALIZED")) return { rows: [], rowCount: 0 };
       await onQuery?.(sql, values);
       if (sql.includes("claimable AS MATERIALIZED")) {
         const batch = batches[claimIndex++] ?? [];
@@ -62,7 +63,7 @@ const fakeNotificationDatabase = ({ batches = [], onQuery, targets = [protectedT
       if (sql.includes("SET status = 'delivered'")) {
         return { rows: [{ source_event_id: values?.[1] }], rowCount: 1 };
       }
-      if (sql.includes("SET status = 'failed'")) {
+      if ((sql.includes("SET status = 'failed'") && sql.includes("lease_token = $5"))) {
         return { rows: [], rowCount: 1 };
       }
       throw new Error(`unexpected query: ${sql}`);
@@ -288,7 +289,7 @@ test("onBatch aggregates retryable and terminal failures without sensitive field
       onQuery(sql) {
         if (sql.includes("claimable AS MATERIALIZED")) now += 5;
         if (sql.includes("SET status = 'delivered'") ||
-            sql.includes("SET status = 'failed'")) now += 5;
+            (sql.includes("SET status = 'failed'") && sql.includes("lease_token = $5"))) now += 5;
       },
     }),
     now: () => new Date(now),
@@ -446,7 +447,7 @@ test("coalescing and throwing telemetry observers do not alter settlement or sto
           claimCalls += 1;
           if (claimCalls === 1) await claimGate;
         }
-        if (sql.includes("SET status = 'failed'")) retryDelays.push(values[5]);
+        if ((sql.includes("SET status = 'failed'") && sql.includes("lease_token = $5"))) retryDelays.push(values[5]);
       },
     }),
     initialRetryDelayMs: 17,
@@ -490,7 +491,7 @@ test("coalescing and throwing telemetry observers do not alter settlement or sto
   assert.equal(dispatcher.stopped, true);
 });
 
-test("server close drains an in-flight notification batch and remains idempotent", async () => {
+test("server close drains an in-flight notification batch and remains idempotent", async (t) => {
   let materialized = false;
   let claimed = false;
   const notificationBatches = [];
@@ -500,6 +501,7 @@ test("server close drains an in-flight notification batch and remains idempotent
   const sendGate = new Promise((resolve) => { releaseSend = resolve; });
   const database = {
     async query(sql) {
+      if (sql.includes("exhausted AS MATERIALIZED")) return { rows: [], rowCount: 0 };
       if (sql.includes("INSERT INTO") && sql.includes("chat_notification_deliveries")) {
         materialized = true;
         return { rows: [], rowCount: 1 };
@@ -552,6 +554,11 @@ test("server close drains an in-flight notification batch and remains idempotent
             }
             return { rows: [], rowCount: 1 };
           }
+          if (sql.includes("candidate.user_id AS recipient_host_user_id")) {
+            return { rows: [{ tenant_id: "tenant-a", source_event_id: "event-a",
+              recipient_host_user_id: "recipient-a", conversation_id: "conversation-a",
+              conversation_type: "channel", notification_metadata: { protocolVersion: 4 } }], rowCount: 1 };
+          }
           if (sql.includes("SELECT event.replay_position")) {
             return { rows: [{ replay_position: "1" }], rowCount: 1 };
           }
@@ -598,6 +605,8 @@ test("server close drains an in-flight notification batch and remains idempotent
     },
   });
 
+  void runtime.postgresMaintenance.stop();
+  t.after(async () => { releaseSend(); await runtime.close(); });
   await started;
   assert.equal(materialized, true);
   const firstClose = runtime.close();

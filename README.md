@@ -108,7 +108,10 @@ behavior that every attached UI needs to share.
 ## Platform and bundling expectations
 
 - Node.js `>=22.0.0` is required. The server and testing entry points are
-  Node-side surfaces.
+  Node-side surfaces. The PostgreSQL test harness keeps both
+  `@testcontainers/postgresql` and its `testcontainers` implementation pinned to
+  12.0.0 as production dependencies: later 12.1 versions require a newer Node
+  minimum. Keep these pins and the consumer lock together when reviewing upgrades.
 - The client, React, and UI JavaScript entry points are browser-safe. React is a
   host-provided peer dependency with the supported range `>=18.2.0 <20`.
 - Browser code should import browser subpaths directly. Conditional exports

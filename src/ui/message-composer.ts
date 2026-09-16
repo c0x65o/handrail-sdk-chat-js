@@ -18,7 +18,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type ReactElement,
   type Ref,
-  type SubmitEvent,
+  type MouseEvent as ReactMouseEvent,
 } from "react";
 
 import {
@@ -1214,7 +1214,7 @@ function ConnectedMessageComposer(
       : { content: draftQuery.data.draft.content }),
   });
   const hostOnSubmit = props.hostProps?.onSubmit;
-  const onSubmit = useCallback((event: SubmitEvent<HTMLFormElement>): void => {
+  const onSubmit = useCallback<NonNullable<ChatSlotHostProps<HTMLFormElement>["onSubmit"]>>((event): void => {
     hostOnSubmit?.(event);
     if (event.defaultPrevented) return;
     event.preventDefault();
@@ -1976,7 +1976,7 @@ export function DefaultMessageComposerRenderer({
           onPointerUp: rememberRichSelection,
           onSelect: rememberRichSelection,
           onPaste: handlePaste,
-          onClick: (event) => {
+          onClick: (event: ReactMouseEvent<HTMLDivElement>) => {
             const target = event.target;
             if (target instanceof HTMLElement && target.closest("a") !== null) {
               event.preventDefault();
@@ -2273,7 +2273,7 @@ function UnavailableMessageComposer({
   return createElement("form", {
     className: "handrail-chat__composer",
     "aria-disabled": true,
-    onSubmit: (event: SubmitEvent<HTMLFormElement>) => event.preventDefault(),
+    onSubmit: (event: FormEvent<HTMLFormElement>) => event.preventDefault(),
   },
   createElement("label", {
     className: "handrail-chat__sr-only",

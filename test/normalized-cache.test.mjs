@@ -394,6 +394,7 @@ test("hydrates list preferences only into the current actor's private cache", ()
       conversationId: "conversation-muted",
       userId,
       notificationPreference: "none",
+      isStarred: false,
       mute: {
         muted: true,
         mutedUntil: "2026-08-26T20:00:00.000Z",
@@ -672,6 +673,7 @@ test("stale list preferences preserve newer canonical and pending optimistic sta
       expectedPreferenceRevision: 0,
       idempotencyKey: "preference-pending",
       notificationPreference: "none",
+      isStarred: false,
       mute: { muted: true },
     },
     "2026-08-25T22:00:00.000Z",

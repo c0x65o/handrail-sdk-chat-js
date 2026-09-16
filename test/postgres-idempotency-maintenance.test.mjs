@@ -49,7 +49,7 @@ const withDeadline = async (promise, milliseconds = 5_000) => {
 test("expired idempotency-key maintenance is bounded, ordered, and concurrent", async () => {
   const backend = await createPostgresTestBackend();
   const harness = await backend.createHarness({
-    schemaPrefix: "chat_idempotency_maintenance",
+    schemaPrefix: "chat_idempotency_gc",
   });
   const schema = quoteIdentifier(harness.schema);
   const keys = `${schema}.chat_idempotency_keys`;

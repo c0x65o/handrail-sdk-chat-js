@@ -111,7 +111,7 @@ test("message-reminder migration supports fresh installs and 0029 upgrades", asy
           id: applied.applied.at(-1).id,
           order: applied.applied.at(-1).order,
         },
-        { id: "0032-chat-conversation-preference-starred", order: 32 },
+        { id: handrailChatPostgresMigrations.at(-1).id, order: handrailChatPostgresMigrations.at(-1).order },
       );
       assert.deepEqual(applied.status.pending, []);
       assert.deepEqual(applied.status.incompatible, []);
@@ -674,20 +674,12 @@ test("message-reminder migration supports fresh installs and 0029 upgrades", asy
       });
       const pending = await runner.status();
       assert.equal(pending.applied.length, 29);
-      assert.deepEqual(pending.pending.map(({ id }) => id), [
-        chatMessageRemindersMigration.id,
-        chatMessageReminderNotificationsMigration.id,
-        "0032-chat-conversation-preference-starred",
-      ]);
+      assert.deepEqual(pending.pending.map(({ id }) => id), handrailChatPostgresMigrations.filter(({ order }) => order > 29).map(({ id }) => id));
       assert.deepEqual(pending.incompatible, []);
 
       const upgrade = await runner.apply();
-      assert.deepEqual(upgrade.applied.map(({ id }) => id), [
-        chatMessageRemindersMigration.id,
-        chatMessageReminderNotificationsMigration.id,
-        "0032-chat-conversation-preference-starred",
-      ]);
-      assert.equal(upgrade.status.applied.length, 32);
+      assert.deepEqual(upgrade.applied.map(({ id }) => id), handrailChatPostgresMigrations.filter(({ order }) => order > 29).map(({ id }) => id));
+      assert.equal(upgrade.status.applied.length, handrailChatPostgresMigrations.length);
       assert.deepEqual(upgrade.status.pending, []);
       assert.deepEqual(upgrade.status.incompatible, []);
       assert.equal(
@@ -702,7 +694,7 @@ test("message-reminder migration supports fresh installs and 0029 upgrades", asy
 
       const repeated = await runner.apply();
       assert.deepEqual(repeated.applied, []);
-      assert.equal(repeated.status.applied.length, 32);
+      assert.equal(repeated.status.applied.length, handrailChatPostgresMigrations.length);
       assert.deepEqual(repeated.status.pending, []);
       assert.deepEqual(repeated.status.incompatible, []);
       assert.equal(

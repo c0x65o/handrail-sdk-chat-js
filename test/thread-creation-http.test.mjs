@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -11,7 +12,6 @@ import {
   CHAT_THREAD_CREATION_UNAVAILABLE_CODE,
   CREATE_THREAD_ENTITY_POLICY_ACTION,
   MAX_THREAD_CREATION_REQUEST_BYTES,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actor = Object.freeze({
@@ -189,6 +189,23 @@ const createScriptedThreadDatabase = () => {
               rowCount: 1,
             };
           }
+          // Participant initialization rechecks the same parent/child access in
+          // the command transaction. Real PostgreSQL tests cover its constraints.
+          if (sql.startsWith("SELECT id FROM")) {
+            const thread = working.threads.get(values[1]);
+            const exists = sql.includes("type = 'thread'")
+              ? thread?.tenantId === values[0] && thread.parentConversationId === values[2]
+              : parents.has(`${values[0]}\0${values[1]}`);
+            return { rows: exists ? [{ id: values[1] }] : [], rowCount: exists ? 1 : 0 };
+          }
+          if (sql.startsWith("SELECT user_id FROM")) return { rows: [{ user_id: actor.userId }], rowCount: 1 };
+          if (sql.startsWith("SELECT thread.id, thread.parent_conversation_id")) {
+            const thread = working.threads.get(values[1]);
+            const parent = thread && parents.get(`${values[0]}\0${thread.parentConversationId}`);
+            const rows = parent ? [{ id: thread.id, parent_conversation_id: thread.parentConversationId,
+              is_archived: false, can_manage: true, entity_type: parent.entityType, entity_id: parent.entityId }] : [];
+            return { rows, rowCount: rows.length };
+          }
           if (sql.startsWith("SELECT pg_advisory_xact_lock")) {
             return { rows: [{ pg_advisory_xact_lock: null }], rowCount: 1 };
           }
@@ -274,6 +291,7 @@ const createScriptedThreadDatabase = () => {
             return {
               rows: [{
                 id: thread.id,
+                name: null,
                 visibility: thread.visibility,
                 parent_conversation_id: thread.parentConversationId,
                 root_message_id: thread.rootMessageId,
@@ -290,11 +308,17 @@ const createScriptedThreadDatabase = () => {
                 notification_level: "all",
                 muted: false,
                 muted_until: null,
+                preference_revision: 0,
                 preference_updated_at: thread.createdAt,
                 member_user_ids: [actor.userId],
               }],
               rowCount: 1,
             };
+          }
+          // Newly created threads have no replies; the authoritative summary
+          // separately reads this actor's participation-sensitive unread count.
+          if (sql.startsWith("SELECT (CASE") && sql.includes("AS unread_count")) {
+            return { rows: [{ unread_count: 0 }], rowCount: 1 };
           }
           if (sql.includes("SELECT count(reply.id)::integer")) {
             return {
@@ -471,10 +495,13 @@ test("POST /messages/:messageId/thread mounts canonical thread creation", async 
 
       await t.test("rejects malformed paths, bodies, and idempotency before database work", async () => {
         const valid = input("invalid-base");
+        // Unknown routes delegate to the host without command work.
+        const beforeUnknownRoutes = [database.connectCount, database.directQueryCount];
+        assert.equal((await request("/messages//thread", valid)).status, 404);
+        assert.equal((await request("/messages/root-main/thread/extra", valid)).status, 404);
+        assert.deepEqual([database.connectCount, database.directQueryCount], beforeUnknownRoutes);
         const invalidRequests = [
-          () => request("/messages//thread", valid),
           () => request("/messages/root%2Fmain/thread", valid),
-          () => request("/messages/root-main/thread/extra", valid),
           () => request("/messages/root-main/thread?unexpected=true", valid),
           () => request("/messages/root-other/thread", valid),
           () => request("/messages/root-main/thread", { ...valid, unknown: true }),

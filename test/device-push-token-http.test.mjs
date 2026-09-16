@@ -161,12 +161,14 @@ test("device push-token HTTP transport rejects malformed and untrusted requests 
     await new Promise((resolve) => setImmediate(resolve));
     const backgroundConnectCount = commandConnectCount;
     const valid = input("transport-device", "transport");
+    // Unrecognized path: no SDK command or route-specific validation.
+    assert.equal((await request("/devices//push-token", valid)).status, 404);
+    // Unrecognized path: no SDK command or route-specific validation.
+    assert.equal((await request(`${route(valid.deviceId)}/`, valid)).status, 404);
     const malformedCases = [
       () => request(`${route(valid.deviceId)}?userId=other`, valid),
       () => request(route(valid.deviceId), { ...valid, deviceId: "other-device" }),
       () => request("/devices/device%2Fsub/push-token", valid),
-      () => request("/devices//push-token", valid),
-      () => request(`${route(valid.deviceId)}/`, valid),
       () => request(route(valid.deviceId), valid, { contentType: "text/plain" }),
       () => request(route(valid.deviceId), valid, { body: "{" }),
       () => request(route(valid.deviceId), { ...valid, unknown: true }),

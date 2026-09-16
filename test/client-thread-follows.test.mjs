@@ -357,7 +357,7 @@ test("conflict adopts canonical state, authorization rolls back, and invalid tar
   assert.equal((await client.followThread(threadId)).status, "success");
   assert.equal(selectIsCurrentUserFollowingThread(cache.getState(), threadId), false);
   assert.equal(selectCurrentUserThreadFollowState(cache.getState(), threadId).authoritativeRevision, 4);
-  assert.equal((await client.followThread(threadId)).status, "authentication");
+  assert.equal((await client.followThread(threadId)).status, "rejected");
   assert.equal(selectIsCurrentUserFollowingThread(cache.getState(), threadId), false);
 
   let networkCalls = 0;

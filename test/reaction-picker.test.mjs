@@ -22,7 +22,8 @@ Object.assign(globalThis, {
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 const React = await import("react");
-const { act, createElement, useRef, useState } = React;
+const { createElement, useRef, useState } = React;
+const { act } = await import("./helpers/react-act.mjs");
 const { createRoot } = await import("react-dom/client");
 const {
   REACTION_PICKER_CATALOG,

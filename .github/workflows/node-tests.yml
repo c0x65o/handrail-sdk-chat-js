@@ -26,11 +26,17 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: package-lock.json
+      - name: Set up Dart formatter
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: "3.11.5"
+      - name: Verify Dart formatter
+        run: dart --version
       - name: Check generated package version
         # npm ci runs prepare/build, which would conceal checked-out drift.
         run: node scripts/generate-package-version.mjs --check
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --engine-strict
       - name: Build package
         run: npm run build
       - name: Run Node tests

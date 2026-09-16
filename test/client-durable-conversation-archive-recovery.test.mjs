@@ -574,11 +574,12 @@ test("canonical event wins an in-flight request and newer divergent authority co
   const harness = createStorageHarness();
   const sockets = createSockets(storageIdentity());
   const commandGate = deferred();
+  let archived = false;
   const fixture = await createFixture({
     harness,
     sockets,
     command: () => commandGate.promise,
-    authority: () => response(200, detail({ archived: true, updatedAt: at(2) })),
+    authority: () => response(200, detail({ archived, updatedAt: at(archived ? 2 : 1) })),
   });
   sockets.sockets[0].accept();
   const pending = fixture.client.archiveConversation({
@@ -586,6 +587,7 @@ test("canonical event wins an in-flight request and newer divergent authority co
     expectedLifecycleRevision: 1,
   });
   await eventually(() => archiveRequests(fixture).length === 1);
+  archived = true;
   sockets.sockets[0].event({
     eventId: "event-archive-2",
     protocolVersion: CHAT_PROTOCOL_VERSION,

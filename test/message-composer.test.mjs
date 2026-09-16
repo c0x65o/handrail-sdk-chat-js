@@ -69,7 +69,8 @@ class TestResizeObserver {
 window.ResizeObserver = TestResizeObserver;
 
 const React = await import("react");
-const { act, createElement } = React;
+const { createElement } = React;
+const { act } = await import("./helpers/react-act.mjs");
 const { createRoot } = await import("react-dom/client");
 const buildRoot = process.env.HANDRAIL_COMPOSER_BUILD ?? new URL("../dist/", import.meta.url).href;
 const { ChatProvider } = await import(`${buildRoot}react/index.js`);

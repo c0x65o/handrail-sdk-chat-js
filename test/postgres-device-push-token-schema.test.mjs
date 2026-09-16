@@ -67,7 +67,7 @@ test("device push-token migrations are immutable and ordered", () => {
   );
   assert.equal(
     protectionMigrationIndex,
-    handrailChatPostgresMigrations.length - 3,
+    32,
   );
   assert.deepEqual(
     handrailChatPostgresMigrations[protectionMigrationIndex - 1] && {
@@ -103,7 +103,7 @@ test("device push-token migrations are immutable and ordered", () => {
   );
   assert.equal(
     tokenFreeRevocationMigrationIndex,
-    handrailChatPostgresMigrations.length - 2,
+    33,
   );
   assert.deepEqual(
     {
@@ -132,7 +132,7 @@ test("device push-token migrations are immutable and ordered", () => {
   );
   assert.equal(
     legacyRetirementMigrationIndex,
-    handrailChatPostgresMigrations.length - 1,
+    34,
   );
   assert.deepEqual(
     {
@@ -147,13 +147,13 @@ test("device push-token migrations are immutable and ordered", () => {
     migrations: handrailChatPostgresMigrations,
   });
   assert.deepEqual(
-    runner.migrations.at(-1) && {
-      id: runner.migrations.at(-1).id,
-      order: runner.migrations.at(-1).order,
+    runner.migrations.find(({ id }) => id === legacyRetirementMigrationId) && {
+      id: runner.migrations.find(({ id }) => id === legacyRetirementMigrationId).id,
+      order: runner.migrations.find(({ id }) => id === legacyRetirementMigrationId).order,
     },
     { id: legacyRetirementMigrationId, order: 35 },
   );
-  assert.match(runner.migrations.at(-1)?.checksum ?? "", /^sha256:[a-f0-9]{64}$/);
+  assert.match(runner.migrations.find(({ id }) => id === legacyRetirementMigrationId)?.checksum ?? "", /^sha256:[a-f0-9]{64}$/);
 });
 
 test("device push-token migration retains tenant-safe revocable registrations", async (t) => {
@@ -413,7 +413,7 @@ test("device push-token migration retains tenant-safe revocable registrations", 
     const retirementApply = await runner.apply();
     assert.deepEqual(
       retirementApply.applied.map(({ id, order }) => ({ id, order })),
-      [{ id: legacyRetirementMigrationId, order: 35 }],
+      handrailChatPostgresMigrations.slice(legacyRetirementMigrationIndex).map(({ id, order }) => ({ id, order })),
     );
     assert.equal(retirementApply.status.pending.length, 0);
     const retiredLegacyRows = (

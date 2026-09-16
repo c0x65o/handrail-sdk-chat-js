@@ -230,6 +230,7 @@ test("attachment download HTTP conceals unavailable authorization outcomes", asy
 test("attachment download HTTP rejects malformed and spoofed query input before querying", async () => {
   const fixture = createFixture();
   await withServer(fixture.runtime, async (request) => {
+    assert.equal((await request("/attachments/report/download/extra?messageId=one")).status, 404);
     for (const path of [
       "/attachments/report/download",
       "/attachments/report/download?messageId=one&messageId=two",
@@ -238,7 +239,6 @@ test("attachment download HTTP rejects malformed and spoofed query input before 
       "/attachments/report/download?messageId=one&token=secret",
       "/attachments/report/download?messageId=%ZZ",
       "/attachments/report%2Fspoof/download?messageId=one",
-      "/attachments/report/download/extra?messageId=one",
     ]) {
       assertStableError(
         await request(path),

@@ -34,7 +34,7 @@ exit codes and logs are retained in the deliverable checks.json/execution-logs.t
 
 | Command / scope | Result | What it establishes |
 | --- | --- | --- |
-| `npm run check:package-version` after generation | Exit 0 | Manifest, both lock fields, generated source agree at 1.0.33 |
+| `npm run check:package-version` after generation | Exit 0 | Manifest, both lock fields, generated source agree at current 1.0.35 (initial repair 1.0.33) |
 | `npm run build`; `npm run typecheck`; scoped reply-preference contract tsc | Exit 0 each | JS/server/React compiled; typed contracts checked |
 | Version and CI workflow regressions | 22/22 pass | Pre-lifecycle drift detection, nonmutating checks, workflow ordering |
 | Final version/media/huddle-controls + three React workspace files | 246/246 pass | Patched cleanup, optimistic navigation fallback and current UI fixtures |
@@ -47,10 +47,26 @@ exit codes and logs are retained in the deliverable checks.json/execution-logs.t
 | Final focused real PostgreSQL16 run (24 files) | **350/350 pass, zero skipped** | Mounted React preference HTTP/WebSocket/storage save/reload/reconnect, retry; threads/cursors/access, huddle lifecycle/auth/rejoin/screenshare, attachments, notification dispatcher and replay/idempotency |
 | Flutter media + panel | **19/19 pass** | Actual current SDK provider-neutral cleanup/denial/leave/rejoin/control ownership fixtures |
 | Flutter seven settings/thread/durable-event files | **252/252 pass** | Current SDK preference and thread widgets/controllers plus durable reducers |
-| Preview host (existing Git pins), after normal pub preparation | Analysis clean; 8/8 widgets pass; web build exit 0 | Executable pinned preview only, not the dirty SDK patch |
+| Preview host (existing Git pins), after normal pub preparation | Analysis clean; 8/8 widgets pass; web build exit 0 | Executable pinned preview only, not the current SDK candidate |
 | Flutter full workspace file | **86/86 pass** | Saved settings, thread navigation, source context, search, actions and keyboard traversal; bounded teardown |
 | Flutter analysis `lib` and changed tests | Exit 0, 39 informational lints, no warnings/errors | SDK static analysis; existing generated/style notices remain |
 | Final Flutter analysis of all six changed runtime/test files | Exit 0, no issues | Exact changed Flutter source/test static check |
+
+## Refreshed candidate receipts
+
+A concurrent version/commit change was detected by the final pre-build check.
+See README for initial and refreshed HEADs. The worker preserved it, regenerated
+the stale JS source from current 1.0.35 metadata and reran affected checks;
+refreshed-candidate-checks.json records the exact head/command/exit. Flutter’s
+final 86-test workspace and changed-file analysis ran after the Git advancement.
+Earlier Flutter media/core checks exercise the same unchanged runtime source;
+the concurrent Flutter change adds only manifest version metadata beyond those
+implementation files. Preview dependency pins stayed unchanged.
+
+The exact committed JS 093962c5… gate check also exited 1: manifest/lock 1.0.35,
+generated 1.0.34. Current working source passes at 1.0.35. This is a release-blocking
+artifact inconsistency, separately recorded in committed-version-checks.json;
+the final source checks do not accept that uncorrected commit.
 
 ## Failed diagnostic runs
 
@@ -87,6 +103,7 @@ without reconciling the source contract.
 
 | Follow-up | Concrete next work / completion evidence |
 | --- | --- |
+| Concurrent candidate integrity | Freeze the candidate against concurrent version bumps. Review the generated 1.0.35 fix and require the version lifecycle to update generated source before committing; committed 093962c5… fails its gate. Rerun the dependency-free check on exact Git blobs before any installation and preserve release review. |
 | Aggregate Node harness and stale fixtures | Repair `scripts/run-node-tests.mjs` orchestration for scoped build-dependent client/React tests; reconcile response metadata, HTTP path/error fixtures, SQL boundary fakes and lifecycle teardown in failures.json. Run the canonical aggregate with configured worker limits until no failures/cancellations; account for the skip. |
 | Canonical migration expectations | Update obsolete latest-migration/count snapshots in PostgreSQL schema/migration tests while retaining immutable migration ID/checksum assertions, fresh install and upgrade checks. Never change canonical migration SQL merely to satisfy stale counts. |
 | PostgreSQL integration assertions | Repair conversation-list fixture UNION timestamp typing and the overlength `chat_idempotency_maintenance` schema prefix first. Reconcile conversation preference/read-cursor HTTP outcomes, create-command replay expectations, thread-follow fixture content, outbox fixtures rejected by `chat_outbox_events_timestamp_check`, maintenance SQL-boundary fake expectations and thread-summary reconnect request count (expected 3, actual 6). Preserve real SQL and authorization semantics; rerun `npm run test:postgres` on an isolated PG16 cluster. |

@@ -71,11 +71,11 @@ test(`${workflowName} version gate protects checked-out bytes before install lif
   );
   assert.ok(checkCommand);
   const expected = workflowName === "node-tests"
-    ? [checkCommand, "npm ci", "npm run build", "npm run test:node"]
+    ? ["dart --version", checkCommand, "npm ci --engine-strict", "npm run build", "npm run test:node"]
     : ['pg_isready --dbname "$TEST_DATABASE_URL"', checkCommand, "npm ci", "npm run test:postgres"];
   assert.deepEqual([...commands].sort(), expected.sort());
-  // PostgreSQL readiness is external to version lifecycles; test:postgres builds.
-  const lifecycleCommands = commands.filter(command => !command.startsWith("pg_isready") && !command.startsWith("npm run test:"));
+  // Tool availability checks are external to version lifecycles; test:postgres builds.
+  const lifecycleCommands = commands.filter(command => command !== "dart --version" && !command.startsWith("pg_isready") && !command.startsWith("npm run test:"));
   const generationCommand = manifest.scripts.build.split("&&")[0].trim();
   assert.equal(manifest.scripts.prepare, "npm run build");
   assert.equal(generationCommand, "node scripts/generate-package-version.mjs");

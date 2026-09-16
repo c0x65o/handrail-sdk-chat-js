@@ -164,12 +164,14 @@ test("thread-follow HTTP transport rejects malformed or spoofed requests before 
     await new Promise((resolve) => setImmediate(resolve));
     const backgroundConnectCount = commandConnectCount;
     const valid = input("follow-primary", "transport-valid");
+    // Unrecognized path: no SDK command or route-specific validation.
+    assert.equal((await request("/conversations//follow", valid)).status, 404);
+    // Unrecognized path: no SDK command or route-specific validation.
+    assert.equal((await request(`${route("follow-primary")}/extra`, valid)).status, 404);
     const malformedCases = [
       () => request(`${route("follow-primary")}?tenant=other`, valid),
       () => request(route("follow-other"), valid),
       () => request("/conversations/follow%2Fprimary/follow", valid),
-      () => request("/conversations//follow", valid),
-      () => request(`${route("follow-primary")}/extra`, valid),
       () => request(route("follow-primary"), valid, { contentType: "text/plain" }),
       () => request(route("follow-primary"), valid, { body: "{" }),
       () => request(route("follow-primary"), { ...valid, unknown: true }),

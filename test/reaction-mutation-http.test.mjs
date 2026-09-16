@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -13,7 +14,6 @@ import {
   MESSAGE_REACTION_ROUTE_PREFIX,
   MESSAGE_REACTION_ROUTE_SEGMENT,
   SET_REACTION_CAPABILITY,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actor = Object.freeze({
@@ -472,13 +472,16 @@ test("PATCH /messages/:messageId/reactions/:reactionKey mounts setReaction", asy
       );
       const validPath = reactionPath("validation", "👍");
       const decomposedKey = "cafe\u0301";
+      // Unrecognized path: no SDK command or route-specific validation.
+      const beforeUnknownRoutes = [database.connectCount];
+      assert.equal((await request("/messages/validation/reactions", valid)).status, 404);
+      assert.equal((await request("/messages/validation/reactions/", valid)).status, 404);
+      assert.equal((await request(`${validPath}/extra`, valid)).status, 404);
+      assert.deepEqual([database.connectCount], beforeUnknownRoutes);
       const invalidRequests = [
         () => request(validPath, valid, { body: "{" }),
         () => request(validPath, valid, { contentType: "text/plain" }),
         () => request(`${validPath}?unexpected=true`, valid),
-        () => request("/messages/validation/reactions", valid),
-        () => request("/messages/validation/reactions/", valid),
-        () => request(`${validPath}/extra`, valid),
         () => request("/messages/validation%2Fchild/reactions/%F0%9F%91%8D", valid),
         () => request("/messages/validation/reactions/%", valid),
         () => request(reactionPath("other", "👍"), valid),

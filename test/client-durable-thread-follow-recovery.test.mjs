@@ -311,6 +311,17 @@ function createStorageHarness() {
       ) await replaceGate.promise;
       rows.set(storageKey(scope, kind), encoded);
     },
+    async compareExchange(scope, kind, expected, replacement) {
+      calls.push({ operation: "compareExchange", scope: structuredClone(scope), kind, encoded: replacement });
+      if (kind === ApplicationChatStorageRecordKind.queuedThreadFollowIntents &&
+          replaceGate !== undefined &&
+          (gatedIdentity === undefined || gatedIdentity === scope.userId)) await replaceGate.promise;
+      const recordKey = storageKey(scope, kind);
+      if ((rows.get(recordKey) ?? null) !== expected) return false;
+      if (replacement === null) rows.delete(recordKey);
+      else rows.set(recordKey, replacement);
+      return true;
+    },
     async remove(scope, kind) {
       calls.push({ operation: "remove", scope: structuredClone(scope), kind });
       rows.delete(storageKey(scope, kind));
@@ -324,7 +335,7 @@ function createStorageHarness() {
     gateReplaces(gate, userId) { replaceGate = gate; gatedIdentity = userId; },
     threadWrites(userId = actorId) {
       return calls.filter((call) =>
-        call.operation === "replace" &&
+        (call.operation === "replace" || call.operation === "compareExchange") &&
         call.kind === ApplicationChatStorageRecordKind.queuedThreadFollowIntents &&
         call.scope.userId === userId);
     },

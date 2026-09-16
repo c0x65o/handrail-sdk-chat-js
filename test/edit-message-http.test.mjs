@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -10,7 +11,6 @@ import {
   CHAT_MESSAGE_EDIT_INVALID_REQUEST_CODE,
   CHAT_MESSAGE_EDIT_UNAVAILABLE_CODE,
   MAX_EDIT_MESSAGE_REQUEST_BYTES,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actor = Object.freeze({
@@ -145,6 +145,8 @@ const createScriptedEditDatabase = () => {
   const toRow = (message) => ({
     id: message.id,
     conversation_id: message.conversationId,
+    reply_to_message_id: null,
+    reply_notify_author: false,
     sequence: message.sequence,
     author_user_id: message.authorUserId,
     client_message_id: message.clientMessageId,
@@ -454,13 +456,16 @@ test("PATCH /messages/:messageId mounts the canonical edit command", async (t) =
 
     await t.test("rejects malformed transport and spoofed identity before command execution", async () => {
       const valid = editInput("validation", "validation");
+      // Unknown routes delegate to the host without command work.
+      const beforeUnknownRoutes = [database.authorLookupCount];
+      assert.equal((await request("/messages/validation/extra", valid)).status, 404);
+      assert.equal((await request("/messages", valid)).status, 404);
+      assert.equal((await request("/messages/", valid)).status, 404);
+      assert.deepEqual([database.authorLookupCount], beforeUnknownRoutes);
       const invalidRequests = [
         () => request("/messages/validation", valid, { body: "{" }),
         () => request("/messages/validation", valid, { contentType: "text/plain" }),
         () => request("/messages/validation?unexpected=true", valid),
-        () => request("/messages", valid),
-        () => request("/messages/", valid),
-        () => request("/messages/validation/extra", valid),
         () => request("/messages/validation%2Fchild", valid),
         () => request("/messages/validation%5Cchild", valid),
         () => request("/messages/%", valid),

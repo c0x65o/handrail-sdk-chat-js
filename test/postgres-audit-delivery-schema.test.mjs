@@ -40,7 +40,7 @@ test("audit delivery migration is frozen, deterministic, expand-only, and ordere
   assert.equal(Object.isFrozen(handrailChatPostgresMigrations), true);
   assert.equal(Object.isFrozen(chatAuditDeliveriesMigration), true);
   assert.equal(Object.isFrozen(chatAuditDeliveriesMigration.statements), true);
-  assert.equal(migrationIndex, handrailChatPostgresMigrations.length - 2);
+  assert.equal(migrationIndex, 35);
   assert.deepEqual(
     handrailChatPostgresMigrations[migrationIndex - 1] && {
       id: handrailChatPostgresMigrations[migrationIndex - 1].id,

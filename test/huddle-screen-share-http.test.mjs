@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -9,7 +10,6 @@ import {
   HUDDLE_SCREEN_SHARE_CAPABILITY,
   HUDDLE_SCREEN_SHARE_ROUTE,
   MAX_HUDDLE_SCREEN_SHARE_REQUEST_BYTES,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actors = Object.freeze({

@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { EventEmitter } from "node:events";
 import test from "node:test";
@@ -9,7 +10,6 @@ import {
   CHAT_HTTP_INTERNAL_ERROR_CODE,
   CHAT_HTTP_REQUEST_ID_HEADER,
   CHAT_REQUEST_ADMISSION_DENIED_CODE,
-  createChatServer,
   createPostgresMigrationRunner,
   handrailChatPostgresMigrations,
 } from "@handrail/chat/server";
@@ -441,7 +441,7 @@ test("HTTP outcomes isolate invalid ids and settle connect-style errors", async 
   await runtime.close();
 });
 
-test("HTTP request id correlates the response and existing message audit", async () => {
+test("HTTP request id correlates the response and existing message audit", async (t) => {
   let auditRequestId;
   const database = {
     async query() {
@@ -459,9 +459,14 @@ test("HTTP request id correlates the response and existing message audit", async
               rowCount: 1,
             };
           }
+          if (sql.startsWith("SELECT id FROM") && sql.includes("SELECT parent_conversation_id")) return { rows: [], rowCount: 0 };
+          if (sql.startsWith("SELECT type, parent_conversation_id")) return { rows: [{ type: "channel", parent_conversation_id: null }], rowCount: 1 };
+          if (sql.startsWith("SELECT conversation_id, state")) return { rows: [{ conversation_id: "conversation-safe", state: "active" }], rowCount: 1 };
           if (sql.includes("chat_conversations AS conversation")) {
             return {
               rows: [{
+                parent_conversation_id: null,
+                root_message_id: null,
                 sequence: 1,
                 occurred_at: "2026-01-01T00:00:00.000Z",
                 entity_type: null,
@@ -509,6 +514,7 @@ test("HTTP request id correlates the response and existing message audit", async
       },
     },
   });
+  t.after(() => runtime.close());
   const body = JSON.stringify({
     operation: "send",
     conversationId: "conversation-safe",

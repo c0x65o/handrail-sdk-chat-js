@@ -369,7 +369,7 @@ test("adapter quarantine and logout clearing affect only the exact identity and 
   rows.set(key(identity, ApplicationChatStorageRecordKind.queuedDraftIntents), "{malformed");
   await assert.rejects(
     storage.read(identity, ApplicationChatStorageRecordKind.queuedDraftIntents),
-    /invalid JSON/,
+    (error) => error.name === "ApplicationChatStorageValidationError",
   );
   assert.equal(rows.has(key(identity, ApplicationChatStorageRecordKind.queuedDraftIntents)), false);
   assert.equal(rows.has(key(identity, ApplicationChatStorageRecordKind.queuedSendMessageIntents)), true);

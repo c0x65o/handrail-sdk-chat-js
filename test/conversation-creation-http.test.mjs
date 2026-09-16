@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -12,7 +13,6 @@ import {
   CHAT_CONVERSATION_CREATION_UNAVAILABLE_CODE,
   CREATE_CONVERSATION_ENTITY_POLICY_ACTION,
   MAX_CONVERSATION_CREATION_REQUEST_BYTES,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actor = Object.freeze({
@@ -154,6 +154,7 @@ const createScriptedCreationDatabase = () => {
       notification_level: "all",
       muted: false,
       muted_until: null,
+      preference_revision: 0,
       preference_updated_at: conversation.createdAt,
       member_user_ids: conversation.memberUserIds,
     };

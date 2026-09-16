@@ -163,11 +163,12 @@ test("conversation-preference HTTP transport rejects untrusted input before comm
       expectedPreferenceRevision: 3,
     });
     const { isStarred: _isStarred, ...withoutIsStarred } = valid;
+    // Unrecognized path: no SDK command or route-specific validation.
+    assert.equal((await request("/conversations//preference", valid)).status, 404);
     const malformedCases = [
       () => request(`${route("preference-primary")}?userId=other`, valid),
       () => request(route("preference-primary"), { ...valid, conversationId: "other" }),
       () => request("/conversations/preference%2Fprimary/preference", valid),
-      () => request("/conversations//preference", valid),
       () => request(route("preference-primary"), valid, { contentType: "text/plain" }),
       () => request(route("preference-primary"), valid, { body: "{" }),
       () => request(route("preference-primary"), { ...valid, unknown: true }),

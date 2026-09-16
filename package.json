@@ -1,6 +1,6 @@
 {
   "name": "@handrail/chat",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "Embeddable chat SDK for Handrail applications",
   "type": "module",
   "main": "./dist/index.js",
@@ -235,10 +235,11 @@
     "typescript": "7.0.2"
   },
   "dependencies": {
-    "@testcontainers/postgresql": "12.1.0",
+    "@testcontainers/postgresql": "12.0.0",
     "@types/pg": "8.23.1",
     "@types/ws": "8.18.1",
     "pg": "8.23.0",
+    "testcontainers": "12.0.0",
     "ws": "8.21.3"
   }
 }

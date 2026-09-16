@@ -7,7 +7,8 @@ process.env.NODE_ENV = "test";
 
 const { Window } = await import("happy-dom");
 const React = await import("react");
-const { act, createElement } = React;
+const { createElement } = React;
+const { act } = await import("./helpers/react-act.mjs");
 const { createRoot } = await import("react-dom/client");
 const { renderToStaticMarkup } = await import("react-dom/server");
 const { ChatProvider } = await import("../dist/react/index.js");
@@ -561,7 +562,7 @@ test("opens huddle details as a named non-modal dialog with ordinary focus trave
     details.querySelector(".handrail-chat__huddle-details-title").id,
   );
   assert.equal(
-    details.querySelector(`#${details.getAttribute("aria-labelledby")}`).textContent,
+    details.querySelector(`[id="${details.getAttribute("aria-labelledby")}"]`).textContent,
     "Huddle details",
   );
 

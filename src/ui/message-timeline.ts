@@ -12,6 +12,8 @@ import {
   useState,
   useSyncExternalStore,
   type CSSProperties,
+  type ChangeEvent,
+  type FormEvent,
   type KeyboardEvent,
   type ReactElement,
   type ReactNode,
@@ -65,7 +67,7 @@ import type {
   ChatWorkspaceSlotOverrides,
 } from "./slots.js";
 import type { MessageComposerAvailability } from "./message-composer.js";
-import { ReactionPicker, type ReactionPickerReactionKey } from "./reaction-picker.js";
+import { ReactionPicker, type ReactionPickerReactionKey, type ReactionPickerDismissReason } from "./reaction-picker.js";
 import {
   calculateTimelineAnchorOffsetCorrection,
   calculateTimelineWindow,
@@ -959,7 +961,7 @@ export const DefaultMessageRenderer: TimelineSlots["Message"] = ({ message, acti
             "form",
             {
               className: "handrail-chat__timeline-edit",
-              onSubmit: (event) => {
+              onSubmit: (event: FormEvent<HTMLFormElement>) => {
                 event.preventDefault();
                 void submitEdit();
               },
@@ -969,8 +971,8 @@ export const DefaultMessageRenderer: TimelineSlots["Message"] = ({ message, acti
               autoFocus: true,
               className: "handrail-chat__control",
               id: `edit-${message.id}`,
-              onChange: (event) => setEditText((event.currentTarget as HTMLTextAreaElement).value),
-              onKeyDown: (event) => {
+              onChange: (event: ChangeEvent<HTMLTextAreaElement>) => setEditText((event.currentTarget as HTMLTextAreaElement).value),
+              onKeyDown: (event: KeyboardEvent<HTMLTextAreaElement>) => {
                 if (event.key !== "Escape") return;
                 event.preventDefault();
                 event.stopPropagation();
@@ -1767,6 +1769,7 @@ const MessageRow = ({
   total,
 }: MessageRowProps): ReactElement => {
   const [reactionPickerOpen, setReactionPickerOpen] = useState(false);
+  const restoreReactionFocusAfterCommit = useRef(false);
   const [reactionPickerStyle, setReactionPickerStyle] = useState<CSSProperties | undefined>(undefined);
   const reactionPickerAnchorRef = useRef<HTMLSpanElement | null>(null);
   const reactionPickerTriggerRef = useRef<HTMLButtonElement | null>(null);
@@ -2013,6 +2016,13 @@ const MessageRow = ({
   const restoreReactionTriggerFocus = useCallback(() => {
     reactionPickerTriggerRef.current?.focus();
   }, []);
+  useLayoutEffect(() => {
+    if (!reactionPickerOpen && restoreReactionFocusAfterCommit.current) {
+      restoreReactionFocusAfterCommit.current = false;
+      // React 18 can commit the dismissal after the picker's microtask.
+      restoreReactionTriggerFocus();
+    }
+  }, [reactionPickerOpen, restoreReactionTriggerFocus]);
   const positionReactionPicker = useCallback(() => {
     const trigger = reactionPickerTriggerRef.current;
     if (trigger === null) return;
@@ -2208,7 +2218,10 @@ const MessageRow = ({
                 ? createElement(ReactionPicker, {
                     ariaLabel: `Choose a reaction for message from ${displayName(author)}`,
                     className: "handrail-chat__timeline-reaction-picker",
-                    onDismiss: () => setReactionPickerOpen(false),
+                    onDismiss: (reason: ReactionPickerDismissReason) => {
+                      restoreReactionFocusAfterCommit.current = reason !== "outside_pointer";
+                      setReactionPickerOpen(false);
+                    },
                     onSelect: selectPickerReaction,
                     restoreFocus: restoreReactionTriggerFocus,
                     ...(reactionPickerStyle === undefined ? {} : { style: reactionPickerStyle }),
@@ -2411,6 +2424,9 @@ export function MessageTimeline({
     ready: boolean; finish: (success: boolean) => void; release: () => void;
   } | undefined>(undefined);
   const [navigationVersion, setNavigationVersion] = useState(0);
+  const cancelledNavigationFocusRef = useRef<{
+    scope: typeof navigationScope; trigger: HTMLElement;
+  } | undefined>(undefined);
   const messagesResult = useMessages(conversationId, pageSize === undefined ? {} : { limit: pageSize });
   const readResult = useReadState(conversationId);
   const actions = useChatActions(conversationId);
@@ -2847,9 +2863,10 @@ export function MessageTimeline({
           // Window requests belong to the runtime and may finish after Escape.
           // If hydration removed the restored trigger, retain a focus position
           // in this timeline without stealing focus from another control/scope.
-          if (navigationScopeRef.current === navigationScope && navigationRef.current === undefined &&
-              trigger !== null && !trigger.isConnected && document.activeElement === document.body) {
-            viewportRef.current?.focus({ preventScroll: true });
+          if (navigationScopeRef.current === navigationScope && navigationRef.current === undefined && trigger !== null) {
+            cancelledNavigationFocusRef.current = { scope: navigationScope, trigger };
+            // Inspect connectivity after React commits the hydrated window.
+            setNavigationVersion(version => version + 1);
           }
           return;
         }
@@ -3051,6 +3068,13 @@ export function MessageTimeline({
   }, [conversationId, latestRowIdentity, mountedRowKey, syncViewportMetrics]);
 
   useLayoutEffect(() => {
+    const recovery = cancelledNavigationFocusRef.current;
+    cancelledNavigationFocusRef.current = undefined;
+    if (recovery !== undefined && navigationScopeRef.current === recovery.scope &&
+        navigationRef.current === undefined && !recovery.trigger.isConnected &&
+        document.activeElement === document.body) {
+      viewportRef.current?.focus({ preventScroll: true });
+    }
     const pending = navigationRef.current;
     if (pending?.ready !== true || pending.target.conversationId !== conversationId) return;
     if (sourceRuntime?.getState(pending.target).status !== "available" ||
@@ -3337,7 +3361,7 @@ export function MessageTimeline({
   return createElement(
     "section",
     { "aria-label": ariaLabel, className: joinClassNames("handrail-chat__timeline", className),
-      onKeyDown: (event) => {
+      onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
         if (event.key === "Escape" && navigationRef.current !== undefined) {
           event.preventDefault();
           finishReplyNavigation(false);

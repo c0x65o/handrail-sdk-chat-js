@@ -465,7 +465,7 @@ test("authorization rollback and identity/private-stream checks isolate saved st
   const pending = client.saveMessage({ messageId, privateNote });
   assert.equal(selectIsCurrentUserMessageSaved(cache.getState(), messageId), true);
   const failure = await pending;
-  assert.equal(failure.status, "authentication");
+  assert.equal(failure.status, "rejected");
   assert.equal(selectIsCurrentUserMessageSaved(cache.getState(), messageId), undefined);
   assert.equal(JSON.stringify(failure).includes(privateNote), false);
   assert.equal(JSON.stringify(diagnostics).includes(privateNote), false);

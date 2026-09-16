@@ -463,7 +463,7 @@ export function ReactionPicker({
                       onFocus: () => setActiveIndex(index),
                       onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) =>
                         moveFocus(event, index),
-                      ref: (element: HTMLButtonElement | null) => {
+                      ref: (element: HTMLButtonElement | null): void => {
                         itemRefs.current[index] = element;
                       },
                       tabIndex: activeIndex === index ? 0 : -1,

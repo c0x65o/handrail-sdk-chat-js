@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -14,7 +15,6 @@ import {
   CHAT_SAVED_MESSAGE_UNAVAILABLE_CODE,
   MAX_SAVED_MESSAGE_REQUEST_BYTES,
   SAVED_MESSAGE_ROUTE,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actor = Object.freeze({
@@ -714,13 +714,16 @@ test("PATCH /messages/:messageId/saved mounts setSavedMessage", async (t) => {
         "permission",
         "permissions",
       ];
+      // Unknown routes delegate to the host without command work.
+      const beforeUnknownRoutes = [database.connectCount];
+      assert.equal((await request("/messages/validation/saved/extra", valid)).status, 404);
+      assert.equal((await request("/messages/validation/saved/", valid)).status, 404);
+      assert.deepEqual([database.connectCount], beforeUnknownRoutes);
       const invalidRequests = [
         () => request(path, valid, { body: "{" }),
         () => request(path, valid, { body: "" }),
         () => request(path, valid, { contentType: "text/plain" }),
         () => request(`${path}?unexpected=true`, valid),
-        () => request("/messages/validation/saved/", valid),
-        () => request("/messages/validation/saved/extra", valid),
         () => request("/messages/validation%2Fchild/saved", valid),
         () => request("/messages/%/saved", valid),
         () => request(savedPath("other"), valid),

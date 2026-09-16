@@ -4,7 +4,8 @@ import test from "node:test";
 process.env.NODE_ENV = "test";
 
 const React = await import("react");
-const { act, createElement } = React;
+const { createElement } = React;
+const { act } = await import("./helpers/react-act.mjs");
 const { renderToString } = await import("react-dom/server");
 const ReactTestRenderer = await import("react-test-renderer");
 const { create } = ReactTestRenderer.default;

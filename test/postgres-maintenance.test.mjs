@@ -149,6 +149,9 @@ test("expired outbox maintenance locks, rechecks, and deletes one bounded transa
       if (sql.includes("AS active_lease")) {
         return { rows: [{ ...delivery, active_lease: false }], rowCount: 1 };
       }
+      if (sql.startsWith('UPDATE "tenant_chat".chat_message_reminders AS reminder')) {
+        return { rows: [], rowCount: 0 };
+      }
       if (sql.startsWith("DELETE FROM \"tenant_chat\".chat_notification_deliveries")) {
         return { rows: [], rowCount: 1 };
       }
@@ -183,7 +186,11 @@ test("expired outbox maintenance locks, rechecks, and deletes one bounded transa
   const parentDeleteIndex = calls.findIndex(({ sql }) =>
     sql.includes("DELETE FROM \"tenant_chat\".chat_outbox_events AS event"),
   );
-  assert.ok(childDeleteIndex > 0);
+  const reminderSettleIndex = calls.findIndex(({ sql }) =>
+    sql.startsWith('UPDATE "tenant_chat".chat_message_reminders AS reminder'),
+  );
+  assert.ok(reminderSettleIndex > 0);
+  assert.ok(childDeleteIndex > reminderSettleIndex);
   assert.ok(parentDeleteIndex > childDeleteIndex);
   assert.deepEqual(releases, [undefined]);
   assert.deepEqual(result, {

@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -16,7 +17,6 @@ import {
   MAX_DRAFT_SYNCHRONIZATION_REQUEST_BYTES,
   SYNCHRONIZE_DRAFT_IDEMPOTENCY_OPERATION,
   SYNCHRONIZE_DRAFT_OUTBOX_EVENT_TYPE,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actorA = Object.freeze({
@@ -522,11 +522,14 @@ test("PATCH /conversations/:conversationId/draft mounts actor-private draft sync
           ...valid,
           padding: "x".repeat(MAX_DRAFT_SYNCHRONIZATION_REQUEST_BYTES),
         });
+        // Unrecognized path: no SDK command or route-specific validation.
+        const beforeUnknownRoutes = [commandConnectCount];
+        assert.equal((await request("/conversations//draft", valid)).status, 404);
+        assert.deepEqual([commandConnectCount], beforeUnknownRoutes);
         const invalidCases = [
           () => request(`${route("draft-main")}?tenantId=tenant-b`, valid),
           () => request(route("draft-main"), { ...valid, conversationId: "other" }),
           () => request("/conversations/draft%2Fmain/draft", valid),
-          () => request("/conversations//draft", valid),
           () => request(route("draft-main"), valid, { contentType: "text/plain" }),
           () => request(route("draft-main"), valid, { body: "{" }),
           () => request(route("draft-main"), { ...valid, unknown: true }),

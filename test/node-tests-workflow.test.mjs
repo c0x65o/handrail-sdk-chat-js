@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
+import { tmpdir } from "node:os";
+import { promisify } from "node:util";
 import { resolve } from "node:path";
 import test from "node:test";
 
@@ -149,7 +152,7 @@ test("Node test workflow preserves its install, build, and safety contract", asy
   const actions = [...workflow.matchAll(/^        uses: (.+)$/gmu)].map(
     (match) => match[1],
   );
-  assert.deepEqual(actions, ["actions/checkout@v4", "actions/setup-node@v4"]);
+  assert.deepEqual(actions, ["actions/checkout@v4", "actions/setup-node@v4", "dart-lang/setup-dart@v1"]);
   assert.match(workflow, /^          node-version: 22$/mu);
   assert.match(workflow, /^          cache: npm$/mu);
   assert.match(workflow, /^          cache-dependency-path: package-lock\.json$/mu);
@@ -157,7 +160,8 @@ test("Node test workflow preserves its install, build, and safety contract", asy
   const commands = [...workflow.matchAll(/^        run: (.+)$/gmu)].map(
     (match) => match[1],
   );
-  assert.deepEqual(commands, ["node scripts/generate-package-version.mjs --check", "npm ci", "npm run build", "npm run test:node"]);
+  assert.match(workflow, /^          sdk: "3\.11\.5"$/mu);
+  assert.deepEqual(commands, ["dart --version", "node scripts/generate-package-version.mjs --check", "npm ci --engine-strict", "npm run build", "npm run test:node"]);
   assert.equal(commands.filter((command) => command === "npm run build").length, 1);
   assert.equal(commands.filter((command) => command === "npm run test:node").length, 1);
 
@@ -166,6 +170,67 @@ test("Node test workflow preserves its install, build, and safety contract", asy
   assert.doesNotMatch(workflow, /^\s*continue-on-error:/mu);
   assert.doesNotMatch(
     workflow,
-    /\b(?:postgres(?:ql)?|mysql|mariadb|sqlite|database|docker|flutter|dart|provider|publish(?:ing)?|release|migrate|migration|deploy(?:ment)?|production|staging|kubectl|helm|terraform|pulumi|serverless|flyctl|vercel|netlify)\b|uses:\s*(?:aws-actions|azure|google-github-actions|cloudflare)\//iu,
+    /\b(?:postgres(?:ql)?|mysql|mariadb|sqlite|database|docker|flutter|provider|publish(?:ing)?|release|migrate|migration|deploy(?:ment)?|production|staging|kubectl|helm|terraform|pulumi|serverless|flyctl|vercel|netlify)\b|uses:\s*(?:aws-actions|azure|google-github-actions|cloudflare)\//iu,
   );
+});
+
+// Exercise the runner from a clean checkout without compiling the entire SDK
+// recursively inside its own suite. The build fixture writes a fresh module;
+// each focused-suite environment variable must resolve that module.
+test("runner builds scoped prerequisites and rejects version drift before generation", async (t) => {
+  const fixture = await mkdtemp(resolve(tmpdir(), "chat-node-runner-"));
+  t.after(() => rm(fixture, { recursive: true, force: true }));
+  await mkdir(resolve(fixture, "scripts"));
+  await mkdir(resolve(fixture, "src/client/generated"), { recursive: true });
+  await mkdir(resolve(fixture, "test"));
+  await copyFile(runnerPath, resolve(fixture, "scripts/run-node-tests.mjs"));
+  await copyFile(resolve(root, "scripts/generate-package-version.mjs"), resolve(fixture, "scripts/generate-package-version.mjs"));
+  await writeFile(resolve(fixture, "package.json"), JSON.stringify({
+    type: "module", version: "1.2.3", scripts: { build: "node build.mjs" },
+  }));
+  await writeFile(resolve(fixture, "package-lock.json"), JSON.stringify({
+    version: "1.2.3", packages: { "": { version: "1.2.3" } },
+  }));
+  await writeFile(resolve(fixture, "build.mjs"), `
+    import { mkdir, writeFile } from "node:fs/promises";
+    await mkdir("dist", { recursive: true });
+    await writeFile("dist/fresh.mjs", "export const built = true;");
+    await writeFile("build-ran", "yes");
+  `);
+  await writeFile(resolve(fixture, "test/prerequisites.test.mjs"), `
+    import assert from "node:assert/strict";
+    import test from "node:test";
+    test("all scoped modules exist after preparation", async () => {
+      for (const name of ["REPLY_STYLE", "THREAD_LIST", "THREAD_LIFECYCLE", "MESSAGE_CONTEXT"]) {
+        const location = process.env["HANDRAIL_" + name + "_BUILD"];
+        assert.ok(location.startsWith("file:"));
+        assert.equal((await import(location + "/fresh.mjs")).built, true);
+      }
+    });
+  `);
+  const execute = promisify(execFile);
+  const options = { cwd: fixture, env: { ...process.env, HANDRAIL_REPLY_STYLE_BUILD: "file:///stale" } };
+  await execute(process.execPath, ["scripts/generate-package-version.mjs"], options);
+  await execute(process.execPath, ["scripts/run-node-tests.mjs"], options);
+  assert.equal(await readFile(resolve(fixture, "build-ran"), "utf8"), "yes");
+  await rm(resolve(fixture, "build-ran"));
+  const generated = resolve(fixture, "src/client/generated/package-version.ts");
+  await writeFile(generated, "stale version metadata");
+  await assert.rejects(execute(process.execPath, ["scripts/run-node-tests.mjs"], options),
+    (error) => error.code === 1 && error.stderr.includes("out of date"));
+  await assert.rejects(readFile(resolve(fixture, "build-ran")), { code: "ENOENT" });
+  assert.equal(await readFile(generated, "utf8"), "stale version metadata");
+});
+
+
+test("minimum Node workflow installs with engine checks and exercises emitted consumers", async () => {
+  const workflow = await readFile(resolve(root, ".github/workflows/node-minimum.yml"), "utf8");
+  assert.match(workflow, /node-version: "22\.0\.0"/);
+  const commands = [...workflow.matchAll(/^        run: (.+)$/gmu)].map((match) => match[1]);
+  assert.deepEqual(commands, [
+    "node scripts/generate-package-version.mjs --check",
+    "npm ci --include=dev --engine-strict",
+    "node --test --test-concurrency=1 test/public-declaration-dependencies.test.mjs test/exports.test.mjs test/postgres-container-startup-cleanup.test.mjs",
+  ]);
+  assert.doesNotMatch(workflow, /continue-on-error|ignore-scripts|engine-strict=false/);
 });

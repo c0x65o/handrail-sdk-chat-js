@@ -62,6 +62,7 @@ function summary(id, type = "channel", overrides = {}) {
     createdAt: timestamp,
     updatedAt: timestamp,
     latestSequence: 0,
+    unreadMentionCount: 0,
     activityAt: timestamp,
     currentMember: member(id, userId, "owner"),
     currentReadState: {
@@ -80,10 +81,13 @@ function detail(item, memberUserIds = [userId]) {
     conversation: {
       ...item,
       memberUserIds,
+      activeMemberUserIds: memberUserIds,
+      memberListRevision: 1,
       currentPreference: {
         conversationId: item.id,
         userId,
         notificationPreference: "all",
+        isStarred: false,
         mute: { muted: false },
         updatedAt: timestamp,
       },
@@ -362,7 +366,7 @@ test("lifecycle conflicts, safety rejection, malformed results, and auth failure
     conversationId,
     expectedMemberListRevision: 1,
     targetUserId: "user-b",
-  })).status, "authentication");
+  })).status, "rejected");
   await new Promise((resolve) => setImmediate(resolve));
   assert.ok(requests.filter(({ method }) => method === "GET").length >= 3);
   assert.equal(

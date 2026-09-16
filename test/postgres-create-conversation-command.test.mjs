@@ -324,6 +324,23 @@ test("atomic create-conversation command authorizes, reconciles, and rolls back 
       assert.equal(tenantACount.rows[0].count, 0);
     });
 
+    await t.test("completion timestamps remain ordered across repeated creations and replays", async () => {
+      for (let index = 0; index < 25; index += 1) {
+        const input = channelInput(`timestamp-${index}`);
+        const created = await command(input);
+        const replay = await command(input);
+        assert.equal(replay.reconciliationStatus, "replayed");
+        assert.equal(replay.conversation.conversation.id, created.conversation.conversation.id);
+      }
+      const stored = await harness.pool.query(
+        `SELECT count(*)::integer AS count,
+                bool_and(completed_at = updated_at AND completed_at >= created_at) AS ordered
+           FROM ${tables.idempotency}
+          WHERE client_key LIKE 'create-timestamp-%'`,
+      );
+      assert.deepEqual(stored.rows, [{ count: 25, ordered: true }]);
+    });
+
     await t.test("replays exact outcomes and rejects conflicting key reuse", async () => {
       const request = channelInput("idempotent");
       const first = await command(request);

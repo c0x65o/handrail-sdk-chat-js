@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -35,7 +36,6 @@ const {
   CHAT_MESSAGE_SEND_UNAVAILABLE_CODE,
   MAX_SEND_MESSAGE_REQUEST_BYTES,
   SEND_MESSAGE_ENTITY_POLICY_ACTION,
-  createChatServer,
 } = transport;
 
 const actor = Object.freeze({
@@ -260,6 +260,20 @@ const createScriptedSendDatabase = () => {
               rowCount: 1,
             };
           }
+          if (sql.startsWith("SELECT id FROM") && sql.includes("SELECT parent_conversation_id")) {
+            return { rows: [], rowCount: 0 }; // These fixtures are top-level channels.
+          }
+          if (sql.startsWith("SELECT type, parent_conversation_id")) {
+            const conversation = working.conversations.get(values[1]);
+            const rows = conversation?.tenantId === values[0] ? [{ type: "channel", parent_conversation_id: null }] : [];
+            return { rows, rowCount: rows.length };
+          }
+          if (sql.startsWith("SELECT conversation_id, state")) {
+            const conversation = working.conversations.get(values[3]);
+            const rows = conversation?.tenantId === values[0] && conversation.memberUserId === values[2]
+              ? [{ conversation_id: values[3], state: conversation.memberState }] : [];
+            return { rows, rowCount: rows.length };
+          }
           if (
             sql.includes("UPDATE") &&
             sql.includes("chat_conversations AS conversation")
@@ -278,6 +292,8 @@ const createScriptedSendDatabase = () => {
             return {
               rows: [
                 {
+                  parent_conversation_id: null,
+                  root_message_id: null,
                   sequence: conversation.sequence,
                   occurred_at: "2030-01-01T00:00:00.000Z",
                   entity_type: conversation.entityType,
@@ -567,13 +583,16 @@ test("POST /conversations/:conversationId/messages mounts the canonical send com
 
     await t.test("rejects malformed transport and trusted identity spoofing before command dispatch", async () => {
       const valid = input("validation-errors", "invalid-base");
+      // Unknown routes delegate to the host without command work.
+      const beforeUnknownRoutes = [database.connectCount];
+      assert.equal((await request("/conversations/validation-errors/messages/extra", valid)).status, 404);
+      assert.deepEqual([database.connectCount], beforeUnknownRoutes);
       const invalidRequests = [
         () => request("/conversations/validation-errors/messages", valid, { body: "{" }),
         () => request("/conversations/validation-errors/messages", valid, { contentType: "text/plain" }),
         () => request("/conversations/validation-errors/messages?unexpected=true", valid),
         () => request("/conversations/other/messages", valid),
         () => request("/conversations/validation-errors%2Fchild/messages", valid),
-        () => request("/conversations/validation-errors/messages/extra", valid),
         () => request("/conversations/validation-errors/messages", { ...valid, tenantId: "tenant-b" }),
         () => request("/conversations/validation-errors/messages", { ...valid, author: { type: "user", userId: "spoofed" } }),
         () => request("/conversations/validation-errors/messages", valid, { omitIdempotencyKey: true }),
@@ -789,7 +808,11 @@ test("reply references cross HTTP parsing and malformed references never dispatc
       { messageId: "source-1", notifyAuthor: false }]) {
       const wire = input("conversation-1", "reply", replyTo === undefined ? {} : { replyTo });
       const response = await request("/conversations/conversation-1/messages", wire);
-      assert.equal(response.status, 403, await response.text());
+      if (replyTo === undefined) {
+        assert.equal(response.status, 403, await response.text());
+      } else {
+        await assertStableError(response, 501, "chat_inline_replies_disabled", "Inline replies are not supported");
+      }
     }
     for (const replyTo of [null, {}, [], "source-1", { messageId: "source-1" },
       { messageId: "source-1", notifyAuthor: "false" },

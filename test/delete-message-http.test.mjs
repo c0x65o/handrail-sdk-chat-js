@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -10,7 +11,6 @@ import {
   CHAT_MESSAGE_DELETE_INVALID_REQUEST_CODE,
   CHAT_MESSAGE_DELETE_UNAVAILABLE_CODE,
   MAX_DELETE_MESSAGE_REQUEST_BYTES,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actor = Object.freeze({
@@ -154,6 +154,8 @@ const createScriptedDeleteDatabase = () => {
   const toRow = (message) => ({
     id: message.id,
     conversation_id: message.conversationId,
+    reply_to_message_id: null,
+    reply_notify_author: false,
     sequence: message.sequence,
     author_user_id: message.authorUserId,
     client_message_id: message.clientMessageId,
@@ -171,6 +173,7 @@ const createScriptedDeleteDatabase = () => {
 
   const resource = {
     async query(sql) {
+
       throw new Error(`delete HTTP route must not issue direct queries: ${sql}`);
     },
     async connect() {
@@ -467,13 +470,16 @@ test("DELETE /messages/:messageId mounts the canonical soft-delete command", asy
 
     await t.test("rejects malformed transport and spoofed identity before execution", async () => {
       const valid = deleteInput("validation", "validation");
+      // Unknown routes delegate to the host without command work.
+      const beforeUnknownRoutes = [database.connectCount];
+      assert.equal((await request("/messages/validation/extra", valid)).status, 404);
+      assert.equal((await request("/messages", valid)).status, 404);
+      assert.equal((await request("/messages/", valid)).status, 404);
+      assert.deepEqual([database.connectCount], beforeUnknownRoutes);
       const invalidRequests = [
         () => request("/messages/validation", valid, { body: "{" }),
         () => request("/messages/validation", valid, { contentType: "text/plain" }),
         () => request("/messages/validation?unexpected=true", valid),
-        () => request("/messages", valid),
-        () => request("/messages/", valid),
-        () => request("/messages/validation/extra", valid),
         () => request("/messages/validation%2Fchild", valid),
         () => request("/messages/validation%5Cchild", valid),
         () => request("/messages/%", valid),

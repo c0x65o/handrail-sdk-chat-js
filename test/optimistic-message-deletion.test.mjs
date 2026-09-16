@@ -167,7 +167,15 @@ const createFixture = ({ fetch, commandOptions } = {}) => {
   const client = createChatClient({
     endpoint: "/api/chat",
     getAccessToken: () => "token",
-    fetch,
+    fetch: (url, init) => {
+      // Durable deletion also refreshes conversation authority. Keep that read
+      // separate from the held DELETE acknowledgement used to test ordering.
+      if (init.method === "GET") return Promise.resolve(response(
+        { error: { code: "chat_conversation_snapshot_unavailable" } },
+        { ok: false, status: 503 },
+      ));
+      return fetch(url, init);
+    },
     cache,
     commands: commandOptions,
     optimisticDeletes: {

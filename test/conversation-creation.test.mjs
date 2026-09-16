@@ -61,6 +61,7 @@ function conversationDetail(type, id) {
     updatedAt: now,
     activityAt: now,
     latestSequence: 0,
+    unreadMentionCount: 0,
     currentMember: {
       tenantId: "tenant-from-session",
       conversationId: id,
@@ -76,11 +77,14 @@ function conversationDetail(type, id) {
       lastReadSequence: 0,
       updatedAt: now,
     },
+    activeMemberUserIds: [actorUserId],
     memberUserIds: [actorUserId],
+    memberListRevision: 1,
     currentPreference: {
       conversationId: id,
       userId: actorUserId,
       notificationPreference: "all",
+      isStarred: false,
       mute: { muted: false },
       updatedAt: now,
     },

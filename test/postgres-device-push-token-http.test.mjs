@@ -147,7 +147,7 @@ const adapters = (database, auth = {}, pushTokenProtector) => ({
 test("PUT /devices/:deviceId/push-token mounts token-safe register, replay, refresh, and unregister behavior", async () => {
   const backend = await createPostgresTestBackend();
   const harness = await backend.createHarness({
-    schemaPrefix: "chat_device_push_token_http",
+    schemaPrefix: "chat_push_token_http",
   });
   const protectionCalls = [];
   const runtime = createChatServer(adapters(

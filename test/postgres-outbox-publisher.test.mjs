@@ -44,7 +44,9 @@ test("transactional outbox publisher leases, orders, and retries real PostgreSQL
       `INSERT INTO ${outbox}
          (event_id, protocol_version, tenant_id, stream_id, type,
           occurred_at, payload, expires_at)
-       VALUES ($1, 4, $2, $3, $4, clock_timestamp(), $5::jsonb,
+       VALUES ($1, 4, $2, $3, $4,
+               clock_timestamp() + (LEAST($6::double precision, 0) - 1000) * interval '1 millisecond',
+               $5::jsonb,
                clock_timestamp()
                  + ($6::double precision * interval '1 millisecond'))`,
       [

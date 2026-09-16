@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -6,7 +7,6 @@ import {
   CHAT_HUDDLE_JOIN_INVALID_REQUEST_CODE,
   JOIN_HUDDLE_ROUTE,
   MAX_JOIN_HUDDLE_REQUEST_BYTES,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actorContext = Object.freeze({

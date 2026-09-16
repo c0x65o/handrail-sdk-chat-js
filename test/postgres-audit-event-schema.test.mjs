@@ -57,7 +57,7 @@ test("audit migration stores immutable tenant-safe history", async (t) => {
         targetType,
         targetId,
         occurredAt,
-        metadata,
+        JSON.stringify(metadata),
         requestId,
         correlationId,
       ],
@@ -73,24 +73,7 @@ test("audit migration stores immutable tenant-safe history", async (t) => {
 
     assert.deepEqual(
       applied.applied.map(({ id, order }) => ({ id, order })),
-      [
-        { id: "0001-chat-conversations-membership", order: 1 },
-        { id: "0002-chat-messages-revisions", order: 2 },
-        { id: "0003-chat-reactions", order: 3 },
-        { id: "0004-chat-read-cursors", order: 4 },
-        { id: "0005-chat-outbox-events", order: 5 },
-        { id: "0006-chat-idempotency-keys", order: 6 },
-        { id: "0007-chat-drafts", order: 7 },
-        { id: "0008-chat-conversation-preferences", order: 8 },
-        { id: "0009-chat-thread-follows", order: 9 },
-        { id: "0010-chat-attachments", order: 10 },
-        { id: "0011-chat-audit-events", order: 11 },
-        { id: "0012-chat-saved-messages", order: 12 },
-        { id: "0013-chat-huddle-sessions", order: 13 },
-        { id: "0014-chat-notification-deliveries", order: 14 },
-        { id: "0015-chat-conversation-lifecycle-revision", order: 15 },
-        { id: "0016-chat-thread-follow-revision", order: 16 },
-      ],
+      handrailChatPostgresMigrations.map(({ id, order }) => ({ id, order })),
     );
 
     await harness.pool.query(
@@ -208,7 +191,7 @@ test("audit migration stores immutable tenant-safe history", async (t) => {
           targetType: "conversation",
           targetId: "conversation-a",
         }),
-        /chat_audit_events_conversation_target_fkey/,
+        (error) => error?.constraint === "chat_audit_events_conversation_target_fkey",
       );
       await assert.rejects(
         insertAuditEvent({
@@ -217,13 +200,13 @@ test("audit migration stores immutable tenant-safe history", async (t) => {
           targetType: "chat_message",
           targetId: "message-a",
         }),
-        /chat_audit_events_message_target_fkey/,
+        (error) => error?.constraint === "chat_audit_events_message_target_fkey",
       );
     });
 
     await t.test("rejects malformed or sensitive audit facts", async () => {
       await assert.rejects(
-        insertAuditEvent({ eventId: "bad-target-pair", targetType: "message" }),
+        insertAuditEvent({ eventId: "bad-target-pair", targetType: "erp_order" }),
         /chat_audit_events_target_pair_check/,
       );
       await assert.rejects(
@@ -276,7 +259,7 @@ test("audit migration stores immutable tenant-safe history", async (t) => {
         /chat_audit_events are append-only/,
       );
       await assert.rejects(
-        harness.pool.query(`TRUNCATE ${auditEvents}`),
+        harness.pool.query(`TRUNCATE ${auditEvents} CASCADE`),
         /chat_audit_events are append-only/,
       );
 

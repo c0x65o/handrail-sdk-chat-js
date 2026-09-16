@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -16,7 +17,6 @@ import {
   MAX_PREPARE_ATTACHMENT_RESPONSE_BYTES,
   PREPARE_ATTACHMENT_CAPABILITY,
   PREPARE_ATTACHMENT_ROUTE,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actor = Object.freeze({
@@ -145,6 +145,14 @@ const createScriptedPrepareDatabase = () => {
             };
           }
 
+          if (sql.startsWith("SELECT id FROM") && sql.includes("SELECT parent_conversation_id")) {
+            return { rows: [], rowCount: 0 };
+          }
+          if (sql.startsWith("SELECT type, parent_conversation_id")) {
+            const conversation = conversations.get(values[1]);
+            const rows = conversation?.tenantId === values[0] ? [{ type: "channel", parent_conversation_id: null }] : [];
+            return { rows, rowCount: rows.length };
+          }
           if (sql.includes("FROM \"handrail_chat\".chat_conversations AS conversation")) {
             const [tenantId, conversationId, userId] = values;
             const conversation = conversations.get(conversationId);
@@ -488,11 +496,14 @@ test("prepare-attachment HTTP route reserves, replays, validates, authorizes, an
 
     await t.test("rejects malformed, spoofed, secret-bearing, and mismatched requests", async () => {
       const valid = prepareInput("invalid-base");
+      // Unrecognized path: no SDK command or route-specific validation.
+      const beforeUnknownRoutes = [database.connectCount];
+      assert.equal((await request(`${preparePath("active")}/extra`, valid)).status, 404);
+      assert.deepEqual([database.connectCount], beforeUnknownRoutes);
       const invalidRequests = [
         () => request(preparePath("active"), valid, { body: "{" }),
         () => request(preparePath("active"), valid, { contentType: "text/plain" }),
         () => request(`${preparePath("active")}?unexpected=true`, valid),
-        () => request(`${preparePath("active")}/extra`, valid),
         () => request(preparePath("active%2Fchild"), valid),
         () => request(preparePath("active"), { ...valid, tenantId: "tenant-b" }),
         () => request(preparePath("active"), { ...valid, userId: "spoofed" }),

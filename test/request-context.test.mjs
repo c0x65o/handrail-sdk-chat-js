@@ -8,6 +8,7 @@ import {
   ChatAuthenticationError,
   ChatAuthorizationError,
   createChatServer,
+  resolveChatRequestContext,
   getChatRequestContext,
   hasChatRequestContext,
 } from "@handrail/chat/server";
@@ -21,8 +22,13 @@ const database = {
   },
 };
 
-const createRuntime = ({ resolveActor, getCapabilities }) =>
-  createChatServer({
+const runtimes = new Map();
+test.afterEach(async () => {
+  for (const runtime of runtimes.keys()) await runtime.close();
+  runtimes.clear();
+});
+const createRuntime = ({ resolveActor, getCapabilities }) => {
+  const runtime = createChatServer({
     database: { pool: database },
     auth: { resolveActor },
     directory: {
@@ -40,11 +46,17 @@ const createRuntime = ({ resolveActor, getCapabilities }) =>
       },
     },
   });
+  runtimes.set(runtime, { auth: { resolveActor }, permissions: { getCapabilities } });
+  return runtime;
+};
 
-const runMiddleware = (runtime, request) =>
-  new Promise((resolve) => {
-    runtime.router(request, {}, (error) => resolve(error));
-  });
+// Context resolution is a standalone boundary; unknown router paths deliberately
+// delegate to the host without resolving authentication or permissions.
+const runMiddleware = async (runtime, request) => {
+  const { auth, permissions } = runtimes.get(runtime);
+  try { await resolveChatRequestContext(request, auth, permissions); }
+  catch (error) { return error; }
+};
 
 test("trusted adapters resolve once and attach one deeply immutable context", async () => {
   let authCalls = 0;
@@ -237,6 +249,8 @@ test("standalone router responses expose only stable sanitized failures", async 
       headers: {},
       headersSent: false,
       statusCode: 200,
+      once() {},
+      off() {},
       setHeader(name, value) {
         this.headers[name] = value;
       },
@@ -245,7 +259,7 @@ test("standalone router responses expose only stable sanitized failures", async 
         resolve(this);
       },
     };
-    runtime.router({}, state);
+    runtime.router({ method: "GET", url: "/conversations?scope=organization", headers: {}, once() {}, off() {} }, state);
   });
 
   assert.equal(response.statusCode, 401);

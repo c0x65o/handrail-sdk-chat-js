@@ -35,14 +35,14 @@ const findIndexes = (plan, indexes = []) => {
   return indexes;
 };
 
-test("attachment cleanup delivery migration is frozen, deterministic, expand-only, and last", () => {
+test("attachment cleanup delivery migration is frozen, deterministic, expand-only, and ordered", () => {
   assert.equal(Object.isFrozen(handrailChatPostgresMigrations), true);
   assert.equal(Object.isFrozen(chatAttachmentCleanupDeliveriesMigration), true);
   assert.equal(
     Object.isFrozen(chatAttachmentCleanupDeliveriesMigration.statements),
     true,
   );
-  assert.equal(migrationIndex, handrailChatPostgresMigrations.length - 1);
+  assert.equal(migrationIndex, 36);
   assert.deepEqual(
     handrailChatPostgresMigrations[migrationIndex - 1] && {
       id: handrailChatPostgresMigrations[migrationIndex - 1].id,
@@ -71,7 +71,7 @@ test("attachment cleanup delivery migration is frozen, deterministic, expand-onl
   const descriptor = createPostgresMigrationRunner({
     database: {},
     migrations: handrailChatPostgresMigrations,
-  }).migrations.at(-1);
+  }).migrations.find(({ id }) => id === migrationId);
   const equivalentDescriptor = createPostgresMigrationRunner({
     database: {},
     migrations: [
@@ -219,16 +219,16 @@ test("attachment cleanup delivery migration upgrades order 36 with guarded durab
     assert.equal(pending.applied.length, 36);
     assert.deepEqual(
       pending.pending.map(({ id, order }) => ({ id, order })),
-      [{ id: migrationId, order: 37 }],
+      handrailChatPostgresMigrations.slice(migrationIndex).map(({ id, order }) => ({ id, order })),
     );
     assert.deepEqual(pending.incompatible, []);
 
     const upgrade = await runner.apply();
     assert.deepEqual(
       upgrade.applied.map(({ id, order }) => ({ id, order })),
-      [{ id: migrationId, order: 37 }],
+      handrailChatPostgresMigrations.slice(migrationIndex).map(({ id, order }) => ({ id, order })),
     );
-    assert.equal(upgrade.status.applied.length, 37);
+    assert.equal(upgrade.status.applied.length, handrailChatPostgresMigrations.length);
     assert.deepEqual(upgrade.status.pending, []);
     assert.deepEqual(upgrade.status.incompatible, []);
     assert.equal(
@@ -237,7 +237,7 @@ test("attachment cleanup delivery migration upgrades order 36 with guarded durab
           `SELECT count(*)::integer AS count
            FROM ${metadata}
            WHERE id = $1 AND migration_order = 37 AND checksum = $2`,
-          [migrationId, runner.migrations.at(-1).checksum],
+          [migrationId, runner.migrations.find(({ id }) => id === migrationId).checksum],
         )
       ).rows[0].count,
       1,

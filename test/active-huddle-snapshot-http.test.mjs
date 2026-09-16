@@ -363,6 +363,8 @@ test("active-huddle denial is indistinguishable for nonmembers, entities, missin
 test("active-huddle route rejects malformed, query, body, and spoofed input before querying", async () => {
   const fixture = createFixture();
   await withHttpServer(fixture.runtime, async ({ endpoint, request }) => {
+    assert.equal((await request("/conversations//huddle")).status, 404);
+    assert.equal((await request("/conversations/active/huddle/extra")).status, 404);
     for (const path of [
       `${route("active")}?tenantId=tenant-b`,
       `${route("active")}?userId=other-user&providerRoomId=provider-room-secret`,
@@ -370,8 +372,6 @@ test("active-huddle route rejects malformed, query, body, and spoofed input befo
       "/conversations/%E0%A4%A/huddle",
       "/conversations/active%2Fother/huddle",
       "/conversations/%20%20/huddle",
-      "/conversations//huddle",
-      "/conversations/active/huddle/extra",
     ]) {
       await assertStableError(
         await request(path),

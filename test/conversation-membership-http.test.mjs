@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
@@ -7,7 +8,6 @@ import {
   CHAT_CONVERSATION_MEMBERSHIP_INVALID_REQUEST_CODE,
   CHAT_CONVERSATION_MEMBERSHIP_UNAVAILABLE_CODE,
   MAX_CONVERSATION_MEMBERSHIP_REQUEST_BYTES,
-  createChatServer,
 } from "@handrail/chat/server";
 
 const actors = Object.freeze({
@@ -152,6 +152,8 @@ test("membership endpoint validates its HTTP boundary before command invocation"
       "boundary-target",
       "user-d",
     );
+    // Unknown routes delegate to the host without command work.
+    assert.equal((await request("/conversations/boundary-target/extra/membership", valid)).status, 404);
     const invalidRequests = [
       () => request("/conversations/boundary-target/membership", valid, {
         body: "{",
@@ -174,7 +176,6 @@ test("membership endpoint validates its HTTP boundary before command invocation"
       }),
       () => request("/conversations/different/membership", valid),
       () => request("/conversations/boundary-target/membership?intent=add_member", valid),
-      () => request("/conversations/boundary-target/extra/membership", valid),
       () => request("/conversations/boundary-target/membership", {
         ...valid,
         targetUserId: " user-d",

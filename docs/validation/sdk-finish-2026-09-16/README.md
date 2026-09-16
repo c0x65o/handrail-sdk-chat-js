@@ -1,10 +1,17 @@
 # SDK readiness candidate — sdk_finish, 2026-09-16
 
+Subsequent source qualification repairs and new evidence are recorded in
+[qualification-repair.md](qualification-repair.md). Historical results below
+retain their original candidate and attribution. The later
+[Flutter qualification follow-up](flutter-qualification.md) records cleanup and
+analyzer repairs and the final candidate evidence for independent QA.
+
 Recommendation: **not ready for ERP integration**. This is engineering verification,
 not independent acceptance. Keep Hitcents ERP read-only. Full QA, reviewed public
 HTTPS Git publication, clean pinned-consumer builds and the explicit owner
-readiness/integration gate remain required. No commit, push, PR, deployment,
-Handrail database/queue mutation or ERP modification occurred in this assignment.
+readiness/integration gate remain required. This worker made no commit, push, PR, deployment,
+Handrail database/queue mutation or ERP modification. Concurrent Git advancement
+by another actor was observed and preserved; it is detailed below.
 
 The producing work request is `acc42b17-72fa-44ca-94b1-ee74e0a72785`, run
 `5d4c3c1c-1b0c-41fc-a0a1-d33b1a9c196b`. The saved brief and all four attached
@@ -28,7 +35,8 @@ that evidence. Working changes are identified separately from these base commits
 Before any install/build, package.json and both package-lock version fields were
 1.0.33; generated client source was 1.0.32 (SHA256
 `8149aa8332432ac3b6b8609a21e20aa34e102fbecd2e0ee976ebf9885399b330`). The direct
-check failed without rewriting it. The generator now produces 1.0.33. Check mode
+check failed without rewriting it. The first repair generated 1.0.33; the final concurrent-version reconciliation
+now generates 1.0.35, matching the current manifest/lock. Check mode
 also rejects missing/malformed locks and either mismatched root version field.
 Every JS CI workflow gates npm ci with the dependency-free check. Lifecycle tests
 execute the Node and PostgreSQL workflow command ordering with stale/aligned
@@ -46,6 +54,39 @@ TCP disabled, local mode-0700 Unix socket, test-only TEST_DATABASE_URL, unique
 schemas and the canonical shipped migrations. Ordinary DATABASE_URL was removed
 from the test process. The owned cluster is stopped and removed after testing;
 remaining-schema output is retained independently.
+
+## Concurrent revision refresh before handoff
+
+A final dependency-free integrity check caught another version mismatch before
+rerunning builds. Outside this worker’s Git actions, all three HEADs and their
+local origin/main refs advanced, absorbing most implementation edits:
+
+| Checkout | Refreshed HEAD | Current manifest |
+| --- | --- | --- |
+| JS | `093962c51c797450fe73659824281ca26fa6ac5f` | 1.0.35 |
+| Flutter | `f28cc4d0ed05f37d7c6ccd5f6f946b31e90bf631` | 0.1.24 |
+| Preview | `0093fb669f81c8c7f00034fc088176ca567b0cee` | 0.1.14+1 |
+
+The first observed concurrent JS commit was a1f82cfe… (1.0.34 manifest/lock,
+1.0.33 generated source), with Flutter 2609cf… (0.1.23). A second advancement
+occurred during the refreshed checks: JS 093962c5… (1.0.35 manifest/lock,
+1.0.34 committed generated source) and Flutter f28cc4d0… (0.1.24). Both transitions
+are preserved in concurrent refresh receipts. This worker did not perform those
+Git operations and did not reset them. The normal generator now leaves the JS
+working tree aligned at 1.0.35. Refreshed build/typecheck/246 regressions/350 PG
+checks passed against 093962c5… plus that generated working-file repair.
+
+**The committed JS 093962c5… still fails the dependency-free version gate.**
+A separate check of exact Git blobs, without install/build, exited 1 and confirmed
+1.0.35 versus 1.0.34. Working-tree regeneration does not repair a committed Git
+artifact. Freeze a candidate, review the generated fix and version-bump process,
+and independently reverify before publication/adoption; these concurrent commits
+are not acceptance credit. Local origin/main agreement establishes no approval.
+
+MCP context was reread and still showed this request running with the same
+read/repo_changes scope and authentication snapshot. Initial/refreshed HEADs,
+full assignment deltas and current working-file hashes are recorded separately.
+Remaining working changes require review; the release gate is not waived.
 
 ## Compatible repairs
 
@@ -74,7 +115,7 @@ The exact command results and outstanding failures are in [verification](verific
 
 | Criterion | Required behavior / implementation | Current evidence and remaining acceptance |
 | --- | --- | --- |
-| candidate-integrity | JS manifest/lock/generated version agreement before lifecycles; independent Flutter distribution; compatible source changes | Pre-install failure retained, generated repair and workflow/lifecycle regressions. Build/typecheck results retained. Dirty patch/file hashes identify the candidate; no published candidate SHA exists. |
+| candidate-integrity | JS manifest/lock/generated version agreement before lifecycles; independent Flutter distribution; compatible source changes | Pre-install failure retained, generated repair and workflow/lifecycle regressions. Build/typecheck results retained. Dirty patch/file hashes identify the candidate; refreshed commits and remaining dirty changes are recorded; the concurrently committed JS version gate still fails until the working generated fix is reviewed. |
 | threads-and-settings | Current/Discord preference saves, reload/reconnect, remote propagation, failed-save recovery; preference cannot reroute queued sends | JS/Flutter preference runtimes and settings UIs; contract/unit/widget checks, real PG16 mounted React/HTTP/WebSocket/storage test. Happy-dom is not browser evidence. Final live React↔Flutter save/reload/reconnect still requires QA. |
 | threads-and-settings | Create/open one canonical named thread per root, navigation/deep links, authorized source context, unavailable/deleted sources, close/reopen/lock; retained drafts | Existing client/server/thread controllers and widgets; lifecycle/list contracts, React workspace tests and Flutter widget coverage. React created-conversation fallback repaired to exclude an unavailable optimistic row. Native routing/touch/keyboard/Back still unverified. |
 | threads-and-settings | Independent unread cursors, follow/notification preferences, mention opt-out and authorized delivery | Real PG thread cursor/access/notification tests plus client reducers. Full suite failures remain explicit; no provider delivery or OS notification acceptance is claimed. |
@@ -107,7 +148,7 @@ The earlier 4px Send-padding observation remains historical until fresh QA.
 
 Preview pubspec/lock pin the demo at dd928dd…, while its transitive SDK is still
 51bc3e1411858ce38980f5beded683dee957d1a3. A normal preview rebuild therefore does
-not exercise this uncommitted Flutter patch. README now distinguishes those pins. After regenerating stale worker-specific
+not exercise this current Flutter candidate. README now distinguishes those pins. After regenerating stale worker-specific
 package configuration through `pub get --enforce-lockfile`, preview analysis,
 all eight widget tests and web build passed with unchanged pins/lock.
 The preview is web-only. The existing SDK ERP native example declares Android

@@ -1,0 +1,34 @@
+name: Minimum Node compatibility
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: node-minimum-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  minimum:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up minimum supported Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.0.0"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Check committed package version before prepare
+        run: node scripts/generate-package-version.mjs --check
+      - name: Clean install and normal prepare build with engine checks
+        run: npm ci --include=dev --engine-strict
+      - name: Check strict consumers, exports, and container startup cleanup
+        run: node --test --test-concurrency=1 test/public-declaration-dependencies.test.mjs test/exports.test.mjs test/postgres-container-startup-cleanup.test.mjs

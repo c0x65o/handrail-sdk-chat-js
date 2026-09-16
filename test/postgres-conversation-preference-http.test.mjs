@@ -253,6 +253,10 @@ test("PATCH /conversations/:conversationId/preference mounts the actor-private p
         )
       ).rows[0];
 
+    // Drain automatic workers before measuring this HTTP command boundary.
+    await runtime.postgresMaintenance.stop();
+    await runtime.outboxPublisher.stop();
+
     await withHttpServer(runtime, async ({ request }) => {
       await t.test("supports notification, starred, and mute forms with one command invocation", async () => {
         const notificationPreferences = ["all", "mentions", "none"];

@@ -97,15 +97,11 @@ test("starred preference migration upgrades existing rows and remains idempotent
       migrations: handrailChatPostgresMigrations,
     });
     const beforeUpgrade = await runner.status();
-    assert.deepEqual(beforeUpgrade.pending.map(({ id }) => id), [
-      chatConversationPreferenceStarredMigration.id,
-    ]);
+    assert.deepEqual(beforeUpgrade.pending.map(({ id }) => id), handrailChatPostgresMigrations.filter(({ order }) => order > 31).map(({ id }) => id));
     assert.deepEqual(beforeUpgrade.incompatible, []);
 
     const upgrade = await runner.apply();
-    assert.deepEqual(upgrade.applied.map(({ id, order }) => ({ id, order })), [
-      { id: "0032-chat-conversation-preference-starred", order: 32 },
-    ]);
+    assert.deepEqual(upgrade.applied.map(({ id, order }) => ({ id, order })), handrailChatPostgresMigrations.filter(({ order }) => order > 31).map(({ id, order }) => ({ id, order })));
     assert.deepEqual(
       (
         await harness.pool.query(
@@ -148,7 +144,7 @@ test("starred preference migration upgrades existing rows and remains idempotent
       await harness.pool.query(
         `SELECT
            ARRAY(
-             SELECT attribute.attname
+             SELECT attribute.attname::text
              FROM unnest(index_metadata.indkey)
                WITH ORDINALITY AS key(attnum, ordinality)
              INNER JOIN pg_catalog.pg_attribute AS attribute
@@ -183,7 +179,7 @@ test("starred preference migration upgrades existing rows and remains idempotent
 
     const repeated = await runner.apply();
     assert.deepEqual(repeated.applied, []);
-    assert.equal(repeated.status.applied.length, 32);
+    assert.equal(repeated.status.applied.length, handrailChatPostgresMigrations.length);
     assert.deepEqual(repeated.status.pending, []);
     assert.deepEqual(repeated.status.incompatible, []);
   } finally {
@@ -195,7 +191,7 @@ test("starred preference migration upgrades existing rows and remains idempotent
 test("conversation preference migration stores tenant-safe member settings", async (t) => {
   const backend = await createPostgresTestBackend();
   const harness = await backend.createHarness({
-    schemaPrefix: "chat_conversation_preferences",
+    schemaPrefix: "chat_preferences",
   });
   const schema = quoteIdentifier(harness.schema);
   const conversations = `${schema}.chat_conversations`;
@@ -212,24 +208,7 @@ test("conversation preference migration stores tenant-safe member settings", asy
 
     assert.deepEqual(
       applied.applied.map(({ id, order }) => ({ id, order })),
-      [
-        { id: "0001-chat-conversations-membership", order: 1 },
-        { id: "0002-chat-messages-revisions", order: 2 },
-        { id: "0003-chat-reactions", order: 3 },
-        { id: "0004-chat-read-cursors", order: 4 },
-        { id: "0005-chat-outbox-events", order: 5 },
-        { id: "0006-chat-idempotency-keys", order: 6 },
-        { id: "0007-chat-drafts", order: 7 },
-        { id: "0008-chat-conversation-preferences", order: 8 },
-        { id: "0009-chat-thread-follows", order: 9 },
-        { id: "0010-chat-attachments", order: 10 },
-        { id: "0011-chat-audit-events", order: 11 },
-        { id: "0012-chat-saved-messages", order: 12 },
-        { id: "0013-chat-huddle-sessions", order: 13 },
-        { id: "0014-chat-notification-deliveries", order: 14 },
-        { id: "0015-chat-conversation-lifecycle-revision", order: 15 },
-        { id: "0016-chat-thread-follow-revision", order: 16 },
-      ],
+      handrailChatPostgresMigrations.map(({ id, order }) => ({ id, order })),
     );
 
     await harness.pool.query(

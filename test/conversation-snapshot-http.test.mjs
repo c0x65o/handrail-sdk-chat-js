@@ -1,3 +1,4 @@
+import { createChatServer } from "./helpers/http-server-runtime.mjs";
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import test from "node:test";
@@ -14,7 +15,6 @@ import {
   CONVERSATION_SNAPSHOT_LIMIT_HEADER,
   CONVERSATION_SNAPSHOT_NEXT_CURSOR_HEADER,
   CONVERSATION_SNAPSHOT_VERSION,
-  createChatServer,
   parseConversationDetailSnapshot,
   parseConversationListSnapshot,
 } from "@handrail/chat/server";
@@ -66,6 +66,7 @@ const row = ({
   is_starred: member ? true : null,
   muted: member,
   muted_until: null,
+  preference_revision: member ? 1 : null,
   preference_updated_at: member ? "2030-01-01T09:40:00.000Z" : null,
   active_member_user_ids: activeMemberUserIds,
   unread_mention_count: unreadMentionCount,
@@ -365,6 +366,8 @@ test("GET conversation snapshots are canonical, paginated, actor-scoped, and rea
       CONVERSATION_DETAIL_ENTITY_POLICY_ACTION,
     );
 
+    assert.equal((await request("/conversations/", authenticated)).status, 404);
+    assert.equal((await request("/conversations/direct-active/duplicate", authenticated)).status, 404);
     for (const path of [
       "/conversations?scope=organization&scope=entity",
       "/conversations?scope=organization&limit=101",
@@ -374,8 +377,6 @@ test("GET conversation snapshots are canonical, paginated, actor-scoped, and rea
       "/conversations?scope=organization&entityType=order",
       "/conversations?scope=entity&entityType=order",
       "/conversations?scope=organization&unknown=value",
-      "/conversations/",
-      "/conversations/direct-active/duplicate",
       "/conversations/direct-active?conversationId=duplicate",
       "/conversations/direct-active?tenantId=spoofed",
       "/conversations/direct-active?roles=admin",
