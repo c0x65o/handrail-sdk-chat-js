@@ -621,7 +621,7 @@ test("reply refresh never applies a late snapshot after stream revocation or clo
     stale.conversation.name = "must not restore revoked data";
     responses[0](stale);
     await settleReplyRefresh();
-    assert.equal(fixture.count(), 0);
+    assert.equal(fixture.count(), undefined, "revoked unread state is discarded");
     assert.equal(fixture.cache.getState().entities.conversations, before);
     fixture.client.realtime.applyCanonicalEvent(replyEvent("ping-2", replyMessage("ping-2", 3,
       { replyTo: { messageId: "unloaded", notifyAuthor: true } })));
@@ -630,9 +630,15 @@ test("reply refresh never applies a late snapshot after stream revocation or clo
     fixture.network.setOnline(false);
     fixture.network.setOnline(true);
     await fixture.connect();
+    assert.equal(responses.length, 1, "reconnect cannot rediscover revoked rows without authority");
+    fixture.cache.hydrateConversationDetail(replySnapshot(0, 0));
+    fixture.client.realtime.applyCanonicalEvent(replyEvent("source-new", replyMessage("source-new", 1)));
+    fixture.client.realtime.applyCanonicalEvent(replyEvent("ping-new", replyMessage("ping-new", 2,
+      { replyTo: { messageId: "unloaded", notifyAuthor: true } })));
+    await settleReplyRefresh();
     assert.equal(responses.length, 2);
     fixture.client.close();
-    responses[1](replySnapshot(9, 3));
+    responses[1](replySnapshot(9, 2));
     await settleReplyRefresh();
     assert.equal(fixture.count(), 0);
   } finally { fixture.client.close(); }

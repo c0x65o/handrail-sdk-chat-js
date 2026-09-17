@@ -1539,6 +1539,7 @@ export function useReadState(
       selectConversationUnreadCount(state, conversationId),
       selectConversationUnreadMentionCount(state, conversationId),
       state.entities.conversations[conversationId],
+      cacheIdentityKey(state),
     ]),
     [conversationId],
   );
@@ -1547,6 +1548,11 @@ export function useReadState(
   const unreadCount = selected[1] as number | undefined;
   const unreadMentionCount = selected[2] as number | undefined;
   const knownConversation = selected[3] !== undefined;
+  const identityKey = selected[4];
+  useEffect(() => {
+    if (context?.isReady !== true || !knownConversation) return;
+    return context.client.retainReadState?.(conversationId);
+  }, [context?.client, context?.isReady, conversationId, identityKey, knownConversation]);
   const data = useMemo<ReadStateQueryData | undefined>(() => readState === undefined
     ? undefined
     : Object.freeze({ readState, unreadCount, unreadMentionCount }), [
@@ -1556,7 +1562,7 @@ export function useReadState(
     ]);
   const issue = providerError(context);
   if (issue !== undefined) return failed(issue, data);
-  if (!knownConversation) return loading(data);
+  if (!knownConversation) return loading();
   return data === undefined ? empty(data as never) : ready(data);
 }
 

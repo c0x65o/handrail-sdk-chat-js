@@ -1243,3 +1243,23 @@ test("provider failures are safe and SSR uses a stable prehydrated snapshot", ()
     "<span>error:provider_error:503</span>",
   );
 });
+
+test("read-state hooks retain freshness only while known views are mounted", async () => {
+  const cache = createSeededCache();
+  const retained = [], released = [], results = [];
+  const { client } = createExternalClient(cache, {
+    retainReadState(id) { const token = { id }; retained.push(token); return () => released.push(token); },
+  });
+  const Capture = ({ id }) => { results.push(useReadState(id)); return null; };
+  let renderer;
+  await act(async () => { renderer = create(createElement(ChatProvider, { client }, createElement(Capture, { id: directId }))); await flush(); });
+  assert.deepEqual(retained.map(item => item.id), [directId]);
+  await act(async () => { renderer.update(createElement(ChatProvider, { client }, createElement(Capture, { id: channelId }))); await flush(); });
+  assert.deepEqual(released, [retained[0]]);
+  assert.deepEqual(retained.map(item => item.id), [directId, channelId]);
+  await act(async () => { cache.dispatch({ type: "conversations/discard-access", conversationId: channelId }); await flush(); });
+  assert.deepEqual(released, retained);
+  assert.equal(results.at(-1).data, undefined, "revoked views cannot render cached unread state");
+  await act(async () => { renderer.unmount(); });
+  assert.deepEqual(released, retained);
+});

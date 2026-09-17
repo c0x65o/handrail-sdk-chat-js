@@ -2,9 +2,26 @@ import type { ConversationId } from "../contracts/identifiers.js";
 import type { NormalizedChatCache, NormalizedChatCacheState } from "./normalized-cache.js";
 import type { ChatSnapshotReader } from "./snapshot-reader.js";
 
-/** Reconcile SQL-derived reply pings without guessing recipients or counting replays. */
+/** Reconcile SQL-derived unread state without guessing recipients or counting replays. */
 export function createUnreadMentionRefresh(cache: NormalizedChatCache, reader: ChatSnapshotReader) {
   const pending = new Map<ConversationId, { dirty: boolean; running: boolean; controller: AbortController }>();
+  // One timer and one deduplicated queue per client, including socket followers.
+  // Only mounted read-state consumers retain polling; no message stream is added.
+  const observers = new Map<ConversationId, Set<object>>();
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const stopTimer = (): void => { clearTimeout(timer); timer = undefined; };
+  const poll = (): void => {
+    if (timer !== undefined || closed || observers.size === 0) return;
+    timer = setTimeout(() => {
+      timer = undefined;
+      for (const id of observers.keys()) {
+        // A slow request already covers this tick; never accumulate timer work.
+        if (!pending.has(id)) request(id);
+      }
+      poll();
+    }, 5_000);
+    timer.unref?.();
+  };
   let active = 0;
   let closed = false;
   let scheduled = false;
@@ -14,7 +31,8 @@ export function createUnreadMentionRefresh(cache: NormalizedChatCache, reader: C
     const conversation = state.entities.conversations[id];
     const member = state.currentUser.memberships[id];
     const parentId = conversation?.type === "thread" ? conversation.parentConversationId : undefined;
-    return !revoked.has(id) && (parentId === undefined || !revoked.has(parentId)) &&
+    const parentMember = parentId === undefined ? undefined : state.currentUser.memberships[parentId];
+    return (parentMember === undefined || parentMember.state === "active") && !revoked.has(id) && (parentId === undefined || !revoked.has(parentId)) &&
       state.identity !== null && conversation !== undefined &&
       conversation.tenantId === state.identity.tenantId &&
       (member === undefined || (member.state === "active" && member.userId === state.identity.userId));
@@ -53,7 +71,12 @@ export function createUnreadMentionRefresh(cache: NormalizedChatCache, reader: C
               job.dirty = true;
               return;
             }
-            if (result.status !== "success") return;
+            if (result.status !== "success") {
+              if ("httpStatus" in result && (result.httpStatus === 403 || result.httpStatus === 404)) {
+                revoke(id);
+              }
+              return;
+            }
             const item = result.value.conversation;
             const read = current.currentUser.readStates[id];
             if (item.tenantId !== current.identity?.tenantId ||
@@ -85,8 +108,41 @@ export function createUnreadMentionRefresh(cache: NormalizedChatCache, reader: C
     else pending.set(id, { dirty: false, running: false, controller: new AbortController() });
     schedule();
   };
-  cache.subscribePrivateStateBoundary(() => { revoked.clear(); invalidate(); });
+  const revoke = (id: ConversationId): void => {
+    revoked.add(id);
+    for (const [conversationId, job] of pending) {
+      if (!accessible(cache.getState(), conversationId)) {
+        pending.delete(conversationId);
+        job.controller.abort();
+      }
+    }
+    for (const conversationId of observers.keys()) {
+      if (!accessible(cache.getState(), conversationId)) observers.delete(conversationId);
+    }
+    if (observers.size === 0) stopTimer();
+    cache.dispatch({ type: "conversations/discard-access", conversationId: id });
+  };
+  cache.subscribePrivateStateBoundary(() => {
+    stopTimer(); observers.clear(); revoked.clear(); invalidate();
+  });
   cache.subscribe((state) => state, (state, previous) => {
+    // A discarded row can return through fresh authorized discovery. Keep the
+    // denial until that happens; a reconnect alone never recreates the row.
+    for (const id of revoked) {
+      if (previous.entities.conversations[id] === undefined && state.entities.conversations[id] !== undefined &&
+          state.currentUser.memberships[id]?.state === "active") revoked.delete(id);
+    }
+    // Actor-private membership events can remove an offscreen row even when
+    // this tab has no conversation socket (and therefore no revoke frame).
+    for (const id of observers.keys()) {
+      const conversation = state.entities.conversations[id];
+      const scopes = conversation?.type === "thread" ? [id, conversation.parentConversationId] : [id];
+      for (const scope of scopes) {
+        if (!revoked.has(scope) && state.entities.conversations[scope]?.visibility === "private" &&
+            state.currentUser.memberships[scope]?.state !== undefined &&
+            state.currentUser.memberships[scope]?.state !== "active") revoke(scope);
+      }
+    }
     for (const [id, job] of pending) {
       if (!accessible(state, id)) {
         pending.delete(id);
@@ -111,22 +167,34 @@ export function createUnreadMentionRefresh(cache: NormalizedChatCache, reader: C
     }
   });
   return {
+    retain(id: ConversationId): () => void {
+      const token = {};
+      const owners = observers.get(id) ?? new Set<object>();
+      observers.set(id, owners);
+      owners.add(token);
+      closed = false;
+      if (owners.size === 1) request(id);
+      poll();
+      return () => {
+        // A release from an old identity must not release a new identity's owner.
+        if (observers.get(id) !== owners || !owners.delete(token)) return;
+        if (owners.size !== 0) return;
+        observers.delete(id);
+        const job = pending.get(id);
+        pending.delete(id);
+        job?.controller.abort();
+        if (observers.size === 0) stopTimer();
+      };
+    },
     connected(): void {
       invalidate();
       revoked.clear();
       closed = false;
+      poll();
       // Missed source deletions need reconciliation even with no loaded replies.
       for (const id of Object.keys(cache.getState().entities.conversations)) request(id as ConversationId);
     },
-    closeActive(): void { closed = true; invalidate(); },
-    revoke(id: ConversationId): void {
-      revoked.add(id);
-      for (const [conversationId, job] of pending) {
-        if (!accessible(cache.getState(), conversationId)) {
-          pending.delete(conversationId);
-          job.controller.abort();
-        }
-      }
-    },
+    closeActive(): void { closed = true; stopTimer(); observers.clear(); invalidate(); },
+    revoke,
   };
 }

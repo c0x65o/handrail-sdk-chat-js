@@ -826,6 +826,31 @@ test("manual unread survives idle visibility and layout changes until intentiona
   assert.equal(state.currentUser.readStates[conversationId].lastReadSequence, 13);
 });
 
+test("remote manual unread pauses already visible rows until intentional reading", async () => {
+  const fixture = createFixture({
+    cache: seedCache([message(13)], {
+      currentReadState: readState(userId, 13),
+      conversationOverrides: { latestSequence: 13 },
+    }),
+  });
+  const container = await renderTimeline(fixture);
+  const row = () => container.querySelector('[data-message-id="message-13"]');
+  readObserverFor(container).emit([visibleEntry(row())]);
+  // This bypasses the local timeline action wrapper, like another tab's event
+  // or a fresh HTTP snapshot discovering a manual marker.
+  await act(async () => {
+    await fixture.client.markUnread({ conversationId, fromSequence: 13 });
+  });
+  readObserverFor(container).emit([visibleEntry(row())]);
+  await settleReadObservation();
+  await settleReadObservation();
+  assert.deepEqual(fixture.calls.filter(({ name }) => name === "markRead"), []);
+  assert.equal(selectConversationUnreadCount(fixture.activeCache.getState(), conversationId), 1);
+  container.querySelector(".handrail-chat__timeline-viewport").dispatchEvent(new window.Event("wheel"));
+  await settleReadObservation();
+  assert.equal(selectConversationUnreadCount(fixture.activeCache.getState(), conversationId), 0);
+});
+
 test("manual unread resumes on keyboard reading, window return, and conversation return", async () => {
   const fixture = createFixture({
     cache: seedCache([message(20)], {

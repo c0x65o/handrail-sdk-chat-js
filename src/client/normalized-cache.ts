@@ -483,6 +483,7 @@ export interface NormalizedChatCacheState {
 }
 
 export type NormalizedChatCacheAction =
+  | { readonly type: "conversations/discard-access"; readonly conversationId: ConversationId }
   | { readonly type: "messages/hydrate-context-window"; readonly page: MessageTimelinePage }
   | { readonly type: "messages/forget-context"; readonly messageIds: readonly MessageId[] }
   | { readonly type: "identity/set"; readonly identity: ChatCacheIdentity | null }
@@ -2247,6 +2248,64 @@ export function reduceNormalizedChatCache(
         next = hydrateMessageTimeline(next, { ...action.rootPage, messages: [root] });
       }
       return hydrateMessageTimeline(hydrateConversationDetail(next, action.snapshot), action.page);
+    }
+    case "conversations/discard-access": {
+      // An authoritative denial also invalidates inherited thread access.
+      const ids = new Set([action.conversationId]);
+      for (const conversation of Object.values(state.entities.conversations)) {
+        if (conversation.type === "thread" && conversation.parentConversationId === action.conversationId) ids.add(conversation.id);
+      }
+      const omit = <Value>(record: Readonly<Record<string, Value>>): Readonly<Record<string, Value>> =>
+        freezeRecord(Object.fromEntries(Object.entries(record).filter(([id]) => !ids.has(id as ConversationId))));
+      const messageIds = new Set(Object.values(state.entities.messages)
+        .filter((message) => ids.has(message.conversationId)).map((message) => message.id));
+      const attachmentIds = new Set<string>(Object.values(state.entities.messages)
+        .filter((message) => messageIds.has(message.id))
+        .flatMap((message) => message.attachmentMetadata.map((attachment) => attachment.attachmentId)));
+      const next = forgetCachedMessages(state, messageIds);
+      return freezeState({
+        ...next,
+        entities: Object.freeze({
+          ...next.entities,
+          conversations: omit(next.entities.conversations),
+          attachments: freezeRecord(Object.fromEntries(Object.entries(next.entities.attachments)
+            .filter(([id]) => !attachmentIds.has(id)))),
+          memberUserIdsByConversation: omit(next.entities.memberUserIdsByConversation),
+          membersByConversation: omit(next.entities.membersByConversation),
+        }),
+        attachmentUploads: freezeRecord(Object.fromEntries(Object.entries(next.attachmentUploads)
+          .filter(([, upload]) => !ids.has(upload.conversationId)))),
+        timelines: omit(next.timelines),
+        huddles: omit(next.huddles),
+        ephemeral: Object.freeze({
+          ...next.ephemeral,
+          typing: freezeRecord(Object.fromEntries(Object.entries(next.ephemeral.typing)
+            .filter(([, event]) => !ids.has(event.streamId as ConversationId)))),
+        }),
+        currentUser: Object.freeze({
+          ...next.currentUser,
+          memberships: omit(next.currentUser.memberships),
+          readStates: omit(next.currentUser.readStates),
+          preferences: omit(next.currentUser.preferences),
+          preferenceRevisions: omit(next.currentUser.preferenceRevisions),
+          pendingPreferenceUpdates: omit(next.currentUser.pendingPreferenceUpdates),
+          threadFollows: omit(next.currentUser.threadFollows),
+          threadFollowRevisions: omit(next.currentUser.threadFollowRevisions),
+          pendingThreadFollowUpdates: omit(next.currentUser.pendingThreadFollowUpdates),
+          drafts: omit(next.currentUser.drafts),
+          draftRevisions: omit(next.currentUser.draftRevisions),
+        }),
+        metadata: Object.freeze({
+          ...next.metadata,
+          conversations: omit(next.metadata.conversations),
+          conversationDetails: omit(next.metadata.conversationDetails),
+          conversationListParticipantUserIds: omit(next.metadata.conversationListParticipantUserIds),
+          conversationListActiveHuddles: omit(next.metadata.conversationListActiveHuddles),
+          conversationListUnreadMentionCounts: omit(next.metadata.conversationListUnreadMentionCounts),
+          memberListRevisions: omit(next.metadata.memberListRevisions),
+          durableStreams: omit(next.metadata.durableStreams),
+        }),
+      });
     }
     case "threads/discard-history": {
       const ids = new Set(Object.values(state.entities.messages)

@@ -820,6 +820,8 @@ export interface ChatClient<Feature extends string = string> {
     input: ConversationDetailSnapshotInput,
     options?: ChatSnapshotQueryOptions,
   ): Promise<ChatSnapshotQueryResult<ConversationDetailSnapshot<Feature>>>;
+  /** Retains bounded HTTP reconciliation while a read-state view is mounted. */
+  retainReadState?(conversationId: ConversationId): () => void;
   getMessageTimeline(
     input: MessageTimelineRequest,
     options?: ChatSnapshotQueryOptions,
@@ -13563,6 +13565,7 @@ export function createChatClient<Feature extends string = string>(
       }
       return result;
     },
+    retainReadState: (conversationId) => unreadMentionRefresh.retain(conversationId),
     getMessageTimeline(input, options) {
       return snapshotReader.getMessageTimeline(input, options);
     },

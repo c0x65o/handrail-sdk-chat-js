@@ -2540,6 +2540,9 @@ export function MessageTimeline({
       manualUnreadFromSequence !== undefined &&
       manualUnreadFromSequence !== unreadBoundary.observedManualUnreadFromSequence
     ) {
+      // A cursor event/snapshot from another tab is the same explicit intent as
+      // the local Mark unread action. Layout observations must not undo it.
+      manualReadPauseRef.current ??= { pending: false };
       unreadBoundary.effectiveRead = manualUnreadFromSequence - 1;
       unreadBoundary.hasUnread = true;
     }
