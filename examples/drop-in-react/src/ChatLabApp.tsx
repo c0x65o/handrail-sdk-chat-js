@@ -32,12 +32,12 @@ import {
 } from "./chat-lab-config";
 import { ChatLabThemeSettings, useChatLabTheme } from "./chat-lab-theme";
 
-function NativeTokenDialog({ getHeaders, onClose }: { getHeaders: () => Promise<Record<string, string>>; onClose: () => void }) {
+function NativeTokenDialog({ sessionScope, getHeaders, onClose }: { sessionScope: string; getHeaders: () => Promise<Record<string, string>>; onClose: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => { dialog.current?.showModal(); }, []);
   return <dialog ref={dialog} className="chat-lab__native-token-dialog" aria-label="Manage inbound channel tokens" onCancel={onClose}>
     <button type="button" onClick={onClose}>Close token settings</button>
-    <NativeTokenManager endpoint="/api/chat" getHeaders={getHeaders} />
+    <NativeTokenManager sessionScope={sessionScope} endpoint="/api/chat" getHeaders={getHeaders} />
   </dialog>;
 }
 
@@ -347,7 +347,7 @@ export function ChatLabApp({
         workspaceSettingsContent={(
           <>
             <button type="button" onClick={() => setTokenPanelOpen(open => !open)}>Inbound channel tokens</button>
-            {tokenPanelOpen && <NativeTokenDialog key={actorId} getHeaders={tokenHeaders} onClose={() => setTokenPanelOpen(false)} />}
+            {tokenPanelOpen && <NativeTokenDialog sessionScope={`chat-lab:${actorId}`} getHeaders={tokenHeaders} onClose={() => setTokenPanelOpen(false)} />}
             <ChatLabThemeSettings onThemeChange={selectTheme} themePreference={themePreference} />
             {replyStylesScenario && <details className="chat-lab__reply-settings">
               <summary>Reply settings</summary>

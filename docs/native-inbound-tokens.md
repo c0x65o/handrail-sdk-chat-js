@@ -1,8 +1,12 @@
 # Native inbound channel tokens (unpublished v1 candidate)
 
-This implementation adds restricted inbound HTTP credentials, administrator controls in the SDK UI and Chat Lab, and an explicit checkout binding. The source validation follow-up passed the real PostgreSQL scenarios and all 44 focused Flutter reducer tests on the unchanged implementation candidate. It is ready for independent source review and subsequent managed dev delivery; actual UI/HTTP acceptance and the clean restart proof remain unverified. See `docs/validation/native-token-source-follow-up.json` for current evidence and `docs/validation/native-token-delivery.json` for the retained original failures.
+This candidate includes repairs from source-review WR `0e4caa70-7a10-4106-af57-73c982f86f6e`, run `18a2e4fe-e593-427c-8e92-ca6779298987`. The required host session boundary and managed proof pacing are corrected; controlled PostgreSQL concurrency tests pass without a server change. Current repair evidence is in `docs/validation/native-token-source-repair.json`. Independent re-review and actual managed dev UI/HTTP acceptance, clean-state repetition and the second use case remain required. These source checks do not accept the stage.
 
-## Source validation follow-up (September 16, 2026)
+Repair WR `4c03b0fe-e147-4466-8a15-c6551c97bec5`, run `1bfa7fa7-b065-421f-8541-0d0411af4a63`, started from pre-existing release-bot commit `f24378fccca9a667578dc8f5855231b89274d80c`. Relative to the reviewed candidate, only package.json/package-lock.json had advanced from 1.0.36 to 1.0.37. A scratch reconstruction reproduced the exact original source and full patch hash `bf326b19b732bd683c194c20c3dda4d02b438dae1d3547a270270293186842a3`; existing compiled bytes matched the reviewed package. The normal build synchronizes the generated client version to that existing package version. This repair makes no commit/push/publication. Readiness Task `bbc011e4-ff3f-416a-8266-262c1a9ea560` gates remain in force.
+
+The following follow-up section is **historical evidence**, superseded by the independent review and this repair. Its 44 Flutter passes and original failures are preserved; they are not fresh repair-run results. The original reproduction was retained unchanged and rerun before rebuilding: one pass and two expected identity-safety failures. The maintained replacement regressions exercise the explicit session contract below.
+
+## Historical source validation follow-up (September 16, 2026)
 
 Work request `b39c00af-7789-4345-af36-90463dbb78e3`, run `602433ef-7ab9-44f5-9695-ef51658e68f6` verified the supplied handoff, evidence and patch hashes before testing. All 33 retained changed-file hashes, 14 browser artifact hashes and six earlier check-log hashes matched; the retained patch passed `git apply --reverse --check`. JS, Flutter and preview HEADs remain at their original baselines. Synchronization was deferred because the shared workspace was in use; inspection found no pending Git operation or candidate drift. No reset, stash, synchronization, dependency update, or ownership change was performed. The readiness Task's reservation gate still applies before managed delivery.
 
@@ -48,7 +52,7 @@ The supported MCP SDK executor was inspected first: its runtime contract offers 
 
 ### Planner continuation
 
-Source-stage validation gaps are closed. Preserve the full `native_token_delivery` acceptance criteria and shared readiness Task ownership. The following historical operations handoff remains authoritative for **dev_preview_delivery**: restore/inspect declared resource `c699099d-668d-4a0f-a5a0-7f52923f3e32` through `handrail_dev_resource_action`, prepare via `run_project_task` for runbook `977627c0-fdd0-479e-b2ae-8f016fe0ccaa` in `dev/project_workspace`, and use `handrail_dev_service_action` for service `812c4054-6ced-4616-94fb-13f672b3e897`. These operations require that subsequent stage's authority. This worker did not re-probe or recover the declared resource, start an acceptance host, or change Handrail configuration, database, queue or workflow state. Independent review, actual administrator UI plus external HTTP, retained first-run evidence, managed clean restart, repeat contact proof and build-status proof are still required. The isolated executors do not resolve the managed preparation executor's writable-cache prerequisite.
+At that historical checkpoint, source-stage validation gaps were believed closed; the later independent review superseded that assessment. Preserve the full `native_token_delivery` acceptance criteria and shared readiness Task ownership. The following historical operations handoff remains authoritative for **dev_preview_delivery**: restore/inspect declared resource `c699099d-668d-4a0f-a5a0-7f52923f3e32` through `handrail_dev_resource_action`, prepare via `run_project_task` for runbook `977627c0-fdd0-479e-b2ae-8f016fe0ccaa` in `dev/project_workspace`, and use `handrail_dev_service_action` for service `812c4054-6ced-4616-94fb-13f672b3e897`. These operations require that subsequent stage's authority. This worker did not re-probe or recover the declared resource, start an acceptance host, or change Handrail configuration, database, queue or workflow state. Independent review, actual administrator UI plus external HTTP, retained first-run evidence, managed clean restart, repeat contact proof and build-status proof are still required. The isolated executors do not resolve the managed preparation executor's writable-cache prerequisite.
 
 ## Host integration and API
 
@@ -56,7 +60,23 @@ Apply the normal `handrailChatPostgresMigrations` with the SDK migration runner 
 
 Grant `native_tokens.manage` only from the trusted host `permissions.getCapabilities({actor})` adapter to administrators. A role name or any caller field cannot grant it. The existing host session adapter remains authoritative; this SDK does not implement a password login. Existing session, membership and entity policies continue to apply. Host password/login endpoints remain the host's responsibility under the project's authentication requirements; this change adds no password, MFA or account lockout rules.
 
-Embed `NativeTokenManager` from `@handrail/chat/ui` with `endpoint` (the chat API mount) and a stable `getHeaders` callback for the existing host session. It keeps returned secrets outside chat caches, React token metadata, application storage and browser persistent storage. The one-time input is cleared on dismissal, revocation, identity change or unmount; delayed results cannot reveal a prior actor's secret. The Chat Lab has a modal under **Inbound channel tokens**, with Ada as the sole fixture administrator. Grace and Margaret are denied by the server. These fixture identities are for the scoped development host only.
+Embed `NativeTokenManager` from `@handrail/chat/ui` with `endpoint` (the chat API mount), a stable `getHeaders` callback, and the **required** `sessionScope: string | null`:
+
+```tsx
+<NativeTokenManager
+  endpoint="/api/chat"
+  getHeaders={getCurrentHostSessionHeaders}
+  sessionScope={session
+    ? JSON.stringify([session.tenantId, session.userId, session.loginEpoch])
+    : null}
+/>
+```
+
+`sessionScope` is a non-secret identity boundary, not a bearer token. The host must change it synchronously with every tenant change, user change, logout/login, or replacement authentication session, including a new login for the same user. Use a login epoch/session identifier that is not itself a credential. Pass `null` immediately on logout or while identity is unknown. Do not defer this security update through a transition, and do not mutate the identity behind a stable getter without rendering the new scope. Routine bearer refresh within the same identity/session need not change scope. `getHeaders` must return only that session's host credentials; never pass an integration secret. An omitted/empty scope fails closed at runtime, and omission is a TypeScript error. The server remains the authorization authority.
+
+The exported component enforces its own keyed scope boundary, including endpoint changes: it scrubs the disclosure input during layout cleanup (also clearing detached DOM), discards token/form/error/busy state, aborts pending requests, and invalidates every old generation. Delayed header resolution cannot dispatch a request after invalidation. Listing, creation, revocation, response-body parsing, errors and finalizers must all belong to the live generation before updating UI. StrictMode's setup/cleanup/setup cycle is supported. Changing the callback still invalidates work, but callback identity alone is not an authentication contract.
+
+Secrets stay outside chat caches, React token metadata, application storage and persistent browser storage. Dismissal, revocation and unmount also clear disclosure. Cancellation cannot undo a write already accepted by the server: after an interrupted creation, the original authorized session must inspect its metadata and revoke an unused token; never blindly repeat an uncertain creation. The Chat Lab passes its fixed fixture tenant/actor scope to the reusable component. Ada is the sole fixture administrator; Grace and Margaret are denied server-side. These identities are for the scoped development host only.
 
 Paths below are relative to the host's chat API mount (`/api/chat` in Chat Lab):
 
@@ -112,6 +132,14 @@ Worker `ee69e0a5-808b-4661-b017-66fe1473bc95`, work request `cfdb8ccf-c384-47c4-
 5. Start/restart only dev service `812c4054-6ced-4616-94fb-13f672b3e897` using `handrail_dev_service_action`. It is a host-process service, port **4167**, health `/__chat-lab/health`, command `npm run build && npm --prefix examples/drop-in-react run dev:lab`. It was stopped with no supervised listener or QA route during this worker. No Kubernetes deployment target exists. Use the service's scoped QA route; never a raw listener or guessed URL. If a probe/UI hits 5xx, obtain `get_dev_service_logs` before interpreting the failure.
 6. Independent QA must verify the final candidate and schema, create the token through Ada's actual UI, post from an external HTTP client, see integration attribution and persistence after reload, and prove denial, retry conflict, ordinary-user management denial and UI revocation. Retain sanitized first-run evidence and read it back before any cleanup. PostgreSQL fixture tests are supporting evidence, not acceptance.
 
+Prepare the example's locked dependencies before source testing:
+
+```sh
+npm ci --include=dev --prefix examples/drop-in-react
+```
+
+This preserves the existing public HTTPS full-SHA SDK dependency and lockfile. The candidate binding resolves the working checkout's rebuilt exports; no tarball, registry publication, file/workspace dependency or Git pin rewrite is involved. An independent executor must mount these nested dependencies (including Vitest/jsdom) as well as the root dependencies; a missing nested mount is an unavailable check, not a passing test. Do not commission unrelated broker repairs. The source repair executor and exact argv/output are retained with its report.
+
 Useful checkout checks (all from `handrail-sdk-chat-js`, one heavy command at a time):
 
 ```sh
@@ -123,11 +151,12 @@ npm --prefix examples/drop-in-react run typecheck
 npm --prefix examples/drop-in-react run build
 npm --prefix examples/drop-in-react run check:graph
 npm --prefix examples/drop-in-react run test:native-tokens
+node --test --test-concurrency=1 examples/drop-in-react/test/NativeTokenProofPacing.test.mjs
 ```
 
 For the existing Flutter check use configured project-workspace task `1ef67036-3996-447c-95a1-1d795b921c7e`, command `flutter test --concurrency=2 --no-pub test/durable_resource_event_reducer_test.dart`, after its declared SDK cache is available. The similarly named isolated task does not establish project-workspace visibility.
 
-`examples/drop-in-react/scripts/verify-native-tokens-managed.mjs` is an optional independent acceptance runner against an **already managed** service; it never starts app/database services. It requires `CHAT_LAB_QA_URL`, `CHAT_CANDIDATE_SOURCE_SHA256`, `CHAT_CANDIDATE_PACKAGE_SHA256`, `CHAT_LAB_ALLOWED_CHANNEL_ID` (the default General channel) and `CHAT_LAB_DENIED_CHANNEL_ID`, plus the operations executor's supported Playwright browser. Resolve those IDs through the authorized host conversation list in the fresh fixture. The runner uses a fresh browser context, checks both hashes and the owned schema, and exercises contact, retries, conflicts, denial, reload, build status and UI revocation. It uses the browser library without the test runner so error-context snapshots cannot retain the secret. No traces, screenshots or video are enabled. Its output is a sanitized JSON receipt. It has not been run here. Native QA tooling can exercise the same sequence if the managed proxy requires its scoped browser session; do not bypass proxy access controls. Allow the 60-second native rate window to clear before a new acceptance run.
+`examples/drop-in-react/scripts/verify-native-tokens-managed.mjs` is an optional independent acceptance runner against an **already managed** service; it never starts app/database services. It requires `CHAT_LAB_QA_URL`, `CHAT_CANDIDATE_SOURCE_SHA256`, `CHAT_CANDIDATE_PACKAGE_SHA256`, `CHAT_LAB_ALLOWED_CHANNEL_ID` (the default General channel) and `CHAT_LAB_DENIED_CHANNEL_ID`, plus the operations executor's supported Playwright browser. Resolve those IDs through the authorized host conversation list in the fresh fixture. The runner uses a fresh browser context, checks both hashes and the owned schema, and exercises contact, retries, conflicts, denial, reload, build status and UI revocation. It uses the browser library without the test runner so error-context snapshots cannot retain the secret. No traces, screenshots or video are enabled. Its output is a sanitized JSON receipt. It has not been run here. Native QA tooling can exercise the same sequence if the managed proxy requires its scoped browser session; do not bypass proxy access controls. The runner now routes every native browser request (including StrictMode listings and dialog reopenings) and external HTTP request through one conservative 10-per-60-second scheduler. It reserves slots until 60.25 seconds after response completion and serializes attempts. An explicit SDK 429 is known to occur before route dispatch, so it honors `Retry-After` (at least 60 seconds) and retries that rejected request at most twice; repeated 429 remains failure. Transport failures, timeouts and 5xx have uncertain write effects and are never automatically replayed. Initial unknown/shared traffic can therefore cause a bounded wait or explicit failure, never a skipped denial or revocation assertion. No server setting or counter is changed. Browser waits allow pacing to finish. The regression exercises 13 requests, including two listings per mount, contact/retry/conflict/denied-channel/build, reopen/revoke/post-revocation and ordinary-user denial, through the actual browser and fetch adapters. The current component suppresses its first StrictMode request before dispatch, but the proof retains the larger budget. This scheduler does not add the separate manual attribution, ordinary-user UI, clean-state or second-run acceptance assertions; independent QA must still perform all of them.
 
 ## Clean isolated restart
 

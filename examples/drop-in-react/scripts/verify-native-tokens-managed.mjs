@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createNativeTokenProofPacer, paceNativeTokenBrowserRequests, pacedNativeTokenFetch } from './native-token-proof-pacing.mjs';
 import { chromium } from '@playwright/test';
 import { verifyCandidate } from '../../../scripts/candidate-provenance.mjs';
 // This spec never starts a listener/database. Operations supplies the managed QA route.
@@ -19,7 +20,10 @@ try {
   assert.equal(instance.candidate.source.sha256, source);
   assert.equal(instance.candidate.package.sha256, packageHash);
   assert.match(instance.schema, /^handrail_chat_lab_[a-f0-9]{32}$/);
-  const context = await browser.newContext(); // no inherited storage/session
+  const pacer = createNativeTokenProofPacer();
+  const context = await browser.newContext({ serviceWorkers: 'block' });
+  context.setDefaultTimeout(240_000);
+  await paceNativeTokenBrowserRequests(context, pacer); // no inherited storage/session
   let secret;
   try {
     const page = await context.newPage();
@@ -37,7 +41,7 @@ try {
     await page.getByRole('button', { name: 'Close token settings' }).click();
     const text = `Synthetic contact form ${instance.instanceId}`;
     const payload = { channelId, text, idempotencyKey: `contact-${instance.instanceId}` };
-    const post = async body => fetch(new URL('/api/chat/native-inbound/messages', origin), {
+    const post = async body => pacedNativeTokenFetch(pacer, new URL('/api/chat/native-inbound/messages', origin), {
       method: 'POST', headers: { authorization: `Bearer ${secret}`, 'content-type': 'application/json' }, body: JSON.stringify(body),
     });
     const first = await post(payload);

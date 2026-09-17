@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "work_request_id": "4c03b0fe-e147-4466-8a15-c6551c97bec5",
+  "codex_run_id": "1bfa7fa7-b065-421f-8541-0d0411af4a63",
+  "task_id": "683debf3-0399-4706-bf74-9d476d08ac43",
+  "verdict": "source_repairs_verified_ready_for_independent_re_review_not_stage_acceptance",
+  "baseline_verification": {
+    "current_head": "f24378fccca9a667578dc8f5855231b89274d80c",
+    "original_base": "e23be5c88e7fa3c1737b13dce51b19c3ad4c480f",
+    "reconstructed_patch_sha256": "bf326b19b732bd683c194c20c3dda4d02b438dae1d3547a270270293186842a3",
+    "reconstructed_source_mismatches": [],
+    "original_source_sha256": "cf247c3f3da659ec01a522ef8ec60340536ac9bf20867da53cd0cb2ff7428d61",
+    "current_source_sha256": "e7057a3ddc24b20f44626e3c46aae23ea149a24a3df52b6cbcaba5a6fcac18d7",
+    "current_package_sha256": "3ee5c0565de7b4e8ce161cf7ddb36fdb129ed517db04b1f638b40d94082321f1",
+    "drift": "Only package.json/package-lock.json version 1.0.36 -> 1.0.37 from pre-existing release-bot commit. No pending Git operation or edits. Existing generated version and dist still 1.0.36; normal build will synchronize."
+  },
+  "inputs": [
+    {
+      "id": "05466561-d0d9-4d29-ad13-88c1529968ca",
+      "path": "original-review.md",
+      "sha256": "50e7c4b4ae1e7d14cb7602b4a02b19395c41b0ed4bc6265abcb6013e024f9c25"
+    },
+    {
+      "id": "6488314b-d018-4ec6-899d-9aaba7faf41e",
+      "path": "original-reproduction.mjs.txt",
+      "sha256": "d7a8f0a1242dd56bb37f771deb42e01509e7501c62b90cdd927b39b54fddb18a"
+    }
+  ],
+  "changes": [
+    "Required sessionScope prop, component-owned identity boundary, synchronous layout cleanup, abort/generation guards through delayed headers, reads, writes, parsing, errors and finalizers; caller and contract updated.",
+    "Shared managed-proof scheduler budgets browser and external traffic at 10 requests/60 seconds, including StrictMode and reopenings. Only explicit pre-dispatch 429 retries, honoring Retry-After; no uncertain write replay.",
+    "Four real PostgreSQL scheduling tests prove both send/revoke orderings and same/conflicting first-use receipt contention using pg_blocking_pids. No server failure demonstrated; no server behavior changed.",
+    "Normal build synchronized generated client version to pre-existing package 1.0.37."
+  ],
+  "candidate": {
+    "scheme": "handrail-unpublished-candidate-v1",
+    "source_sha256": "3c942b833d10e9d6afb993aac73d573644f0b54e9b7d4fe63e7c7bfab5fad78d",
+    "package_sha256": "562351eb603345493aacd065da1d042d6b1a9b52917d63fd078be1efc7bdc5eb",
+    "browser_files": [
+      {
+        "path": "examples/drop-in-react/dist/assets/chat-lab-main-B4caR_Nk.js",
+        "sha256": "8dd9284000070fa1481a344eef74926c9bcb0e39f78474e9bb8e3620f5f2a634"
+      },
+      {
+        "path": "examples/drop-in-react/dist/assets/chat-lab-main-CZ8oI5Gq.css",
+        "sha256": "6a695a802d71383998dce481a622c72395907337b7d8e2b17ef2b14e2ffcb790"
+      },
+      {
+        "path": "examples/drop-in-react/dist/assets/chat-workspace-W5UAgcwM.js",
+        "sha256": "1291d72291d405b8dc58cc13288dffa3723a10116db939d18b97471e25d1158d"
+      },
+      {
+        "path": "examples/drop-in-react/dist/assets/example-CPLYbtuO.css",
+        "sha256": "8eb6ebfad027c54f80200936b32350d840d5d92921069d9b7a72f75d1707e560"
+      },
+      {
+        "path": "examples/drop-in-react/dist/assets/example-DZcqkkpC.js",
+        "sha256": "449dd5cb8a3b5802c607283b5c3f47122bedb4d71007cb0754fc1d6e7ef193e2"
+      },
+      {
+        "path": "examples/drop-in-react/dist/assets/message-timeline-B-pOyeIw.js",
+        "sha256": "6d77540186cff93d185790d4b0fc6b04301e735cc7d141d49f21d7f6a42ce089"
+      },
+      {
+        "path": "examples/drop-in-react/dist/assets/message-timeline-DoLld7YG.css",
+        "sha256": "ca0e952a08d09c96d483ce2d33164c864ce5d0cbb34623f7b4c5a63163602c9d"
+      },
+      {
+        "path": "examples/drop-in-react/dist/assets/reminderLab-Bt9d9X5j.css",
+        "sha256": "e11953124a0cee55b06052f16124fa3d4fac3cb6e2890bd18ce28133a763abb8"
+      },
+      {
+        "path": "examples/drop-in-react/dist/assets/reminderLab-jIdMK2Cz.js",
+        "sha256": "3880e01a62ca3a8ad270b513aa13a614cb9c12b6c471a7a159904ae7c8c236e2"
+      },
+      {
+        "path": "examples/drop-in-react/dist/chat-lab.html",
+        "sha256": "3da7e72697bc58c9754076fb9997710bb1eea541dd322efc5fd2e1f4ca9a23dd"
+      },
+      {
+        "path": "examples/drop-in-react/dist/index.html",
+        "sha256": "bb896826cb20b7adf1e26dd753ffbbd8f4c6057207c39cc5072a5ecb7751d077"
+      },
+      {
+        "path": "examples/drop-in-react/dist/module-graph.json",
+        "sha256": "847d07362b0213a3cb9c1272ba523458b20c9be4c675df8f1b688585c4c89ffb"
+      },
+      {
+        "path": "examples/drop-in-react/dist/react-chat-lab.html",
+        "sha256": "3da7e72697bc58c9754076fb9997710bb1eea541dd322efc5fd2e1f4ca9a23dd"
+      },
+      {
+        "path": "examples/drop-in-react/dist/reminder-chat-lab.html",
+        "sha256": "e8e9a621dc75431db5418e3e199a21598723db996161a8bbb34c56688c8f0092"
+      }
+    ],
+    "browser_fingerprint_sha256": "cfb7e00c8dc547834eb7b75b2995ee2872ffde383eb7fae2fdc897c0417c1bd8"
+  },
+  "executor": {
+    "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+    "head": "f24378fccca9a667578dc8f5855231b89274d80c",
+    "node": "v22.23.1",
+    "checks": "sequential; NODE_OPTIONS=--max-old-space-size=2048; Vitest max/minWorkers=1; Node --test-concurrency=1",
+    "postgres_script": "test/run-native-token-postgres.sh",
+    "postgres_script_sha256": "768f95648ce253b6c5d223e97037ef129048b63381acb2e42cff33bd1d4d468a",
+    "postgres": "15.19; private new cluster, Unix socket only, max_connections=20/shared_buffers=32MB, harness pool max=4",
+    "postgres_fixture": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/pg/pg.TveEMN",
+    "postgres_cleanup": "0 remaining owned test schemas; cluster stopped; fixture retained locally",
+    "dependencies": "npm ci --include=dev in nested example; no lockfile/pin change",
+    "lockfiles": {
+      "package-lock.json": "68a2a7c2f271357d6a31383e07ea0d447c112cdaba71256ec6b5cc112429cfeb",
+      "examples/drop-in-react/package-lock.json": "1fe71b07860e8f45b9c8835e2ed4648bca43304a4e1bab5cac07ee709ab60cae"
+    }
+  },
+  "checks": [
+    {
+      "name": "example-npm-ci",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "npm",
+        "ci",
+        "--include=dev",
+        "--prefix",
+        "examples/drop-in-react",
+        "--cache",
+        "/opt/handrail/.handrail/codex-runs/1bfa7fa7-b065-421f-8541-0d0411af4a63/tmp/npm-cache"
+      ],
+      "exit_code": 0,
+      "note": "295 locked packages installed; public HTTPS SDK full-SHA pin and lockfile unchanged. npm git-cache warning mentions SSH; existing Git url.insteadOf rewrites SSH to public HTTPS.",
+      "log_sha256": "32620dd8a712243785e636b472d53956b6b84b2f45bad9cb582c1eca28b1fa75"
+    },
+    {
+      "name": "original-reproduction",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "command": "NODE_ENV=test node --input-type=module < supplied ui-identity-delayed-audit.mjs",
+      "exit_code": 1,
+      "tests": 3,
+      "pass": 1,
+      "fail": 2,
+      "phase": "before rebuild against verified original dist",
+      "note": "Expected safety failures reproduced, retained separately from corrected regressions.",
+      "log_sha256": "330ec8daaa8fda752bc99a8ee3cd0ffd703a7105cf34dfe10f7aaa7d6226826e"
+    },
+    {
+      "name": "build",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.22,
+      "log_sha256": "060ae0431d9a4bd7b0f3e54e5fc4b923220a08df4b11859a61996623724392aa"
+    },
+    {
+      "name": "typecheck",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 3.96,
+      "log_sha256": "14ae4d2795d19ce90c0009285dc2f38ffb10596fef05ddf2cd7c0a2d1a009f99"
+    },
+    {
+      "name": "example-typecheck",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "npm",
+        "run",
+        "typecheck",
+        "--prefix",
+        "examples/drop-in-react"
+      ],
+      "exit_code": 1,
+      "duration_seconds": 0.61,
+      "log_sha256": "5fbbfc5efa3a0cd3278ec92ffa4da0cc91007ae394b20b68cfe738caa357337c"
+    },
+    {
+      "name": "example-typecheck-corrected",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "npm",
+        "run",
+        "typecheck",
+        "--prefix",
+        "examples/drop-in-react"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.59,
+      "log_sha256": "1c54d90099969a60fde5538105be384c8827089152600337cd5a50a77e761943"
+    },
+    {
+      "name": "component",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "npm",
+        "run",
+        "test:native-tokens",
+        "--prefix",
+        "examples/drop-in-react"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 3.93,
+      "log_sha256": "5875ded9f70e1ae2a7bcbf3dd59c7dd01eb54ad9790278349f20047952927817"
+    },
+    {
+      "name": "proof-pacing",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "examples/drop-in-react/test/NativeTokenProofPacing.test.mjs"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.2,
+      "log_sha256": "258eede9f1b2633e7ad3567522e83c82e95a21dfefa351e57882bdc558e13669"
+    },
+    {
+      "name": "node-focused",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "test/native-token-boundaries.test.mjs",
+        "test/native-candidate-binding.test.mjs",
+        "test/request-context.test.mjs",
+        "test/send-message-http.test.mjs",
+        "test/message-generation.test.mjs",
+        "test/ui-browser-graph.test.mjs"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 5.02,
+      "log_sha256": "e5c30918383bf1a9295aa543f9a9acd62307d70696b0d5dbd94864042426feae"
+    },
+    {
+      "name": "postgres",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "env",
+        "TMPDIR=/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/native-repair-pg",
+        "PG_BIN=/usr/lib/postgresql/15/bin",
+        "bash",
+        "test/run-native-token-postgres.sh"
+      ],
+      "exit_code": 1,
+      "duration_seconds": 0.85,
+      "log_sha256": "504ce255155c1bbe0a99e921618a37c88b34342c8684addd8d34f46726cf6256"
+    },
+    {
+      "name": "postgres-short-path",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "env",
+        "TMPDIR=/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/pg",
+        "PG_BIN=/usr/lib/postgresql/15/bin",
+        "bash",
+        "test/run-native-token-postgres.sh"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 4.0,
+      "log_sha256": "68100707f0b955c401077ae4d79e906872f27071a5f1b53dec85c15a5be38a11"
+    },
+    {
+      "name": "browser-build",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "npm",
+        "run",
+        "build",
+        "--prefix",
+        "examples/drop-in-react"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 3.57,
+      "log_sha256": "fd005ead268308431eb92879133c273d2e3e7ca704bdbc61b89a94711a04ca29"
+    },
+    {
+      "name": "browser-graph",
+      "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js",
+      "argv": [
+        "npm",
+        "run",
+        "check:graph",
+        "--prefix",
+        "examples/drop-in-react"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.37,
+      "log_sha256": "3e85dc14a38b287795b2a430732ff1debd2f8824b052bacd0868fc2b7ccb49ed"
+    }
+  ],
+  "fresh_pass_counts": {
+    "component": 28,
+    "proof_pacing": 3,
+    "focused_node": 52,
+    "postgres": 7
+  },
+  "failures_preserved": [
+    {
+      "name": "original identity reproduction",
+      "result": "2 expected failures, 1 pass before rebuilding"
+    },
+    {
+      "name": "example typecheck",
+      "result": "test helper inferred an overly narrow header type; explicit Record<string,string> annotation fixed it; corrected check passed"
+    },
+    {
+      "name": "PostgreSQL first fixture",
+      "result": "Unix socket pathname too long, no tests executed; stopped initialization fixture retained at build/native-repair-pg/pg.xwpuOd; shorter build/pg fixture passed all 7 tests"
+    },
+    {
+      "name": "historical failures",
+      "result": "Original implementation, follow-up, review, broker dependency failures, planning failure and discovery recovery remain in the unchanged historical evidence and supplied review."
+    }
+  ],
+  "historical_flutter": {
+    "pass": 44,
+    "fresh_rerun": false,
+    "reason": "No Flutter source, generated message contract, server serialization or reducer changes. Fresh shared message-generation and HTTP compatibility checks are included in 52 Node passes. Live rendered Flutter attribution remains unverified.",
+    "work_request_id": "b39c00af-7789-4345-af36-90463dbb78e3",
+    "run_id": "602433ef-7ab9-44f5-9695-ef51658e68f6",
+    "head": "873908d0595e55d61344a4f33c0be2766b1a8ac9",
+    "test_sha256": "d6b2cf20428ee94648f37eef7f9eb736408810e0a872a3f1725b14e1c331fc07",
+    "lock_sha256": "eea72d79596aa8f25711079ebe30b6f8b9de269bcb9d92a4bb4576c9aee4e392",
+    "git_status": ""
+  },
+  "preserved_evidence": {
+    "implementation": "docs/validation/native-token-delivery.json",
+    "implementation_sha256": "c849d1adbfd61e735cf21bad0dd8be11443be41613dd72be18d86492c2bb1159",
+    "follow_up": "docs/validation/native-token-source-follow-up.json",
+    "follow_up_sha256": "210ba905e37bcff7b2827a14df8442aecc049db6ff0dbb3e84ceabe528e3a8da"
+  },
+  "changed_files_excluding_this_receipt": [
+    {
+      "path": "docs/native-inbound-tokens.md",
+      "sha256": "d07382bcc9cef3867802bb8beef1145662a1415de0117c3b326849bd5950ce18"
+    },
+    {
+      "path": "examples/drop-in-react/scripts/native-token-proof-pacing.mjs",
+      "sha256": "9fb0c30697f9015194729f179c7d22f539fb104bea54d90b0b8c977c5c934615"
+    },
+    {
+      "path": "examples/drop-in-react/scripts/verify-native-tokens-managed.mjs",
+      "sha256": "f5cf8d9fd4a84de22d78eac8b73a486dbb783e6919e72ecb1dc15afb91980c8a"
+    },
+    {
+      "path": "examples/drop-in-react/src/ChatLabApp.tsx",
+      "sha256": "0c8c11f72ce1726567aad427366113cbe0c78d3f59259f52bdd31ba0abaf2a83"
+    },
+    {
+      "path": "examples/drop-in-react/test/NativeTokenManager.test.tsx",
+      "sha256": "7618eafadae4cbf2e1485fc0b68b528b89008bf756933e63d89ab4ff687126ab"
+    },
+    {
+      "path": "examples/drop-in-react/test/NativeTokenProofPacing.test.mjs",
+      "sha256": "db964466ea0511b5e85e52aa844af14b2cc02379a0f07e0d3af7b587bd0f12bb"
+    },
+    {
+      "path": "src/client/generated/package-version.ts",
+      "sha256": "d8db8c0e56bce63c9ba463859fa937680a9a5ccf43f0ee4d1e5b58ff5fc5ed23"
+    },
+    {
+      "path": "src/ui/NativeTokenManager.tsx",
+      "sha256": "414ad6608c9de1abf322b5fe026b4c52b9e9d48ed0597b25c2c2f46f5b613cf8"
+    },
+    {
+      "path": "test/postgres-native-tokens.test.mjs",
+      "sha256": "35f8ccf4884df9ebce7c14d8fcf01555d2ca471c804ef671abee56c777a716db"
+    }
+  ],
+  "coordination": "No pending edits/Git operation at start. Main workspace synchronization was deferred as in supplied receipt; no reset/stash/pull/commit/push performed. Exact candidate reconstruction resolved source identity, preserving the pre-existing release-bot commit. No Task coordination mutation tool is exposed in this worker; preserve readiness Task bbc011e4-ff3f-416a-8266-262c1a9ea560 reservation and obtain its gate through the existing planner before native delivery. No lifecycle/configuration/queue/Handrail DB actions.",
+  "remaining": [
+    "Server-retain and read back native artifact identities after this worker returns; local manifest/readback is not a server-retention receipt.",
+    "Independent source re-review of these exact source/package/browser/full-patch hashes. Independent executor must provide nested locked example dependencies and the existing disposable PostgreSQL executor; do not expand into unrelated broker repairs.",
+    "Invalidate affected runtime acceptance; coordinate readiness Task reservation, use declared preparation/lifecycle controls to deliver this exact unpublished working candidate. No native lifecycle action performed here.",
+    "Actual administrator UI create/list/revoke, ordinary-user server denial, external contact HTTP, tenant/channel restrictions, attribution, reload persistence, retry/conflict and revoked-send denial.",
+    "Retain/read back first-run proof before managed isolated clean restart; verify removed old owned schema, new instance/schema and clean browser state; repeat full contact proof and build-status use case.",
+    "Preserve all historical evidence, planning/discovery recovery, ERP/production/provider/publication exclusions. No stage acceptance."
+  ]
+}

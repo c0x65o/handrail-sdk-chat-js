@@ -123,3 +123,129 @@ test('management fails closed before storage when the host grants no administrat
   const options = { permissions: { getCapabilities: async () => ['message.send'] }, database: { query() { throw new Error('must not reach database'); } } };
   for (const method of ['GET', 'POST', 'DELETE']) await assert.rejects(manageNativeTokens(options, member.actor, method), { statusCode: 403 });
 });
+
+const deferred = () => { let resolve; const promise = new Promise(yes => { resolve = yes; }); return { promise, resolve }; };
+
+// Intercept only scheduling around real PostgreSQL queries; no SQL/repository fake.
+function scheduledDatabase(pool, { after = async () => {}, before = async () => {} } = {}) {
+  const connect = async () => {
+    const client = await pool.connect();
+    return {
+      async query(sql, values) {
+        await before(sql, client.processID);
+        const result = await client.query(sql, values);
+        await after(sql, client.processID);
+        return result;
+      },
+      release: () => client.release(),
+    };
+  };
+  return { connect, async query(sql, values) { const client = await connect(); try { return await client.query(sql, values); } finally { client.release(); } } };
+}
+async function waitForBlock(pool, waiter, holder) {
+  const deadline = Date.now() + 5000;
+  while (Date.now() < deadline) {
+    const result = await pool.query('SELECT $2::int = ANY(pg_blocking_pids($1::int)) AS blocked', [waiter, holder]);
+    if (result.rows[0].blocked) return;
+    await new Promise(resolve => setTimeout(resolve, 10));
+  }
+  assert.fail('contending operation never reached the expected PostgreSQL lock');
+}
+async function concurrencyFixture(t) {
+  const backend = await createPostgresTestBackend();
+  t.after(() => backend.teardown());
+  const fixture = await backend.createHarness({ schemaPrefix: 'native_tokens_race' });
+  await createPostgresMigrationRunner({ database: fixture.pool, schema: fixture.schema, migrations: handrailChatPostgresMigrations }).apply();
+  const options = { database: fixture.pool, schema: fixture.schema,
+    permissions: { getCapabilities: async () => ['native_tokens.manage', 'message.send'], authorizeEntity: async () => true },
+    directory: { getUser: async () => null } };
+  await fixture.pool.query("INSERT INTO chat_conversations (tenant_id,id,type,visibility,name) VALUES ('tenant-a','allowed','channel','private','Synthetic')");
+  await fixture.pool.query("INSERT INTO chat_conversation_members (tenant_id,conversation_id,user_id,role,state) VALUES ('tenant-a','allowed','admin','member','active')");
+  const { token, secret } = await manageNativeTokens(options, admin.actor, 'POST', { name: 'Synthetic race', channelIds: ['allowed'] });
+  const { postNativeMessage } = await import('../dist/server/native-tokens.js');
+  const payload = { channelId: 'allowed', text: 'Synthetic concurrent first use', idempotencyKey: 'first-use' };
+  const send = (database = fixture.pool, body = payload) => postNativeMessage({ ...options, database }, `Bearer ${secret}`, body);
+  const revoke = (database = fixture.pool) => manageNativeTokens({ ...options, database }, admin.actor, 'DELETE', undefined, token.id);
+  const effects = async count => {
+    for (const table of ['chat_messages', 'chat_message_revisions', 'chat_native_message_receipts']) {
+      assert.equal(Number((await fixture.pool.query(`SELECT count(*) FROM ${table}`)).rows[0].count), count, table);
+    }
+    assert.equal(Number((await fixture.pool.query("SELECT count(*) FROM chat_outbox_events WHERE type='message.created'")).rows[0].count), count);
+  };
+  return { ...fixture, options, token, payload, send, revoke, effects };
+}
+
+test('send holding credential lock commits before concurrent revocation, then new sends and replays fail', { timeout: 15000 }, async t => {
+  const f = await concurrencyFixture(t);
+  const locked = deferred(), release = deferred(), revokeStarted = deferred();
+  const sending = f.send(scheduledDatabase(f.pool, { after: async (sql, pid) => {
+    if (sql.includes('chat_native_tokens') && sql.includes('FOR SHARE')) { locked.resolve(pid); await release.promise; }
+  } }));
+  let revoking;
+  try {
+    const holder = await locked.promise;
+    revoking = f.revoke(scheduledDatabase(f.pool, { before: async (sql, pid) => {
+      if (sql.includes('UPDATE') && sql.includes('chat_native_tokens')) revokeStarted.resolve(pid);
+    } }));
+    await waitForBlock(f.pool, await revokeStarted.promise, holder);
+    await f.effects(0);
+    release.resolve();
+    const accepted = await sending;
+    assert.equal(accepted.message.content.text, f.payload.text);
+    assert.deepEqual(await revoking, { revoked: true });
+    await assert.rejects(f.send(), { statusCode: 401 });
+    await assert.rejects(f.send(f.pool, { ...f.payload, idempotencyKey: 'after-revoke' }), { statusCode: 401 });
+    await f.effects(1);
+  } finally { release.resolve(); await Promise.allSettled([sending, revoking]); }
+});
+
+test('revocation holding credential lock rejects an already authenticated send once committed', { timeout: 15000 }, async t => {
+  const f = await concurrencyFixture(t);
+  const revoker = await f.pool.connect();
+  let sending;
+  try {
+    await revoker.query('BEGIN');
+    // Execute the actual management command, retaining its UPDATE lock until COMMIT.
+    await f.revoke({ query: revoker.query.bind(revoker) });
+    const lockAttempt = deferred();
+    sending = f.send(scheduledDatabase(f.pool, { before: async (sql, pid) => {
+      if (sql.includes('chat_native_tokens') && sql.includes('FOR SHARE')) lockAttempt.resolve(pid);
+    } })).then(value => ({ value }), error => ({ error }));
+    await waitForBlock(f.pool, await lockAttempt.promise, revoker.processID);
+    await revoker.query('COMMIT');
+    assert.equal((await sending).error?.statusCode, 401);
+    await assert.rejects(f.send(), { statusCode: 401 });
+    await f.effects(0);
+  } finally { await revoker.query('ROLLBACK'); revoker.release(); if (sending) await sending; }
+});
+
+for (const conflict of [false, true]) {
+  test(`concurrent first-use receipt claims ${conflict ? 'reject conflicting payloads' : 'persist once and replay the same message'}`, { timeout: 15000 }, async t => {
+    const f = await concurrencyFixture(t);
+    const claimed = deferred(), release = deferred(), contender = deferred();
+    const first = f.send(scheduledDatabase(f.pool, { after: async (sql, pid) => {
+      if (sql.includes('INSERT INTO') && sql.includes('chat_native_message_receipts')) { claimed.resolve(pid); await release.promise; }
+    } }));
+    let second;
+    try {
+      const holder = await claimed.promise;
+      second = f.send(scheduledDatabase(f.pool, { before: async (sql, pid) => {
+        if (sql.includes('INSERT INTO') && sql.includes('chat_native_message_receipts')) contender.resolve(pid);
+      } }), conflict ? { ...f.payload, text: 'Conflicting first-use payload' } : f.payload).then(value => ({ value }), error => ({ error }));
+      await waitForBlock(f.pool, await contender.promise, holder);
+      await f.effects(0); // the first claim is still uncommitted
+      release.resolve();
+      const accepted = await first;
+      const result = await second;
+      if (conflict) assert.equal(result.error?.statusCode, 409);
+      else {
+        assert.equal(result.error, undefined);
+        assert.equal(result.value.message.id, accepted.message.id);
+        assert.equal(result.value.reconciliationStatus, 'replayed');
+      }
+      await f.effects(1);
+      assert.equal((await f.pool.query('SELECT content FROM chat_messages')).rows[0].content.text, f.payload.text);
+      assert.equal((await f.send()).message.id, accepted.message.id);
+    } finally { release.resolve(); await Promise.allSettled([first, second]); }
+  });
+}

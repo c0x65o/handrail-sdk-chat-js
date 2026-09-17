@@ -20,6 +20,38 @@ const generatorPath = resolve(
 );
 const execFileAsync = promisify(execFile);
 
+test("native version mirror declares the canonical package and exact generated constant template", async () => {
+  const declaration = JSON.parse(await readFile(
+    resolve(repositoryRoot, ".handrail/version-mirrors.json"), "utf8",
+  ));
+  assert.deepEqual(declaration, {
+    schema_version: 1,
+    source: "package.json",
+    mirrors: [{
+      file: packageVersionOutputPath,
+      format: "text_templates",
+      templates: ['export const CHAT_CLIENT_PACKAGE_VERSION = "{{version}}" as const;'],
+    }],
+  });
+});
+
+test("the declared template remains compatible with exact generator bytes across versions", async () => {
+  const declaration = JSON.parse(await readFile(
+    resolve(repositoryRoot, ".handrail/version-mirrors.json"), "utf8",
+  ));
+  const [template] = declaration.mirrors[0].templates;
+  const versions = [await readPackageVersion(repositoryRoot), "9.8.9", "9.8.10", "10.0.0-rc.1"];
+  for (let index = 0; index < versions.length - 1; index += 1) {
+    const before = generatePackageVersionSource(versions[index]);
+    const previousText = template.replaceAll("{{version}}", versions[index]);
+    const nextText = template.replaceAll("{{version}}", versions[index + 1]);
+    assert.equal(before.split(previousText).length - 1, 1);
+    // This checks the SDK declaration/generator contract only. Actual native
+    // writer verification uses provenance-checked platform source separately.
+    assert.equal(before.replace(previousText, nextText), generatePackageVersionSource(versions[index + 1]));
+  }
+});
+
 test("compiled client package version agrees with package metadata", async () => {
   const { CHAT_CLIENT_PACKAGE_VERSION } = await import("../dist/client/generated/package-version.js");
   assert.equal(CHAT_CLIENT_PACKAGE_VERSION, await readPackageVersion(repositoryRoot));
