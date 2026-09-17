@@ -3323,6 +3323,11 @@ export function createChatClient<Feature extends string = string>(
       onStatusChange,
       ...crossTabRuntime
     } = config.crossTab;
+    // A sibling only knows the scopes it has loaded. Its snapshot can bootstrap
+    // this cache, but cannot replace local reads/events (or a prior bootstrap):
+    // omissions are not server-authoritative removals or permission revocations.
+    const bootstrapCacheState = cache.getState();
+    let bootstrapHydrated = false;
     try {
       coordinator = createChatCrossTabCoordinator({
         ...crossTabRuntime,
@@ -3470,7 +3475,9 @@ export function createChatClient<Feature extends string = string>(
           coordinator?.publishCanonicalState(cache.getState());
         },
         onCanonicalState(value) {
+          if (bootstrapHydrated || cache.getState() !== bootstrapCacheState) return;
           if (cache.hydrateCanonicalState(value)) {
+            bootstrapHydrated = true;
             void replyStyleRuntime?.api.load();
             readStateRuntime?.markAuthoritative(
               Object.values(cache.getState().currentUser.readStates),

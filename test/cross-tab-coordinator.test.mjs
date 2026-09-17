@@ -1348,3 +1348,61 @@ test("channel failures are fail-open and server idempotency remains canonical", 
     });
   }
 });
+
+for (const phase of ["before-election", "after-hydration", "leader-handover"]) {
+  test(`a sibling bootstrap snapshot cannot replace local reads ${phase}`, async () => {
+    const clock = new FakeClock(); const hub = new FakeChannelHub(); const sockets = [];
+    const clients = ["tab-a", "tab-b", "tab-c"].map(tabId => makeClient({hub, clock, tabId, sockets}));
+    const identity = {tenantId:"tenant-1", userId:"user-1", sessionId:"session-1"};
+    clients.forEach(client => client.cache.setIdentity(identity));
+    try {
+      await Promise.all(clients.map(client => client.start()));
+      const follower = clients[2];
+      const loadLocal = () => {
+        follower.cache.applyDurableEvent(canonicalConversationEvent);
+        follower.cache.hydrateConversationList({ kind:"conversation_list", scope:{type:"organization"}, items:[], page:{}, _meta:{protocolVersion:CHAT_PROTOCOL_VERSION} });
+      };
+      if (phase === "before-election") loadLocal();
+      clock.tick(timing.electionDelayMs);
+      await Promise.resolve(); await Promise.resolve();
+      if (phase !== "before-election") {
+        loadLocal();
+        const snapshot = hub.messages.findLast(message => message.kind === "canonical-state");
+        hub.injectTo("tab-c", snapshot);
+        if (phase === "leader-handover") {
+          clients[0].close();
+          clock.tick(timing.electionDelayMs);
+          await Promise.resolve(); await Promise.resolve();
+          assert.equal(clients[1].coordination.role, "leader");
+          assert.equal(follower.coordination.role, "follower");
+        }
+      }
+      assert.ok(follower.cache.getState().entities.conversations["conversation-realtime"], "local server data survives an incomplete sibling snapshot");
+      assert.ok(Object.keys(follower.cache.getState().metadata.conversationLists).length, "completed list metadata cannot disappear and strand the hook loading");
+    } finally { clients.forEach(client => client.close()); }
+  });
+}
+
+
+test("an identical initial bootstrap consumes snapshot admission without suppressing canonical events", async () => {
+  const clock = new FakeClock(); const hub = new FakeChannelHub(); const sockets = [];
+  const clients = ["tab-a", "tab-b"].map(tabId => makeClient({hub, clock, tabId, sockets}));
+  const identity = {tenantId:"tenant-1", userId:"user-1", sessionId:"session-1"};
+  clients.forEach(client => client.cache.setIdentity(identity));
+  try {
+    await Promise.all(clients.map(client => client.start()));
+    clock.tick(timing.electionDelayMs);
+    await Promise.resolve(); await Promise.resolve();
+    clients[0].cache.applyDurableEvent(canonicalConversationEvent);
+    const snapshot = structuredClone(hub.messages.findLast(message => message.kind === "canonical-state"));
+    snapshot.payload.value = clients[0].cache.getState();
+    hub.injectTo("tab-b", snapshot);
+    assert.equal(clients[1].cache.getState().entities.conversations["conversation-realtime"], undefined);
+    sockets[0].open(); sockets[0].message(acceptedSession);
+    const liveEvent = structuredClone(canonicalConversationEvent);
+    liveEvent.eventId = "event-live-conversation";
+    liveEvent.streamId = liveEvent.payload.conversation.id = "conversation-live";
+    sockets[0].message(liveEvent);
+    assert.equal(clients[1].cache.getState().entities.conversations["conversation-live"].name, "Realtime");
+  } finally { clients.forEach(client => client.close()); }
+});

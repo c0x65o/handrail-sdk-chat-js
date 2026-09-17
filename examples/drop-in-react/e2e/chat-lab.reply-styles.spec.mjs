@@ -110,11 +110,11 @@ test("mixed styles preserve channel replies, canonical threads, drafts, queued d
     expect(await threads()).toEqual([]);
     expect(await preferences()).toEqual([{ user_id: "alice", style: "current" }, { user_id: "bob", style: "discord" }]);
     await page.reload();
-    await style(page, "discord");
+    await style(page); // Assert restored choice before any selection or write.
     await expect(root(page)).toBeVisible();
     completedCheckpoints.push("Retained draft/source during style switch; durable queued send kept channel/source; Bob preference reload");
     await testInfo.attach("mixed-replies-before-named-thread", {
-      body: await page.screenshot({ fullPage: true }), contentType: "image/png",
+      body: await page.screenshot({ fullPage: false }), contentType: "image/png",
     });
 
     await root(page).hover();
@@ -174,7 +174,7 @@ test("mixed styles preserve channel replies, canonical threads, drafts, queued d
     await page.getByRole("button", { name: "Back to Launch planning", exact: true }).click();
     await assertParentRoot(page);
     expect(await threads()).toEqual([{ id: threadId, name: THREAD, root_message_id: chatLab.rootMessageId, closed_at: null }]);
-    await testInfo.attach("named-thread-retained-history", { body: await alice.screenshot({ fullPage: true }), contentType: "image/png" });
+    await testInfo.attach("named-thread-retained-history", { body: await alice.screenshot({ fullPage: false }), contentType: "image/png" });
 
     completedCheckpoints.push("Canonical root/discovery opening, shared reopen, retained Leave history");
   } finally {

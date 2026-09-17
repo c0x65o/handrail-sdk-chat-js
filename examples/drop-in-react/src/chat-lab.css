@@ -1014,14 +1014,15 @@ select {
 }
 .chat-lab__scenario-guide { padding: .5rem 1rem; font-size: .85rem; }
 .chat-lab__scenario-guide p { margin: .25rem 0; }
-.chat-lab__reply-settings { position: relative; }
+/* Host controls must fit the narrow navigation rail. Focusing overflowing
+   settings previously scrolled the entire rail horizontally and hid its labels. */
+.chat-lab .handrail-chat__navigation-header { flex-direction: column; align-items: stretch; }
+.chat-lab .handrail-chat__navigation-actions { flex-wrap: wrap; margin-inline-start: 0; }
+.chat-lab__reply-settings { position: relative; flex-basis: 100%; min-width: 0; }
 .chat-lab__reply-settings summary { cursor: pointer; }
 .chat-lab__reply-settings > section {
-  position: absolute;
-  z-index: 20;
-  top: 100%;
-  left: 0;
-  width: min(22rem, 80vw);
+  box-sizing: border-box;
+  width: 100%;
   padding: 1rem;
   background: var(--hr-chat-color-canvas);
   border: 1px solid var(--hr-chat-color-border);
