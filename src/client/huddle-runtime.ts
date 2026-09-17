@@ -1171,6 +1171,27 @@ export function createChatHuddleRuntime(
     await removeRetained(input.idempotencyKey);
     retries.delete(conversationId);
     clearRecovery(conversationId, operation);
+    if (!applied && command.operation === "set_huddle_screen_share" &&
+        !sameValue(canonical(conversationId), command.state)) {
+      // A queued earlier ownership event can overtake this HTTP request. The
+      // watermark cannot distinguish that echo from genuinely newer authority;
+      // read the server before deciding whether capture may start or must stop.
+      // An already-running hydration may predate the command, so await it first.
+      await hydrations.get(conversationId)?.promise;
+      if (requestGeneration !== generation) {
+        return errorResult(operation, "closed", COMMAND_FAILURE_MESSAGE, false);
+      }
+      const refreshed = await runtime.hydrate(conversationId);
+      if (requestGeneration !== generation) {
+        return errorResult(operation, "closed", COMMAND_FAILURE_MESSAGE, false);
+      }
+      if (refreshed.status === "error") {
+        const failure = Object.freeze({ ...refreshed, operation });
+        retries.set(conversationId, { conversationId, input });
+        settleFromAuthority(input.idempotencyKey, failure);
+        return failure;
+      }
+    }
     if (
       !recovered &&
       (command.operation === "start_huddle" || command.operation === "join_huddle") &&

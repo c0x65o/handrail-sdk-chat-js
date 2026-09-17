@@ -1491,3 +1491,104 @@ test("imports runtime behavior only from React and the public React entry point"
   );
   assert.doesNotMatch(source, /(?:console\.|JSON\.stringify|dangerouslySetInnerHTML)/);
 });
+
+for (const boundary of ["pending", "microphone", "leave", "end", "other-owner"]) {
+  test(`capture ended during ${boundary} preserves release until safe or discards it at cleanup`, async () => {
+    const descriptor = Object.freeze({ kind: "opaque_media_join", descriptor: "ended-boundary", expiresAt: "2035-02-03T04:09:06.000Z" });
+    const owned = canonical("active", { participants: [participant(currentUserId), participant(otherUserId)], screenShareOwnerUserId: currentUserId });
+    const ready = { media: { state: "ready", huddleSessionId: owned.huddleSessionId, expiresAt: descriptor.expiresAt } };
+    const fixture = createFixture({ descriptor, initialView: view(owned, ready) });
+    const media = createMediaFixture({ descriptors: [descriptor], initial: { screenShareActive: true } });
+    const container = await mount(controls(fixture.client, { mediaSession: media.session }));
+    let finishMicrophone;
+    if (boundary === "microphone") {
+      media.session.setMicrophoneMuted = () => new Promise(resolve => { finishMicrophone = resolve; });
+      await click(button(container, "Unmute microphone"));
+    } else {
+      await act(async () => fixture.publish(view(owned, { ...ready, pendingOperation: "leave_huddle" })));
+    }
+    await act(async () => { media.publish({ screenShareActive: false }); await flush(); });
+    assert.equal(fixture.calls.filter(x => x.name === "clearHuddleScreenShare").length, 0);
+    await act(async () => {
+      if (boundary === "microphone") finishMicrophone();
+      else if (boundary === "leave") fixture.publish(view(canonical("active", { participants: [participant(currentUserId, "left"), participant(otherUserId)] }), ready));
+      else if (boundary === "end") fixture.publish(view(canonical("ended", { participants: [participant(currentUserId, "left")] }), ready));
+      else if (boundary === "other-owner") fixture.publish(view({ ...owned, screenShareOwnerUserId: otherUserId }, ready));
+      else fixture.publish(view(owned, ready));
+      await flush();
+    });
+    assert.equal(fixture.calls.filter(x => x.name === "clearHuddleScreenShare").length,
+      boundary === "pending" || boundary === "microphone" ? 1 : 0);
+  });
+}
+
+test("releases ownership when capture starts and ends before React commits active media", async () => {
+  const descriptor = Object.freeze({ kind: "opaque_media_join", descriptor: "batched-ended", expiresAt: "2035-02-03T04:09:06.000Z" });
+  const ready = { media: { state: "ready", huddleSessionId: "huddle-session-controls", expiresAt: descriptor.expiresAt } };
+  const state = owner => canonical("active", { participants: [participant(currentUserId)], screenShareOwnerUserId: owner });
+  let fixture;
+  fixture = createFixture({ descriptor, initialView: view(state(null), ready), actionHandlers: {
+    setHuddleScreenShare: async () => { fixture.publish(view(state(currentUserId), ready)); return { status: "success", state: state(currentUserId) }; },
+    clearHuddleScreenShare: async () => { fixture.publish(view(state(null), ready)); return { status: "success", state: state(null) }; },
+  } });
+  const media = createMediaFixture({ descriptors: [descriptor] });
+  const container = await mount(controls(fixture.client, { mediaSession: media.session }));
+  const start = media.session.startScreenShare.bind(media.session);
+  media.session.startScreenShare = async () => { await start(); media.publish({ screenShareActive: false }); };
+  await click(button(container, "Start screen sharing"));
+  assert.equal(media.session.getState().screenShareActive, false);
+  assert.equal(fixture.client.getHuddleState().canonicalState.screenShareOwnerUserId, null);
+  assert.equal(fixture.calls.filter(x => x.name === "clearHuddleScreenShare").length, 1);
+});
+
+for (const scenario of [currentUserId, null, otherUserId, "stale-read", "superseded-read"]) {
+  const owner = scenario === "stale-read" ? currentUserId : scenario === "superseded-read" ? otherUserId : scenario;
+  test(`capture ended under a queued null-owner projection reads authority (${scenario})`, async () => {
+    const descriptor = Object.freeze({ kind: "opaque_media_join", descriptor: "queued-null", expiresAt: "2035-02-03T04:09:06.000Z" });
+    const ready = { media: { state: "ready", huddleSessionId: "huddle-session-controls", expiresAt: descriptor.expiresAt } };
+    const state = owner => canonical("active", { participants: [participant(currentUserId), participant(otherUserId)], screenShareOwnerUserId: owner });
+    let fixture;
+    let reads = 0;
+    fixture = createFixture({ descriptor, initialView: view(state(currentUserId), ready), actionHandlers: {
+      hydrateHuddle: async () => {
+        if (++reads === 1 && scenario === "stale-read") return { status: "success", state: state(null), applied: false };
+        fixture.publish(view(state(owner), ready));
+        return { status: "success", state: state(scenario === "superseded-read" ? currentUserId : owner), applied: true };
+      },
+      clearHuddleScreenShare: async () => { fixture.publish(view(state(null), ready)); return { status: "success", state: state(null) }; },
+    } });
+    const media = createMediaFixture({ descriptors: [descriptor], initial: { screenShareActive: true } });
+    await mount(controls(fixture.client, { mediaSession: media.session }));
+    // A delayed previous clear arrives after the new acquisition HTTP response.
+    // Local media must stop, then reconcile the currently authoritative owner.
+    await act(async () => { fixture.publish(view(state(null), ready)); await flush(); });
+    assert.equal(media.session.getState().screenShareActive, false);
+    assert.equal(fixture.calls.filter(x => x.name === "hydrateHuddle").length, scenario === "stale-read" ? 2 : 1);
+    assert.equal(fixture.calls.filter(x => x.name === "clearHuddleScreenShare").length, owner === currentUserId ? 1 : 0);
+    assert.equal(fixture.client.getHuddleState().canonicalState.screenShareOwnerUserId, owner === currentUserId ? null : owner);
+  });
+}
+
+for (const boundary of ["leave_huddle", "end_huddle", "unmount", "session", "identity"]) {
+  test(`ended-capture reconciliation cannot clear across ${boundary}`, async () => {
+    const descriptor = Object.freeze({ kind: "opaque_media_join", descriptor: "ended-read-boundary", expiresAt: "2035-02-03T04:09:06.000Z" });
+    const ready = { media: { state: "ready", huddleSessionId: "huddle-session-controls", expiresAt: descriptor.expiresAt } };
+    const owned = canonical("active", { participants: [participant(currentUserId), participant(otherUserId)], screenShareOwnerUserId: currentUserId });
+    let finishRead;
+    const fixture = createFixture({ descriptor, initialView: view(owned, ready), actionHandlers: {
+      hydrateHuddle: () => new Promise(resolve => { finishRead = resolve; }),
+    } });
+    const media = createMediaFixture({ descriptors: [descriptor], initial: { screenShareActive: true } });
+    const container = await mount(controls(fixture.client, { mediaSession: media.session }));
+    await act(async () => { fixture.publish(view({ ...owned, screenShareOwnerUserId: null }, ready)); await flush(); });
+    assert.equal(typeof finishRead, "function");
+    if (boundary === "unmount") await unmount(container);
+    else if (boundary === "identity") await rerender(container, controls(fixture.client, { mediaSession: media.session, currentUserId: otherUserId }));
+    else await act(async () => fixture.publish(view(
+      boundary === "session" ? { ...owned, huddleSessionId: "replacement-session" } : owned,
+      { ...ready, ...(boundary === "session" ? {} : { pendingOperation: boundary }) },
+    )));
+    await act(async () => { finishRead({ status: "success", state: owned, applied: true }); await flush(); });
+    assert.equal(fixture.calls.filter(x => x.name === "clearHuddleScreenShare").length, 0);
+  });
+}

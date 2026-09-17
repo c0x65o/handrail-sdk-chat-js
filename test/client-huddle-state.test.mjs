@@ -556,3 +556,117 @@ test("a queued leave arriving during rejoin does not discard the newer join cred
   assert.equal(client.getHuddleMediaJoinDescriptor(conversationId).descriptor, descriptorSentinel);
   client.close();
 });
+
+const ownershipCache = () => {
+  const cache = createNormalizedChatCache(identity);
+  cache.applyDurableEvent({
+    eventId: "ownership-conversation", protocolVersion: CHAT_PROTOCOL_VERSION,
+    tenantId, streamId: conversationId, type: CHAT_DURABLE_EVENT_TYPES.conversationCreated,
+    occurredAt: "2030-01-01T00:00:00.000Z",
+    payload: { conversation: { id: conversationId, tenantId, type: "channel",
+      visibility: "public", name: "Ownership", createdAt: "2030-01-01T00:00:00.000Z",
+      updatedAt: "2030-01-01T00:00:00.000Z", memberUserIds: [userId] } },
+  });
+  return cache;
+};
+const ownershipEcho = (cache, state) => cache.applyDurableEvent({
+  eventId: "queued-ownership", protocolVersion: CHAT_PROTOCOL_VERSION,
+  tenantId, streamId: conversationId, type: CHAT_DURABLE_EVENT_TYPES.huddleUpdated,
+  occurredAt: "2030-01-01T00:00:03.000Z", payload: { state },
+});
+
+for (const intent of ["set", "clear"]) {
+  test(`refreshes screen-share ${intent} after a queued snapshot overtakes its HTTP request`, async () => {
+    const cache = ownershipCache();
+    const before = intent === "set" ? active : sharing;
+    const after = intent === "set" ? sharing : active;
+    cache.setHuddleState(before);
+    const calls = [];
+    const client = createClient({ cache, fetch: async (url, init) => {
+      calls.push(init.method);
+      if (init.method === "GET") return response(after);
+      // The prior command's queued echo is a new object, but predates this
+      // successful transaction. It invalidates the in-flight watermark.
+      ownershipEcho(cache, before);
+      return response(commandResult("set_huddle_screen_share", after));
+    } });
+    try {
+      const result = intent === "set"
+        ? await client.setHuddleScreenShare(conversationId)
+        : await client.clearHuddleScreenShare(conversationId);
+      assert.equal(result.status, "success");
+      assert.equal(result.state.screenShareOwnerUserId, after.screenShareOwnerUserId);
+      assert.deepEqual(client.getHuddleState(conversationId).canonicalState, after);
+      assert.deepEqual(calls, ["PATCH", "GET"]);
+      assert.equal(client.getHuddleState(conversationId).pendingOperation, undefined);
+    } finally { client.close(); }
+  });
+}
+
+for (const latest of [active, { ...active, screenShareOwnerUserId: "other-user", participants: [...active.participants, { userId: "other-user", status: "joined", joinedAt }] }, left, ended]) {
+  test(`screen-share refresh preserves newer authority: ${latest.status}/${latest.screenShareOwnerUserId}/${latest.participants[0].status}`, async () => {
+    const cache = ownershipCache();
+    cache.setHuddleState(active);
+    const client = createClient({ cache, fetch: async (_url, init) => {
+      if (init.method === "GET") return response(latest);
+      // This identical null-owner snapshot can instead be a newer clear from
+      // another session. Equality must not disable watermark protection.
+      ownershipEcho(cache, active);
+      return response(commandResult("set_huddle_screen_share", sharing));
+    } });
+    try {
+      const result = await client.setHuddleScreenShare(conversationId);
+      assert.equal(result.status, "success");
+      assert.deepEqual(result.state, latest);
+      assert.deepEqual(cache.getState().huddles[conversationId], latest);
+    } finally { client.close(); }
+  });
+}
+
+test("ownership reconciliation waits out an older hydration and reads a fresh snapshot", async () => {
+  const cache = ownershipCache(); cache.setHuddleState(active);
+  const oldRead = deferred(); const dispatched = deferred();
+  let reads = 0;
+  const client = createClient({ cache, fetch: async (_url, init) => {
+    if (init.method === "GET") return ++reads === 1 ? oldRead.promise : response(sharing);
+    ownershipEcho(cache, active); dispatched.resolve();
+    return response(commandResult("set_huddle_screen_share", sharing));
+  } });
+  try {
+    const hydration = client.hydrateHuddle(conversationId);
+    const command = client.setHuddleScreenShare(conversationId);
+    await dispatched.promise;
+    oldRead.resolve(response(active));
+    await hydration;
+    assert.equal((await command).state.screenShareOwnerUserId, userId);
+    assert.equal(reads, 2);
+  } finally { client.close(); }
+});
+
+for (const scenario of ["newer-event", "failed-read", "identity-change"]) {
+  test(`ownership reconciliation handles ${scenario} during the fresh read`, async () => {
+    const cache = ownershipCache(); cache.setHuddleState(active);
+    const client = createClient({ cache, fetch: async (_url, init) => {
+      if (init.method === "PATCH") {
+        ownershipEcho(cache, active);
+        return response(commandResult("set_huddle_screen_share", sharing));
+      }
+      if (scenario === "failed-read") return response({}, 503);
+      if (scenario === "identity-change") cache.setIdentity(null);
+      else cache.setHuddleState(ended);
+      return response(sharing);
+    } });
+    try {
+      const result = await client.setHuddleScreenShare(conversationId);
+      if (scenario === "newer-event") {
+        assert.equal(result.status, "success");
+        assert.deepEqual(result.state, ended);
+      } else {
+        assert.equal(result.status, "error");
+        assert.equal(result.operation, "set_huddle_screen_share");
+        assert.equal(result.code, scenario === "failed-read" ? "transport" : "closed");
+      }
+      assert.equal(client.getHuddleState(conversationId).pendingOperation, undefined);
+    } finally { client.close(); }
+  });
+}

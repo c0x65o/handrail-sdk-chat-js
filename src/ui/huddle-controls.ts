@@ -275,6 +275,7 @@ function ConnectedHuddleControls(
   const handoffBoundaryRef = useRef<object | undefined>(undefined);
   const hasConnectedRef = useRef(false);
   const previousLocalShareRef = useRef(false);
+  const shareBoundaryRef = useRef({});
   const closeDetails = useCallback(() => {
     setDetailsOpen(false);
     const trigger = detailsTriggerRef.current;
@@ -343,6 +344,12 @@ function ConnectedHuddleControls(
   }, [mediaSession, props.conversationId, props.currentUserId]);
 
   useEffect(() => {
+    previousLocalShareRef.current = false;
+    shareBoundaryRef.current = {};
+  }, [mediaSession, props.conversationId, props.currentUserId, isJoined,
+    canonical?.status === "inactive" ? undefined : canonical?.huddleSessionId]);
+
+  useEffect(() => {
     if (mediaSession === undefined || canonical === undefined) return;
     const isLive = canonical.status === "starting" || canonical.status === "active";
     if (!isLive || !isJoined) void mediaSession.leave().catch(() => undefined);
@@ -366,15 +373,48 @@ function ConnectedHuddleControls(
   ]);
 
   useEffect(() => {
-    const wasSharing = previousLocalShareRef.current;
-    previousLocalShareRef.current = mediaState?.screenShareActive === true;
-    if (wasSharing && mediaState?.screenShareActive === false && isJoined && pending === undefined &&
-        screenShareOwnerUserId === props.currentUserId &&
-        mediaOperationRef.current === undefined) {
-      // The browser's own Stop sharing control must release canonical ownership.
-      void actions.clearHuddleScreenShare().catch(() => undefined);
+    if (!isJoined || (screenShareOwnerUserId !== null &&
+        screenShareOwnerUserId !== props.currentUserId)) {
+      previousLocalShareRef.current = false;
+      return;
     }
-  }, [mediaState?.screenShareActive, screenShareOwnerUserId, props.currentUserId, actions, isJoined, pending]);
+    if (mediaState?.screenShareActive === true) previousLocalShareRef.current = true;
+    if (previousLocalShareRef.current && mediaState?.screenShareActive === false &&
+        pending === undefined && mediaOperationRef.current === undefined) {
+      // The browser's own Stop sharing control must release canonical ownership.
+      // Keep the ended transition while another operation is pending.
+      previousLocalShareRef.current = false;
+      if (screenShareOwnerUserId === props.currentUserId) {
+        void actions.clearHuddleScreenShare().catch(() => undefined);
+      } else {
+        // A queued clear can briefly hide a newer acquisition. Resolve that
+        // ambiguity now, rather than retaining an intent that could clear a
+        // genuinely later share by another session of this user.
+        const boundary = shareBoundaryRef.current;
+        const sessionId = canonical?.status === "inactive" ? undefined : canonical?.huddleSessionId;
+        void runMediaOperation("screen_share", async () => {
+          let result = await actions.hydrateHuddle();
+          // The hook may share a read started before the acquisition. Its
+          // rejected watermark is not evidence that ownership was released.
+          if (result.status === "success" && result.applied === false &&
+              mountedRef.current && shareBoundaryRef.current === boundary) {
+            result = await actions.hydrateHuddle();
+          }
+          if (!mountedRef.current || shareBoundaryRef.current !== boundary ||
+              result.status !== "success" || mediaSession?.getState().screenShareActive !== false) return;
+          const current = context?.client.getHuddleState(props.conversationId);
+          const pendingNow = current?.pendingOperation;
+          if (pendingNow === "leave_huddle" || pendingNow === "end_huddle") return;
+          const state = current?.canonicalState;
+          if (state?.status === "active" && state.huddleSessionId === sessionId &&
+              state.screenShareOwnerUserId === props.currentUserId &&
+              state.participants.some((participant) => participant.userId === props.currentUserId && participant.status === "joined")) {
+            await actions.clearHuddleScreenShare();
+          }
+        }).catch(() => undefined);
+      }
+    }
+  }, [mediaState?.screenShareActive, screenShareOwnerUserId, props.currentUserId, actions, isJoined, pending, mediaOperation]);
 
   useEffect(() => {
     if (view?.media.state !== "ready" || pending !== undefined || context === null || !isJoined) return;
@@ -528,6 +568,7 @@ function ConnectedHuddleControls(
           const result = await actions.clearHuddleScreenShare();
           if (result.status !== "success") return result;
         }
+        previousLocalShareRef.current = false;
         await stopLocalScreenShare(mediaSession);
         return undefined;
       }
@@ -551,6 +592,8 @@ function ConnectedHuddleControls(
       }
       try {
         await mediaSession.startScreenShare();
+        // Capture can end before React commits its active state.
+        previousLocalShareRef.current = true;
       } catch {
         await actions.clearHuddleScreenShare().catch(() => undefined);
         await stopLocalScreenShare(mediaSession).catch(() => undefined);
