@@ -247,7 +247,7 @@ const createFixture = ({
   const success = (name) => Promise.resolve({ status: "success", value: { operation: name } });
   const client = {
     endpoint: "/chat",
-    state: { state: "ready" },
+    state: { state: "ready", enabledFeatures: { attachments: true } },
     cache,
     getThreadOpeningState: () => opening,
     subscribeThreadOpening(_id, listener) {
@@ -1033,6 +1033,52 @@ test('leaving then sending an inline thread reply keeps lifecycle controls usabl
   assert.equal(fixture.runtime.api.getState(threadId).lifecycle.locked, true);
   assert.ok(findButton(container, 'Unlock thread'));
   assert.ok(findButton(container, 'Join'));
+});
+
+test('membership reauthorization retains disabled lifecycle nodes and admits one action only after readiness', async () => {
+  const pending = deferredLifecycle();
+  let reads = 0;
+  const fixture = lifecycleFixture({ read: () => ++reads === 1 ? undefined : pending.promise });
+  const container = await renderPanel(fixture, { lifecycleAvailability: lifecycleAuthority });
+  const close = findButton(container, 'Close thread');
+  assert.equal(close.disabled, false);
+  await act(async () => {
+    fixture.cache.hydrateConversationDetail(detail({ ...threadConversation,
+      currentMember: { ...member(threadId), updatedAt: '2038-01-01T00:00:00.000Z' } }));
+    await flush();
+  });
+  assert.equal(fixture.runtime.api.getState(threadId).status, 'loading');
+  assert.equal(findButton(container, 'Close thread'), close);
+  assert.equal(close.disabled, true);
+  await click(close);
+  assert.deepEqual(fixture.writes, [], 'No action is queued while authorization is pending');
+  await act(async () => { pending.resolve(undefined); await flush(); });
+  assert.equal(findButton(container, 'Close thread'), close);
+  assert.equal(close.disabled, false);
+  assert.deepEqual(fixture.writes, [], 'Reauthorization must not replay a disabled click');
+  await click(close);
+  assert.equal(fixture.writes.length, 1);
+  assert.equal(fixture.writes[0].input.intent, 'close');
+  assert.match(container.textContent, /Thread closed/);
+});
+
+test('denied membership reauthorization removes retained lifecycle controls', async () => {
+  const pending = deferredLifecycle();
+  let reads = 0;
+  const fixture = lifecycleFixture({ read: () => ++reads === 1 ? undefined : pending.promise });
+  const container = await renderPanel(fixture, { lifecycleAvailability: lifecycleAuthority });
+  const close = findButton(container, 'Close thread');
+  await act(async () => {
+    fixture.cache.hydrateConversationDetail(detail({ ...threadConversation,
+      currentMember: { ...member(threadId), updatedAt: '2038-01-01T00:00:00.000Z' } }));
+    await flush();
+  });
+  assert.equal(findButton(container, 'Close thread'), close);
+  assert.equal(close.disabled, true);
+  await act(async () => { pending.resolve({ status: 'rejected', httpStatus: 403 }); await flush(); });
+  assert.equal(findButton(container, 'Close thread'), undefined);
+  assert.equal(fixture.runtime.api.getState(threadId).error, 'access_revoked');
+  assert.deepEqual(fixture.writes, []);
 });
 
 test('lifecycle dismissal, Escape, unmount and custom close label never mutate shared discussion', async () => {

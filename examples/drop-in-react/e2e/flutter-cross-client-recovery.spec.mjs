@@ -13,6 +13,20 @@ test('Flutter recovers an open thread during React Bob updates without manual re
   const flutter = await context.newPage();
   const name = `QA thread recovery ${Date.now()}`;
   const errors = [];
+  const lifecycleRequests = [], lifecycleResponses = [], lifecycleEvents = [], lifecycleSql = [];
+  page.on('request', request => {
+    if (request.method() === 'PATCH' && new URL(request.url()).pathname.endsWith('/lifecycle')) {
+      lifecycleRequests.push({ url: request.url(), body: request.postDataJSON() });
+    }
+  });
+  for (const [client, target] of [['react', page], ['flutter', flutter]]) {
+    target.on('websocket', socket => socket.on('framereceived', frame => {
+      try {
+        const event = JSON.parse(String(frame.payload));
+        if (event.type === 'thread.lifecycle.updated') lifecycleEvents.push({ client, event });
+      } catch { /* Non-JSON transport frames are not lifecycle receipts. */ }
+    }));
+  }
   const navigations = [];
   const screenshots = [info.outputPath('recovered-thread-390x844.png'), info.outputPath('recovery-390x844.png')];
   let provenance, instance, thread;
@@ -74,10 +88,43 @@ test('Flutter recovers an open thread during React Bob updates without manual re
     await history.getByRole('button', { name: 'Reply', exact: true }).click();
     await input.fill(`${name} inline after Leave`);
     await panel.getByRole('button', { name: 'Send message', exact: true }).click();
-    await panel.getByRole('button', { name: 'Close thread', exact: true }).click();
+    const lifecycleResponse = intent => page.waitForResponse(response =>
+      response.request().method() === 'PATCH' &&
+      new URL(response.url()).pathname === `/api/chat/conversations/${thread.id}/lifecycle` &&
+      response.request().postDataJSON()?.intent === intent);
+    const [closed] = await Promise.all([
+      lifecycleResponse('close'),
+      panel.getByRole('button', { name: 'Close thread', exact: true }).click(),
+    ]);
+    expect(closed.status()).toBe(200);
+    lifecycleResponses.push(await closed.json());
+    await expect(panel.getByText('Thread closed.', { exact: true })).toBeVisible();
     await expect.poll(() => flutter.locator('body').ariaSnapshot()).toContain('Thread closed.');
-    await panel.getByRole('button', { name: 'Reopen thread', exact: true }).click();
+    const closedRow = (await chatLab.harness.pool.query(
+      'SELECT lifecycle_revision, closed_at, closed_by_user_id, locked FROM chat_conversations WHERE id=$1', [thread.id],
+    )).rows[0];
+    expect(closedRow).toMatchObject({ lifecycle_revision: '2', closed_by_user_id: 'bob', locked: false });
+    expect(closedRow.closed_at).not.toBeNull();
+    lifecycleSql.push({ checkpoint: 'closed', ...closedRow });
+    await page.screenshot({ path: info.outputPath('react-closed-1440x1000.png') });
+    await flutter.screenshot({ path: info.outputPath('flutter-closed-390x844.png') });
+    const [reopened] = await Promise.all([
+      lifecycleResponse('reopen'),
+      panel.getByRole('button', { name: 'Reopen thread', exact: true }).click(),
+    ]);
+    expect(reopened.status()).toBe(200);
+    lifecycleResponses.push(await reopened.json());
+    await expect(panel.getByText('Thread open.', { exact: true })).toBeVisible();
     await expect.poll(() => flutter.locator('body').ariaSnapshot()).not.toContain('Thread closed.');
+    const reopenedRow = (await chatLab.harness.pool.query(
+      'SELECT lifecycle_revision, closed_at, closed_by_user_id, locked FROM chat_conversations WHERE id=$1', [thread.id],
+    )).rows[0];
+    expect(reopenedRow).toEqual({ lifecycle_revision: '3', closed_at: null, closed_by_user_id: null, locked: false });
+    lifecycleSql.push({ checkpoint: 'reopened', ...reopenedRow });
+    for (const client of ['react', 'flutter']) {
+      await expect.poll(() => lifecycleEvents.filter(receipt => receipt.client === client &&
+        receipt.event.payload.threadId === thread.id).map(receipt => receipt.event.payload.threadLifecycle.revision)).toEqual([2, 3]);
+    }
     await panel.getByRole('button', { name: 'Join', exact: true }).click();
     await panel.getByRole('button', { name: 'Leave', exact: true }).click();
     await expect(panel.getByRole('button', { name: 'Join', exact: true })).toBeEnabled();
@@ -109,9 +156,12 @@ test('Flutter recovers an open thread during React Bob updates without manual re
     expect(status.diagnostics).not.toContain('snapshot_hydration_failed');
     expect(errors).toEqual([]);
     await composer.getByRole('textbox').clear();
+    expect(lifecycleRequests.map(request => request.body.intent)).toEqual(['close', 'reopen']);
+    await page.screenshot({ path: info.outputPath('react-recovered-1440x1000.png') });
   } finally {
     try {
       const evidence = { name, thread, errors, navigations, provenance, instance, screenshots,
+        lifecycleRequests, lifecycleResponses, lifecycleEvents, lifecycleSql,
         viewport: flutter.viewportSize(),
         semantics: await flutter.locator('body').ariaSnapshot().catch(error => error.message),
         exported: await call(flutter, 'export').catch(error => ({ error: error.message })) };

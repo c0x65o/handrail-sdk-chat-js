@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { isolatedEnvironment, requireComplete } from '../scripts/accept-flutter-cross-client-recovery.mjs';
 
@@ -42,9 +43,13 @@ test('runner discards shared origins, database credentials, assets and inherited
   assert.equal(input.DATABASE_URL, 'shared');
 });
 
-test('missing prerequisite writes incomplete evidence and exits nonzero before any runtime starts', () => {
+test('missing prerequisite writes incomplete evidence and exits nonzero before any runtime starts', (t) => {
   const example = fileURLToPath(new URL('../', import.meta.url));
-  const scratch = mkdtempSync(path.resolve(example, '../../build/cross-client-harness-test-'));
+  const scratch = mkdtempSync(path.join(tmpdir(), 'cross-client-harness-test-'));
+  t.after(() => {
+    rmSync(scratch, { recursive: true, force: true });
+    assert.equal(existsSync(scratch), false, 'Owned temporary directory must be removed');
+  });
   const output = path.join(scratch, 'missing-postgres');
   const result = spawnSync(process.execPath, ['scripts/accept-flutter-cross-client-recovery.mjs', output], {
     cwd: example, encoding: 'utf8', env: { ...process.env, PG_BINDIR: path.join(scratch, 'absent') },

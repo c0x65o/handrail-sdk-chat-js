@@ -39,7 +39,7 @@ test('shared Flutter opens Launch planning as Alice and switches to Bob', async 
     await expect(page.getByRole('group', { name: 'Message 1 from alice Which launch date?', exact: true })).toBeVisible();
     expect(state.seedProfile).toBe('reply-styles');
     expect(state.instanceId).toBe(instance.instanceId);
-    expect(state.availableActors).toEqual({ alice: 'Alice', bob: 'Bob' });
+    expect(state.availableActors).toEqual({ alice: 'Alice', bob: 'Bob', carol: 'Carol', dave: 'Dave' });
     expect(state.error).toBeNull();
     expect(state.clientDiagnostic).toBeNull();
     expect(state.provenance.sourceDigest).toMatch(/^[a-f0-9]{64}$/);
@@ -52,8 +52,10 @@ test('shared Flutter opens Launch planning as Alice and switches to Bob', async 
     await page.goto(`${chatLabOrigin}/__flutter-chat-lab/`);
     const alice = await checkActor('alice');
     await page.getByRole('button', { name: 'Alice', exact: true }).click();
-    await expect(page.getByRole('menuitem', { name: 'Bob', exact: true })).toBeVisible();
-    await expect(page.getByRole('menuitem')).toHaveCount(2);
+    await expect(page.getByRole('menuitem')).toHaveCount(4);
+    for (const actor of ['Alice', 'Bob', 'Carol', 'Dave']) {
+      await expect(page.getByRole('menuitem', { name: actor, exact: true })).toBeVisible();
+    }
     await page.screenshot({ path: info.outputPath('actor-options.png') });
     await page.getByRole('menuitem', { name: 'Bob', exact: true }).click();
     await page.waitForURL(/actor=bob/);

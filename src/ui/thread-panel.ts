@@ -503,7 +503,16 @@ function ThreadLifecycleControls({ lifecycle, closed, locked, archived, canManag
   const updating = busy || lifecycle.status === "updating";
   const denied = lifecycle.error === "access_revoked";
   const ready = !archived && !denied && lifecycle.actionsAvailable;
-  const visible = !archived && !denied && (ready || lifecycle.status === "updating");
+  const reauthorizing = lifecycle.status === "idle" || lifecycle.status === "loading";
+  const controlsThread = useRef<string | undefined>(undefined);
+  if (ready) controlsThread.current = lifecycle.threadId;
+  else if (!reauthorizing && lifecycle.status !== "updating") controlsThread.current = undefined;
+  // A send can refresh membership between pointer-down and pointer-up. Keep
+  // the already displayed nodes while authority reloads, or the browser drops
+  // the click when its original target is removed. They remain disabled until
+  // reauthorization finishes; never retain or replay an action across that gap.
+  const visible = !archived && !denied && (ready || lifecycle.status === "updating" ||
+    (reauthorizing && controlsThread.current === lifecycle.threadId));
   const retryIntent = lifecycle.pendingInput?.intent;
   const retryAllowed = retryIntent === undefined ||
     (retryIntent === "reopen" ? canSend && !locked : canManage);
