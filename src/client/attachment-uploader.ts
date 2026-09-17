@@ -120,6 +120,8 @@ export interface ChatAttachmentUploadManager {
 }
 
 interface ActiveUpload {
+  readonly generation: number;
+  readonly identity: ReturnType<NormalizedChatCache["getState"]>["identity"];
   readonly uploadId: string;
   readonly conversationId: ConversationId;
   readonly metadata: AttachmentMetadata;
@@ -330,6 +332,18 @@ export function createChatAttachmentUploadManager(
     throw new TypeError("Invalid attachment cleanup timeout");
   }
   const active = new Map<string, ActiveUpload>();
+  let generation = 0;
+  const closeActive = (): void => {
+    for (const record of active.values()) {
+      if (record.identity === config.cache.getState().identity) setState(record, "cancelled");
+    }
+    generation += 1;
+    for (const record of active.values()) record.controller.abort();
+    dispatcher.closeActive();
+  };
+  // Account/session replacement must not write old results or fetch new-session
+  // credentials for cleanup of an old-session upload.
+  config.cache.subscribe((state) => state.identity, closeActive);
   const generateUploadId = config.options?.generateUploadId ?? (() => config.generateIdentity("upload"));
   const generateIdempotencyKey = config.options?.generateIdempotencyKey ??
     ((phase: "prepare" | "finalize" | "abort") => config.generateIdentity(`attachment-${phase}`));
@@ -361,11 +375,14 @@ export function createChatAttachmentUploadManager(
       }),
       ...(attachment === undefined ? {} : { attachment }),
     });
-    config.cache.setAttachmentUploadState(state, messageMetadata);
+    if (record.generation === generation) {
+      config.cache.setAttachmentUploadState(state, messageMetadata);
+    }
     return state;
   };
 
   const abortPrepared = (record: ActiveUpload): Promise<boolean> => {
+    if (record.generation !== generation) return Promise.resolve(false);
     if (record.pending === undefined) return Promise.resolve(true);
     if (record.abortPromise !== undefined) return record.abortPromise;
     const pending = record.pending;
@@ -528,6 +545,8 @@ export function createChatAttachmentUploadManager(
         throw new TypeError("Invalid or duplicate attachment upload id");
       }
       const record: ActiveUpload = {
+        generation,
+        identity: config.cache.getState().identity,
         uploadId,
         conversationId: input.conversationId,
         metadata,
@@ -560,9 +579,6 @@ export function createChatAttachmentUploadManager(
         },
       }) as ChatAttachmentUploadHandle;
     },
-    closeActive(): void {
-      for (const record of [...active.values()]) record.controller.abort();
-      dispatcher.closeActive();
-    },
+    closeActive,
   });
 }

@@ -344,6 +344,8 @@ export interface ChatComposerState extends NoPrivateChatRendererFields {
     preview?: string;
   }>;
   readonly attachments: readonly ChatComposerAttachmentState[];
+  /** Attachment admission is independent of ordinary text composition. */
+  readonly attachmentDisabledReason?: "disabled" | "unavailable";
   readonly mentionParticipants: readonly ChatComposerMentionParticipant[];
   readonly mentions: readonly ChatComposerMentionState[];
   readonly disabled: boolean;

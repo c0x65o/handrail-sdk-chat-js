@@ -294,6 +294,15 @@ test("selects and pastes attachments through canonical upload, send, reload, and
     /\/__chat-lab\/storage\/download\?.*\btoken=/u,
   );
 
+  const downloadPromise = page.waitForEvent("download");
+  await downloadLink.click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe(textFile.name);
+  const stream = await download.createReadStream();
+  const chunks = [];
+  for await (const chunk of stream) chunks.push(chunk);
+  expect(Buffer.concat(chunks)).toEqual(textFile.buffer);
+
   await reloadedMessage.evaluate((element) => {
     element.scrollIntoView({ block: "start", inline: "nearest" });
     return new Promise((resolve) => requestAnimationFrame(() => resolve()));
@@ -324,7 +333,8 @@ test("selects and pastes attachments through canonical upload, send, reload, and
   expect(geometry.imagePreview.rect.width).toBeLessThanOrEqual(513);
   expect(geometry.fileName.rect.height).toBeGreaterThan(geometry.fileName.lineHeight * 1.5);
 
-  await expect(page.locator(".chat-lab__stage")).toHaveScreenshot(
+  // Functional byte verification above always runs before visual comparison.
+  await expect.soft(page.locator(".chat-lab__stage")).toHaveScreenshot(
     ATTACHMENT_BASELINE,
     {
       animations: "disabled",
@@ -333,12 +343,5 @@ test("selects and pastes attachments through canonical upload, send, reload, and
     },
   );
 
-  const downloadPromise = page.waitForEvent("download");
-  await downloadLink.click();
-  const download = await downloadPromise;
-  expect(download.suggestedFilename()).toBe(textFile.name);
-  const stream = await download.createReadStream();
-  const chunks = [];
-  for await (const chunk of stream) chunks.push(chunk);
-  expect(Buffer.concat(chunks)).toEqual(textFile.buffer);
+
 });

@@ -81,13 +81,17 @@ const createLifecycleFetch = ({ finalOutcome = "finalized", onRequest, upload } 
   };
 };
 
-const createClient = ({ fetch, transport, cache, diagnostics, resource, identities } = {}) => {
+const createClient = async ({ fetch, transport, cache, diagnostics, resource, identities, serverFeatures = () => ({ attachments: true }) } = {}) => {
   let identityIndex = 0;
   const generated = identities ?? ["upload-1", "prepare-1", "finalize-1", "abort-1"];
-  return createChatClient({
+  const client = createChatClient({
     endpoint: "https://chat.invalid/api",
     getAccessToken: async () => "chat-access-token-secret",
-    fetch,
+    fetch: (url, init) => url.endsWith("/_meta") ? Promise.resolve(response({
+      packageVersion: "1.0.42", protocolVersion: 4, schemaVersion: 1,
+      enabledFeatures: serverFeatures(),
+      supportedProtocolRange: { minimumVersion: 4, maximumVersion: 4 },
+    })) : fetch(url, init),
     cache,
     commands: {
       retry: { maxAttempts: 2, backoffMs: () => 0, wait: async () => {} },
@@ -101,6 +105,8 @@ const createClient = ({ fetch, transport, cache, diagnostics, resource, identiti
       cleanupTimeoutMs: 100,
     },
   });
+  await client.start();
+  return client;
 };
 
 test("prepare-transfer-progress-finalize exposes only canonical safe state", async () => {
@@ -113,7 +119,7 @@ test("prepare-transfer-progress-finalize exposes only canonical safe state", asy
     (value) => progress.push(value),
   );
   let receivedDescriptor;
-  const client = createClient({
+  const client = await createClient({
     cache,
     diagnostics,
     fetch: createLifecycleFetch({ onRequest: (request) => requests.push(request) }),
@@ -167,7 +173,7 @@ test("default transport consumes canonical opaque upload instructions", async ()
       transfers.push({ url: String(url), init });
       return { ok: true, status: 204 };
     };
-    client = createClient({ fetch: createLifecycleFetch({ upload }) });
+    client = await createClient({ fetch: createLifecycleFetch({ upload }) });
     const result = await client.uploadAttachment({
       conversationId: "conversation-1",
       metadata,
@@ -191,7 +197,7 @@ test("cancel during transfer stops progress and performs a stable best-effort ab
   let releaseTransfer;
   let reportProgress;
   const transferStarted = new Promise((resolve) => { releaseTransfer = resolve; });
-  const client = createClient({
+  const client = await createClient({
     fetch: createLifecycleFetch({ onRequest: (request) => requests.push(request) }),
     transport: async (request) => {
       reportProgress = request.onProgress;
@@ -230,7 +236,7 @@ test("safe route and explicitly safe transfer retries retain stable identities",
   };
   const descriptors = [];
   let transferAttempts = 0;
-  const client = createClient({
+  const client = await createClient({
     fetch,
     transport: async ({ upload }) => {
       descriptors.push(upload.descriptor);
@@ -259,7 +265,7 @@ test("safe route and explicitly safe transfer retries retain stable identities",
 
 test("checksum rejection is canonical terminal state and never aborts", async () => {
   const requests = [];
-  const client = createClient({
+  const client = await createClient({
     fetch: createLifecycleFetch({
       finalOutcome: "rejected",
       onRequest: (request) => requests.push(request),
@@ -276,7 +282,7 @@ test("checksum rejection is canonical terminal state and never aborts", async ()
 
 test("transport failures cannot expose descriptor, token, or provider internals", async () => {
   const diagnostics = [];
-  const client = createClient({
+  const client = await createClient({
     diagnostics,
     fetch: createLifecycleFetch(),
     transport: async () => {
@@ -298,12 +304,12 @@ test("transport failures cannot expose descriptor, token, or provider internals"
   ]) assert.equal(serialized.includes(forbidden), false, forbidden);
 });
 
-test("client close cancels transfer, aborts prepared state, and revokes temporary resources", async () => {
+test("client close cancels transfer without fetching credentials for stale-session cleanup", async () => {
   const requests = [];
   let started;
   const transferStarted = new Promise((resolve) => { started = resolve; });
   let revocations = 0;
-  const client = createClient({
+  const client = await createClient({
     fetch: createLifecycleFetch({ onRequest: (request) => requests.push(request) }),
     transport: async () => {
       started();
@@ -322,9 +328,9 @@ test("client close cancels transfer, aborts prepared state, and revokes temporar
   client.close();
 
   assert.equal(result.status, "cancelled");
-  assert.equal(handle.state.status, "abandoned");
+  assert.equal(handle.state.status, "cancelled");
   assert.equal(revocations, 1);
-  assert.equal(requests.some(({ body }) => body.operation === "abort_attachment"), true);
+  assert.equal(requests.some(({ body }) => body.operation === "abort_attachment"), false);
 });
 
 test("send and retry reject every non-finalized attachment state before transport", async () => {
@@ -334,8 +340,10 @@ test("send and retry reject every non-finalized attachment state before transpor
     sessionId: "session-1",
   });
   let sendCalls = 0;
-  const client = createClient({
+  let enabled = true;
+  const client = await createClient({
     cache,
+    serverFeatures: () => ({ attachments: enabled }),
     fetch: async (url, init) => {
       const body = JSON.parse(init.body);
       if (body.operation === "send") {
@@ -388,4 +396,68 @@ test("send and retry reject every non-finalized attachment state before transpor
     assert.equal((await client.retryMessage(failedClientMessageId)).status, "validation", status);
   }
   assert.equal(sendCalls, initialSendCalls);
+  cache.setAttachmentUploadState(uploadState("finalized", lifecycle.finalized), messageMetadata);
+  client.close();
+  enabled = false;
+  await client.start();
+  assert.equal((await client.sendMessage({ conversationId: "conversation-1", content })).status, "validation");
+  assert.equal((await client.retryMessage(failedClientMessageId)).status, "validation");
+  assert.equal(sendCalls, initialSendCalls);
+  client.close();
+});
+
+test("attachment admission follows negotiated enabled, disabled and unavailable lifecycle without requests", async () => {
+  let enabledFeatures = { attachments: false };
+  const requests = [];
+  const client = createChatClient({
+    endpoint: "https://chat.invalid/api",
+    getAccessToken: () => "token",
+    fetch: async (url) => {
+      requests.push(url);
+      assert.ok(url.endsWith("/_meta"));
+      return response({ packageVersion: "1.0.42", protocolVersion: 4, schemaVersion: 1,
+        enabledFeatures, supportedProtocolRange: { minimumVersion: 4, maximumVersion: 4 } });
+    },
+  });
+  const input = { conversationId: "conversation-1", metadata, source };
+  assert.throws(() => client.uploadAttachment(input), /temporarily unavailable/);
+  assert.deepEqual(requests, []);
+  await client.start();
+  assert.throws(() => client.uploadAttachment(input), /disabled/);
+  client.close();
+  enabledFeatures = { attachments: true };
+  await client.start();
+  const controller = new AbortController();
+  controller.abort();
+  assert.equal((await client.uploadAttachment({ ...input, signal: controller.signal }).completion).status, "cancelled");
+  client.close();
+  assert.throws(() => client.uploadAttachment(input), /temporarily unavailable/);
+  enabledFeatures = {};
+  await client.start();
+  assert.throws(() => client.uploadAttachment(input), /temporarily unavailable/);
+  assert.equal(requests.length, 3);
+  client.close();
+});
+
+test("session replacement cancels pending transfer and suppresses late results and cleanup credentials", async () => {
+  const cache = createNormalizedChatCache({ tenantId: "tenant-1", userId: "user-1", sessionId: "old" });
+  let transferred;
+  let reportProgress;
+  let began;
+  const started = new Promise(resolve => { began = resolve; });
+  const requests = [];
+  const client = await createClient({ cache,
+    fetch: createLifecycleFetch({ onRequest: request => requests.push(request) }),
+    transport: request => { reportProgress = request.onProgress; began(); return new Promise(resolve => { transferred = resolve; }); },
+  });
+  const handle = client.uploadAttachment({ conversationId: "conversation-1", metadata, source });
+  await started;
+  cache.setIdentity({ tenantId: "tenant-2", userId: "user-2", sessionId: "new" });
+  const fresh = JSON.stringify(cache.getState());
+  reportProgress(5);
+  transferred({ status: "uploaded" });
+  assert.equal((await handle.completion).status, "cancelled");
+  assert.equal(JSON.stringify(cache.getState()), fresh);
+  assert.deepEqual(requests.map(({ body }) => body.operation), ["prepare_attachment"]);
+  client.close();
 });

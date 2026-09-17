@@ -20,7 +20,8 @@ const exampleRoot = fileURLToPath(new URL("..", import.meta.url));
 const loopbackStoragePrefix = "/__chat-lab/storage";
 const loopbackStorageMaxObjectBytes = MAX_ATTACHMENT_SIZE_BYTES;
 const loopbackStorageMaxTotalBytes = 256 * 1024 * 1024;
-const uploadCapabilityTtlMs = 15 * 60_000;
+// Leave adapter/SQL scheduling headroom below the public 15 minute maximum.
+const uploadCapabilityTtlMs = 14 * 60_000;
 const downloadCapabilityTtlMs = 5 * 60_000;
 
 const loopbackHostname = (hostname) =>
@@ -98,12 +99,23 @@ export const createChatLabLoopbackStorage = ({ now = Date.now } = {}) => {
   const pruneExpired = () => {
     const current = instant();
     for (const [token, entry] of uploads) {
-      if (entry.expiresAtMs <= current) uploads.delete(token);
+      if (entry.expiresAtMs <= current) {
+        uploads.delete(token);
+        const record = objects.get(entry.objectKey);
+        if (record?.uploadToken === token) {
+          record.uploadToken = undefined;
+          // Failed preparations may never acquire a SQL row. Reclaim their
+          // reservations here; materialized bytes belong to SQL lifecycle cleanup.
+          if (record.bytes === undefined) objects.delete(entry.objectKey);
+        }
+      }
     }
     for (const [token, entry] of downloads) {
       if (entry.expiresAtMs <= current) removeDownload(token);
     }
   };
+  const expiryTimer = setInterval(pruneExpired, 30_000);
+  expiryTimer.unref();
   const matches = (entry, record, query) =>
     entry !== undefined &&
     record !== undefined &&
@@ -116,12 +128,18 @@ export const createChatLabLoopbackStorage = ({ now = Date.now } = {}) => {
   const adapter = {
     async createUploadUrl(input) {
       requireOrigin();
+      pruneExpired();
       if (
         !Number.isSafeInteger(input.contentLengthBytes) ||
         input.contentLengthBytes < 0 ||
         input.contentLengthBytes > loopbackStorageMaxObjectBytes
       ) throw new Error("Chat Lab attachment exceeds the in-memory storage bound");
       const objectKey = storageObjectKey(input.actor.tenantId, input.attachmentId);
+      // Complete fallible descriptor construction before reserving capacity.
+      const token = capabilityToken();
+      const expiresAtMs = instant() + uploadCapabilityTtlMs;
+      const expiresAt = new Date(expiresAtMs).toISOString();
+      const url = capabilityUrl("upload", { tenantId: input.actor.tenantId, objectKey }, token);
       let record = objects.get(objectKey);
       if (record === undefined) {
         if (reservedBytes() + input.contentLengthBytes > loopbackStorageMaxTotalBytes) {
@@ -149,8 +167,6 @@ export const createChatLabLoopbackStorage = ({ now = Date.now } = {}) => {
         throw new Error("Chat Lab attachment metadata changed after preparation");
       }
       if (record.uploadToken !== undefined) uploads.delete(record.uploadToken);
-      const token = capabilityToken();
-      const expiresAtMs = instant() + uploadCapabilityTtlMs;
       record.uploadToken = token;
       uploads.set(token, {
         tenantId: record.tenantId,
@@ -161,8 +177,8 @@ export const createChatLabLoopbackStorage = ({ now = Date.now } = {}) => {
       return {
         objectKey,
         method: "PUT",
-        url: capabilityUrl("upload", record, token),
-        expiresAt: new Date(expiresAtMs).toISOString(),
+        url,
+        expiresAt,
       };
     },
     async verifyObject(input) {
@@ -240,6 +256,7 @@ export const createChatLabLoopbackStorage = ({ now = Date.now } = {}) => {
       origin = parsed.origin;
     },
     snapshot() {
+      pruneExpired();
       return Object.freeze({
         objectCount: objects.size,
         byteCount: [...objects.values()].reduce(
@@ -321,6 +338,12 @@ export const createChatLabLoopbackStorage = ({ now = Date.now } = {}) => {
           storageError(response, 400, "Upload size does not match preparation");
           return;
         }
+        if (closed || uploads.get(query.token) !== entry ||
+            objects.get(query.key) !== record || entry.expiresAtMs <= instant()) {
+          pruneExpired();
+          storageError(response, 410, "Storage capability expired");
+          return;
+        }
         record.bytes = Buffer.concat(chunks, received);
         record.uploadToken = undefined;
         uploads.delete(query.token);
@@ -354,6 +377,7 @@ export const createChatLabLoopbackStorage = ({ now = Date.now } = {}) => {
     async teardown() {
       if (closed) return;
       closed = true;
+      clearInterval(expiryTimer);
       origin = undefined;
       uploads.clear();
       downloads.clear();

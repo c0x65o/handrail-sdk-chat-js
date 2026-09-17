@@ -128,7 +128,7 @@ const draftContent = (
 
 const createFixture = ({
   initialDraft = draftContent(),
-  state = Object.freeze({ state: "ready" }),
+  state = Object.freeze({ state: "ready", enabledFeatures: { attachments: true } }),
   conversation = safeConversation,
   participantUsers,
 } = {}) => {
@@ -220,6 +220,7 @@ const createFixture = ({
     if (!sourceStates.has(key)) sourceStates.set(key, Object.freeze({ ...target, status: "idle" }));
     return sourceStates.get(key);
   };
+  const lifecycleListeners = new Set();
   const client = {
     messageContext: {
       getState: sourceSnapshot,
@@ -241,12 +242,13 @@ const createFixture = ({
       },
     },
     endpoint: "/chat",
-    state,
+    get state() { return state; },
     cache,
     start: async () => state,
     close() {},
-    subscribeLifecycle() {
-      return () => {};
+    subscribeLifecycle(listener) {
+      lifecycleListeners.add(listener);
+      return () => lifecycleListeners.delete(listener);
     },
     selectDirectoryUser: (id) => directory.get(id),
     async hydrateDirectoryUsers(ids) {
@@ -414,6 +416,7 @@ const createFixture = ({
     queueSend(result) { sendResults.push(result); },
     queueRetry(result) { retryResults.push(result); },
     setDraft(next) { publishDraft(next); },
+    setLifecycle(next) { state = next; for (const listener of lifecycleListeners) listener(next); },
   };
 };
 
@@ -2342,7 +2345,7 @@ test("passes renderer-safe normalized state to Composer overrides and covers dis
   const notReady = createFixture({ state: Object.freeze({ state: "idle" }) });
   const providerView = await renderComposer(notReady);
   assert.equal(providerView.textarea().disabled, true);
-  assert.match(providerView.container.querySelector('[role="status"]').textContent, /chat unavailable/i);
+  assert.match(providerView.container.textContent, /chat unavailable/i);
   await providerView.unmount();
 
   const safety = await renderComposer(createFixture({ initialDraft: null }));
@@ -2356,4 +2359,92 @@ test("passes renderer-safe normalized state to Composer overrides and covers dis
   assert.equal(safety.container.querySelector("img"), null);
   assert.equal(fixture.calls.some(({ name }) => name === "dangerouslySetInnerHTML"), false);
   await safety.unmount();
+});
+
+test("attachment feature transitions gate picker, paste and drop while preserving text and ignoring late uploads", async () => {
+  const fixture = createFixture({ initialDraft: null });
+  const view = await renderComposer(fixture);
+  const file = new window.File(["proof"], "proof.txt", { type: "text/plain" });
+  const choose = async () => act(async () => {
+    const input = view.container.querySelector('input[type="file"]');
+    Object.defineProperty(input, "files", { configurable: true, value: [file] });
+    input.dispatchEvent(new window.Event("change", { bubbles: true }));
+    await flush();
+  });
+  const drop = async () => act(async () => {
+    const event = new window.Event("drop", { bubbles: true, cancelable: true });
+    Object.defineProperty(event, "dataTransfer", { value: { files: [file], types: ["Files"] } });
+    view.container.querySelector("form").dispatchEvent(event);
+    assert.equal(event.defaultPrevented, true);
+    await flush();
+  });
+  await inputText(view.textarea(), "Keep this text");
+  await choose();
+  assert.equal(fixture.uploads.size, 1);
+  for (const features of [{ attachments: false }, {}, { attachments: true }]) {
+    await act(async () => {
+      fixture.setLifecycle({ state: "ready", enabledFeatures: features });
+      await flush();
+    });
+    const input = view.container.querySelector('input[type="file"]');
+    if (features.attachments === true) {
+      assert.equal(input.disabled, false);
+      await drop();
+      assert.equal(fixture.uploads.size, 2);
+      break;
+    }
+    assert.equal(input.disabled, true);
+    await act(async () => { fixture.uploads.get("upload-1").finalize("late-disabled"); await flush(); });
+    const reason = view.container.querySelector(`#${input.getAttribute("aria-describedby")}`);
+    assert.match(reason.textContent, features.attachments === false ? /disabled.*still send text/ : /temporarily unavailable/);
+    assert.equal(reason.getAttribute("role"), "status");
+    assert.equal(view.textarea().disabled, false);
+    assert.equal(view.textarea().value, "Keep this text");
+    await choose();
+    await pasteItems(view.editor(), [{ kind: "file", type: file.type, getAsFile: () => file }]);
+    await drop();
+    assert.equal(fixture.uploads.size, 1);
+    assert.equal(view.container.querySelector('[aria-label="Message attachments"]'), null);
+    assert.equal(view.container.querySelector('button[type="submit"]').disabled, false);
+  }
+  await view.unmount();
+  await act(async () => { fixture.uploads.get("upload-2").finalize("late"); await flush(); });
+  assert.equal(fixture.calls.filter(({ name }) => name === "sendMessage").length, 0);
+});
+
+test("feature loss preserves finalized draft files for recovery and permits text after removal", async () => {
+  const fixture = createFixture({ initialDraft: draftContent("Keep caption", "plain", [{ attachmentId: "saved-file" }]) });
+  const view = await renderComposer(fixture);
+  for (const enabledFeatures of [{}, { attachments: false }]) {
+    await act(async () => { fixture.setLifecycle({ state: "ready", enabledFeatures }); await flush(); });
+    assert.ok(view.container.querySelector('[aria-label="Message attachments"]'));
+    assert.match(view.container.textContent, /Remove attached files to send text/);
+    assert.equal(view.container.querySelector('button[type="submit"]').disabled, true);
+    assert.equal(view.textarea().value, "Keep caption");
+    assert.deepEqual(fixture.getDraft().content.attachments, [{ attachmentId: "saved-file" }]);
+  }
+  await act(async () => {
+    view.container.querySelector('[aria-label="Remove attachment Attachment"]').click();
+    await flush();
+    view.container.querySelector('button[type="submit"]').click();
+    await flush();
+  });
+  const send = fixture.calls.find(({ name }) => name === "sendMessage");
+  assert.equal(send.args[0].content.text, "Keep caption");
+  assert.equal(send.args[0].content.attachments, undefined);
+  await view.unmount();
+});
+
+test("attachment-bearing retry waits for feature recovery while text retry remains usable", async () => {
+  for (const attachments of [[{ attachmentId: "saved-file" }], []]) {
+    const fixture = createFixture({ initialDraft: draftContent("Retry caption", "plain", attachments) });
+    const controlsRef = React.createRef();
+    const view = await renderComposer(fixture, { controlsRef });
+    fixture.queueSend(Promise.resolve({ status: "transport" }));
+    await act(async () => { await controlsRef.current.send(); await flush(); });
+    await act(async () => { fixture.setLifecycle({ state: "ready", enabledFeatures: { attachments: false } }); await flush(); });
+    await act(async () => { await controlsRef.current.retrySend(); await flush(); });
+    assert.equal(fixture.calls.filter(({ name }) => name === "retryMessage").length, attachments.length === 0 ? 1 : 0);
+    await view.unmount();
+  }
 });

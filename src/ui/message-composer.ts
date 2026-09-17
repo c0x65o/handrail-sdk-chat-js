@@ -13,6 +13,7 @@ import {
   useState,
   type ChangeEvent,
   type ClipboardEvent,
+  type DragEvent,
   type FormEvent,
   type KeyboardEvent,
   type PointerEvent as ReactPointerEvent,
@@ -528,6 +529,12 @@ function ConnectedMessageComposer(
   });
   const actions = useChatActions(props.conversationId);
   const context = useChat();
+  const attachmentDisabledReason = context?.state.state !== "ready"
+    ? "unavailable" as const
+    : context.state.enabledFeatures.attachments === true ? undefined
+      : context.state.enabledFeatures.attachments === false ? "disabled" as const : "unavailable" as const;
+  const attachmentAvailabilityRef = useRef(attachmentDisabledReason);
+  attachmentAvailabilityRef.current = attachmentDisabledReason;
   const sourceRuntime = context?.client.messageContext;
   const focusEditorRef = useRef<(() => void) | undefined>(undefined);
   const mountedRef = useRef(true);
@@ -865,7 +872,7 @@ function ConnectedMessageComposer(
   }, [synchronizeDraft]);
 
   const addAttachments = useCallback((files: readonly File[]): void => {
-    if (disabled) return;
+    if (disabled || attachmentAvailabilityRef.current !== undefined) return;
     setLastAnnouncement(undefined);
     for (const file of files) {
       const contentType = file.type as ComposerUploadContentType;
@@ -903,6 +910,8 @@ function ConnectedMessageComposer(
       setAttachments(updated);
       cancelUploadRef.current.set(handle.uploadId, () => handle.cancel());
       void handle.completion.then((result) => {
+        if (!mountedRef.current || !cancelUploadRef.current.has(handle.uploadId) ||
+            attachmentAvailabilityRef.current !== undefined) return;
         if (result.status === "finalized") {
           settleFinalizedAttachment(handle.uploadId, result.attachment.attachmentId);
           return;
@@ -918,12 +927,32 @@ function ConnectedMessageComposer(
             : "The attachment could not be uploaded.",
         );
       }).catch(() => {
+        if (!mountedRef.current || !cancelUploadRef.current.has(handle.uploadId) ||
+            attachmentAvailabilityRef.current !== undefined) return;
         cancelUploadRef.current.delete(handle.uploadId);
         updateUploadState(handle.uploadId, { status: "failed" });
         setLocalDraftError("The attachment could not be uploaded.");
       });
     }
   }, [actions, disabled, settleFinalizedAttachment, updateUploadState]);
+
+  useEffect(() => {
+    if (attachmentDisabledReason === undefined) return;
+    for (const cancel of cancelUploadRef.current.values()) cancel();
+    cancelUploadRef.current.clear();
+    if (attachmentsRef.current.length === 0) return;
+    const retained = Object.freeze(attachmentsRef.current.filter(attachment => attachment.attachmentId !== undefined));
+    if (retained.length === attachmentsRef.current.length) return;
+    attachmentsRef.current = retained;
+    setAttachments(retained);
+    setLocalDraftError(undefined);
+    setLastAnnouncement(undefined);
+    if (attachmentDisabledReason === "disabled") synchronizeDraft(editorRef.current, retained);
+  }, [attachmentDisabledReason, synchronizeDraft]);
+  useEffect(() => () => {
+    for (const cancel of cancelUploadRef.current.values()) cancel();
+    cancelUploadRef.current.clear();
+  }, []);
 
   const cancelAttachment = useCallback((uploadId: string): void => {
     cancelUploadRef.current.get(uploadId)?.();
@@ -972,6 +1001,7 @@ function ConnectedMessageComposer(
       ACTIVE_UPLOAD_STATUSES.has(attachment.status));
     if (
       hasUnsettledUpload ||
+      (attachmentAvailabilityRef.current !== undefined && attachmentIds.length > 0) ||
       (currentEditor.text.trim().length === 0 && attachmentIds.length === 0)
     ) return;
     sendingRef.current = true;
@@ -1036,6 +1066,7 @@ function ConnectedMessageComposer(
     const submittedVersion = draftEditRef.current;
     const current = editorRef.current;
     const payload = failedPayloadRef.current;
+    if (attachmentAvailabilityRef.current !== undefined && (payload?.attachmentIds.length ?? 0) > 0) return;
     const matchesDraft = payload !== undefined && samePayload({
       ...(current.replyTo === undefined ? {} : { replyTo: current.replyTo }),
       content: { ...current, mentions: current.mentions.map(({ mention }) => mention),
@@ -1100,7 +1131,8 @@ function ConnectedMessageComposer(
     ACTIVE_UPLOAD_STATUSES.has(attachment.status));
   const hasContent = editor.text.trim().length > 0 ||
     attachments.some((attachment) => attachment.attachmentId !== undefined);
-  const canSubmit = !disabled && !isSending && !hasUnsettledUpload && hasContent;
+  const canSubmit = !disabled && !isSending && !hasUnsettledUpload && hasContent &&
+    !(attachmentDisabledReason !== undefined && attachments.some(attachment => attachment.attachmentId !== undefined));
   const status = useMemo<ChatComposerState["status"]>(() => {
     if (isSending) return Object.freeze({ kind: "sending", message: "Sending message…" });
     if (hasUnsettledUpload) {
@@ -1125,6 +1157,7 @@ function ConnectedMessageComposer(
     text: editor.text,
     format: editor.format,
     attachments: attachmentViews,
+    ...(attachmentDisabledReason === undefined ? {} : { attachmentDisabledReason }),
     mentionParticipants: Object.freeze(mentionParticipants.map((participant) =>
       Object.freeze({
         key: participant.key,
@@ -1148,6 +1181,7 @@ function ConnectedMessageComposer(
       : { failedClientMessageId }),
     status,
   }), [
+    attachmentDisabledReason,
     attachmentViews,
     canSubmit,
     disabled,
@@ -1603,14 +1637,25 @@ export function DefaultMessageComposerRenderer({
     event.currentTarget.value = "";
   };
   const handlePaste = (event: ClipboardEvent<HTMLElement>): void => {
-    if (state.disabled || state.readOnly) return;
+    if (state.disabled || state.readOnly || state.attachmentDisabledReason !== undefined) return;
     const files = Array.from(event.clipboardData.items)
       .filter((item) => item.kind === "file")
       .map((item) => item.getAsFile())
       .filter((file): file is File => file !== null);
     if (files.length > 0) controls.addAttachments(files);
   };
+  const handleDrop = (event: DragEvent<HTMLFormElement>): void => {
+    if (event.dataTransfer.files.length === 0) return;
+    event.preventDefault();
+    if (state.disabled || state.readOnly || state.attachmentDisabledReason !== undefined) return;
+    controls.addAttachments(Array.from(event.dataTransfer.files));
+  };
   const error = state.sendError ?? state.draftError;
+  const attachmentReason = state.attachmentDisabledReason === "disabled"
+    ? "Attachments are disabled for this workspace. You can still send text."
+    : state.attachmentDisabledReason === "unavailable"
+      ? "Attachments are temporarily unavailable."
+      : undefined;
   const reason = disabledReasonLabel(state.disabledReason);
   const statusMessage = state.status.kind === "draft" ? "" : state.status.message;
   const hasStatusFeedback = statusMessage.length > 0 || reason !== undefined;
@@ -1890,6 +1935,10 @@ export function DefaultMessageComposerRenderer({
     "form",
     {
       ...hostProps,
+      onDrop: handleDrop,
+      onDragOver: (event: DragEvent<HTMLFormElement>) => {
+        if (Array.from(event.dataTransfer.types).includes("Files")) event.preventDefault();
+      },
       "data-read-only": state.readOnly ? true : undefined,
       "aria-describedby": [
         hasStatusFeedback ? statusId : undefined,
@@ -2097,8 +2146,8 @@ export function DefaultMessageComposerRenderer({
       },
         createElement("label", {
           className: "handrail-chat__composer-action handrail-chat__composer-attach",
-          "aria-disabled": state.disabled,
-          title: "Attach files",
+          "aria-disabled": state.disabled || attachmentReason !== undefined,
+          title: attachmentReason ?? "Attach files",
         },
         composerActionIcon("attachment"),
         createElement("span", { className: "handrail-chat__sr-only" }, "Attach files"),
@@ -2107,7 +2156,8 @@ export function DefaultMessageComposerRenderer({
           multiple: true,
           accept: ATTACHMENT_ACCEPT,
           "aria-label": "Attach files",
-          disabled: state.disabled,
+          "aria-describedby": attachmentReason === undefined ? undefined : `${id}-attachments-status`,
+          disabled: state.disabled || state.readOnly || attachmentReason !== undefined,
           onChange: handleFileChange,
         })),
         createElement("div", {
@@ -2211,6 +2261,13 @@ export function DefaultMessageComposerRenderer({
             )
           : null),
       ),
+      attachmentReason === undefined ? null : createElement("div", {
+        id: `${id}-attachments-status`,
+        role: "status",
+        "aria-live": "polite",
+        className: "handrail-chat__muted",
+      }, attachmentReason, state.attachments.some(attachment => attachment.status === "finalized" || attachment.status === "restored")
+        ? " Remove attached files to send text." : ""),
       hasFeedback
         ? createElement("div", { className: "handrail-chat__composer-feedback" },
           hasStatusFeedback

@@ -2353,6 +2353,9 @@ export function createChatClient<Feature extends string = string>(
   ): void => {
     if (lifecycleState.state === nextState.state) return;
     lifecycleState = nextState;
+    if (nextState.state !== "ready" || (nextState.enabledFeatures as Readonly<Record<string, boolean>>).attachments !== true) {
+      attachmentUploadManager?.closeActive();
+    }
     replyStyleRuntime?.connectionChanged(nextState.state === "ready" && realtimeSession === undefined);
     threadListRuntime?.connectionChanged(nextState.state === "ready" && realtimeSession === undefined);
     threadLifecycleRuntime?.connectionChanged(nextState.state === "ready" && realtimeSession === undefined);
@@ -4664,6 +4667,10 @@ export function createChatClient<Feature extends string = string>(
       identity = cacheIdentity;
       const state = cache.getState();
       const references = input.content.attachments ?? [];
+      if (references.length > 0 && (lifecycleState.state !== "ready" ||
+          (lifecycleState.enabledFeatures as Readonly<Record<string, boolean>>).attachments !== true)) {
+        return Promise.resolve(SEND_VALIDATION_FAILURE);
+      }
       const metadata = references.map(
         ({ attachmentId }) => state.entities.attachments[attachmentId],
       );
@@ -4781,6 +4788,8 @@ export function createChatClient<Feature extends string = string>(
         .map((upload) => upload.attachment?.attachmentId),
     );
     if (
+      ((input.content.attachments?.length ?? 0) > 0 && (lifecycleState.state !== "ready" ||
+        (lifecycleState.enabledFeatures as Readonly<Record<string, boolean>>).attachments !== true)) ||
       (input.content.attachments ?? []).some(
         ({ attachmentId }) => !finalizedAttachmentIds.has(attachmentId),
       )
@@ -13727,6 +13736,13 @@ export function createChatClient<Feature extends string = string>(
       };
     },
     uploadAttachment(input) {
+      if (lifecycleState.state !== "ready") {
+        throw new Error("Attachments are temporarily unavailable.");
+      }
+      if ((lifecycleState.enabledFeatures as Readonly<Record<string, boolean>>).attachments !== true) {
+        throw new Error((lifecycleState.enabledFeatures as Readonly<Record<string, boolean>>).attachments === false
+          ? "Attachments are disabled for this workspace." : "Attachments are temporarily unavailable.");
+      }
       return attachmentUploadManager.upload(input);
     },
     async sendMessage(input) {
