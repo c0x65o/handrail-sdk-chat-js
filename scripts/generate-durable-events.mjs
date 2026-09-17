@@ -42,7 +42,7 @@ import type { Message, ThreadSummary } from "../message.js";
 import type { ConversationMembershipMutationInput, ConversationMembershipMutationResult } from "../conversation-membership.js";
 import type { UpdateConversationPreferenceInput, UpdateConversationPreferenceResult } from "../conversation-preference-mutation.js";
 import { parseSynchronizeDraftInput, parseSynchronizeDraftResult, type ConversationDraftUpdatedPayload as GeneratedConversationDraftUpdatedPayload } from "../draft-mutation.js";
-import type { HuddleSessionState } from "../huddle-session.js";
+import type { HuddleSessionState, HuddleParticipant, HuddleCommandInput } from "../huddle-session.js";
 import type { ReactionMutationResult } from "../reaction-mutations.js";
 import type { ReadCursorUpdatedPayload as GeneratedReadCursorUpdatedPayload } from "../read-cursor-mutation.js";
 import type { CanonicalActorPrivateSavedMessageState } from "../saved-message-mutation.js";
@@ -83,7 +83,13 @@ export interface MessageReminderUpdatedPayload { readonly operation: "message_re
 export type DurableConversationDraftUpdatedPayload = GeneratedConversationDraftUpdatedPayload;
 export interface CanonicalMessageAttachmentMetadata { readonly attachmentId: AttachmentId; readonly fileName: string; readonly contentType: string; readonly sizeBytes: number; readonly downloadUrl: string; readonly previewUrl?: string; readonly width?: number; readonly height?: number; readonly altText?: string; }
 export interface AttachmentUpdatedPayload { readonly conversationId: ConversationId; readonly messageId: MessageId; readonly attachment: CanonicalMessageAttachmentMetadata; }
-export interface HuddleUpdatedPayload { readonly state: HuddleSessionState; }
+export interface HuddleUpdatedPayload {
+  readonly state: HuddleSessionState;
+  readonly operation?: HuddleCommandInput["operation"];
+  readonly participant?: HuddleParticipant;
+  readonly intent?: "set" | "clear";
+  readonly reason?: "explicit_leave" | "disconnect" | "huddle_ended";
+}
 
 ${interfaces}
 
@@ -236,6 +242,17 @@ function validateCanonicalPayload(type: ChatDurableEventType, payload: Record<st
   if (type === CHAT_DURABLE_EVENT_TYPES.huddleUpdated) {
     const state = readRecord(payload.state);
     if (!["inactive", "starting", "active", "ended"].includes(readString(state.status))) throw failure("incoherent_payload");
+    if (payload.operation !== undefined && !["start_huddle", "join_huddle", "leave_huddle", "set_huddle_screen_share", "end_huddle"].includes(readString(payload.operation))) throw failure("incoherent_payload");
+    if (payload.intent !== undefined && !["set", "clear"].includes(readString(payload.intent))) throw failure("incoherent_payload");
+    if (payload.reason !== undefined && !["explicit_leave", "disconnect", "huddle_ended"].includes(readString(payload.reason))) throw failure("incoherent_payload");
+    if (payload.participant !== undefined) {
+      const participant = readRecord(payload.participant);
+      ensureExactKeys(participant, ["userId", "status", "joinedAt", "leftAt"]);
+      readString(participant.userId); readTimestamp(participant.joinedAt);
+      if (!["joined", "left"].includes(readString(participant.status))) throw failure("incoherent_payload");
+      if (participant.status === "left") readTimestamp(participant.leftAt);
+      else if (participant.leftAt !== undefined) throw failure("incoherent_payload");
+    }
   }
 }
 
@@ -465,7 +482,24 @@ void _validateCanonical(String type, Map<String,Object?> payload) {
     else { throw _failure(DurableEventParseErrorCode.incoherentPayload); }
   }
   if (type == 'attachment.updated') { final a = _readMap(payload['attachment']); _string(a['attachmentId']); _string(a['fileName']); _string(a['contentType']); _nonNegative(a['sizeBytes']); _string(a['downloadUrl']); }
-  if (type == 'huddle.updated') { final status = _string(_readMap(payload['state'])['status']); if (!const ['inactive','starting','active','ended'].contains(status)) { throw _failure(DurableEventParseErrorCode.incoherentPayload); } }
+  if (type == 'huddle.updated') {
+    final status = _string(_readMap(payload['state'])['status']);
+    if (!const ['inactive','starting','active','ended'].contains(status)) throw _failure(DurableEventParseErrorCode.incoherentPayload);
+    for (final field in <String, List<String>>{
+      'operation': ['start_huddle','join_huddle','leave_huddle','set_huddle_screen_share','end_huddle'],
+      'intent': ['set','clear'], 'reason': ['explicit_leave','disconnect','huddle_ended'],
+    }.entries) {
+      if (payload.containsKey(field.key) && !field.value.contains(_string(payload[field.key]))) throw _failure(DurableEventParseErrorCode.incoherentPayload);
+    }
+    if (payload.containsKey('participant')) {
+      final participant = _readMap(payload['participant']);
+      _exactKeys(participant, {'userId','status','joinedAt','leftAt'});
+      _string(participant['userId']); _timestamp(participant['joinedAt']);
+      if (!const ['joined','left'].contains(_string(participant['status']))) throw _failure(DurableEventParseErrorCode.incoherentPayload);
+      if (participant['status'] == 'left') { _timestamp(participant['leftAt']); }
+      else if (participant.containsKey('leftAt')) { throw _failure(DurableEventParseErrorCode.incoherentPayload); }
+    }
+  }
 }
 void _validateConversation(Map<String,Object?> value) {
   if (value.containsKey('threadLifecycle')) {

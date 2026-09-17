@@ -59,6 +59,7 @@ export async function runAcceptance(options = {}) {
     flutterExecutable: process.env.FLUTTER_BIN || (process.env.FLUTTER_ROOT ? path.join(process.env.FLUTTER_ROOT, 'bin/flutter') : 'flutter'),
     phases: {}, cleanup: {} };
   const env = isolatedEnvironment(process.env);
+  env.NODE_OPTIONS = '--max-old-space-size=4096';
   const secrets = Object.entries(process.env).filter(([key, value]) =>
     /PASSWORD|SECRET|TOKEN|DATABASE_URL/.test(key) && value.length >= 4).map(([, value]) => value);
   const redact = value => {
@@ -103,6 +104,7 @@ export async function runAcceptance(options = {}) {
     manifest.configDigest = createHash('sha256').update(readFileSync(path.join(example, config))).digest('hex');
     manifest.sdkSourceDigest = digestTree(repo, ['src']);
     manifest.harnessDigest = digestTree(example, ['e2e', 'scripts']);
+    manifest.labSourceDigest = digestTree(example, ['src']);
     await run('sdk-compile', process.execPath, ['node_modules/typescript/bin/tsc', '--project', 'tsconfig.json']);
     await run('sdk-styles', process.execPath, ['scripts/copy-ui-styles.mjs']);
     assert.equal(digestTree(repo, ['src']), manifest.sdkSourceDigest, 'SDK inputs changed during compilation');
@@ -146,6 +148,7 @@ export async function runAcceptance(options = {}) {
     assert.equal(digestTree(repo, ['src']), manifest.sdkSourceDigest, 'SDK inputs changed during execution');
     assert.equal(digestTree(repo, ['dist']), manifest.sdkDistDigest, 'SDK build changed during execution');
     assert.equal(digestTree(example, ['e2e', 'scripts']), manifest.harnessDigest, 'Acceptance inputs changed during execution');
+    assert.equal(digestTree(example, ['src']), manifest.labSourceDigest, 'Lab browser sources changed during execution');
     assert.equal(createHash('sha256').update(readFileSync(path.join(example, config))).digest('hex'), manifest.configDigest);
     manifest.accepted = true;
   } catch (error) {

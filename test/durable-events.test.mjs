@@ -276,3 +276,22 @@ for (const type of ["conversation.created", "thread.created"]) {
     assertRejection(wire, "tenant_mismatch");
   });
 }
+
+test('canonical huddle command metadata is compatible and join material stays forbidden', () => {
+  const event = fixtures.valid.find(event => event.type === 'huddle.updated');
+  for (const metadata of [
+    { operation: 'start_huddle' },
+    { operation: 'join_huddle', participant: event.payload.state.participants[0] },
+    { operation: 'leave_huddle', reason: 'disconnect', participant: { ...event.payload.state.participants[0], status: 'left', leftAt: event.occurredAt } },
+    { operation: 'set_huddle_screen_share', intent: 'clear' },
+    { operation: 'end_huddle' },
+  ]) {
+    const wire = { ...event, payload: { state: event.payload.state, ...metadata } };
+    assert.deepEqual(parseKnownDurableEvent(wire, trustedIdentity).payload, wire.payload);
+  }
+  for (const metadata of [{ operation: 'unknown' }, { reason: 'unknown' }, { intent: 'unknown' },
+    { participant: { userId: 'user-1', status: 'left', joinedAt: event.occurredAt } },
+    { mediaJoin: { descriptor: 'FORBIDDEN_JOIN_MATERIAL' } }]) {
+    assertRejection({ ...event, payload: { state: event.payload.state, ...metadata } }, 'incoherent_payload');
+  }
+});

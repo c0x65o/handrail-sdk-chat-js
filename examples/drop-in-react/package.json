@@ -21,7 +21,8 @@
     "test:browser:states": "playwright test e2e/conversation-state-chat-lab.spec.mjs --project=chromium",
     "check:static": "node scripts/static-check.mjs",
     "check": "npm run typecheck && npm run build && npm run check:graph && npm run test:smoke && npm run check:static",
-    "test:native-tokens": "NODE_ENV=test vitest run --maxWorkers=1 --minWorkers=1 test/NativeTokenManager.test.tsx"
+    "test:native-tokens": "NODE_ENV=test vitest run --maxWorkers=1 --minWorkers=1 test/NativeTokenManager.test.tsx",
+    "accept:huddle-media": "node scripts/accept-huddle-media.mjs"
   },
   "engines": {
     "node": ">=22.0.0"
