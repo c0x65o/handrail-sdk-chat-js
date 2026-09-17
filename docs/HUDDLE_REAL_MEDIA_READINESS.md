@@ -14,7 +14,7 @@ Flutter recovery now installs descriptor-free authorized huddle snapshots alongs
 
 ## Reproduction and release boundary
 
-Use normal public HTTPS Git dependencies pinned to full SHA with matching locks. The hosts are pinned to published `dc377a84f09033d532c455c6891e0085f67ebe23` (0.1.27). Newly changed Flutter core source requires Handrail's finalization followed by a reviewed pin/lock update; the frozen public commit does not acquire these changes. Any disposable verification overlay must be explicitly identified by base revision and per-file hashes and is not an installable release.
+Use normal public HTTPS Git dependencies pinned to full SHA with matching locks. The hosts are pinned to published `dc377a84f09033d532c455c6891e0085f67ebe23` (0.1.27). During verification, external Handrail Release Bot commits advanced JS to `f01fe8d588745353ae0935efd93da647585009e5` (1.0.46), Flutter to `bdff12af7c746374ef4b06da31fbed961ee52da4` (0.1.28), and preview to `2aebf69a27aacb7a8f6a1a14c7c0d98ed7061945` (0.1.17+1). The worker did not finalize Git. This observation is not independent release approval or proof of a public push. A reviewed consumer pin/lock update and clean installation remain required; the frozen public commit does not acquire these changes. Any disposable verification overlay must be explicitly identified by base revision and per-file hashes and is not an installable release.
 
 From the JS checkout, after version consistency verification and normal `npm run build`:
 

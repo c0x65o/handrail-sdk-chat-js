@@ -8,7 +8,7 @@ async function screenDenialAndConflict({ flutter, react, checkpoint, expect, obs
     navigator.mediaDevices.getDisplayMedia = async () => { throw new DOMException('Denied', 'NotAllowedError'); };
   });
   await flutter.getByLabel('Start screen sharing', { exact: true }).click();
-  await expect(flutter.getByText(/Screen sharing permission was denied/)).toBeVisible();
+  await expect(flutter.getByLabel('Dialog', { exact: true }).getByText(/Screen sharing permission was denied/)).toBeVisible();
   expect((await checkpoint('display-denied')).sessions[0].screen_share_owner_user_id).toBeNull();
   await flutter.evaluate(() => { navigator.mediaDevices.getDisplayMedia = window.__media.display; });
 
@@ -60,7 +60,10 @@ export { screenDenialAndConflict, canonicalRevocation };
 // uses a full navigation for actor switching; this validates that supported
 // host boundary, not in-place account replacement or native lifecycle.
 async function flutterAccountRoundTrip({ flutter, react, status, stats, checkpoint, expect, observations }) {
-  await flutter.keyboard.press('Escape'); // dismiss media bottom sheet
+  // Tap the modal barrier; Escape is not handled by this Flutter web sheet.
+  await flutter.mouse.click(12, 24);
+  await expect(flutter.getByLabel('Dialog', { exact: true })).toHaveCount(0);
+  expect((await stats(flutter)).length).toBe(2);
   await flutter.getByRole('button', { name: 'Grace Hopper', exact: true }).click();
   await flutter.getByRole('menuitem', { name: 'Margaret Hamilton', exact: true }).click();
   await flutter.waitForURL(/actor=margaret/);

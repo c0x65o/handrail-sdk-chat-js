@@ -21,7 +21,7 @@ test('React and Flutter exchange media with canonical ownership, recovery and cl
   const contexts = [], pages = [], observations = [], sql = [], errors = [], screenshots = [], events = [], http = [];
   let provenance, instance;
   const checkpoint = async label => {
-    const sessions = (await chatLab.harness.pool.query('SELECT status, screen_share_owner_user_id FROM chat_huddle_sessions')).rows;
+    const sessions = (await chatLab.harness.pool.query('SELECT status, active_screen_share_owner_user_id AS screen_share_owner_user_id FROM chat_huddle_sessions')).rows;
     const participants = (await chatLab.harness.pool.query('SELECT user_id, left_at IS NULL AS joined FROM chat_huddle_participants ORDER BY user_id')).rows;
     sql.push({ label, sessions, participants });
     return { sessions, participants };
@@ -83,7 +83,7 @@ test('React and Flutter exchange media with canonical ownership, recovery and cl
       navigator.mediaDevices.getUserMedia = async () => { window.__media.deniedCalls = (window.__media.deniedCalls || 0) + 1; throw new DOMException('Denied', 'NotAllowedError'); };
     });
     await flutter.getByLabel('Unmute microphone', { exact: true }).click();
-    await expect(flutter.getByText(/Microphone permission was denied/)).toBeVisible();
+    await expect(flutter.getByLabel('Dialog', { exact: true }).getByText(/Microphone permission was denied/)).toBeVisible();
     observations.push({ label: 'microphone-denied', captureCalls: await flutter.evaluate(() => window.__media.deniedCalls), uiMessageVisible: true, permission: 'boundary-injected NotAllowedError' });
     await flutter.evaluate(() => { navigator.mediaDevices.getUserMedia = window.__media.getUserMedia; });
     for (const page of pages) await page.getByLabel('Unmute microphone', { exact: true }).click();
@@ -105,16 +105,18 @@ test('React and Flutter exchange media with canonical ownership, recovery and cl
     await flutter.evaluate(() => { const track = window.__media.tracks.filter(t => t.kind === 'video' && t.readyState === 'live').at(-1); track.stop(); track.dispatchEvent(new Event('ended')); });
     await expect.poll(async () => (await checkpoint('share-ended')).sessions[0].screen_share_owner_user_id).toBeNull();
     await expect(react.getByLabel('Grace Hopper shared screen', { exact: true })).toHaveCount(0);
+    observations.push({ label: 'flutter-screen-transport-and-release', remoteVideoDecoded: true, canonicalOwnerReleased: true, revocation: 'real track.stop plus injected ended event' });
     await flutter.getByLabel('Mute microphone', { exact: true }).click();
     await expect.poll(() => flutter.evaluate(() => window.__media.tracks.filter(t => t.kind === 'audio' && t.readyState === 'live').every(t => !t.enabled))).toBe(true);
     await flutter.getByLabel('Unmute microphone', { exact: true }).click();
     await flutter.evaluate(() => { const track = window.__media.tracks.filter(t => t.kind === 'audio' && t.readyState === 'live').at(-1); track.stop(); track.dispatchEvent(new Event('ended')); });
     await expect(flutter.getByLabel('Unmute microphone', { exact: true })).toBeEnabled();
     await flutter.getByLabel('Unmute microphone', { exact: true }).click();
+    observations.push({ label: 'microphone-mute-revoke-recapture', capture: 'real synthetic-device track', revocation: 'track.stop plus injected ended event' });
     await flutter.evaluate(() => window.__media.sockets.at(-1).close());
     await expect.poll(() => stopped(flutter)).toBe(true);
     await flutter.getByRole('button', { name: 'Leave huddle', exact: true }).click();
-    expect((await checkpoint('left')).participants.find(p => p.user_id === 'grace').joined).toBe(false);
+    await expect.poll(async () => (await checkpoint('left')).participants.find(p => p.user_id === 'grace').joined).toBe(false);
     await flutter.getByRole('button', { name: 'Join huddle', exact: true }).click();
     await flutter.getByLabel('Unmute microphone', { exact: true }).click();
     await expect.poll(async () => { const values = await stats(flutter); return values.length === 2 && values.every(n => n > 1000); }).toBe(true);
@@ -124,7 +126,7 @@ test('React and Flutter exchange media with canonical ownership, recovery and cl
     await react.getByRole('button', { name: 'Open huddle details', exact: true }).click();
     await react.getByRole('button', { name: 'End huddle', exact: true }).click();
     for (const page of pages) await expect.poll(() => stopped(page)).toBe(true);
-    expect((await checkpoint('ended')).sessions[0].status).toBe('ended');
+    await expect.poll(async () => (await checkpoint('ended')).sessions[0].status).toBe('ended');
     const file = info.outputPath('flutter-ended-430x932.png'); await flutter.screenshot({ path: file }); screenshots.push(file);
     expect(errors).toEqual([]);
   } finally {
