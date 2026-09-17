@@ -187,6 +187,9 @@ test("leave-huddle HTTP route rejects unsafe transport input before command effe
         providerRoomReference: "PROVIDER_ROOM_SECRET_SENTINEL",
       }),
       leaveInput(sessionId, "leave-http-reason", { reason: "disconnect" }),
+      leaveInput(sessionId, "leave-http-cleanup-fence", {
+        expectedJoinedAt: "2026-09-17T00:00:00.000123Z",
+      }),
       leaveInput(sessionId, "leave-http-credential", {
         credential: "AUTH_SECRET_SENTINEL",
       }),

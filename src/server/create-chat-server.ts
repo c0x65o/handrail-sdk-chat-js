@@ -2404,6 +2404,7 @@ const normalizeWebSocketOptions = <Capability extends string>(
     "maxConnections",
     "maxConnectionsPerTenant",
     "handshakeTimeoutMs",
+    "leaveHuddlesOnDisconnect",
     "sessionRevalidationIntervalMs",
     "maxPendingEvents",
     "maxReplayEvents",
@@ -2459,6 +2460,13 @@ const normalizeWebSocketOptions = <Capability extends string>(
     requireFunction(options.now, "webSocket.now");
   }
 
+  if (options.leaveHuddlesOnDisconnect !== undefined &&
+      typeof options.leaveHuddlesOnDisconnect !== "boolean") {
+    throw new ChatServerConfigurationError(
+      "webSocket.leaveHuddlesOnDisconnect must be a boolean",
+    );
+  }
+
   const sessionRevalidationIntervalMs =
     options.sessionRevalidationIntervalMs === undefined
       ? DEFAULT_CHAT_WEBSOCKET_SESSION_REVALIDATION_INTERVAL_MS
@@ -2489,6 +2497,7 @@ const normalizeWebSocketOptions = <Capability extends string>(
       "handshakeTimeoutMs",
       DEFAULT_CHAT_WEBSOCKET_HANDSHAKE_TIMEOUT_MS,
     ),
+    leaveHuddlesOnDisconnect: options.leaveHuddlesOnDisconnect !== false,
     sessionRevalidationIntervalMs:
       sessionRevalidationIntervalMs as number,
     maxPendingEvents: readPositiveInteger(

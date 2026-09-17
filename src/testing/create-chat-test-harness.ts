@@ -45,6 +45,7 @@ import {
   type ChatServerFeatures,
   type ChatServerRuntime,
 } from "../server/create-chat-server.js";
+import type { ChatWebSocketOptions } from "../server/websocket-upgrade.js";
 import type { ChatThreadInactivityPolicyResolver } from "../server/thread-list-handler-options.js";
 import {
   createPostgresMigrationRunner,
@@ -146,6 +147,8 @@ export interface CreateChatTestHarnessOptions
   };
   /** All fake-backed features default to enabled. */
   readonly features?: ChatServerFeatures;
+  /** Optional host realtime lifecycle policy for integration tests/labs. */
+  readonly webSocket?: ChatWebSocketOptions;
   /** Optional real host policy for thread discovery in integration tests/labs. */
   readonly threadInactivityPolicy?: false | ChatThreadInactivityPolicyResolver;
   /** Optional host request telemetry, also used by the live Chat Lab. */
@@ -712,6 +715,7 @@ export async function createChatTestHarnessInternal(
       database: { pool: postgresHarness.pool, schema: postgresHarness.schema },
       ...adapters,
       features: { ...ALL_FEATURES, ...options.features },
+      ...(options.webSocket === undefined ? {} : { webSocket: options.webSocket }),
       ...(options.threadInactivityPolicy === undefined
         ? {}
         : { threadInactivityPolicy: options.threadInactivityPolicy }),

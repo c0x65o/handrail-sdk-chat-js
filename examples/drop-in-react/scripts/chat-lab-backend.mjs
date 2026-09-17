@@ -533,6 +533,9 @@ export async function startChatLabBackend(options = {}) {
   const selection = selectChatLabDatabase(options);
   const harness = await createChatLabDatabaseHarness(createChatTestHarness, selection, {
     schemaPrefix: "handrail_chat_lab",
+    // Media participation outlives chat recovery and other-device chat sockets.
+    // The real-media host owns explicit Leave/End and transport cleanup.
+    ...(options.media === undefined ? {} : { webSocket: { leaveHuddlesOnDisconnect: false } }),
     httpObservability: {
       onOutcome(outcome) {
         if (outcome.statusCode >= 500) {

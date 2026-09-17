@@ -10,9 +10,18 @@ import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 
 import { ChatLabApp } from "../src/ChatLabApp";
 import { createChatLabHuddleFixtureMediaAdapter } from "../src/chat-lab-media";
-// The executable Chat Lab harness intentionally remains plain Node ESM.
-// @ts-expect-error No declaration file is emitted for this example-only script.
-import { CHAT_LAB_ACTORS, resolveChatLabActor, startChatLabBackend } from "../scripts/chat-lab-backend.mjs";
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+import { compileFunction, constants } from "node:vm";
+
+// Run executable Node ESM natively. Vitest's automatic .mjs inlining rewrites
+// filesystem import.meta.url into a browser URL in this jsdom suite.
+const importNative = compileFunction("return import(specifier)", ["specifier"], {
+  importModuleDynamically: constants.USE_MAIN_CONTEXT_DEFAULT_LOADER,
+}) as (specifier: string) => Promise<any>;
+const { CHAT_LAB_ACTORS, resolveChatLabActor, startChatLabBackend } =
+  await importNative(pathToFileURL(resolve("scripts/chat-lab-backend.mjs")).href);
+// This helper intentionally installs into the jsdom test global, not Node's.
 // @ts-expect-error No declaration file is emitted for this example-only script.
 import { installChatLabBrowserSocket } from "../scripts/chat-lab-browser-socket-harness.mjs";
 
@@ -22,9 +31,14 @@ let restoreBrowserSocket: (() => void) | undefined;
 
 const openDirectConversation = async (active = false): Promise<HTMLElement> => {
   const navigation = await screen.findByRole("navigation", { name: "Conversations" });
-  fireEvent.click(within(navigation).getByRole("button", {
-    name: /^Direct conversation(?:, \d+ unread messages?)?$/u,
-  }));
+  // The actor's navigation shell renders before its canonical list hydrates.
+  const direct = await waitFor(() => {
+    const button = within(navigation).getAllByRole("button").find(candidate =>
+      candidate.getAttribute("data-conversation-id") === lab.conversationIds.direct);
+    if (!button) throw new Error("Seeded direct conversation is missing");
+    return button;
+  }, { timeout: 10_000 });
+  fireEvent.click(direct);
   if (active) {
     return screen.findByRole("region", { name: "Huddle controls" }, { timeout: 10_000 });
   }
@@ -39,13 +53,12 @@ const openDirectConversation = async (active = false): Promise<HTMLElement> => {
 };
 
 const selectActor = async (name: RegExp) => {
-  fireEvent.click(screen.getByRole("button", { name }));
+  fireEvent.click(screen.getByRole("button", { name: /^Development fixture identity:/u }));
+  fireEvent.click(screen.getByRole("option", { name }));
   const displayName = name.source.includes("Grace") ? "Grace Hopper" : "Ada Lovelace";
-  await screen.findByText(
-    `Viewing the real persisted conversation as ${displayName}`,
-    {},
-    { timeout: 10_000 },
-  );
+  await screen.findByRole("button", {
+    name: `Development fixture identity: ${displayName}`,
+  }, { timeout: 10_000 });
   await screen.findByText("Managed realtime connected", {}, { timeout: 10_000 });
   return openDirectConversation(true);
 };
@@ -54,7 +67,7 @@ const ensureConnected = async (huddle: HTMLElement) => {
   if (within(huddle).queryByText("Media connection: Connected.") !== null) return;
   const rejoin = await within(huddle).findByRole(
     "button",
-    { name: "Rejoin huddle" },
+    { name: /^(?:Rejoin|Join) huddle$/u },
     { timeout: 10_000 },
   );
   fireEvent.click(rejoin);
@@ -68,7 +81,7 @@ const ensureConnected = async (huddle: HTMLElement) => {
 const openHuddleDetails = async (huddle: HTMLElement) => {
   const trigger = within(huddle).getByRole("button", { name: "Open huddle details" });
   if (trigger.getAttribute("aria-expanded") !== "true") fireEvent.click(trigger);
-  return within(huddle).findByRole("region", { name: "Huddle details" });
+  return within(huddle).findByRole("dialog", { name: "Huddle details" });
 };
 
 beforeAll(async () => {
@@ -125,10 +138,14 @@ describe("ChatLabApp huddles", () => {
       .toBeNull();
     await screen.findByText("Managed realtime connected", {}, { timeout: 10_000 });
     const navigation = await screen.findByRole("navigation", { name: "Conversations" });
-    fireEvent.click(within(navigation).getByRole("button", {
-      name: /^Direct conversation(?:, \d+ unread messages?)?$/u,
-    }));
-    await screen.findByRole("heading", { name: "Direct conversation" }, { timeout: 10_000 });
+    const direct = within(navigation).getAllByRole("button").find(button =>
+      button.getAttribute("data-conversation-id") === lab.conversationIds.direct);
+    if (!direct) throw new Error("Seeded direct conversation is missing");
+    fireEvent.click(direct);
+    await waitFor(() => {
+      expect(document.querySelector(`.handrail-chat__conversation[data-conversation-id="${lab.conversationIds.direct}"]`))
+        .not.toBeNull();
+    });
 
     expect(screen.queryByRole("button", { name: "Start huddle" })).toBeNull();
     expect(screen.queryByRole("button", { name: "Join huddle" })).toBeNull();
@@ -138,11 +155,9 @@ describe("ChatLabApp huddles", () => {
       name: "Development fixture identity: Ada Lovelace",
     }));
     fireEvent.click(screen.getByRole("option", { name: "Grace Hopper Engineering" }));
-    await screen.findByText(
-      "Viewing the real persisted conversation as Grace Hopper",
-      {},
-      { timeout: 10_000 },
-    );
+    await screen.findByRole("button", {
+      name: "Development fixture identity: Grace Hopper",
+    }, { timeout: 10_000 });
     expect(screen.getByText(
       "Huddle media not configured. Start and Join actions are unavailable.",
     )).not.toBeNull();
@@ -178,6 +193,7 @@ describe("ChatLabApp huddles", () => {
       {},
       { timeout: 10_000 },
     );
+    const admittedConnectionCount = mediaAdapter.snapshot().connectionCount;
     const activeConnection = mediaAdapter.snapshot().connections.at(-1);
     expect(activeConnection).toMatchObject({
       connectionStatus: "connected",
@@ -204,15 +220,20 @@ describe("ChatLabApp huddles", () => {
     expect(within(details).getByRole<HTMLButtonElement>("button", {
       name: "End huddle",
     }).disabled).toBe(false);
-    expect(mediaAdapter.snapshot()).toMatchObject({
-      connectionCount: 1,
-      connections: [{
+    expect(mediaAdapter.snapshot().connectionCount).toBe(admittedConnectionCount);
+    // Superseded admission attempts may have been cleaned during recovery;
+    // exactly one live provider and complete prior cleanup are the invariant.
+    expect(mediaAdapter.snapshot().connections.filter(connection =>
+      connection.connectionStatus !== "disconnected")).toMatchObject([{
         id: activeConnection?.id,
         connectionStatus: "reconnecting",
         disconnectCount: 0,
         tracks: [{ kind: "microphone", stopped: false }],
-      }],
-    });
+      }]);
+    expect(mediaAdapter.snapshot().connections.filter(connection =>
+      connection.id !== activeConnection?.id).every(connection =>
+        connection.disconnectCount === 1 && connection.tracks.every(track => track.stopped)))
+      .toBe(true);
 
     expect(mediaAdapter.setCurrentConnectionStatus("connected")).toBe(true);
     await within(huddle).findByText(
@@ -220,15 +241,20 @@ describe("ChatLabApp huddles", () => {
       {},
       { timeout: 10_000 },
     );
-    expect(mediaAdapter.snapshot()).toMatchObject({
-      connectionCount: 1,
-      connections: [{
+    expect(mediaAdapter.snapshot().connectionCount).toBe(admittedConnectionCount);
+    // Superseded admission attempts may have been cleaned during recovery;
+    // exactly one live provider and complete prior cleanup are the invariant.
+    expect(mediaAdapter.snapshot().connections.filter(connection =>
+      connection.connectionStatus !== "disconnected")).toMatchObject([{
         id: activeConnection?.id,
         connectionStatus: "connected",
         disconnectCount: 0,
         tracks: [{ kind: "microphone", stopped: false }],
-      }],
-    });
+      }]);
+    expect(mediaAdapter.snapshot().connections.filter(connection =>
+      connection.id !== activeConnection?.id).every(connection =>
+        connection.disconnectCount === 1 && connection.tracks.every(track => track.stopped)))
+      .toBe(true);
     expect(within(huddle).getByRole<HTMLButtonElement>("button", {
       name: "Unmute microphone",
     }).disabled).toBe(false);
@@ -307,18 +333,33 @@ describe("ChatLabApp huddles", () => {
       { timeout: 10_000 },
     );
     details = await openHuddleDetails(huddle);
-    await within(details).findByText(
-      "ada is sharing their screen.",
-      {},
-      { timeout: 10_000 },
-    );
+    // This fixture uses the legacy chat-socket-owned policy: switching its
+    // only Ada client leaves Ada and releases canonical share ownership.
+    await within(details).findByText("No one is sharing their screen.", {}, { timeout: 10_000 });
+    await waitFor(async () => {
+      const canonical = await lab.harness.pool.query(
+        `SELECT participant.left_at, session.active_screen_share_owner_user_id
+           FROM "${lab.harness.schema}".chat_huddle_sessions AS session
+           JOIN "${lab.harness.schema}".chat_huddle_participants AS participant
+             ON participant.tenant_id = session.tenant_id
+            AND participant.huddle_session_id = session.id
+          WHERE session.tenant_id = 'chat-lab' AND session.conversation_id = $1
+            AND session.status = 'active' AND participant.user_id = 'ada'`,
+        [lab.conversationIds.direct],
+      );
+      expect(canonical.rows).toHaveLength(1);
+      expect(canonical.rows[0].left_at).not.toBeNull();
+      expect(canonical.rows[0].active_screen_share_owner_user_id).toBeNull();
+    });
     expect(within(details).getByRole<HTMLButtonElement>("button", {
       name: "Start screen sharing",
-    }).disabled).toBe(true);
+    }).disabled).toBe(false);
 
     huddle = await selectActor(/Ada Lovelace Product/u);
     await ensureConnected(huddle);
     details = await openHuddleDetails(huddle);
+    fireEvent.click(within(details).getByRole("button", { name: "Start screen sharing" }));
+    await within(details).findByText("ada is sharing their screen.", {}, { timeout: 10_000 });
     fireEvent.click(within(details).getByRole("button", {
       name: "Stop screen sharing",
     }));
@@ -343,15 +384,17 @@ describe("ChatLabApp huddles", () => {
     huddle = await selectActor(/Ada Lovelace Product/u);
     details = await openHuddleDetails(huddle);
     await within(details).findByText(
-      "grace is sharing their screen.",
+      "No one is sharing their screen.",
       {},
       { timeout: 10_000 },
     );
-    expect(within(details).getByRole<HTMLButtonElement>("button", {
+    // Left participants have no capture controls until they join again.
+    expect(within(details).queryByRole("button", {
       name: "Start screen sharing",
-    }).disabled).toBe(true);
+    })).toBeNull();
 
     huddle = await selectActor(/Grace Hopper Engineering/u);
+    await ensureConnected(huddle);
     fireEvent.click(within(huddle).getByRole("button", { name: "Leave huddle" }));
     await within(huddle).findByText(/grace \(left\)/u, {}, { timeout: 10_000 });
 

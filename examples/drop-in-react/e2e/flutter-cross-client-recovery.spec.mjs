@@ -140,7 +140,9 @@ test('Flutter recovers an open thread during React Bob updates without manual re
     await expect(flutter.getByRole('menuitem', { name: 'Join', exact: true })).toBeEnabled();
     await expect(flutter.getByRole('menuitem', { name: 'Notifications: all', exact: true })).toBeEnabled();
     expect(await flutter.getByRole('menuitem', { name: 'Retry loading subscriptions', exact: true }).count()).toBe(0);
-    await flutter.keyboard.press('Escape');
+    // Dismiss the Flutter popup through its modal barrier before composing.
+    await flutter.mouse.click(12, 24);
+    await expect(flutter.getByRole('menuitem', { name: 'Notifications: all', exact: true })).toHaveCount(0);
     const flutterComposer = flutter.getByRole('textbox', { name: 'Write a message', exact: true }).last();
     await flutterComposer.click();
     await flutterComposer.fill('');

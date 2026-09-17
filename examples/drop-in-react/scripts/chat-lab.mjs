@@ -12,6 +12,7 @@ const { MAX_ATTACHMENT_SIZE_BYTES } = await import("@handrail/chat");
 import { startChatLabBackend } from "./chat-lab-backend.mjs";
 import { buildFlutterChatLab } from "./build-flutter-chat-lab.mjs";
 import { createChatLabWebRtcServer } from "./chat-lab-webrtc-server.mjs";
+import { createChatLabMediaLifecycle } from "./chat-lab-media-lifecycle.mjs";
 import { chatLabBackendProvenance } from "./chat-lab-provenance.mjs";
 import { startChatLabWithFlutter } from "./chat-lab-startup.mjs";
 import { flutterWebRoot as defaultFlutterWebRoot } from "../../../scripts/sdk-repositories.mjs";
@@ -656,25 +657,9 @@ export async function startChatLab(options = {}) {
   };
   try {
     media = createChatLabWebRtcServer({
+      ...createChatLabMediaLifecycle(() => backend),
       trustHandrailLoopbackProxy: ["127.0.0.1", "::1", "localhost"].includes(bindHost),
       iceServers: options.iceServers ?? JSON.parse(process.env.CHAT_LAB_ICE_SERVERS ?? "[]"),
-      authorizeParticipant: async ({ roomId, tenantId, userId }) => {
-        if (!backend) return false;
-        const schema = `"${backend.harness.schema}"`;
-        const result = await backend.harness.pool.query(
-          `SELECT 1 FROM ${schema}.chat_huddle_sessions AS session
-           JOIN ${schema}.chat_huddle_participants AS participant
-             ON participant.tenant_id = session.tenant_id AND participant.huddle_session_id = session.id
-           JOIN ${schema}.chat_conversation_members AS member
-             ON member.tenant_id = session.tenant_id AND member.conversation_id = session.conversation_id
-             AND member.user_id = participant.user_id
-           WHERE session.provider_room_reference = $1 AND session.tenant_id = $2
-             AND participant.user_id = $3 AND participant.left_at IS NULL
-             AND session.status IN ('starting', 'active') AND member.state = 'active'`,
-          [roomId, tenantId, userId],
-        );
-        return result.rowCount > 0;
-      },
     });
     backend = await startChatLabBackend({ ...options, storage, media: media.adapter });
     const instanceId = randomBytes(16).toString("hex");

@@ -43,6 +43,7 @@ export type LeaveHuddleCommandErrorCode =
   | "idempotency_conflict"
   | "idempotency_in_progress"
   | "huddle_not_active"
+  | "participation_changed"
   | "participant_already_left";
 
 /** Stable, provider-neutral failure suitable for explicit and cleanup callers. */
@@ -80,6 +81,13 @@ export interface LeaveHuddleParticipationOptions extends LeaveHuddleDependencies
   readonly huddleSessionId: string;
   readonly idempotencyKey: string;
   readonly reason: HuddleLeaveReason;
+  /**
+   * Trusted host cleanup fence, captured from canonical joined_at (retain SQL
+   * microseconds). Never forward caller input here. Only valid for disconnect.
+   * A fenced cleanup can release this participation after access is revoked;
+   * it grants no user command authority and cannot affect a newer join.
+   */
+  readonly expectedJoinedAt?: string;
 }
 
 export interface LeaveJoinedHuddlesOnDisconnectOptions
@@ -95,6 +103,7 @@ interface ClaimedIdempotencyRow {
 }
 
 interface EligibleParticipantRow {
+  readonly participation_matches: boolean;
   readonly id: string;
   readonly conversation_id: string;
   readonly status: string;
@@ -155,12 +164,14 @@ const toIsoTimestamp = (value: Date | string, label: string): IsoTimestamp => {
 const requestHash = (
   huddleSessionId: string,
   reason: HuddleLeaveReason,
+  expectedJoinedAt?: string,
 ): string =>
   `sha256:${createHash("sha256")
     .update(JSON.stringify({
       operation: "leave_huddle",
       huddleSessionId,
       reason,
+      ...(expectedJoinedAt === undefined ? {} : { expectedJoinedAt }),
     }))
     .digest("hex")}`;
 
@@ -257,6 +268,13 @@ export async function leaveHuddleParticipation(
     idempotencyKey: options.idempotencyKey,
   });
   const reason = validateLeaveReason(options.reason);
+  const fencedCleanup = options.expectedJoinedAt !== undefined;
+  if (fencedCleanup && (reason !== HUDDLE_LEAVE_REASONS.disconnect ||
+      typeof options.expectedJoinedAt !== "string" ||
+      options.expectedJoinedAt.length > 64 ||
+      !Number.isFinite(Date.parse(options.expectedJoinedAt)))) {
+    throw new TypeError("expectedJoinedAt requires a canonical timestamp and disconnect reason");
+  }
   const schema = validatePostgresSchema(options.schema ?? DEFAULT_POSTGRES_SCHEMA);
   const prefix = quoteIdentifier(schema);
   const idempotencyTtlMs = positiveSafeInteger(
@@ -267,7 +285,7 @@ export async function leaveHuddleParticipation(
     options.outboxRetentionMs ?? DEFAULT_LEAVE_HUDDLE_OUTBOX_RETENTION_MS,
     "outboxRetentionMs",
   );
-  const hash = requestHash(input.huddleSessionId, reason);
+  const hash = requestHash(input.huddleSessionId, reason, options.expectedJoinedAt);
   const createId = options.createId ?? randomUUID;
   const connection = await options.database.connect();
 
@@ -310,12 +328,14 @@ export async function leaveHuddleParticipation(
               session.started_at, session.active_screen_share_owner_user_id,
               COALESCE(conversation.entity_type, parent.entity_type) AS entity_type,
               COALESCE(conversation.entity_id, parent.entity_id) AS entity_id,
-              participant.user_id, participant.joined_at, participant.left_at
+              participant.user_id, participant.joined_at, participant.left_at,
+              ($5::timestamptz IS NULL OR participant.joined_at = $5::timestamptz)
+                AS participation_matches
          FROM ${prefix}.chat_huddle_sessions AS session
          INNER JOIN ${prefix}.chat_conversations AS conversation
            ON conversation.tenant_id = session.tenant_id
           AND conversation.id = session.conversation_id
-         INNER JOIN ${prefix}.chat_conversation_members AS member
+         LEFT JOIN ${prefix}.chat_conversation_members AS member
            ON member.tenant_id = conversation.tenant_id
           AND member.conversation_id = conversation.id
           AND member.user_id = $3
@@ -329,13 +349,17 @@ export async function leaveHuddleParticipation(
           AND parent.id = conversation.parent_conversation_id
         WHERE session.tenant_id = $1
           AND session.id = $2
-          AND conversation.archived_at IS NULL
+          AND ($4::boolean OR (member.state = 'active' AND conversation.archived_at IS NULL))
         FOR UPDATE OF session, conversation, participant`,
-      [options.actor.tenantId, input.huddleSessionId, options.actor.userId],
+      [options.actor.tenantId, input.huddleSessionId, options.actor.userId,
+        fencedCleanup, options.expectedJoinedAt ?? null],
     );
     const session = eligible.rows[0];
     if (session === undefined) throw new ChatAuthorizationError();
-    await authorizeEntity(session, options);
+    if (!session.participation_matches) {
+      throw new LeaveHuddleCommandError("participation_changed", "The participation has changed");
+    }
+    if (!fencedCleanup) await authorizeEntity(session, options);
 
     if (claimed.idempotency_state === "completed") {
       const original = parseHuddleCommandResult(

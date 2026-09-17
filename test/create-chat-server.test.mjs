@@ -1669,3 +1669,18 @@ test("thread inactivity is independent of user identity and saved reply style", 
   }
   assert.deepEqual(scopes, [inactivityScope, inactivityScope, inactivityScope]);
 });
+
+
+test("media hosts can opt out of legacy chat-socket huddle eviction", async () => {
+  const database = makeDatabase();
+  for (const value of [undefined, true, false]) {
+    const runtime = createChatServer({ ...makeMinimalConfig(database.resource),
+      webSocket: { ...(value === undefined ? {} : { leaveHuddlesOnDisconnect: value }) } });
+    assert.equal(runtime.config.webSocket.leaveHuddlesOnDisconnect, value !== false);
+    await runtime.close();
+  }
+  for (const value of [null, 0, "false"]) {
+    assert.throws(() => createChatServer({ ...makeMinimalConfig(database.resource),
+      webSocket: { leaveHuddlesOnDisconnect: value } }), /leaveHuddlesOnDisconnect must be a boolean/);
+  }
+});

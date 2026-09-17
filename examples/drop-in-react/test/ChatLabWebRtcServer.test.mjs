@@ -133,3 +133,56 @@ test("signaling cannot cross room boundaries and removed members lose signaling 
   ada.socket.send(JSON.stringify({ type: "signal", target: grace.welcome.peerId, payload: {} }));
   assert.equal((await closed)[0], 1008);
 });
+
+test("concurrent reuse of one credential admits only one provider session", async t => {
+  let release, entered;
+  const gate = new Promise(resolve => { release = resolve; });
+  const started = new Promise(resolve => { entered = resolve; });
+  const fixture = await setup(t, { authorizeParticipant: async () => { entered(); await gate; return true; } });
+  const token = JSON.parse((await fixture.grant("ada")).token).token;
+  const first = await fixture.open(), second = await fixture.open();
+  const rejected = once(second.socket, "close");
+  first.socket.send(JSON.stringify({ type: "authenticate", token }));
+  await started;
+  second.socket.send(JSON.stringify({ type: "authenticate", token }));
+  release();
+  assert.equal((await first.next()).type, "welcome");
+  assert.equal((await rejected)[0], 1008);
+});
+
+test("a socket closed during authorization cannot become a ghost participant", async t => {
+  let release, entered;
+  const gate = new Promise(resolve => { release = resolve; });
+  const started = new Promise(resolve => { entered = resolve; });
+  const cleanups = [];
+  const fixture = await setup(t, { heartbeatMs: 20, cleanupGraceMs: 1,
+    authorizeParticipant: async () => { entered(); await gate; return true; },
+    captureParticipation: async () => ({ huddleSessionId: "canonical", joinedAt: "incarnation" }),
+    releaseParticipation: async grant => { cleanups.push(grant); },
+  });
+  const token = JSON.parse((await fixture.grant("ada")).token).token;
+  const connection = await fixture.open();
+  connection.socket.send(JSON.stringify({ type: "authenticate", token }));
+  await started;
+  const closed = once(connection.socket, "close");
+  connection.socket.terminate(); await closed; release();
+  for (let n = 0; n < 100 && cleanups.length === 0; n++) await new Promise(resolve => setTimeout(resolve, 10));
+  assert.equal(cleanups.length, 1);
+  assert.equal(cleanups[0].actor.userId, "ada");
+  assert.deepEqual(connection.packets, []);
+});
+
+test("cleanup storage failure retries the same trusted identity without leaking tokens", async t => {
+  const calls = [];
+  const fixture = await setup(t, { heartbeatMs: 20, cleanupGraceMs: 1,
+    captureParticipation: async () => ({ huddleSessionId: "canonical", joinedAt: "incarnation" }),
+    releaseParticipation: async grant => { calls.push(grant); if (calls.length === 1) throw new Error("storage unavailable"); },
+  });
+  const connection = await fixture.join("ada");
+  connection.socket.terminate();
+  for (let n = 0; n < 100 && calls.length < 2; n++) await new Promise(resolve => setTimeout(resolve, 10));
+  assert.equal(calls.length, 2);
+  assert.equal(calls[0].cleanupId, calls[1].cleanupId);
+  assert.equal(calls[0].actor.userId, "ada");
+  assert.equal("token" in calls[0], false);
+});

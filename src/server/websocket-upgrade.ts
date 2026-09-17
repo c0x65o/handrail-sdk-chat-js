@@ -235,6 +235,12 @@ export interface ChatWebSocketOptions<
   readonly maxConnectionsPerTenant?: number;
   readonly handshakeTimeoutMs?: number;
   /**
+   * Defaults to true for legacy chat-socket-owned participation. Real-media
+   * hosts may set false and own Leave/End through their media lifecycle;
+   * closing a chat socket then never evicts another device's huddle.
+   */
+  readonly leaveHuddlesOnDisconnect?: boolean;
+  /**
    * Delay between completion-scheduled active-session checks. Used only when
    * auth.revalidateActiveSession is implemented by the host.
    */
@@ -259,6 +265,7 @@ export interface NormalizedChatWebSocketOptions<
   readonly maxConnections: number;
   readonly maxConnectionsPerTenant: number;
   readonly handshakeTimeoutMs: number;
+  readonly leaveHuddlesOnDisconnect: boolean;
   readonly sessionRevalidationIntervalMs: number;
   readonly maxPendingEvents: number;
   readonly maxReplayEvents: number;
@@ -593,6 +600,7 @@ export function createChatWebSocketController<
   const persistDisconnect = (
     disconnect: NonNullable<SocketState["disconnect"]>,
   ): void => {
+    if (!input.options.leaveHuddlesOnDisconnect) return;
     const pending = leaveJoinedHuddlesOnDisconnect({
       database: input.database,
       schema: input.schema,

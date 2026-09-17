@@ -312,6 +312,9 @@ class LabWebRtcConnection implements ChatHuddleMediaAdapterConnection {
     for (const peer of this.#peers.values()) this.#shareState(peer);
   }
   async stopScreenShare(): Promise<void> {
+    // Disconnect already stopped every owned track. Publishing disconnected
+    // state again here feeds host cleanup callbacks back into themselves.
+    if (this.#closed) return;
     this.#screen?.getTracks().forEach((track) => { track.onended = null; track.stop(); });
     this.#screen = undefined;
     await Promise.all([...this.#peers.values()].map((peer) => peer.videoSender.replaceTrack(null).catch(() => {})));

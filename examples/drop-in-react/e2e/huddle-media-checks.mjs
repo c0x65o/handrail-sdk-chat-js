@@ -34,17 +34,37 @@ async function screenDenialAndConflict({ flutter, react, checkpoint, expect, obs
 // the harness's isolated canonical schema. It tests real media authorizer,
 // not the conversation-member HTTP command (covered separately by SDK tests).
 async function canonicalRevocation({ flutter, react, chatLab, chatLabOrigin, checkpoint, stopped, expect, observations }) {
+  await flutter.getByLabel('Start screen sharing', { exact: true }).click();
+  await expect.poll(async () => (await checkpoint('flutter-sharing-before-revocation')).sessions[0].screen_share_owner_user_id).toBe('grace');
+  await expect.poll(() => react.getByLabel('Grace Hopper shared screen', { exact: true }).evaluate(video => video.videoWidth > 0 && video.currentTime > 0)).toBe(true);
   const sessions = (await chatLab.harness.pool.query("SELECT id, tenant_id, conversation_id FROM chat_huddle_sessions WHERE status='active' ORDER BY id")).rows;
   expect(sessions).toHaveLength(1);
   const session = sessions[0];
   const changed = await chatLab.harness.pool.query("UPDATE chat_conversation_members SET state='removed', updated_at=clock_timestamp() WHERE tenant_id=$1 AND conversation_id=$2 AND user_id=$3 AND state='active' RETURNING user_id,state", [session.tenant_id, session.conversation_id, 'grace']);
   expect(changed.rows).toEqual([{ user_id: 'grace', state: 'removed' }]);
-  await expect.poll(() => stopped(flutter), { timeout: 15_000 }).toBe(true);
+  try {
+    await expect.poll(() => stopped(flutter), { timeout: 15_000 }).toBe(true);
+  } catch (error) {
+    await checkpoint('revocation-resource-assertion-failed');
+    const resources = await Promise.race([
+      flutter.evaluate(() => ({
+        peers: window.__media.pcs.map(pc => pc.connectionState),
+        tracks: window.__media.tracks.map(track => ({ kind: track.kind, state: track.readyState })),
+        sockets: window.__media.sockets.map(socket => socket.readyState),
+      })).catch(() => ({ unavailable: 'page evaluation failed' })),
+      new Promise(resolve => setTimeout(() => resolve({ unavailable: 'page evaluation exceeded 2000ms' }), 2000)),
+    ]);
+    observations.push({ label: 'revocation-resource-assertion-failed', resources });
+    throw error;
+  }
+  await expect.poll(async () => { const value = await checkpoint('revoked-active-share-cleanup'); return value.sessions[0].screen_share_owner_user_id === null && value.participants.find(p => p.user_id === 'grace').joined === false; }, { timeout: 18_000 }).toBe(true);
+  await expect(react.getByLabel('Grace Hopper shared screen', { exact: true })).toHaveCount(0);
+  observations.push({ label: 'flutter-active-share-permission-revocation', canonicalParticipationLeft: true, canonicalOwnerReleased: true, remoteVideoRemoved: true });
   // No token/descriptor retained. Fixed deterministic test credential stays
   // within request headers and is never included in report/network body logs.
   const credential = chatLab.actors.find(actor => actor.id === 'grace').credential;
   const response = await flutter.request.post(`${chatLabOrigin}/api/chat/huddles/${encodeURIComponent(session.id)}/join`, {
-    headers: { authorization: `Bearer ${credential}` },
+    headers: { authorization: `Bearer ${credential}`, 'idempotency-key': 'qa-revoked-member-rejoin' },
     data: { operation: 'join_huddle', huddleSessionId: session.id, idempotencyKey: 'qa-revoked-member-rejoin' },
   });
   expect(response.status()).toBe(403);
@@ -60,10 +80,15 @@ export { screenDenialAndConflict, canonicalRevocation };
 // uses a full navigation for actor switching; this validates that supported
 // host boundary, not in-place account replacement or native lifecycle.
 async function flutterAccountRoundTrip({ flutter, react, status, stats, checkpoint, expect, observations }) {
+  await flutter.getByLabel('Start screen sharing', { exact: true }).click();
+  await expect.poll(async () => (await checkpoint('flutter-sharing-before-account-switch')).sessions[0].screen_share_owner_user_id).toBe('grace');
+  await expect.poll(() => react.getByLabel('Grace Hopper shared screen', { exact: true }).evaluate(video => video.videoWidth > 0 && video.currentTime > 0)).toBe(true);
   // Tap the modal barrier; Escape is not handled by this Flutter web sheet.
+  const beforeDismiss = (await stats(flutter)).reduce((a, b) => a + b, 0);
   await flutter.mouse.click(12, 24);
   await expect(flutter.getByLabel('Dialog', { exact: true })).toHaveCount(0);
-  expect((await stats(flutter)).length).toBe(2);
+  await expect.poll(async () => { const values = await stats(flutter); return values.length === 2 && values.reduce((a, b) => a + b, 0) > beforeDismiss; }).toBe(true);
+  observations.push({ label: 'closing-controls-preserves-media', inboundBytes: await stats(flutter) });
   await flutter.getByRole('button', { name: 'Grace Hopper', exact: true }).click();
   await flutter.getByRole('menuitem', { name: 'Margaret Hamilton', exact: true }).click();
   await flutter.waitForURL(/actor=margaret/);
@@ -71,6 +96,9 @@ async function flutterAccountRoundTrip({ flutter, react, status, stats, checkpoi
   await expect.poll(async () => (await status(flutter)).identity?.userId).toBe('margaret');
   await flutter.locator('flt-semantics-placeholder').evaluate(e => e.click());
   await expect.poll(() => react.locator('[data-media-connection="connected"]').count()).toBe(1);
+  await expect.poll(async () => { const value = await checkpoint('active-share-account-switch-cleanup'); return value.sessions[0].screen_share_owner_user_id === null && value.participants.find(p => p.user_id === 'grace').joined === false; }, { timeout: 18_000 }).toBe(true);
+  await expect(react.getByLabel('Grace Hopper shared screen', { exact: true })).toHaveCount(0);
+  observations.push({ label: 'flutter-active-share-account-switch', canonicalParticipationLeft: true, canonicalOwnerReleased: true, remoteVideoRemoved: true });
   expect(await flutter.evaluate(() => ({ peers: window.__media.pcs.length, tracks: window.__media.tracks.length }))).toEqual({ peers: 0, tracks: 0 });
   observations.push({ label: 'flutter-account-switch', mechanism: 'supported actor selector document navigation', identity: 'margaret', oldGracePeerReleased: true, newAccountCaptureCountBeforeJoin: 0 });
   await flutter.getByRole('button', { name: 'Margaret Hamilton', exact: true }).click();

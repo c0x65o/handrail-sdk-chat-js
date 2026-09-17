@@ -14,6 +14,7 @@ import {
   createPostgresMigrationRunner,
   handrailChatPostgresMigrations,
   leaveHuddle,
+  leaveHuddleParticipation,
   leaveJoinedHuddlesOnDisconnect,
 } from "@handrail/chat/server";
 import { createPostgresTestBackend } from "@handrail/chat/testing";
@@ -445,10 +446,61 @@ test("trusted leave-huddle is tenant-safe, atomic, replayable, and used by disco
       assert.deepEqual(await counts("session-disconnect-helper"), { outbox: 1, idempotency: 1 });
     });
 
-    await t.test("an authenticated WebSocket close invokes disconnect leave, while failed handshakes do not", async () => {
+    await t.test("trusted incarnation fence survives delayed cleanup and preserves SQL microseconds", async () => {
+      const sessionId = "session-fenced-cleanup";
+      await seedActiveSession({ conversationId: "conversation-fenced-cleanup", sessionId,
+        screenShareOwner: actor.userId });
+      const times = await harness.pool.query(`SELECT joined_at::text AS current,
+        (joined_at + CASE WHEN mod(extract(microseconds FROM joined_at)::integer, 1000)=999
+          THEN interval '-1 microsecond' ELSE interval '1 microsecond' END)::text AS stale
+        FROM ${tables.participants} WHERE huddle_session_id=$1 AND user_id=$2`, [sessionId, actor.userId]);
+      const firstJoin = times.rows[0].stale, newerJoin = times.rows[0].current;
+      assert.equal(Date.parse(firstJoin), Date.parse(newerJoin), "the fence must retain sub-millisecond precision");
+      const cleanup = (expectedJoinedAt, key = "fenced-cleanup") => leaveHuddleParticipation({
+        database: harness.pool, schema: harness.schema, permissions, actor,
+        huddleSessionId: sessionId, idempotencyKey: key,
+        reason: HUDDLE_LEAVE_REASONS.disconnect, expectedJoinedAt,
+      });
+      await assert.rejects(cleanup(firstJoin), error => error.code === "participation_changed");
+      assert.deepEqual(await counts(sessionId), { outbox: 0, idempotency: 0 });
+      const before = await harness.pool.query(`SELECT active_screen_share_owner_user_id FROM ${tables.sessions} WHERE id=$1`, [sessionId]);
+      assert.equal(before.rows[0].active_screen_share_owner_user_id, actor.userId);
+      const applied = await cleanup(newerJoin);
+      assert.equal(applied.state.screenShareOwnerUserId, null);
+      assert.equal((await cleanup(newerJoin)).reconciliationStatus, "replayed");
+      assert.deepEqual(await counts(sessionId), { outbox: 1, idempotency: 1 });
+      // A completed old idempotency key must not replay old state over a rejoin.
+      await harness.pool.query(`UPDATE ${tables.participants} SET joined_at=clock_timestamp(), left_at=NULL, leave_reason=NULL WHERE huddle_session_id=$1 AND user_id=$2`, [sessionId, actor.userId]);
+      await assert.rejects(cleanup(newerJoin), error => error.code === "participation_changed");
+      assert.deepEqual(await counts(sessionId), { outbox: 1, idempotency: 1 });
+    });
+
+    await t.test("only trusted fenced disconnect can release revoked participation and ownership", async () => {
+      const sessionId = "session-revoked-cleanup";
+      await seedActiveSession({ conversationId: "conversation-revoked-cleanup", sessionId,
+        screenShareOwner: actor.userId, entity: { type: "project", id: "revoked-project" } });
+      const joined = await harness.pool.query(`SELECT joined_at::text FROM ${tables.participants} WHERE huddle_session_id=$1 AND user_id=$2`, [sessionId, actor.userId]);
+      await harness.pool.query(`UPDATE ${tables.members} SET state='removed' WHERE conversation_id='conversation-revoked-cleanup' AND user_id=$1`, [actor.userId]);
+      await assert.rejects(command(request(sessionId, "revoked-user-leave")), ChatAuthorizationError);
+      const base = { database: harness.pool, schema: harness.schema, actor,
+        permissions: { authorizeEntity: async () => false }, huddleSessionId: sessionId,
+        idempotencyKey: "revoked-provider-cleanup", expectedJoinedAt: joined.rows[0].joined_at };
+      await assert.rejects(leaveHuddleParticipation({ ...base, reason: HUDDLE_LEAVE_REASONS.explicit }), TypeError);
+      const result = await leaveHuddleParticipation({ ...base, reason: HUDDLE_LEAVE_REASONS.disconnect });
+      assert.equal(result.state.screenShareOwnerUserId, null);
+      assert.equal(result.state.participants.find(p => p.userId === actor.userId).status, "left");
+      assert.deepEqual(await counts(sessionId), { outbox: 1, idempotency: 1 });
+      const event = await harness.pool.query(`SELECT payload FROM ${tables.outbox} WHERE payload->'state'->>'huddleSessionId'=$1`, [sessionId]);
+      assert.equal(event.rows[0].payload.reason, HUDDLE_LEAVE_REASONS.disconnect);
+    });
+
+    for (const leaveHuddlesOnDisconnect of [true, false]) await t.test(
+      `authenticated WebSocket disconnect respects host policy (${leaveHuddlesOnDisconnect})`, async () => {
+      const sessionId = `session-websocket-disconnect-${leaveHuddlesOnDisconnect}`;
       await seedActiveSession({
-        conversationId: "conversation-websocket-disconnect",
-        sessionId: "session-websocket-disconnect",
+        conversationId: `conversation-websocket-disconnect-${leaveHuddlesOnDisconnect}`,
+        sessionId,
+        screenShareOwner: actor.userId,
       });
       const runtime = createChatServer({
         database: { pool: harness.pool, schema: harness.schema },
@@ -465,7 +517,7 @@ test("trusted leave-huddle is tenant-safe, atomic, replayable, and used by disco
           async searchUsers() { return []; },
         },
         permissions,
-        webSocket: { handshakeTimeoutMs: 1_000 },
+        webSocket: { handshakeTimeoutMs: 1_000, ...(leaveHuddlesOnDisconnect ? {} : { leaveHuddlesOnDisconnect }) },
       });
       const server = createServer(runtime.router);
       runtime.attachWebSocket(server);
@@ -487,9 +539,9 @@ test("trusted leave-huddle is tenant-safe, atomic, replayable, and used by disco
         const before = await harness.pool.query(
           `SELECT left_at FROM ${tables.participants}
             WHERE tenant_id = 'tenant-a'
-              AND huddle_session_id = 'session-websocket-disconnect'
+              AND huddle_session_id = $2
               AND user_id = $1`,
-          [actor.userId],
+          [actor.userId, sessionId],
         );
         assert.equal(before.rows[0].left_at, null);
 
@@ -508,19 +560,34 @@ test("trusted leave-huddle is tenant-safe, atomic, replayable, and used by disco
         assert.equal((await accepted).type, "chat.session.accepted");
         socket.close();
         await new Promise((resolve) => socket.once("close", resolve));
+        if (!leaveHuddlesOnDisconnect) {
+          // Drain disconnect work before proving no canonical mutation occurred.
+          await runtime.close();
+          const retained = await harness.pool.query(
+            `SELECT participant.left_at, session.active_screen_share_owner_user_id
+               FROM ${tables.participants} AS participant
+               JOIN ${tables.sessions} AS session
+                 ON session.tenant_id=participant.tenant_id AND session.id=participant.huddle_session_id
+              WHERE participant.tenant_id='tenant-a' AND participant.user_id=$1 AND session.id=$2`,
+            [actor.userId, sessionId],
+          );
+          assert.deepEqual(retained.rows[0], { left_at: null, active_screen_share_owner_user_id: actor.userId });
+          return;
+        }
         await waitFor(async () => {
           const result = await harness.pool.query(
             `SELECT leave_reason FROM ${tables.participants}
               WHERE tenant_id = 'tenant-a'
-                AND huddle_session_id = 'session-websocket-disconnect'
+                AND huddle_session_id = $2
                 AND user_id = $1`,
-            [actor.userId],
+            [actor.userId, sessionId],
           );
           return result.rows[0].leave_reason === HUDDLE_LEAVE_REASONS.disconnect;
         });
         const session = await harness.pool.query(
           `SELECT status, ended_at FROM ${tables.sessions}
-            WHERE tenant_id = 'tenant-a' AND id = 'session-websocket-disconnect'`,
+            WHERE tenant_id = 'tenant-a' AND id = $1`,
+          [sessionId],
         );
         assert.deepEqual(session.rows[0], { status: "active", ended_at: null });
       } finally {
