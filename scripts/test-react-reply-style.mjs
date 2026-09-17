@@ -1,4 +1,4 @@
-import { mkdir, mkdtemp, readFile, writeFile, rm } from "node:fs/promises";
+import { cp, mkdir, mkdtemp, readFile, writeFile, rm } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -12,6 +12,8 @@ const run = args => {
   if (result.status !== 0) throw new Error(`Scoped check exited ${result.status ?? result.signal}`);
 };
 try {
+  // Relocated tests keep their relative imports of the shared React helpers.
+  await cp(resolve(root, "test/helpers"), resolve(output, "helpers"), { recursive: true });
   run(["node_modules/typescript/bin/tsc", "-p", "tsconfig.react-reply-style.json", "--outDir", output]);
   run(["node_modules/typescript/bin/tsc", "-p", "tsconfig.react-reply-style-type-tests.json"]);
   run(["--test", "--test-concurrency=1", "--test-timeout=15000", "test/react-reply-style.test.mjs"]);
