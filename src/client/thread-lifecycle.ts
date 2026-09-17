@@ -259,8 +259,25 @@ export function createThreadLifecycleRuntime(options: Options) {
         revoke(id); continue;
       }
       if ([id, parent].some(scope => state.currentUser.memberships[scope] !== previous.currentUser.memberships[scope])) {
-        cancel(e);
-        publish(e, { threadId: id, parentConversationId: parent, status: "idle", legacy: false, actionsAvailable: false });
+        const timestampOnly = [id, parent].every(scope => {
+          const before = previous.currentUser.memberships[scope];
+          const after = state.currentUser.memberships[scope];
+          if (before === after) return true;
+          if (before === undefined || after === undefined) return false;
+          const { updatedAt: _beforeTime, ...beforeAuthority } = before;
+          const { updatedAt: _afterTime, ...afterAuthority } = after;
+          return Object.keys(beforeAuthority).length === Object.keys(afterAuthority).length &&
+            Object.entries(afterAuthority).every(([key, value]) =>
+              Object.hasOwn(beforeAuthority, key) && Reflect.get(beforeAuthority, key) === value);
+        });
+        // Sending refreshes active membership timestamps. Do not cancel an
+        // already accepted command during its async token acquisition when all
+        // authority fields are unchanged. Still reauthorize below; denial,
+        // session changes or any membership change beyond updatedAt cancel it.
+        if (e.command === undefined || !timestampOnly) {
+          cancel(e);
+          publish(e, { threadId: id, parentConversationId: parent, status: "idle", legacy: false, actionsAvailable: false });
+        }
         // The mounted hook does not reload on cache changes. Reauthorize after
         // invalidation so an allowed membership refresh cannot strand controls.
         void load(id, parent);

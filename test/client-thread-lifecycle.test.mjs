@@ -59,7 +59,8 @@ const event = (lifecycle, parent = parentId, changed = false) => ({
   occurredAt: now, payload: { threadId, parentConversationId: parent,
     ...(changed ? { revision: lifecycle.revision } : { threadLifecycle: lifecycle }) },
 });
-function harness({ fetch: override, feature = true, cache = createNormalizedChatCache(identity), actor = userId } = {}) {
+function harness({ fetch: override, feature = true, cache = createNormalizedChatCache(identity), actor = userId,
+  getAccessToken = () => "token" } = {}) {
   let canonical = open(1), online = true, sequence = 0;
   const requests = [];
   const fetch = async (url, init) => {
@@ -76,7 +77,7 @@ function harness({ fetch: override, feature = true, cache = createNormalizedChat
     }
     throw new Error("unconfigured command");
   };
-  const dispatcher = createChatCommandDispatcher({ endpoint: "/chat", getAccessToken: () => "token", fetch,
+  const dispatcher = createChatCommandDispatcher({ endpoint: "/chat", getAccessToken, fetch,
     options: { retry: { maxAttempts: 1 } } });
   const reader = createChatSnapshotReader({ endpoint: "/chat", getAccessToken: () => "token", fetch,
     options: { retry: { maxAttempts: 1 } } });
@@ -88,6 +89,26 @@ function harness({ fetch: override, feature = true, cache = createNormalizedChat
     setOnline(value) { online = value; runtime.connectionChanged(value); },
   };
 }
+
+test('denied timestamp reauthorization still aborts an accepted command before token acquisition completes', async () => {
+  const token = deferred();
+  let denied = false;
+  const h = harness({ getAccessToken: () => token.promise,
+    fetch: () => denied ? response({ error: { code: 'denied' } }, 403) : undefined });
+  h.cache.hydrateConversationDetail(detail());
+  await h.api.load(threadId, parentId);
+  const pending = h.api.close(threadId);
+  denied = true;
+  h.cache.hydrateConversationDetail(detail(open(1), {
+    currentMember: { ...detail().conversation.currentMember, updatedAt: '2031-01-01T00:00:00.000Z' },
+  }));
+  await flush();
+  token.resolve('token');
+  await pending;
+  assert.equal(h.requests.filter(request => request.method === 'PATCH').length, 0);
+  assert.equal(h.api.getState(threadId).error, 'access_revoked');
+  assert.equal(h.api.getState(threadId).pendingInput, undefined);
+});
 const result = (input, before, after, status = "applied") => ({ ...input, threadId,
   reconciliationStatus: status, previousLifecycle: before, threadLifecycle: after });
 
@@ -422,3 +443,32 @@ test("membership refresh after hydration recovers automatically; denial still pu
   assert.equal(h.api.getState(threadId).lifecycle, undefined);
   assert.equal(h.api.getState(threadId).actionsAvailable, false);
 });
+
+for (const change of ['timestamp', 'role', 'joinedAt', 'removed']) {
+  test(`membership ${change} refresh during command token acquisition preserves only unchanged authority`, async () => {
+    const h = harness({ fetch: (_url, init, body) => init.method === 'PATCH'
+      ? response(result(body, open(1), closed(2))) : undefined });
+    h.cache.hydrateConversationDetail(detail());
+    await h.api.load(threadId, parentId);
+    // The real dispatcher awaits token acquisition before fetch. Refresh in
+    // that gap, as the send-triggered detail response does in the browser.
+    const pending = h.api.close(threadId);
+    assert.equal(h.api.getState(threadId).status, 'updating');
+    h.cache.hydrateConversationDetail(detail(open(1), {
+      currentMember: { ...detail().conversation.currentMember, updatedAt: '2031-01-01T00:00:00.000Z',
+        ...(change === 'role' ? { role: 'moderator' } : {}),
+        ...(change === 'joinedAt' ? { joinedAt: '2031-01-01T00:00:00.000Z' } : {}),
+        ...(change === 'removed' ? { state: 'removed' } : {}) },
+    }));
+    await pending;
+    await flush();
+    const writes = h.requests.filter(request => request.method === 'PATCH');
+    assert.equal(writes.length, change === 'timestamp' ? 1 : 0);
+    if (change === 'timestamp') {
+      assert.equal(writes[0].body.intent, 'close');
+      assert.equal(writes[0].body.expectedLifecycleRevision, 1);
+      assert.equal(writes[0].key, 'lifecycle-1');
+      assert.deepEqual(h.api.getState(threadId).lifecycle, closed(2));
+    }
+  });
+}

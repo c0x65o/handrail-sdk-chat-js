@@ -1,5 +1,9 @@
 # Self-contained Flutter cross-client thread recovery acceptance
 
+For the 1.0.43 harness defects, reproduced rapid Close races, regression coverage
+and remaining readiness gates, see [QA-43 repair](qa-43-recovery-repair.md).
+The dated results below remain historical evidence.
+
 Finding: `0791d064-3e24-4882-b47d-67d8b617f40c`  
 Work request: `63a7e01e-a749-4482-8e37-535b97d6f5df`
 
