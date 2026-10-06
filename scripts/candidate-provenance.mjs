@@ -14,7 +14,7 @@ function fingerprint(paths) {
   return { sha256: hash(JSON.stringify(entries)), files: entries };
 }
 export function inspectCandidate() {
-  const sourcePaths = ['src', 'scripts', 'examples/drop-in-react/src', 'examples/drop-in-react/scripts'].flatMap(path => files(join(candidateRoot, path)));
+  const sourcePaths = ['src', 'scripts', 'examples/native-contact-form', 'examples/drop-in-react/src', 'examples/drop-in-react/scripts'].flatMap(path => files(join(candidateRoot, path)));
   for (const path of ['package.json', 'package-lock.json', 'tsconfig.json', 'examples/drop-in-react/package.json', 'examples/drop-in-react/package-lock.json', 'examples/drop-in-react/vite.config.ts', 'examples/drop-in-react/tsconfig.json']) sourcePaths.push(join(candidateRoot, path));
   const distPaths = files(join(candidateRoot, 'dist')).filter(path => !path.endsWith('/candidate.json'));
   return { scheme: 'handrail-unpublished-candidate-v1', source: fingerprint(sourcePaths), package: fingerprint(distPaths) };

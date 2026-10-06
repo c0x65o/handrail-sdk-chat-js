@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "handoff_id": "native-relay-a0285beb-8973d97d-ae75557702b8",
+  "work_request_id": "a0285beb-c597-4f21-a940-c79c141e58f9",
+  "codex_run_id": "8973d97d-34b7-4e25-b164-23f3b51ba73d",
+  "recorded_at": "2026-10-06T01:37:34.950988+00:00",
+  "verdict": "workspace implementation and isolated qualification passed; managed qualification remains unverified",
+  "delivery": "Uncommitted working tree on shared Main. No commit, push, PR, publication, deployment, Handrail state mutation, real persistent credential, external integration activation or customer/production write.",
+  "baselines": {
+    "js": {
+      "version": "1.0.48",
+      "commit": "7ccdbcc42b9092fa0aef0ff258d840e2a6510306"
+    },
+    "flutter": "39dddc7b448917aa9392f557617cc3014cad6326",
+    "preview": "b48bf8418702f3acf3b12b8e401749e7ff3a63fb",
+    "initial_worktrees": "clean; linked Flutter/preview tracked trees remain unchanged"
+  },
+  "context": {
+    "handrail_current_context": "Read successfully; active project Handrail Chat SDK and exact current WR verified. No saved owner decisions or project-specific memory supplied. Attached KB contracts used.",
+    "repository_guidance": "No AGENTS.md in checkout or ancestors. Workspace and JS .agents directories empty; no local skill or memory files found.",
+    "authentication": "Host sessions/capability policy retained. Native route limit remains enabled at 10/60. SDK has no password-login route; no password/MFA/lockout policy changes."
+  },
+  "implemented": [
+    "POST /native-tokens/:tokenId/rotate atomically replaces a 256-bit random secret verifier while preserving identity, unchanged grants and durable retry history; no grace interval or revoked-token reactivation.",
+    "Creation, first revocation and rotation append metadata-only lifecycle records to existing durable audit tables/dispatcher in the same transaction; audit failure rolls back changes.",
+    "Reusable NativeTokenManager, already mounted in Chat Lab settings, now confirms rotation, shows token IDs, refreshes uncertain outcomes and scrubs one-time disclosures across scope changes.",
+    "Native sends lock the granted channel before retry/persistence to reject concurrent archival, without changing ordinary session send behavior.",
+    "Added bounded server-side contact-form HTTP example with required host authorization, fixed channel, stable retry IDs, no redirects or automatic uncertain retries, and sanitized responses.",
+    "Added reusable actual browser proof and two-instance isolated runner; retained full-SHA Git dependencies/lockfiles and exact-source development resolver.",
+    "Replaced stale current documentation; retained September evidence separately without activating retired planners."
+  ],
+  "candidate": {
+    "scheme": "handrail-unpublished-candidate-v1",
+    "source_sha256": "ae75557702b82b4e09f6e42934eaddc1a46afb3fc367fb34aacf2dfd5859b307",
+    "package_sha256": "c5813d7131f31d08df109f3a3f3951a96c23a39a304d9ae73f3ed36b0e32d4ef",
+    "retained_manifest": "build/native-token-finish-20261006/candidate.json",
+    "source_file_count": 323,
+    "compiled_file_count": 657,
+    "dependency_pin": "git+https://github.com/c0x65o/handrail-sdk-chat-js.git#90bff33529df06720ff89ccd821360ac65eaf0d0",
+    "qualification": "Exact working-tree source resolved through supported Node/Vite candidate binding, not a new SDK dependency installation. No installable final Git SHA exists until separately authorized commit/release."
+  },
+  "checks": [
+    {
+      "command": "npm run build",
+      "result": "passed"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "passed; includes contract type tests"
+    },
+    {
+      "command": "node --test --test-concurrency=1 test/native-token-boundaries.test.mjs test/native-candidate-binding.test.mjs test/native-contact-form.test.mjs test/request-context.test.mjs test/send-message-http.test.mjs examples/drop-in-react/test/NativeTokenProofPacing.test.mjs",
+      "result": "22 passed"
+    },
+    {
+      "command": "npm --prefix examples/drop-in-react run typecheck",
+      "result": "passed against current compiled declarations"
+    },
+    {
+      "command": "npm --prefix examples/drop-in-react run build",
+      "result": "passed; existing large-chunk warning retained"
+    },
+    {
+      "command": "npm --prefix examples/drop-in-react run check:graph",
+      "result": "passed; 135 browser modules, no server implementation modules"
+    },
+    {
+      "command": "npm --prefix examples/drop-in-react run test:native-tokens",
+      "result": "31 passed; one worker"
+    },
+    {
+      "command": "TMPDIR=<private worker scratch> PG_BIN=/usr/lib/postgresql/15/bin bash test/run-native-token-postgres.sh",
+      "result": "13 passed; PostgreSQL 15.19, private Unix socket with no TCP listener. Includes lifecycle rollback and real audit dispatcher delivery, both revocation/rotation lock orders, concurrent receipt behavior and channel archive race. Zero test schemas remain; cluster stopped."
+    },
+    {
+      "command": "TMPDIR=<private worker scratch> PG_BIN=/usr/lib/postgresql/15/bin PLAYWRIGHT_BROWSERS_PATH=<worker scratch>/browsers NATIVE_TOKEN_ISOLATED_BROWSER=1 bash test/run-native-token-postgres.sh",
+      "result": "13 PostgreSQL cases and browser test passed on final implementation; two independent clean actual Chat Lab + Chromium instances, external HTTP via contact handler, SQL and browser candidate hashes verified. Owned schemas removed, fixture tokens revoked, private cluster stopped. No traces/screenshots/video."
+    },
+    {
+      "command": "CI=true FLUTTER_SUPPRESS_ANALYTICS=true PUB_CACHE=<scratch SDK>/bin/cache/pub-cache <scratch SDK>/bin/flutter pub get --enforce-lockfile --no-example",
+      "result": "passed; repaired generated package configuration only, no dependency/lockfile changes"
+    },
+    {
+      "command": "CI=true FLUTTER_SUPPRESS_ANALYTICS=true PUB_CACHE=<scratch SDK>/bin/cache/pub-cache <scratch SDK>/bin/flutter test --no-pub --concurrency=2 test/durable_resource_event_reducer_test.dart",
+      "result": "45 passed, including compilation. Fresh non-hardlinked scratch copy of installed Flutter revision cc0734ac716fbb8b90f3f9db8020958b1553afa7; matching entrypoint, Dart binary, tool snapshot and test-engine hashes verified."
+    },
+    {
+      "command": "git diff --check and verifyCandidate()",
+      "result": "passed on final working source"
+    }
+  ],
+  "prior_attempts_and_warnings": [
+    {
+      "check": "Initial PostgreSQL attempt",
+      "result": "9 passed, 1 failed",
+      "reason": "New archive test fixture omitted required archived_by_user_id and violated chat_conversations_archive_pair_check. Corrected fixture; final 13 pass. Original execution output retained in worker transcript (session 82634)."
+    },
+    {
+      "check": "Initial Flutter reducer attempt",
+      "result": "failed before tests",
+      "reason": "Pre-existing .dart_tool/package_config.json referenced unavailable separate Preview cache. Fixed through locked pub get into private scratch cache; final 45 pass. No Preview project writes.",
+      "log": "build/native-token-finish-20261006/flutter-reducer.log"
+    },
+    {
+      "check": "Browser navigation diagnostics",
+      "result": "nonfatal handled Vite websocket EPIPE on page navigation, retained in log; both final browser runs passed. No HTTP 5xx observed."
+    },
+    {
+      "check": "Vite consumer build",
+      "result": "passed with >500kB chunk warning; no bundle-size optimization undertaken"
+    }
+  ],
+  "browser_receipts": [
+    {
+      "run": 1,
+      "status": "passed",
+      "instanceId": "9507b1f77b70851a0b4a36f0d16bdd42",
+      "schema": "handrail_chat_lab_0dfaf03fbead4d578a645298e42b0d2d",
+      "source": "ae75557702b82b4e09f6e42934eaddc1a46afb3fc367fb34aacf2dfd5859b307",
+      "package": "c5813d7131f31d08df109f3a3f3951a96c23a39a304d9ae73f3ed36b0e32d4ef",
+      "proofs": [
+        "UI creation",
+        "contact HTTP example",
+        "retry",
+        "conflict",
+        "denied channel/read",
+        "integration attribution",
+        "reload",
+        "UI rotation",
+        "old credential invalidation",
+        "retry across rotation",
+        "build status",
+        "UI revocation",
+        "ordinary user UI/API denial"
+      ]
+    },
+    {
+      "run": 2,
+      "status": "passed",
+      "instanceId": "f7f3c26c3c9b96670914ac855dc2b419",
+      "schema": "handrail_chat_lab_adfe639ace534b07a634dd091d1f0812",
+      "source": "ae75557702b82b4e09f6e42934eaddc1a46afb3fc367fb34aacf2dfd5859b307",
+      "package": "c5813d7131f31d08df109f3a3f3951a96c23a39a304d9ae73f3ed36b0e32d4ef",
+      "proofs": [
+        "UI creation",
+        "contact HTTP example",
+        "retry",
+        "conflict",
+        "denied channel/read",
+        "integration attribution",
+        "reload",
+        "UI rotation",
+        "old credential invalidation",
+        "retry across rotation",
+        "build status",
+        "UI revocation",
+        "ordinary user UI/API denial"
+      ]
+    }
+  ],
+  "managed_readiness": {
+    "inspected_read_only": true,
+    "service_id": "812c4054-6ced-4616-94fb-13f672b3e897",
+    "service_status": "stopped; no listener or QA route",
+    "port": 4167,
+    "health": "/__chat-lab/health",
+    "command": "npm run build && npm --prefix examples/drop-in-react run dev:lab",
+    "resource_id": "c699099d-668d-4a0f-a5a0-7f52923f3e32",
+    "resource_status": "Docker container missing, volume present, probe down; stored port 37033 is last-known, not current; PostgreSQL 16 declared",
+    "prepare_task_id": "977627c0-fdd0-479e-b2ae-8f016fe0ccaa",
+    "prepare_command": "npm ci --include=dev && npm run setup:lab",
+    "configured_check": "Flutter durable resource reducer executed locally with same-revision SDK as above"
+  },
+  "remaining": [
+    "Managed service/proxy and declared PostgreSQL 16 runtime acceptance is unverified. Local Chromium/PG15 evidence is not managed acceptance.",
+    "Parent operations authority: re-inspect resource/service; handrail_dev_resource_action(action=start, resource_type=postgres, resource_id=c699099d-668d-4a0f-a5a0-7f52923f3e32), preserve retained volume, verify reconciled bindings; never recreate/reset.",
+    "Run preparation run_project_task(task_id=977627c0-fdd0-479e-b2ae-8f016fe0ccaa, env=dev) with supported writable Flutter caches; then handrail_dev_service_action(action=start/restart, service_id=812c4054-6ced-4616-94fb-13f672b3e897). These state changes were not authorized/executed in this workspace-only run.",
+    "Use scoped managed QA route and exact candidate hashes with verify-native-tokens-managed.mjs, retain first receipt, perform managed clean restart and repeat with new schema/context. Exact env names and ownership/cleanup steps are in docs/native-inbound-tokens.md.",
+    "Flutter web UI/build and managed preparation were not exercised; configured Flutter reducer passed. No npm registry release; any Git-SHA installation must await a separately authorized commit and matching lockfile."
+  ],
+  "edited_files": [
+    {
+      "path": "docs/native-inbound-tokens.md",
+      "sha256": "7c7f76109baf5882918428f5cdbd962d390558ad13baad82f225ec618e64bfef"
+    },
+    {
+      "path": "docs/validation/native-token-history-202609.md",
+      "sha256": "86d45d19999af826e486be7d99d4650c535cd6a807c1e0789f0ecd534ef906be"
+    },
+    {
+      "path": "examples/drop-in-react/scripts/native-token-browser-proof.mjs",
+      "sha256": "f9983467498ff7c1c2ec8c2d88a0c809470862d34310365b72a2e17caa4bbb78"
+    },
+    {
+      "path": "examples/drop-in-react/scripts/verify-native-tokens-managed.mjs",
+      "sha256": "682c0e47038bb786c391414139b152b34be845e3753a62c40c99eb6d444fa66e"
+    },
+    {
+      "path": "examples/drop-in-react/test/NativeTokenManager.test.tsx",
+      "sha256": "594de9cf5e2becae3583c6ccf77216bd43c83783dea8772a24eaa32701fbcd5b"
+    },
+    {
+      "path": "examples/drop-in-react/test/NativeTokensBrowser.test.mjs",
+      "sha256": "695014268c457d58848cd2b37ca9db6c5c2425cfebbe4956ef75e88301c4d3f3"
+    },
+    {
+      "path": "examples/native-contact-form/README.md",
+      "sha256": "6ee73178ac2b45f7e43249e8e74a1d79d1df20ccf27c2913f82204ba9d2c8775"
+    },
+    {
+      "path": "examples/native-contact-form/handler.mjs",
+      "sha256": "3494435585b6f0af15a5307982b986747b87621db58ed0104e5d6699c0eb8dd7"
+    },
+    {
+      "path": "scripts/candidate-provenance.mjs",
+      "sha256": "66880f8f3fd987fca1fd2aea4cd8023f025ae20f83ae2d7d228ea35694313d94"
+    },
+    {
+      "path": "src/server/contracts.ts",
+      "sha256": "b8f95f7b77bea38344093c25e17f30b4e2bc5a66276f390c2a0658711bf93323"
+    },
+    {
+      "path": "src/server/create-chat-server.ts",
+      "sha256": "6522c935c33190fcfecbdc5cf8d9883facd0c0114f4fca2e3a799132053ee228"
+    },
+    {
+      "path": "src/server/native-tokens.ts",
+      "sha256": "48e2f3440c80849b2a0d317382c8a7846661e7b97e137d021d43bfb32de966d3"
+    },
+    {
+      "path": "src/server/send-message-command.ts",
+      "sha256": "f5f590e66d4163b10103dbb06cfd9e6571516ab3470138d8cbd2cded22539fc2"
+    },
+    {
+      "path": "src/ui/NativeTokenManager.tsx",
+      "sha256": "f357377b9cfcb0e3201b7b86fa9e9bc9198a0ef42afc7470ea099b1711b85cb7"
+    },
+    {
+      "path": "test/native-contact-form.test.mjs",
+      "sha256": "2a363054c6fdd284815291c701947e2937ee9369a0e2b35defdbd089a2fc7490"
+    },
+    {
+      "path": "test/postgres-native-tokens.test.mjs",
+      "sha256": "208b0663cb084495c6c1ddd8caa82f65090de8f5b8a238043a9a2d8d55a95327"
+    },
+    {
+      "path": "test/run-native-token-postgres.sh",
+      "sha256": "5d0a35408a37dfe71a01ccc1ebeb4a6c094dfe8f140df28055e1bce0dba2119b"
+    },
+    {
+      "path": "docs/validation/native-token-finish-20261006.json",
+      "sha256": null,
+      "note": "Self-referential evidence report excluded from edited-content hash; external report checksum retained beside build artifacts."
+    }
+  ],
+  "edited_content_manifest_sha256": "6641fced19393b71399bd80228e905856b2b2599d519bc9b7af385aa0c9749ca",
+  "working_tree_patch": {
+    "path": "build/native-token-finish-20261006/working-tree.patch",
+    "sha256": "7c5c5e792815901c5d98f7a85bdb6f321176d510679c71b520fbb5e45b745f59",
+    "qualification": "Includes tracked and newly added source/test/documentation changes; excludes this self-referential report."
+  },
+  "test_logs": [
+    {
+      "path": "build/native-token-finish-20261006/browser-graph.log",
+      "sha256": "4872c1e35e7e376eeceba8452f333cfaa97be84e497e3c88bf01e56d2f7dd854"
+    },
+    {
+      "path": "build/native-token-finish-20261006/build.log",
+      "sha256": "a9f509ec7e389bbd2937468a11652f5440b8559691bc8aa54ab5960efdf73bfc"
+    },
+    {
+      "path": "build/native-token-finish-20261006/consumer-build.log",
+      "sha256": "03c91734c1c832d98e30972357496604119a1e3238426a743ed1541f4cdc143f"
+    },
+    {
+      "path": "build/native-token-finish-20261006/consumer-typecheck.log",
+      "sha256": "a58b9104ee22db5535a5a487341749541d2e65907ab18229b9bb3cecfa459251"
+    },
+    {
+      "path": "build/native-token-finish-20261006/flutter-pub-get.log",
+      "sha256": "ede48e3f2a1c1cd3829248c430f4d71613af965329810f151d77206f371e6f26"
+    },
+    {
+      "path": "build/native-token-finish-20261006/flutter-reducer-retry.log",
+      "sha256": "93f7a8cc1d8fe22c78ee4f190b8c09fe2565c5c63a9e21db96e2a9dd61443256"
+    },
+    {
+      "path": "build/native-token-finish-20261006/flutter-reducer.log",
+      "sha256": "ef197e3ba8b45ac9c2311160d00fbccce2e543673c8987384d35589d271bd574"
+    },
+    {
+      "path": "build/native-token-finish-20261006/focused.log",
+      "sha256": "8a1155b7dc67ff7e525c57353d6fda409baafa692a5e3afaf1d1a2186aeb3065"
+    },
+    {
+      "path": "build/native-token-finish-20261006/postgres-browser.log",
+      "sha256": "651b089a57e9d6f7bc0b31bb2d93d763b92d246450793d8ba38c5a459ee952fb"
+    },
+    {
+      "path": "build/native-token-finish-20261006/postgres-final.log",
+      "sha256": "734d65b62bdbbde6fb2bd537cf573d1e245c3e03725f60e2f0b325f13e9c2387"
+    },
+    {
+      "path": "build/native-token-finish-20261006/typecheck.log",
+      "sha256": "a2aa71cccb0ece00238faed1d3722ee71307e09ad417b63b8d3d3af858e12fee"
+    },
+    {
+      "path": "build/native-token-finish-20261006/ui-session.log",
+      "sha256": "b276279d9fe0f100f5a543901221c8d5e3343a12b70c60618806a7afc4c2e09a"
+    }
+  ],
+  "browser_assets": [
+    {
+      "path": "examples/drop-in-react/dist/assets/chat-lab-main-BnsaGSKH.js",
+      "sha256": "84da70bbdd859e11067897cb91a1551d04ee2425c71cb2e9ea302a5a16d0c854"
+    },
+    {
+      "path": "examples/drop-in-react/dist/assets/chat-lab-main-Dz47SCs4.css",
+      "sha256": "32adb0c629ba4c297cc98260f9f9eb712cbc67f36b106c5dccb9f0e2e0898a77"
+    },
+    {
+      "path": "examples/drop-in-react/dist/assets/chat-workspace-Dz_6PyBU.js",
+      "sha256": "5f846ae19e82b85eb78e1eb122159f6428f366c65ed9ab41009b5d84ff4c9ef9"
+    },
+    {
+      "path": "examples/drop-in-react/dist/assets/example-CPLYbtuO.css",
+      "sha256": "8eb6ebfad027c54f80200936b32350d840d5d92921069d9b7a72f75d1707e560"
+    },
+    {
+      "path": "examples/drop-in-react/dist/assets/example-DWJQuSR4.js",
+      "sha256": "e4b2bbef34c035d895ec6bd8b4d1cfdb43414c10f0cea26d72f0817d3e770d5e"
+    },
+    {
+      "path": "examples/drop-in-react/dist/assets/message-timeline-CmGVwYKW.js",
+      "sha256": "d7975525a38be45bc97b9b885ee1b9f64c4167ac99ba02a8cf6c260483183fea"
+    },
+    {
+      "path": "examples/drop-in-react/dist/assets/message-timeline-DoLld7YG.css",
+      "sha256": "ca0e952a08d09c96d483ce2d33164c864ce5d0cbb34623f7b4c5a63163602c9d"
+    },
+    {
+      "path": "examples/drop-in-react/dist/assets/reminderLab-Bt9d9X5j.css",
+      "sha256": "e11953124a0cee55b06052f16124fa3d4fac3cb6e2890bd18ce28133a763abb8"
+    },
+    {
+      "path": "examples/drop-in-react/dist/assets/reminderLab-voLa-ICJ.js",
+      "sha256": "2c2fd983539c90fd69517cc57289c30933353a3f12691880fd0a9ce46a39d7cc"
+    },
+    {
+      "path": "examples/drop-in-react/dist/chat-lab.html",
+      "sha256": "b83902e3685ea9c6df92caea8ea059aead93c00eeab37c6460cf88eaee2e7cd1"
+    },
+    {
+      "path": "examples/drop-in-react/dist/index.html",
+      "sha256": "f911b8c99d3c1812e76100c111c3e755de2af6775f83c4389271d20514af6cdd"
+    },
+    {
+      "path": "examples/drop-in-react/dist/module-graph.json",
+      "sha256": "847d07362b0213a3cb9c1272ba523458b20c9be4c675df8f1b688585c4c89ffb"
+    },
+    {
+      "path": "examples/drop-in-react/dist/react-chat-lab.html",
+      "sha256": "b83902e3685ea9c6df92caea8ea059aead93c00eeab37c6460cf88eaee2e7cd1"
+    },
+    {
+      "path": "examples/drop-in-react/dist/reminder-chat-lab.html",
+      "sha256": "5f38cbcfdd7e8804514911dbf6d0165d12e89dbb4a8bda0e75a7bb7f5db45f18"
+    }
+  ]
+}

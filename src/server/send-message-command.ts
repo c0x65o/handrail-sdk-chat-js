@@ -432,7 +432,7 @@ export async function sendMessage<Block extends MessageBlock = MessageBlock>(
         `SELECT 1 FROM ${prefix}.chat_native_token_channels s
          JOIN ${prefix}.chat_conversations c ON c.tenant_id=s.tenant_id AND c.id=s.conversation_id
          WHERE s.tenant_id=$1 AND s.token_id=$2 AND s.conversation_id=$3
-         AND c.type='channel' AND c.archived_at IS NULL`,
+         AND c.type='channel' AND c.archived_at IS NULL FOR UPDATE OF c`,
         [options.actor.tenantId, token.rows[0].id, input.conversationId],
       );
       if (scope.rowCount !== 1) throw new ChatAuthorizationError();

@@ -57,6 +57,47 @@ const deferred = <T,>() => {
   const promise = new Promise<T>((yes, no) => { resolve = yes; reject = no; });
   return { promise, resolve, reject };
 };
+
+for (const failure of [429, 503, 'transport'] as const) {
+  it(`recovers an initial ${failure} list failure by a same-mounted read-only refresh`, async () => {
+    const fetcher = vi.fn();
+    if (failure === 'transport') fetcher.mockRejectedValueOnce(new Error('Temporary network failure'));
+    else fetcher.mockResolvedValueOnce(new Response('{}', { status: failure }));
+    fetcher.mockResolvedValueOnce(new Response(JSON.stringify({ tokens: [metadata] })));
+    vi.stubGlobal('fetch', fetcher);
+    render(<NativeTokenManager sessionScope="admin" endpoint="/api/chat" getHeaders={getHeaders} />);
+    await screen.findByRole('alert');
+    expect(screen.queryByText('Create token')).toBeNull();
+    fireEvent.click(screen.getByText('Refresh token list'));
+    await screen.findByText('Old token');
+    expect(screen.queryByRole('alert')).toBeNull();
+    expect((screen.getByText('Create token') as HTMLButtonElement).disabled).toBe(false);
+    expect(fetcher.mock.calls.map(call => call[1].method)).toEqual(['GET', 'GET']);
+  });
+}
+
+for (const transition of ['scope', 'headers'] as const) {
+  it(`discards refresh JSON and finalizers from an old session generation after changing ${transition}`, async () => {
+    const pending = deferred<{ tokens: typeof metadata[] }>();
+    const fetcher = vi.fn().mockResolvedValueOnce(new Response('{}', { status: 429 }))
+      .mockResolvedValueOnce({ ok: true, json: () => pending.promise })
+      .mockResolvedValueOnce(new Response('{}', { status: 403 }));
+    vi.stubGlobal('fetch', fetcher);
+    const view = render(<NativeTokenManager sessionScope="admin" endpoint="/api/chat" getHeaders={getHeaders} />);
+    await screen.findByRole('alert');
+    fireEvent.click(screen.getByText('Refresh token list'));
+    await waitFor(() => expect(fetcher).toHaveBeenCalledTimes(2));
+    view.rerender(<NativeTokenManager sessionScope={transition === 'scope' ? 'new-session' : 'admin'} endpoint="/api/chat"
+      getHeaders={transition === 'headers' ? async () => ({}) : getHeaders} />);
+    await screen.findByRole('alert');
+    await act(async () => pending.resolve({ tokens: [metadata] }));
+    expect(screen.queryByText('Old token')).toBeNull();
+    expect(screen.queryByText('Create token')).toBeNull();
+    expect(screen.getByRole('alert')).toBeDefined();
+    expect(fetcher.mock.calls.every(call => call[1].method === 'GET')).toBe(true);
+  });
+}
+
 async function createToken() {
   await screen.findByText('Create token');
   fireEvent.change(screen.getByLabelText('Token name'), { target: { value: 'Synthetic' } });
@@ -154,4 +195,54 @@ it('StrictMode cancels the first delayed header lookup before fetching and autho
   render(<StrictMode><NativeTokenManager sessionScope='session' endpoint='/api/chat' getHeaders={getHeaders} /></StrictMode>);
   await screen.findByText('Create token');
   expect(fetcher).toHaveBeenCalledTimes(1);
+});
+
+it('requires explicit rotation confirmation and replaces the one-time disclosure without duplicating metadata', async () => {
+  const fetcher = vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({ tokens: [metadata] })))
+    .mockResolvedValueOnce(new Response(JSON.stringify({ token: metadata, secret: 'synthetic-replacement' })));
+  vi.stubGlobal('fetch', fetcher);
+  const view = render(<NativeTokenManager sessionScope="admin" endpoint="/api/chat" getHeaders={getHeaders} />);
+  fireEvent.click(await screen.findByText('Rotate Old token'));
+  expect(fetcher).toHaveBeenCalledTimes(1);
+  expect(screen.getByRole('group', { name: 'Confirm token rotation' }).textContent).toContain('stops working immediately');
+  fireEvent.click(screen.getByText('Replace secret now'));
+  await waitFor(() => expect(Boolean((screen.getByLabelText('New token secret') as HTMLInputElement).value)).toBe(true));
+  expect(fetcher.mock.calls[1]![0]).toBe('/api/chat/native-tokens/old-token/rotate');
+  expect(fetcher.mock.calls[1]![1].body).toBe('{}');
+  expect(screen.getAllByText('Old token').length).toBe(1);
+  const input = screen.getByLabelText('New token secret') as HTMLInputElement;
+  view.unmount();
+  expect(input.value).toBe('');
+});
+
+it('blocks another creation after uncertain delivery until metadata has been refreshed', async () => {
+  const fetcher = vi.fn().mockResolvedValueOnce(new Response('{"tokens":[]}'))
+    .mockRejectedValueOnce(new Error('private transport detail'))
+    .mockResolvedValueOnce(new Response(JSON.stringify({ tokens: [metadata] })));
+  vi.stubGlobal('fetch', fetcher);
+  render(<NativeTokenManager sessionScope="admin" endpoint="/api/chat" getHeaders={getHeaders} />);
+  await createToken();
+  expect((await screen.findByRole('alert')).textContent).toContain('may have succeeded');
+  expect(screen.getByRole('alert').textContent).not.toContain('private transport detail');
+  expect((screen.getByText('Create token') as HTMLButtonElement).disabled).toBe(true);
+  fireEvent.click(screen.getByText('Refresh token list'));
+  await screen.findByText('Old token');
+  expect(screen.getByText('old-token')).toBeDefined();
+  await waitFor(() => expect((screen.getByText('Create token') as HTMLButtonElement).disabled).toBe(false));
+});
+
+it('discards a late rotation disclosure after a tenant transition with stable headers', async () => {
+  const pending = deferred<Response>();
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({ tokens: [metadata] })))
+    .mockImplementationOnce(() => pending.promise)
+    .mockResolvedValueOnce(new Response('{"tokens":[]}')));
+  const view = render(<NativeTokenManager sessionScope="tenant-a" endpoint="/api/chat" getHeaders={getHeaders} />);
+  fireEvent.click(await screen.findByText('Rotate Old token'));
+  fireEvent.click(screen.getByText('Replace secret now'));
+  await act(async () => {});
+  view.rerender(<NativeTokenManager sessionScope="tenant-b" endpoint="/api/chat" getHeaders={getHeaders} />);
+  await act(async () => pending.resolve(new Response(JSON.stringify({ token: metadata, secret: 'synthetic-late-rotation' }))));
+  expect((screen.getByLabelText('New token secret') as HTMLInputElement).value).toBe('');
+  expect(screen.queryByText('Old token')).toBeNull();
+  expect(screen.queryByRole('alert')).toBeNull();
 });

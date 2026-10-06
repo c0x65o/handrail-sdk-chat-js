@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import test from 'node:test';
 import { createChatTestHarness, createPostgresTestBackend } from '@handrail/chat/testing';
-import { handrailChatPostgresMigrations, createPostgresMigrationRunner } from '@handrail/chat/server';
+import { handrailChatPostgresMigrations, createPostgresMigrationRunner, createChatAuditDispatcher } from '@handrail/chat/server';
 import { manageNativeTokens } from '../dist/server/native-tokens.js';
 
 const actor = (tenant, user, admin) => ({ credential: `${tenant}-${user}`, actor: { tenantId: tenant, userId: user, roles: [] }, capabilities: ['conversation.read', 'message.send', ...(admin ? ['native_tokens.manage'] : [])], user: { tenantId: tenant, userId: user, displayName: user } });
@@ -172,7 +172,7 @@ async function concurrencyFixture(t) {
     }
     assert.equal(Number((await fixture.pool.query("SELECT count(*) FROM chat_outbox_events WHERE type='message.created'")).rows[0].count), count);
   };
-  return { ...fixture, options, token, payload, send, revoke, effects };
+  return { ...fixture, options, token, secret, payload, send, revoke, effects };
 }
 
 test('send holding credential lock commits before concurrent revocation, then new sends and replays fail', { timeout: 15000 }, async t => {
@@ -201,22 +201,23 @@ test('send holding credential lock commits before concurrent revocation, then ne
 
 test('revocation holding credential lock rejects an already authenticated send once committed', { timeout: 15000 }, async t => {
   const f = await concurrencyFixture(t);
-  const revoker = await f.pool.connect();
+  const locked = deferred(), release = deferred(), lockAttempt = deferred();
+  const revoking = f.revoke(scheduledDatabase(f.pool, { after: async (sql, pid) => {
+    if (sql.includes('UPDATE') && sql.includes('chat_native_tokens')) { locked.resolve(pid); await release.promise; }
+  } }));
   let sending;
   try {
-    await revoker.query('BEGIN');
-    // Execute the actual management command, retaining its UPDATE lock until COMMIT.
-    await f.revoke({ query: revoker.query.bind(revoker) });
-    const lockAttempt = deferred();
+    const holder = await locked.promise;
     sending = f.send(scheduledDatabase(f.pool, { before: async (sql, pid) => {
       if (sql.includes('chat_native_tokens') && sql.includes('FOR SHARE')) lockAttempt.resolve(pid);
     } })).then(value => ({ value }), error => ({ error }));
-    await waitForBlock(f.pool, await lockAttempt.promise, revoker.processID);
-    await revoker.query('COMMIT');
+    await waitForBlock(f.pool, await lockAttempt.promise, holder);
+    release.resolve();
+    await revoking;
     assert.equal((await sending).error?.statusCode, 401);
     await assert.rejects(f.send(), { statusCode: 401 });
     await f.effects(0);
-  } finally { await revoker.query('ROLLBACK'); revoker.release(); if (sending) await sending; }
+  } finally { release.resolve(); await Promise.allSettled([sending, revoking]); }
 });
 
 for (const conflict of [false, true]) {
@@ -230,7 +231,7 @@ for (const conflict of [false, true]) {
     try {
       const holder = await claimed.promise;
       second = f.send(scheduledDatabase(f.pool, { before: async (sql, pid) => {
-        if (sql.includes('INSERT INTO') && sql.includes('chat_native_message_receipts')) contender.resolve(pid);
+        if (sql.includes('chat_native_token_channels')) contender.resolve(pid);
       } }), conflict ? { ...f.payload, text: 'Conflicting first-use payload' } : f.payload).then(value => ({ value }), error => ({ error }));
       await waitForBlock(f.pool, await contender.promise, holder);
       await f.effects(0); // the first claim is still uncommitted
@@ -249,3 +250,164 @@ for (const conflict of [false, true]) {
     } finally { release.resolve(); await Promise.allSettled([first, second]); }
   });
 }
+
+test('rotation preserves identity, restricted grants and durable retries; lifecycle audit is atomic and sanitized', async t => {
+  const f = await concurrencyFixture(t);
+  const { postNativeMessage } = await import('../dist/server/native-tokens.js');
+  const accepted = await f.send();
+  const rotate = (options = f.options, actor = admin.actor, body = {}) => manageNativeTokens(options, actor, 'POST', body, f.token.id);
+  await assert.rejects(rotate(f.options, otherAdmin.actor), { statusCode: 404 });
+  await assert.rejects(rotate(f.options, admin.actor, { channelIds: ['denied'] }), { statusCode: 400 });
+  await assert.rejects(rotate({ ...f.options, permissions: { getCapabilities: async () => [] } }), { statusCode: 403 });
+  const replacement = await rotate();
+  assert.equal(replacement.token.id, f.token.id);
+  assert.equal(replacement.token.senderUserId, f.token.senderUserId);
+  assert.deepEqual(replacement.token.channelIds, ['allowed']);
+  assert.ok(/^hrnt_[A-Za-z0-9_-]{43}$/.test(replacement.secret));
+  assert.equal(replacement.secret === f.secret, false);
+  await assert.rejects(f.send(), { statusCode: 401 });
+  const replay = await postNativeMessage(f.options, `Bearer ${replacement.secret}`, f.payload);
+  assert.equal(replay.message.id, accepted.message.id);
+  assert.equal(replay.reconciliationStatus, 'replayed');
+  await assert.rejects(postNativeMessage(f.options, `Bearer ${replacement.secret}`, { ...f.payload, channelId: 'denied' }), { statusCode: 403 });
+  // Audit persistence failure rolls back the verifier change; no unlogged credential.
+  const failing = scheduledDatabase(f.pool, { before: async sql => {
+    if (sql.includes('INSERT INTO') && sql.includes('chat_audit_events')) throw new Error('synthetic audit failure');
+  } });
+  await assert.rejects(manageNativeTokens({ ...f.options, database: failing }, admin.actor, 'POST', { name: 'Rolled back', channelIds: ['allowed'] }), /synthetic audit failure/);
+  assert.equal((await f.pool.query('SELECT 1 FROM chat_native_tokens')).rowCount, 1);
+  assert.equal((await f.pool.query("SELECT 1 FROM chat_conversation_members WHERE user_id LIKE 'native-integration:%'")).rowCount, 1);
+  await assert.rejects(rotate({ ...f.options, database: failing }), /synthetic audit failure/);
+  assert.equal((await postNativeMessage(f.options, `Bearer ${replacement.secret}`, f.payload)).reconciliationStatus, 'replayed');
+  await assert.rejects(f.revoke(failing), /synthetic audit failure/);
+  assert.equal((await postNativeMessage(f.options, `Bearer ${replacement.secret}`, f.payload)).reconciliationStatus, 'replayed');
+  await f.revoke(); await f.revoke();
+  await assert.rejects(rotate(), { statusCode: 409 });
+  await assert.rejects(postNativeMessage(f.options, `Bearer ${replacement.secret}`, f.payload), { statusCode: 401 });
+  const audits = (await f.pool.query("SELECT * FROM chat_audit_events WHERE target_type='native_token' ORDER BY occurred_at")).rows;
+  assert.deepEqual(audits.map(row => row.action), ['native_token.created', 'native_token.rotated', 'native_token.revoked']);
+  for (const event of audits) {
+    assert.equal(event.tenant_id, admin.actor.tenantId);
+    assert.equal(event.actor_user_id, admin.actor.userId);
+    assert.equal(event.target_id, f.token.id);
+    assert.deepEqual(event.metadata, {});
+    assert.ok(event.occurred_at instanceof Date);
+    assert.equal((await f.pool.query('SELECT 1 FROM chat_audit_deliveries WHERE audit_event_id=$1', [event.event_id])).rowCount, 1);
+  }
+  const delivered = [];
+  const dispatcher = createChatAuditDispatcher({ database: f.pool, schema: f.schema, adapter: { record: async event => delivered.push(event) } });
+  try {
+    const batch = await dispatcher.runOnce();
+    assert.equal(batch.failed, 0);
+    assert.deepEqual(delivered.filter(event => event.target?.type === 'native_token').map(event => event.action), audits.map(row => row.action));
+  } finally { await dispatcher.close(); }
+  const serialized = JSON.stringify({ audits, delivered });
+  for (const value of [f.secret, replacement.secret, createHash('sha256').update(f.secret).digest('hex'), createHash('sha256').update(replacement.secret).digest('hex'), 'Synthetic race']) assert.equal(serialized.includes(value), false);
+  await f.effects(1);
+});
+
+test('rotation waits for an in-flight send and invalidates old credentials without duplicating retries', { timeout: 15000 }, async t => {
+  const f = await concurrencyFixture(t);
+  const locked = deferred(), release = deferred(), rotatingStarted = deferred();
+  const sending = f.send(scheduledDatabase(f.pool, { after: async (sql, pid) => {
+    if (sql.includes('chat_native_tokens') && sql.includes('FOR SHARE')) { locked.resolve(pid); await release.promise; }
+  } }));
+  let rotating;
+  try {
+    const holder = await locked.promise;
+    rotating = manageNativeTokens({ ...f.options, database: scheduledDatabase(f.pool, { before: async (sql, pid) => {
+      if (sql.includes('chat_native_tokens') && sql.includes('FOR UPDATE')) rotatingStarted.resolve(pid);
+    } }) }, admin.actor, 'POST', {}, f.token.id);
+    await waitForBlock(f.pool, await rotatingStarted.promise, holder);
+    release.resolve();
+    const accepted = await sending, replacement = await rotating;
+    await assert.rejects(f.send(), { statusCode: 401 });
+    const { postNativeMessage } = await import('../dist/server/native-tokens.js');
+    assert.equal((await postNativeMessage(f.options, `Bearer ${replacement.secret}`, f.payload)).message.id, accepted.message.id);
+    await f.effects(1);
+  } finally { release.resolve(); await Promise.allSettled([sending, rotating]); }
+});
+
+test('rotation rechecks host channel policy and never restores removed integration membership', async t => {
+  const f = await concurrencyFixture(t);
+  const rotate = () => manageNativeTokens(f.options, admin.actor, 'POST', {}, f.token.id);
+  await f.pool.query("UPDATE chat_conversation_members SET state='removed' WHERE user_id='admin'");
+  await assert.rejects(rotate(), { statusCode: 403 });
+  await f.pool.query("UPDATE chat_conversation_members SET state='active' WHERE user_id='admin'");
+  await f.pool.query('UPDATE chat_conversation_members SET state=\'removed\' WHERE user_id=$1', [f.token.senderUserId]);
+  const replacement = await rotate();
+  const { postNativeMessage } = await import('../dist/server/native-tokens.js');
+  await assert.rejects(postNativeMessage(f.options, `Bearer ${replacement.secret}`, f.payload), { statusCode: 403 });
+  await f.pool.query("UPDATE chat_conversations SET archived_at=clock_timestamp(), archived_by_user_id='admin'");
+  await assert.rejects(rotate(), { statusCode: 403 });
+  await f.effects(0);
+});
+
+test('HTTP rotation enforces authentication, shape and size limits with no secret in metadata', async t => {
+  const harness = await createChatTestHarness({ schemaPrefix: 'native_tokens_http', actors: [admin, member] });
+  t.after(() => harness.teardown());
+  const schema = `"${harness.schema}"`;
+  await harness.pool.query(`INSERT INTO ${schema}.chat_conversations (tenant_id,id,type,visibility,name) VALUES ('tenant-a','allowed','channel','private','Synthetic')`);
+  await harness.pool.query(`INSERT INTO ${schema}.chat_conversation_members (tenant_id,conversation_id,user_id,role,state) VALUES ('tenant-a','allowed','admin','member','active')`);
+  const req = (path, body, credential = admin.credential, headers = {}) => fetch(`${harness.endpoint}${path}`, {
+    method: 'POST', headers: { authorization: `Bearer ${credential}`, 'content-type': 'application/json', ...headers }, body: typeof body === 'string' ? body : JSON.stringify(body),
+  });
+  const created = await (await req('/native-tokens', { name: 'HTTP form', channelIds: ['allowed'] })).json();
+  const path = `/native-tokens/${created.token.id}/rotate`;
+  assert.equal((await req(path, {}, member.credential)).status, 403);
+  assert.equal((await req(path, {}, created.secret)).status, 401);
+  assert.equal((await req(path, { roles: ['admin'] })).status, 400);
+  assert.equal((await req(path, {}, admin.credential, { 'content-type': 'text/plain' })).status, 400);
+  assert.equal((await req(`${path}?extra=1`, {})).status, 400);
+  assert.equal((await req(path, JSON.stringify({ large: 'x'.repeat(20000) }))).status, 400);
+  const rotated = await req(path, {});
+  assert.equal(rotated.status, 200);
+  assert.equal(rotated.headers.get('cache-control'), 'no-store');
+  const replacement = await rotated.json();
+  assert.equal(replacement.token.id, created.token.id);
+  assert.equal(replacement.secret === created.secret, false);
+  const payload = { channelId: 'allowed', text: 'Synthetic form', idempotencyKey: '1' };
+  assert.equal((await req('/native-inbound/messages', payload, created.secret)).status, 401);
+  assert.equal((await req('/native-inbound/messages', payload, replacement.secret)).status, 200);
+  // A forged proxy address cannot move the request into a fresh limiter bucket.
+  assert.equal((await req(path, {}, admin.credential, { 'x-forwarded-for': '192.0.2.42' })).status, 429);
+});
+
+test('native replay rechecks a concurrent channel archive under the destination lock', { timeout: 15000 }, async t => {
+  const f = await concurrencyFixture(t);
+  await f.send();
+  const archiver = await f.pool.connect();
+  const attempted = deferred();
+  let replay;
+  try {
+    await archiver.query('BEGIN');
+    await archiver.query("UPDATE chat_conversations SET archived_at=clock_timestamp(), archived_by_user_id='admin' WHERE id='allowed'");
+    replay = f.send(scheduledDatabase(f.pool, { before: async (sql, pid) => {
+      if (sql.includes('chat_native_token_channels')) attempted.resolve(pid);
+    } })).then(value => ({ value }), error => ({ error }));
+    await waitForBlock(f.pool, await attempted.promise, archiver.processID);
+    await archiver.query('COMMIT');
+    assert.equal((await replay).error?.statusCode, 403);
+    await f.effects(1);
+  } finally { await archiver.query('ROLLBACK'); archiver.release(); if (replay) await replay; }
+});
+
+test('rotation holding the credential lock rejects an already authenticated old-secret send', { timeout: 15000 }, async t => {
+  const f = await concurrencyFixture(t);
+  const locked = deferred(), release = deferred(), attempted = deferred();
+  const rotating = manageNativeTokens({ ...f.options, database: scheduledDatabase(f.pool, { after: async (sql, pid) => {
+    if (sql.includes('chat_native_tokens') && sql.includes('FOR UPDATE')) { locked.resolve(pid); await release.promise; }
+  } }) }, admin.actor, 'POST', {}, f.token.id);
+  let sending;
+  try {
+    const holder = await locked.promise;
+    sending = f.send(scheduledDatabase(f.pool, { before: async (sql, pid) => {
+      if (sql.includes('chat_native_tokens') && sql.includes('FOR SHARE')) attempted.resolve(pid);
+    } })).then(value => ({ value }), error => ({ error }));
+    await waitForBlock(f.pool, await attempted.promise, holder);
+    release.resolve();
+    await rotating;
+    assert.equal((await sending).error?.statusCode, 401);
+    await f.effects(0);
+  } finally { release.resolve(); await Promise.allSettled([sending, rotating]); }
+});

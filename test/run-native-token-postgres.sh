@@ -26,4 +26,7 @@ export TEST_DATABASE_URL
 TEST_DATABASE_URL=$(node --input-type=module -e 'const u = new URL("postgresql://native_token_test@localhost:55432/native_token_validation"); u.searchParams.set("host", process.argv[1]); console.log(u.href)' "$fixture")
 "$PG_BIN/psql" "$TEST_DATABASE_URL" -X -v ON_ERROR_STOP=1 -c "SELECT current_database(), current_user, version(), current_setting('data_directory') AS data_directory, current_setting('listen_addresses') AS listen_addresses;"
 node --test --test-concurrency=1 test/postgres-native-tokens.test.mjs
+if [[ "${NATIVE_TOKEN_ISOLATED_BROWSER:-0}" == 1 ]]; then
+  node --import ./examples/drop-in-react/scripts/candidate-binding.mjs --test --test-concurrency=1 examples/drop-in-react/test/NativeTokensBrowser.test.mjs
+fi
 "$PG_BIN/psql" "$TEST_DATABASE_URL" -X -v ON_ERROR_STOP=1 -c "SELECT count(*) AS remaining_test_schemas FROM pg_namespace WHERE nspname LIKE 'native_upgrade_%' OR nspname LIKE 'native_tokens_%';"

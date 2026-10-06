@@ -12,6 +12,13 @@ export const CHAT_AUTHENTICATION_ERROR_CODE =
 export const CHAT_AUTHORIZATION_ERROR_CODE =
   "CHAT_AUTHORIZATION_FAILED" as const;
 
+/** Reserve the native namespace even when host bearer parsing tolerates whitespace.
+ * This detects credentials for rejection; it does not validate an inbound secret
+ * or normalize credentials passed to ordinary host authentication.
+ */
+export const isNativeTokenAuthorization = (value: unknown): boolean =>
+  typeof value === "string" && /^\s*Bearer\s+hrnt_/i.test(value);
+
 /** Stable, sanitized failure raised when no valid trusted host actor exists. */
 export class ChatAuthenticationError extends Error {
   public readonly code = CHAT_AUTHENTICATION_ERROR_CODE;
@@ -152,7 +159,7 @@ export function resolveChatRequestContext<
   // This namespace belongs exclusively to the native inbound endpoint, including
   // for WebSocket upgrade requests. Never pass these credentials to host auth.
   const authorization = (request as { headers?: { authorization?: unknown } }).headers?.authorization;
-  if (typeof authorization === "string" && /^Bearer hrnt_/i.test(authorization)) {
+  if (isNativeTokenAuthorization(authorization)) {
     return Promise.reject(new ChatAuthenticationError());
   }
   const carrier = request as ContextCarrier<Capability>;

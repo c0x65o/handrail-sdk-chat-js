@@ -510,6 +510,7 @@ import {
 import {
   ChatAuthenticationError,
   ChatAuthorizationError,
+  isNativeTokenAuthorization,
   resolveChatRequestContext,
 } from "./request-context.js";
 import {
@@ -5428,6 +5429,7 @@ const CHAT_HTTP_ROUTE_MATCHERS: readonly ChatHttpRouteMatcher[] = Object.freeze(
   staticChatRoute("GET", "/_meta"),
   staticChatRoute("GET", "/native-tokens"),
   staticChatRoute("POST", "/native-tokens"),
+  parameterizedChatRoute("POST", "/native-tokens/:tokenId/rotate", /^\/native-tokens\/([^/]+)\/rotate$/u),
   parameterizedChatRoute("DELETE", "/native-tokens/:tokenId", /^\/native-tokens\/([^/]+)$/u),
   staticChatRoute("POST", "/native-inbound/messages"),
   staticChatRoute("GET", REPLY_STYLE_PREFERENCE_ROUTE),
@@ -8653,7 +8655,7 @@ export function createChatServer<
         return;
       }
       // Restricted credentials cannot become ordinary host sessions, even with a permissive adapter.
-      if (request.headers.authorization?.startsWith("Bearer hrnt_")) throw new ChatAuthenticationError();
+      if (isNativeTokenAuthorization(request.headers.authorization)) throw new ChatAuthenticationError();
       const context = await resolveChatRequestContext(
         request as IncomingMessage & Request,
         adapters.auth as ChatAuthAdapter<IncomingMessage & Request>,
@@ -8663,7 +8665,7 @@ export function createChatServer<
       if (isNativeRoute) {
         writeNativeTokenResult(response, await manageNativeTokens(nativeOptions, context.actor, route.method,
           route.method === "POST" ? await readNativeTokenBody(request) : undefined,
-          route.method === "DELETE" ? decodeURIComponent(new URL(request.url!, "http://chat.invalid").pathname.split("/")[2]!) : undefined));
+          route.routeTemplate.includes(":tokenId") ? decodeURIComponent(new URL(request.url!, "http://chat.invalid").pathname.split("/")[2]!) : undefined));
         return;
       }
       if (isReplyStylePreference) {

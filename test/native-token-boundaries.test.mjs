@@ -30,3 +30,28 @@ test('HTTP and WebSocket host authentication cannot promote a native credential'
   await assert.rejects(resolveChatRequestContext({ headers: { authorization: 'Bearer hrnt_synthetic' } }, { resolveActor: async () => { calls++; } }, {}), { statusCode: 401 });
   assert.equal(calls, 0);
 });
+
+test('shared context rejects native namespace before host auth or cached context across bearer whitespace', async () => {
+  let calls = 0;
+  const auth = { resolveActor: async () => { calls++; return { tenantId: 'tenant', userId: 'user', roles: [] }; } };
+  const permissions = { getCapabilities: async () => [] };
+  for (const authorization of [
+    'Bearer  hrnt_invalid', 'bearer\thrnt_invalid', ' \tBeArEr \t HRNT_invalid \t',
+    'Bearer\u00a0hrnt_invalid', 'Bearer hrnt_', 'Bearer hrnt_invalid extra',
+  ]) {
+    const request = { headers: { authorization: 'Bearer ordinary' } };
+    await resolveChatRequestContext(request, auth, permissions);
+    const before = calls;
+    request.headers.authorization = authorization;
+    await assert.rejects(resolveChatRequestContext(request, auth, permissions), { statusCode: 401 });
+    await assert.rejects(resolveChatRequestContext({ headers: { authorization } }, auth, permissions), { statusCode: 401 });
+    assert.equal(calls, before);
+  }
+  for (const authorization of ['Bearer ordinary', ' \tBeArEr  ordinary \t', 'Bearer\tordinary', 'Bearer ordinary-hrnt_suffix', undefined]) {
+    const request = { headers: { authorization } };
+    const before = calls;
+    assert.equal((await resolveChatRequestContext(request, auth, permissions)).actor.userId, 'user');
+    assert.equal(request.headers.authorization, authorization);
+    assert.equal(calls, before + 1);
+  }
+});

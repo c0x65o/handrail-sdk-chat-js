@@ -3,7 +3,7 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import { parseSendMessageInput } from "../contracts/message-mutations.js";
 import type { TenantId, UserId } from "../contracts/identifiers.js";
 import type { ChatDirectoryAdapter, ChatPermissionAdapter, TrustedChatActorContext } from "./contracts.js";
-import type { PostgresMigrationDatabase } from "./postgres-migrations.js";
+import type { PostgresMigrationConnection, PostgresMigrationDatabase } from "./postgres-migrations.js";
 import { validatePostgresSchema } from "./postgres-migrations.js";
 import { ChatAuthenticationError, ChatAuthorizationError } from "./request-context.js";
 import { readBoundedJsonBody } from "./bounded-json-body.js";
@@ -67,21 +67,42 @@ export async function manageNativeTokens(options: Options, actor: TrustedChatAct
     ) AS "channelIds" FROM ${prefix}.chat_native_tokens t WHERE tenant_id=$1 ORDER BY created_at DESC`, [actor.tenantId]);
     return { tokens: result.rows };
   }
-  if (method === "DELETE") {
-    const result = await options.database.query(`UPDATE ${prefix}.chat_native_tokens SET revoked_at=COALESCE(revoked_at, clock_timestamp()) WHERE tenant_id=$1 AND id=$2 RETURNING id`, [actor.tenantId, tokenId]);
-    if (result.rowCount !== 1) throw new NativeTokenError(404, "native_token_not_found");
-    return { revoked: true };
+  const rotating = method === "POST" && tokenId !== undefined;
+  if (method !== "POST" && method !== "DELETE") throw invalid();
+  // Rotation deliberately preserves the identity, grants and permanent retry receipts.
+  // It accepts no role, name or channel changes and cannot reactivate a revoked token.
+  const input = method === "POST" ? object(body, rotating ? [] : ["name", "channelIds"]) : {};
+  let name = "";
+  let channelIds: string[] = [];
+  if (method === "POST" && !rotating) {
+    name = string(input.name, 80).trim();
+    if (!Array.isArray(input.channelIds) || input.channelIds.length < 1 || input.channelIds.length > 50) throw invalid();
+    channelIds = [...new Set(input.channelIds.map(id => string(id, 200)))].sort();
   }
-  const input = object(body, ["name", "channelIds"]);
-  const name = string(input.name, 80).trim();
-  if (!Array.isArray(input.channelIds) || input.channelIds.length < 1 || input.channelIds.length > 50) throw invalid();
-  const channelIds = [...new Set(input.channelIds.map(id => string(id, 200)))].sort();
-  const id = randomUUID();
+  const id = tokenId ?? randomUUID();
   const senderUserId = `native-integration:${id}`;
-  const secret = `hrnt_${randomBytes(32).toString("base64url")}`;
   const connection = await options.database.connect();
   try {
     await connection.query("BEGIN");
+    if (method === "DELETE") {
+      const result = await connection.query(`UPDATE ${prefix}.chat_native_tokens
+        SET revoked_at=clock_timestamp() WHERE tenant_id=$1 AND id=$2 AND revoked_at IS NULL RETURNING id`, [actor.tenantId, id]);
+      if (result.rowCount === 1) {
+        await auditNativeToken(connection, prefix, actor, id, "revoked");
+      } else {
+        const exists = await connection.query(`SELECT id FROM ${prefix}.chat_native_tokens WHERE tenant_id=$1 AND id=$2`, [actor.tenantId, id]);
+        if (!exists.rowCount) throw new NativeTokenError(404, "native_token_not_found");
+      }
+      await connection.query("COMMIT");
+      return { revoked: true };
+    }
+    if (rotating) {
+      const current = await connection.query<{ revoked_at: Date | null }>(`SELECT revoked_at FROM ${prefix}.chat_native_tokens WHERE tenant_id=$1 AND id=$2 FOR UPDATE`, [actor.tenantId, id]);
+      if (!current.rowCount) throw new NativeTokenError(404, "native_token_not_found");
+      if (current.rows[0]!.revoked_at) throw new NativeTokenError(409, "native_token_revoked");
+      const grants = await connection.query<{ conversation_id: string }>(`SELECT conversation_id FROM ${prefix}.chat_native_token_channels WHERE tenant_id=$1 AND token_id=$2 ORDER BY conversation_id`, [actor.tenantId, id]);
+      channelIds = grants.rows.map(row => row.conversation_id);
+    }
     for (const channelId of channelIds) {
       const result = await connection.query<{ entity_type: string | null; entity_id: string | null }>(
         `SELECT c.entity_type, c.entity_id FROM ${prefix}.chat_conversations c
@@ -91,6 +112,13 @@ export async function manageNativeTokens(options: Options, actor: TrustedChatAct
       const channel = result.rows[0];
       if (!channel) throw new ChatAuthorizationError();
       if (channel.entity_type && channel.entity_id && !await options.permissions.authorizeEntity({ actor, entity: { type: channel.entity_type, id: channel.entity_id }, action: "message.send" })) throw new ChatAuthorizationError();
+    }
+    const secret = `hrnt_${randomBytes(32).toString("base64url")}`;
+    if (rotating) {
+      const result = await connection.query(`UPDATE ${prefix}.chat_native_tokens SET verifier=$3 WHERE tenant_id=$1 AND id=$2 RETURNING ${metadataColumns}`, [actor.tenantId, id, digest(secret)]);
+      await auditNativeToken(connection, prefix, actor, id, "rotated");
+      await connection.query("COMMIT");
+      return { token: { ...result.rows[0], channelIds }, secret };
     }
     const result = await connection.query(`INSERT INTO ${prefix}.chat_native_tokens
       (tenant_id,id,name,sender_user_id,verifier,created_by_user_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING ${metadataColumns}`,
@@ -103,12 +131,24 @@ export async function manageNativeTokens(options: Options, actor: TrustedChatAct
         WHERE tenant_id=$1 AND id=$2 AND member_list_revision < 9007199254740991`, [actor.tenantId, channelId]);
       if (revision.rowCount !== 1) throw new NativeTokenError(409, "membership_revision_exhausted");
     }
+    await auditNativeToken(connection, prefix, actor, id, "created");
     await connection.query("COMMIT");
     return { token: { ...result.rows[0], channelIds }, secret };
   } catch (error) {
     await connection.query("ROLLBACK").catch(() => undefined);
     throw error;
   } finally { connection.release(); }
+}
+
+/** The existing append-only audit/outbox path, in the same credential transaction.
+ * Only server IDs enter the record; names, request bodies and verifiers never do. */
+async function auditNativeToken(connection: PostgresMigrationConnection, prefix: string,
+  actor: TrustedChatActorContext, id: string, action: "created" | "revoked" | "rotated") {
+  const eventId = randomUUID();
+  await connection.query(`INSERT INTO ${prefix}.chat_audit_events
+    (tenant_id,event_id,actor_user_id,action,target_type,target_id,occurred_at,metadata,request_id)
+    VALUES ($1,$2,$3,$4,'native_token',$5,clock_timestamp(),'{}',$2)`,
+    [actor.tenantId, eventId, actor.userId, `native_token.${action}`, id]);
 }
 
 export function parseNativeInboundMessage(body: unknown) {

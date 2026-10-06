@@ -49,6 +49,7 @@ export type ChatRequestAdmissionMethod =
 export type ChatRequestAdmissionRouteTemplate =
   | "/native-tokens"
   | "/native-tokens/:tokenId"
+  | "/native-tokens/:tokenId/rotate"
   | "/native-inbound/messages"
   | "/_meta"
   | "/_realtime"

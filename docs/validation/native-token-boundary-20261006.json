@@ -1,0 +1,421 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-06T01:49:00.456590+00:00",
+  "work_request_id": "121b9f48-254b-43cd-8785-2e3ac7b943ee",
+  "codex_run_id": "b7633454-cf2b-41af-8c47-d0975ca06429",
+  "handoff_id": "native-relay-121b9f48-b7633454-2f94752d921a",
+  "owner_outcome_id": "c32916ae-505c-4c81-9312-a3792a238882",
+  "verdict": "Auth boundary defect reproduced and closed. Entire combined native-token feature passes isolated qualification; managed acceptance remains unverified.",
+  "delivery": "Uncommitted shared Main workspace; source/package SHA-256 identify file manifests, not published Git commits. No commit, push, PR, publication, managed runtime start, Handrail database/queue mutation, customer-app or Preview writes. Only ephemeral synthetic fixtures; no persistent token access or external integration activated.",
+  "lineage": {
+    "prior_report": "docs/validation/native-token-finish-20261006.json",
+    "prior_handoff_id": "native-relay-a0285beb-8973d97d-ae75557702b8",
+    "fresh_source_sha256_before_edits": "ae75557702b82b4e09f6e42934eaddc1a46afb3fc367fb34aacf2dfd5859b307",
+    "fresh_package_sha256_before_edits": "c5813d7131f31d08df109f3a3f3951a96c23a39a304d9ae73f3ed36b0e32d4ef",
+    "verification": "verifyCandidate() recomputed both hashes and matched the exact supplied handoff before edits; no reversion or duplicate implementation. preservation.json verifies prior files retained unchanged, including archive fix. Prior report retained byte-for-byte.",
+    "base_commits": {
+      "js": {
+        "version": "1.0.48",
+        "commit": "7ccdbcc42b9092fa0aef0ff258d840e2a6510306"
+      },
+      "flutter": "39dddc7b448917aa9392f557617cc3014cad6326",
+      "preview": "b48bf8418702f3acf3b12b8e401749e7ff3a63fb",
+      "initial_worktrees": "clean; linked Flutter/preview tracked trees remain unchanged"
+    }
+  },
+  "context": {
+    "handrail_current_context": "Read successfully; current project and work request match. Saved decisions empty.",
+    "guidance": "No AGENTS.md in checkout/ancestors, .agents directories empty, no applicable checkout skills or specific project memory found. Attached DB testing and mobile KB read; existing real isolated PG helper used.",
+    "authentication": "No effective requirement conflict. Native rate limiting remains 10 requests/60 seconds; ordinary host session policy unchanged; no password/MFA/lockout changes."
+  },
+  "combined_feature": [
+    "POST /native-tokens/:tokenId/rotate atomically replaces a 256-bit random secret verifier while preserving identity, unchanged grants and durable retry history; no grace interval or revoked-token reactivation.",
+    "Creation, first revocation and rotation append metadata-only lifecycle records to existing durable audit tables/dispatcher in the same transaction; audit failure rolls back changes.",
+    "Reusable NativeTokenManager, already mounted in Chat Lab settings, now confirms rotation, shows token IDs, refreshes uncertain outcomes and scrubs one-time disclosures across scope changes.",
+    "Native sends lock the granted channel before retry/persistence to reject concurrent archival, without changing ordinary session send behavior.",
+    "Added bounded server-side contact-form HTTP example with required host authorization, fixed channel, stable retry IDs, no redirects or automatic uncertain retries, and sanitized responses.",
+    "Added reusable actual browser proof and two-instance isolated runner; retained full-SHA Git dependencies/lockfiles and exact-source development resolver.",
+    "Replaced stale current documentation; retained September evidence separately without activating retired planners.",
+    "Recognizable native bearer credentials are now rejected before ordinary HTTP/shared request-context authentication, including WebSocket upgrade/browser subprotocol and cached context. One shared whitespace/case predicate leaves strict native inbound syntax and ordinary host credentials unchanged."
+  ],
+  "independent_review": {
+    "reproduction": "Before the fix, synthetic multiple-space native authorization reached the HTTP host resolver, and shared context failed to reject it (including cached context). Two focused red tests are retained in reproduction.log. Privilege promotion depends on the host adapter; this is a fail-closed separation defect, not proof that SDK native-token validation itself granted privileges.",
+    "boundary": "/^\\s*Bearer\\s+hrnt_/i detects the reserved namespace only. Focused tests cover multiple spaces, tabs, NBSP, mixed scheme/prefix case, leading/trailing whitespace, empty suffix and malformed trailing text. Real HTTP and ws connections, browser bearer subprotocol, fresh/cached shared context assert zero host resolver calls; rejected WebSockets never establish sessions or call revalidateActiveSession. Ordinary bearer and headerless host sessions pass unchanged; existing active revalidation suite also passes.",
+    "refresh": "No manager implementation fix needed. Five added tests prove same-mounted GET-only recovery from initial 429, 503 and transport failure, and discard delayed JSON/finalizers across both sessionScope remount and getHeaders generation changes. Prior stale request/StrictMode tests retained; 36 UI tests pass.",
+    "preserved_security": "Reviewed strict inbound parsing, restricted grants, atomic verifier rotation with no grace/reactivation, metadata-only lifecycle audit and rollback, native credential/channel locks before retry, and bounded server-side contact relay with sanitized responses. Prior archive fix and rotation/send ordering regressions are unchanged and all 13 PG cases pass."
+  },
+  "candidate": {
+    "scheme": "handrail-unpublished-candidate-v1",
+    "source_sha256": "2f94752d921aef911d3e523e931d24c977cb4859d63dea9457c9c975ad7484a0",
+    "package_sha256": "1c12684b2a3b5e01b29344c04d15e63cda6a2e14960c8686bbf689a5f1760be5",
+    "source_file_count": 323,
+    "compiled_file_count": 657,
+    "retained_manifest": "build/native-token-boundary-20261006/candidate.json",
+    "dependency_pin": "git+https://github.com/c0x65o/handrail-sdk-chat-js.git#90bff33529df06720ff89ccd821360ac65eaf0d0",
+    "binding": "Existing source-bound Node/Vite consumer/browser resolver; no dependency pin or lockfile change and no installable final Git SHA."
+  },
+  "checks": [
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "log": "build.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "scope": "SDK and contract types",
+      "log": "typecheck.log"
+    },
+    {
+      "command": "node --test --test-concurrency=1 test/native-token-boundaries.test.mjs test/native-candidate-binding.test.mjs test/native-contact-form.test.mjs test/request-context.test.mjs test/send-message-http.test.mjs test/websocket-upgrade.test.mjs test/websocket-session-revalidation.test.mjs examples/drop-in-react/test/NativeTokenProofPacing.test.mjs",
+      "status": "pass",
+      "tests": 63,
+      "skipped": 0,
+      "log": "focused.log"
+    },
+    {
+      "command": "npm --prefix examples/drop-in-react run typecheck",
+      "status": "pass",
+      "scope": "current candidate declarations",
+      "log": "consumer-typecheck.log"
+    },
+    {
+      "command": "npm --prefix examples/drop-in-react run build",
+      "status": "pass",
+      "warning": "existing >500kB chunk warning",
+      "log": "consumer-build.log"
+    },
+    {
+      "command": "npm --prefix examples/drop-in-react run check:graph",
+      "status": "pass",
+      "modules": 135,
+      "scope": "no server implementation in browser graph",
+      "log": "browser-graph.log"
+    },
+    {
+      "command": "npm --prefix examples/drop-in-react run test:native-tokens",
+      "status": "pass",
+      "tests": 36,
+      "workers": 1,
+      "log": "ui-session.log"
+    },
+    {
+      "command": "TMPDIR=<current private worker scratch> PG_BIN=/usr/lib/postgresql/15/bin PLAYWRIGHT_BROWSERS_PATH=<current private worker scratch>/browsers NATIVE_TOKEN_ISOLATED_BROWSER=1 bash test/run-native-token-postgres.sh",
+      "status": "pass",
+      "postgres_tests": 13,
+      "browser_tests": 1,
+      "clean_browser_instances": 2,
+      "scope": "PostgreSQL 15.19, private Unix socket, no TCP listener; real SDK migrations/persistence/audit delivery, archive/retry race, both rotation/send orders; actual Chromium and contact HTTP. Owned schemas removed, fixture tokens revoked, cluster stopped.",
+      "log": "postgres-browser.log"
+    },
+    {
+      "command": "git diff --check and verifyCandidate()",
+      "status": "pass"
+    },
+    {
+      "command": "Flutter durable resource event reducer",
+      "status": "not-run",
+      "scope": "Unchanged prior proof preserved, not rerun: 45 passed including compilation at Flutter SDK repo 39dddc7b448917aa9392f557617cc3014cad6326. Source and lockfile clean; exact prior log hash checked in preservation.json. Covers reducer only, not Flutter UI/web build or managed acceptance."
+    },
+    {
+      "command": "Managed Chat Lab / PostgreSQL 16 acceptance and managed preparation",
+      "status": "not-run",
+      "scope": "Explicitly outside authorization; runtime remains stopped/container missing with retained volume."
+    },
+    {
+      "command": "Native pre/post platform checks",
+      "status": "not-run",
+      "scope": "No configured project aggregate checks; skipped native checks are not a full pass."
+    }
+  ],
+  "failed_attempts_and_warnings": [
+    {
+      "check": "Unchanged-source regression",
+      "status": "fail",
+      "expected": true,
+      "detail": "2 failures reproduce the boundary leak before production changes.",
+      "log": "reproduction.log"
+    },
+    {
+      "check": "Initial test fixture configuration",
+      "status": "fail",
+      "detail": "Test interval of 1000ms was below supported 5000ms minimum; corrected fixture before reproduction. Transcript retains initial error."
+    },
+    {
+      "check": "First fixed-source boundary test attempt",
+      "status": "fail",
+      "detail": "Test awaited a WebSocket message even though authentication rejection closes without one; timed out. Corrected test to race message/close; focused final tests pass.",
+      "log": "boundary.log"
+    },
+    {
+      "check": "Browser navigation",
+      "status": "warning",
+      "detail": "Handled Vite websocket ECONNRESET during reload; browser proof continues. No observed HTTP 5xx.",
+      "log": "postgres-browser.log"
+    }
+  ],
+  "browser_receipts": [
+    {
+      "run": 1,
+      "status": "passed",
+      "instanceId": "2a54db7eb4fb0936e3953e3a49b6b82e",
+      "schema": "handrail_chat_lab_381b78b23a8c45c1b535d7aa843b73d1",
+      "source": "2f94752d921aef911d3e523e931d24c977cb4859d63dea9457c9c975ad7484a0",
+      "package": "1c12684b2a3b5e01b29344c04d15e63cda6a2e14960c8686bbf689a5f1760be5",
+      "proofs": [
+        "UI creation",
+        "contact HTTP example",
+        "retry",
+        "conflict",
+        "denied channel/read",
+        "integration attribution",
+        "reload",
+        "UI rotation",
+        "old credential invalidation",
+        "retry across rotation",
+        "build status",
+        "UI revocation",
+        "ordinary user UI/API denial"
+      ]
+    },
+    {
+      "run": 2,
+      "status": "passed",
+      "instanceId": "9fa897204faea311d26e50912d8e745c",
+      "schema": "handrail_chat_lab_e35226d9df5a49a3a1c2d8df4653305e",
+      "source": "2f94752d921aef911d3e523e931d24c977cb4859d63dea9457c9c975ad7484a0",
+      "package": "1c12684b2a3b5e01b29344c04d15e63cda6a2e14960c8686bbf689a5f1760be5",
+      "proofs": [
+        "UI creation",
+        "contact HTTP example",
+        "retry",
+        "conflict",
+        "denied channel/read",
+        "integration attribution",
+        "reload",
+        "UI rotation",
+        "old credential invalidation",
+        "retry across rotation",
+        "build status",
+        "UI revocation",
+        "ordinary user UI/API denial"
+      ]
+    }
+  ],
+  "managed_readiness": {
+    "inspection": "Fresh read-only MCP service status and resource inspect confirmed the prior gap. No recovery/start attempted.",
+    "service_id": "812c4054-6ced-4616-94fb-13f672b3e897",
+    "service_status": "stopped; no listener or QA route",
+    "resource_id": "c699099d-668d-4a0f-a5a0-7f52923f3e32",
+    "resource_status": "container absent, retained volume present, probe down; stored port 37033 is last-known",
+    "declared_postgres_version": 16,
+    "isolated_postgres_version": "15.19",
+    "acceptance": "unverified; isolated PG15 is not managed PG16 acceptance"
+  },
+  "remaining": [
+    "Owning workflow to link this combined handoff to original native outcome and review requirements.",
+    "Managed PostgreSQL 16/service/proxy qualification remains unverified. Any recovery/preparation/start requires separate operations authority and preservation of the retained volume; then repeat exact-source managed browser proof on two clean instances.",
+    "No final Git SHA or release exists; commit/push/publish were not authorized. Flutter web UI/build remains not run."
+  ],
+  "changed_files": [
+    {
+      "path": "docs/native-inbound-tokens.md",
+      "sha256": "63349c208f91cf4c879921b8a2cbd5075402609bdce4de28e055a3c756867c04",
+      "touched_this_run": true
+    },
+    {
+      "path": "docs/validation/native-token-boundary-20261006.json",
+      "sha256": null,
+      "touched_this_run": true
+    },
+    {
+      "path": "docs/validation/native-token-finish-20261006.json",
+      "sha256": "5935cd4cc5df05c32bbdfa9b7f064b0fb0e157fc84aada4c8e631951f24f7efd",
+      "touched_this_run": false
+    },
+    {
+      "path": "docs/validation/native-token-history-202609.md",
+      "sha256": "86d45d19999af826e486be7d99d4650c535cd6a807c1e0789f0ecd534ef906be",
+      "touched_this_run": false
+    },
+    {
+      "path": "examples/drop-in-react/scripts/native-token-browser-proof.mjs",
+      "sha256": "f9983467498ff7c1c2ec8c2d88a0c809470862d34310365b72a2e17caa4bbb78",
+      "touched_this_run": false
+    },
+    {
+      "path": "examples/drop-in-react/scripts/verify-native-tokens-managed.mjs",
+      "sha256": "682c0e47038bb786c391414139b152b34be845e3753a62c40c99eb6d444fa66e",
+      "touched_this_run": false
+    },
+    {
+      "path": "examples/drop-in-react/test/NativeTokenManager.test.tsx",
+      "sha256": "f2eeaa7caf2c204df99b76fa03a469ae17e487a9567b188c7d2e9fa1085f3823",
+      "touched_this_run": true
+    },
+    {
+      "path": "examples/drop-in-react/test/NativeTokensBrowser.test.mjs",
+      "sha256": "695014268c457d58848cd2b37ca9db6c5c2425cfebbe4956ef75e88301c4d3f3",
+      "touched_this_run": false
+    },
+    {
+      "path": "examples/native-contact-form/README.md",
+      "sha256": "6ee73178ac2b45f7e43249e8e74a1d79d1df20ccf27c2913f82204ba9d2c8775",
+      "touched_this_run": false
+    },
+    {
+      "path": "examples/native-contact-form/handler.mjs",
+      "sha256": "3494435585b6f0af15a5307982b986747b87621db58ed0104e5d6699c0eb8dd7",
+      "touched_this_run": false
+    },
+    {
+      "path": "scripts/candidate-provenance.mjs",
+      "sha256": "66880f8f3fd987fca1fd2aea4cd8023f025ae20f83ae2d7d228ea35694313d94",
+      "touched_this_run": false
+    },
+    {
+      "path": "src/server/contracts.ts",
+      "sha256": "b8f95f7b77bea38344093c25e17f30b4e2bc5a66276f390c2a0658711bf93323",
+      "touched_this_run": false
+    },
+    {
+      "path": "src/server/create-chat-server.ts",
+      "sha256": "f7e3a0df3c578c215a6f6dc860feeb750052f4204da7bae909f842c904c4e511",
+      "touched_this_run": true
+    },
+    {
+      "path": "src/server/native-tokens.ts",
+      "sha256": "48e2f3440c80849b2a0d317382c8a7846661e7b97e137d021d43bfb32de966d3",
+      "touched_this_run": false
+    },
+    {
+      "path": "src/server/request-context.ts",
+      "sha256": "40cb9cbb01c62e39a0e711cf0085fc954b8b4099edd0ce19ada999316c494f70",
+      "touched_this_run": true
+    },
+    {
+      "path": "src/server/send-message-command.ts",
+      "sha256": "f5f590e66d4163b10103dbb06cfd9e6571516ab3470138d8cbd2cded22539fc2",
+      "touched_this_run": false
+    },
+    {
+      "path": "src/ui/NativeTokenManager.tsx",
+      "sha256": "f357377b9cfcb0e3201b7b86fa9e9bc9198a0ef42afc7470ea099b1711b85cb7",
+      "touched_this_run": false
+    },
+    {
+      "path": "test/native-contact-form.test.mjs",
+      "sha256": "2a363054c6fdd284815291c701947e2937ee9369a0e2b35defdbd089a2fc7490",
+      "touched_this_run": false
+    },
+    {
+      "path": "test/native-token-boundaries.test.mjs",
+      "sha256": "ac2c8018680453ae91329ab078384d23437963654131257d35406fe933af9407",
+      "touched_this_run": true
+    },
+    {
+      "path": "test/postgres-native-tokens.test.mjs",
+      "sha256": "208b0663cb084495c6c1ddd8caa82f65090de8f5b8a238043a9a2d8d55a95327",
+      "touched_this_run": false
+    },
+    {
+      "path": "test/run-native-token-postgres.sh",
+      "sha256": "5d0a35408a37dfe71a01ccc1ebeb4a6c094dfe8f140df28055e1bce0dba2119b",
+      "touched_this_run": false
+    },
+    {
+      "path": "test/websocket-upgrade.test.mjs",
+      "sha256": "604afded72f66a8663570bb196be25bf9bc39af2ad5aaca79220fe8fef45af1b",
+      "touched_this_run": true
+    }
+  ],
+  "changed_file_count": 22,
+  "files_touched_this_run": [
+    "docs/native-inbound-tokens.md",
+    "docs/validation/native-token-boundary-20261006.json",
+    "src/server/request-context.ts",
+    "src/server/create-chat-server.ts",
+    "test/native-token-boundaries.test.mjs",
+    "test/websocket-upgrade.test.mjs",
+    "examples/drop-in-react/test/NativeTokenManager.test.tsx"
+  ],
+  "changed_content_manifest_sha256": "c06626be649a68aa84a3d9885b05da42df0d4a4beb97408b3d1a5b9d204061f7",
+  "working_tree_patch": {
+    "path": "build/native-token-boundary-20261006/working-tree.patch",
+    "sha256": "55526d098e2c7f32569359d5a09b5be127e8bdf8cd38eaae9ac09e53576030df",
+    "scope": "Entire combined tracked and untracked feature, including prior report; excludes self-referential new report."
+  },
+  "artifacts": [
+    {
+      "path": "build/native-token-boundary-20261006/boundary-final.log",
+      "sha256": "bff39a76aa4f83d8a9c590c84627d70a2dd7828cf94844c404c4e2735d600088"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/boundary.log",
+      "sha256": "f696680bf255fbed35c34be5e969b19a94ce41fb8268a89f827e3bd82129b90d"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/browser-graph.log",
+      "sha256": "4872c1e35e7e376eeceba8452f333cfaa97be84e497e3c88bf01e56d2f7dd854"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/browser-install.log",
+      "sha256": "59c8b3993d85d1bcc2a2e97461c7401e0eb7501092f89ff5438d0ed760fbefc0"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/build.log",
+      "sha256": "13c3093de47a38998fa69173da78a087b4dbb5965c11742d35519d78196a42d3"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/candidate.json",
+      "sha256": "594b10a098a02855e50b90a51857d042fd910973f7ff3b47db72fc55929b1bf7"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/consumer-build.log",
+      "sha256": "1131d7ebd31946175db8bd696fae19ce58b91aad5bfb5faf7549027019495559"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/consumer-typecheck.log",
+      "sha256": "fc5421489bbad8d9541d288a2d2dc07aa01f3dde7e2db56bdd74377a6ca4cef5"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/focused.log",
+      "sha256": "30869f5fdbd1d93240b275e185827b4ddbffb5060918e6ded02a7ba0be101c97"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/postgres-browser.log",
+      "sha256": "be7bd9cfa76f4142f0d915c9eb197901d657866c2ebc39caf19949136bc1788a"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/preservation.json",
+      "sha256": "7838fe78fbcb92977b99e4f6891905f546903b453920c98dff406826d3369233"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/reproduction.log",
+      "sha256": "91caa54c03f2b7a640d10411ee369408115e69272adb1cbf3c5176414f1b2c0b"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/typecheck.log",
+      "sha256": "a2aa71cccb0ece00238faed1d3722ee71307e09ad417b63b8d3d3af858e12fee"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/ui-session.log",
+      "sha256": "b4aa91b7d185dd81334f1eb770003b1e098f239e3d6c9d80d5348fcec14ce7f6"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/working-tree.patch",
+      "sha256": "55526d098e2c7f32569359d5a09b5be127e8bdf8cd38eaae9ac09e53576030df"
+    },
+    {
+      "path": "build/native-token-boundary-20261006/write-report.py",
+      "sha256": "736a834bd1d0e0af85df85039e66a4c7fe3a3babadfd959bb864d7c297c4e257"
+    }
+  ],
+  "prior_flutter_proof": {
+    "report": "docs/validation/native-token-finish-20261006.json",
+    "log": "build/native-token-finish-20261006/flutter-reducer-retry.log",
+    "log_sha256": "93f7a8cc1d8fe22c78ee4f190b8c09fe2565c5c63a9e21db96e2a9dd61443256",
+    "tests": 45,
+    "scope": "Durable resource event reducer only; SDK Flutter and Preview heads/clean tracked trees verified in preservation.json. No rerun or new Flutter acceptance claim."
+  }
+}

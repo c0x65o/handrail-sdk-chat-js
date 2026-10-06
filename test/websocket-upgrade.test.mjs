@@ -287,6 +287,51 @@ const waitFor = async (predicate) => {
   assert.fail("condition was not met before timeout");
 };
 
+test("native bearer whitespace never reaches HTTP or WebSocket host auth or active revalidation", { timeout: 10_000 }, async () => {
+  let resolutions = 0;
+  let revalidations = 0;
+  const fixture = await createFixture({ sessionRevalidationIntervalMs: 5_000 }, {
+    auth: {
+      async resolveActor() {
+        resolutions++;
+        return actors.get("Bearer tenant-a"); // deliberately permissive host
+      },
+      async revalidateActiveSession({ actor }) { revalidations++; return actor; },
+    },
+  });
+  try {
+    const variants = ['Bearer  hrnt_invalid', 'bearer\thrnt_invalid', ' \tBeArEr \t HRNT_invalid \t',
+      'Bearer\u00a0hrnt_invalid', 'Bearer hrnt_', 'Bearer hrnt_invalid extra'];
+    for (const authorization of variants) {
+      const response = await fetch(fixture.url('/directory/users/search?query=demo').replace('ws:', 'http:'), { headers: { authorization } });
+      await response.arrayBuffer();
+      assert.equal(resolutions, 0, 'HTTP must not call the host resolver');
+      assert.equal(response.status, 401);
+      const connection = connect(fixture.url(), authorization);
+      await Promise.race([connection.message, connection.closed]);
+      assert.equal(resolutions, 0, 'WebSocket must not call the host resolver');
+      assert.deepEqual(await connection.closed, CHAT_WEBSOCKET_CLOSE_REASONS.authenticationFailed);
+    }
+    const browser = connectBrowser(fixture.url(), '\thrnt_invalid');
+    await Promise.race([browser.message, browser.closed]);
+    assert.equal(resolutions, 0, 'browser subprotocol must use the same boundary');
+    assert.deepEqual(await browser.closed, CHAT_WEBSOCKET_CLOSE_REASONS.authenticationFailed);
+    assert.equal(fixture.sessions.length, 0);
+    assert.equal(revalidations, 0);
+
+    const response = await fetch(fixture.url('/directory/users/search?query=demo').replace('ws:', 'http:'), { headers: { authorization: ' \tBeArEr  ordinary \t' } });
+    await response.arrayBuffer();
+    assert.equal(response.status, 200);
+    const ordinary = connect(fixture.url(), 'Bearer\tordinary');
+    assert.equal((await ordinary.message).tenantId, 'tenant-a');
+    assert.equal(resolutions, 2);
+    assert.equal(fixture.sessions.length, 1);
+    await closeSocket(ordinary);
+  } finally {
+    await fixture.close();
+  }
+});
+
 test("admits the untouched upgrade once before browser credentials and auth", async () => {
   const events = [];
   const admissionInputs = [];
