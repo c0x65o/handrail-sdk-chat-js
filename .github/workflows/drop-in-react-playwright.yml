@@ -66,13 +66,17 @@ jobs:
         id: browser-tests
         run: npm run test:browser -- --workers=1
         working-directory: examples/drop-in-react
+      - name: Check sender wrapping in public SDK components
+        id: sender-layout
+        run: node scripts/qualify-sender-layout.mjs "$RUNNER_TEMP/sender-layout"
       - name: Upload Playwright failure artifacts
-        if: failure() && steps.browser-tests.outcome == 'failure'
+        if: failure() && (steps.browser-tests.outcome == 'failure' || steps.sender-layout.outcome == 'failure')
         uses: actions/upload-artifact@v4
         with:
           name: drop-in-react-playwright-failure
           path: |
             examples/drop-in-react/test-results/playwright
             examples/drop-in-react/playwright-report
+            ${{ runner.temp }}/sender-layout
           if-no-files-found: ignore
           retention-days: 3

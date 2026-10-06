@@ -1,0 +1,1864 @@
+TAP version 13
+# Subtest: automatic selection refreshes cached history once and cancels on selection or actor replacement
+ok 1 - automatic selection refreshes cached history once and cancels on selection or actor replacement
+  ---
+  duration_ms: 218.786943
+  type: 'test'
+  ...
+# Subtest: the default workspace composes complete public, private, direct, and thread surfaces
+ok 2 - the default workspace composes complete public, private, direct, and thread surfaces
+  ---
+  duration_ms: 60.179318
+  type: 'test'
+  ...
+# Subtest: a projected mark-read update clears the selected conversation sidebar badge
+ok 3 - a projected mark-read update clears the selected conversation sidebar badge
+  ---
+  duration_ms: 62.099609
+  type: 'test'
+  ...
+# Subtest: the conversation header uses a three-dot menu with Star as its only option
+ok 4 - the conversation header uses a three-dot menu with Star as its only option
+  ---
+  duration_ms: 77.267495
+  type: 'test'
+  ...
+# Subtest: conversation stars project immediately, block duplicates, and settle canonical success
+ok 5 - conversation stars project immediately, block duplicates, and settle canonical success
+  ---
+  duration_ms: 116.685265
+  type: 'test'
+  ...
+# Subtest: conversation star failures roll back and revision conflicts retry canonical state
+ok 6 - conversation star failures roll back and revision conflicts retry canonical state
+  ---
+  duration_ms: 147.608274
+  type: 'test'
+  ...
+# Subtest: star pointer and keyboard activation stay isolated from row selection and popups
+ok 7 - star pointer and keyboard activation stay isolated from row selection and popups
+  ---
+  duration_ms: 85.286043
+  type: 'test'
+  ...
+# Subtest: read-only conversation rows disable the star action
+ok 8 - read-only conversation rows disable the star action
+  ---
+  duration_ms: 43.093185
+  type: 'test'
+  ...
+# Subtest: the navigation sentinel loads one page, deduplicates pending intersections, and stops at cursor exhaustion
+ok 9 - the navigation sentinel loads one page, deduplicates pending intersections, and stops at cursor exhaustion
+  ---
+  duration_ms: 83.230466
+  type: 'test'
+  ...
+# Subtest: 5,000 conversations keep navigation mounts bounded while scrolling and revealing keyboard targets
+ok 10 - 5,000 conversations keep navigation mounts bounded while scrolling and revealing keyboard targets
+  ---
+  duration_ms: 421.221774
+  type: 'test'
+  ...
+# Subtest: 5,000-conversation windowing keeps selection, starring, filtering, and collapse state coherent
+ok 11 - 5,000-conversation windowing keeps selection, starring, filtering, and collapse state coherent
+  ---
+  duration_ms: 195.090768
+  type: 'test'
+  ...
+# Subtest: the navigation sentinel observer disconnects when ChatWorkspace unmounts
+ok 12 - the navigation sentinel observer disconnects when ChatWorkspace unmounts
+  ---
+  duration_ms: 22.930584
+  type: 'test'
+  ...
+# Subtest: the Load more conversations button remains operable without IntersectionObserver
+ok 13 - the Load more conversations button remains operable without IntersectionObserver
+  ---
+  duration_ms: 33.550088
+  type: 'test'
+  ...
+# Subtest: conversation navigation moves starred rows out of their original sections and roves once
+ok 14 - conversation navigation moves starred rows out of their original sections and roves once
+  ---
+  duration_ms: 148.742345
+  type: 'test'
+  ...
+# Subtest: Starred collapse and filtering do not restore an ordinary duplicate
+ok 15 - Starred collapse and filtering do not restore an ordinary duplicate
+  ---
+  duration_ms: 115.088834
+  type: 'test'
+  ...
+# (node:172) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: conversation navigation filtering and an empty direct bucket add no blank or duplicate rows
+ok 16 - conversation navigation filtering and an empty direct bucket add no blank or duplicate rows
+  ---
+  duration_ms: 111.881268
+  type: 'test'
+  ...
+# Subtest: mounted direct heading, avatar, and composer recover after directory rate limiting
+ok 17 - mounted direct heading, avatar, and composer recover after directory rate limiting
+  ---
+  duration_ms: 74.663589
+  type: 'test'
+  ...
+# Subtest: the default composer exposes contextual accessible labels and placeholders
+ok 18 - the default composer exposes contextual accessible labels and placeholders
+  ---
+  duration_ms: 155.020475
+  type: 'test'
+  ...
+# Subtest: typing status keeps stable composer layout, excludes the current user, and ignores heartbeat-only copy changes
+ok 19 - typing status keeps stable composer layout, excludes the current user, and ignores heartbeat-only copy changes
+  ---
+  duration_ms: 50.081055
+  type: 'test'
+  ...
+# Subtest: typing status renders bounded plural copy and safe directory fallbacks
+ok 20 - typing status renders bounded plural copy and safe directory fallbacks
+  ---
+  duration_ms: 91.816795
+  type: 'test'
+  ...
+# Subtest: typing status clears on stop and expiry without retaining names across conversation switches
+ok 21 - typing status clears on stop and expiry without retaining names across conversation switches
+  ---
+  duration_ms: 99.5391
+  type: 'test'
+  ...
+# Subtest: switching conversations updates composer context and restores each draft
+ok 22 - switching conversations updates composer context and restores each draft
+  ---
+  duration_ms: 132.565939
+  type: 'test'
+  ...
+# Subtest: WorkspaceHeader preserves defaults, renders safe identity, and composes wired controls
+ok 23 - WorkspaceHeader preserves defaults, renders safe identity, and composes wired controls
+  ---
+  duration_ms: 195.545754
+  type: 'test'
+  ...
+# Subtest: channel creation is a workspace modal with contained focus and global-trigger restoration
+ok 24 - channel creation is a workspace modal with contained focus and global-trigger restoration
+  ---
+  duration_ms: 162.417434
+  type: 'test'
+  ...
+# Subtest: channel section actions retain their visibility defaults across dismiss and reopen
+ok 25 - channel section actions retain their visibility defaults across dismiss and reopen
+  ---
+  duration_ms: 167.449566
+  type: 'test'
+  ...
+# Subtest: pending channel creation disables controls and ignores Escape, Cancel, and backdrop dismissal
+ok 26 - pending channel creation disables controls and ignores Escape, Cancel, and backdrop dismissal
+  ---
+  duration_ms: 89.296392
+  type: 'test'
+  ...
+# Subtest: detail state panels expose stable loading and automatic-selection semantics
+ok 27 - detail state panels expose stable loading and automatic-selection semantics
+  ---
+  duration_ms: 47.949679
+  type: 'test'
+  ...
+# Subtest: a ready workspace with no selected conversation does not access huddle runtime state
+ok 28 - a ready workspace with no selected conversation does not access huddle runtime state
+  ---
+  duration_ms: 21.148689
+  type: 'test'
+  ...
+# Subtest: detail empty and unavailable panels preserve live-region and decorative semantics
+ok 29 - detail empty and unavailable panels preserve live-region and decorative semantics
+  ---
+  duration_ms: 42.103685
+  type: 'test'
+  ...
+# Subtest: detail failures use a distinct alert panel without a nonfunctional retry control
+ok 30 - detail failures use a distinct alert panel without a nonfunctional retry control
+  ---
+  duration_ms: 31.486766
+  type: 'test'
+  ...
+# Subtest: custom EmptyState slots retain the detail panel host contract
+ok 31 - custom EmptyState slots retain the detail panel host contract
+  ---
+  duration_ms: 14.700722
+  type: 'test'
+  ...
+# Subtest: empty public and private channels render specific visibility introductions in the timeline column
+ok 32 - empty public and private channels render specific visibility introductions in the timeline column
+  ---
+  duration_ms: 24.700112
+  type: 'test'
+  ...
+# Subtest: empty direct and group-direct timelines use safe other-participant identity
+ok 33 - empty direct and group-direct timelines use safe other-participant identity
+  ---
+  duration_ms: 29.842549
+  type: 'test'
+  ...
+# Subtest: custom EmptyState overrides receive the compatible frozen safe introduction projection
+ok 34 - custom EmptyState overrides receive the compatible frozen safe introduction projection
+  ---
+  duration_ms: 11.590797
+  type: 'test'
+  ...
+# Subtest: member management is absent unless viewing is explicitly authorized
+ok 35 - member management is absent unless viewing is explicitly authorized
+  ---
+  duration_ms: 26.880376
+  type: 'test'
+  ...
+# Subtest: the header members count opens a named panel and close actions restore focus
+ok 36 - the header members count opens a named panel and close actions restore focus
+  ---
+  duration_ms: 117.543053
+  type: 'test'
+  ...
+# Subtest: switching conversations closes members without restoring focus to a stale trigger
+ok 37 - switching conversations closes members without restoring focus to a stale trigger
+  ---
+  duration_ms: 86.818562
+  type: 'test'
+  ...
+# Subtest: default public actions send, open and close a focus-restoring thread, and start a huddle
+ok 38 - default public actions send, open and close a focus-restoring thread, and start a huddle
+  ---
+  duration_ms: 107.402835
+  type: 'test'
+  ...
+# Subtest: the default workspace coordinates empty-composer ArrowUp with timeline edit focus and Escape restoration
+ok 39 - the default workspace coordinates empty-composer ArrowUp with timeline edit focus and Escape restoration
+  ---
+  duration_ms: 148.668242
+  type: 'test'
+  ...
+# Subtest: places the inactive huddle in the channel header and the live call bar between timeline and composer
+ok 40 - places the inactive huddle in the channel header and the live call bar between timeline and composer
+  ---
+  duration_ms: 54.406797
+  type: 'test'
+  ...
+# Subtest: docks an opened thread beside a stable independently scrolling timeline pane
+ok 41 - docks an opened thread beside a stable independently scrolling timeline pane
+  ---
+  duration_ms: 83.594796
+  type: 'test'
+  ...
+# Subtest: Reply starts a new thread and is hidden for deleted and unsent messages
+ok 42 - Reply starts a new thread and is hidden for deleted and unsent messages
+  ---
+  duration_ms: 100.374533
+  type: 'test'
+  ...
+# Subtest: Remind me schedules exact preset and custom local instants and validates future input
+ok 43 - Remind me schedules exact preset and custom local instants and validates future input
+  ---
+  duration_ms: 69.57311
+  type: 'test'
+  ...
+# Subtest: a preset synchronously latches every reminder control against a rapid empty custom submit
+ok 44 - a preset synchronously latches every reminder control against a rapid empty custom submit
+  ---
+  duration_ms: 54.51643
+  type: 'test'
+  ...
+# Subtest: an existing reminder is displayed, rescheduled, and cancelled at canonical revisions
+ok 45 - an existing reminder is displayed, rescheduled, and cancelled at canonical revisions
+  ---
+  duration_ms: 58.691321
+  type: 'test'
+  ...
+# Subtest: reminder pending and retryable failures are accessible and preserve retry correlation
+ok 46 - reminder pending and retryable failures are accessible and preserve retry correlation
+  ---
+  duration_ms: 68.379865
+  type: 'test'
+  ...
+# Subtest: a newer canonical reminder replaces stale optimistic UI and drives subsequent revisions
+ok 47 - a newer canonical reminder replaces stale optimistic UI and drives subsequent revisions
+  ---
+  duration_ms: 45.671959
+  type: 'test'
+  ...
+# Subtest: Remind me is hidden for deleted, sending, and failed messages
+ok 48 - Remind me is hidden for deleted, sending, and failed messages
+  ---
+  duration_ms: 27.723729
+  type: 'test'
+  ...
+# Subtest: Forward selects an authorized destination once and focuses the canonical row
+ok 49 - Forward selects an authorized destination once and focuses the canonical row
+  ---
+  duration_ms: 87.266251
+  type: 'test'
+  ...
+# Subtest: Forward contains focus, supports every radio navigation key, and makes only the background inert
+ok 50 - Forward contains focus, supports every radio navigation key, and makes only the background inert
+  ---
+  duration_ms: 65.105776
+  type: 'test'
+  ...
+# Subtest: Forward pending submission disables controls and ignores Escape
+ok 51 - Forward pending submission disables controls and ignores Escape
+  ---
+  duration_ms: 84.159898
+  type: 'test'
+  ...
+# Subtest: Forward cancellation supports Escape and Cancel without a command and restores focus
+ok 52 - Forward cancellation supports Escape and Cancel without a command and restores focus
+  ---
+  duration_ms: 159.585217
+  type: 'test'
+  ...
+# Subtest: Forward command failure reports a safe notice and restores focus
+ok 53 - Forward command failure reports a safe notice and restores focus
+  ---
+  duration_ms: 110.279472
+  type: 'test'
+  ...
+# Subtest: Forward navigation failure reports a safe destination notice
+ok 54 - Forward navigation failure reports a safe destination notice
+  ---
+  duration_ms: 1731.246908
+  type: 'test'
+  ...
+# Subtest: Forward filters unavailable destinations and is suppressed for unsupported source states
+ok 55 - Forward filters unavailable destinations and is suppressed for unsupported source states
+  ---
+  duration_ms: 87.406572
+  type: 'test'
+  ...
+# Subtest: host reaction keys flow to the default main timeline and opened thread
+ok 56 - host reaction keys flow to the default main timeline and opened thread
+  ---
+  duration_ms: 95.324215
+  type: 'test'
+  ...
+# Subtest: host message mutation availability flows to the default main timeline and opened thread
+ok 57 - host message mutation availability flows to the default main timeline and opened thread
+  ---
+  duration_ms: 100.698493
+  type: 'test'
+  ...
+# Subtest: the default workspace bounds host reaction keys
+ok 58 - the default workspace bounds host reaction keys
+  ---
+  duration_ms: 48.131796
+  type: 'test'
+  ...
+# Subtest: every documented slot flows through the complete default composition
+ok 59 - every documented slot flows through the complete default composition
+  ---
+  duration_ms: 23.8512
+  type: 'test'
+  ...
+# Subtest: public and private channel headers omit member identity and expose canonical visibility
+ok 60 - public and private channel headers omit member identity and expose canonical visibility
+  ---
+  duration_ms: 36.054021
+  type: 'test'
+  ...
+# Subtest: direct headers select the other member and expose only canonical availability
+ok 61 - direct headers select the other member and expose only canonical availability
+  ---
+  duration_ms: 29.49856
+  type: 'test'
+  ...
+# Subtest: direct headers render safe directory and unresolved participant fallbacks
+ok 62 - direct headers render safe directory and unresolved participant fallbacks
+  ---
+  duration_ms: 53.424325
+  type: 'test'
+  ...
+# Subtest: group-direct headers render the other participant and exclude the current user
+ok 63 - group-direct headers render the other participant and exclude the current user
+  ---
+  duration_ms: 13.784314
+  type: 'test'
+  ...
+# Subtest: group-direct headers order participants deterministically and bound avatar overflow
+ok 64 - group-direct headers order participants deterministically and bound avatar overflow
+  ---
+  duration_ms: 22.219365
+  type: 'test'
+  ...
+# Subtest: group-direct headers truncate long names while exposing the complete safe label
+ok 65 - group-direct headers truncate long names while exposing the complete safe label
+  ---
+  duration_ms: 16.281949
+  type: 'test'
+  ...
+# Subtest: group-direct headers use non-sensitive redacted, unavailable, and unresolved fallbacks
+ok 66 - group-direct headers use non-sensitive redacted, unavailable, and unresolved fallbacks
+  ---
+  duration_ms: 17.204894
+  type: 'test'
+  ...
+# Subtest: modes, scoped tokens, themes, and accessibility landmarks survive default composition
+ok 67 - modes, scoped tokens, themes, and accessibility landmarks survive default composition
+  ---
+  duration_ms: 74.697191
+  type: 'test'
+  ...
+# Subtest: reply style settings opens with keyboard, contains focus and restores the trigger
+ok 68 - reply style settings opens with keyboard, contains focus and restores the trigger
+  ---
+  duration_ms: 121.492602
+  type: 'test'
+  ...
+# Subtest: host settings content and custom settings slot retain ownership
+ok 69 - host settings content and custom settings slot retain ownership
+  ---
+  duration_ms: 102.438809
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-public without opening threads
+ok 70 - inline Reply routing sends Alice/Bob payload in conversation-public without opening threads
+  ---
+  duration_ms: 69.973633
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-direct without opening threads
+ok 71 - inline Reply routing sends Alice/Bob payload in conversation-direct without opening threads
+  ---
+  duration_ms: 93.259711
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-group-direct without opening threads
+ok 72 - inline Reply routing sends Alice/Bob payload in conversation-group-direct without opening threads
+  ---
+  duration_ms: 71.871877
+  type: 'test'
+  ...
+# Subtest: inline Reply routing in an already-open ThreadPanel keeps its thread ID and parent draft
+ok 73 - inline Reply routing in an already-open ThreadPanel keeps its thread ID and parent draft
+  ---
+  duration_ms: 157.990859
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables unsupported with an accessible explanation
+ok 74 - inline Reply routing disables unsupported with an accessible explanation
+  ---
+  duration_ms: 36.831509
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables unknown with an accessible explanation
+ok 75 - inline Reply routing disables unknown with an accessible explanation
+  ---
+  duration_ms: 39.062788
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables read-only with an accessible explanation
+ok 76 - inline Reply routing disables read-only with an accessible explanation
+  ---
+  duration_ms: 39.934141
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables send-disabled with an accessible explanation
+ok 77 - inline Reply routing disables send-disabled with an accessible explanation
+  ---
+  duration_ms: 40.315122
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables inactive member with an accessible explanation
+ok 78 - inline Reply routing disables inactive member with an accessible explanation
+  ---
+  duration_ms: 40.363106
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables custom composer without connection with an accessible explanation
+ok 79 - inline Reply routing disables custom composer without connection with an accessible explanation
+  ---
+  duration_ms: 31.750589
+  type: 'test'
+  ...
+# Subtest: inline Reply routing is independent of preference persistence support and excludes deleted/unsent sources
+ok 80 - inline Reply routing is independent of preference persistence support and excludes deleted/unsent sources
+  ---
+  duration_ms: 53.239604
+  type: 'test'
+  ...
+# Subtest: inline Reply routing preserves attachments, mentions and text when replacing a source
+ok 81 - inline Reply routing preserves attachments, mentions and text when replacing a source
+  ---
+  duration_ms: 59.252972
+  type: 'test'
+  ...
+# Subtest: inline Reply routing freezes a pending send across style and conversation switches and rejects stale slot callbacks
+ok 82 - inline Reply routing freezes a pending send across style and conversation switches and rejects stale slot callbacks
+  ---
+  duration_ms: 170.171688
+  type: 'test'
+  ...
+# Subtest: inline Reply routing respects ThreadPanel restrictions {"readOnly":true}
+ok 83 - inline Reply routing respects ThreadPanel restrictions {"readOnly":true}
+  ---
+  duration_ms: 98.784741
+  type: 'test'
+  ...
+# Subtest: inline Reply routing respects ThreadPanel restrictions {"composerAvailability":{"canSend":false}}
+ok 84 - inline Reply routing respects ThreadPanel restrictions {"composerAvailability":{"canSend":false}}
+  ---
+  duration_ms: 74.970639
+  type: 'test'
+  ...
+# Subtest: inline Reply routing retains a selected source when switching to Current before sending
+ok 85 - inline Reply routing retains a selected source when switching to Current before sending
+  ---
+  duration_ms: 80.192596
+  type: 'test'
+  ...
+# Subtest: inline Reply routing can replace the next draft source while a send retains its frozen payload
+ok 86 - inline Reply routing can replace the next draft source while a send retains its frozen payload
+  ---
+  duration_ms: 65.239591
+  type: 'test'
+  ...
+# Subtest: named thread dialog creates a discussion independently of Reply and preserves its channel draft
+ok 87 - named thread dialog creates a discussion independently of Reply and preserves its channel draft
+  ---
+  duration_ms: 179.183538
+  type: 'test'
+  ...
+# Subtest: named thread dialog validates canonical Unicode names before calling the client
+ok 88 - named thread dialog validates canonical Unicode names before calling the client
+  ---
+  duration_ms: 111.301795
+  type: 'test'
+  ...
+# Subtest: named thread dialog latches duplicate submits and retries the original name into a canonical existing thread
+ok 89 - named thread dialog latches duplicate submits and retries the original name into a canonical existing thread
+  ---
+  duration_ms: 142.970231
+  type: 'test'
+  ...
+# Subtest: named thread dialog cancel and Escape preserve drafts, contain keyboard focus and restore the opener
+ok 90 - named thread dialog cancel and Escape preserve drafts, contain keyboard focus and restore the opener
+  ---
+  duration_ms: 134.337139
+  type: 'test'
+  ...
+# Subtest: named thread dialog ignores completion after cancel
+ok 91 - named thread dialog ignores completion after cancel
+  ---
+  duration_ms: 64.399135
+  type: 'test'
+  ...
+# Subtest: named thread dialog ignores completion after navigate
+ok 92 - named thread dialog ignores completion after navigate
+  ---
+  duration_ms: 79.426587
+  type: 'test'
+  ...
+# Subtest: named thread action disables unsupported creation with an explanation
+ok 93 - named thread action disables unsupported creation with an explanation
+  ---
+  duration_ms: 23.951275
+  type: 'test'
+  ...
+# Subtest: named thread action disables unknown creation with an explanation
+ok 94 - named thread action disables unknown creation with an explanation
+  ---
+  duration_ms: 27.207298
+  type: 'test'
+  ...
+# Subtest: named thread action disables read-only creation with an explanation
+ok 95 - named thread action disables read-only creation with an explanation
+  ---
+  duration_ms: 34.514001
+  type: 'test'
+  ...
+# Subtest: named thread action disables restricted creation with an explanation
+ok 96 - named thread action disables restricted creation with an explanation
+  ---
+  duration_ms: 27.380895
+  type: 'test'
+  ...
+# Subtest: named thread action disables inactive creation with an explanation
+ok 97 - named thread action disables inactive creation with an explanation
+  ---
+  duration_ms: 27.64932
+  type: 'test'
+  ...
+# Subtest: named thread existing Open Thread works without named capability or write access in Discord style
+ok 98 - named thread existing Open Thread works without named capability or write access in Discord style
+  ---
+  duration_ms: 52.138582
+  type: 'test'
+  ...
+# Subtest: named thread Current Reply preserves the legacy entry and understands canonical names
+ok 99 - named thread Current Reply preserves the legacy entry and understands canonical names
+  ---
+  duration_ms: 95.178681
+  type: 'test'
+  ...
+# Subtest: named thread custom renderer gets optional actions and custom thread hosts retain ownership
+ok 100 - named thread custom renderer gets optional actions and custom thread hosts retain ownership
+  ---
+  duration_ms: 79.464906
+  type: 'test'
+  ...
+# Subtest: named thread dialog uses the constrained workspace shell at a narrow viewport
+ok 101 - named thread dialog uses the constrained workspace shell at a narrow viewport
+  ---
+  duration_ms: 105.027873
+  type: 'test'
+  ...
+# Subtest: named thread dialog retains a failed service attempt and preserves draft through capability loss
+ok 102 - named thread dialog retains a failed service attempt and preserves draft through capability loss
+  ---
+  duration_ms: 85.498533
+  type: 'test'
+  ...
+# Subtest: named thread creation excludes deleted and unsent roots, and is independent of inline and preference support
+ok 103 - named thread creation excludes deleted and unsent roots, and is independent of inline and preference support
+  ---
+  duration_ms: 109.845492
+  type: 'test'
+  ...
+# Subtest: inline Reply routing: default directly selected thread focuses its existing composer without nested creation
+ok 104 - inline Reply routing: default directly selected thread focuses its existing composer without nested creation
+  ---
+  duration_ms: 52.310757
+  type: 'test'
+  ...
+# Subtest: inline Reply routing: current directly selected thread focuses its existing composer without nested creation
+ok 105 - inline Reply routing: current directly selected thread focuses its existing composer without nested creation
+  ---
+  duration_ms: 52.864479
+  type: 'test'
+  ...
+# Subtest: inline Reply routing: Current directly selected thread requires a connected composer
+ok 106 - inline Reply routing: Current directly selected thread requires a connected composer
+  ---
+  duration_ms: 32.093084
+  type: 'test'
+  ...
+# Subtest: creation actions deduplicate, retain retry identity, and reuse canonical directs
+ok 107 - creation actions deduplicate, retain retry identity, and reuse canonical directs
+  ---
+  duration_ms: 22.484111
+  type: 'test'
+  ...
+# Subtest: archive, restore, and every membership intent reconcile canonical cache state
+ok 108 - archive, restore, and every membership intent reconcile canonical cache state
+  ---
+  duration_ms: 9.607298
+  type: 'test'
+  ...
+# Subtest: lifecycle conflicts, safety rejection, malformed results, and auth failures refresh or roll back safely
+ok 109 - lifecycle conflicts, safety rejection, malformed results, and auth failures refresh or roll back safely
+  ---
+  duration_ms: 8.44867
+  type: 'test'
+  ...
+# Subtest: a canonical creation event wins over a late HTTP failure and close settles pending work
+ok 110 - a canonical creation event wins over a late HTTP failure and close settles pending work
+  ---
+  duration_ms: 4.49348
+  type: 'test'
+  ...
+# Subtest: affected-user private membership events update only current-user membership state
+ok 111 - affected-user private membership events update only current-user membership state
+  ---
+  duration_ms: 0.816075
+  type: 'test'
+  ...
+# Subtest: membership HTTP and durable-event ordering converges on the newest complete list
+ok 112 - membership HTTP and durable-event ordering converges on the newest complete list
+  ---
+  duration_ms: 2.550344
+  type: 'test'
+  ...
+# Subtest: two confirmed creations survive stale discovery, scope changes, errors and acknowledgement
+ok 113 - two confirmed creations survive stale discovery, scope changes, errors and acknowledgement
+  ---
+  duration_ms: 16.384198
+  type: 'test'
+  ...
+# Subtest: a delayed creation result cannot populate a replacement identity or session
+ok 114 - a delayed creation result cannot populate a replacement identity or session
+  ---
+  duration_ms: 7.084552
+  type: 'test'
+  ...
+# Subtest: README relative links point to repository files
+ok 115 - README relative links point to repository files
+  ---
+  duration_ms: 10.27211
+  type: 'test'
+  ...
+# Subtest: README dependency and import snippets track the package manifest
+ok 116 - README dependency and import snippets track the package manifest
+  ---
+  duration_ms: 9.852383
+  type: 'test'
+  ...
+# Subtest: README platform and realtime claims remain source-backed
+ok 117 - README platform and realtime claims remain source-backed
+  ---
+  duration_ms: 34.075863
+  type: 'test'
+  ...
+# Subtest: built public subpaths resolve and import independently
+ok 118 - built public subpaths resolve and import independently
+  ---
+  duration_ms: 210.412322
+  type: 'test'
+  ...
+# Subtest: package conditions expose only browser-safe entries to browser resolvers
+ok 119 - package conditions expose only browser-safe entries to browser resolvers
+  ---
+  duration_ms: 3.41528
+  type: 'test'
+  ...
+# Subtest: a browser resolver rejects the Node-only server subpath
+ok 120 - a browser resolver rejects the Node-only server subpath
+  ---
+  duration_ms: 10.120454
+  type: 'test'
+  ...
+# Subtest: each subpath emits runtime, declaration, and map artifacts
+ok 121 - each subpath emits runtime, declaration, and map artifacts
+  ---
+  duration_ms: 1.107062
+  type: 'test'
+  ...
+# Subtest: TypeScript resolves declarations for every public subpath
+ok 122 - TypeScript resolves declarations for every public subpath
+  ---
+  duration_ms: 165.404248
+  type: 'test'
+  ...
+# Subtest: the browser client bundle excludes testing, server, and Node graphs
+ok 123 - the browser client bundle excludes testing, server, and Node graphs
+  ---
+  duration_ms: 167.928968
+  type: 'test'
+  ...
+# Subtest: the root JavaScript bundle excludes the optional stylesheet
+ok 124 - the root JavaScript bundle excludes the optional stylesheet
+  ---
+  duration_ms: 13.565735
+  type: 'test'
+  ...
+# Subtest: the production server bundle excludes the testing graph
+ok 125 - the production server bundle excludes the testing graph
+  ---
+  duration_ms: 100.62743
+  type: 'test'
+  ...
+# Subtest: an explicit stylesheet import emits CSS and remains in the bundle graph
+ok 126 - an explicit stylesheet import emits CSS and remains in the bundle graph
+  ---
+  duration_ms: 10.172979
+  type: 'test'
+  ...
+# Subtest: the browser react bundle excludes React, server, testing, and Node graphs
+ok 127 - the browser react bundle excludes React, server, testing, and Node graphs
+  ---
+  duration_ms: 124.065863
+  type: 'test'
+  ...
+# Subtest: the browser ui bundle excludes React, server, testing, and Node graphs
+ok 128 - the browser ui bundle excludes React, server, testing, and Node graphs
+  ---
+  duration_ms: 98.551241
+  type: 'test'
+  ...
+# Subtest: renders one compact editor surface with accessible tools and feedback
+ok 129 - renders one compact editor surface with accessible tools and feedback
+  ---
+  duration_ms: 66.765565
+  type: 'test'
+  ...
+# Subtest: opens the emoji picker by pointer and keyboard and inserts at selection or caret
+ok 130 - opens the emoji picker by pointer and keyboard and inserts at selection or caret
+  ---
+  duration_ms: 81.512391
+  type: 'test'
+  ...
+# Subtest: dismisses the composer emoji picker without leaking across conversations
+ok 131 - dismisses the composer emoji picker without leaking across conversations
+  ---
+  duration_ms: 114.977256
+  type: 'test'
+  ...
+# Subtest: keeps the emoji picker inert for disabled and read-only composers
+ok 132 - keeps the emoji picker inert for disabled and read-only composers
+  ---
+  duration_ms: 26.09943
+  type: 'test'
+  ...
+# Subtest: projects channel, direct, and group participants without exposing membership identities
+ok 133 - projects channel, direct, and group participants without exposing membership identities
+  ---
+  duration_ms: 17.237709
+  type: 'test'
+  ...
+# Subtest: filters safe participants and inserts a pointer-selected mention over the visual selection
+ok 134 - filters safe participants and inserts a pointer-selected mention over the visual selection
+  ---
+  duration_ms: 31.640233
+  type: 'test'
+  ...
+# Subtest: supports keyboard mention navigation, filtering, selection, and Escape focus restoration
+ok 135 - supports keyboard mention navigation, filtering, selection, and Escape focus restoration
+  ---
+  duration_ms: 44.047964
+  type: 'test'
+  ...
+# Subtest: opens participant typeahead from typed @ and sends the selected user mention
+ok 136 - opens participant typeahead from typed @ and sends the selected user mention
+  ---
+  duration_ms: 42.224658
+  type: 'test'
+  ...
+# Subtest: maps a visual mention selection through canonical Markdown delimiters
+ok 137 - maps a visual mention selection through canonical Markdown delimiters
+  ---
+  duration_ms: 25.750317
+  type: 'test'
+  ...
+# Subtest: dismisses inline mentions without changing text and ignores invalid @ boundaries
+ok 138 - dismisses inline mentions without changing text and ignores invalid @ boundaries
+  ---
+  duration_ms: 37.984331
+  type: 'test'
+  ...
+# Subtest: does not trigger or select inline mentions during IME composition
+ok 139 - does not trigger or select inline mentions during IME composition
+  ---
+  duration_ms: 18.145518
+  type: 'test'
+  ...
+# Subtest: keeps unavailable inline mention options from creating mention metadata
+ok 140 - keeps unavailable inline mention options from creating mention metadata
+  ---
+  duration_ms: 16.176804
+  type: 'test'
+  ...
+# Subtest: restores and round-trips mentions, sends exact references, retries matching failures, and clears on success
+ok 141 - restores and round-trips mentions, sends exact references, retries matching failures, and clears on success
+  ---
+  duration_ms: 41.153169
+  type: 'test'
+  ...
+# Subtest: resets mention interaction on conversation changes and disables it for guarded composers
+ok 142 - resets mention interaction on conversation changes and disables it for guarded composers
+  ---
+  duration_ms: 45.69258
+  type: 'test'
+  ...
+# Subtest: disables Send for empty or whitespace-only content and enables sendable text
+ok 143 - disables Send for empty or whitespace-only content and enables sendable text
+  ---
+  duration_ms: 18.772945
+  type: 'test'
+  ...
+# Subtest: autosizes one-line and multiline text, caps overflow, and resets after send
+ok 144 - autosizes one-line and multiline text, caps overflow, and resets after send
+  ---
+  duration_ms: 33.637147
+  type: 'test'
+  ...
+# Subtest: autosizes restored drafts and resynchronizes observed container changes
+ok 145 - autosizes restored drafts and resynchronizes observed container changes
+  ---
+  duration_ms: 11.112968
+  type: 'test'
+  ...
+# Subtest: restores drafts, updates them through debounced public actions, and retries safe draft errors
+ok 146 - restores drafts, updates them through debounced public actions, and retries safe draft errors
+  ---
+  duration_ms: 30.565777
+  type: 'test'
+  ...
+# Subtest: keeps repeated routine draft synchronization silent while preserving public draft status
+ok 147 - keeps repeated routine draft synchronization silent while preserving public draft status
+  ---
+  duration_ms: 36.757238
+  type: 'test'
+  ...
+# Subtest: visually formats selections, stores canonical Markdown, and restores focus
+ok 148 - visually formats selections, stores canonical Markdown, and restores focus
+  ---
+  duration_ms: 118.502895
+  type: 'test'
+  ...
+# Subtest: inserts visual placeholders at a collapsed caret
+ok 149 - inserts visual placeholders at a collapsed caret
+  ---
+  duration_ms: 68.05058
+  type: 'test'
+  ...
+# Subtest: keeps keyboard input ordered and plain after deactivating Italic at the caret
+ok 150 - keeps keyboard input ordered and plain after deactivating Italic at the caret
+  ---
+  duration_ms: 77.163633
+  type: 'test'
+  ...
+# Subtest: rehydrates canonical Markdown visually and rejects unsafe link actions
+ok 151 - rehydrates canonical Markdown visually and rejects unsafe link actions
+  ---
+  duration_ms: 15.402885
+  type: 'test'
+  ...
+# Subtest: falls back to the plain textarea without an enabled formatting toolbar
+ok 152 - falls back to the plain textarea without an enabled formatting toolbar
+  ---
+  duration_ms: 15.664028
+  type: 'test'
+  ...
+# Subtest: sends the transformed composer text as a Markdown payload
+ok 153 - sends the transformed composer text as a Markdown payload
+  ---
+  duration_ms: 26.949853
+  type: 'test'
+  ...
+# Subtest: bounds typing and implements Enter, Shift+Enter, IME, blur, and duplicate-send semantics
+ok 154 - bounds typing and implements Enter, Shift+Enter, IME, blur, and duplicate-send semantics
+  ---
+  duration_ms: 31.198172
+  type: 'test'
+  ...
+# Subtest: ArrowUp requests the latest edit only for a truly empty, unmodified default composer
+ok 155 - ArrowUp requests the latest edit only for a truly empty, unmodified default composer
+  ---
+  duration_ms: 122.960997
+  type: 'test'
+  ...
+# Subtest: renders safe upload progress, cancellation, finalization, and finalized-id-only sending
+ok 156 - renders safe upload progress, cancellation, finalization, and finalized-id-only sending
+  ---
+  duration_ms: 42.697696
+  type: 'test'
+  ...
+# Subtest: uploads a pasted image once, preserves mixed text paste, and gates Enter until finalization
+ok 157 - uploads a pasted image once, preserves mixed text paste, and gates Enter until finalization
+  ---
+  duration_ms: 34.38168
+  type: 'test'
+  ...
+# Subtest: uploads supported pasted documents once and ignores non-file and null clipboard items
+ok 158 - uploads supported pasted documents once and ignores non-file and null clipboard items
+  ---
+  duration_ms: 13.946466
+  type: 'test'
+  ...
+# Subtest: rejects unsupported pasted files canonically and ignores paste while disabled or read-only
+ok 159 - rejects unsupported pasted files canonically and ignores paste while disabled or read-only
+  ---
+  duration_ms: 31.262897
+  type: 'test'
+  ...
+# Subtest: inline reply source-only drafts survive replacement, ping edits, remount and cancellation
+ok 160 - inline reply source-only drafts survive replacement, ping edits, remount and cancellation
+  ---
+  duration_ms: 22.365128
+  type: 'test'
+  ...
+# Subtest: cancel reply preserves text and attachments and restores the rich editor focus
+ok 161 - cancel reply preserves text and attachments and restores the rich editor focus
+  ---
+  duration_ms: 9.701153
+  type: 'test'
+  ...
+# Subtest: inline reply submission stays in the current channel across style rerenders and source rejection
+ok 162 - inline reply submission stays in the current channel across style rerenders and source rejection
+  ---
+  duration_ms: 24.86032
+  type: 'test'
+  ...
+# Subtest: inline reply submission stays in the current thread across style rerenders and source rejection
+ok 163 - inline reply submission stays in the current thread across style rerenders and source rejection
+  ---
+  duration_ms: 18.96543
+  type: 'test'
+  ...
+# Subtest: reply source errors recover and access loss removes source content from DOM and slots
+ok 164 - reply source errors recover and access loss removes source content from DOM and slots
+  ---
+  duration_ms: 19.369745
+  type: 'test'
+  ...
+# Subtest: retry matches source and ping and retains its original intent after composer reply changes
+ok 165 - retry matches source and ping and retains its original intent after composer reply changes
+  ---
+  duration_ms: 18.179536
+  type: 'test'
+  ...
+# Subtest: late send success preserves newer draft edits
+ok 166 - late send success preserves newer draft edits
+  ---
+  duration_ms: 16.705347
+  type: 'test'
+  ...
+# Subtest: late retry success preserves newer draft edits
+ok 167 - late retry success preserves newer draft edits
+  ---
+  duration_ms: 17.007475
+  type: 'test'
+  ...
+# Subtest: a retry completing after a conversation switch cannot clear the newly opened draft
+ok 168 - a retry completing after a conversation switch cannot clear the newly opened draft
+  ---
+  duration_ms: 19.698702
+  type: 'test'
+  ...
+# Subtest: editing a sent message never submits composer reply context or changes its ancestry
+ok 169 - editing a sent message never submits composer reply context or changes its ancestry
+  ---
+  duration_ms: 21.374641
+  type: 'test'
+  ...
+# Subtest: preserves failed content, exposes the public optimistic id, and retries without fabricating transport state
+ok 170 - preserves failed content, exposes the public optimistic id, and retries without fabricating transport state
+  ---
+  duration_ms: 15.519795
+  type: 'test'
+  ...
+# Subtest: permission failures preserve content, explain membership, and do not offer an ineffective retry
+ok 171 - permission failures preserve content, explain membership, and do not offer an ineffective retry
+  ---
+  duration_ms: 29.971582
+  type: 'test'
+  ...
+# Subtest: authentication failures retain their own explanation
+ok 172 - authentication failures retain their own explanation
+  ---
+  duration_ms: 12.072515
+  type: 'test'
+  ...
+# Subtest: passes renderer-safe normalized state to Composer overrides and covers disabled/a11y/raw-input states
+ok 173 - passes renderer-safe normalized state to Composer overrides and covers disabled/a11y/raw-input states
+  ---
+  duration_ms: 70.51287
+  type: 'test'
+  ...
+# Subtest: attachment feature transitions gate picker, paste and drop while preserving text and ignoring late uploads
+ok 174 - attachment feature transitions gate picker, paste and drop while preserving text and ignoring late uploads
+  ---
+  duration_ms: 41.157295
+  type: 'test'
+  ...
+# Subtest: feature loss preserves finalized draft files for recovery and permits text after removal
+ok 175 - feature loss preserves finalized draft files for recovery and permits text after removal
+  ---
+  duration_ms: 34.624196
+  type: 'test'
+  ...
+# Subtest: attachment-bearing retry waits for feature recovery while text retry remains usable
+ok 176 - attachment-bearing retry waits for feature recovery while text retry remains usable
+  ---
+  duration_ms: 48.152481
+  type: 'test'
+  ...
+# Subtest: retains optional replies on active and deleted messages in their conversation
+ok 177 - retains optional replies on active and deleted messages in their conversation
+  ---
+  duration_ms: 3.621104
+  type: 'test'
+  ...
+# Subtest: rejects malformed reply references on active and deleted messages
+ok 178 - rejects malformed reply references on active and deleted messages
+  ---
+  duration_ms: 2.452023
+  type: 'test'
+  ...
+# Subtest: applies an exclusive backward cursor and returns ascending order
+ok 179 - applies an exclusive backward cursor and returns ascending order
+  ---
+  duration_ms: 0.279448
+  type: 'test'
+  ...
+# Subtest: applies an exclusive forward cursor and still returns ascending order
+ok 180 - applies an exclusive forward cursor and still returns ascending order
+  ---
+  duration_ms: 0.218132
+  type: 'test'
+  ...
+# Subtest: preserves edit markers and a redacted soft-delete shell
+ok 181 - preserves edit markers and a redacted soft-delete shell
+  ---
+  duration_ms: 0.179095
+  type: 'test'
+  ...
+# Subtest: serializes reaction aggregates, attachment metadata, root summary, and replay cursor
+ok 182 - serializes reaction aggregates, attachment metadata, root summary, and replay cursor
+  ---
+  duration_ms: 0.2675
+  type: 'test'
+  ...
+# Subtest: rejects thread replies and any other conversation row from a parent page
+ok 183 - rejects thread replies and any other conversation row from a parent page
+  ---
+  duration_ms: 0.171303
+  type: 'test'
+  ...
+# Subtest: rejects thread summaries on ordinary messages and mismatched attachments
+ok 184 - rejects thread summaries on ordinary messages and mismatched attachments
+  ---
+  duration_ms: 0.240214
+  type: 'test'
+  ...
+# Subtest: DefaultAttachmentRenderer links a lazy image preview and keeps readable download metadata
+ok 185 - DefaultAttachmentRenderer links a lazy image preview and keeps readable download metadata
+  ---
+  duration_ms: 6.121489
+  type: 'test'
+  ...
+# Subtest: DefaultAttachmentRenderer uses canonical image preview metadata without changing open or download targets
+ok 186 - DefaultAttachmentRenderer uses canonical image preview metadata without changing open or download targets
+  ---
+  duration_ms: 1.410589
+  type: 'test'
+  ...
+# Subtest: DefaultAttachmentRenderer rejects malformed optional preview metadata
+ok 187 - DefaultAttachmentRenderer rejects malformed optional preview metadata
+  ---
+  duration_ms: 0.554128
+  type: 'test'
+  ...
+# Subtest: DefaultAttachmentRenderer keeps non-images compact and does not emit preview markup
+ok 188 - DefaultAttachmentRenderer keeps non-images compact and does not emit preview markup
+  ---
+  duration_ms: 0.347788
+  type: 'test'
+  ...
+# Subtest: DefaultMessageTimelineEmptyState renders a quiet conversation introduction in the timeline column
+ok 189 - DefaultMessageTimelineEmptyState renders a quiet conversation introduction in the timeline column
+  ---
+  duration_ms: 0.561075
+  type: 'test'
+  ...
+# Subtest: DefaultAttachmentRenderer escapes malicious-looking and long filenames as text
+ok 190 - DefaultAttachmentRenderer escapes malicious-looking and long filenames as text
+  ---
+  duration_ms: 1.180168
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: cache hooks update declaratively and selector equality isolates unrelated rerenders
+ok 191 - cache hooks update declaratively and selector equality isolates unrelated rerenders
+  ---
+  duration_ms: 26.609059
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# (node:341) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: directory-user batches coalesce duplicates, request only misses, and retain caller order
+ok 192 - directory-user batches coalesce duplicates, request only misses, and retain caller order
+  ---
+  duration_ms: 4.845639
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: directory rate limits retry after cooldown, recover identities, and cancel on unmount
+ok 193 - directory rate limits retry after cooldown, recover identities, and cancel on unmount
+  ---
+  duration_ms: 6.782189
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: directory-user batches ignore aborted completions from a previous identity
+ok 194 - directory-user batches ignore aborted completions from a previous identity
+  ---
+  duration_ms: 3.044231
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: conversation participants resolve 50 list summaries without opening conversation details
+ok 195 - conversation participants resolve 50 list summaries without opening conversation details
+  ---
+  duration_ms: 57.836663
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: conversation discovery refreshes restored lists and preserves pagination without refetch loops
+ok 196 - conversation discovery refreshes restored lists and preserves pagination without refetch loops
+  ---
+  duration_ms: 8.50751
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: message hooks pass stable conversation-local cursors and merge adjacent pages
+ok 197 - message hooks pass stable conversation-local cursors and merge adjacent pages
+  ---
+  duration_ms: 2.03417
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: saved-message hooks preserve opaque pagination order and unavailable entries
+ok 198 - saved-message hooks preserve opaque pagination order and unavailable entries
+  ---
+  duration_ms: 4.84164
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: message-reminder hooks preserve opaque pagination order and identity scope
+ok 199 - message-reminder hooks preserve opaque pagination order and identity scope
+  ---
+  duration_ms: 4.364207
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: directory search observes the client debounce runtime and exposes only redacted summaries
+ok 200 - directory search observes the client debounce runtime and exposes only redacted summaries
+  ---
+  duration_ms: 6.25096
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: thread, draft, attachment, and huddle hooks keep runtime boundaries declarative
+ok 201 - thread, draft, attachment, and huddle hooks keep runtime boundaries declarative
+  ---
+  duration_ms: 3.008069
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: disabled huddle queries keep a stable fallback until a valid conversation is enabled
+ok 202 - disabled huddle queries keep a stable fallback until a valid conversation is enabled
+  ---
+  duration_ms: 1.968549
+  type: 'test'
+  ...
+# Subtest: provider failures are safe and SSR uses a stable prehydrated snapshot
+ok 203 - provider failures are safe and SSR uses a stable prehydrated snapshot
+  ---
+  duration_ms: 6.155265
+  type: 'test'
+  ...
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: read-state hooks retain freshness only while known views are mounted
+ok 204 - read-state hooks retain freshness only while known views are mounted
+  ---
+  duration_ms: 2.629898
+  type: 'test'
+  ...
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Subtest: mounted discovery revalidates each creation without losing pending rows or leaking scopes
+ok 205 - mounted discovery revalidates each creation without losing pending rows or leaking scopes
+  ---
+  duration_ms: 37.162499
+  type: 'test'
+  ...
+# Subtest: opens a new canonical thread and composes its isolated timeline and composer
+ok 206 - opens a new canonical thread and composes its isolated timeline and composer
+  ---
+  duration_ms: 92.014926
+  type: 'test'
+  ...
+# Subtest: shows immutable parent context and keeps parent messages out of an existing thread
+ok 207 - shows immutable parent context and keeps parent messages out of an existing thread
+  ---
+  duration_ms: 27.430668
+  type: 'test'
+  ...
+# Subtest: forwards normalized link-preview overrides through the thread timeline
+ok 208 - forwards normalized link-preview overrides through the thread timeline
+  ---
+  duration_ms: 29.152767
+  type: 'test'
+  ...
+# Subtest: opens the reaction picker for replies without rendering empty configured aggregates
+ok 209 - opens the reaction picker for replies without rendering empty configured aggregates
+  ---
+  duration_ms: 72.527353
+  type: 'test'
+  ...
+# Subtest: paginates only the thread and exposes its unread, follow, unfollow, and mark-read actions
+ok 210 - paginates only the thread and exposes its unread, follow, unfollow, and mark-read actions
+  ---
+  duration_ms: 113.421591
+  type: 'test'
+  ...
+# Subtest: renders accessible loading and retryable error states and retries through the public action
+ok 211 - renders accessible loading and retryable error states and retries through the public action
+  ---
+  duration_ms: 23.687833
+  type: 'test'
+  ...
+# Subtest: renders an unavailable state outside ChatProvider without touching private context
+ok 212 - renders an unavailable state outside ChatProvider without touching private context
+  ---
+  duration_ms: 2.296017
+  type: 'test'
+  ...
+# Subtest: moves focus from Reply into the named panel once and preserves it through live replies
+ok 213 - moves focus from Reply into the named panel once and preserves it through live replies
+  ---
+  duration_ms: 59.171408
+  type: 'test'
+  ...
+# Subtest: closes by Escape and Close while restoring the connected Reply opener
+ok 214 - closes by Escape and Close while restoring the connected Reply opener
+  ---
+  duration_ms: 75.071085
+  type: 'test'
+  ...
+# Subtest: does not try to restore a Reply opener that was removed
+ok 215 - does not try to restore a Reply opener that was removed
+  ---
+  duration_ms: 52.628456
+  type: 'test'
+  ...
+# Subtest: a conflicting follow result announces reconciliation rather than an unapplied change
+ok 216 - a conflicting follow result announces reconciliation rather than an unapplied change
+  ---
+  duration_ms: 28.157107
+  type: 'test'
+  ...
+# Subtest: unfollow conflict is announced in the live region and can retry with refreshed authority
+ok 217 - unfollow conflict is announced in the live region and can retry with refreshed authority
+  ---
+  duration_ms: 46.187575
+  type: 'test'
+  ...
+# Subtest: follow conflict is announced in the live region and can retry with refreshed authority
+ok 218 - follow conflict is announced in the live region and can retry with refreshed authority
+  ---
+  duration_ms: 70.440152
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for applied, isFollowing=true
+ok 219 - unfollow announcement checks authority for applied, isFollowing=true
+  ---
+  duration_ms: 35.968232
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for applied, isFollowing=false
+ok 220 - unfollow announcement checks authority for applied, isFollowing=false
+  ---
+  duration_ms: 35.472364
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for replayed, isFollowing=true
+ok 221 - unfollow announcement checks authority for replayed, isFollowing=true
+  ---
+  duration_ms: 36.234673
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for replayed, isFollowing=false
+ok 222 - unfollow announcement checks authority for replayed, isFollowing=false
+  ---
+  duration_ms: 33.298893
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for already_requested_state, isFollowing=true
+ok 223 - unfollow announcement checks authority for already_requested_state, isFollowing=true
+  ---
+  duration_ms: 26.180885
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for already_requested_state, isFollowing=false
+ok 224 - unfollow announcement checks authority for already_requested_state, isFollowing=false
+  ---
+  duration_ms: 30.787863
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for follow_revision_conflict, isFollowing=true
+ok 225 - unfollow announcement checks authority for follow_revision_conflict, isFollowing=true
+  ---
+  duration_ms: 30.777277
+  type: 'test'
+  ...
+# Subtest: unfollow announcement checks authority for follow_revision_conflict, isFollowing=false
+ok 226 - unfollow announcement checks authority for follow_revision_conflict, isFollowing=false
+  ---
+  duration_ms: 31.471454
+  type: 'test'
+  ...
+# Subtest: offline Follow announces retry, preserves authority, and recovers without login
+ok 227 - offline Follow announces retry, preserves authority, and recovers without login
+  ---
+  duration_ms: 73.57299
+  type: 'test'
+  ...
+# Subtest: offline Unfollow announces retry, preserves authority, and recovers without login
+ok 228 - offline Unfollow announces retry, preserves authority, and recovers without login
+  ---
+  duration_ms: 48.475038
+  type: 'test'
+  ...
+# Subtest: recovers missing thread after canonical hydration before mount
+ok 229 - recovers missing thread after canonical hydration before mount
+  ---
+  duration_ms: 27.393117
+  type: 'test'
+  ...
+# Subtest: recovers missing thread after canonical hydration while mounted
+ok 230 - recovers missing thread after canonical hydration while mounted
+  ---
+  duration_ms: 42.890722
+  type: 'test'
+  ...
+# Subtest: recovers missing root and thread after canonical hydration before mount
+ok 231 - recovers missing root and thread after canonical hydration before mount
+  ---
+  duration_ms: 22.369352
+  type: 'test'
+  ...
+# Subtest: recovers missing root and thread after canonical hydration while mounted
+ok 232 - recovers missing root and thread after canonical hydration while mounted
+  ---
+  duration_ms: 42.02562
+  type: 'test'
+  ...
+# Subtest: failed snapshot_failed hydration recovery stops at a visible Retry and recovers on request
+ok 233 - failed snapshot_failed hydration recovery stops at a visible Retry and recovers on request
+  ---
+  duration_ms: 40.980638
+  type: 'test'
+  ...
+# Subtest: failed root_message_unavailable hydration recovery stops at a visible Retry and recovers on request
+ok 234 - failed root_message_unavailable hydration recovery stops at a visible Retry and recovers on request
+  ---
+  duration_ms: 40.248255
+  type: 'test'
+  ...
+# Subtest: canonical root restoration releases an earlier root-unavailable panel
+ok 235 - canonical root restoration releases an earlier root-unavailable panel
+  ---
+  duration_ms: 19.378119
+  type: 'test'
+  ...
+# Subtest: leaving then sending an inline thread reply keeps lifecycle controls usable after membership refresh
+ok 236 - leaving then sending an inline thread reply keeps lifecycle controls usable after membership refresh
+  ---
+  duration_ms: 57.145796
+  type: 'test'
+  ...
+# Subtest: membership reauthorization retains disabled lifecycle nodes and admits one action only after readiness
+ok 237 - membership reauthorization retains disabled lifecycle nodes and admits one action only after readiness
+  ---
+  duration_ms: 33.173377
+  type: 'test'
+  ...
+# Subtest: denied membership reauthorization removes retained lifecycle controls
+ok 238 - denied membership reauthorization removes retained lifecycle controls
+  ---
+  duration_ms: 28.891338
+  type: 'test'
+  ...
+# Subtest: lifecycle dismissal, Escape, unmount and custom close label never mutate shared discussion
+ok 239 - lifecycle dismissal, Escape, unmount and custom close label never mutate shared discussion
+  ---
+  duration_ms: 73.130798
+  type: 'test'
+  ...
+# Subtest: lifecycle visibility: supported manager
+ok 240 - lifecycle visibility: supported manager
+  ---
+  duration_ms: 18.238147
+  type: 'test'
+  ...
+# Subtest: lifecycle visibility: unsupported manager
+ok 241 - lifecycle visibility: unsupported manager
+  ---
+  duration_ms: 15.217196
+  type: 'test'
+  ...
+# Subtest: lifecycle visibility: unknown authority
+ok 242 - lifecycle visibility: unknown authority
+  ---
+  duration_ms: 17.488721
+  type: 'test'
+  ...
+# Subtest: lifecycle visibility: explicit denial
+ok 243 - lifecycle visibility: explicit denial
+  ---
+  duration_ms: 18.960401
+  type: 'test'
+  ...
+# Subtest: lifecycle visibility: send-only authority
+ok 244 - lifecycle visibility: send-only authority
+  ---
+  duration_ms: 14.759824
+  type: 'test'
+  ...
+# Subtest: lifecycle close, reopen, lock, unlock use canonical transitions; unlock leaves closed
+ok 245 - lifecycle close, reopen, lock, unlock use canonical transitions; unlock leaves closed
+  ---
+  duration_ms: 49.953846
+  type: 'test'
+  ...
+# Subtest: lifecycle pending actions reject duplicates and transport retry keeps exact command
+ok 246 - lifecycle pending actions reject duplicates and transport retry keeps exact command
+  ---
+  duration_ms: 50.131472
+  type: 'test'
+  ...
+# Subtest: lifecycle conflict shows canonical state and retries original revision after remote updates
+ok 247 - lifecycle conflict shows canonical state and retries original revision after remote updates
+  ---
+  duration_ms: 52.576713
+  type: 'test'
+  ...
+# Subtest: remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: current, root panel
+ok 248 - remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: current, root panel
+  ---
+  duration_ms: 88.144634
+  type: 'test'
+  ...
+# Subtest: remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: current, discovery panel
+ok 249 - remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: current, discovery panel
+  ---
+  duration_ms: 85.357996
+  type: 'test'
+  ...
+# Subtest: remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: discord, root panel
+ok 250 - remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: discord, root panel
+  ---
+  duration_ms: 85.307221
+  type: 'test'
+  ...
+# Subtest: remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: discord, discovery panel
+ok 251 - remote lifecycle retains draft/reply/attachments and blocks keyboard/pointer sends: discord, discovery panel
+  ---
+  duration_ms: 99.27227
+  type: 'test'
+  ...
+# Subtest: lifecycle denial retains composer draft while revoked history is removed
+ok 252 - lifecycle denial retains composer draft while revoked history is removed
+  ---
+  duration_ms: 33.749741
+  type: 'test'
+  ...
+# Subtest: eligible unlock never weakens host restriction {"readOnly":true}
+ok 253 - eligible unlock never weakens host restriction {"readOnly":true}
+  ---
+  duration_ms: 18.219438
+  type: 'test'
+  ...
+# Subtest: eligible unlock never weakens host restriction {"composerAvailability":{"canSend":false}}
+ok 254 - eligible unlock never weakens host restriction {"composerAvailability":{"canSend":false}}
+  ---
+  duration_ms: 22.646521
+  type: 'test'
+  ...
+# Subtest: eligible unlock never weakens host restriction {"composerAvailability":{"membershipState":"removed"}}
+ok 255 - eligible unlock never weakens host restriction {"composerAvailability":{"membershipState":"removed"}}
+  ---
+  duration_ms: 18.31627
+  type: 'test'
+  ...
+# Subtest: lifecycle loading and legacy metadata are accessible with no mutation controls
+ok 256 - lifecycle loading and legacy metadata are accessible with no mutation controls
+  ---
+  duration_ms: 18.190836
+  type: 'test'
+  ...
+# Subtest: explicit reopen requires independent send authority: undefined
+ok 257 - explicit reopen requires independent send authority: undefined
+  ---
+  duration_ms: 14.470684
+  type: 'test'
+  ...
+# Subtest: explicit reopen requires independent send authority: {"canManage":true}
+ok 258 - explicit reopen requires independent send authority: {"canManage":true}
+  ---
+  duration_ms: 17.270976
+  type: 'test'
+  ...
+# Subtest: explicit reopen requires independent send authority: {"canSend":true}
+ok 259 - explicit reopen requires independent send authority: {"canSend":true}
+  ---
+  duration_ms: 14.320406
+  type: 'test'
+  ...
+# Subtest: lifecycle read failure retries hydration without creating a command
+ok 260 - lifecycle read failure retries hydration without creating a command
+  ---
+  duration_ms: 22.273382
+  type: 'test'
+  ...
+# Subtest: current subscription labels bind to thread APIs and leave retains history, draft, unread and private state
+ok 261 - current subscription labels bind to thread APIs and leave retains history, draft, unread and private state
+  ---
+  duration_ms: 25.428125
+  type: 'test'
+  ...
+# Subtest: discord subscription labels bind to thread APIs and leave retains history, draft, unread and private state
+ok 262 - discord subscription labels bind to thread APIs and leave retains history, draft, unread and private state
+  ---
+  duration_ms: 26.777243
+  type: 'test'
+  ...
+# Subtest: Discord subscription pending prevents duplicate mutations and explicit retry recovers from rejection
+ok 263 - Discord subscription pending prevents duplicate mutations and explicit retry recovers from rejection
+  ---
+  duration_ms: 21.686052
+  type: 'test'
+  ...
+# Subtest: thread preference pending uses canonical values, prevents duplicates, and owns nested Escape at compact width
+ok 264 - thread preference pending uses canonical values, prevents duplicates, and owns nested Escape at compact width
+  ---
+  duration_ms: 36.483637
+  type: 'test'
+  ...
+# Subtest: thread notification level and timed mute are independent; conflicts load authority and permit explicit retry
+ok 265 - thread notification level and timed mute are independent; conflicts load authority and permit explicit retry
+  ---
+  duration_ms: 41.338131
+  type: 'test'
+  ...
+# Subtest: missing thread preferences load without fabricated defaults and retry an unavailable read
+ok 266 - missing thread preferences load without fabricated defaults and retry an unavailable read
+  ---
+  duration_ms: 20.853864
+  type: 'test'
+  ...
+# Subtest: Discord follow conflict reconciles authority and explicit subscription retry retains keyboard focus
+ok 267 - Discord follow conflict reconciles authority and explicit subscription retry retains keyboard focus
+  ---
+  duration_ms: 23.087761
+  type: 'test'
+  ...
+# Subtest: pre-existing optimistic subscription and preference writes remain unconfirmed and cannot be duplicated
+ok 268 - pre-existing optimistic subscription and preference writes remain unconfirmed and cannot be duplicated
+  ---
+  duration_ms: 21.570723
+  type: 'test'
+  ...
+# Subtest: default Reply inside a thread focuses its composer without nested creation or an inline source
+ok 269 - default Reply inside a thread focuses its composer without nested creation or an inline source
+  ---
+  duration_ms: 22.294613
+  type: 'test'
+  ...
+# Subtest: current Reply inside a thread focuses its composer without nested creation or an inline source
+ok 270 - current Reply inside a thread focuses its composer without nested creation or an inline source
+  ---
+  duration_ms: 23.300407
+  type: 'test'
+  ...
+# Subtest: Current thread Reply respects host restriction {"readOnly":true}
+ok 271 - Current thread Reply respects host restriction {"readOnly":true}
+  ---
+  duration_ms: 14.896365
+  type: 'test'
+  ...
+# Subtest: Current thread Reply respects host restriction {"composerAvailability":{"canSend":false}}
+ok 272 - Current thread Reply respects host restriction {"composerAvailability":{"canSend":false}}
+  ---
+  duration_ms: 17.359906
+  type: 'test'
+  ...
+# Subtest: Current thread Reply respects host restriction {"composerAvailability":{"membershipState":"removed"}}
+ok 273 - Current thread Reply respects host restriction {"composerAvailability":{"membershipState":"removed"}}
+  ---
+  duration_ms: 14.726351
+  type: 'test'
+  ...
+# Subtest: standalone Current thread timeline disables Reply without an existing composer
+ok 274 - standalone Current thread timeline disables Reply without an existing composer
+  ---
+  duration_ms: 5.80554
+  type: 'test'
+  ...
+# Subtest: the public UI graph stays within browser-safe public boundaries
+ok 275 - the public UI graph stays within browser-safe public boundaries
+  ---
+  duration_ms: 106.763089
+  type: 'test'
+  ...
+# Subtest: every UI selector is scoped beneath the Handrail Chat root
+ok 276 - every UI selector is scoped beneath the Handrail Chat root
+  ---
+  duration_ms: 10.228836
+  type: 'test'
+  ...
+# Subtest: the stylesheet defines every documented token category with fallbacks
+ok 277 - the stylesheet defines every documented token category with fallbacks
+  ---
+  duration_ms: 1.255956
+  type: 'test'
+  ...
+# Subtest: every consumed UI token is declared on the Handrail Chat root
+ok 278 - every consumed UI token is declared on the Handrail Chat root
+  ---
+  duration_ms: 3.190189
+  type: 'test'
+  ...
+# Subtest: notification preferences use the shared dropdown layer below modal overlays
+ok 279 - notification preferences use the shared dropdown layer below modal overlays
+  ---
+  duration_ms: 1.330383
+  type: 'test'
+  ...
+# Subtest: Jump to latest is timeline-anchored below shared popup layers
+ok 280 - Jump to latest is timeline-anchored below shared popup layers
+  ---
+  duration_ms: 1.272869
+  type: 'test'
+  ...
+# Subtest: direct and group-direct creation reuse the channel workspace overlay layer
+ok 281 - direct and group-direct creation reuse the channel workspace overlay layer
+  ---
+  duration_ms: 1.663649
+  type: 'test'
+  ...
+# Subtest: production chat state tokens cover every theme branch
+ok 282 - production chat state tokens cover every theme branch
+  ---
+  duration_ms: 2.599926
+  type: 'test'
+  ...
+# Subtest: ChatWorkspace shell regions consume the scoped production hierarchy tokens
+ok 283 - ChatWorkspace shell regions consume the scoped production hierarchy tokens
+  ---
+  duration_ms: 2.994594
+  type: 'test'
+  ...
+# Subtest: the Chat Lab scopes workspace tokens and narrowly limits shell overrides
+ok 284 - the Chat Lab scopes workspace tokens and narrowly limits shell overrides
+  ---
+  duration_ms: 2.853562
+  type: 'test'
+  ...
+# Subtest: the DOM fixture demonstrates a host override and focus-visible opt-in
+ok 285 - the DOM fixture demonstrates a host override and focus-visible opt-in
+  ---
+  duration_ms: 1.356034
+  type: 'test'
+  ...
+# Subtest: dark, forced-color, and reduced-motion preferences stay root scoped
+ok 286 - dark, forced-color, and reduced-motion preferences stay root scoped
+  ---
+  duration_ms: 1.719442
+  type: 'test'
+  ...
+# Subtest: huddle details use their grid layout only while disclosed
+ok 287 - huddle details use their grid layout only while disclosed
+  ---
+  duration_ms: 1.376604
+  type: 'test'
+  ...
+# Subtest: link-preview cards bound long text and lazy images inside the timeline
+ok 288 - link-preview cards bound long text and lazy images inside the timeline
+  ---
+  duration_ms: 1.135493
+  type: 'test'
+  ...
+# Subtest: compact ChatWorkspace styles keep a single pane and uniformly sized header actions
+ok 289 - compact ChatWorkspace styles keep a single pane and uniformly sized header actions
+  ---
+  duration_ms: 2.782167
+  type: 'test'
+  ...
+# Subtest: narrow split-pane headers compact actions against the conversation width
+ok 290 - narrow split-pane headers compact actions against the conversation width
+  ---
+  duration_ms: 1.027918
+  type: 'test'
+  ...
+# Subtest: conversation state panels stay detail-scoped with accessible motion and color fallbacks
+ok 291 - conversation state panels stay detail-scoped with accessible motion and color fallbacks
+  ---
+  duration_ms: 66.325294
+  type: 'test'
+  ...
+# Subtest: timeline panes solely own bounded conversation scrolling
+ok 292 - timeline panes solely own bounded conversation scrolling
+  ---
+  duration_ms: 2.814604
+  type: 'test'
+  ...
+# Subtest: the conversation header separates shrinkable identity from bounded, non-wrapping actions
+ok 293 - the conversation header separates shrinkable identity from bounded, non-wrapping actions
+  ---
+  duration_ms: 3.433257
+  type: 'test'
+  ...
+# Subtest: the conversation navigation keeps dense hover, focus, selection, and forced-color states scoped
+ok 294 - the conversation navigation keeps dense hover, focus, selection, and forced-color states scoped
+  ---
+  duration_ms: 4.330261
+  type: 'test'
+  ...
+# Subtest: conversation rows reserve only the star action and render a passive mute indicator
+ok 295 - conversation rows reserve only the star action and render a passive mute indicator
+  ---
+  duration_ms: 1.746201
+  type: 'test'
+  ...
+# Subtest: the conversation filter positions a quiet currentColor icon without weakening focus or forced colors
+ok 296 - the conversation filter positions a quiet currentColor icon without weakening focus or forced colors
+  ---
+  duration_ms: 1.243611
+  type: 'test'
+  ...
+# Subtest: message action toolbars reveal on hover or keyboard focus without sticking after pointer clicks
+ok 297 - message action toolbars reveal on hover or keyboard focus without sticking after pointer clicks
+  ---
+  duration_ms: 1.722789
+  type: 'test'
+  ...
+# Subtest: reaction picker controls use compact currentColor SVGs without narrowing overflow
+ok 298 - reaction picker controls use compact currentColor SVGs without narrowing overflow
+  ---
+  duration_ms: 1.46105
+  type: 'test'
+  ...
+# Subtest: the thread close control uses a compact currentColor SVG in forced colors
+ok 299 - the thread close control uses a compact currentColor SVG in forced colors
+  ---
+  duration_ms: 1.092108
+  type: 'test'
+  ...
+# Subtest: the thread conversation keeps its composer outside scrollable controls and history
+ok 300 - the thread conversation keeps its composer outside scrollable controls and history
+  ---
+  duration_ms: 0.935474
+  type: 'test'
+  ...
+# Subtest: the compact composer keeps focus feedback on its individual controls
+ok 301 - the compact composer keeps focus feedback on its individual controls
+  ---
+  duration_ms: 4.446979
+  type: 'test'
+  ...
+# Subtest: the forwarding picker has a compact bounded modal with complete interaction states
+ok 302 - the forwarding picker has a compact bounded modal with complete interaction states
+  ---
+  duration_ms: 2.493445
+  type: 'test'
+  ...
+# Subtest: timeline image attachments are constrained without horizontal overflow
+ok 303 - timeline image attachments are constrained without horizontal overflow
+  ---
+  duration_ms: 1.147054
+  type: 'test'
+  ...
+1..303
+# tests 303
+# suites 0
+# pass 303
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 18149.742561

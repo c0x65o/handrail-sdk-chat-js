@@ -1,0 +1,38 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Sender layout regression
++ actual - expected
+
++ [
++   'timeline-320-fine: horizontal overflow\n\ntrue !== false\n',
++   'thread-320-fine: horizontal overflow\n\ntrue !== false\n',
++   'timeline-390-fine: horizontal overflow\n\ntrue !== false\n',
++   'thread-390-fine: horizontal overflow\n\ntrue !== false\n',
++   'timeline-320-coarse: horizontal overflow\n\ntrue !== false\n',
++   'thread-320-coarse: horizontal overflow\n\ntrue !== false\n',
++   'timeline-390-coarse: horizontal overflow\n\ntrue !== false\n',
++   'thread-390-coarse: horizontal overflow\n\ntrue !== false\n'
++ ]
+- []
+
+    at file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/scripts/qualify-sender-layout.mjs:126:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    'timeline-320-fine: horizontal overflow\n\ntrue !== false\n',
+    'thread-320-fine: horizontal overflow\n\ntrue !== false\n',
+    'timeline-390-fine: horizontal overflow\n\ntrue !== false\n',
+    'thread-390-fine: horizontal overflow\n\ntrue !== false\n',
+    'timeline-320-coarse: horizontal overflow\n\ntrue !== false\n',
+    'thread-320-coarse: horizontal overflow\n\ntrue !== false\n',
+    'timeline-390-coarse: horizontal overflow\n\ntrue !== false\n',
+    'thread-390-coarse: horizontal overflow\n\ntrue !== false\n'
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.23.1

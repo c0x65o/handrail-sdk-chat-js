@@ -1,0 +1,1 @@
+Passed 12 public SDK timeline/thread cases; evidence: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/docs/validation/sender-wrap-20261006/after-pane

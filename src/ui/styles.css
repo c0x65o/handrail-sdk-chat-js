@@ -318,6 +318,12 @@
   gap: var(--hr-chat-space-2, 0.5rem);
 }
 
+/* Keep full sender identities readable, including email addresses and unbroken IDs. */
+.handrail-chat .handrail-chat__timeline-author > strong,
+.handrail-chat .handrail-chat__thread-root-meta > strong {
+  overflow-wrap: anywhere;
+}
+
 .handrail-chat .handrail-chat__timeline-actions {
   align-items: center;
   background: var(--hr-chat-color-surface-action, #ffffff);

@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: drop-in React Playwright workflow preserves the browser gate contract
+ok 1 - drop-in React Playwright workflow preserves the browser gate contract
+  ---
+  duration_ms: 6.858214
+  type: 'test'
+  ...
+# Subtest: candidate receipts match source/package bytes and Node loads checkout server/testing exports
+ok 2 - candidate receipts match source/package bytes and Node loads checkout server/testing exports
+  ---
+  duration_ms: 260.371331
+  type: 'test'
+  ...
+# Subtest: contact HTTP handler bounds inputs, keeps grants server-side and handles uncertain delivery without leaking credentials
+ok 3 - contact HTTP handler bounds inputs, keeps grants server-side and handles uncertain delivery without leaking credentials
+  ---
+  duration_ms: 64.397409
+  type: 'test'
+  ...
+# Subtest: inbound text maps to the existing canonical plain-message contract
+ok 4 - inbound text maps to the existing canonical plain-message contract
+  ---
+  duration_ms: 2.345093
+  type: 'test'
+  ...
+# Subtest: caller identity, capabilities, mentions, attachments and unknown fields are rejected
+ok 5 - caller identity, capabilities, mentions, attachments and unknown fields are rejected
+  ---
+  duration_ms: 1.181321
+  type: 'test'
+  ...
+# Subtest: malformed credentials and non-administrators never reach storage
+ok 6 - malformed credentials and non-administrators never reach storage
+  ---
+  duration_ms: 0.936981
+  type: 'test'
+  ...
+# Subtest: HTTP and WebSocket host authentication cannot promote a native credential
+ok 7 - HTTP and WebSocket host authentication cannot promote a native credential
+  ---
+  duration_ms: 0.388
+  type: 'test'
+  ...
+# Subtest: shared context rejects native namespace before host auth or cached context across bearer whitespace
+ok 8 - shared context rejects native namespace before host auth or cached context across bearer whitespace
+  ---
+  duration_ms: 1.021451
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 611.818744

@@ -60,6 +60,7 @@ test("drop-in React Playwright workflow preserves the browser gate contract", as
       ["run", "npm run build:flutter:lab"],
       ["run", "npx playwright install --with-deps chromium"],
       ["run", "npm run test:browser -- --workers=1"],
+      ["run", 'node scripts/qualify-sender-layout.mjs "$RUNNER_TEMP/sender-layout"'],
       ["uses", "actions/upload-artifact@v4"],
     ],
     "actions and commands must remain in the required deterministic order",
@@ -120,12 +121,12 @@ test("drop-in React Playwright workflow preserves the browser gate contract", as
   const artifact = stepBlock(workflow, "Upload Playwright failure artifacts");
   assert.match(
     artifact,
-    /^        if: failure\(\) && steps\.browser-tests\.outcome == 'failure'$/mu,
+    /^        if: failure\(\) && \(steps\.browser-tests\.outcome == 'failure' \|\| steps\.sender-layout\.outcome == 'failure'\)$/mu,
   );
   assert.match(artifact, /^        uses: actions\/upload-artifact@v4$/mu);
   assert.match(
     artifact,
-    /^          path: \|\n            examples\/drop-in-react\/test-results\/playwright\n            examples\/drop-in-react\/playwright-report$/mu,
+    /^          path: \|\n            examples\/drop-in-react\/test-results\/playwright\n            examples\/drop-in-react\/playwright-report\n            \$\{\{ runner.temp \}\}\/sender-layout$/mu,
   );
   const retention = artifact.match(/^          retention-days: (\d+)$/mu);
   assert.ok(retention, "failure artifacts must declare a retention period");

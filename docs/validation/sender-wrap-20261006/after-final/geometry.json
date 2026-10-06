@@ -1,0 +1,3687 @@
+{
+  "browser": "151.0.7922.34",
+  "baseline": null,
+  "results": [
+    {
+      "label": "timeline-320-fine",
+      "rows": [
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 72,
+            "width": 181,
+            "height": 101,
+            "top": 72,
+            "right": 269,
+            "bottom": 173,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 74,
+              "width": 165.015625,
+              "height": 19,
+              "top": 74,
+              "right": 253.015625,
+              "bottom": 93,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 98,
+              "width": 176.71875,
+              "height": 19,
+              "top": 98,
+              "right": 264.71875,
+              "bottom": 117,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 122,
+              "width": 69.546875,
+              "height": 19,
+              "top": 122,
+              "right": 157.546875,
+              "bottom": 141,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 154,
+              "width": 57.546875,
+              "height": 16,
+              "top": 154,
+              "right": 145.546875,
+              "bottom": 170,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 303,
+            "width": 181,
+            "height": 125,
+            "top": 303,
+            "right": 269,
+            "bottom": 428,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 305,
+              "width": 91.375,
+              "height": 19,
+              "top": 305,
+              "right": 179.375,
+              "bottom": 324,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 329,
+              "width": 114.25,
+              "height": 19,
+              "top": 329,
+              "right": 202.25,
+              "bottom": 348,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 353,
+              "width": 164.640625,
+              "height": 19,
+              "top": 353,
+              "right": 252.640625,
+              "bottom": 372,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 377,
+              "width": 108.578125,
+              "height": 19,
+              "top": 377,
+              "right": 196.578125,
+              "bottom": 396,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 409,
+              "width": 57.546875,
+              "height": 16,
+              "top": 409,
+              "right": 145.546875,
+              "bottom": 425,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 500,
+            "width": 181,
+            "height": 173,
+            "top": 500,
+            "right": 269,
+            "bottom": 673,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 502,
+              "width": 178.078125,
+              "height": 19,
+              "top": 502,
+              "right": 266.078125,
+              "bottom": 521,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 526,
+              "width": 177.421875,
+              "height": 19,
+              "top": 526,
+              "right": 265.421875,
+              "bottom": 545,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 550,
+              "width": 180.140625,
+              "height": 19,
+              "top": 550,
+              "right": 268.140625,
+              "bottom": 569,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 574,
+              "width": 172.53125,
+              "height": 19,
+              "top": 574,
+              "right": 260.53125,
+              "bottom": 593,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 598,
+              "width": 174.96875,
+              "height": 19,
+              "top": 598,
+              "right": 262.96875,
+              "bottom": 617,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 622,
+              "width": 89.46875,
+              "height": 19,
+              "top": 622,
+              "right": 177.46875,
+              "bottom": 641,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 654,
+              "width": 57.546875,
+              "height": 16,
+              "top": 654,
+              "right": 145.546875,
+              "bottom": 670,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable channel message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": false,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "thread-320-fine",
+      "rows": [
+        {
+          "kind": "handrail-chat__thread-root-meta",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "10/6/2026, 6:29:00 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 33,
+            "y": 90,
+            "width": 254,
+            "height": 109,
+            "top": 90,
+            "right": 287,
+            "bottom": 199,
+            "left": 33
+          },
+          "nameRects": [
+            {
+              "x": 33,
+              "y": 92,
+              "width": 249.15625,
+              "height": 19,
+              "top": 92,
+              "right": 282.15625,
+              "bottom": 111,
+              "left": 33
+            },
+            {
+              "x": 33,
+              "y": 116,
+              "width": 162.109375,
+              "height": 19,
+              "top": 116,
+              "right": 195.109375,
+              "bottom": 135,
+              "left": 33
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 33,
+              "y": 148,
+              "width": 160.765625,
+              "height": 16,
+              "top": 148,
+              "right": 193.765625,
+              "bottom": 164,
+              "left": 33
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 257,
+            "width": 179,
+            "height": 101,
+            "top": 257,
+            "right": 268,
+            "bottom": 358,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 259,
+              "width": 165.015625,
+              "height": 19,
+              "top": 259,
+              "right": 254.015625,
+              "bottom": 278,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 283,
+              "width": 176.71875,
+              "height": 19,
+              "top": 283,
+              "right": 265.71875,
+              "bottom": 302,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 307,
+              "width": 69.546875,
+              "height": 19,
+              "top": 307,
+              "right": 158.546875,
+              "bottom": 326,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 339,
+              "width": 57.546875,
+              "height": 16,
+              "top": 339,
+              "right": 146.546875,
+              "bottom": 355,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 430,
+            "width": 179,
+            "height": 125,
+            "top": 430,
+            "right": 268,
+            "bottom": 555,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 432,
+              "width": 91.375,
+              "height": 19,
+              "top": 432,
+              "right": 180.375,
+              "bottom": 451,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 456,
+              "width": 114.25,
+              "height": 19,
+              "top": 456,
+              "right": 203.25,
+              "bottom": 475,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 480,
+              "width": 164.640625,
+              "height": 19,
+              "top": 480,
+              "right": 253.640625,
+              "bottom": 499,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 504,
+              "width": 108.578125,
+              "height": 19,
+              "top": 504,
+              "right": 197.578125,
+              "bottom": 523,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 536,
+              "width": 57.546875,
+              "height": 16,
+              "top": 536,
+              "right": 146.546875,
+              "bottom": 552,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 627,
+            "width": 179,
+            "height": 173,
+            "top": 627,
+            "right": 268,
+            "bottom": 800,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 629,
+              "width": 178.078125,
+              "height": 19,
+              "top": 629,
+              "right": 267.078125,
+              "bottom": 648,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 653,
+              "width": 177.421875,
+              "height": 19,
+              "top": 653,
+              "right": 266.421875,
+              "bottom": 672,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 677,
+              "width": 168.5625,
+              "height": 19,
+              "top": 677,
+              "right": 257.5625,
+              "bottom": 696,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 701,
+              "width": 170.84375,
+              "height": 19,
+              "top": 701,
+              "right": 259.84375,
+              "bottom": 720,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 725,
+              "width": 176.734375,
+              "height": 19,
+              "top": 725,
+              "right": 265.734375,
+              "bottom": 744,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 749,
+              "width": 100.984375,
+              "height": 19,
+              "top": 749,
+              "right": 189.984375,
+              "bottom": 768,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 781,
+              "width": 57.546875,
+              "height": 16,
+              "top": 781,
+              "right": 146.546875,
+              "bottom": 797,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable thread message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": false,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "timeline-390-fine",
+      "rows": [
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 72,
+            "width": 251,
+            "height": 77,
+            "top": 72,
+            "right": 339,
+            "bottom": 149,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 74,
+              "width": 249.15625,
+              "height": 19,
+              "top": 74,
+              "right": 337.15625,
+              "bottom": 93,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 98,
+              "width": 162.109375,
+              "height": 19,
+              "top": 98,
+              "right": 250.109375,
+              "bottom": 117,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 130,
+              "width": 57.546875,
+              "height": 16,
+              "top": 130,
+              "right": 145.546875,
+              "bottom": 146,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 233,
+            "width": 251,
+            "height": 101,
+            "top": 233,
+            "right": 339,
+            "bottom": 334,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 235,
+              "width": 211.1875,
+              "height": 19,
+              "top": 235,
+              "right": 299.1875,
+              "bottom": 254,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 259,
+              "width": 164.640625,
+              "height": 19,
+              "top": 259,
+              "right": 252.640625,
+              "bottom": 278,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 283,
+              "width": 108.578125,
+              "height": 19,
+              "top": 283,
+              "right": 196.578125,
+              "bottom": 302,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 315,
+              "width": 57.546875,
+              "height": 16,
+              "top": 315,
+              "right": 145.546875,
+              "bottom": 331,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 382,
+            "width": 251,
+            "height": 125,
+            "top": 382,
+            "right": 339,
+            "bottom": 507,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 384,
+              "width": 245.578125,
+              "height": 19,
+              "top": 384,
+              "right": 333.578125,
+              "bottom": 403,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 408,
+              "width": 248.484375,
+              "height": 19,
+              "top": 408,
+              "right": 336.484375,
+              "bottom": 427,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 432,
+              "width": 249.09375,
+              "height": 19,
+              "top": 432,
+              "right": 337.09375,
+              "bottom": 451,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 456,
+              "width": 229.4375,
+              "height": 19,
+              "top": 456,
+              "right": 317.4375,
+              "bottom": 475,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 488,
+              "width": 57.546875,
+              "height": 16,
+              "top": 488,
+              "right": 145.546875,
+              "bottom": 504,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable channel message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": false,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "thread-390-fine",
+      "rows": [
+        {
+          "kind": "handrail-chat__thread-root-meta",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "10/6/2026, 6:29:00 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 33,
+            "y": 90,
+            "width": 324,
+            "height": 80,
+            "top": 90,
+            "right": 357,
+            "bottom": 170,
+            "left": 33
+          },
+          "nameRects": [
+            {
+              "x": 33,
+              "y": 92,
+              "width": 314.265625,
+              "height": 19,
+              "top": 92,
+              "right": 347.265625,
+              "bottom": 111,
+              "left": 33
+            },
+            {
+              "x": 33,
+              "y": 116,
+              "width": 97.015625,
+              "height": 19,
+              "top": 116,
+              "right": 130.015625,
+              "bottom": 135,
+              "left": 33
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 33,
+              "y": 149.5,
+              "width": 160.765625,
+              "height": 16,
+              "top": 149.5,
+              "right": 193.765625,
+              "bottom": 165.5,
+              "left": 33
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 446,
+            "width": 249,
+            "height": 77,
+            "top": 446,
+            "right": 338,
+            "bottom": 523,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 448,
+              "width": 238.3125,
+              "height": 19,
+              "top": 448,
+              "right": 327.3125,
+              "bottom": 467,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 472,
+              "width": 172.96875,
+              "height": 19,
+              "top": 472,
+              "right": 261.96875,
+              "bottom": 491,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 504,
+              "width": 57.546875,
+              "height": 16,
+              "top": 504,
+              "right": 146.546875,
+              "bottom": 520,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 571,
+            "width": 249,
+            "height": 101,
+            "top": 571,
+            "right": 338,
+            "bottom": 672,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 573,
+              "width": 211.1875,
+              "height": 19,
+              "top": 573,
+              "right": 300.1875,
+              "bottom": 592,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 597,
+              "width": 164.640625,
+              "height": 19,
+              "top": 597,
+              "right": 253.640625,
+              "bottom": 616,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 621,
+              "width": 108.578125,
+              "height": 19,
+              "top": 621,
+              "right": 197.578125,
+              "bottom": 640,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 653,
+              "width": 57.546875,
+              "height": 16,
+              "top": 653,
+              "right": 146.546875,
+              "bottom": 669,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 720,
+            "width": 249,
+            "height": 125,
+            "top": 720,
+            "right": 338,
+            "bottom": 845,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 722,
+              "width": 245.578125,
+              "height": 19,
+              "top": 722,
+              "right": 334.578125,
+              "bottom": 741,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 746,
+              "width": 248.484375,
+              "height": 19,
+              "top": 746,
+              "right": 337.484375,
+              "bottom": 765,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 770,
+              "width": 235.96875,
+              "height": 19,
+              "top": 770,
+              "right": 324.96875,
+              "bottom": 789,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 794,
+              "width": 242.578125,
+              "height": 19,
+              "top": 794,
+              "right": 331.578125,
+              "bottom": 813,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 826,
+              "width": 57.546875,
+              "height": 16,
+              "top": 826,
+              "right": 146.546875,
+              "bottom": 842,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable thread message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": false,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "timeline-1440-fine",
+      "rows": [
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 91,
+            "width": 1301,
+            "height": 24,
+            "top": 91,
+            "right": 1389,
+            "bottom": 115,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 93,
+              "width": 411.265625,
+              "height": 19,
+              "top": 93,
+              "right": 499.265625,
+              "bottom": 112,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 507.265625,
+              "y": 94.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 94.5,
+              "right": 564.8125,
+              "bottom": 110.5,
+              "left": 507.265625
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 199,
+            "width": 1301,
+            "height": 24,
+            "top": 199,
+            "right": 1389,
+            "bottom": 223,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 201,
+              "width": 495.53125,
+              "height": 19,
+              "top": 201,
+              "right": 583.53125,
+              "bottom": 220,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 591.53125,
+              "y": 202.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 202.5,
+              "right": 649.078125,
+              "bottom": 218.5,
+              "left": 591.53125
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 271,
+            "width": 1301,
+            "height": 24,
+            "top": 271,
+            "right": 1389,
+            "bottom": 295,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 273,
+              "width": 972.59375,
+              "height": 19,
+              "top": 273,
+              "right": 1060.59375,
+              "bottom": 292,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 1068.59375,
+              "y": 274.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 274.5,
+              "right": 1126.140625,
+              "bottom": 290.5,
+              "left": 1068.59375
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable channel message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": false,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "thread-1440-fine",
+      "rows": [
+        {
+          "kind": "handrail-chat__thread-root-meta",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "10/6/2026, 6:29:00 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 33,
+            "y": 90,
+            "width": 1374,
+            "height": 24,
+            "top": 90,
+            "right": 1407,
+            "bottom": 114,
+            "left": 33
+          },
+          "nameRects": [
+            {
+              "x": 33,
+              "y": 92,
+              "width": 411.265625,
+              "height": 19,
+              "top": 92,
+              "right": 444.265625,
+              "bottom": 111,
+              "left": 33
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 452.265625,
+              "y": 93.5,
+              "width": 160.765625,
+              "height": 16,
+              "top": 93.5,
+              "right": 613.03125,
+              "bottom": 109.5,
+              "left": 452.265625
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 391,
+            "width": 1299,
+            "height": 24,
+            "top": 391,
+            "right": 1388,
+            "bottom": 415,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 393,
+              "width": 411.265625,
+              "height": 19,
+              "top": 393,
+              "right": 500.265625,
+              "bottom": 412,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 508.265625,
+              "y": 394.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 394.5,
+              "right": 565.8125,
+              "bottom": 410.5,
+              "left": 508.265625
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 463,
+            "width": 1299,
+            "height": 24,
+            "top": 463,
+            "right": 1388,
+            "bottom": 487,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 465,
+              "width": 495.53125,
+              "height": 19,
+              "top": 465,
+              "right": 584.53125,
+              "bottom": 484,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 592.53125,
+              "y": 466.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 466.5,
+              "right": 650.078125,
+              "bottom": 482.5,
+              "left": 592.53125
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 535,
+            "width": 1299,
+            "height": 24,
+            "top": 535,
+            "right": 1388,
+            "bottom": 559,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 537,
+              "width": 972.59375,
+              "height": 19,
+              "top": 537,
+              "right": 1061.59375,
+              "bottom": 556,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 1069.59375,
+              "y": 538.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 538.5,
+              "right": 1127.140625,
+              "bottom": 554.5,
+              "left": 1069.59375
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable thread message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": false,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "timeline-320-coarse",
+      "rows": [
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 91,
+            "width": 196,
+            "height": 101,
+            "top": 91,
+            "right": 284,
+            "bottom": 192,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 93,
+              "width": 192.53125,
+              "height": 19,
+              "top": 93,
+              "right": 280.53125,
+              "bottom": 112,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 117,
+              "width": 190.71875,
+              "height": 19,
+              "top": 117,
+              "right": 278.71875,
+              "bottom": 136,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 141,
+              "width": 28.03125,
+              "height": 19,
+              "top": 141,
+              "right": 116.03125,
+              "bottom": 160,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 173,
+              "width": 57.546875,
+              "height": 16,
+              "top": 173,
+              "right": 145.546875,
+              "bottom": 189,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 424,
+            "width": 196,
+            "height": 125,
+            "top": 424,
+            "right": 284,
+            "bottom": 549,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 426,
+              "width": 91.375,
+              "height": 19,
+              "top": 426,
+              "right": 179.375,
+              "bottom": 445,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 450,
+              "width": 114.25,
+              "height": 19,
+              "top": 450,
+              "right": 202.25,
+              "bottom": 469,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 474,
+              "width": 164.640625,
+              "height": 19,
+              "top": 474,
+              "right": 252.640625,
+              "bottom": 493,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 498,
+              "width": 108.578125,
+              "height": 19,
+              "top": 498,
+              "right": 196.578125,
+              "bottom": 517,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 530,
+              "width": 57.546875,
+              "height": 16,
+              "top": 530,
+              "right": 145.546875,
+              "bottom": 546,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 723,
+            "width": 196,
+            "height": 173,
+            "top": 723,
+            "right": 284,
+            "bottom": 896,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 725,
+              "width": 189.46875,
+              "height": 19,
+              "top": 725,
+              "right": 277.46875,
+              "bottom": 744,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 749,
+              "width": 192.140625,
+              "height": 19,
+              "top": 749,
+              "right": 280.140625,
+              "bottom": 768,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 773,
+              "width": 187.890625,
+              "height": 19,
+              "top": 773,
+              "right": 275.890625,
+              "bottom": 792,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 797,
+              "width": 193,
+              "height": 19,
+              "top": 797,
+              "right": 281,
+              "bottom": 816,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 821,
+              "width": 186.90625,
+              "height": 19,
+              "top": 821,
+              "right": 274.90625,
+              "bottom": 840,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 845,
+              "width": 23.1875,
+              "height": 19,
+              "top": 845,
+              "right": 111.1875,
+              "bottom": 864,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 877,
+              "width": 57.546875,
+              "height": 16,
+              "top": 877,
+              "right": 145.546875,
+              "bottom": 893,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable channel message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": true,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "thread-320-coarse",
+      "rows": [
+        {
+          "kind": "handrail-chat__thread-root-meta",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "10/6/2026, 6:29:00 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 33,
+            "y": 90,
+            "width": 254,
+            "height": 109,
+            "top": 90,
+            "right": 287,
+            "bottom": 199,
+            "left": 33
+          },
+          "nameRects": [
+            {
+              "x": 33,
+              "y": 92,
+              "width": 249.15625,
+              "height": 19,
+              "top": 92,
+              "right": 282.15625,
+              "bottom": 111,
+              "left": 33
+            },
+            {
+              "x": 33,
+              "y": 116,
+              "width": 162.109375,
+              "height": 19,
+              "top": 116,
+              "right": 195.109375,
+              "bottom": 135,
+              "left": 33
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 33,
+              "y": 148,
+              "width": 160.765625,
+              "height": 16,
+              "top": 148,
+              "right": 193.765625,
+              "bottom": 164,
+              "left": 33
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": -40,
+            "width": 194,
+            "height": 101,
+            "top": -40,
+            "right": 283,
+            "bottom": 61,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": -38,
+              "width": 192.53125,
+              "height": 19,
+              "top": -38,
+              "right": 281.53125,
+              "bottom": -19,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": -14,
+              "width": 190.71875,
+              "height": 19,
+              "top": -14,
+              "right": 279.71875,
+              "bottom": 5,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 10,
+              "width": 28.03125,
+              "height": 19,
+              "top": 10,
+              "right": 117.03125,
+              "bottom": 29,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 42,
+              "width": 57.546875,
+              "height": 16,
+              "top": 42,
+              "right": 146.546875,
+              "bottom": 58,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 235,
+            "width": 194,
+            "height": 125,
+            "top": 235,
+            "right": 283,
+            "bottom": 360,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 237,
+              "width": 91.375,
+              "height": 19,
+              "top": 237,
+              "right": 180.375,
+              "bottom": 256,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 261,
+              "width": 114.25,
+              "height": 19,
+              "top": 261,
+              "right": 203.25,
+              "bottom": 280,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 285,
+              "width": 164.640625,
+              "height": 19,
+              "top": 285,
+              "right": 253.640625,
+              "bottom": 304,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 309,
+              "width": 108.578125,
+              "height": 19,
+              "top": 309,
+              "right": 197.578125,
+              "bottom": 328,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 341,
+              "width": 57.546875,
+              "height": 16,
+              "top": 341,
+              "right": 146.546875,
+              "bottom": 357,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 534,
+            "width": 194,
+            "height": 173,
+            "top": 534,
+            "right": 283,
+            "bottom": 707,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 536,
+              "width": 189.46875,
+              "height": 19,
+              "top": 536,
+              "right": 278.46875,
+              "bottom": 555,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 560,
+              "width": 192.140625,
+              "height": 19,
+              "top": 560,
+              "right": 281.140625,
+              "bottom": 579,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 584,
+              "width": 187.890625,
+              "height": 19,
+              "top": 584,
+              "right": 276.890625,
+              "bottom": 603,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 608,
+              "width": 193,
+              "height": 19,
+              "top": 608,
+              "right": 282,
+              "bottom": 627,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 632,
+              "width": 186.90625,
+              "height": 19,
+              "top": 632,
+              "right": 275.90625,
+              "bottom": 651,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 656,
+              "width": 23.1875,
+              "height": 19,
+              "top": 656,
+              "right": 112.1875,
+              "bottom": 675,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 688,
+              "width": 57.546875,
+              "height": 16,
+              "top": 688,
+              "right": 146.546875,
+              "bottom": 704,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable thread message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": true,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "timeline-390-coarse",
+      "rows": [
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 91,
+            "width": 266,
+            "height": 77,
+            "top": 91,
+            "right": 354,
+            "bottom": 168,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 93,
+              "width": 264.171875,
+              "height": 19,
+              "top": 93,
+              "right": 352.171875,
+              "bottom": 112,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 117,
+              "width": 147.109375,
+              "height": 19,
+              "top": 117,
+              "right": 235.109375,
+              "bottom": 136,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 149,
+              "width": 57.546875,
+              "height": 16,
+              "top": 149,
+              "right": 145.546875,
+              "bottom": 165,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 354,
+            "width": 266,
+            "height": 101,
+            "top": 354,
+            "right": 354,
+            "bottom": 455,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 356,
+              "width": 211.1875,
+              "height": 19,
+              "top": 356,
+              "right": 299.1875,
+              "bottom": 375,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 380,
+              "width": 164.640625,
+              "height": 19,
+              "top": 380,
+              "right": 252.640625,
+              "bottom": 399,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 404,
+              "width": 108.578125,
+              "height": 19,
+              "top": 404,
+              "right": 196.578125,
+              "bottom": 423,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 436,
+              "width": 57.546875,
+              "height": 16,
+              "top": 436,
+              "right": 145.546875,
+              "bottom": 452,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 605,
+            "width": 266,
+            "height": 125,
+            "top": 605,
+            "right": 354,
+            "bottom": 730,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 607,
+              "width": 257.78125,
+              "height": 19,
+              "top": 607,
+              "right": 345.78125,
+              "bottom": 626,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 631,
+              "width": 253.9375,
+              "height": 19,
+              "top": 631,
+              "right": 341.9375,
+              "bottom": 650,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 655,
+              "width": 256.75,
+              "height": 19,
+              "top": 655,
+              "right": 344.75,
+              "bottom": 674,
+              "left": 88
+            },
+            {
+              "x": 88,
+              "y": 679,
+              "width": 204.140625,
+              "height": 19,
+              "top": 679,
+              "right": 292.140625,
+              "bottom": 698,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 88,
+              "y": 711,
+              "width": 57.546875,
+              "height": 16,
+              "top": 711,
+              "right": 145.546875,
+              "bottom": 727,
+              "left": 88
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable channel message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": true,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "thread-390-coarse",
+      "rows": [
+        {
+          "kind": "handrail-chat__thread-root-meta",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "10/6/2026, 6:29:00 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 33,
+            "y": 90,
+            "width": 324,
+            "height": 80,
+            "top": 90,
+            "right": 357,
+            "bottom": 170,
+            "left": 33
+          },
+          "nameRects": [
+            {
+              "x": 33,
+              "y": 92,
+              "width": 314.265625,
+              "height": 19,
+              "top": 92,
+              "right": 347.265625,
+              "bottom": 111,
+              "left": 33
+            },
+            {
+              "x": 33,
+              "y": 116,
+              "width": 97.015625,
+              "height": 19,
+              "top": 116,
+              "right": 130.015625,
+              "bottom": 135,
+              "left": 33
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 33,
+              "y": 149.5,
+              "width": 160.765625,
+              "height": 16,
+              "top": 149.5,
+              "right": 193.765625,
+              "bottom": 165.5,
+              "left": 33
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 149,
+            "width": 264,
+            "height": 77,
+            "top": 149,
+            "right": 353,
+            "bottom": 226,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 151,
+              "width": 258.6875,
+              "height": 19,
+              "top": 151,
+              "right": 347.6875,
+              "bottom": 170,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 175,
+              "width": 152.59375,
+              "height": 19,
+              "top": 175,
+              "right": 241.59375,
+              "bottom": 194,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 207,
+              "width": 57.546875,
+              "height": 16,
+              "top": 207,
+              "right": 146.546875,
+              "bottom": 223,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 376,
+            "width": 264,
+            "height": 101,
+            "top": 376,
+            "right": 353,
+            "bottom": 477,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 378,
+              "width": 211.1875,
+              "height": 19,
+              "top": 378,
+              "right": 300.1875,
+              "bottom": 397,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 402,
+              "width": 164.640625,
+              "height": 19,
+              "top": 402,
+              "right": 253.640625,
+              "bottom": 421,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 426,
+              "width": 108.578125,
+              "height": 19,
+              "top": 426,
+              "right": 197.578125,
+              "bottom": 445,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 458,
+              "width": 57.546875,
+              "height": 16,
+              "top": 458,
+              "right": 146.546875,
+              "bottom": 474,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 627,
+            "width": 264,
+            "height": 125,
+            "top": 627,
+            "right": 353,
+            "bottom": 752,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 629,
+              "width": 257.78125,
+              "height": 19,
+              "top": 629,
+              "right": 346.78125,
+              "bottom": 648,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 653,
+              "width": 253.9375,
+              "height": 19,
+              "top": 653,
+              "right": 342.9375,
+              "bottom": 672,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 677,
+              "width": 256.75,
+              "height": 19,
+              "top": 677,
+              "right": 345.75,
+              "bottom": 696,
+              "left": 89
+            },
+            {
+              "x": 89,
+              "y": 701,
+              "width": 204.140625,
+              "height": 19,
+              "top": 701,
+              "right": 293.140625,
+              "bottom": 720,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 89,
+              "y": 733,
+              "width": 57.546875,
+              "height": 16,
+              "top": 733,
+              "right": 146.546875,
+              "bottom": 749,
+              "left": 89
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable thread message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": true,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "timeline-1440-coarse",
+      "rows": [
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 91,
+            "width": 1316,
+            "height": 24,
+            "top": 91,
+            "right": 1404,
+            "bottom": 115,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 93,
+              "width": 411.265625,
+              "height": 19,
+              "top": 93,
+              "right": 499.265625,
+              "bottom": 112,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 507.265625,
+              "y": 94.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 94.5,
+              "right": 564.8125,
+              "bottom": 110.5,
+              "left": 507.265625
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 301,
+            "width": 1316,
+            "height": 24,
+            "top": 301,
+            "right": 1404,
+            "bottom": 325,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 303,
+              "width": 495.53125,
+              "height": 19,
+              "top": 303,
+              "right": 583.53125,
+              "bottom": 322,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 591.53125,
+              "y": 304.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 304.5,
+              "right": 649.078125,
+              "bottom": 320.5,
+              "left": 591.53125
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 88,
+            "y": 475,
+            "width": 1316,
+            "height": 24,
+            "top": 475,
+            "right": 1404,
+            "bottom": 499,
+            "left": 88
+          },
+          "nameRects": [
+            {
+              "x": 88,
+              "y": 477,
+              "width": 972.59375,
+              "height": 19,
+              "top": 477,
+              "right": 1060.59375,
+              "bottom": 496,
+              "left": 88
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 1068.59375,
+              "y": 478.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 478.5,
+              "right": 1126.140625,
+              "bottom": 494.5,
+              "left": 1068.59375
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable channel message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable channel message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": true,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "label": "thread-1440-coarse",
+      "rows": [
+        {
+          "kind": "handrail-chat__thread-root-meta",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "10/6/2026, 6:29:00 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 33,
+            "y": 90,
+            "width": 1374,
+            "height": 24,
+            "top": 90,
+            "right": 1407,
+            "bottom": 114,
+            "left": 33
+          },
+          "nameRects": [
+            {
+              "x": 33,
+              "y": 92,
+              "width": 411.265625,
+              "height": 19,
+              "top": 92,
+              "right": 444.265625,
+              "bottom": 111,
+              "left": 33
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 452.265625,
+              "y": 93.5,
+              "width": 160.765625,
+              "height": 16,
+              "top": 93.5,
+              "right": 613.03125,
+              "bottom": 109.5,
+              "left": 452.265625
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "alexandra.montgomery@design.example.test",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 352,
+            "width": 1314,
+            "height": 24,
+            "top": 352,
+            "right": 1403,
+            "bottom": 376,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 354,
+              "width": 411.265625,
+              "height": 19,
+              "top": 354,
+              "right": 500.265625,
+              "bottom": 373,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 508.265625,
+              "y": 355.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 355.5,
+              "right": 565.8125,
+              "bottom": 371.5,
+              "left": 508.265625
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "Alexandra Montgomery Customer Support Engineering",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 526,
+            "width": 1314,
+            "height": 24,
+            "top": 526,
+            "right": 1403,
+            "bottom": 550,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 528,
+              "width": 495.53125,
+              "height": 19,
+              "top": 528,
+              "right": 584.53125,
+              "bottom": 547,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 592.53125,
+              "y": 529.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 529.5,
+              "right": 650.078125,
+              "bottom": 545.5,
+              "left": 592.53125
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        },
+        {
+          "kind": "handrail-chat__timeline-author",
+          "name": "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "time": "6:29 AM",
+          "dateTime": "2026-10-06T06:29:00.000Z",
+          "bounds": {
+            "x": 89,
+            "y": 700,
+            "width": 1314,
+            "height": 24,
+            "top": 700,
+            "right": 1403,
+            "bottom": 724,
+            "left": 89
+          },
+          "nameRects": [
+            {
+              "x": 89,
+              "y": 702,
+              "width": 972.59375,
+              "height": 19,
+              "top": 702,
+              "right": 1061.59375,
+              "bottom": 721,
+              "left": 89
+            }
+          ],
+          "timeRects": [
+            {
+              "x": 1069.59375,
+              "y": 703.5,
+              "width": 57.546875,
+              "height": 16,
+              "top": 703.5,
+              "right": 1127.140625,
+              "bottom": 719.5,
+              "left": 1069.59375
+            }
+          ],
+          "nameStyle": {
+            "overflow": "visible",
+            "textOverflow": "clip"
+          },
+          "clipped": false,
+          "overlap": false
+        }
+      ],
+      "messages": [
+        {
+          "text": "Readable thread message 1.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 2.Mark unreadRemind me",
+          "overflow": false
+        },
+        {
+          "text": "Readable thread message 3.Mark unreadRemind me",
+          "overflow": false
+        }
+      ],
+      "names": [
+        "alexandra.montgomery@design.example.test",
+        "Alexandra Montgomery Customer Support Engineering",
+        "SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "overflow": false,
+      "coarse": true,
+      "actions": [
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Reply",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Save",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "Copy",
+          "reachable": true,
+          "fits": true
+        },
+        {
+          "label": "More message actions",
+          "reachable": true,
+          "fits": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "failures": []
+}

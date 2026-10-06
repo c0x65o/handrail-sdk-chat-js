@@ -1,0 +1,28 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Sender layout regression
++ actual - expected
+
++ [
++   'thread-1440-fine: unreachable actions',
++   'thread-320-coarse: unreachable actions',
++   'thread-390-coarse: unreachable actions'
++ ]
+- []
+
+    at file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/scripts/qualify-sender-layout.mjs:108:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    'thread-1440-fine: unreachable actions',
+    'thread-320-coarse: unreachable actions',
+    'thread-390-coarse: unreachable actions'
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.23.1
