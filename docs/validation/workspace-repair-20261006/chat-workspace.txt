@@ -1,0 +1,1423 @@
+
+> @handrail/chat@1.0.49 test:chat-workspace
+> npm run build && node --test test/chat-workspace.test.mjs test/chat-workspace-message-search.test.mjs test/chat-workspace-default.test.mjs test/ui-browser-graph.test.mjs test/ui-styles.test.mjs
+
+
+> @handrail/chat@1.0.49 build
+> node scripts/generate-package-version.mjs && tsc --project tsconfig.json && node scripts/copy-ui-styles.mjs && node scripts/candidate-provenance.mjs
+
+Candidate source=465994c8526cdf621b7c0d83f839e20efe2f2360128ab3ab1941c6f0f5b2434d package=f1f6270fa661ab7af6a9d69161036fb549a42cdceb76fbc185d38037d7585353
+TAP version 13
+# Subtest: automatic selection refreshes cached history once and cancels on selection or actor replacement
+ok 1 - automatic selection refreshes cached history once and cancels on selection or actor replacement
+  ---
+  duration_ms: 333.937756
+  type: 'test'
+  ...
+# Subtest: the default workspace composes complete public, private, direct, and thread surfaces
+ok 2 - the default workspace composes complete public, private, direct, and thread surfaces
+  ---
+  duration_ms: 83.407723
+  type: 'test'
+  ...
+# Subtest: a projected mark-read update clears the selected conversation sidebar badge
+ok 3 - a projected mark-read update clears the selected conversation sidebar badge
+  ---
+  duration_ms: 137.150563
+  type: 'test'
+  ...
+# Subtest: the conversation header uses a three-dot menu with Star as its only option
+ok 4 - the conversation header uses a three-dot menu with Star as its only option
+  ---
+  duration_ms: 121.868309
+  type: 'test'
+  ...
+# Subtest: conversation stars project immediately, block duplicates, and settle canonical success
+ok 5 - conversation stars project immediately, block duplicates, and settle canonical success
+  ---
+  duration_ms: 148.355035
+  type: 'test'
+  ...
+# Subtest: conversation star failures roll back and revision conflicts retry canonical state
+ok 6 - conversation star failures roll back and revision conflicts retry canonical state
+  ---
+  duration_ms: 184.737823
+  type: 'test'
+  ...
+# Subtest: star pointer and keyboard activation stay isolated from row selection and popups
+ok 7 - star pointer and keyboard activation stay isolated from row selection and popups
+  ---
+  duration_ms: 104.661951
+  type: 'test'
+  ...
+# Subtest: read-only conversation rows disable the star action
+ok 8 - read-only conversation rows disable the star action
+  ---
+  duration_ms: 63.56645
+  type: 'test'
+  ...
+# Subtest: the navigation sentinel loads one page, deduplicates pending intersections, and stops at cursor exhaustion
+ok 9 - the navigation sentinel loads one page, deduplicates pending intersections, and stops at cursor exhaustion
+  ---
+  duration_ms: 99.527899
+  type: 'test'
+  ...
+# Subtest: 5,000 conversations keep navigation mounts bounded while scrolling and revealing keyboard targets
+ok 10 - 5,000 conversations keep navigation mounts bounded while scrolling and revealing keyboard targets
+  ---
+  duration_ms: 582.244987
+  type: 'test'
+  ...
+# Subtest: 5,000-conversation windowing keeps selection, starring, filtering, and collapse state coherent
+ok 11 - 5,000-conversation windowing keeps selection, starring, filtering, and collapse state coherent
+  ---
+  duration_ms: 374.350109
+  type: 'test'
+  ...
+# Subtest: the navigation sentinel observer disconnects when ChatWorkspace unmounts
+ok 12 - the navigation sentinel observer disconnects when ChatWorkspace unmounts
+  ---
+  duration_ms: 44.541959
+  type: 'test'
+  ...
+# Subtest: the Load more conversations button remains operable without IntersectionObserver
+ok 13 - the Load more conversations button remains operable without IntersectionObserver
+  ---
+  duration_ms: 53.743535
+  type: 'test'
+  ...
+# Subtest: conversation navigation moves starred rows out of their original sections and roves once
+ok 14 - conversation navigation moves starred rows out of their original sections and roves once
+  ---
+  duration_ms: 135.887142
+  type: 'test'
+  ...
+# Subtest: Starred collapse and filtering do not restore an ordinary duplicate
+ok 15 - Starred collapse and filtering do not restore an ordinary duplicate
+  ---
+  duration_ms: 157.497381
+  type: 'test'
+  ...
+# (node:225) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: conversation navigation filtering and an empty direct bucket add no blank or duplicate rows
+ok 16 - conversation navigation filtering and an empty direct bucket add no blank or duplicate rows
+  ---
+  duration_ms: 126.344479
+  type: 'test'
+  ...
+# Subtest: mounted direct heading, avatar, and composer recover after directory rate limiting
+ok 17 - mounted direct heading, avatar, and composer recover after directory rate limiting
+  ---
+  duration_ms: 77.393474
+  type: 'test'
+  ...
+# Subtest: the default composer exposes contextual accessible labels and placeholders
+ok 18 - the default composer exposes contextual accessible labels and placeholders
+  ---
+  duration_ms: 181.55737
+  type: 'test'
+  ...
+# Subtest: typing status keeps stable composer layout, excludes the current user, and ignores heartbeat-only copy changes
+ok 19 - typing status keeps stable composer layout, excludes the current user, and ignores heartbeat-only copy changes
+  ---
+  duration_ms: 64.082608
+  type: 'test'
+  ...
+# Subtest: typing status renders bounded plural copy and safe directory fallbacks
+ok 20 - typing status renders bounded plural copy and safe directory fallbacks
+  ---
+  duration_ms: 94.073995
+  type: 'test'
+  ...
+# Subtest: typing status clears on stop and expiry without retaining names across conversation switches
+ok 21 - typing status clears on stop and expiry without retaining names across conversation switches
+  ---
+  duration_ms: 124.141608
+  type: 'test'
+  ...
+# Subtest: switching conversations updates composer context and restores each draft
+ok 22 - switching conversations updates composer context and restores each draft
+  ---
+  duration_ms: 172.188749
+  type: 'test'
+  ...
+# Subtest: WorkspaceHeader preserves defaults, renders safe identity, and composes wired controls
+ok 23 - WorkspaceHeader preserves defaults, renders safe identity, and composes wired controls
+  ---
+  duration_ms: 204.556964
+  type: 'test'
+  ...
+# Subtest: channel creation is a workspace modal with contained focus and global-trigger restoration
+ok 24 - channel creation is a workspace modal with contained focus and global-trigger restoration
+  ---
+  duration_ms: 188.102305
+  type: 'test'
+  ...
+# Subtest: channel section actions retain their visibility defaults across dismiss and reopen
+ok 25 - channel section actions retain their visibility defaults across dismiss and reopen
+  ---
+  duration_ms: 203.730667
+  type: 'test'
+  ...
+# Subtest: pending channel creation disables controls and ignores Escape, Cancel, and backdrop dismissal
+ok 26 - pending channel creation disables controls and ignores Escape, Cancel, and backdrop dismissal
+  ---
+  duration_ms: 117.097453
+  type: 'test'
+  ...
+# Subtest: detail state panels expose stable loading and automatic-selection semantics
+ok 27 - detail state panels expose stable loading and automatic-selection semantics
+  ---
+  duration_ms: 64.676931
+  type: 'test'
+  ...
+# Subtest: a ready workspace with no selected conversation does not access huddle runtime state
+ok 28 - a ready workspace with no selected conversation does not access huddle runtime state
+  ---
+  duration_ms: 46.579264
+  type: 'test'
+  ...
+# Subtest: detail empty and unavailable panels preserve live-region and decorative semantics
+ok 29 - detail empty and unavailable panels preserve live-region and decorative semantics
+  ---
+  duration_ms: 53.442225
+  type: 'test'
+  ...
+# Subtest: detail failures use a distinct alert panel without a nonfunctional retry control
+ok 30 - detail failures use a distinct alert panel without a nonfunctional retry control
+  ---
+  duration_ms: 36.765577
+  type: 'test'
+  ...
+# Subtest: custom EmptyState slots retain the detail panel host contract
+ok 31 - custom EmptyState slots retain the detail panel host contract
+  ---
+  duration_ms: 22.137692
+  type: 'test'
+  ...
+# Subtest: empty public and private channels render specific visibility introductions in the timeline column
+ok 32 - empty public and private channels render specific visibility introductions in the timeline column
+  ---
+  duration_ms: 30.765823
+  type: 'test'
+  ...
+# Subtest: empty direct and group-direct timelines use safe other-participant identity
+ok 33 - empty direct and group-direct timelines use safe other-participant identity
+  ---
+  duration_ms: 30.873434
+  type: 'test'
+  ...
+# Subtest: custom EmptyState overrides receive the compatible frozen safe introduction projection
+ok 34 - custom EmptyState overrides receive the compatible frozen safe introduction projection
+  ---
+  duration_ms: 12.721351
+  type: 'test'
+  ...
+# Subtest: member management is absent unless viewing is explicitly authorized
+ok 35 - member management is absent unless viewing is explicitly authorized
+  ---
+  duration_ms: 22.870885
+  type: 'test'
+  ...
+# Subtest: the header members count opens a named panel and close actions restore focus
+ok 36 - the header members count opens a named panel and close actions restore focus
+  ---
+  duration_ms: 124.693196
+  type: 'test'
+  ...
+# Subtest: switching conversations closes members without restoring focus to a stale trigger
+ok 37 - switching conversations closes members without restoring focus to a stale trigger
+  ---
+  duration_ms: 102.863943
+  type: 'test'
+  ...
+# Subtest: default public actions send, open and close a focus-restoring thread, and start a huddle
+ok 38 - default public actions send, open and close a focus-restoring thread, and start a huddle
+  ---
+  duration_ms: 105.09267
+  type: 'test'
+  ...
+# Subtest: the default workspace coordinates empty-composer ArrowUp with timeline edit focus and Escape restoration
+ok 39 - the default workspace coordinates empty-composer ArrowUp with timeline edit focus and Escape restoration
+  ---
+  duration_ms: 198.924067
+  type: 'test'
+  ...
+# Subtest: places the inactive huddle in the channel header and the live call bar between timeline and composer
+ok 40 - places the inactive huddle in the channel header and the live call bar between timeline and composer
+  ---
+  duration_ms: 61.066217
+  type: 'test'
+  ...
+# Subtest: docks an opened thread beside a stable independently scrolling timeline pane
+ok 41 - docks an opened thread beside a stable independently scrolling timeline pane
+  ---
+  duration_ms: 120.699413
+  type: 'test'
+  ...
+# Subtest: Reply starts a new thread and is hidden for deleted and unsent messages
+ok 42 - Reply starts a new thread and is hidden for deleted and unsent messages
+  ---
+  duration_ms: 128.460093
+  type: 'test'
+  ...
+# Subtest: Remind me schedules exact preset and custom local instants and validates future input
+ok 43 - Remind me schedules exact preset and custom local instants and validates future input
+  ---
+  duration_ms: 61.526982
+  type: 'test'
+  ...
+# Subtest: a preset synchronously latches every reminder control against a rapid empty custom submit
+ok 44 - a preset synchronously latches every reminder control against a rapid empty custom submit
+  ---
+  duration_ms: 49.354361
+  type: 'test'
+  ...
+# Subtest: an existing reminder is displayed, rescheduled, and cancelled at canonical revisions
+ok 45 - an existing reminder is displayed, rescheduled, and cancelled at canonical revisions
+  ---
+  duration_ms: 52.597525
+  type: 'test'
+  ...
+# Subtest: reminder pending and retryable failures are accessible and preserve retry correlation
+ok 46 - reminder pending and retryable failures are accessible and preserve retry correlation
+  ---
+  duration_ms: 105.746605
+  type: 'test'
+  ...
+# Subtest: a newer canonical reminder replaces stale optimistic UI and drives subsequent revisions
+ok 47 - a newer canonical reminder replaces stale optimistic UI and drives subsequent revisions
+  ---
+  duration_ms: 89.05243
+  type: 'test'
+  ...
+# Subtest: Remind me is hidden for deleted, sending, and failed messages
+ok 48 - Remind me is hidden for deleted, sending, and failed messages
+  ---
+  duration_ms: 61.418754
+  type: 'test'
+  ...
+# Subtest: Forward selects an authorized destination once and focuses the canonical row
+ok 49 - Forward selects an authorized destination once and focuses the canonical row
+  ---
+  duration_ms: 164.913346
+  type: 'test'
+  ...
+# Subtest: Forward contains focus, supports every radio navigation key, and makes only the background inert
+ok 50 - Forward contains focus, supports every radio navigation key, and makes only the background inert
+  ---
+  duration_ms: 121.155885
+  type: 'test'
+  ...
+# Subtest: Forward pending submission disables controls and ignores Escape
+ok 51 - Forward pending submission disables controls and ignores Escape
+  ---
+  duration_ms: 123.719272
+  type: 'test'
+  ...
+# Subtest: Forward cancellation supports Escape and Cancel without a command and restores focus
+ok 52 - Forward cancellation supports Escape and Cancel without a command and restores focus
+  ---
+  duration_ms: 120.295323
+  type: 'test'
+  ...
+# Subtest: Forward command failure reports a safe notice and restores focus
+ok 53 - Forward command failure reports a safe notice and restores focus
+  ---
+  duration_ms: 78.849544
+  type: 'test'
+  ...
+# Subtest: Forward navigation failure reports a safe destination notice
+ok 54 - Forward navigation failure reports a safe destination notice
+  ---
+  duration_ms: 1703.503676
+  type: 'test'
+  ...
+# Subtest: Forward filters unavailable destinations and is suppressed for unsupported source states
+ok 55 - Forward filters unavailable destinations and is suppressed for unsupported source states
+  ---
+  duration_ms: 105.165427
+  type: 'test'
+  ...
+# Subtest: host reaction keys flow to the default main timeline and opened thread
+ok 56 - host reaction keys flow to the default main timeline and opened thread
+  ---
+  duration_ms: 96.636581
+  type: 'test'
+  ...
+# Subtest: host message mutation availability flows to the default main timeline and opened thread
+ok 57 - host message mutation availability flows to the default main timeline and opened thread
+  ---
+  duration_ms: 85.89293
+  type: 'test'
+  ...
+# Subtest: the default workspace bounds host reaction keys
+ok 58 - the default workspace bounds host reaction keys
+  ---
+  duration_ms: 57.018904
+  type: 'test'
+  ...
+# Subtest: every documented slot flows through the complete default composition
+ok 59 - every documented slot flows through the complete default composition
+  ---
+  duration_ms: 26.406735
+  type: 'test'
+  ...
+# Subtest: public and private channel headers omit member identity and expose canonical visibility
+ok 60 - public and private channel headers omit member identity and expose canonical visibility
+  ---
+  duration_ms: 35.277964
+  type: 'test'
+  ...
+# Subtest: direct headers select the other member and expose only canonical availability
+ok 61 - direct headers select the other member and expose only canonical availability
+  ---
+  duration_ms: 35.877556
+  type: 'test'
+  ...
+# Subtest: direct headers render safe directory and unresolved participant fallbacks
+ok 62 - direct headers render safe directory and unresolved participant fallbacks
+  ---
+  duration_ms: 63.680324
+  type: 'test'
+  ...
+# Subtest: group-direct headers render the other participant and exclude the current user
+ok 63 - group-direct headers render the other participant and exclude the current user
+  ---
+  duration_ms: 14.793023
+  type: 'test'
+  ...
+# Subtest: group-direct headers order participants deterministically and bound avatar overflow
+ok 64 - group-direct headers order participants deterministically and bound avatar overflow
+  ---
+  duration_ms: 16.368065
+  type: 'test'
+  ...
+# Subtest: group-direct headers truncate long names while exposing the complete safe label
+ok 65 - group-direct headers truncate long names while exposing the complete safe label
+  ---
+  duration_ms: 11.743385
+  type: 'test'
+  ...
+# Subtest: group-direct headers use non-sensitive redacted, unavailable, and unresolved fallbacks
+ok 66 - group-direct headers use non-sensitive redacted, unavailable, and unresolved fallbacks
+  ---
+  duration_ms: 11.104717
+  type: 'test'
+  ...
+# Subtest: modes, scoped tokens, themes, and accessibility landmarks survive default composition
+ok 67 - modes, scoped tokens, themes, and accessibility landmarks survive default composition
+  ---
+  duration_ms: 54.813811
+  type: 'test'
+  ...
+# Subtest: reply style settings opens with keyboard, contains focus and restores the trigger
+ok 68 - reply style settings opens with keyboard, contains focus and restores the trigger
+  ---
+  duration_ms: 117.303901
+  type: 'test'
+  ...
+# Subtest: host settings content and custom settings slot retain ownership
+ok 69 - host settings content and custom settings slot retain ownership
+  ---
+  duration_ms: 93.949013
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-public without opening threads
+ok 70 - inline Reply routing sends Alice/Bob payload in conversation-public without opening threads
+  ---
+  duration_ms: 59.145113
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-direct without opening threads
+ok 71 - inline Reply routing sends Alice/Bob payload in conversation-direct without opening threads
+  ---
+  duration_ms: 52.270884
+  type: 'test'
+  ...
+# Subtest: inline Reply routing sends Alice/Bob payload in conversation-group-direct without opening threads
+ok 72 - inline Reply routing sends Alice/Bob payload in conversation-group-direct without opening threads
+  ---
+  duration_ms: 62.057003
+  type: 'test'
+  ...
+# Subtest: inline Reply routing in an already-open ThreadPanel keeps its thread ID and parent draft
+ok 73 - inline Reply routing in an already-open ThreadPanel keeps its thread ID and parent draft
+  ---
+  duration_ms: 156.473843
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables unsupported with an accessible explanation
+ok 74 - inline Reply routing disables unsupported with an accessible explanation
+  ---
+  duration_ms: 44.604826
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables unknown with an accessible explanation
+ok 75 - inline Reply routing disables unknown with an accessible explanation
+  ---
+  duration_ms: 45.633886
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables read-only with an accessible explanation
+ok 76 - inline Reply routing disables read-only with an accessible explanation
+  ---
+  duration_ms: 42.755311
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables send-disabled with an accessible explanation
+ok 77 - inline Reply routing disables send-disabled with an accessible explanation
+  ---
+  duration_ms: 49.425453
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables inactive member with an accessible explanation
+ok 78 - inline Reply routing disables inactive member with an accessible explanation
+  ---
+  duration_ms: 44.400028
+  type: 'test'
+  ...
+# Subtest: inline Reply routing disables custom composer without connection with an accessible explanation
+ok 79 - inline Reply routing disables custom composer without connection with an accessible explanation
+  ---
+  duration_ms: 29.839136
+  type: 'test'
+  ...
+# Subtest: inline Reply routing is independent of preference persistence support and excludes deleted/unsent sources
+ok 80 - inline Reply routing is independent of preference persistence support and excludes deleted/unsent sources
+  ---
+  duration_ms: 59.967933
+  type: 'test'
+  ...
+# Subtest: inline Reply routing preserves attachments, mentions and text when replacing a source
+not ok 81 - inline Reply routing preserves attachments, mentions and text when replacing a source
+  ---
+  duration_ms: 56.039589
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/chat-workspace-default.test.mjs:4211:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + undefined
+    - {
+    -   content: {
+    -     attachments: [
+    -       {
+    -         attachmentId: 'schedule'
+    -       }
+    -     ],
+    -     format: 'plain',
+    -     mentions: [
+    -       {
+    -         type: 'user',
+    -         userId: 'user-default-workspace-other'
+    -       }
+    -     ],
+    -     text: 'Friday @Avery Example'
+    -   },
+    -   conversationId: 'conversation-public',
+    -   replyTo: {
+    -     messageId: 'message-public-root',
+    -     notifyAuthor: true
+    -   }
+    - }
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    conversationId: 'conversation-public'
+    content:
+      format: 'plain'
+      text: 'Friday @Avery Example'
+      attachments:
+        0:
+          attachmentId: 'schedule'
+      mentions:
+        0:
+          type: 'user'
+          userId: 'user-default-workspace-other'
+    replyTo:
+      messageId: 'message-public-root'
+      notifyAuthor: true
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/chat-workspace-default.test.mjs:4221:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: inline Reply routing freezes a pending send across style and conversation switches and rejects stale slot callbacks
+ok 82 - inline Reply routing freezes a pending send across style and conversation switches and rejects stale slot callbacks
+  ---
+  duration_ms: 172.797092
+  type: 'test'
+  ...
+# Subtest: inline Reply routing respects ThreadPanel restrictions {"readOnly":true}
+ok 83 - inline Reply routing respects ThreadPanel restrictions {"readOnly":true}
+  ---
+  duration_ms: 92.041308
+  type: 'test'
+  ...
+# Subtest: inline Reply routing respects ThreadPanel restrictions {"composerAvailability":{"canSend":false}}
+ok 84 - inline Reply routing respects ThreadPanel restrictions {"composerAvailability":{"canSend":false}}
+  ---
+  duration_ms: 71.623784
+  type: 'test'
+  ...
+# Subtest: inline Reply routing retains a selected source when switching to Current before sending
+ok 85 - inline Reply routing retains a selected source when switching to Current before sending
+  ---
+  duration_ms: 62.473061
+  type: 'test'
+  ...
+# Subtest: inline Reply routing can replace the next draft source while a send retains its frozen payload
+ok 86 - inline Reply routing can replace the next draft source while a send retains its frozen payload
+  ---
+  duration_ms: 49.533624
+  type: 'test'
+  ...
+# Subtest: named thread dialog creates a discussion independently of Reply and preserves its channel draft
+ok 87 - named thread dialog creates a discussion independently of Reply and preserves its channel draft
+  ---
+  duration_ms: 167.633242
+  type: 'test'
+  ...
+# Subtest: named thread dialog validates canonical Unicode names before calling the client
+ok 88 - named thread dialog validates canonical Unicode names before calling the client
+  ---
+  duration_ms: 104.693199
+  type: 'test'
+  ...
+# Subtest: named thread dialog latches duplicate submits and retries the original name into a canonical existing thread
+ok 89 - named thread dialog latches duplicate submits and retries the original name into a canonical existing thread
+  ---
+  duration_ms: 129.888458
+  type: 'test'
+  ...
+# Subtest: named thread dialog cancel and Escape preserve drafts, contain keyboard focus and restore the opener
+ok 90 - named thread dialog cancel and Escape preserve drafts, contain keyboard focus and restore the opener
+  ---
+  duration_ms: 123.967585
+  type: 'test'
+  ...
+# Subtest: named thread dialog ignores completion after cancel
+ok 91 - named thread dialog ignores completion after cancel
+  ---
+  duration_ms: 96.694309
+  type: 'test'
+  ...
+# Subtest: named thread dialog ignores completion after navigate
+ok 92 - named thread dialog ignores completion after navigate
+  ---
+  duration_ms: 57.40219
+  type: 'test'
+  ...
+# Subtest: named thread action disables unsupported creation with an explanation
+ok 93 - named thread action disables unsupported creation with an explanation
+  ---
+  duration_ms: 22.627633
+  type: 'test'
+  ...
+# Subtest: named thread action disables unknown creation with an explanation
+ok 94 - named thread action disables unknown creation with an explanation
+  ---
+  duration_ms: 28.730213
+  type: 'test'
+  ...
+# Subtest: named thread action disables read-only creation with an explanation
+ok 95 - named thread action disables read-only creation with an explanation
+  ---
+  duration_ms: 24.647252
+  type: 'test'
+  ...
+# Subtest: named thread action disables restricted creation with an explanation
+ok 96 - named thread action disables restricted creation with an explanation
+  ---
+  duration_ms: 25.82553
+  type: 'test'
+  ...
+# Subtest: named thread action disables inactive creation with an explanation
+ok 97 - named thread action disables inactive creation with an explanation
+  ---
+  duration_ms: 27.050079
+  type: 'test'
+  ...
+# Subtest: named thread existing Open Thread works without named capability or write access in Discord style
+ok 98 - named thread existing Open Thread works without named capability or write access in Discord style
+  ---
+  duration_ms: 42.750537
+  type: 'test'
+  ...
+# Subtest: named thread Current Reply preserves the legacy entry and understands canonical names
+ok 99 - named thread Current Reply preserves the legacy entry and understands canonical names
+  ---
+  duration_ms: 47.076953
+  type: 'test'
+  ...
+# Subtest: named thread custom renderer gets optional actions and custom thread hosts retain ownership
+ok 100 - named thread custom renderer gets optional actions and custom thread hosts retain ownership
+  ---
+  duration_ms: 40.13703
+  type: 'test'
+  ...
+# Subtest: named thread dialog uses the constrained workspace shell at a narrow viewport
+ok 101 - named thread dialog uses the constrained workspace shell at a narrow viewport
+  ---
+  duration_ms: 64.074837
+  type: 'test'
+  ...
+# Subtest: named thread dialog retains a failed service attempt and preserves draft through capability loss
+ok 102 - named thread dialog retains a failed service attempt and preserves draft through capability loss
+  ---
+  duration_ms: 67.680565
+  type: 'test'
+  ...
+# Subtest: named thread creation excludes deleted and unsent roots, and is independent of inline and preference support
+ok 103 - named thread creation excludes deleted and unsent roots, and is independent of inline and preference support
+  ---
+  duration_ms: 100.326095
+  type: 'test'
+  ...
+# Subtest: inline Reply routing: default directly selected thread focuses its existing composer without nested creation
+ok 104 - inline Reply routing: default directly selected thread focuses its existing composer without nested creation
+  ---
+  duration_ms: 58.452659
+  type: 'test'
+  ...
+# Subtest: inline Reply routing: current directly selected thread focuses its existing composer without nested creation
+ok 105 - inline Reply routing: current directly selected thread focuses its existing composer without nested creation
+  ---
+  duration_ms: 50.958631
+  type: 'test'
+  ...
+# Subtest: inline Reply routing: Current directly selected thread requires a connected composer
+ok 106 - inline Reply routing: Current directly selected thread requires a connected composer
+  ---
+  duration_ms: 30.824749
+  type: 'test'
+  ...
+# Subtest: message search starts collapsed and restores trigger focus on close and Escape
+ok 107 - message search starts collapsed and restores trigger focus on close and Escape
+  ---
+  duration_ms: 152.198964
+  type: 'test'
+  ...
+# Subtest: message search renders no trigger when the client capability is absent
+ok 108 - message search renders no trigger when the client capability is absent
+  ---
+  duration_ms: 55.935146
+  type: 'test'
+  ...
+# Subtest: message search renders no trigger without a selected conversation
+ok 109 - message search renders no trigger without a selected conversation
+  ---
+  duration_ms: 45.31516
+  type: 'test'
+  ...
+# Subtest: message search defaults to the current conversation and refreshes that default
+ok 110 - message search defaults to the current conversation and refreshes that default
+  ---
+  duration_ms: 205.429171
+  type: 'test'
+  ...
+# Subtest: message search debounces, maps every filter, and renders snippets as text
+ok 111 - message search debounces, maps every filter, and renders snippets as text
+  ---
+  duration_ms: 375.054199
+  type: 'test'
+  ...
+# Subtest: message search renders preserved forwarded attribution and unresolved-author fallback
+ok 112 - message search renders preserved forwarded attribution and unresolved-author fallback
+  ---
+  duration_ms: 117.573851
+  type: 'test'
+  ...
+# Subtest: search results support roving keyboard focus
+ok 113 - search results support roving keyboard focus
+  ---
+  duration_ms: 115.394105
+  type: 'test'
+  ...
+# Subtest: a completed search with no authorized hits announces no results
+ok 114 - a completed search with no authorized hits announces no results
+  ---
+  duration_ms: 108.790219
+  type: 'test'
+  ...
+# Subtest: initial and pagination failures retain actionable retry paths
+ok 115 - initial and pagination failures retain actionable retry paths
+  ---
+  duration_ms: 227.716267
+  type: 'test'
+  ...
+# Subtest: result activation selects, scrolls, and focuses after hydration in uncontrolled mode
+ok 116 - result activation selects, scrolls, and focuses after hydration in uncontrolled mode
+  ---
+  duration_ms: 218.148957
+  type: 'test'
+  ...
+# Subtest: result activation selects, scrolls, and focuses after hydration in controlled mode
+ok 117 - result activation selects, scrolls, and focuses after hydration in controlled mode
+  ---
+  duration_ms: 205.529777
+  type: 'test'
+  ...
+# Subtest: an unavailable result stops at an accessible bounded fallback
+ok 118 - an unavailable result stops at an accessible bounded fallback
+  ---
+  duration_ms: 1665.18106
+  type: 'test'
+  ...
+# Subtest: a host activation callback overrides default routing without removing the result
+ok 119 - a host activation callback overrides default routing without removing the result
+  ---
+  duration_ms: 117.525376
+  type: 'test'
+  ...
+# Subtest: recent thread navigation reacts to canonical events and detail without changing top-level list IDs
+ok 120 - recent thread navigation reacts to canonical events and detail without changing top-level list IDs
+  ---
+  duration_ms: 121.734442
+  type: 'test'
+  ...
+# Subtest: recent thread navigation respects parent scope and clears with parent removal or identity reset
+ok 121 - recent thread navigation respects parent scope and clears with parent removal or identity reset
+  ---
+  duration_ms: 83.29295
+  type: 'test'
+  ...
+# Subtest: every layout mode renders root-scoped navigation, header, and main landmarks
+ok 122 - every layout mode renders root-scoped navigation, header, and main landmarks
+  ---
+  duration_ms: 57.438784
+  type: 'test'
+  ...
+# Subtest: maximum-action headers keep one semantic, ordered, focusable action cluster in wide and compact layouts
+ok 123 - maximum-action headers keep one semantic, ordered, focusable action cluster in wide and compact layouts
+  ---
+  duration_ms: 156.604286
+  type: 'test'
+  ...
+# Subtest: member trigger renders a compact icon and exact zero, one, and many count labels
+ok 124 - member trigger renders a compact icon and exact zero, one, and many count labels
+  ---
+  duration_ms: 181.612214
+  type: 'test'
+  ...
+# Subtest: organization and entity scopes render only their scoped navigation rows
+ok 125 - organization and entity scopes render only their scoped navigation rows
+  ---
+  duration_ms: 22.685732
+  type: 'test'
+  ...
+# Subtest: conversation rows distinguish types and expose only nonzero canonical unread counts
+ok 126 - conversation rows distinguish types and expose only nonzero canonical unread counts
+  ---
+  duration_ms: 44.235083
+  type: 'test'
+  ...
+# Subtest: direct and group-direct rows use SVG fallbacks only while participant projections are unavailable
+ok 127 - direct and group-direct rows use SVG fallbacks only while participant projections are unavailable
+  ---
+  duration_ms: 14.828796
+  type: 'test'
+  ...
+# Subtest: direct-message rows render safe participant identity, presence, bounded groups, and retain roving unread semantics
+ok 128 - direct-message rows render safe participant identity, presence, bounded groups, and retain roving unread semantics
+  ---
+  duration_ms: 88.705533
+  type: 'test'
+  ...
+# Subtest: navigation rows project notification levels and finite or indefinite mute state without weakening unread selection
+ok 129 - navigation rows project notification levels and finite or indefinite mute state without weakening unread selection
+  ---
+  duration_ms: 50.986425
+  type: 'test'
+  ...
+# Subtest: notification preferences are available from the detail header but not navigation rows
+ok 130 - notification preferences are available from the detail header but not navigation rows
+  ---
+  duration_ms: 43.115526
+  type: 'test'
+  ...
+# Subtest: navigation rows render active huddle metadata across selected and non-selected state transitions
+ok 131 - navigation rows render active huddle metadata across selected and non-selected state transitions
+  ---
+  duration_ms: 44.193435
+  type: 'test'
+  ...
+# Subtest: navigation preference projection stays isolated to each cache actor
+ok 132 - navigation preference projection stays isolated to each cache actor
+  ---
+  duration_ms: 74.274554
+  type: 'test'
+  ...
+# Subtest: fifty direct-message rows use list participant snapshots without detail or per-row hydration
+ok 133 - fifty direct-message rows use list participant snapshots without detail or per-row hydration
+  ---
+  duration_ms: 371.453168
+  type: 'test'
+  ...
+# Subtest: uncontrolled hydration synchronously exposes exactly one current conversation
+ok 134 - uncontrolled hydration synchronously exposes exactly one current conversation
+  ---
+  duration_ms: 13.811686
+  type: 'test'
+  ...
+# Subtest: mixed conversation kinds render Starred first with projection-scoped row identity
+ok 135 - mixed conversation kinds render Starred first with projection-scoped row identity
+  ---
+  duration_ms: 46.05873
+  type: 'test'
+  ...
+# Subtest: empty navigation sections retain concise copy and collapsible list relationships
+ok 136 - empty navigation sections retain concise copy and collapsible list relationships
+  ---
+  duration_ms: 37.763919
+  type: 'test'
+  ...
+# Subtest: empty section actions open each existing canonical creation dialog
+ok 137 - empty section actions open each existing canonical creation dialog
+  ---
+  duration_ms: 101.011962
+  type: 'test'
+  ...
+# Subtest: section creation actions fail closed independently and in read-only mode
+ok 138 - section creation actions fail closed independently and in read-only mode
+  ---
+  duration_ms: 56.203593
+  type: 'test'
+  ...
+# Subtest: conversation sections collapse independently without changing the selected detail
+ok 139 - conversation sections collapse independently without changing the selected detail
+  ---
+  duration_ms: 187.436951
+  type: 'test'
+  ...
+# Subtest: conversation filtering reveals matches without replacing collapsed preferences
+ok 140 - conversation filtering reveals matches without replacing collapsed preferences
+  ---
+  duration_ms: 103.872059
+  type: 'test'
+  ...
+# Subtest: conversation filter matches every current label case-insensitively and preserves sections
+ok 141 - conversation filter matches every current label case-insensitively and preserves sections
+  ---
+  duration_ms: 86.230793
+  type: 'test'
+  ...
+# Subtest: conversation filter matches participant display names in direct and group conversations
+ok 142 - conversation filter matches participant display names in direct and group conversations
+  ---
+  duration_ms: 46.236922
+  type: 'test'
+  ...
+# Subtest: unmodified slash focuses the filter from BODY, navigation, and timeline controls and selects its preserved query
+ok 143 - unmodified slash focuses the filter from BODY, navigation, and timeline controls and selects its preserved query
+  ---
+  duration_ms: 38.947177
+  type: 'test'
+  ...
+# Subtest: conversation-filter slash ignores editable, composer, search, creation, menu, dialog, and WorkspaceHeader boundaries
+ok 144 - conversation-filter slash ignores editable, composer, search, creation, menu, dialog, and WorkspaceHeader boundaries
+  ---
+  duration_ms: 90.635325
+  type: 'test'
+  ...
+# Subtest: filtered keyboard navigation uses contiguous visual order across sections
+ok 145 - filtered keyboard navigation uses contiguous visual order across sections
+  ---
+  duration_ms: 77.23459
+  type: 'test'
+  ...
+# Subtest: conversation filter Escape is focus-scoped and preserves hidden selection
+ok 146 - conversation filter Escape is focus-scoped and preserves hidden selection
+  ---
+  duration_ms: 35.886905
+  type: 'test'
+  ...
+# Subtest: conversation filter shows a scoped no-match status and retains pagination
+ok 147 - conversation filter shows a scoped no-match status and retains pagination
+  ---
+  duration_ms: 22.410236
+  type: 'test'
+  ...
+# Subtest: visual-order keyboard navigation crosses section boundaries and keeps one current row
+ok 148 - visual-order keyboard navigation crosses section boundaries and keeps one current row
+  ---
+  duration_ms: 126.044314
+  type: 'test'
+  ...
+# Subtest: controlled selection reports requests without overriding the controlled value
+ok 149 - controlled selection reports requests without overriding the controlled value
+  ---
+  duration_ms: 35.70997
+  type: 'test'
+  ...
+# Subtest: uncontrolled selection supports click and ArrowUp, ArrowDown, Home, and End activation
+ok 150 - uncontrolled selection supports click and ArrowUp, ArrowDown, Home, and End activation
+  ---
+  duration_ms: 96.337487
+  type: 'test'
+  ...
+# Subtest: compact navigation moves list to detail and back with focus and roving state restored
+ok 151 - compact navigation moves list to detail and back with focus and roving state restored
+  ---
+  duration_ms: 130.619579
+  type: 'test'
+  ...
+# Subtest: conversation-filter slash reveals compact navigation before focusing and selecting the preserved query
+ok 152 - conversation-filter slash reveals compact navigation before focusing and selecting the preserved query
+  ---
+  duration_ms: 50.662791
+  type: 'test'
+  ...
+# Subtest: wide layout keeps both panes and breakpoint changes do not refetch chat data
+ok 153 - wide layout keeps both panes and breakpoint changes do not refetch chat data
+  ---
+  duration_ms: 35.374498
+  type: 'test'
+  ...
+# Subtest: compact layout observation disconnects when the workspace unmounts
+ok 154 - compact layout observation disconnects when the workspace unmounts
+  ---
+  duration_ms: 31.624316
+  type: 'test'
+  ...
+# Subtest: conversation-filter shortcut shares one document listener, scopes BODY to the active workspace, and cleans up
+ok 155 - conversation-filter shortcut shares one document listener, scopes BODY to the active workspace, and cleans up
+  ---
+  duration_ms: 55.932815
+  type: 'test'
+  ...
+# Subtest: authorized channel creation normalizes public and private names and selects authoritative results
+ok 156 - authorized channel creation normalizes public and private names and selects authoritative results
+  ---
+  duration_ms: 187.110608
+  type: 'test'
+  ...
+# Subtest: channel dialog dismissal restores focus to each originating trigger after closure
+ok 157 - channel dialog dismissal restores focus to each originating trigger after closure
+  ---
+  duration_ms: 66.281219
+  type: 'test'
+  ...
+# Subtest: created conversation is immediately listed and selection survives prepended and reordered snapshots
+ok 158 - created conversation is immediately listed and selection survives prepended and reordered snapshots
+  ---
+  duration_ms: 64.21091
+  type: 'test'
+  ...
+# Subtest: a definitively unavailable created conversation falls back to the first current row
+ok 159 - a definitively unavailable created conversation falls back to the first current row
+  ---
+  duration_ms: 51.121489
+  type: 'test'
+  ...
+# Subtest: controlled creation reports the authoritative ID without changing controlled selection
+ok 160 - controlled creation reports the authoritative ID without changing controlled selection
+  ---
+  duration_ms: 39.242967
+  type: 'test'
+  ...
+# Subtest: channel creation blocks duplicate pending submissions and keeps actionable failures open
+ok 161 - channel creation blocks duplicate pending submissions and keeps actionable failures open
+  ---
+  duration_ms: 41.141663
+  type: 'test'
+  ...
+# Subtest: channel creation is fail-closed for absent, denied, and read-only availability
+ok 162 - channel creation is fail-closed for absent, denied, and read-only availability
+  ---
+  duration_ms: 29.831387
+  type: 'test'
+  ...
+# Subtest: creation add menu exposes exactly every host-authorized availability combination
+ok 163 - creation add menu exposes exactly every host-authorized availability combination
+  ---
+  duration_ms: 383.159984
+  type: 'test'
+  ...
+# Subtest: creation add menu supports keyboard navigation, activation, dismissal, and focus restoration
+ok 164 - creation add menu supports keyboard navigation, activation, dismissal, and focus restoration
+  ---
+  duration_ms: 160.164248
+  type: 'test'
+  ...
+# Subtest: direct creation is a root workspace modal with stable navigation, contained focus, and exact focus restoration
+ok 165 - direct creation is a root workspace modal with stable navigation, contained focus, and exact focus restoration
+  ---
+  duration_ms: 123.636247
+  type: 'test'
+  ...
+# Subtest: pending direct creation blocks Escape, Cancel, and backdrop dismissal
+ok 166 - pending direct creation blocks Escape, Cancel, and backdrop dismissal
+  ---
+  duration_ms: 380.615761
+  type: 'test'
+  ...
+# Subtest: direct creation debounces directory search, selects one user, and reconciles authoritative conversations
+ok 167 - direct creation debounces directory search, selects one user, and reconciles authoritative conversations
+  ---
+  duration_ms: 1389.987851
+  type: 'test'
+  ...
+# Subtest: direct creation is fail-closed for absent, denied, and read-only availability
+ok 168 - direct creation is fail-closed for absent, denied, and read-only availability
+  ---
+  duration_ms: 33.036824
+  type: 'test'
+  ...
+# Subtest: group-direct creation is a bounded root modal with stable navigation and exact focus restoration
+ok 169 - group-direct creation is a bounded root modal with stable navigation and exact focus restoration
+  ---
+  duration_ms: 620.767023
+  type: 'test'
+  ...
+# Subtest: group-direct creation preserves unique selections and reconciles canonical authoritative results
+ok 170 - group-direct creation preserves unique selections and reconciles canonical authoritative results
+  ---
+  duration_ms: 1453.58191
+  type: 'test'
+  ...
+# Subtest: group-direct creation blocks pending duplicates and retains selections after errors
+ok 171 - group-direct creation blocks pending duplicates and retains selections after errors
+  ---
+  duration_ms: 423.649481
+  type: 'test'
+  ...
+# Subtest: group-direct creation is fail-closed for absent, denied, and read-only availability
+ok 172 - group-direct creation is fail-closed for absent, denied, and read-only availability
+  ---
+  duration_ms: 21.023014
+  type: 'test'
+  ...
+# Subtest: member management searches the authorized directory and uses each latest canonical revision
+ok 173 - member management searches the authorized directory and uses each latest canonical revision
+  ---
+  duration_ms: 426.286281
+  type: 'test'
+  ...
+# Subtest: member management announces pending, conflict, safety, and transport outcomes accessibly
+ok 174 - member management announces pending, conflict, safety, and transport outcomes accessibly
+  ---
+  duration_ms: 64.349041
+  type: 'test'
+  ...
+# Subtest: member role selection reconciles conflicts and authors exact canonical roles with latest revisions
+ok 175 - member role selection reconciles conflicts and authors exact canonical roles with latest revisions
+  ---
+  duration_ms: 100.272922
+  type: 'test'
+  ...
+# Subtest: member role selection preserves last-owner safety and announces transport failures
+ok 176 - member role selection preserves last-owner safety and announces transport failures
+  ---
+  duration_ms: 57.417898
+  type: 'test'
+  ...
+# Subtest: member management is fail-closed when unavailable and hides mutations when denied or read-only
+ok 177 - member management is fail-closed when unavailable and hides mutations when denied or read-only
+  ---
+  duration_ms: 163.402018
+  type: 'test'
+  ...
+# Subtest: notification preferences author every level and mute shape with authoritative SDK revisions
+ok 178 - notification preferences author every level and mute shape with authoritative SDK revisions
+  ---
+  duration_ms: 150.763154
+  type: 'test'
+  ...
+# Subtest: notification preference pending and conflict states reconcile canonical choices before an explicit retry
+ok 179 - notification preference pending and conflict states reconcile canonical choices before an explicit retry
+  ---
+  duration_ms: 79.30557
+  type: 'test'
+  ...
+# Subtest: notification preference failures are actionable and read-only workspaces cannot submit
+ok 180 - notification preference failures are actionable and read-only workspaces cannot submit
+  ---
+  duration_ms: 103.707921
+  type: 'test'
+  ...
+# Subtest: conversation pagination control is absent without a next cursor
+ok 181 - conversation pagination control is absent without a next cursor
+  ---
+  duration_ms: 7.823876
+  type: 'test'
+  ...
+# Subtest: conversation pagination invokes one load per activation and announces in-flight work
+ok 182 - conversation pagination invokes one load per activation and announces in-flight work
+  ---
+  duration_ms: 46.641452
+  type: 'test'
+  ...
+# Subtest: appended conversations preserve the selected and focused conversation button
+ok 183 - appended conversations preserve the selected and focused conversation button
+  ---
+  duration_ms: 54.077144
+  type: 'test'
+  ...
+# Subtest: a failed conversation page remains visible and retryable
+ok 184 - a failed conversation page remains visible and retryable
+  ---
+  duration_ms: 67.348014
+  type: 'test'
+  ...
+# Subtest: loading, error, and empty results expose live status, alert, and empty regions
+ok 185 - loading, error, and empty results expose live status, alert, and empty regions
+  ---
+  duration_ms: 15.560387
+  type: 'test'
+  ...
+# Subtest: wide workspace identity and body replacements retain public slot output
+ok 186 - wide workspace identity and body replacements retain public slot output
+  ---
+  duration_ms: 26.91609
+  type: 'test'
+  ...
+# Subtest: default workspace timeline forwards normalized link previews and outer host props
+ok 187 - default workspace timeline forwards normalized link previews and outer host props
+  ---
+  duration_ms: 27.513701
+  type: 'test'
+  ...
+# Subtest: timeline, composer, thread, and huddle remain explicit replaceable body surfaces
+ok 188 - timeline, composer, thread, and huddle remain explicit replaceable body surfaces
+  ---
+  duration_ms: 10.965854
+  type: 'test'
+  ...
+# Subtest: modal mode owns one root-local dialog and never creates an external portal
+ok 189 - modal mode owns one root-local dialog and never creates an external portal
+  ---
+  duration_ms: 16.301624
+  type: 'test'
+  ...
+# Subtest: modal mode moves focus inside and wraps forward, backward, outside, and empty Tab attempts
+ok 190 - modal mode moves focus inside and wraps forward, backward, outside, and empty Tab attempts
+  ---
+  duration_ms: 34.167753
+  type: 'test'
+  ...
+# Subtest: nested workspace dialogs keep Escape, focus containment, and restoration priority
+ok 191 - nested workspace dialogs keep Escape, focus containment, and restoration priority
+  ---
+  duration_ms: 70.248579
+  type: 'test'
+  ...
+# Subtest: modal focus returns when the host transitions to a non-modal mode
+ok 192 - modal focus returns when the host transitions to a non-modal mode
+  ---
+  duration_ms: 34.399755
+  type: 'test'
+  ...
+# Subtest: modal transition does not override focus intentionally moved outside
+ok 193 - modal transition does not override focus intentionally moved outside
+  ---
+  duration_ms: 39.875209
+  type: 'test'
+  ...
+# Subtest: modal focus returns when the host unmounts the workspace
+ok 194 - modal focus returns when the host unmounts the workspace
+  ---
+  duration_ms: 27.230852
+  type: 'test'
+  ...
+# Subtest: modal focus restoration safely ignores a disconnected opener
+ok 195 - modal focus restoration safely ignores a disconnected opener
+  ---
+  duration_ms: 28.379887
+  type: 'test'
+  ...
+# Subtest: non-modal modes leave host focus and keyboard ownership unchanged
+ok 196 - non-modal modes leave host focus and keyboard ownership unchanged
+  ---
+  duration_ms: 100.129267
+  type: 'test'
+  ...
+# Subtest: the public UI graph stays within browser-safe public boundaries
+ok 197 - the public UI graph stays within browser-safe public boundaries
+  ---
+  duration_ms: 249.06193
+  type: 'test'
+  ...
+# Subtest: every UI selector is scoped beneath the Handrail Chat root
+ok 198 - every UI selector is scoped beneath the Handrail Chat root
+  ---
+  duration_ms: 26.189319
+  type: 'test'
+  ...
+# Subtest: the stylesheet defines every documented token category with fallbacks
+ok 199 - the stylesheet defines every documented token category with fallbacks
+  ---
+  duration_ms: 8.158616
+  type: 'test'
+  ...
+# Subtest: every consumed UI token is declared on the Handrail Chat root
+ok 200 - every consumed UI token is declared on the Handrail Chat root
+  ---
+  duration_ms: 12.32922
+  type: 'test'
+  ...
+# Subtest: notification preferences use the shared dropdown layer below modal overlays
+ok 201 - notification preferences use the shared dropdown layer below modal overlays
+  ---
+  duration_ms: 12.879725
+  type: 'test'
+  ...
+# Subtest: Jump to latest is timeline-anchored below shared popup layers
+ok 202 - Jump to latest is timeline-anchored below shared popup layers
+  ---
+  duration_ms: 2.772333
+  type: 'test'
+  ...
+# Subtest: direct and group-direct creation reuse the channel workspace overlay layer
+ok 203 - direct and group-direct creation reuse the channel workspace overlay layer
+  ---
+  duration_ms: 2.841032
+  type: 'test'
+  ...
+# Subtest: production chat state tokens cover every theme branch
+ok 204 - production chat state tokens cover every theme branch
+  ---
+  duration_ms: 4.22296
+  type: 'test'
+  ...
+# Subtest: ChatWorkspace shell regions consume the scoped production hierarchy tokens
+ok 205 - ChatWorkspace shell regions consume the scoped production hierarchy tokens
+  ---
+  duration_ms: 4.732201
+  type: 'test'
+  ...
+# Subtest: the Chat Lab scopes workspace tokens and narrowly limits shell overrides
+ok 206 - the Chat Lab scopes workspace tokens and narrowly limits shell overrides
+  ---
+  duration_ms: 5.40548
+  type: 'test'
+  ...
+# Subtest: the DOM fixture demonstrates a host override and focus-visible opt-in
+ok 207 - the DOM fixture demonstrates a host override and focus-visible opt-in
+  ---
+  duration_ms: 3.060122
+  type: 'test'
+  ...
+# Subtest: dark, forced-color, and reduced-motion preferences stay root scoped
+ok 208 - dark, forced-color, and reduced-motion preferences stay root scoped
+  ---
+  duration_ms: 3.217628
+  type: 'test'
+  ...
+# Subtest: huddle details use their grid layout only while disclosed
+ok 209 - huddle details use their grid layout only while disclosed
+  ---
+  duration_ms: 6.160019
+  type: 'test'
+  ...
+# Subtest: link-preview cards bound long text and lazy images inside the timeline
+ok 210 - link-preview cards bound long text and lazy images inside the timeline
+  ---
+  duration_ms: 2.213785
+  type: 'test'
+  ...
+# Subtest: compact ChatWorkspace styles keep a single pane and uniformly sized header actions
+ok 211 - compact ChatWorkspace styles keep a single pane and uniformly sized header actions
+  ---
+  duration_ms: 4.583727
+  type: 'test'
+  ...
+# Subtest: narrow split-pane headers compact actions against the conversation width
+ok 212 - narrow split-pane headers compact actions against the conversation width
+  ---
+  duration_ms: 2.164078
+  type: 'test'
+  ...
+# Subtest: conversation state panels stay detail-scoped with accessible motion and color fallbacks
+ok 213 - conversation state panels stay detail-scoped with accessible motion and color fallbacks
+  ---
+  duration_ms: 119.75121
+  type: 'test'
+  ...
+# Subtest: timeline panes solely own bounded conversation scrolling
+ok 214 - timeline panes solely own bounded conversation scrolling
+  ---
+  duration_ms: 2.901926
+  type: 'test'
+  ...
+# Subtest: the conversation header separates shrinkable identity from bounded, non-wrapping actions
+ok 215 - the conversation header separates shrinkable identity from bounded, non-wrapping actions
+  ---
+  duration_ms: 4.511324
+  type: 'test'
+  ...
+# Subtest: the conversation navigation keeps dense hover, focus, selection, and forced-color states scoped
+ok 216 - the conversation navigation keeps dense hover, focus, selection, and forced-color states scoped
+  ---
+  duration_ms: 6.581626
+  type: 'test'
+  ...
+# Subtest: conversation rows reserve only the star action and render a passive mute indicator
+ok 217 - conversation rows reserve only the star action and render a passive mute indicator
+  ---
+  duration_ms: 7.2059
+  type: 'test'
+  ...
+# Subtest: the conversation filter positions a quiet currentColor icon without weakening focus or forced colors
+ok 218 - the conversation filter positions a quiet currentColor icon without weakening focus or forced colors
+  ---
+  duration_ms: 7.864342
+  type: 'test'
+  ...
+# Subtest: message action toolbars reveal on hover or keyboard focus without sticking after pointer clicks
+ok 219 - message action toolbars reveal on hover or keyboard focus without sticking after pointer clicks
+  ---
+  duration_ms: 4.067871
+  type: 'test'
+  ...
+# Subtest: reaction picker controls use compact currentColor SVGs without narrowing overflow
+ok 220 - reaction picker controls use compact currentColor SVGs without narrowing overflow
+  ---
+  duration_ms: 5.709799
+  type: 'test'
+  ...
+# Subtest: the thread close control uses a compact currentColor SVG in forced colors
+ok 221 - the thread close control uses a compact currentColor SVG in forced colors
+  ---
+  duration_ms: 3.969673
+  type: 'test'
+  ...
+# Subtest: the thread conversation keeps its composer outside scrollable controls and history
+ok 222 - the thread conversation keeps its composer outside scrollable controls and history
+  ---
+  duration_ms: 2.280925
+  type: 'test'
+  ...
+# Subtest: the compact composer keeps focus feedback on its individual controls
+ok 223 - the compact composer keeps focus feedback on its individual controls
+  ---
+  duration_ms: 8.841256
+  type: 'test'
+  ...
+# Subtest: the forwarding picker has a compact bounded modal with complete interaction states
+ok 224 - the forwarding picker has a compact bounded modal with complete interaction states
+  ---
+  duration_ms: 5.891942
+  type: 'test'
+  ...
+# Subtest: timeline image attachments are constrained without horizontal overflow
+ok 225 - timeline image attachments are constrained without horizontal overflow
+  ---
+  duration_ms: 2.431615
+  type: 'test'
+  ...
+1..225
+# tests 225
+# suites 0
+# pass 224
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 12084.769406

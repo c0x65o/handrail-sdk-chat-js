@@ -1,0 +1,116 @@
+[
+  {
+    "name": "typecheck",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exit_code": 0,
+    "log": "docs/validation/workspace-repair-20261006/typecheck.txt"
+  },
+  {
+    "name": "chat-workspace",
+    "command": [
+      "npm",
+      "run",
+      "test:chat-workspace"
+    ],
+    "exit_code": 1,
+    "log": "docs/validation/workspace-repair-20261006/chat-workspace.txt"
+  },
+  {
+    "name": "ui-composer",
+    "command": [
+      "npm",
+      "run",
+      "test:ui-composer"
+    ],
+    "exit_code": 0,
+    "log": "docs/validation/workspace-repair-20261006/ui-composer.txt"
+  },
+  {
+    "name": "ui-styles",
+    "command": [
+      "npm",
+      "run",
+      "test:ui-styles"
+    ],
+    "exit_code": 0,
+    "log": "docs/validation/workspace-repair-20261006/ui-styles.txt"
+  },
+  {
+    "name": "client-cache-query",
+    "command": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "test/normalized-cache.test.mjs",
+      "test/client-snapshot-hydration.test.mjs",
+      "test/client-conversation-lifecycle.test.mjs",
+      "test/react-query-hooks.test.mjs",
+      "test/client-durable-conversation-creation.test.mjs",
+      "test/client-durable-conversation-creation-atomic.test.mjs",
+      "test/client-application-chat-conversation-creation-storage.test.mjs",
+      "test/conversation-creation.test.mjs",
+      "test/conversation-creation-browser.test.mjs"
+    ],
+    "exit_code": 0,
+    "log": "docs/validation/workspace-repair-20261006/client-cache-query.txt"
+  },
+  {
+    "name": "relay-packaging",
+    "command": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "test/native-token-boundaries.test.mjs",
+      "test/native-candidate-binding.test.mjs",
+      "test/native-contact-form.test.mjs",
+      "test/request-context.test.mjs",
+      "test/send-message-http.test.mjs",
+      "test/exports.test.mjs",
+      "test/package-version-generation.test.mjs",
+      "test/client-browser-graph.test.mjs",
+      "test/ui-browser-graph.test.mjs",
+      "examples/drop-in-react/test/NativeTokenProofPacing.test.mjs"
+    ],
+    "exit_code": 0,
+    "log": "docs/validation/workspace-repair-20261006/relay-packaging.txt"
+  },
+  {
+    "name": "chat-workspace-final",
+    "command": "npm run test:chat-workspace",
+    "exit_code": 0,
+    "tests": 225,
+    "log": "docs/validation/workspace-repair-20261006/chat-workspace-final.txt"
+  },
+  {
+    "name": "build-final",
+    "command": "npm run build",
+    "exit_code": 0,
+    "tests": null,
+    "log": "docs/validation/workspace-repair-20261006/build-final.txt"
+  },
+  {
+    "name": "client-query-final",
+    "command": "node --test --test-concurrency=1 test/client-snapshot-hydration.test.mjs test/client-conversation-lifecycle.test.mjs test/react-query-hooks.test.mjs test/client-durable-conversation-creation.test.mjs test/client-durable-conversation-creation-atomic.test.mjs",
+    "exit_code": 0,
+    "tests": 60,
+    "log": "docs/validation/workspace-repair-20261006/client-query-final.txt"
+  },
+  {
+    "name": "postgres-final",
+    "command": "bash docs/validation/workspace-repair-20261006/run-postgres.sh",
+    "exit_code": 0,
+    "tests": 14,
+    "log": "docs/validation/workspace-repair-20261006/postgres-final.txt"
+  },
+  {
+    "name": "browser-final",
+    "command": "PLAYWRIGHT_BROWSERS_PATH=$PWD/build/playwright-browsers node scripts/qualify-composer-layout.mjs",
+    "exit_code": 0,
+    "tests": 144,
+    "log": "docs/validation/workspace-repair-20261006/browser-final.txt"
+  }
+]

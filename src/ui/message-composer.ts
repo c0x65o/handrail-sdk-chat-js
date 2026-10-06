@@ -1659,7 +1659,7 @@ export function DefaultMessageComposerRenderer({
   const reason = disabledReasonLabel(state.disabledReason);
   const statusMessage = state.status.kind === "draft" ? "" : state.status.message;
   const hasStatusFeedback = statusMessage.length > 0 || reason !== undefined;
-  const hasFeedback = hasStatusFeedback || error !== undefined;
+  const hasFeedback = hasStatusFeedback || error !== undefined || attachmentReason !== undefined;
   const readTextareaSelection = (): ComposerSelection => {
     const textarea = textareaRef.current;
     const textLength = state.text.length;
@@ -2261,15 +2261,15 @@ export function DefaultMessageComposerRenderer({
             )
           : null),
       ),
-      attachmentReason === undefined ? null : createElement("div", {
-        id: `${id}-attachments-status`,
-        role: "status",
-        "aria-live": "polite",
-        className: "handrail-chat__muted",
-      }, attachmentReason, state.attachments.some(attachment => attachment.status === "finalized" || attachment.status === "restored")
-        ? " Remove attached files to send text." : ""),
       hasFeedback
         ? createElement("div", { className: "handrail-chat__composer-feedback" },
+          attachmentReason === undefined ? null : createElement("div", {
+            id: `${id}-attachments-status`,
+            role: "status",
+            "aria-live": "polite",
+            className: "handrail-chat__muted",
+          }, attachmentReason, state.attachments.some(attachment => attachment.status === "finalized" || attachment.status === "restored")
+            ? " Remove attached files to send text." : ""),
           hasStatusFeedback
             ? createElement("div", {
                 id: statusId,

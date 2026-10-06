@@ -1,0 +1,47 @@
+TAP version 13
+# Subtest: two confirmed creations survive stale discovery, scope changes, errors and acknowledgement
+not ok 1 - two confirmed creations survive stale discovery, scope changes, errors and acknowledgement
+  ---
+  duration_ms: 25.86251
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/workspace-repair-negative/test/client-conversation-lifecycle.test.mjs:588:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        'A',
+        'B',
+        'C',
+    -   'D',
+    -   'E'
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'A'
+    1: 'B'
+    2: 'C'
+    3: 'D'
+    4: 'E'
+  actual:
+    0: 'A'
+    1: 'B'
+    2: 'C'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/workspace-repair-negative/test/client-conversation-lifecycle.test.mjs:623:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 138.277023

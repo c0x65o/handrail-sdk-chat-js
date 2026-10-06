@@ -165,6 +165,10 @@ export interface ConversationCacheMetadata {
 }
 
 export interface ConversationListCacheEntry {
+  /** Confirmed creations not yet observed in linked authoritative discovery pages. */
+  readonly pendingCreatedIds?: readonly ConversationId[];
+  /** Changes only on creation, so acknowledgement does not trigger another refresh. */
+  readonly creationRevision?: number;
   readonly conversationIds: readonly ConversationId[];
   readonly nextCursor?: ConversationSnapshotCursor;
   readonly snapshot: ConversationSnapshotMetadata<never>;
@@ -181,6 +185,8 @@ export interface ConversationListCachePage {
 export interface ConversationListHydrationOptions {
   /** The exclusive cursor used to request this page; absent means the first page. */
   readonly requestCursor?: ConversationSnapshotCursor;
+  /** Start a fresh authoritative cursor chain instead of retaining earlier pages. */
+  readonly replacePages?: boolean;
 }
 
 export interface ConversationTimelineCacheEntry {
@@ -497,6 +503,7 @@ export type NormalizedChatCacheAction =
       readonly type: "conversations/hydrate-list";
       readonly snapshot: ConversationListSnapshot;
       readonly requestCursor?: ConversationSnapshotCursor;
+      readonly replacePages?: boolean;
     }
   | {
       readonly type: "conversations/hydrate-detail";
@@ -1065,6 +1072,7 @@ export function createNormalizedChatCache(
       dispatch({
         type: "conversations/hydrate-list",
         snapshot: snapshot as ConversationListSnapshot,
+        ...(options?.replacePages === true ? { replacePages: true } : {}),
         ...(options?.requestCursor === undefined
           ? {}
           : { requestCursor: options.requestCursor }),
@@ -2221,7 +2229,7 @@ export function reduceNormalizedChatCache(
       });
     }
     case "conversations/hydrate-list":
-      return hydrateConversationList(state, action.snapshot, action.requestCursor);
+      return hydrateConversationList(state, action.snapshot, action.requestCursor, action.replacePages);
     case "conversations/hydrate-detail":
       return hydrateConversationDetail(state, action.snapshot);
     case "conversations/pending-begin":
@@ -2297,6 +2305,14 @@ export function reduceNormalizedChatCache(
         }),
         metadata: Object.freeze({
           ...next.metadata,
+          conversationLists: freezeRecord(Object.fromEntries(Object.entries(next.metadata.conversationLists).map(([key, list]) => [key, Object.freeze({
+            ...list,
+            conversationIds: Object.freeze(list.conversationIds.filter(id => !ids.has(id))),
+            ...(list.pendingCreatedIds === undefined ? {} : { pendingCreatedIds: Object.freeze(list.pendingCreatedIds.filter(id => !ids.has(id))) }),
+            pages: freezeRecord(Object.fromEntries(Object.entries(list.pages).map(([cursor, page]) => [cursor, Object.freeze({
+              ...page, conversationIds: Object.freeze(page.conversationIds.filter(id => !ids.has(id))),
+            })]))),
+          })]))),
           conversations: omit(next.metadata.conversations),
           conversationDetails: omit(next.metadata.conversationDetails),
           conversationListParticipantUserIds: omit(next.metadata.conversationListParticipantUserIds),
@@ -3008,7 +3024,27 @@ function reconcileConversationCreation(
     state,
     result.conversation as ConversationDetailSnapshot,
   );
-  return settleConversationOperation(hydrated, logicalKey);
+  const conversation = result.conversation.conversation;
+  const scopeKeys = ["organization", ...(conversation.entity === undefined ? [] : [
+    conversationSnapshotScopeKey({ type: "entity", entity: conversation.entity }),
+  ])];
+  const lists = { ...hydrated.metadata.conversationLists };
+  for (const key of scopeKeys) {
+    const previous = lists[key];
+    if (previous?.conversationIds.includes(conversation.id)) continue;
+    lists[key] = Object.freeze({
+      ...previous,
+      conversationIds: sortDiscoveryIds(hydrated, mergeIds(previous?.conversationIds ?? [], [conversation.id])),
+      pendingCreatedIds: mergeIds(previous?.pendingCreatedIds ?? [], [conversation.id]),
+      creationRevision: (previous?.creationRevision ?? 0) + 1,
+      pages: previous?.pages ?? EMPTY_RECORD,
+      snapshot: previous?.snapshot ?? result.conversation._meta,
+    });
+  }
+  return settleConversationOperation(freezeState({
+    ...hydrated,
+    metadata: Object.freeze({ ...hydrated.metadata, conversationLists: freezeRecord(lists) }),
+  }), logicalKey);
 }
 
 /** Forget source/history content without touching drafts or participation authority. */
@@ -3239,6 +3275,7 @@ function hydrateConversationList(
   state: NormalizedChatCacheState,
   snapshot: ConversationListSnapshot,
   requestCursor: ConversationSnapshotCursor | undefined,
+  replacePages = false,
 ): NormalizedChatCacheState {
   const identity = requireIdentity(state);
   const normalized = normalizeConversationSummaries(state, snapshot.items, identity);
@@ -3253,12 +3290,19 @@ function hydrateConversationList(
   });
   const pageKey = conversationListPageKey(requestCursor);
   const pages = freezeRecord({
-    ...(existingList?.pages ?? {}),
+    ...(replacePages ? {} : existingList?.pages ?? {}),
     [pageKey]: page,
   });
   const linked = linkConversationListPages(pages);
+  const pendingCreatedIds = existingList?.pendingCreatedIds?.filter(id => !linked.conversationIds.includes(id));
   const list: ConversationListCacheEntry = Object.freeze({
-    conversationIds: linked.conversationIds,
+    ...(existingList?.creationRevision === undefined ? {} : { creationRevision: existingList.creationRevision }),
+    ...(pendingCreatedIds === undefined ? {} : { pendingCreatedIds: Object.freeze(pendingCreatedIds) }),
+    conversationIds: pendingCreatedIds?.length
+      ? sortDiscoveryIds({ ...state, entities: { ...state.entities, conversations: normalized.conversations },
+          currentUser: { ...state.currentUser, preferences: normalized.preferences } },
+          mergeIds(linked.conversationIds, pendingCreatedIds))
+      : linked.conversationIds,
     ...(linked.nextCursor === undefined ? {} : { nextCursor: linked.nextCursor }),
     snapshot: snapshot._meta,
     pages,
@@ -5129,6 +5173,19 @@ const conversationListPageKey = (
   cursor === undefined
     ? JSON.stringify(["initial"])
     : JSON.stringify(["cursor", cursor]);
+
+function sortDiscoveryIds(state: NormalizedChatCacheState, ids: readonly ConversationId[]): readonly ConversationId[] {
+  const rank = (id: ConversationId): number => {
+    const conversation = state.entities.conversations[id];
+    return conversation?.type === "direct" ? 0 : conversation?.type === "channel"
+      ? conversation.visibility === "public" ? 1 : 2 : 3;
+  };
+  return Object.freeze([...ids].sort((a, b) =>
+    Number(state.currentUser.preferences[b]?.isStarred === true) - Number(state.currentUser.preferences[a]?.isStarred === true) ||
+    rank(a) - rank(b) ||
+    (Date.parse(state.entities.conversations[b]?.updatedAt ?? "") - Date.parse(state.entities.conversations[a]?.updatedAt ?? "")) ||
+    b.localeCompare(a)));
+}
 
 function linkConversationListPages(
   pages: Readonly<Record<string, ConversationListCachePage>>,

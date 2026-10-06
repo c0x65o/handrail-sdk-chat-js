@@ -1,0 +1,1 @@
+Passed: 144 rendered cases; evidence: /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/docs/validation/workspace-repair-20261006

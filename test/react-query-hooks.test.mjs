@@ -1263,3 +1263,60 @@ test("read-state hooks retain freshness only while known views are mounted", asy
   await act(async () => { renderer.unmount(); });
   assert.deepEqual(released, retained);
 });
+
+test("mounted discovery revalidates each creation without losing pending rows or leaking scopes", async () => {
+  const cache = createNormalizedChatCache(identity);
+  const originals = ["A", "B", "C"].map(id => conversation(id, "channel"));
+  cache.hydrateConversationList(listSnapshot(originals));
+  const serverList = items => listSnapshot(items.map(item => ({
+    ...item, hasActiveHuddle: false, currentPreference: { ...item.currentPreference, isStarred: false },
+  })));
+  const serverDetail = item => {
+    const snapshot = detailSnapshot(item);
+    snapshot.conversation.currentPreference.isStarred = false;
+    return snapshot;
+  };
+  const calls = [];
+  let items = originals;
+  const client = createChatClient({
+    endpoint: "/chat", cache, realtime: false, getAccessToken: () => "fixture-only",
+    async fetch(url, init) {
+      if (url === "/chat/_meta") return response(metadata);
+      if (init.method === "POST") {
+        const input = JSON.parse(init.body);
+        return response({
+          operation: "create_conversation", type: "channel", reconciliationStatus: "created",
+          clientRequestId: input.clientRequestId,
+          conversation: serverDetail(conversation(input.name, "channel", { name: input.name, visibility: input.visibility })),
+        }, 201);
+      }
+      calls.push(url);
+      const scope = new URL(url, 'https://fixture.test').searchParams.get('scope');
+      return response(scope === 'entity' ? { ...serverList([]), scope: { type: 'entity', entity: { type: 'project', id: 'other' } } } : serverList(items));
+    },
+  });
+  const results = [];
+  const Capture = ({ scope }) => { results.push(useConversations({ scope })); return null; };
+  let renderer;
+  const mount = scope => createElement(ChatProvider, { client }, createElement(Capture, { scope }));
+  try {
+    await client.start();
+    await act(async () => { renderer = create(mount({ type: 'organization' })); await flush(); });
+    const ids = () => results.at(-1).data.conversations.map(({ id }) => id).sort();
+    assert.equal(calls.length, 1);
+    for (const name of ['D', 'E']) {
+      await act(async () => { assert.equal((await client.createChannel({ name, visibility: 'private' })).status, 'success'); await flush(); });
+    }
+    assert.equal(calls.length, 3, 'one scoped refresh per confirmed creation');
+    assert.deepEqual(ids(), ['A', 'B', 'C', 'D', 'E']);
+    await act(async () => { renderer.update(mount({ type: 'entity', entity: { type: 'project', id: 'other' } })); await flush(); });
+    assert.deepEqual(ids(), []);
+    await act(async () => { renderer.update(mount({ type: 'organization' })); await flush(); });
+    assert.deepEqual(ids(), ['A', 'B', 'C', 'D', 'E']);
+    const before = calls.length;
+    items = [...originals, conversation('D', 'channel'), conversation('E', 'channel')];
+    await act(async () => { await client.listConversations({ scope: { type: 'organization' } }); await flush(); });
+    assert.equal(calls.length, before + 1, 'acknowledgement must not loop');
+    assert.deepEqual(ids(), ['A', 'B', 'C', 'D', 'E']);
+  } finally { if (renderer) await act(async () => renderer.unmount()); client.close(); }
+});

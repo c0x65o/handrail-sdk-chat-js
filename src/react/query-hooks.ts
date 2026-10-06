@@ -400,7 +400,7 @@ export function useConversations(
         }
       });
     return () => controller.abort();
-  }, [canQuery, context?.client, identityKey, limit, scopeKey]);
+  }, [canQuery, context?.client, identityKey, limit, scopeKey, list?.creationRevision]);
 
   const loadMore = useCallback(async (): Promise<void> => {
     if (context === null || !canQuery || list?.nextCursor === undefined) return;

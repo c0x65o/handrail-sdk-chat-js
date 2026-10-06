@@ -1,0 +1,568 @@
+TAP version 13
+# Subtest: conversation-creation storage round-trips channel, direct, and group-direct intents
+ok 1 - conversation-creation storage round-trips channel, direct, and group-direct intents
+  ---
+  duration_ms: 5.950345
+  type: 'test'
+  ...
+# Subtest: creation logical keys canonicalize participants and include every channel-defining field
+ok 2 - creation logical keys canonicalize participants and include every channel-defining field
+  ---
+  duration_ms: 0.925918
+  type: 'test'
+  ...
+# Subtest: creation storage rejects duplicate correlations and non-increasing FIFO order
+ok 3 - creation storage rejects duplicate correlations and non-increasing FIFO order
+  ---
+  duration_ms: 1.117722
+  type: 'test'
+  ...
+# Subtest: creation validation rejects malformed, duplicate-member, trusted, unsafe, and non-JSON inputs
+ok 4 - creation validation rejects malformed, duplicate-member, trusted, unsafe, and non-JSON inputs
+  ---
+  duration_ms: 1.02977
+  type: 'test'
+  ...
+# Subtest: creation wire decoding requires exact versions, shapes, and canonical member order
+ok 5 - creation wire decoding requires exact versions, shapes, and canonical member order
+  ---
+  duration_ms: 2.341641
+  type: 'test'
+  ...
+# Subtest: creation storage enforces member, count, per-intent UTF-8, and total-record bounds
+ok 6 - creation storage enforces member, count, per-intent UTF-8, and total-record bounds
+  ---
+  duration_ms: 158.4972
+  type: 'test'
+  ...
+# Subtest: creation intents are deeply immutable and detached from caller-owned values
+ok 7 - creation intents are deeply immutable and detached from caller-owned values
+  ---
+  duration_ms: 0.727685
+  type: 'test'
+  ...
+# Subtest: creation storage isolates identities and quarantines/removes only the exact creation key
+ok 8 - creation storage isolates identities and quarantines/removes only the exact creation key
+  ---
+  duration_ms: 3.292651
+  type: 'test'
+  ...
+# Subtest: creation actions deduplicate, retain retry identity, and reuse canonical directs
+ok 9 - creation actions deduplicate, retain retry identity, and reuse canonical directs
+  ---
+  duration_ms: 21.398589
+  type: 'test'
+  ...
+# Subtest: archive, restore, and every membership intent reconcile canonical cache state
+ok 10 - archive, restore, and every membership intent reconcile canonical cache state
+  ---
+  duration_ms: 8.693424
+  type: 'test'
+  ...
+# Subtest: lifecycle conflicts, safety rejection, malformed results, and auth failures refresh or roll back safely
+ok 11 - lifecycle conflicts, safety rejection, malformed results, and auth failures refresh or roll back safely
+  ---
+  duration_ms: 6.997671
+  type: 'test'
+  ...
+# Subtest: a canonical creation event wins over a late HTTP failure and close settles pending work
+ok 12 - a canonical creation event wins over a late HTTP failure and close settles pending work
+  ---
+  duration_ms: 3.055872
+  type: 'test'
+  ...
+# Subtest: affected-user private membership events update only current-user membership state
+ok 13 - affected-user private membership events update only current-user membership state
+  ---
+  duration_ms: 0.552596
+  type: 'test'
+  ...
+# Subtest: membership HTTP and durable-event ordering converges on the newest complete list
+ok 14 - membership HTTP and durable-event ordering converges on the newest complete list
+  ---
+  duration_ms: 2.216541
+  type: 'test'
+  ...
+# Subtest: two confirmed creations survive stale discovery, scope changes, errors and acknowledgement
+ok 15 - two confirmed creations survive stale discovery, scope changes, errors and acknowledgement
+  ---
+  duration_ms: 21.429342
+  type: 'test'
+  ...
+# Subtest: a delayed creation result cannot populate a replacement identity or session
+ok 16 - a delayed creation result cannot populate a replacement identity or session
+  ---
+  duration_ms: 5.84668
+  type: 'test'
+  ...
+# Subtest: contended distinct conversation creations both survive with retry-stable metadata
+ok 17 - contended distinct conversation creations both survive with retry-stable metadata
+  ---
+  duration_ms: 43.210009
+  type: 'test'
+  ...
+# Subtest: equivalent reordered group directs coalesce to the first committed correlation
+ok 18 - equivalent reordered group directs coalesce to the first committed correlation
+  ---
+  duration_ms: 12.932104
+  type: 'test'
+  ...
+# Subtest: retried exact settlement preserves a newer correlation and unrelated creation
+ok 19 - retried exact settlement preserves a newer correlation and unrelated creation
+  ---
+  duration_ms: 18.525871
+  type: 'test'
+  ...
+# Subtest: channel, direct, group-direct, intent, and record bounds stay enforced
+ok 20 - channel, direct, group-direct, intent, and record bounds stay enforced
+  ---
+  duration_ms: 0.966283
+  type: 'test'
+  ...
+# Subtest: stale identity-generation persistence cannot publish or remove replacement work
+ok 21 - stale identity-generation persistence cannot publish or remove replacement work
+  ---
+  duration_ms: 10.243563
+  type: 'test'
+  ...
+# Subtest: persisted conversation-creation announcements contain correlation metadata only
+ok 22 - persisted conversation-creation announcements contain correlation metadata only
+  ---
+  duration_ms: 15.675367
+  type: 'test'
+  ...
+# Subtest: creation persists before dispatch and duplicate authored retries reuse correlation
+ok 23 - creation persists before dispatch and duplicate authored retries reuse correlation
+  ---
+  duration_ms: 43.181663
+  type: 'test'
+  ...
+# Subtest: restart replays exact channel, direct, and group-direct requests in persisted order
+ok 24 - restart replays exact channel, direct, and group-direct requests in persisted order
+  ---
+  duration_ms: 23.474394
+  type: 'test'
+  ...
+# Subtest: a matching conversation.created event settles storage and the active caller first
+ok 25 - a matching conversation.created event settles storage and the active caller first
+  ---
+  duration_ms: 15.261241
+  type: 'test'
+  ...
+# Subtest: an equivalent canonical direct settles a retained request without dispatch
+ok 26 - an equivalent canonical direct settles a retained request without dispatch
+  ---
+  duration_ms: 5.130211
+  type: 'test'
+  ...
+# Subtest: ambiguous failures retain work and use bounded injectable backoff
+ok 27 - ambiguous failures retain work and use bounded injectable backoff
+  ---
+  duration_ms: 5.93501
+  type: 'test'
+  ...
+# Subtest: transport, rate-limit, and malformed acknowledgements retain exact work
+    # Subtest: transport
+    ok 1 - transport
+      ---
+      duration_ms: 3.488024
+      type: 'test'
+      ...
+    # Subtest: rate limit
+    ok 2 - rate limit
+      ---
+      duration_ms: 3.257136
+      type: 'test'
+      ...
+    # Subtest: malformed success
+    ok 3 - malformed success
+      ---
+      duration_ms: 3.614618
+      type: 'test'
+      ...
+    1..3
+ok 28 - transport, rate-limit, and malformed acknowledgements retain exact work
+  ---
+  duration_ms: 10.892751
+  type: 'test'
+  ...
+# Subtest: terminal authentication, permission, validation, and conflict results remove work
+    # Subtest: authentication
+    ok 1 - authentication
+      ---
+      duration_ms: 7.861782
+      type: 'test'
+      ...
+    # Subtest: permission
+    ok 2 - permission
+      ---
+      duration_ms: 3.537272
+      type: 'test'
+      ...
+    # Subtest: validation
+    ok 3 - validation
+      ---
+      duration_ms: 4.303586
+      type: 'test'
+      ...
+    # Subtest: conflict
+    ok 4 - conflict
+      ---
+      duration_ms: 2.921041
+      type: 'test'
+      ...
+    1..4
+ok 29 - terminal authentication, permission, validation, and conflict results remove work
+  ---
+  duration_ms: 19.183666
+  type: 'test'
+  ...
+# Subtest: recovery pauses offline and resumes the same intent after reconnect
+ok 30 - recovery pauses offline and resumes the same intent after reconnect
+  ---
+  duration_ms: 8.230503
+  type: 'test'
+  ...
+# Subtest: a stale identity completion cannot settle either identity's later scope
+ok 31 - a stale identity completion cannot settle either identity's later scope
+  ---
+  duration_ms: 5.026189
+  type: 'test'
+  ...
+# Subtest: a follower persists creation before the leader dispatches and reconciles its canonical fanout
+ok 32 - a follower persists creation before the leader dispatches and reconciles its canonical fanout
+  ---
+  duration_ms: 24.809717
+  type: 'test'
+  ...
+# Subtest: creation leadership transfer retains and reuses the exact persisted correlation
+ok 33 - creation leadership transfer retains and reuses the exact persisted correlation
+  ---
+  duration_ms: 16.037198
+  type: 'test'
+  ...
+# Subtest: creation announcements reject malformed envelopes and foreign identity records
+ok 34 - creation announcements reject malformed envelopes and foreign identity records
+  ---
+  duration_ms: 4.154748
+  type: 'test'
+  ...
+# Subtest: a descriptor-valid but identity-mismatched creation result is not reconciled
+ok 35 - a descriptor-valid but identity-mismatched creation result is not reconciled
+  ---
+  duration_ms: 8.721047
+  type: 'test'
+  ...
+# Subtest: conversation creation remains fail-open when cross-tab coordination falls back
+ok 36 - conversation creation remains fail-open when cross-tab coordination falls back
+  ---
+  duration_ms: 6.723228
+  type: 'test'
+  ...
+# Subtest: hydrates organization/entity lists and detail snapshots with canonical encoded URLs
+ok 37 - hydrates organization/entity lists and detail snapshots with canonical encoded URLs
+  ---
+  duration_ms: 21.55154
+  type: 'test'
+  ...
+# Subtest: hydrates backward/forward pages in stable order and keeps thread timelines separate
+ok 38 - hydrates backward/forward pages in stable order and keeps thread timelines separate
+  ---
+  duration_ms: 2.615963
+  type: 'test'
+  ...
+# Subtest: deduplicates identical reads while isolating partial and all-consumer cancellation
+ok 39 - deduplicates identical reads while isolating partial and all-consumer cancellation
+  ---
+  duration_ms: 6.116474
+  type: 'test'
+  ...
+# Subtest: close cancels reads and authentication refresh obtains a new token
+ok 40 - close cancels reads and authentication refresh obtains a new token
+  ---
+  duration_ms: 3.174237
+  type: 'test'
+  ...
+# Subtest: sanitizes malformed, authentication, provider, and transport failures
+ok 41 - sanitizes malformed, authentication, provider, and transport failures
+  ---
+  duration_ms: 5.245492
+  type: 'test'
+  ...
+# Subtest: discovery rejects reordered roots, detached pages, and responses from a prior identity
+ok 42 - discovery rejects reordered roots, detached pages, and responses from a prior identity
+  ---
+  duration_ms: 5.87045
+  type: 'test'
+  ...
+# Subtest: an authoritative detail denial cancels older discovery that could resurrect the row
+ok 43 - an authoritative detail denial cancels older discovery that could resurrect the row
+  ---
+  duration_ms: 1.90888
+  type: 'test'
+  ...
+# Subtest: a failed refresh preserves usable pagination and a repeated cursor does not join an obsolete page
+ok 44 - a failed refresh preserves usable pagination and a repeated cursor does not join an obsolete page
+  ---
+  duration_ms: 2.799341
+  type: 'test'
+  ...
+# Subtest: conversation creation contracts remain browser-safe
+ok 45 - conversation creation contracts remain browser-safe
+  ---
+  duration_ms: 86.411478
+  type: 'test'
+  ...
+# Subtest: parses valid channel, direct, and group-direct creation inputs
+ok 46 - parses valid channel, direct, and group-direct creation inputs
+  ---
+  duration_ms: 2.44851
+  type: 'test'
+  ...
+# Subtest: requires nonblank idempotency and client request IDs for every kind
+ok 47 - requires nonblank idempotency and client request IDs for every kind
+  ---
+  duration_ms: 1.046487
+  type: 'test'
+  ...
+# Subtest: rejects trusted identity and authorization fields recursively
+ok 48 - rejects trusted identity and authorization fields recursively
+  ---
+  duration_ms: 0.420247
+  type: 'test'
+  ...
+# Subtest: enforces channel names, visibility, complete entities, and kind isolation
+ok 49 - enforces channel names, visibility, complete entities, and kind isolation
+  ---
+  duration_ms: 0.282569
+  type: 'test'
+  ...
+# Subtest: enforces direct/group privacy, unnamed shapes, cardinality, and unique members
+ok 50 - enforces direct/group privacy, unnamed shapes, cardinality, and unique members
+  ---
+  duration_ms: 0.335539
+  type: 'test'
+  ...
+# Subtest: derives order-independent identity from members plus separately trusted actor
+ok 51 - derives order-independent identity from members plus separately trusted actor
+  ---
+  duration_ms: 0.394599
+  type: 'test'
+  ...
+# Subtest: JSON-round-trips created, existing-equivalent, and replayed canonical results
+ok 52 - JSON-round-trips created, existing-equivalent, and replayed canonical results
+  ---
+  duration_ms: 2.094865
+  type: 'test'
+  ...
+# Subtest: rejects malformed and mismatched canonical result shapes
+ok 53 - rejects malformed and mismatched canonical result shapes
+  ---
+  duration_ms: 0.717332
+  type: 'test'
+  ...
+# Subtest: normalizes channel, direct, and thread snapshots while isolating private state
+ok 54 - normalizes channel, direct, and thread snapshots while isolating private state
+  ---
+  duration_ms: 4.733851
+  type: 'test'
+  ...
+# Subtest: keeps immutable list-summary participants distinct from authoritative detail membership
+ok 55 - keeps immutable list-summary participants distinct from authoritative detail membership
+  ---
+  duration_ms: 3.440359
+  type: 'test'
+  ...
+# Subtest: projects paginated list mention counts, hydrates them canonically, and clears them at the latest read cursor
+ok 56 - projects paginated list mention counts, hydrates them canonically, and clears them at the latest read cursor
+  ---
+  duration_ms: 1.903513
+  type: 'test'
+  ...
+# Subtest: hydrates list preferences only into the current actor's private cache
+ok 57 - hydrates list preferences only into the current actor's private cache
+  ---
+  duration_ms: 0.57026
+  type: 'test'
+  ...
+# Subtest: links list pages by opaque cursor identity even when pages hydrate out of order
+ok 58 - links list pages by opaque cursor identity even when pages hydrate out of order
+  ---
+  duration_ms: 0.3633
+  type: 'test'
+  ...
+# Subtest: merges timeline pages in stable sequence order, deduplicates, and keeps threads separate
+ok 59 - merges timeline pages in stable sequence order, deduplicates, and keeps threads separate
+  ---
+  duration_ms: 1.024278
+  type: 'test'
+  ...
+# Subtest: preserves structural sharing and suppresses unchanged selector notifications
+ok 60 - preserves structural sharing and suppresses unchanged selector notifications
+  ---
+  duration_ms: 1.061589
+  type: 'test'
+  ...
+# Subtest: reset and every identity boundary clear public, private, ephemeral, and huddle data
+ok 61 - reset and every identity boundary clear public, private, ephemeral, and huddle data
+  ---
+  duration_ms: 1.581468
+  type: 'test'
+  ...
+# Subtest: rejects cross-identity private state without changing the cache
+ok 62 - rejects cross-identity private state without changing the cache
+  ---
+  duration_ms: 1.071584
+  type: 'test'
+  ...
+# Subtest: stale list preferences preserve newer canonical and pending optimistic state
+ok 63 - stale list preferences preserve newer canonical and pending optimistic state
+  ---
+  duration_ms: 1.638613
+  type: 'test'
+  ...
+# Subtest: older conversation snapshots cannot overwrite newer conversation or private state
+ok 64 - older conversation snapshots cannot overwrite newer conversation or private state
+  ---
+  duration_ms: 0.451738
+  type: 'test'
+  ...
+# Subtest: older timeline snapshots preserve message revisions and the newer realtime baseline
+ok 65 - older timeline snapshots preserve message revisions and the newer realtime baseline
+  ---
+  duration_ms: 0.252303
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: cache hooks update declaratively and selector equality isolates unrelated rerenders
+ok 66 - cache hooks update declaratively and selector equality isolates unrelated rerenders
+  ---
+  duration_ms: 24.549258
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# (node:538) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: directory-user batches coalesce duplicates, request only misses, and retain caller order
+ok 67 - directory-user batches coalesce duplicates, request only misses, and retain caller order
+  ---
+  duration_ms: 4.810066
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: directory rate limits retry after cooldown, recover identities, and cancel on unmount
+ok 68 - directory rate limits retry after cooldown, recover identities, and cancel on unmount
+  ---
+  duration_ms: 6.831048
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: directory-user batches ignore aborted completions from a previous identity
+ok 69 - directory-user batches ignore aborted completions from a previous identity
+  ---
+  duration_ms: 2.913627
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: conversation participants resolve 50 list summaries without opening conversation details
+ok 70 - conversation participants resolve 50 list summaries without opening conversation details
+  ---
+  duration_ms: 47.578959
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: conversation discovery refreshes restored lists and preserves pagination without refetch loops
+ok 71 - conversation discovery refreshes restored lists and preserves pagination without refetch loops
+  ---
+  duration_ms: 8.523475
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: message hooks pass stable conversation-local cursors and merge adjacent pages
+ok 72 - message hooks pass stable conversation-local cursors and merge adjacent pages
+  ---
+  duration_ms: 2.049268
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: saved-message hooks preserve opaque pagination order and unavailable entries
+ok 73 - saved-message hooks preserve opaque pagination order and unavailable entries
+  ---
+  duration_ms: 4.394797
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: message-reminder hooks preserve opaque pagination order and identity scope
+ok 74 - message-reminder hooks preserve opaque pagination order and identity scope
+  ---
+  duration_ms: 3.573544
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: directory search observes the client debounce runtime and exposes only redacted summaries
+ok 75 - directory search observes the client debounce runtime and exposes only redacted summaries
+  ---
+  duration_ms: 5.23613
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: thread, draft, attachment, and huddle hooks keep runtime boundaries declarative
+ok 76 - thread, draft, attachment, and huddle hooks keep runtime boundaries declarative
+  ---
+  duration_ms: 2.922477
+  type: 'test'
+  ...
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: disabled huddle queries keep a stable fallback until a valid conversation is enabled
+ok 77 - disabled huddle queries keep a stable fallback until a valid conversation is enabled
+  ---
+  duration_ms: 1.994096
+  type: 'test'
+  ...
+# Subtest: provider failures are safe and SSR uses a stable prehydrated snapshot
+ok 78 - provider failures are safe and SSR uses a stable prehydrated snapshot
+  ---
+  duration_ms: 6.204798
+  type: 'test'
+  ...
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+# Subtest: read-state hooks retain freshness only while known views are mounted
+ok 79 - read-state hooks retain freshness only while known views are mounted
+  ---
+  duration_ms: 2.401221
+  type: 'test'
+  ...
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Detected multiple renderers concurrently rendering the same context provider. This is currently unsupported.
+# Subtest: mounted discovery revalidates each creation without losing pending rows or leaking scopes
+ok 80 - mounted discovery revalidates each creation without losing pending rows or leaking scopes
+  ---
+  duration_ms: 36.938616
+  type: 'test'
+  ...
+1..80
+# tests 87
+# suites 0
+# pass 87
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2049.460686

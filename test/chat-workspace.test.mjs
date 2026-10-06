@@ -15,6 +15,7 @@ const {
   CHAT_CLIENT_PACKAGE_VERSION,
   createChatClient,
   createNormalizedChatCache,
+  deriveCanonicalParticipantIdentity,
 } = await import("@handrail/chat/client");
 const {
   CHAT_PROTOCOL_VERSION,
@@ -3075,6 +3076,23 @@ test("conversation-filter shortcut shares one document listener, scopes BODY to 
   }
 });
 
+function reconcileFixtureCreation(cache, input, snapshot, type = "channel", reconciliationStatus = "created") {
+  const request = { ...input, operation: "create_conversation", type,
+    visibility: type === "channel" ? input.visibility : "private",
+    idempotencyKey: "fixture-creation", clientRequestId: "fixture-creation" };
+  const value = {
+    operation: "create_conversation", type, reconciliationStatus,
+    clientRequestId: request.clientRequestId, conversation: {
+      ...snapshot, conversation: { ...snapshot.conversation,
+        currentPreference: { isStarred: false, ...snapshot.conversation.currentPreference },
+      },
+    },
+    ...(type === "channel" ? {} : { participantIdentity: deriveCanonicalParticipantIdentity(actorId, input.intendedMemberUserIds) }),
+  };
+  cache.reconcileConversationCreation("fixture-creation", request, value);
+  return { status: "success", value };
+}
+
 test("authorized channel creation normalizes public and private names and selects authoritative results", async () => {
   const cache = createCache();
   const calls = [];
@@ -3089,17 +3107,7 @@ test("authorized channel creation normalizes public and private names and select
         visibility: input.visibility,
       });
       const snapshot = detailSnapshot(item);
-      cache.hydrateConversationDetail(snapshot);
-      return {
-        status: "success",
-        value: {
-          operation: "create_conversation",
-          type: "channel",
-          reconciliationStatus: "created",
-          clientRequestId: `request-${calls.length}`,
-          conversation: snapshot,
-        },
-      };
+      return reconcileFixtureCreation(cache, input, snapshot);
     },
   };
   const container = await renderWorkspace(workspace(client, {
@@ -3138,6 +3146,7 @@ test("authorized channel creation normalizes public and private names and select
     { name: "Product é", visibility: "public" },
     { name: "Leadership", visibility: "private" },
   ]);
+  for (const id of ids) assert.equal(container.querySelectorAll(`[data-conversation-id="${id}"].handrail-chat__conversation-button`).length, 1);
   assert.deepEqual(selected.slice(-2), ids);
 });
 
@@ -3229,19 +3238,8 @@ test("created conversation is immediately listed and selection survives prepende
   });
   const client = {
     ...createClient(cache),
-    async createChannel() {
-      const snapshot = detailSnapshot(createdConversation);
-      cache.hydrateConversationDetail(snapshot);
-      return {
-        status: "success",
-        value: {
-          operation: "create_conversation",
-          type: "channel",
-          reconciliationStatus: "created",
-          clientRequestId: "created-before-list-hydration",
-          conversation: snapshot,
-        },
-      };
+    async createChannel(input) {
+      return reconcileFixtureCreation(cache, input, detailSnapshot(createdConversation));
     },
   };
   const ChannelHeader = ({ conversation: selected, hostProps }) => createElement(
@@ -3795,17 +3793,7 @@ test("direct creation debounces directory search, selects one user, and reconcil
       creationCalls.push(input);
       const index = creationCalls.length - 1;
       const snapshot = detailSnapshot(directConversation(directIds[index]));
-      cache.hydrateConversationDetail(snapshot);
-      return {
-        status: "success",
-        value: {
-          operation: "create_conversation",
-          type: "direct",
-          reconciliationStatus: index === 0 ? "created" : "existing_equivalent",
-          clientRequestId: `direct-request-${index + 1}`,
-          conversation: snapshot,
-        },
-      };
+      return reconcileFixtureCreation(cache, input, snapshot, "direct", index === 0 ? "created" : "existing_equivalent");
     },
   };
   const container = await renderWorkspace(workspace(client, {

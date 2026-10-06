@@ -1,0 +1,68 @@
+TAP version 13
+# Subtest: inline Reply routing preserves attachments, mentions and text when replacing a source
+not ok 1 - inline Reply routing preserves attachments, mentions and text when replacing a source
+  ---
+  duration_ms: 131.858703
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/workspace-repair-negative/test/chat-workspace-default.test.mjs:4211:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + undefined
+    - {
+    -   content: {
+    -     attachments: [
+    -       {
+    -         attachmentId: 'schedule'
+    -       }
+    -     ],
+    -     format: 'plain',
+    -     mentions: [
+    -       {
+    -         type: 'user',
+    -         userId: 'user-default-workspace-other'
+    -       }
+    -     ],
+    -     text: 'Friday @Avery Example'
+    -   },
+    -   conversationId: 'conversation-public',
+    -   replyTo: {
+    -     messageId: 'message-public-root',
+    -     notifyAuthor: true
+    -   }
+    - }
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    conversationId: 'conversation-public'
+    content:
+      format: 'plain'
+      text: 'Friday @Avery Example'
+      attachments:
+        0:
+          attachmentId: 'schedule'
+      mentions:
+        0:
+          type: 'user'
+          userId: 'user-default-workspace-other'
+    replyTo:
+      messageId: 'message-public-root'
+      notifyAuthor: true
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/workspace-repair-negative/test/chat-workspace-default.test.mjs:4221:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 564.043571

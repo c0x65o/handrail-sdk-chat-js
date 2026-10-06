@@ -1,0 +1,10 @@
+
+> @handrail/chat@1.0.49 build
+> node scripts/generate-package-version.mjs && tsc --project tsconfig.json && node scripts/copy-ui-styles.mjs && node scripts/candidate-provenance.mjs
+
+Candidate source=15addc92ebf464295afdd2a03c0d4a035ead5adf5397a2b8d57b8b32e97d9584 package=458ff61487844f2de1bf1d6684da558105acb1bac402282c32563cadc8d85b71
+npm notice
+npm notice New major version of npm available! 10.9.8 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

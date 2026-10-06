@@ -1,0 +1,362 @@
+TAP version 13
+# Subtest: complete proof shares the 10/60 budget across StrictMode listings, reopening, writes and denials
+ok 1 - complete proof shares the 10/60 budget across StrictMode listings, reopening, writes and denials
+  ---
+  duration_ms: 29.80937
+  type: 'test'
+  ...
+# Subtest: explicit pre-dispatch 429 respects Retry-After without replaying uncertain writes
+ok 2 - explicit pre-dispatch 429 respects Retry-After without replaying uncertain writes
+  ---
+  duration_ms: 1.119549
+  type: 'test'
+  ...
+# Subtest: repeated 429 remains a failure and malformed Retry-After waits a full window
+ok 3 - repeated 429 remains a failure and malformed Retry-After waits a full window
+  ---
+  duration_ms: 0.270843
+  type: 'test'
+  ...
+# Subtest: the client and React search graphs exclude Node and server dependencies
+ok 4 - the client and React search graphs exclude Node and server dependencies
+  ---
+  duration_ms: 111.6028
+  type: 'test'
+  ...
+# Subtest: README relative links point to repository files
+ok 5 - README relative links point to repository files
+  ---
+  duration_ms: 9.123737
+  type: 'test'
+  ...
+# Subtest: README dependency and import snippets track the package manifest
+ok 6 - README dependency and import snippets track the package manifest
+  ---
+  duration_ms: 8.292582
+  type: 'test'
+  ...
+# Subtest: README platform and realtime claims remain source-backed
+ok 7 - README platform and realtime claims remain source-backed
+  ---
+  duration_ms: 24.950719
+  type: 'test'
+  ...
+# Subtest: built public subpaths resolve and import independently
+ok 8 - built public subpaths resolve and import independently
+  ---
+  duration_ms: 175.795155
+  type: 'test'
+  ...
+# Subtest: package conditions expose only browser-safe entries to browser resolvers
+ok 9 - package conditions expose only browser-safe entries to browser resolvers
+  ---
+  duration_ms: 5.760728
+  type: 'test'
+  ...
+# Subtest: a browser resolver rejects the Node-only server subpath
+ok 10 - a browser resolver rejects the Node-only server subpath
+  ---
+  duration_ms: 10.161485
+  type: 'test'
+  ...
+# Subtest: each subpath emits runtime, declaration, and map artifacts
+ok 11 - each subpath emits runtime, declaration, and map artifacts
+  ---
+  duration_ms: 1.155824
+  type: 'test'
+  ...
+# Subtest: TypeScript resolves declarations for every public subpath
+ok 12 - TypeScript resolves declarations for every public subpath
+  ---
+  duration_ms: 179.361301
+  type: 'test'
+  ...
+# Subtest: the browser client bundle excludes testing, server, and Node graphs
+ok 13 - the browser client bundle excludes testing, server, and Node graphs
+  ---
+  duration_ms: 168.16384
+  type: 'test'
+  ...
+# Subtest: the root JavaScript bundle excludes the optional stylesheet
+ok 14 - the root JavaScript bundle excludes the optional stylesheet
+  ---
+  duration_ms: 18.344335
+  type: 'test'
+  ...
+# Subtest: the production server bundle excludes the testing graph
+ok 15 - the production server bundle excludes the testing graph
+  ---
+  duration_ms: 115.628375
+  type: 'test'
+  ...
+# Subtest: an explicit stylesheet import emits CSS and remains in the bundle graph
+ok 16 - an explicit stylesheet import emits CSS and remains in the bundle graph
+  ---
+  duration_ms: 10.247255
+  type: 'test'
+  ...
+# Subtest: the browser react bundle excludes React, server, testing, and Node graphs
+ok 17 - the browser react bundle excludes React, server, testing, and Node graphs
+  ---
+  duration_ms: 116.941854
+  type: 'test'
+  ...
+# Subtest: the browser ui bundle excludes React, server, testing, and Node graphs
+ok 18 - the browser ui bundle excludes React, server, testing, and Node graphs
+  ---
+  duration_ms: 107.015897
+  type: 'test'
+  ...
+# Subtest: candidate receipts match source/package bytes and Node loads checkout server/testing exports
+ok 19 - candidate receipts match source/package bytes and Node loads checkout server/testing exports
+  ---
+  duration_ms: 275.280151
+  type: 'test'
+  ...
+# Subtest: contact HTTP handler bounds inputs, keeps grants server-side and handles uncertain delivery without leaking credentials
+ok 20 - contact HTTP handler bounds inputs, keeps grants server-side and handles uncertain delivery without leaking credentials
+  ---
+  duration_ms: 75.087764
+  type: 'test'
+  ...
+# Subtest: inbound text maps to the existing canonical plain-message contract
+ok 21 - inbound text maps to the existing canonical plain-message contract
+  ---
+  duration_ms: 2.138262
+  type: 'test'
+  ...
+# Subtest: caller identity, capabilities, mentions, attachments and unknown fields are rejected
+ok 22 - caller identity, capabilities, mentions, attachments and unknown fields are rejected
+  ---
+  duration_ms: 0.764444
+  type: 'test'
+  ...
+# Subtest: malformed credentials and non-administrators never reach storage
+ok 23 - malformed credentials and non-administrators never reach storage
+  ---
+  duration_ms: 0.875439
+  type: 'test'
+  ...
+# Subtest: HTTP and WebSocket host authentication cannot promote a native credential
+ok 24 - HTTP and WebSocket host authentication cannot promote a native credential
+  ---
+  duration_ms: 0.358312
+  type: 'test'
+  ...
+# Subtest: shared context rejects native namespace before host auth or cached context across bearer whitespace
+ok 25 - shared context rejects native namespace before host auth or cached context across bearer whitespace
+  ---
+  duration_ms: 0.952686
+  type: 'test'
+  ...
+# Subtest: native version mirror declares the canonical package and exact generated constant template
+ok 26 - native version mirror declares the canonical package and exact generated constant template
+  ---
+  duration_ms: 5.941634
+  type: 'test'
+  ...
+# Subtest: the declared template remains compatible with exact generator bytes across versions
+ok 27 - the declared template remains compatible with exact generator bytes across versions
+  ---
+  duration_ms: 2.150005
+  type: 'test'
+  ...
+# Subtest: compiled client package version agrees with package metadata
+ok 28 - compiled client package version agrees with package metadata
+  ---
+  duration_ms: 1.272417
+  type: 'test'
+  ...
+# Subtest: build refreshes package version while main CI checks committed drift
+ok 29 - build refreshes package version while main CI checks committed drift
+  ---
+  duration_ms: 1.353847
+  type: 'test'
+  ...
+# Subtest: node-tests version gate protects checked-out bytes before install lifecycles
+    # Subtest: stale source fails without installation or regeneration
+    ok 1 - stale source fails without installation or regeneration
+      ---
+      duration_ms: 45.462577
+      type: 'test'
+      ...
+    # node scripts/generate-package-version.mjs --check: exit 1\\nGenerated package-version source is out of date:\\n- src/client/generated/package-version.ts\\nRun npm run generate:package-version. Align package-lock.json version metadata with package.json if listed.
+    # Subtest: aligned source passes and allows normal prepare and explicit build
+    ok 2 - aligned source passes and allows normal prepare and explicit build
+      ---
+      duration_ms: 727.110086
+      type: 'test'
+      ...
+    # node scripts/generate-package-version.mjs --check: exit 0\\nGenerated package-version source is up to date.
+    # npm ci --engine-strict: exit 0\\n> handrail-ci-version-fixture@9.8.8-test preinstall\\n> node scripts/record-lifecycle.mjs preinstall\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test prepare\\n> npm run build\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build\\n\\n\\nup to date in 445ms
+    # npm run build: exit 0\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build
+    # Subtest: former install-first ordering conceals stale checked-out source
+    ok 3 - former install-first ordering conceals stale checked-out source
+      ---
+      duration_ms: 887.838862
+      type: 'test'
+      ...
+    # npm ci: exit 0\\n> handrail-ci-version-fixture@9.8.8-test preinstall\\n> node scripts/record-lifecycle.mjs preinstall\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test prepare\\n> npm run build\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build\\n\\n\\nup to date in 451ms
+    # npm run check:package-version: exit 0\\n> handrail-ci-version-fixture@9.8.8-test check:package-version\\n> node scripts/generate-package-version.mjs --check\\n\\nGenerated package-version source is up to date.
+    # npm run build: exit 0\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build
+    1..3
+ok 30 - node-tests version gate protects checked-out bytes before install lifecycles
+  ---
+  duration_ms: 1662.515632
+  type: 'test'
+  ...
+# Subtest: postgres-integration version gate protects checked-out bytes before install lifecycles
+    # Subtest: stale source fails without installation or regeneration
+    ok 1 - stale source fails without installation or regeneration
+      ---
+      duration_ms: 51.620793
+      type: 'test'
+      ...
+    # node scripts/generate-package-version.mjs --check: exit 1\\nGenerated package-version source is out of date:\\n- src/client/generated/package-version.ts\\nRun npm run generate:package-version. Align package-lock.json version metadata with package.json if listed.
+    # Subtest: aligned source passes and allows normal prepare and explicit build
+    ok 2 - aligned source passes and allows normal prepare and explicit build
+      ---
+      duration_ms: 608.357971
+      type: 'test'
+      ...
+    # node scripts/generate-package-version.mjs --check: exit 0\\nGenerated package-version source is up to date.
+    # npm ci: exit 0\\n> handrail-ci-version-fixture@9.8.8-test preinstall\\n> node scripts/record-lifecycle.mjs preinstall\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test prepare\\n> npm run build\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build\\n\\n\\nup to date in 500ms
+    # Subtest: former install-first ordering conceals stale checked-out source
+    ok 3 - former install-first ordering conceals stale checked-out source
+      ---
+      duration_ms: 879.392839
+      type: 'test'
+      ...
+    # npm ci: exit 0\\n> handrail-ci-version-fixture@9.8.8-test preinstall\\n> node scripts/record-lifecycle.mjs preinstall\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test prepare\\n> npm run build\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build\\n\\n\\nup to date in 447ms
+    # npm run check:package-version: exit 0\\n> handrail-ci-version-fixture@9.8.8-test check:package-version\\n> node scripts/generate-package-version.mjs --check\\n\\nGenerated package-version source is up to date.
+    # npm run build: exit 0\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build
+    1..3
+ok 31 - postgres-integration version gate protects checked-out bytes before install lifecycles
+  ---
+  duration_ms: 1542.438741
+  type: 'test'
+  ...
+# Subtest: npm version lifecycle regenerates the browser package version
+ok 32 - npm version lifecycle regenerates the browser package version
+  ---
+  duration_ms: 281.750038
+  type: 'test'
+  ...
+# Subtest: package.json deterministically drives the generated browser package version
+ok 33 - package.json deterministically drives the generated browser package version
+  ---
+  duration_ms: 3.171151
+  type: 'test'
+  ...
+# Subtest: check mode detects a generated browser package version that trails the manifest
+ok 34 - check mode detects a generated browser package version that trails the manifest
+  ---
+  duration_ms: 86.567364
+  type: 'test'
+  ...
+# Subtest: version check rejects missing, malformed, or independently stale lock metadata without rewriting it
+ok 35 - version check rejects missing, malformed, or independently stale lock metadata without rewriting it
+  ---
+  duration_ms: 235.192848
+  type: 'test'
+  ...
+# Subtest: every SDK CI installation is preceded by the dependency-free committed version gate
+ok 36 - every SDK CI installation is preceded by the dependency-free committed version gate
+  ---
+  duration_ms: 2.20232
+  type: 'test'
+  ...
+# Subtest: trusted adapters resolve once and attach one deeply immutable context
+ok 37 - trusted adapters resolve once and attach one deeply immutable context
+  ---
+  duration_ms: 12.240417
+  type: 'test'
+  ...
+# Subtest: null, missing, empty, and malformed actors fail closed
+ok 38 - null, missing, empty, and malformed actors fail closed
+  ---
+  duration_ms: 21.857431
+  type: 'test'
+  ...
+# Subtest: adapter failures and malformed capabilities become sanitized typed errors
+ok 39 - adapter failures and malformed capabilities become sanitized typed errors
+  ---
+  duration_ms: 9.0467
+  type: 'test'
+  ...
+# Subtest: standalone router responses expose only stable sanitized failures
+ok 40 - standalone router responses expose only stable sanitized failures
+  ---
+  duration_ms: 4.152837
+  type: 'test'
+  ...
+# Subtest: interleaved requests retain distinct trusted contexts
+ok 41 - interleaved requests retain distinct trusted contexts
+  ---
+  duration_ms: 2.315658
+  type: 'test'
+  ...
+# Subtest: POST /conversations/:conversationId/messages mounts the canonical send command
+    # Subtest: accepts plain and rich markdown content with canonical actor identity
+    ok 1 - accepts plain and rich markdown content with canonical actor identity
+      ---
+      duration_ms: 37.852142
+      type: 'test'
+      ...
+    # Subtest: replays an exact retry and rejects conflicting key reuse
+    ok 2 - replays an exact retry and rejects conflicting key reuse
+      ---
+      duration_ms: 13.790006
+      type: 'test'
+      ...
+    # Subtest: rejects malformed transport and trusted identity spoofing before command dispatch
+    ok 3 - rejects malformed transport and trusted identity spoofing before command dispatch
+      ---
+      duration_ms: 51.424175
+      type: 'test'
+      ...
+    # Subtest: maps authentication and safe authorization failures
+    ok 4 - maps authentication and safe authorization failures
+      ---
+      duration_ms: 15.661707
+      type: 'test'
+      ...
+    # Subtest: maps invalid mentions and unfinished attachments
+    ok 5 - maps invalid mentions and unfinished attachments
+      ---
+      duration_ms: 10.906275
+      type: 'test'
+      ...
+    # Subtest: sanitizes unexpected failures
+    ok 6 - sanitizes unexpected failures
+      ---
+      duration_ms: 3.574702
+      type: 'test'
+      ...
+    1..6
+ok 42 - POST /conversations/:conversationId/messages mounts the canonical send command
+  ---
+  duration_ms: 156.54327
+  type: 'test'
+  ...
+# Subtest: reply references cross HTTP parsing and malformed references never dispatch
+ok 43 - reply references cross HTTP parsing and malformed references never dispatch
+  ---
+  duration_ms: 51.887344
+  type: 'test'
+  ...
+# Subtest: the public UI graph stays within browser-safe public boundaries
+ok 44 - the public UI graph stays within browser-safe public boundaries
+  ---
+  duration_ms: 118.430977
+  type: 'test'
+  ...
+1..44
+# tests 56
+# suites 0
+# pass 56
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6855.883794

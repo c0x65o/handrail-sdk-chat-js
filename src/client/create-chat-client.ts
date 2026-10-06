@@ -9822,6 +9822,9 @@ export function createChatClient<Feature extends string = string>(
     conversationArchiveResultWaiters.clear();
   });
 
+  let conversationLifecycleGeneration = 0;
+  cache.subscribePrivateStateBoundary(() => { conversationLifecycleGeneration += 1; });
+
   const executeConversationLifecycle = <Input, Result>(options: {
     readonly logicalKey: string;
     readonly family: "creation" | "archive" | "membership";
@@ -9852,10 +9855,18 @@ export function createChatClient<Feature extends string = string>(
     } catch {
       return Promise.resolve(SEND_VALIDATION_FAILURE);
     }
+    const operationIdentity = cache.getState().identity;
+    const operationGeneration = conversationLifecycleGeneration;
     const promise = client.dispatch(options.descriptor, options.input, {
       idempotencyKey: options.idempotencyKey,
       coordinationKey: lifecycleCoordinationKey(options.logicalKey),
     }).then((result) => {
+      // A completed command from an old session cannot publish into a new cache scope.
+      const currentIdentity = cache.getState().identity;
+      if (operationGeneration !== conversationLifecycleGeneration ||
+          currentIdentity?.tenantId !== operationIdentity?.tenantId ||
+          currentIdentity?.userId !== operationIdentity?.userId ||
+          currentIdentity?.sessionId !== operationIdentity?.sessionId) return result;
       let refresh =
         result.status === "malformed_response" &&
         options.conversationId !== undefined;

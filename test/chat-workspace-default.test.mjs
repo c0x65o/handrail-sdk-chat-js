@@ -4210,6 +4210,9 @@ test("inline Reply routing is independent of preference persistence support and 
 
 test("inline Reply routing preserves attachments, mentions and text when replacing a source", async () => {
   const fixture = createFixture(); await withReplyRouting(fixture);
+  // This scenario sends a finalized attachment; advertise the required feature.
+  fixture.client.state = Object.freeze({ ...fixture.client.state,
+    enabledFeatures: { ...fixture.client.state.enabledFeatures, attachments: true } });
   const content = { format: "plain", text: "Friday @Avery Example", attachments: [{ attachmentId: "schedule" }],
     mentions: [{ type: "user", userId: otherUserId }], replyTo: { messageId: "old-source", notifyAuthor: false } };
   fixture.client.replaceConversationDraft({ conversationId: publicId, content });

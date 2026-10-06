@@ -1,0 +1,307 @@
+
+> @handrail/chat@1.0.49 test:ui-composer
+> npm run build && node --test test/message-composer.test.mjs
+
+
+> @handrail/chat@1.0.49 build
+> node scripts/generate-package-version.mjs && tsc --project tsconfig.json && node scripts/copy-ui-styles.mjs && node scripts/candidate-provenance.mjs
+
+Candidate source=465994c8526cdf621b7c0d83f839e20efe2f2360128ab3ab1941c6f0f5b2434d package=f1f6270fa661ab7af6a9d69161036fb549a42cdceb76fbc185d38037d7585353
+TAP version 13
+# Subtest: renders one compact editor surface with accessible tools and feedback
+ok 1 - renders one compact editor surface with accessible tools and feedback
+  ---
+  duration_ms: 69.212741
+  type: 'test'
+  ...
+# Subtest: opens the emoji picker by pointer and keyboard and inserts at selection or caret
+ok 2 - opens the emoji picker by pointer and keyboard and inserts at selection or caret
+  ---
+  duration_ms: 87.260836
+  type: 'test'
+  ...
+# Subtest: dismisses the composer emoji picker without leaking across conversations
+ok 3 - dismisses the composer emoji picker without leaking across conversations
+  ---
+  duration_ms: 106.481903
+  type: 'test'
+  ...
+# Subtest: keeps the emoji picker inert for disabled and read-only composers
+ok 4 - keeps the emoji picker inert for disabled and read-only composers
+  ---
+  duration_ms: 25.534228
+  type: 'test'
+  ...
+# Subtest: projects channel, direct, and group participants without exposing membership identities
+ok 5 - projects channel, direct, and group participants without exposing membership identities
+  ---
+  duration_ms: 16.457832
+  type: 'test'
+  ...
+# Subtest: filters safe participants and inserts a pointer-selected mention over the visual selection
+ok 6 - filters safe participants and inserts a pointer-selected mention over the visual selection
+  ---
+  duration_ms: 31.093464
+  type: 'test'
+  ...
+# Subtest: supports keyboard mention navigation, filtering, selection, and Escape focus restoration
+ok 7 - supports keyboard mention navigation, filtering, selection, and Escape focus restoration
+  ---
+  duration_ms: 49.992119
+  type: 'test'
+  ...
+# Subtest: opens participant typeahead from typed @ and sends the selected user mention
+ok 8 - opens participant typeahead from typed @ and sends the selected user mention
+  ---
+  duration_ms: 43.843323
+  type: 'test'
+  ...
+# Subtest: maps a visual mention selection through canonical Markdown delimiters
+ok 9 - maps a visual mention selection through canonical Markdown delimiters
+  ---
+  duration_ms: 27.24876
+  type: 'test'
+  ...
+# Subtest: dismisses inline mentions without changing text and ignores invalid @ boundaries
+ok 10 - dismisses inline mentions without changing text and ignores invalid @ boundaries
+  ---
+  duration_ms: 44.36987
+  type: 'test'
+  ...
+# Subtest: does not trigger or select inline mentions during IME composition
+ok 11 - does not trigger or select inline mentions during IME composition
+  ---
+  duration_ms: 21.363695
+  type: 'test'
+  ...
+# Subtest: keeps unavailable inline mention options from creating mention metadata
+ok 12 - keeps unavailable inline mention options from creating mention metadata
+  ---
+  duration_ms: 38.043539
+  type: 'test'
+  ...
+# Subtest: restores and round-trips mentions, sends exact references, retries matching failures, and clears on success
+ok 13 - restores and round-trips mentions, sends exact references, retries matching failures, and clears on success
+  ---
+  duration_ms: 69.878598
+  type: 'test'
+  ...
+# Subtest: resets mention interaction on conversation changes and disables it for guarded composers
+ok 14 - resets mention interaction on conversation changes and disables it for guarded composers
+  ---
+  duration_ms: 42.275484
+  type: 'test'
+  ...
+# Subtest: disables Send for empty or whitespace-only content and enables sendable text
+ok 15 - disables Send for empty or whitespace-only content and enables sendable text
+  ---
+  duration_ms: 14.958564
+  type: 'test'
+  ...
+# Subtest: autosizes one-line and multiline text, caps overflow, and resets after send
+ok 16 - autosizes one-line and multiline text, caps overflow, and resets after send
+  ---
+  duration_ms: 34.662266
+  type: 'test'
+  ...
+# Subtest: autosizes restored drafts and resynchronizes observed container changes
+ok 17 - autosizes restored drafts and resynchronizes observed container changes
+  ---
+  duration_ms: 11.484607
+  type: 'test'
+  ...
+# Subtest: restores drafts, updates them through debounced public actions, and retries safe draft errors
+ok 18 - restores drafts, updates them through debounced public actions, and retries safe draft errors
+  ---
+  duration_ms: 24.243564
+  type: 'test'
+  ...
+# Subtest: keeps repeated routine draft synchronization silent while preserving public draft status
+ok 19 - keeps repeated routine draft synchronization silent while preserving public draft status
+  ---
+  duration_ms: 23.241144
+  type: 'test'
+  ...
+# Subtest: visually formats selections, stores canonical Markdown, and restores focus
+ok 20 - visually formats selections, stores canonical Markdown, and restores focus
+  ---
+  duration_ms: 114.165194
+  type: 'test'
+  ...
+# Subtest: inserts visual placeholders at a collapsed caret
+ok 21 - inserts visual placeholders at a collapsed caret
+  ---
+  duration_ms: 66.068842
+  type: 'test'
+  ...
+# Subtest: keeps keyboard input ordered and plain after deactivating Italic at the caret
+ok 22 - keeps keyboard input ordered and plain after deactivating Italic at the caret
+  ---
+  duration_ms: 83.177903
+  type: 'test'
+  ...
+# Subtest: rehydrates canonical Markdown visually and rejects unsafe link actions
+ok 23 - rehydrates canonical Markdown visually and rejects unsafe link actions
+  ---
+  duration_ms: 15.518678
+  type: 'test'
+  ...
+# Subtest: falls back to the plain textarea without an enabled formatting toolbar
+ok 24 - falls back to the plain textarea without an enabled formatting toolbar
+  ---
+  duration_ms: 9.103858
+  type: 'test'
+  ...
+# Subtest: sends the transformed composer text as a Markdown payload
+ok 25 - sends the transformed composer text as a Markdown payload
+  ---
+  duration_ms: 34.570222
+  type: 'test'
+  ...
+# Subtest: bounds typing and implements Enter, Shift+Enter, IME, blur, and duplicate-send semantics
+ok 26 - bounds typing and implements Enter, Shift+Enter, IME, blur, and duplicate-send semantics
+  ---
+  duration_ms: 28.276127
+  type: 'test'
+  ...
+# Subtest: ArrowUp requests the latest edit only for a truly empty, unmodified default composer
+ok 27 - ArrowUp requests the latest edit only for a truly empty, unmodified default composer
+  ---
+  duration_ms: 116.036828
+  type: 'test'
+  ...
+# Subtest: renders safe upload progress, cancellation, finalization, and finalized-id-only sending
+ok 28 - renders safe upload progress, cancellation, finalization, and finalized-id-only sending
+  ---
+  duration_ms: 44.839514
+  type: 'test'
+  ...
+# Subtest: uploads a pasted image once, preserves mixed text paste, and gates Enter until finalization
+ok 29 - uploads a pasted image once, preserves mixed text paste, and gates Enter until finalization
+  ---
+  duration_ms: 31.615719
+  type: 'test'
+  ...
+# Subtest: uploads supported pasted documents once and ignores non-file and null clipboard items
+ok 30 - uploads supported pasted documents once and ignores non-file and null clipboard items
+  ---
+  duration_ms: 10.442587
+  type: 'test'
+  ...
+# Subtest: rejects unsupported pasted files canonically and ignores paste while disabled or read-only
+ok 31 - rejects unsupported pasted files canonically and ignores paste while disabled or read-only
+  ---
+  duration_ms: 22.814608
+  type: 'test'
+  ...
+# Subtest: inline reply source-only drafts survive replacement, ping edits, remount and cancellation
+ok 32 - inline reply source-only drafts survive replacement, ping edits, remount and cancellation
+  ---
+  duration_ms: 30.003257
+  type: 'test'
+  ...
+# Subtest: cancel reply preserves text and attachments and restores the rich editor focus
+ok 33 - cancel reply preserves text and attachments and restores the rich editor focus
+  ---
+  duration_ms: 11.535456
+  type: 'test'
+  ...
+# Subtest: inline reply submission stays in the current channel across style rerenders and source rejection
+ok 34 - inline reply submission stays in the current channel across style rerenders and source rejection
+  ---
+  duration_ms: 28.361912
+  type: 'test'
+  ...
+# Subtest: inline reply submission stays in the current thread across style rerenders and source rejection
+ok 35 - inline reply submission stays in the current thread across style rerenders and source rejection
+  ---
+  duration_ms: 21.92435
+  type: 'test'
+  ...
+# Subtest: reply source errors recover and access loss removes source content from DOM and slots
+ok 36 - reply source errors recover and access loss removes source content from DOM and slots
+  ---
+  duration_ms: 21.945965
+  type: 'test'
+  ...
+# Subtest: retry matches source and ping and retains its original intent after composer reply changes
+ok 37 - retry matches source and ping and retains its original intent after composer reply changes
+  ---
+  duration_ms: 19.475153
+  type: 'test'
+  ...
+# Subtest: late send success preserves newer draft edits
+ok 38 - late send success preserves newer draft edits
+  ---
+  duration_ms: 17.006664
+  type: 'test'
+  ...
+# Subtest: late retry success preserves newer draft edits
+ok 39 - late retry success preserves newer draft edits
+  ---
+  duration_ms: 22.371051
+  type: 'test'
+  ...
+# Subtest: a retry completing after a conversation switch cannot clear the newly opened draft
+ok 40 - a retry completing after a conversation switch cannot clear the newly opened draft
+  ---
+  duration_ms: 27.429158
+  type: 'test'
+  ...
+# Subtest: editing a sent message never submits composer reply context or changes its ancestry
+ok 41 - editing a sent message never submits composer reply context or changes its ancestry
+  ---
+  duration_ms: 36.799805
+  type: 'test'
+  ...
+# Subtest: preserves failed content, exposes the public optimistic id, and retries without fabricating transport state
+ok 42 - preserves failed content, exposes the public optimistic id, and retries without fabricating transport state
+  ---
+  duration_ms: 26.260843
+  type: 'test'
+  ...
+# Subtest: permission failures preserve content, explain membership, and do not offer an ineffective retry
+ok 43 - permission failures preserve content, explain membership, and do not offer an ineffective retry
+  ---
+  duration_ms: 50.60478
+  type: 'test'
+  ...
+# Subtest: authentication failures retain their own explanation
+ok 44 - authentication failures retain their own explanation
+  ---
+  duration_ms: 22.114193
+  type: 'test'
+  ...
+# Subtest: passes renderer-safe normalized state to Composer overrides and covers disabled/a11y/raw-input states
+ok 45 - passes renderer-safe normalized state to Composer overrides and covers disabled/a11y/raw-input states
+  ---
+  duration_ms: 80.479391
+  type: 'test'
+  ...
+# Subtest: attachment feature transitions gate picker, paste and drop while preserving text and ignoring late uploads
+ok 46 - attachment feature transitions gate picker, paste and drop while preserving text and ignoring late uploads
+  ---
+  duration_ms: 44.292214
+  type: 'test'
+  ...
+# Subtest: feature loss preserves finalized draft files for recovery and permits text after removal
+ok 47 - feature loss preserves finalized draft files for recovery and permits text after removal
+  ---
+  duration_ms: 24.616233
+  type: 'test'
+  ...
+# Subtest: attachment-bearing retry waits for feature recovery while text retry remains usable
+ok 48 - attachment-bearing retry waits for feature recovery while text retry remains usable
+  ---
+  duration_ms: 59.406332
+  type: 'test'
+  ...
+1..48
+# tests 48
+# suites 0
+# pass 48
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2428.719049

@@ -2402,18 +2402,12 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
   }, []);
   const listedConversations = listResult.data?.conversations ?? [];
   const cachedConversations = useChatSelector(state => state.entities.conversations);
-  const [createdNavigationConversation, setCreatedNavigationConversation] = useState<
-    ConversationListQueryConversation | undefined
-  >();
   // Top-level snapshots deliberately exclude threads. Keep canonical threads
   // encountered this session in navigation, scoped to visible parents. Discovery
   // remains the authoritative way to browse all of a channel's threads.
   const conversations = useMemo<readonly ConversationListQueryConversation[]>(
     () => {
-      const listed = createdNavigationConversation === undefined ||
-        listedConversations.some(({ id }) => id === createdNavigationConversation.id)
-      ? listedConversations
-      : [createdNavigationConversation, ...listedConversations];
+      const listed = listedConversations;
       const listedIds = new Set(listed.map(({ id }) => id));
       const recentThreads = Object.values(cachedConversations).flatMap(conversation => {
         if (conversation.type !== "thread" || listedIds.has(conversation.id) ||
@@ -2424,7 +2418,7 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
       });
       return recentThreads.length === 0 ? listed : Object.freeze([...listed, ...recentThreads]);
     },
-    [cachedConversations, createdNavigationConversation, listedConversations],
+    [cachedConversations, listedConversations],
   );
   const conversationPreferences = useChatSelector(selectConversationPreferences);
   const starredConversationIds = useMemo<ReadonlySet<ConversationId>>(
@@ -2432,16 +2426,6 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
       conversationPreferences[id]?.isStarred === true ? [id] : [])),
     [conversationPreferences, conversations],
   );
-  useEffect(() => {
-    if (
-      createdNavigationConversation === undefined ||
-      !listedConversations.some(({ id }) => id === createdNavigationConversation.id)
-    ) {
-      return;
-    }
-    setCreatedNavigationConversation((current) =>
-      current?.id === createdNavigationConversation.id ? undefined : current);
-  }, [createdNavigationConversation, listedConversations]);
   const navigationModel = useMemo(
     () => projectConversationNavigation(conversations, starredConversationIds, true),
     [conversations, starredConversationIds],
@@ -2768,8 +2752,6 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
     if (!createdConversationDefinitivelyUnavailable) return;
 
     pendingCreatedConversationIdRef.current = undefined;
-    setCreatedNavigationConversation((current) =>
-      current?.id === pendingCreatedConversationId ? undefined : current);
     setInternalConversationId((current) => {
       if (current !== pendingCreatedConversationId) return current;
       if (
@@ -3659,10 +3641,6 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
         return;
       }
 
-      setCreatedNavigationConversation(Object.freeze({
-        ...result.value.conversation.conversation,
-        hasActiveHuddle: false,
-      }));
       selectCreatedConversation(result.value.conversation.conversation.id);
       channelDialogRestoreFocusPendingRef.current = true;
       setChannelDialogOpen(false);
@@ -3968,12 +3946,6 @@ export function ChatWorkspace(props: ChatWorkspaceProps): ReactElement {
         actions,
         onOpenChange: (open) => {
           if (!open) setActiveCreationDialog(undefined);
-        },
-        onConversationResolved: (conversation) => {
-          setCreatedNavigationConversation(Object.freeze({
-            ...conversation,
-            hasActiveHuddle: false,
-          }));
         },
         onConversationSelected: selectCreatedConversation,
         open: directDialogOpen,

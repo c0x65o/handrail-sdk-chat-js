@@ -3068,6 +3068,7 @@
 }
 
 .handrail-chat .handrail-chat__composer {
+  container: handrail-composer / inline-size;
   background: var(--hr-chat-color-surface-composer, #ffffff);
   border: var(--hr-chat-border-width, 1px) solid var(--hr-chat-color-border-subtle, #e4e9ed);
   border-radius: var(--hr-chat-radius-md, 0.5rem);
@@ -3451,6 +3452,29 @@
   justify-self: end;
   min-block-size: 2.25rem;
   padding: var(--hr-chat-space-1, 0.25rem) var(--hr-chat-space-3, 0.75rem);
+}
+
+/* Respond to the actual composer width, including embedded desktop panes. */
+@container handrail-composer (max-width: 28rem) {
+  .handrail-chat .handrail-chat__composer-footer {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .handrail-chat .handrail-chat__composer-toolbar {
+    grid-column: 1;
+    grid-row: 1;
+    flex-wrap: wrap;
+  }
+
+  .handrail-chat .handrail-chat__composer-send {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .handrail-chat .handrail-chat__composer-feedback {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
 }
 
 .handrail-chat .handrail-chat__composer-send:not(:disabled) {

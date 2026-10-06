@@ -36,7 +36,7 @@ import type {
   ChatClientFetch,
   ChatClientFetchResponse,
 } from "./command-dispatcher.js";
-import type { NormalizedChatCache } from "./normalized-cache.js";
+import { conversationSnapshotScopeKey, type NormalizedChatCache } from "./normalized-cache.js";
 
 export interface ChatSnapshotQueryOptions {
   readonly signal?: AbortSignal;
@@ -322,6 +322,14 @@ const parseTimelinePage = (
 /** Creates the shared, browser-safe GET transport used by createChatClient. */
 export function createChatSnapshotReader(config: SnapshotReaderConfig): ChatSnapshotReader {
   const activeReads = new Map<string, ActiveRead>();
+  let cacheGeneration = 0;
+  const identityKey = () => {
+    const identity = config.cache?.getState().identity;
+    return identity == null ? undefined : JSON.stringify([identity.tenantId, identity.userId, identity.sessionId]);
+  };
+  // A fresh first page starts a new cursor chain. Old roots/pages may complete,
+  // but must never replace discovery from a newer request or another identity.
+  const discoveryReads = new Map<string, { epoch: number; committed: number; sequence: number; rootKey?: string; rootRequestKey?: string }>();
   const onDiagnostic = config.options?.onDiagnostic;
   if (onDiagnostic !== undefined && typeof onDiagnostic !== "function") {
     throw new TypeError("queries.onDiagnostic must be a function");
@@ -590,8 +598,33 @@ export function createChatSnapshotReader(config: SnapshotReaderConfig): ChatSnap
       if (validated.cursor !== undefined) parameters.set("cursor", validated.cursor);
       if (validated.limit !== undefined) parameters.set("limit", String(validated.limit));
       const url = `${config.endpoint}/conversations?${parameters.toString()}`;
+      const identity = identityKey();
+      const generation = cacheGeneration;
+      const scopeKey = conversationSnapshotScopeKey(validated.scope);
+      const identityScope = JSON.stringify([identity, generation, scopeKey]);
+      const creationRevision = config.cache?.getState().metadata.conversationLists[scopeKey]?.creationRevision ?? 0;
+      const baseKey = `GET ${url} ${identityScope} ${creationRevision}`;
+      let reads = discoveryReads.get(identityScope);
+      if (reads === undefined) {
+        reads = { epoch: 0, committed: 0, sequence: 0 };
+        discoveryReads.set(identityScope, reads);
+      }
+      let key: string;
+      if (validated.cursor === undefined) {
+        if (reads.rootKey !== baseKey || !activeReads.has(reads.rootRequestKey ?? "")) {
+          reads.epoch = ++reads.sequence;
+          reads.rootKey = baseKey;
+          reads.rootRequestKey = `${baseKey} ${reads.epoch}`;
+        }
+        key = reads.rootRequestKey!;
+      } else {
+        key = `${baseKey} ${reads.epoch}`;
+      }
+      const epoch = reads.epoch;
+      const pageIsCurrent = validated.cursor === undefined || reads.committed === epoch;
+      const isCurrent = () => identityKey() === identity && cacheGeneration === generation && reads.epoch === epoch && pageIsCurrent;
       return consume({
-        key: `GET ${url}`,
+        key,
         query: "conversation.list",
         url,
         parse(value) {
@@ -601,12 +634,21 @@ export function createChatSnapshotReader(config: SnapshotReaderConfig): ChatSnap
           }
           return snapshot;
         },
-        hydrate: (snapshot) => config.cache?.hydrateConversationList(snapshot, {
-          ...(validated.cursor === undefined
-            ? {}
-            : { requestCursor: validated.cursor }),
-        }),
-      }, options);
+        hydrate: (snapshot) => {
+          if (!isCurrent()) return;
+          config.cache?.hydrateConversationList(snapshot, {
+            ...(validated.cursor === undefined ? { replacePages: true } : { requestCursor: validated.cursor }),
+          });
+          reads.committed = epoch;
+        },
+      }, options).then(result => {
+        if (validated.cursor === undefined && result.status !== "success" && !activeReads.has(key) && isCurrent()) {
+          // A failed refresh leaves the last successful cursor chain usable.
+          // sequence remains monotonic so older requests cannot become current again.
+          reads.epoch = reads.committed;
+        }
+        return result;
+      });
     },
     getConversation<Feature extends string = string>(
       input: ConversationDetailSnapshotInput,
@@ -620,8 +662,10 @@ export function createChatSnapshotReader(config: SnapshotReaderConfig): ChatSnap
         return Promise.resolve(VALIDATION_FAILURE);
       }
       const url = `${config.endpoint}/conversations/${encodeURIComponent(validated.conversationId)}`;
+      const identity = identityKey();
+      const generation = cacheGeneration;
       return consume({
-        key: `GET ${url}`,
+        key: `GET ${url} ${identity} ${generation}`,
         query: "conversation.detail",
         url,
         parse(value) {
@@ -631,8 +675,23 @@ export function createChatSnapshotReader(config: SnapshotReaderConfig): ChatSnap
           }
           return snapshot;
         },
-        hydrate: (snapshot) => config.cache?.hydrateConversationDetail(snapshot),
-      }, options);
+        hydrate: (snapshot) => {
+          if (identityKey() === identity && cacheGeneration === generation) config.cache?.hydrateConversationDetail(snapshot);
+        },
+      }, options).then(result => {
+        if (identityKey() === identity && cacheGeneration === generation &&
+            result.status !== "success" && "httpStatus" in result &&
+            (result.httpStatus === 403 || result.httpStatus === 404 || result.httpStatus === 410)) {
+          // A list that started before this denial cannot restore its membership.
+          for (const [key, active] of activeReads) {
+            if (!key.startsWith(`GET ${config.endpoint}/conversations?`)) continue;
+            activeReads.delete(key);
+            active.controller.abort();
+          }
+          config.cache?.dispatch({ type: "conversations/discard-access", conversationId: validated.conversationId });
+        }
+        return result;
+      });
     },
     getMessageTimeline(input, options = {}) {
       let validated: MessageTimelineRequest;
@@ -730,6 +789,8 @@ export function createChatSnapshotReader(config: SnapshotReaderConfig): ChatSnap
     },
   };
   config.cache?.subscribePrivateStateBoundary(() => {
+    cacheGeneration += 1;
+    discoveryReads.clear();
     for (const [key, active] of activeReads) {
       if (!active.privateState) continue;
       activeReads.delete(key);

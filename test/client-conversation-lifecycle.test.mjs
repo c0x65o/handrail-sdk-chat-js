@@ -583,3 +583,108 @@ test("membership HTTP and durable-event ordering converges on the newest complet
     "owner",
   );
 });
+
+// HTTP-boundary fixtures: these prove discovery/cache behavior, not persistence.
+test("two confirmed creations survive stale discovery, scope changes, errors and acknowledgement", async () => {
+  const cache = createNormalizedChatCache(identity);
+  const scope = { type: "organization" };
+  const entity = { type: "project", id: "fixture-project" };
+  const entityScope = { type: "entity", entity };
+  const entityKey = JSON.stringify(["entity", entity.type, entity.id]);
+  const original = ["A", "B", "C"].map(id => ({ ...detail(summary(id)).conversation, hasActiveHuddle: false }));
+  const list = (items, selectedScope = scope, nextCursor) => ({
+    kind: "conversation_list", scope: selectedScope, items,
+    page: nextCursor === undefined ? {} : { nextCursor }, _meta: metadata,
+  });
+  cache.hydrateConversationList(list(original));
+  cache.hydrateConversationList(list([], entityScope));
+  let mode = "stale";
+  const client = createChatClient({
+    endpoint: "https://fixture.test/chat", getAccessToken: () => "fixture-only",
+    cache, realtime: false, commands: { retry: { maxAttempts: 1 } },
+    async fetch(url, init) {
+      if (init.method === "POST") {
+        const input = JSON.parse(init.body);
+        if (input.name === "failed") return response({}, 503);
+        const result = creationResult(input, input.name);
+        if (input.entity) result.conversation.conversation.entity = input.entity;
+        return response(result, 201);
+      }
+      if (String(url).endsWith("/D")) return mode === "denied" ? response({}, 404) : response(detail(summary("D")));
+      if (mode === "offline") return response({}, 503);
+      return response(list(original));
+    },
+  });
+  const ids = () => cache.getState().metadata.conversationLists.organization.conversationIds;
+  try {
+    for (const name of ["D", "E"]) {
+      assert.equal((await client.createChannel({ name, visibility: "private", ...(name === "E" ? { entity } : {}) })).status, "success");
+    }
+    assert.deepEqual([...ids()].sort(), ["A", "B", "C", "D", "E"]);
+    assert.deepEqual(ids(), ["C", "B", "A", "E", "D"], "navigation rank, newest activity and id ordering");
+    assert.deepEqual(cache.getState().metadata.conversationLists[entityKey].conversationIds, ["E"]);
+    const unrelated = { type: "entity", entity: { ...entity, id: "unrelated" } };
+    cache.hydrateConversationList(list([], unrelated));
+    assert.deepEqual(cache.getState().metadata.conversationLists[JSON.stringify(["entity", entity.type, "unrelated"])].conversationIds, []);
+    await client.listConversations({ scope });
+    assert.deepEqual([...ids()].sort(), ["A", "B", "C", "D", "E"]);
+    mode = "offline";
+    assert.equal((await client.listConversations({ scope })).status, "transport");
+    assert.notEqual((await client.createChannel({ name: "failed", visibility: "private" })).status, "success");
+    assert.deepEqual([...ids()].sort(), ["A", "B", "C", "D", "E"]);
+    assert.equal((await client.getConversation({ conversationId: "D" })).status, "success");
+    cache.hydrateMessageTimeline({ conversationId: "D", messages: [{
+      id: "D-message", tenantId, conversationId: "D", author: { type: "user", userId }, sequence: 1,
+      createdAt: timestamp, updatedAt: timestamp, revision: { revision: 1 }, content: { format: "plain", text: "Independent history" },
+      isThreadRoot: false, reactions: [], attachmentMetadata: [],
+    }], pagination: { older: { available: false }, newer: { available: false } }, replay: { resumeFrom: { eventId: "event-D" } } });
+    // Independent detail hydration must never leak into navigation.
+    cache.hydrateConversationDetail(detail(summary("detail-only")));
+    assert.equal(ids().includes("detail-only"), false);
+    const created = id => ({ ...detail(summary(id, "channel", { visibility: "private" })).conversation, hasActiveHuddle: false });
+    cache.hydrateConversationList(list([...original, created("D")], scope, "page-2"));
+    assert.deepEqual(cache.getState().metadata.conversationLists.organization.pendingCreatedIds, ["E"]);
+    assert.equal(cache.getState().metadata.conversationLists.organization.nextCursor, "page-2");
+    cache.hydrateConversationList(list([created("D"), created("E")]), { requestCursor: "page-2" });
+    assert.equal(ids().length, 5);
+    assert.deepEqual(cache.getState().metadata.conversationLists.organization.pendingCreatedIds, []);
+    assert.equal(cache.getState().metadata.conversationLists.organization.nextCursor, undefined);
+    // Once discovery acknowledged a creation, authoritative omission can remove it.
+    cache.hydrateConversationList(list(original), { replacePages: true });
+    assert.deepEqual(ids(), ["A", "B", "C"]);
+    assert.ok(cache.getState().entities.conversations.D);
+    assert.ok(cache.getState().metadata.conversationDetails.D);
+    assert.deepEqual(cache.getState().timelines.D.messageIds, ["D-message"]);
+    assert.equal(cache.getState().entities.messages["D-message"].content.text, "Independent history");
+    // A pending creation with an explicit access denial must also be removed.
+    assert.equal((await client.createChannel({ name: "D", visibility: "private" })).status, "success");
+    mode = "denied";
+    assert.equal((await client.getConversation({ conversationId: "D" })).httpStatus, 404);
+    assert.equal(ids().includes("D"), false);
+    assert.equal(cache.getState().metadata.conversationLists.organization.pendingCreatedIds.includes("D"), false);
+    cache.setIdentity({ ...identity, userId: "another-user", sessionId: "another-session" });
+    assert.deepEqual(cache.getState().metadata.conversationLists, {});
+  } finally { client.close(); }
+});
+
+
+test("a delayed creation result cannot populate a replacement identity or session", async () => {
+  for (const replacement of [{ ...identity, sessionId: "replacement" }, { ...identity, userId: "replacement" }]) {
+    const cache = createNormalizedChatCache(identity);
+    let finish;
+    const client = createChatClient({
+      endpoint: "/chat", cache, realtime: false, getAccessToken: () => "fixture-only",
+      fetch: (_url, init) => new Promise(resolve => { finish = () => resolve(response(creationResult(JSON.parse(init.body), "late"), 201)); }),
+    });
+    try {
+      const pending = client.createChannel({ name: "late", visibility: "private" });
+      for (let i = 0; i < 100 && !finish; i++) await new Promise(resolve => setImmediate(resolve));
+      assert.ok(finish);
+      cache.setIdentity(replacement);
+      finish();
+      await pending;
+      assert.deepEqual(cache.getState().metadata.conversationLists, {});
+      assert.deepEqual(cache.getState().entities.conversations, {});
+    } finally { client.close(); }
+  }
+});
