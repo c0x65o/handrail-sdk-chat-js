@@ -94,6 +94,8 @@ export interface ChatSnapshotQueryRejected {
   readonly status: "rejected";
   readonly message: "The chat server rejected the snapshot query.";
   readonly httpStatus: number;
+  /** Absolute retry deadline, including a conservative fallback for HTTP 429. */
+  readonly retryAt?: number;
 }
 
 export interface ChatSnapshotQueryMalformedResponse {
@@ -187,6 +189,16 @@ export interface ChatSnapshotReader {
 }
 
 const ABORTED = Symbol("chat-snapshot-query-aborted");
+const rateLimitDeadline = (response: ChatClientFetchResponse): number => {
+  const now = Date.now();
+  let header: string | null | undefined;
+  try { header = response.headers?.get("retry-after"); } catch { /* Optional fetch adapter edge. */ }
+  const value = header?.trim();
+  const deadline = value && /^\d+(?:\.\d+)?$/.test(value)
+    ? now + Number(value) * 1_000
+    : value ? Date.parse(value) : NaN;
+  return Number.isFinite(deadline) && deadline > now ? deadline : now + 60_000;
+};
 const MAX_MESSAGE_TIMELINE_LIMIT = 100;
 const freeze = <Value extends object>(value: Value): Readonly<Value> =>
   Object.freeze(value);
@@ -422,6 +434,7 @@ export function createChatSnapshotReader(config: SnapshotReaderConfig): ChatSnap
                   status: "rejected",
                   message: "The chat server rejected the snapshot query.",
                   httpStatus: response.status,
+                  ...(response.status === 429 ? { retryAt: rateLimitDeadline(response) } : {}),
                 } as const)
               : transportFailure(response.status);
         diagnose({

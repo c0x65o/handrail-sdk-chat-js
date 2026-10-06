@@ -183,6 +183,8 @@ export interface ConversationListCachePage {
 }
 
 export interface ConversationListHydrationOptions {
+  /** Refresh existing projections without changing discovery pages or pagination. */
+  readonly preservePages?: boolean;
   /** The exclusive cursor used to request this page; absent means the first page. */
   readonly requestCursor?: ConversationSnapshotCursor;
   /** Start a fresh authoritative cursor chain instead of retaining earlier pages. */
@@ -504,6 +506,7 @@ export type NormalizedChatCacheAction =
       readonly snapshot: ConversationListSnapshot;
       readonly requestCursor?: ConversationSnapshotCursor;
       readonly replacePages?: boolean;
+      readonly preservePages?: boolean;
     }
   | {
       readonly type: "conversations/hydrate-detail";
@@ -1073,6 +1076,7 @@ export function createNormalizedChatCache(
         type: "conversations/hydrate-list",
         snapshot: snapshot as ConversationListSnapshot,
         ...(options?.replacePages === true ? { replacePages: true } : {}),
+        ...(options?.preservePages === true ? { preservePages: true } : {}),
         ...(options?.requestCursor === undefined
           ? {}
           : { requestCursor: options.requestCursor }),
@@ -2229,7 +2233,7 @@ export function reduceNormalizedChatCache(
       });
     }
     case "conversations/hydrate-list":
-      return hydrateConversationList(state, action.snapshot, action.requestCursor, action.replacePages);
+      return hydrateConversationList(state, action.snapshot, action.requestCursor, action.replacePages, action.preservePages);
     case "conversations/hydrate-detail":
       return hydrateConversationDetail(state, action.snapshot);
     case "conversations/pending-begin":
@@ -3276,6 +3280,7 @@ function hydrateConversationList(
   snapshot: ConversationListSnapshot,
   requestCursor: ConversationSnapshotCursor | undefined,
   replacePages = false,
+  preservePages = false,
 ): NormalizedChatCacheState {
   const identity = requireIdentity(state);
   const normalized = normalizeConversationSummaries(state, snapshot.items, identity);
@@ -3308,7 +3313,7 @@ function hydrateConversationList(
     pages,
   });
 
-  const conversationLists = valueEqual(existingList, list)
+  const conversationLists = preservePages || valueEqual(existingList, list)
     ? state.metadata.conversationLists
     : freezeRecord({ ...state.metadata.conversationLists, [scopeKey]: list });
   let conversationListParticipantUserIds =

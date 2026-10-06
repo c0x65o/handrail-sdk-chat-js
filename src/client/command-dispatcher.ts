@@ -3,6 +3,7 @@ export type ChatCommandMethod = "POST" | "PUT" | "PATCH" | "DELETE";
 export interface ChatClientFetchResponse {
   readonly ok: boolean;
   readonly status: number;
+  readonly headers?: { get(name: string): string | null };
   json(): Promise<unknown>;
 }
 

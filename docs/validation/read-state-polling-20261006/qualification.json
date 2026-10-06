@@ -1,0 +1,188 @@
+{
+  "base_version": "1.0.51",
+  "base_sha": "c4403cecb3757cf80f30933efcf9fc0dfa2a7ebd",
+  "base_tag": "v1.0.51",
+  "source_correction_uncommitted": true,
+  "publication_and_corrected_git_consumer_qualification": "pending owning Handrail workflow",
+  "reproduction": "Real PostgreSQL 15.19 SDK harness and Chromium 151; 24 additional authorized private channels; two independent React clients for the same actor; features.realtime=false; second workspace hidden without unmounting after 35 seconds.",
+  "limits": [
+    "This proves the SDK scaling defect, not exact attribution of Preview staging HTTP429s.",
+    "The SDK lab has no Preview ordinary API limiter or consumer database-window rows. UTC buckets and rolling windows are analytical measurements only.",
+    "No paired Flutter or unrelated Preview API workload was executed.",
+    "The 75-second source candidate run preceded a browser-only timer type annotation correction. The final-source durable browser regression is recorded separately."
+  ],
+  "runs": {
+    "baseline": {
+      "trace": "baseline.json.gz",
+      "trace_uncompressed_sha256": "6fc2afdf42e5234c950acb36af67a1c18b9869f32a4850ba037cb757fc038aee",
+      "source_identity": {
+        "source": "f560a6e22bcb9e1894a33f8eb52b7e952aeaebddded67ecb77093a84db3141dd",
+        "package": "640bb31e7ec3b39f7559b62cf0f0afbc24cd682c3222fa35019245cf0928288b"
+      },
+      "summary": {
+        "total": 854,
+        "successful": 846,
+        "http429": 0,
+        "http5xx": 0,
+        "maxRolling60s": 679,
+        "hiddenDetailRequests": 140
+      },
+      "duration_seconds": 75.038,
+      "initial_mounted_rows_per_client": 30,
+      "hidden_retained_rows": 18,
+      "actual_consumer_database_windows": null,
+      "analytical_utc_fixed_60s": {
+        "2026-10-06T17:15:00.000Z": 258,
+        "2026-10-06T17:16:00.000Z": 591
+      },
+      "cleanup": {
+        "baselineExit": 0,
+        "schemaCheckExit": 0,
+        "remainingSchemas": "",
+        "stopExit": 0,
+        "clusterRemoved": true
+      }
+    },
+    "candidate": {
+      "trace": "candidate.json.gz",
+      "trace_uncompressed_sha256": "050a2af08a284965b36a5ea77d957b58c0970ef98d99b1de92cbb16dd5272f4a",
+      "source_identity": {
+        "source": "2b7cca2ffe2b84b7a42a12af72cb1f00771ad01281d4ea8e899492d3c08b02d9",
+        "package": "eed25da16a601f04f0981f8c2a105b04cbd05071bb3a7466a8fd833b4a4ab02d"
+      },
+      "summary": {
+        "total": 51,
+        "successful": 49,
+        "http429": 0,
+        "http5xx": 0,
+        "maxRolling60s": 38,
+        "hiddenDetailRequests": 0
+      },
+      "duration_seconds": 75.048,
+      "initial_mounted_rows_per_client": 30,
+      "hidden_retained_rows": 18,
+      "actual_consumer_database_windows": null,
+      "analytical_utc_fixed_60s": {
+        "2026-10-06T17:24:00.000Z": 38,
+        "2026-10-06T17:25:00.000Z": 8
+      },
+      "cleanup": {
+        "candidateExit": 0,
+        "schemaCheckExit": 0,
+        "remainingSchemas": "",
+        "stopExit": 0,
+        "clusterRemoved": true
+      }
+    }
+  },
+  "final_source_identity": {
+    "source": "ebfd60547dda99062ddb9a064d124db03c054146102ce5e7c6f8fb091d1b5e6d",
+    "package": "8c8f7a5b2079ead988701abada8530d52ff54930c7f2c0e5aa15ddfcf27ad543"
+  },
+  "checks": {
+    "package_version_drift": {
+      "result": "passed",
+      "command": "node scripts/generate-package-version.mjs --check"
+    },
+    "build": {
+      "result": "passed",
+      "command": "npm run build"
+    },
+    "types": {
+      "result": "passed",
+      "command": "npm run typecheck"
+    },
+    "focused_polling": {
+      "result": "passed",
+      "tests": 22,
+      "command": "node --test --test-concurrency=1 test/client-background-read-state.test.mjs"
+    },
+    "thread_types_and_regressions": {
+      "result": "passed",
+      "tests": 95,
+      "command": "node scripts/test-client-thread-list.mjs"
+    },
+    "real_postgres_browser": {
+      "result": "passed",
+      "tests": 3,
+      "command": "node examples/drop-in-react/node_modules/playwright/cli.js test --config examples/drop-in-react/playwright.config.ts chat-lab.background-unread.spec.mjs chat-lab.read-state-polling.spec.mjs --project=chromium --workers=1 --retries=0 --reporter=line",
+      "cleanup": {
+        "browserExit": 0,
+        "schemaCheckExit": 0,
+        "remainingSchemas": "",
+        "stopExit": 0,
+        "clusterRemoved": true
+      }
+    },
+    "final_browser_hide_return": {
+      "result": "passed",
+      "tests": 1,
+      "trace": "final-browser.json.gz",
+      "trace_uncompressed_sha256": "e682bbcf8b569e79f31aa37b48ec7b678e2113a7dc814ba48d75b72eed07d0c9",
+      "cleanup": {
+        "browserExit": 0,
+        "schemaCheckExit": 0,
+        "remainingSchemas": "",
+        "stopExit": 0,
+        "clusterRemoved": true
+      },
+      "coverage": "Bounded foreground and hidden traffic, unchanged selection and unsent draft after return, final source identity."
+    },
+    "frozen_git_consumer": {
+      "result": "passed",
+      "tests": 1,
+      "command": "HANDRAIL_CHAT_JS_REVISION=c4403cecb3757cf80f30933efcf9fc0dfa2a7ebd npm run test:git-consumer",
+      "scope": "Existing 1.0.51 release only. Public HTTPS full SHA, matching consumer lock, normal prepare/build/types/exports and shared React. This does not qualify the uncommitted correction."
+    },
+    "final_focused_regressions": {
+      "result": "passed",
+      "tests": 530,
+      "failed": 0,
+      "skipped": 0,
+      "command": "node --test --test-concurrency=1 <files in regression-files.json>",
+      "files": "regression-files.json",
+      "log": "regressions.tap.gz"
+    }
+  },
+  "resolved_check_failures": [
+    {
+      "check": "Initial broad invocation",
+      "result": "500 passed, 2 failed",
+      "causes": [
+        "Browser-only TypeScript compilation rejected the existing timer.unref access; an optional structural timer type now compiles for browser and Node.",
+        "client-thread-list.test.mjs requires its dedicated compiler runner, not direct node --test."
+      ],
+      "resolution": "Dedicated thread compiler/type/regression runner passed 95 tests; final broad regression excludes the runner-only files."
+    },
+    {
+      "check": "Expanded draft hide/return assertion",
+      "result": "failed",
+      "cause": "Playwright toHaveValue only supports inputs; the composer is contenteditable.",
+      "resolution": "Use toHaveText; fresh PostgreSQL/browser rerun passed."
+    }
+  ],
+  "integration_requirements": [
+    "No host visibility/remount change is required.",
+    "Custom fetch adapters should return headers.get so Retry-After longer than the 60-second fallback is honored.",
+    "Keep Preview on its frozen 1.0.51 pin until the owning workflow publishes and independently qualifies the corrected full Git SHA and matching lock."
+  ],
+  "trace_semantics": "Request attempts include canceled requests (status absent); successful HTTP response counts are separate. Row visible means the element has a CSS layout box, not viewport intersection. Client visible/hidden-retained records host-container visibility.",
+  "file_sha256": {
+    "src/client/command-dispatcher.ts": "1209b91e39209838a72e251f127fc6a90c76bf5420c37f5a7835b06e8df4bd32",
+    "src/client/normalized-cache.ts": "a3e44d574df45f1197f7583e230aa2b930a5f30fb027d784bd531bce549dafa8",
+    "src/client/snapshot-reader.ts": "256778d22f940350f2909848e825581aa5e3301714309718ed310f27f0e81e70",
+    "src/client/unread-mention-refresh.ts": "a0be9494c0af37e7438dac40ee001bc756f3a423f93aa641297fb4ae736a61bf",
+    "test/client-background-read-state.test.mjs": "8e766a4c934c6bad548033ed603e0e12cf567c1fa314758721ad93e14445204c",
+    "examples/drop-in-react/e2e/chat-lab.read-state-polling.spec.mjs": "1910a1b325974b969843f2830e98cf9b297d34ef55b0a85eb9d56d5a37d8ffb1"
+  },
+  "logs": [
+    "build.log.txt",
+    "types.log.txt",
+    "browser.log.txt",
+    "final-browser.log.txt",
+    "frozen-git-consumer.log.txt",
+    "polling.tap.gz",
+    "threads.tap.gz",
+    "regressions.tap.gz"
+  ]
+}

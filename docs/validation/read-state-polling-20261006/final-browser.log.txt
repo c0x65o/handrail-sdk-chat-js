@@ -1,0 +1,17 @@
+
+Running 1 test using 1 worker
+
+(node:41) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] [chromium] › examples/drop-in-react/e2e/chat-lab.read-state-polling.spec.mjs:7:1 › populated and hidden retained workspaces have bounded read-state traffic
+[chromium] › examples/drop-in-react/e2e/chat-lab.read-state-polling.spec.mjs:7:1 › populated and hidden retained workspaces have bounded read-state traffic
+Chat Lab started: http://127.0.0.1:38365
+
+Chat Lab stopped: http://127.0.0.1:38365
+
+  1 passed (22.0s)
+waiting for server to shut down.... done
+server stopped
+{"browserExit": 0, "schemaCheckExit": 0, "remainingSchemas": "", "stopExit": 0, "clusterRemoved": true}

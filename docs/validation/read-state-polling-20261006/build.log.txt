@@ -1,0 +1,5 @@
+
+> @handrail/chat@1.0.51 build
+> node scripts/generate-package-version.mjs && tsc --project tsconfig.json && node scripts/copy-ui-styles.mjs && node scripts/candidate-provenance.mjs
+
+Candidate source=ebfd60547dda99062ddb9a064d124db03c054146102ce5e7c6f8fb091d1b5e6d package=8c8f7a5b2079ead988701abada8530d52ff54930c7f2c0e5aa15ddfcf27ad543

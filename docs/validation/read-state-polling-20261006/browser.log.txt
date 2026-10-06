@@ -1,0 +1,19 @@
+
+Running 3 tests using 1 worker
+
+(node:41) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/3] [chromium] › examples/drop-in-react/e2e/chat-lab.background-unread.spec.mjs:5:1 › offscreen unread and mentions converge in both tabs before reconnect or reload
+[chromium] › examples/drop-in-react/e2e/chat-lab.background-unread.spec.mjs:5:1 › offscreen unread and mentions converge in both tabs before reconnect or reload
+Chat Lab started: http://127.0.0.1:40147
+
+[2/3] [chromium] › examples/drop-in-react/e2e/chat-lab.background-unread.spec.mjs:92:1 › offscreen access removal clears both tabs and releases read-state refresh
+[3/3] [chromium] › examples/drop-in-react/e2e/chat-lab.read-state-polling.spec.mjs:5:1 › populated and hidden retained workspaces have bounded read-state traffic
+Chat Lab stopped: http://127.0.0.1:40147
+
+  3 passed (50.4s)
+waiting for server to shut down.... done
+server stopped
+{"browserExit": 0, "schemaCheckExit": 0, "remainingSchemas": "", "stopExit": 0, "clusterRemoved": true}
