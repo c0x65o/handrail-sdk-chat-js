@@ -1,0 +1,14 @@
+{
+  "calls": 3,
+  "waits": [
+    100,
+    200
+  ],
+  "result": {
+    "status": "transport",
+    "message": "The chat command could not be completed.",
+    "httpStatus": 429
+  },
+  "expectedMinimumWaitMs": 60000,
+  "reproduced": true
+}

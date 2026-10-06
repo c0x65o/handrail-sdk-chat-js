@@ -120,7 +120,7 @@ function successfulSend(body, identity, id = "message-canonical") {
   });
 }
 
-async function createFixture({ command, identityRef, cache, harness } = {}) {
+async function createFixture({ command, identityRef, cache, harness, retry } = {}) {
   const storageHarness = harness ?? createStorageHarness();
   const trustedIdentity = identityRef ?? { current: storageIdentity() };
   const normalizedCache = cache ?? createNormalizedChatCache(cacheIdentity());
@@ -138,7 +138,7 @@ async function createFixture({ command, identityRef, cache, harness } = {}) {
       return command?.(request, trustedIdentity.current, commandRequests.length) ??
         successfulSend(body, trustedIdentity.current);
     },
-    commands: { retry: { maxAttempts: 1 } },
+    commands: { retry: retry ?? { maxAttempts: 1 } },
     optimisticMessages: {
       generateClientMessageId: () => `client-${++generated}`,
       generateIdempotencyKey: () => `idempotency-${generated}`,
@@ -363,5 +363,32 @@ test("a delayed old-generation completion cannot settle the active identity queu
     activeAfter.intents.map(({ clientMessageId, idempotencyKey }) => ({ clientMessageId, idempotencyKey })),
     activeBefore.intents.map(({ clientMessageId, idempotencyKey }) => ({ clientMessageId, idempotencyKey })),
   );
+  fixture.client.close();
+});
+
+
+test("identity turnover while rate limited preserves old queue identity and releases the new actor", async () => {
+  const waiting = deferred();
+  const identityRef = { current: storageIdentity("user-a", "device-a") };
+  const fixture = await createFixture({
+    identityRef,
+    retry: { wait: () => { waiting.resolve(); return new Promise(() => {}); } },
+    command: (request, identity, count) => count === 1
+      ? { ...response(429, {}), headers: new Headers({ "Retry-After": "120" }) }
+      : successfulSend(request.body, identity),
+  });
+  const oldSend = fixture.client.sendMessage({ conversationId: "conversation-a", content: { format: "plain", text: "old" } });
+  await waiting.promise;
+  const oldRequest = fixture.commandRequests[0];
+  fixture.client.close();
+  await oldSend;
+  identityRef.current = storageIdentity("user-b", "device-b");
+  assert.equal((await fixture.client.start()).state, "ready");
+  fixture.cache.setIdentity(cacheIdentity("user-b", "session-b"));
+  const result = await fixture.client.sendMessage({ conversationId: "conversation-b", content: { format: "plain", text: "new" } });
+  assert.equal(result.status, "success");
+  assert.equal(fixture.commandRequests.length, 2);
+  assert.notEqual(fixture.commandRequests[1].init.headers["idempotency-key"], oldRequest.init.headers["idempotency-key"]);
+  assert.equal(fixture.client.getSendMessageQueueState().identity.userId, "user-b");
   fixture.client.close();
 });

@@ -1,3 +1,4 @@
+import { rateLimitDeadline } from "./rate-limit.js";
 import { parseGetReplyStylePreferenceInput, parseReplyStylePreferenceState, type GetReplyStylePreferenceInput, type ReplyStylePreferenceState } from "../contracts/reply-style-preference.js";
 import { THREAD_LIST_PATH, parseThreadListRequest, parseThreadListResult, serializeThreadListQuery, type ThreadListRequest, type ThreadListResult } from "../contracts/thread-list.js";
 import { MESSAGE_CONTEXT_PATH, parseMessageContextRequest, parseMessageContextResult,
@@ -189,16 +190,6 @@ export interface ChatSnapshotReader {
 }
 
 const ABORTED = Symbol("chat-snapshot-query-aborted");
-const rateLimitDeadline = (response: ChatClientFetchResponse): number => {
-  const now = Date.now();
-  let header: string | null | undefined;
-  try { header = response.headers?.get("retry-after"); } catch { /* Optional fetch adapter edge. */ }
-  const value = header?.trim();
-  const deadline = value && /^\d+(?:\.\d+)?$/.test(value)
-    ? now + Number(value) * 1_000
-    : value ? Date.parse(value) : NaN;
-  return Number.isFinite(deadline) && deadline > now ? deadline : now + 60_000;
-};
 const MAX_MESSAGE_TIMELINE_LIMIT = 100;
 const freeze = <Value extends object>(value: Value): Readonly<Value> =>
   Object.freeze(value);

@@ -1,3 +1,5 @@
+import { retryAfterDeadline } from "./rate-limit.js";
+
 export type ChatCommandMethod = "POST" | "PUT" | "PATCH" | "DELETE";
 
 export interface ChatClientFetchResponse {
@@ -90,6 +92,8 @@ export interface ChatCommandRetryOptions {
   readonly maxAuthRefreshes?: 0 | 1;
   /** Receives a one-based retry number and must return a finite delay in ms. */
   readonly backoffMs?: (retryNumber: number) => number;
+  /** Clock paired with an injected wait boundary. Defaults to Date.now. */
+  readonly now?: () => number;
   /** Injectable wait boundary for deterministic clocks. */
   readonly wait?: (delayMs: number, signal: AbortSignal) => Promise<void>;
 }
@@ -377,6 +381,8 @@ export function createChatCommandDispatcher(
   const maxAuthRefreshes = config.options?.retry?.maxAuthRefreshes ?? 1;
   const backoffMs = config.options?.retry?.backoffMs ?? defaultBackoffMs;
   const wait = config.options?.retry?.wait ?? defaultWait;
+  const now = config.options?.retry?.now ?? Date.now;
+  let rateLimitedUntil = 0;
   const generateIdempotencyKey =
     config.options?.generateIdempotencyKey ?? generateBrowserIdempotencyKey;
   const onDiagnostic = config.options?.onDiagnostic;
@@ -384,7 +390,7 @@ export function createChatCommandDispatcher(
   if (maxAuthRefreshes !== 0 && maxAuthRefreshes !== 1) {
     throw new TypeError("commands.retry.maxAuthRefreshes must be zero or one");
   }
-  if (typeof backoffMs !== "function" || typeof wait !== "function") {
+  if (typeof backoffMs !== "function" || typeof wait !== "function" || typeof now !== "function") {
     throw new TypeError("commands retry hooks must be functions");
   }
   if (typeof generateIdempotencyKey !== "function") {
@@ -537,6 +543,22 @@ export function createChatCommandDispatcher(
         return true;
       };
 
+      // Recheck after every wait: an overlapping response may extend the deadline.
+      const waitForCooldown = async (): Promise<boolean> => {
+        try {
+          while (rateLimitedUntil > now()) {
+            const delayMs = Math.min(60_000, rateLimitedUntil - now());
+            await raceWithAbort(
+              Promise.resolve().then(() => wait(delayMs, active.controller.signal)),
+              active.controller.signal,
+            );
+          }
+          return true;
+        } catch {
+          return false;
+        }
+      };
+
       const scheduleRetry = async (): Promise<boolean> => {
         retryNumber += 1;
         let delayMs: number;
@@ -548,6 +570,7 @@ export function createChatCommandDispatcher(
         if (!Number.isFinite(delayMs) || delayMs < 0 || delayMs > 60_000) {
           return false;
         }
+        delayMs = Math.max(delayMs, Math.min(60_000, rateLimitedUntil - now()));
         diagnose({
           event: "retry_scheduled",
           command: descriptorName,
@@ -575,6 +598,13 @@ export function createChatCommandDispatcher(
         }
 
         while (attempt < maxAttempts) {
+          while (rateLimitedUntil > now()) {
+            if (await waitForCooldown()) continue;
+            const stopped = interrupted();
+            return stopped === undefined
+              ? transportFailure()
+              : classify(active, descriptorName, attempt, stopped);
+          }
           const stopped = interrupted();
           if (stopped !== undefined) {
             return classify(active, descriptorName, attempt, stopped);
@@ -621,6 +651,11 @@ export function createChatCommandDispatcher(
               : classify(active, descriptorName, attempt, retryStopped);
           }
 
+          const responseStopped = interrupted();
+          if (responseStopped !== undefined) {
+            return classify(active, descriptorName, attempt, responseStopped);
+          }
+
           if (!Number.isInteger(response.status) || response.status < 100 || response.status > 599) {
             diagnose({
               event: "response_malformed",
@@ -631,6 +666,9 @@ export function createChatCommandDispatcher(
             return malformedResponse();
           }
 
+          if (!response.ok && response.status === 429) {
+            rateLimitedUntil = Math.max(rateLimitedUntil, retryAfterDeadline(response, now()) ?? now() + 60_000);
+          }
           if (!response.ok && TRANSIENT_HTTP_STATUSES.has(response.status)) {
             if (
               descriptor.retry === "safe" &&
@@ -798,6 +836,7 @@ export function createChatCommandDispatcher(
       }
     },
     closeActive() {
+      rateLimitedUntil = 0;
       for (const active of activeCommands) {
         active.closed = true;
         active.controller.abort();
