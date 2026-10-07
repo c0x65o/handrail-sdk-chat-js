@@ -1,0 +1,136 @@
+postgres (PostgreSQL) 15.19 (Debian 15.19-0+deb12u1)
+waiting for server to start.... done
+server started
+TAP version 13
+# Subtest: thread cursors use current parent authority and preserve retained state
+    # Subtest: private parent reader advances without child membership or following
+    ok 1 - private parent reader advances without child membership or following
+      ---
+      duration_ms: 34.547147
+      type: 'test'
+      ...
+    # Subtest: public parent reader advances without child membership or following
+    ok 2 - public parent reader advances without child membership or following
+      ---
+      duration_ms: 21.429758
+      type: 'test'
+      ...
+    # Subtest: re-entry retains manual unread, notification settings, role, draft and follow=true
+    ok 3 - re-entry retains manual unread, notification settings, role, draft and follow=true
+      ---
+      duration_ms: 66.800653
+      type: 'test'
+      ...
+    # Subtest: re-entry retains manual unread, notification settings, role, draft and follow=false
+    ok 4 - re-entry retains manual unread, notification settings, role, draft and follow=false
+      ---
+      duration_ms: 56.959206
+      type: 'test'
+      ...
+    # Subtest: membership revocation denies fresh requests and completed retries despite retained child membership
+    ok 5 - membership revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 23.366663
+      type: 'test'
+      ...
+    # Subtest: entity revocation denies fresh requests and completed retries despite retained child membership
+    ok 6 - entity revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 21.893308
+      type: 'test'
+      ...
+    # Subtest: missing-adapter revocation denies fresh requests and completed retries despite retained child membership
+    ok 7 - missing-adapter revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 18.425612
+      type: 'test'
+      ...
+    # Subtest: throwing-adapter revocation denies fresh requests and completed retries despite retained child membership
+    ok 8 - throwing-adapter revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 19.873715
+      type: 'test'
+      ...
+    # Subtest: parent-archive revocation denies fresh requests and completed retries despite retained child membership
+    ok 9 - parent-archive revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 24.336286
+      type: 'test'
+      ...
+    # Subtest: thread-archive revocation denies fresh requests and completed retries despite retained child membership
+    ok 10 - thread-archive revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 18.586493
+      type: 'test'
+      ...
+    # Subtest: missing entity adapter denies initial setup without any leakage
+    ok 11 - missing entity adapter denies initial setup without any leakage
+      ---
+      duration_ms: 8.336491
+      type: 'test'
+      ...
+    # Subtest: denying entity adapter denies initial setup without any leakage
+    ok 12 - denying entity adapter denies initial setup without any leakage
+      ---
+      duration_ms: 7.746095
+      type: 'test'
+      ...
+    # Subtest: throwing entity adapter denies initial setup without any leakage
+    ok 13 - throwing entity adapter denies initial setup without any leakage
+      ---
+      duration_ms: 8.160174
+      type: 'test'
+      ...
+    # Subtest: setup-recheck entity adapter denies initial setup without any leakage
+    ok 14 - setup-recheck entity adapter denies initial setup without any leakage
+      ---
+      duration_ms: 8.58292
+      type: 'test'
+      ...
+    # Subtest: tenant and user isolation deny setup using another actor's parent membership
+    ok 15 - tenant and user isolation deny setup using another actor's parent membership
+      ---
+      duration_ms: 9.106227
+      type: 'test'
+      ...
+    # Subtest: relationship changes after discovery are rejected under parent-before-child locks
+    ok 16 - relationship changes after discovery are rejected under parent-before-child locks
+      ---
+      duration_ms: 17.330322
+      type: 'test'
+      ...
+    # Subtest: invalid first cursor mutation rolls back participant setup
+    ok 17 - invalid first cursor mutation rolls back participant setup
+      ---
+      duration_ms: 13.065445
+      type: 'test'
+      ...
+    # Subtest: outbox failure rolls back new and retained participant state, cursor, preference, audit and claim
+    ok 18 - outbox failure rolls back new and retained participant state, cursor, preference, audit and claim
+      ---
+      duration_ms: 47.555116
+      type: 'test'
+      ...
+    1..18
+ok 1 - thread cursors use current parent authority and preserve retained state
+  ---
+  duration_ms: 823.670004
+  type: 'test'
+  ...
+# Real PostgreSQL 15.19 (Debian 15.19-0+deb12u1); url-backed, isolated schema and canonical migrations
+1..1
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1026.681239
+ remaining_test_schemas 
+------------------------
+                      0
+(1 row)
+
+waiting for server to shut down.... done
+server stopped

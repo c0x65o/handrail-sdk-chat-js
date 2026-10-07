@@ -1,0 +1,27 @@
+{
+  "canonicalFiles": 114,
+  "removals": [],
+  "delta": [
+    {
+      "path": "test/shared-fixtures/composer-layout-browser.mjs",
+      "action": "add",
+      "beforeSha256": null,
+      "afterSha256": "05a32752c840e4225542869f7596b10fd8e83cb923529e48b3aa6d8cbfa344f2",
+      "bytes": 1877
+    },
+    {
+      "path": "test/shared-fixtures/sender-layout-browser.mjs",
+      "action": "add",
+      "beforeSha256": null,
+      "afterSha256": "f4ec74a432e9c9a26dabc642bcee724440f4d483aaf6c53674a1edd2a4cce8e2",
+      "bytes": 4419
+    },
+    {
+      "path": "shared-contracts.lock.json",
+      "action": "update",
+      "beforeSha256": "71266cedbebe39132a72a7848b9dbbaf6ea8c9fc3d113f4db89033ce55943231",
+      "afterSha256": "7a976c19b2382704a4e310671636c2d113ffd9e3db34ea84dedf05c47e5df6bc",
+      "bytes": 13512
+    }
+  ]
+}

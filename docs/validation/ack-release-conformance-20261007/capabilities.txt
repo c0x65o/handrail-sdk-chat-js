@@ -1,0 +1,56 @@
+
+> @handrail/chat@1.0.54 check:capabilities
+> node --test --test-concurrency=1 cross-repo-tests/cross-client-capabilities.test.mjs
+
+TAP version 13
+# Subtest: the checked-in cross-client capability manifest is valid
+ok 1 - the checked-in cross-client capability manifest is valid
+  ---
+  duration_ms: 1234.732209
+  type: 'test'
+  ...
+# Subtest: capability IDs and statuses use closed vocabularies
+ok 2 - capability IDs and statuses use closed vocabularies
+  ---
+  duration_ms: 3.425313
+  type: 'test'
+  ...
+# Subtest: the manifest exactly covers the independently reviewed family registry
+ok 3 - the manifest exactly covers the independently reviewed family registry
+  ---
+  duration_ms: 4.605162
+  type: 'test'
+  ...
+# Subtest: every capability has exactly the five required surfaces
+ok 4 - every capability has exactly the five required surfaces
+  ---
+  duration_ms: 2.877351
+  type: 'test'
+  ...
+# Subtest: supported entries require well-formed, publicly reachable citations
+ok 5 - supported entries require well-formed, publicly reachable citations
+  ---
+  duration_ms: 176.175982
+  type: 'test'
+  ...
+# Subtest: unsupported entries require a concrete host or product reason
+ok 6 - unsupported entries require a concrete host or product reason
+  ---
+  duration_ms: 84.822672
+  type: 'test'
+  ...
+# Subtest: known parity boundaries remain explicit
+ok 7 - known parity boundaries remain explicit
+  ---
+  duration_ms: 1.351276
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1573.604371

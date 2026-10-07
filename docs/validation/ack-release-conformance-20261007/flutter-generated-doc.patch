@@ -1,0 +1,170 @@
+diff --git a/docs/releasing.md b/docs/releasing.md
+index 7bcd61a..55c4dfe 100644
+--- a/docs/releasing.md
++++ b/docs/releasing.md
+@@ -45,3 +45,37 @@ maintain a second version sequence in Dart.
+ There is no package-registry publication or deployment step. Full runtime,
+ threads/settings, UI and huddle/media QA remain separate gates. Hitcents ERP
+ changes still require the owner's readiness/integration approval.
++
++## Read acknowledgement and decoration release scope (2026-10-07)
++
++The reviewed decoration correction is qualified on Flutter 3.19.0/Dart 3.3.0
++and 3.41.7/Dart 3.11.5. Reuse its exact source/lock and layout, lifetime,
++compiler and ordinary-browser evidence in
++[the independent review](validation/ack-release-review-20261007/review.txt)
++when those runtime bytes are unchanged. This does not clear the historical
++13 full-analysis infos, seven full-suite failures, semantics-enabled toolbar
++typing failure, device/provider/staging checks or Preview 126/120 acceptance.
++
++Published Flutter 0.1.32 already requires the canonical HTTP read outcome,
++including `reconciliationStatus` and the request's `idempotencyKey`. Its
++parser/read runtime/visibility bytes are unchanged in 0.1.33 and this candidate;
++the corrected JS server supplies the missing fields. Do not relax Flutter
++parsing or send transport metadata into strict canonical Result/event helpers.
++
++The companion JS `docs/releasing.md` records the actual eight-case public HTTP
++matrix: old non-durable JS 1.0.54 readers reject the corrected server, whereas
++the candidate non-durable reader also works with the legacy server. Upgrade
++those readers first, or coordinate the reader/server rollout. Durable JS and
++Flutter need the corrected server; the reader patch alone cannot make the
++legacy producer's incomplete outcome valid. Other historical JS pins are not
++blanket-qualified. Preview's root server/React upgrade and exact installed
++consumer checks remain parent-owned and separate from this Flutter publication.
++
++JS owns the shared snapshot. Use its `scripts/sync-flutter-contracts.mjs` for
++the exact vendor fixtures and lock, then verify the intended pair with
++`check:flutter-contracts`, `check:capabilities` and bounded `check:conformance`.
++Paired CI uses the frozen `sdk-compatibility.json` revision; a passing sibling
++workspace pair does not certify that separate frozen pin. Publish only the
++reconciled reviewed sources through native finalization, verify the immutable
++commit and version mirror, then install public HTTPS full-SHA pins and matching
++locks for the combined consumer acceptance.
+diff --git a/shared-contracts.lock.json b/shared-contracts.lock.json
+index 05bf4cf..8a16740 100644
+--- a/shared-contracts.lock.json
++++ b/shared-contracts.lock.json
+@@ -97,6 +97,7 @@
+     "test/shared-fixtures/browser-thread-creation.ts": "2273e9c9b50586990f4ae6afdd85d87bbcb5ba5f034ef2aa9050a324f2009b93",
+     "test/shared-fixtures/browser-thread-follow-mutation.ts": "808105708f4609ea7b196ffddf06182c36b16d1e117e6d00cd4a8974721a4ec8",
+     "test/shared-fixtures/browser-ui.ts": "43a26caed9f9a2063a1da57be15787129d4579fc405b68504588b89dc205783d",
++    "test/shared-fixtures/composer-layout-browser.mjs": "05a32752c840e4225542869f7596b10fd8e83cb923529e48b3aa6d8cbfa344f2",
+     "test/shared-fixtures/conversation-membership-mutations.mjs": "16475c1ca1d09ad719694dfc9f50b74a2896b9994194e90c647abf251e41b4d9",
+     "test/shared-fixtures/conversation-preference-mutations.mjs": "96cfc8fdca3a84268ee9b814d11232d0b49b3117113e0358d2c16caff0c2f54f",
+     "test/shared-fixtures/declarations.ts": "b9ba90fc52bf4c1366ac1f1420a57541fb853a55d6fb016d4dccebd57c8eb576",
+@@ -109,6 +110,7 @@
+     "test/shared-fixtures/react-ui-consumer.mjs": "f3f565b9ee7abb44672323fd6128c3be1b9cdcdfca88280ed0fe8317b26c5803",
+     "test/shared-fixtures/reply-style-preference.json": "df0921e46c0192f884657ac27b08dc970b07fa1a8958a6bdde8d2446a83c6b06",
+     "test/shared-fixtures/saved-message-mutations.mjs": "e916ce0156701589374a361ba3f5131a1afc4d980aa85b41fbc24d2e9003bb61",
++    "test/shared-fixtures/sender-layout-browser.mjs": "f4ec74a432e9c9a26dabc642bcee724440f4d483aaf6c53674a1edd2a4cce8e2",
+     "test/shared-fixtures/thread-follow-mutations.mjs": "cd12bbd2e36623186ad6700377abf92f649efba6be463823d2fe7fd17a8a02b4",
+     "test/shared-fixtures/thread-lifecycle-http.json": "04b61f151b91cb9eae9975f45f899c7feb79e5c1f43642977326ea295f57fc98",
+     "test/shared-fixtures/thread-list.json": "0569e8a60f7db48d6a4e1f22fa81a7033b94215f5150053ea9df28e5673bdf75",
+diff --git a/test/shared-fixtures/composer-layout-browser.mjs b/test/shared-fixtures/composer-layout-browser.mjs
+new file mode 100644
+index 0000000..7dfe4e7
+--- /dev/null
++++ b/test/shared-fixtures/composer-layout-browser.mjs
+@@ -0,0 +1,29 @@
++import React, { useState } from 'react';
++import { createRoot } from 'react-dom/client';
++import { flushSync } from 'react-dom';
++import { DefaultMessageComposerRenderer } from '../../dist/ui/message-composer.js';
++
++const root = createRoot(document.getElementById('fixture'));
++function Composer({ options }) {
++  const [text, setText] = useState(options.draft === 'empty' ? '' : 'A short draft');
++  const [format, setFormat] = useState('plain');
++  const controls = {
++    setText, setFormat, insertMention() {}, async send() {}, async retrySend() {}, async retryDraft() {},
++    addAttachments() {}, cancelAttachment() {}, removeAttachment() {}, blur() {}, clearReply() {},
++    setReplyNotifyAuthor() {}, async retryReplySource() {}, selectReply() {},
++  };
++  return React.createElement(DefaultMessageComposerRenderer, {
++    conversation: { id: 'fixture-channel', type: 'channel', name: 'Composer qualification', visibility: 'private' },
++    hostProps: { className: 'handrail-chat__composer', onSubmit: event => event.preventDefault() },
++    controls,
++    state: {
++      inputLabel: 'Message', placeholder: 'Write a message', text, format,
++      attachments: [], mentions: [], mentionParticipants: [], disabled: false, readOnly: false,
++      attachmentDisabledReason: options.attachments === 'enabled' ? undefined : options.attachments,
++      isSending: options.feedback === 'sending', canSubmit: text.length > 0 && options.feedback !== 'sending',
++      status: options.feedback === 'sending' ? { kind: 'sending', message: 'Sending message…' } : { kind: 'draft', message: '' },
++      ...(options.feedback === 'error' ? { sendError: 'Message could not be sent. Please try again.', failedClientMessageId: 'fixture-failed' } : {}),
++    },
++  });
++}
++window.renderComposer = options => flushSync(() => root.render(React.createElement(Composer, { key: JSON.stringify(options), options })));
+diff --git a/test/shared-fixtures/sender-layout-browser.mjs b/test/shared-fixtures/sender-layout-browser.mjs
+new file mode 100644
+index 0000000..19f8b21
+--- /dev/null
++++ b/test/shared-fixtures/sender-layout-browser.mjs
+@@ -0,0 +1,67 @@
++// Real public components and normalized cache; synthetic directory/query edges only.
++import React from 'react';
++import { createRoot } from 'react-dom/client';
++import { CHAT_PROTOCOL_VERSION } from '@handrail/chat';
++import { CHAT_CLIENT_PACKAGE_VERSION, createNormalizedChatCache } from '@handrail/chat/client';
++import { ChatContext } from '@handrail/chat/react';
++import { MessageTimeline, ThreadPanel } from '@handrail/chat/ui';
++
++const tenantId = 'sender-layout';
++const userId = 'viewer';
++const now = '2026-10-06T06:29:00.000Z';
++const metadata = {
++  packageVersion: CHAT_CLIENT_PACKAGE_VERSION, protocolVersion: CHAT_PROTOCOL_VERSION,
++  schemaVersion: 1, enabledFeatures: {}, feature: { name: 'conversation_snapshots', version: 1 },
++  supportedProtocolRange: { minimumVersion: CHAT_PROTOCOL_VERSION, maximumVersion: CHAT_PROTOCOL_VERSION },
++};
++const names = [
++  'alexandra.montgomery@design.example.test',
++  'Alexandra Montgomery Customer Support Engineering',
++  'SyntheticSenderIdentifierABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
++];
++const cache = createNormalizedChatCache({ tenantId, userId, sessionId: 'layout-only' });
++const conversation = (id, type) => ({
++  id, tenantId, type, name: 'Sender layout', visibility: 'public',
++  createdAt: now, updatedAt: now, activityAt: now, latestSequence: names.length,
++  ...(type === 'thread' ? { parentConversationId: 'channel', rootMessageId: 'channel-0' } : {}),
++  currentMember: { tenantId, conversationId: id, userId, role: 'member', state: 'active', joinedAt: now, updatedAt: now },
++  currentReadState: { conversationId: id, userId, lastReadSequence: names.length, updatedAt: now },
++  currentPreference: { conversationId: id, userId, notificationPreference: 'all', mute: { muted: false }, updatedAt: now },
++});
++for (const [id, type] of [['channel', 'channel'], ['thread', 'thread']]) {
++  cache.hydrateConversationDetail({ kind: 'conversation_detail', conversation: { ...conversation(id, type), memberUserIds: [userId, 'sender-0', 'sender-1', 'sender-2'] }, _meta: metadata });
++  cache.hydrateMessageTimeline({
++    conversationId: id,
++    messages: names.map((_, index) => ({
++      id: `${id}-${index}`, tenantId, conversationId: id, author: { type: 'user', userId: `sender-${index}` },
++      sequence: index + 1, createdAt: now, updatedAt: now, revision: { revision: 1 },
++      content: { format: 'plain', text: `Readable ${type} message ${index + 1}.` },
++      isThreadRoot: id === 'channel' && index === 0,
++      reactions: [], attachmentMetadata: [],
++      ...(id === 'channel' && index === 0 ? { threadSummary: { threadId: 'thread', replyCount: 3, participantIds: ['sender-0'], unreadCount: 0, lastReplyAt: now } } : {}),
++    })),
++    pagination: { older: { available: false }, newer: { available: false } },
++    replay: { resumeFrom: { eventId: `${id}-event` } },
++  });
++}
++const opening = { state: 'ready', rootMessageId: 'channel-0', parentConversationId: 'channel', threadConversationId: 'thread', reconciliationStatus: 'existing_for_root' };
++const draft = { conversationId: 'thread', status: 'ready', authoritativeRevision: 0, dirty: false };
++const success = async () => ({ status: 'success' });
++const client = {
++  endpoint: '/unused-layout-fixture', cache, state: { state: 'ready', enabledFeatures: {} },
++  selectDirectoryUser: id => ({ kind: 'active', userId: id, displayName: names[Number(id.split('-')[1])] ?? 'Viewer', avatar: { kind: 'initials', initials: 'SS' } }),
++  hydrateDirectoryUsers: success,
++  getConversation: success, getMessageTimeline: success, markRead: success,
++  getThreadOpeningState: () => opening, subscribeThreadOpening: () => () => {}, openThread: async () => opening,
++  selectConversationDraft: () => draft, subscribeConversationDraft: () => () => {},
++  openConversationDraft: async () => draft, closeConversationDraft: success,
++  startTyping: () => true, stopTyping() {},
++};
++const context = { client, state: client.state, readiness: 'ready', isReady: true, refreshRequired: null, error: null };
++const mode = window.senderLayoutMode ?? 'timeline';
++createRoot(document.getElementById('fixture')).render(React.createElement(ChatContext.Provider, { value: context },
++  mode === 'thread'
++    ? React.createElement(ThreadPanel, { rootMessageId: 'channel-0', currentUserId: userId })
++    : React.createElement(MessageTimeline, { conversationId: 'channel', currentUserId: userId }),
++));
++window.senderLayoutNames = names;

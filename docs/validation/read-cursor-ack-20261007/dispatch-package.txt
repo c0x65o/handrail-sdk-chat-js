@@ -1,0 +1,217 @@
+TAP version 13
+# Subtest: dispatch validates before transport and returns only the parsed canonical result
+ok 1 - dispatch validates before transport and returns only the parsed canonical result
+  ---
+  duration_ms: 20.828904
+  type: 'test'
+  ...
+# Subtest: refreshes authentication at most once and reuses one generated idempotency key
+ok 2 - refreshes authentication at most once and reuses one generated idempotency key
+  ---
+  duration_ms: 4.814969
+  type: 'test'
+  ...
+# Subtest: retries safe network and explicit transient failures with deterministic bounded backoff
+ok 3 - retries safe network and explicit transient failures with deterministic bounded backoff
+  ---
+  duration_ms: 4.379728
+  type: 'test'
+  ...
+# Subtest: returns canonical conflict, auth, feature-disabled, and unsupported outcomes without retry
+ok 4 - returns canonical conflict, auth, feature-disabled, and unsupported outcomes without retry
+  ---
+  duration_ms: 4.674078
+  type: 'test'
+  ...
+# Subtest: rejects malformed JSON and structurally malformed successful and error payloads
+ok 5 - rejects malformed JSON and structurally malformed successful and error payloads
+  ---
+  duration_ms: 1.251967
+  type: 'test'
+  ...
+# Subtest: caller abort and close interrupt active fetches with distinct canonical outcomes
+ok 6 - caller abort and close interrupt active fetches with distinct canonical outcomes
+  ---
+  duration_ms: 2.318393
+  type: 'test'
+  ...
+# Subtest: caller abort and close interrupt deterministic backoff and prevent retries
+ok 7 - caller abort and close interrupt deterministic backoff and prevent retries
+  ---
+  duration_ms: 1.487112
+  type: 'test'
+  ...
+# Subtest: diagnostics structurally redact tokens, authorization, thrown secrets, and content
+ok 8 - diagnostics structurally redact tokens, authorization, thrown secrets, and content
+  ---
+  duration_ms: 0.844091
+  type: 'test'
+  ...
+# Subtest: token-provider outage before dispatch is transport and allows manual retry
+ok 9 - token-provider outage before dispatch is transport and allows manual retry
+  ---
+  duration_ms: 0.771812
+  type: 'test'
+  ...
+# Subtest: token-provider outage during refresh is transport and allows manual retry
+ok 10 - token-provider outage during refresh is transport and allows manual retry
+  ---
+  duration_ms: 0.966572
+  type: 'test'
+  ...
+# Subtest: invalid returned token "" remains an authentication failure
+ok 11 - invalid returned token "" remains an authentication failure
+  ---
+  duration_ms: 0.556262
+  type: 'test'
+  ...
+# Subtest: invalid returned token "   " remains an authentication failure
+ok 12 - invalid returned token "   " remains an authentication failure
+  ---
+  duration_ms: 0.377378
+  type: 'test'
+  ...
+# Subtest: invalid returned token null remains an authentication failure
+ok 13 - invalid returned token null remains an authentication failure
+  ---
+  duration_ms: 0.357052
+  type: 'test'
+  ...
+# Subtest: invalid returned token undefined remains an authentication failure
+ok 14 - invalid returned token undefined remains an authentication failure
+  ---
+  duration_ms: 0.360724
+  type: 'test'
+  ...
+# Subtest: invalid returned token 123 remains an authentication failure
+ok 15 - invalid returned token 123 remains an authentication failure
+  ---
+  duration_ms: 3.32733
+  type: 'test'
+  ...
+# Subtest: native version mirror declares the canonical package and exact generated constant template
+ok 16 - native version mirror declares the canonical package and exact generated constant template
+  ---
+  duration_ms: 7.110339
+  type: 'test'
+  ...
+# Subtest: the declared template remains compatible with exact generator bytes across versions
+ok 17 - the declared template remains compatible with exact generator bytes across versions
+  ---
+  duration_ms: 2.939948
+  type: 'test'
+  ...
+# Subtest: compiled client package version agrees with package metadata
+ok 18 - compiled client package version agrees with package metadata
+  ---
+  duration_ms: 2.131012
+  type: 'test'
+  ...
+# Subtest: build refreshes package version while main CI checks committed drift
+ok 19 - build refreshes package version while main CI checks committed drift
+  ---
+  duration_ms: 1.37825
+  type: 'test'
+  ...
+# Subtest: node-tests version gate protects checked-out bytes before install lifecycles
+    # Subtest: stale source fails without installation or regeneration
+    ok 1 - stale source fails without installation or regeneration
+      ---
+      duration_ms: 55.179014
+      type: 'test'
+      ...
+    # node scripts/generate-package-version.mjs --check: exit 1\\nGenerated package-version source is out of date:\\n- src/client/generated/package-version.ts\\nRun npm run generate:package-version. Align package-lock.json version metadata with package.json if listed.
+    # Subtest: aligned source passes and allows normal prepare and explicit build
+    ok 2 - aligned source passes and allows normal prepare and explicit build
+      ---
+      duration_ms: 854.384992
+      type: 'test'
+      ...
+    # node scripts/generate-package-version.mjs --check: exit 0\\nGenerated package-version source is up to date.
+    # npm ci --engine-strict: exit 0\\n> handrail-ci-version-fixture@9.8.8-test preinstall\\n> node scripts/record-lifecycle.mjs preinstall\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test prepare\\n> npm run build\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build\\n\\n\\nup to date in 520ms
+    # npm run build: exit 0\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build
+    # Subtest: former install-first ordering conceals stale checked-out source
+    ok 3 - former install-first ordering conceals stale checked-out source
+      ---
+      duration_ms: 975.61096
+      type: 'test'
+      ...
+    # npm ci: exit 0\\n> handrail-ci-version-fixture@9.8.8-test preinstall\\n> node scripts/record-lifecycle.mjs preinstall\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test prepare\\n> npm run build\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build\\n\\n\\nup to date in 529ms
+    # npm run check:package-version: exit 0\\n> handrail-ci-version-fixture@9.8.8-test check:package-version\\n> node scripts/generate-package-version.mjs --check\\n\\nGenerated package-version source is up to date.
+    # npm run build: exit 0\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build
+    1..3
+ok 20 - node-tests version gate protects checked-out bytes before install lifecycles
+  ---
+  duration_ms: 1888.839622
+  type: 'test'
+  ...
+# Subtest: postgres-integration version gate protects checked-out bytes before install lifecycles
+    # Subtest: stale source fails without installation or regeneration
+    ok 1 - stale source fails without installation or regeneration
+      ---
+      duration_ms: 47.866388
+      type: 'test'
+      ...
+    # node scripts/generate-package-version.mjs --check: exit 1\\nGenerated package-version source is out of date:\\n- src/client/generated/package-version.ts\\nRun npm run generate:package-version. Align package-lock.json version metadata with package.json if listed.
+    # Subtest: aligned source passes and allows normal prepare and explicit build
+    ok 2 - aligned source passes and allows normal prepare and explicit build
+      ---
+      duration_ms: 602.112735
+      type: 'test'
+      ...
+    # node scripts/generate-package-version.mjs --check: exit 0\\nGenerated package-version source is up to date.
+    # npm ci: exit 0\\n> handrail-ci-version-fixture@9.8.8-test preinstall\\n> node scripts/record-lifecycle.mjs preinstall\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test prepare\\n> npm run build\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build\\n\\n\\nup to date in 484ms
+    # Subtest: former install-first ordering conceals stale checked-out source
+    ok 3 - former install-first ordering conceals stale checked-out source
+      ---
+      duration_ms: 906.073246
+      type: 'test'
+      ...
+    # npm ci: exit 0\\n> handrail-ci-version-fixture@9.8.8-test preinstall\\n> node scripts/record-lifecycle.mjs preinstall\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test prepare\\n> npm run build\\n\\n\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build\\n\\n\\nup to date in 448ms
+    # npm run check:package-version: exit 0\\n> handrail-ci-version-fixture@9.8.8-test check:package-version\\n> node scripts/generate-package-version.mjs --check\\n\\nGenerated package-version source is up to date.
+    # npm run build: exit 0\\n> handrail-ci-version-fixture@9.8.8-test build\\n> node scripts/generate-package-version.mjs && node scripts/record-lifecycle.mjs build
+    1..3
+ok 21 - postgres-integration version gate protects checked-out bytes before install lifecycles
+  ---
+  duration_ms: 1558.961654
+  type: 'test'
+  ...
+# Subtest: npm version lifecycle regenerates the browser package version
+ok 22 - npm version lifecycle regenerates the browser package version
+  ---
+  duration_ms: 329.02276
+  type: 'test'
+  ...
+# Subtest: package.json deterministically drives the generated browser package version
+ok 23 - package.json deterministically drives the generated browser package version
+  ---
+  duration_ms: 2.980812
+  type: 'test'
+  ...
+# Subtest: check mode detects a generated browser package version that trails the manifest
+ok 24 - check mode detects a generated browser package version that trails the manifest
+  ---
+  duration_ms: 84.605593
+  type: 'test'
+  ...
+# Subtest: version check rejects missing, malformed, or independently stale lock metadata without rewriting it
+ok 25 - version check rejects missing, malformed, or independently stale lock metadata without rewriting it
+  ---
+  duration_ms: 224.241445
+  type: 'test'
+  ...
+# Subtest: every SDK CI installation is preceded by the dependency-free committed version gate
+ok 26 - every SDK CI installation is preceded by the dependency-free committed version gate
+  ---
+  duration_ms: 2.338561
+  type: 'test'
+  ...
+1..26
+# tests 32
+# suites 0
+# pass 32
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4375.456567

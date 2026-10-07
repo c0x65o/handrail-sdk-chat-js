@@ -1,0 +1,153 @@
+Read cursor acknowledgement producer repair — workspace candidate, 2026-10-07
+
+Verdict: the producer defect was reproduced and repaired. No release or Preview
+acceptance is claimed. JS base is 1.0.54 / 248fb8890b8e7e1ba15799aff06ef48156cca451.
+The package version and lockfile remain unchanged for parent-owned publication.
+
+Production delta: exactly three files, 61 insertions / 55 deletions (including
+moving the existing nonthread lock query ahead of the completed-replay branch).
+- src/server/update-read-cursor-command.ts returns ReadCursorMutationOutcome.
+  createReadCursorMutationOutcome validates fresh applied and completed replayed
+  envelopes against the exact parsed input, before commit. An unchanged intent
+  with a new key is applied; the same completed key is replayed.
+- src/server/create-chat-server.ts validates and serializes that outcome rather
+  than the older result. Both mark_read and mark_unread echo the exact key.
+- src/client/read-state.ts allows the public non-durable JS client to consume
+  complete outcomes, binding their operation/conversation/key/sequence. It still
+  accepts legacy fieldless results from older servers. Either metadata field
+  triggers complete validation. Durable clients still require complete outcomes.
+
+production.patch SHA-256:
+6ab3aae1914f849213ec76c13565c36b310d91d513bb0f0414215ae40fd11767
+Candidate source fingerprint:
+fc0d79b3f10afe571a9f9b12cac98086265b62676d70f4088c9ceb39398f9c50
+Candidate built package fingerprint:
+3fa973e3731371f0ffa65e65470bfbcf8b616438723cdc94d2863a7f7298e2a2
+Per-file SHA-256, Git blob IDs, peer custody and capacity: candidate-hashes.json.
+
+Storage / authorization compatibility
+
+No schema, migration, stored receipt format, event format, CAS predicate, request
+hash, identity scope, TTL, timestamp ordering, or mutation SQL changed. Fresh
+claims still store the legacy immutable canonical result. The transport envelope
+is constructed separately, so old rows and new rows can both replay; snapshots
+prove replay changes no receipt data, cursor timestamp, audit or outbox content.
+Legacy rows were explicitly seeded and replayed without conversion or history
+rewrites. An expired but unpruned receipt retains its existing same-hash replay /
+different-hash conflict behavior; maintenance remains responsible for expiry.
+
+Thread authorization keeps parent-before-child locks and current parent/entity
+checks before completed replay. Nonthread completed replay formerly bypassed
+current membership. The exact existing nonthread conversation/member lock and
+membership check now execute before replay too. Child participant setup remains
+fresh-intent-only. Fresh authorization failures retain their established safe
+error shapes. No new archive/entity policy for nonthreads is introduced.
+
+Compatibility constraint for publication: previously installed non-durable JS
+clients use a strict legacy parser and will reject a complete outcome. Candidate
+JS fixes that path; coordinate JS client/server pins in the parent release. This
+patch does not introduce wire negotiation or modify any consumer. Older direct
+command callers that pass whole results into the strict legacy result/event
+parser must use the canonical outcome API or project the legacy result fields.
+The existing result/event contract itself remains strict and unchanged.
+
+Reproduction and PostgreSQL proof
+
+The before build used unmodified production at the base SHA with new assertions.
+Actual isolated PostgreSQL command and HTTP tests failed on missing idempotencyKey
+and reconciliationStatus (before-postgres-retry.txt: 9 pass / 20 fail including
+suite parents and downstream assertions after earlier subtest failures). This
+is a real producer reproduction, not a simulated database or HTTP-only fake.
+
+Final pg-http-clients-final.txt: 56 passed, zero failed/skipped. PostgreSQL 15.19,
+createPostgresTestBackend, unique schemas, all canonical migrations, pool max 4,
+Node concurrency 1. Native cluster: private Unix socket, TCP disabled, 20 max
+connections, 32MB buffers. Only isolated test data was changed. The final schema
+count was zero and every owned cluster was stopped; local cluster artifacts are
+retained in ignored build directories. No live database/provider was contacted.
+
+Coverage includes first writes and no-ops for both operations; same-key / lost
+ack replay; changed sequence, operation and conversation under one key; tenant
+and user isolation; wrong identity; revoked current and parent/entity access;
+old read replay after manual unread and old unread replay after newer read;
+concurrent read duplicates and unread duplicates, opposing read/unread intents;
+legacy receipts, expiry binding, rollback, fractional claim precision, future
+cursor ordering, parent-before-child relationship races and retained state.
+Public JS markRead/markUnread also settle through the real HTTP server.
+
+Published Flutter .32 proof
+
+Exact source: 2d095ba5a0f86e4aa0b12ba8432500e3edfb576f, version 0.1.32.
+prepare-flutter32.py extracts immutable source fixtures from this project's Git
+object store and authenticates the owning parser/runtime and package version
+against public HTTPS raw URLs. flutter32-source.json records URLs and hashes.
+No installed cache, SDK source, companion file, or Flutter workspace file was
+patched. No toolchain was downloaded/copied. Source fixtures use the existing
+Dart 3.11.5 binary and an offline-resolved, locked third-party test harness
+(dart-harness.lock). This is source-runtime proof, not final installed acceptance.
+The generated read-cursor Dart bytes exactly match current canonical JS output
+(SHA-256 e1f4c2318549bf5b7dec60ec42560bf529f9cca63f2262fbaa89c585f96a5ff8).
+
+94 unmodified published tests pass: generated parser, read-cursor runtime,
+visibility coordinator, durable resource reducer. In the live proof, unchanged
+public HandrailChatClient talks to candidate createChatServer over local HTTP
+backed by real PostgreSQL. The coordinator uses its default 500ms exposure and
+2s retry policy through an injected clock/scheduler; server responses carry no
+injected success metadata. PostgreSQL is checked after the child exits.
+
+Observed live cases:
+- Valid read: one HTTP request, accepted cursor 6, no scheduled 2s retry.
+- Manual unread: applied and replayed accepted; marker 4 retained.
+- Lost ack after commit: one 2s retry with the exact same request/key, replayed,
+  one durable write/audit. Malformed response and wrong-user controls behave
+  likewise, with the first response rejected.
+- Denied actor: bounded two requests, no cursor committed, no further retry.
+- 429 edge control: honors Retry-After 12s, then one successful application;
+  no extra visibility retry. Disposal drains scheduling.
+Negative controls modify only the test transport edge; production code and the
+public parser/runtime remain unmodified. No cadence or rate settings changed.
+
+Other verification
+
+Build, full source/contracts typecheck, scoped command/server compile, package
+exports/inclusion dry-run, canonical read-cursor TS/Dart generation and diff
+whitespace check pass. Focused JS checks: 106 pass. Dispatcher/package checks:
+32 pass. Retry-After checks: 16 pass. Full CI and the long Preview workload were
+not rerun; checks remain focused under the requested five-minute full-CI limit.
+See checks.json for evidence filenames.
+
+Whole-repository check:flutter-contracts FAILED on three unrelated committed
+peer snapshot differences: missing composer-layout-browser.mjs and
+sender-layout-browser.mjs, plus the stale shared-contracts.lock.json. No
+read-cursor drift. unrelated-sync-drift.json shows the relevant inputs and
+absent files match their committed heads.
+This failed check remains a parent review item; it was not repaired or waived.
+
+All failed attempts are retained, including: Unix socket path too long at first
+PG startup (fixed by shorter private path); initial Python archive filter API
+unsupported by the worker (used checked archive members); the expiry fixture
+incorrectly attempted immutable history modification, then incorrectly expected
+expired-key reuse (corrected to the documented SQL contract); initial Dart
+harness dependency/language mismatch and read-only pub active_roots bookkeeping
+(corrected by offline resolution with private bookkeeping and existing hosted
+bytes); live Retry-After test initially failed to advance its injected wait
+clock (paired clock/wait fixed). These were harness failures, not suppressed
+production failures. Original before/after logs and later passing logs coexist.
+
+Release delta and remaining acceptance
+
+Parent must review/publish a new JS version/SHA, update authorized consumer pins
+and matching locks through the normal HTTPS Git install/build pipeline, and run
+exact installed acceptance using the unchanged driver. No migration or Flutter
+parser relaxation is needed. No release version was selected in this workspace.
+At most the two previously demonstrated first-window mark_read requests are
+candidates for removal. The 126/120 acceptance failure remains until final
+published pins and unchanged-driver measurement prove otherwise.
+
+No commits, pushes, PRs, deployments, Handrail DB/queue writes, consumer/platform
+edits, credential/access changes, or live provider effects were performed.
+Flutter .33 retains its original pending composer/test/evidence changes; the
+companion remains clean. Capacity was ~41GiB available initially and ~40GiB at
+completion, with existing toolchains reused. Handrail current_context confirmed
+the active request. Attached KB and repository test/contract guidance were read;
+no applicable AGENTS.md was present.

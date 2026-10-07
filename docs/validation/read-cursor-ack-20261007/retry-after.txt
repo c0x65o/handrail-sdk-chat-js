@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: Retry-After 0
+ok 1 - Retry-After 0
+  ---
+  duration_ms: 23.058576
+  type: 'test'
+  ...
+# Subtest: Retry-After Tue, 06 Oct 2026 18:00:00 GMT
+ok 2 - Retry-After Tue, 06 Oct 2026 18:00:00 GMT
+  ---
+  duration_ms: 1.557791
+  type: 'test'
+  ...
+# Subtest: Retry-After 60
+ok 3 - Retry-After 60
+  ---
+  duration_ms: 1.121856
+  type: 'test'
+  ...
+# Subtest: Retry-After Tue, 06 Oct 2026 19:02:00 GMT
+ok 4 - Retry-After Tue, 06 Oct 2026 19:02:00 GMT
+  ---
+  duration_ms: 1.120524
+  type: 'test'
+  ...
+# Subtest: Retry-After undefined
+ok 5 - Retry-After undefined
+  ---
+  duration_ms: 2.206305
+  type: 'test'
+  ...
+# Subtest: Retry-After garbage
+ok 6 - Retry-After garbage
+  ---
+  duration_ms: 1.212515
+  type: 'test'
+  ...
+# Subtest: Retry-After -1
+ok 7 - Retry-After -1
+  ---
+  duration_ms: 0.926583
+  type: 'test'
+  ...
+# Subtest: Retry-After Infinity
+ok 8 - Retry-After Infinity
+  ---
+  duration_ms: 0.806816
+  type: 'test'
+  ...
+# Subtest: Retry-After 9999999999999999999999999999999999999999
+ok 9 - Retry-After 9999999999999999999999999999999999999999
+  ---
+  duration_ms: 4.923777
+  type: 'test'
+  ...
+# Subtest: overlapping cooldown gates retries and new commands; success cannot shorten it
+ok 10 - overlapping cooldown gates retries and new commands; success cannot shorten it
+  ---
+  duration_ms: 9.918171
+  type: 'test'
+  ...
+# Subtest: abort while waiting prevents retries
+ok 11 - abort while waiting prevents retries
+  ---
+  duration_ms: 0.957353
+  type: 'test'
+  ...
+# Subtest: close while waiting prevents retries
+ok 12 - close while waiting prevents retries
+  ---
+  duration_ms: 0.495472
+  type: 'test'
+  ...
+# Subtest: bounded attempts and retry-never retain final-response cooldown
+ok 13 - bounded attempts and retry-never retain final-response cooldown
+  ---
+  duration_ms: 0.803751
+  type: 'test'
+  ...
+# Subtest: uncertain admission then 429 retains identity and one successful side effect
+ok 14 - uncertain admission then 429 retains identity and one successful side effect
+  ---
+  duration_ms: 0.988064
+  type: 'test'
+  ...
+# Subtest: native fetch propagates actual HTTP Retry-After through public client
+ok 15 - native fetch propagates actual HTTP Retry-After through public client
+  ---
+  duration_ms: 32.37627
+  type: 'test'
+  ...
+# Subtest: a shorter overlapping 429 cannot shorten the existing deadline
+ok 16 - a shorter overlapping 429 cannot shorten the existing deadline
+  ---
+  duration_ms: 4.995314
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 225.899442

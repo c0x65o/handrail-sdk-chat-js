@@ -1,0 +1,55 @@
+[
+  {
+    "check": "pre-generation package guard/build/full source and contracts typecheck/canonical generation",
+    "result": "passed",
+    "evidence": [
+      "build.txt",
+      "typecheck.txt",
+      "canonical-generation.txt"
+    ]
+  },
+  {
+    "check": "baseline/candidate real HTTP public JS compatibility matrix",
+    "result": "passed",
+    "matrixCases": 8,
+    "actualPatchExchanges": 20,
+    "evidence": [
+      "matrix-qualified.txt",
+      "matrix.json",
+      "strict-boundaries.json"
+    ]
+  },
+  {
+    "check": "PostgreSQL/HTTP/JS/unmodified Flutter .32 proof",
+    "result": "passed",
+    "tests": 56,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": [
+      "pg-http-flutter32.txt"
+    ]
+  },
+  {
+    "check": "focused JS parser/durable/retry/dispatcher/export/generation",
+    "result": "passed",
+    "tests": 154,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": [
+      "focused-js.txt"
+    ]
+  },
+  {
+    "check": "shared Flutter contract snapshot, current and committed baseline heads",
+    "result": "failed",
+    "evidence": [
+      "contract-sync.txt"
+    ],
+    "remaining": "Canonical sync two browser fixtures and lock; rerun affected paired conformance."
+  },
+  {
+    "check": "full CI/installed consumer/unchanged Preview driver/live native staging",
+    "result": "not_run",
+    "remaining": "Parent-owned acceptance; no five-minute full-CI auto-skip event claimed."
+  }
+]

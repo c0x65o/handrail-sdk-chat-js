@@ -1,0 +1,5 @@
+2026-10-07 09:22:58.323 CDT [124] LOG:  starting PostgreSQL 15.19 (Debian 15.19-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-10-07 09:22:58.323 CDT [124] LOG:  Unix-domain socket path "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/read-cursor-ack/pg.7cTHoZ/.s.PGSQL.5432" is too long (maximum 107 bytes)
+2026-10-07 09:22:58.323 CDT [124] WARNING:  could not create Unix-domain socket in directory "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/build/read-cursor-ack/pg.7cTHoZ"
+2026-10-07 09:22:58.324 CDT [124] FATAL:  could not create any Unix-domain sockets
+2026-10-07 09:22:58.324 CDT [124] LOG:  database system is shut down

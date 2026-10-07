@@ -919,38 +919,38 @@ export function createChatReadStateRuntime(
     queue.mutations.shift();
     queue.active = mutation;
 
+    // Non-durable clients also accept legacy servers. If either outcome field
+    // is present, validate the complete envelope against this exact request.
+    const parseResult = (value: unknown): ReadCursorMutationResult => {
+      if (mutation.durable === undefined && typeof value === "object" &&
+          value !== null && !("reconciliationStatus" in value) &&
+          !("idempotencyKey" in value)) {
+        return parseReadCursorMutationResult(value);
+      }
+      return parseReadCursorMutationOutcome(value, mutation.input);
+    };
     let result: MutationResult;
     if (mutation.input.operation === "mark_read") {
-      const descriptor = mutation.durable === undefined
-        ? markReadDescriptor
-        : {
-            ...markReadDescriptor,
-            parseResult(value: unknown): MarkReadResult {
-              const parsed = parseReadCursorMutationOutcome(
-                value,
-                mutation.input as MarkReadInput,
-              );
-              if (parsed.operation !== "mark_read") throw new TypeError("unexpected operation");
-              return parsed;
-            },
-          };
+      const descriptor = {
+        ...markReadDescriptor,
+        parseResult(value: unknown): MarkReadResult {
+          const parsed = parseResult(value);
+          if (parsed.operation !== "mark_read") throw new TypeError("unexpected operation");
+          return parsed;
+        },
+      };
       result = await options.dispatch(descriptor, mutation.input, {
         idempotencyKey: mutation.input.idempotencyKey,
       });
     } else {
-      const descriptor = mutation.durable === undefined
-        ? markUnreadDescriptor
-        : {
-            ...markUnreadDescriptor,
-            parseResult(value: unknown): MarkUnreadResult {
-              const parsed = parseReadCursorMutationOutcome(
-                value,
-                mutation.input as MarkUnreadInput,
-              );
-              if (parsed.operation !== "mark_unread") throw new TypeError("unexpected operation");
-              return parsed;
-            },
-          };
+      const descriptor = {
+        ...markUnreadDescriptor,
+        parseResult(value: unknown): MarkUnreadResult {
+          const parsed = parseResult(value);
+          if (parsed.operation !== "mark_unread") throw new TypeError("unexpected operation");
+          return parsed;
+        },
+      };
       result = await options.dispatch(descriptor, mutation.input, {
         idempotencyKey: mutation.input.idempotencyKey,
       });

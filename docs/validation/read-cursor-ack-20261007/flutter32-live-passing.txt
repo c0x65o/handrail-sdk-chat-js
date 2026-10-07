@@ -1,0 +1,103 @@
+postgres (PostgreSQL) 15.19 (Debian 15.19-0+deb12u1)
+waiting for server to start.... done
+server started
+TAP version 13
+# Subtest: command: complete immutable read cursor acknowledgements
+    # Subtest: first application, no-op, lost acknowledgement and later intent retain exact receipts
+    ok 1 - first application, no-op, lost acknowledgement and later intent retain exact receipts
+      ---
+      duration_ms: 103.844293
+      type: 'test'
+      ...
+    # Subtest: legacy completed receipt is returned without rewriting any historical data
+    ok 2 - legacy completed receipt is returned without rewriting any historical data
+      ---
+      duration_ms: 9.284665
+      type: 'test'
+      ...
+    # Subtest: same key is isolated by tenant and actor
+    ok 3 - same key is isolated by tenant and actor
+      ---
+      duration_ms: 25.084651
+      type: 'test'
+      ...
+    # Subtest: completed thread replay rechecks entity and parent access
+    ok 4 - completed thread replay rechecks entity and parent access
+      ---
+      duration_ms: 33.584597
+      type: 'test'
+      ...
+    # Subtest: concurrent duplicates commit once and expired keys retain claim semantics
+    ok 5 - concurrent duplicates commit once and expired keys retain claim semantics
+      ---
+      duration_ms: 37.124178
+      type: 'test'
+      ...
+    1..5
+ok 1 - command: complete immutable read cursor acknowledgements
+  ---
+  duration_ms: 700.416813
+  type: 'test'
+  ...
+# PostgreSQL 15.19 (Debian 15.19-0+deb12u1); isolated schema; canonical migrations
+# Subtest: HTTP: complete immutable read cursor acknowledgements
+    # Subtest: first application, no-op, lost acknowledgement and later intent retain exact receipts
+    ok 1 - first application, no-op, lost acknowledgement and later intent retain exact receipts
+      ---
+      duration_ms: 164.787528
+      type: 'test'
+      ...
+    # Subtest: legacy completed receipt is returned without rewriting any historical data
+    ok 2 - legacy completed receipt is returned without rewriting any historical data
+      ---
+      duration_ms: 12.046249
+      type: 'test'
+      ...
+    # Subtest: same key is isolated by tenant and actor
+    ok 3 - same key is isolated by tenant and actor
+      ---
+      duration_ms: 44.304393
+      type: 'test'
+      ...
+    # Subtest: completed thread replay rechecks entity and parent access
+    ok 4 - completed thread replay rechecks entity and parent access
+      ---
+      duration_ms: 44.340006
+      type: 'test'
+      ...
+    # Subtest: concurrent duplicates commit once and expired keys retain claim semantics
+    ok 5 - concurrent duplicates commit once and expired keys retain claim semantics
+      ---
+      duration_ms: 47.788551
+      type: 'test'
+      ...
+    # Subtest: unmodified published Flutter .32 runtime against candidate HTTP and PostgreSQL
+    ok 6 - unmodified published Flutter .32 runtime against candidate HTTP and PostgreSQL
+      ---
+      duration_ms: 3796.16464
+      type: 'test'
+      ...
+    1..6
+ok 2 - HTTP: complete immutable read cursor acknowledgements
+  ---
+  duration_ms: 4587.225194
+  type: 'test'
+  ...
+# PostgreSQL 15.19 (Debian 15.19-0+deb12u1); isolated schema; canonical migrations
+# valid: requests=1, visibilityRetry=false, Retry-After=[]\\nmark_unread applied/replayed: accepted with unchanged durable receipt\\nlost: requests=2, visibilityRetry=true, Retry-After=[]\\nmalformed: requests=2, visibilityRetry=true, Retry-After=[]\\nwrong-user: requests=2, visibilityRetry=true, Retry-After=[]\\ndenied: requests=2, visibilityRetry=true, Retry-After=[]\\n429: requests=2, visibilityRetry=false, Retry-After=[12]\\n
+1..2
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5522.171189
+ remaining_test_schemas 
+------------------------
+                      0
+(1 row)
+
+waiting for server to shut down.... done
+server stopped

@@ -228,9 +228,9 @@ import {
   MAX_READ_CURSOR_IDEMPOTENCY_KEY_UTF8_BYTES,
   ReadCursorMutationError,
   parseReadCursorMutationInput,
-  parseReadCursorMutationResult,
+  parseReadCursorMutationOutcome,
   type ReadCursorMutationInput,
-  type ReadCursorMutationResult,
+  type ReadCursorMutationOutcome,
 } from "../contracts/read-cursor-mutation.js";
 import {
   MAX_SAVED_MESSAGE_IDENTIFIER_UTF8_BYTES,
@@ -6247,7 +6247,7 @@ const writeThreadFollowJson = (
 
 const writeReadCursorJson = (
   response: ServerResponse,
-  value: ReadCursorMutationResult,
+  value: ReadCursorMutationOutcome,
 ): void => {
   let body: string;
   try {
@@ -8219,7 +8219,7 @@ export function createChatServer<
       schema: databaseConfig.schema,
       requestId,
     });
-    writeReadCursorJson(response, parseReadCursorMutationResult(result));
+    writeReadCursorJson(response, parseReadCursorMutationOutcome(result, input));
   };
 
   const handleDraftSynchronization = async (

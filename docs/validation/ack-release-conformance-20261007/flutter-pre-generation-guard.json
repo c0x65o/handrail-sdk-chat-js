@@ -1,0 +1,19 @@
+{
+  "exit": 0,
+  "seconds": 11.84,
+  "command": [
+    "flutter",
+    "test",
+    "--no-pub",
+    "--concurrency=2",
+    "test/core_import_boundary_test.dart"
+  ],
+  "repository": "handrail-sdk-chat-flutter",
+  "timeout_seconds": 300,
+  "current_toolchain": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/build/ack-release-review/current-flutter",
+  "flutter_dispatcher": "/opt/handrail/repos/handrail/handrail-chat/.huddle-tmp/ack-conformance-runner/bin/flutter",
+  "memory": {
+    "memory.peak": "1031909376",
+    "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+  }
+}

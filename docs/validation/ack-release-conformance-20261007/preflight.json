@@ -1,0 +1,10 @@
+{
+  "reviewedJsProductionPatch": "6ab3aae1914f849213ec76c13565c36b310d91d513bb0f0414215ae40fd11767",
+  "jsProductionFilesVerified": 3,
+  "flutterFinalSourcesVerified": 9,
+  "flutterLibraryFilesVerified": 128,
+  "freeBytes": 38946131968,
+  "freeInodes": 67646406,
+  "minimumSdk": "/opt/handrail/repos/handrail/handrail-chat/.huddle-tmp/ack-review-toolchains/flutter",
+  "currentSdk": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/build/ack-release-review/current-flutter"
+}

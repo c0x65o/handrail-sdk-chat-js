@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { createServer, request as httpRequest } from "node:http";
 import test from "node:test";
 
-import { parseReadCursorMutationResult } from "@handrail/chat";
+import { parseReadCursorMutationOutcome } from "@handrail/chat";
 import {
   CHAT_AUTHENTICATION_ERROR_CODE,
   CHAT_AUTHORIZATION_ERROR_CODE,
@@ -259,6 +259,8 @@ test("PATCH /conversations/:conversationId/read-cursor mounts the private read-s
         const initialJson = await initialResponse.json();
         assert.deepEqual(initialJson, {
           operation: "mark_read",
+          reconciliationStatus: "applied",
+          idempotencyKey: initial.idempotencyKey,
           conversationId: "read-target",
           readState: {
             conversationId: "read-target",
@@ -269,17 +271,19 @@ test("PATCH /conversations/:conversationId/read-cursor mounts the private read-s
           latestSequence: 8,
           unreadCount: 5,
         });
-        assert.deepEqual(parseReadCursorMutationResult(initialJson), initialJson);
+        assert.deepEqual(parseReadCursorMutationOutcome(initialJson, initial), initialJson);
         assert.deepEqual(Object.keys(initialJson), [
           "operation",
           "conversationId",
           "readState",
           "latestSequence",
           "unreadCount",
+          "reconciliationStatus",
+          "idempotencyKey",
         ]);
         assert.equal("tenantId" in initialJson, false);
         assert.equal("roles" in initialJson, false);
-        assert.equal("idempotencyKey" in initialJson, false);
+        assert.equal(initialJson.idempotencyKey, initial.idempotencyKey);
         assert.equal("actorUserId" in initialJson, false);
         assert.equal(initialJson.readState.userId, actor.userId);
 
@@ -315,7 +319,7 @@ test("PATCH /conversations/:conversationId/read-cursor mounts the private read-s
         const beforeRetry = commandConnectCount;
         const retry = await request(route("retry-target"), input);
         assert.equal(commandConnectCount, beforeRetry + 1);
-        assert.deepEqual(await retry.json(), firstJson);
+        assert.deepEqual(await retry.json(), { ...firstJson, reconciliationStatus: "replayed" });
         assert.deepEqual(
           await sideEffectCounts("retry-target", input.idempotencyKey),
           { cursor_count: 1, audit_count: 1, outbox_count: 1, idempotency_count: 1 },

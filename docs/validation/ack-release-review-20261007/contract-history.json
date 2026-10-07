@@ -1,0 +1,74 @@
+[
+  {
+    "revision": "90bff33529df06720ff89ccd821360ac65eaf0d0",
+    "path": "contracts/http/read-cursor.json",
+    "sha256": "d756d78c53fe868029938c1fb8ec39dbe928ce46dc8fa7e83270bfc0a6cd47b2",
+    "resultFields": [
+      {
+        "name": "operation",
+        "type": "operation"
+      },
+      {
+        "name": "reconciliationStatus",
+        "type": "reconciliationStatus"
+      },
+      {
+        "name": "idempotencyKey",
+        "type": "boundedNonBlankString",
+        "source": "requestEcho"
+      },
+      {
+        "name": "conversationId",
+        "type": "ConversationId"
+      },
+      {
+        "name": "readState",
+        "type": "canonicalReadState"
+      },
+      {
+        "name": "latestSequence",
+        "type": "nonNegativeSafeInteger"
+      },
+      {
+        "name": "unreadCount",
+        "type": "derivedUnreadCount"
+      }
+    ]
+  },
+  {
+    "revision": "248fb8890b8e7e1ba15799aff06ef48156cca451",
+    "path": "contracts/http/read-cursor.json",
+    "sha256": "d756d78c53fe868029938c1fb8ec39dbe928ce46dc8fa7e83270bfc0a6cd47b2",
+    "resultFields": [
+      {
+        "name": "operation",
+        "type": "operation"
+      },
+      {
+        "name": "reconciliationStatus",
+        "type": "reconciliationStatus"
+      },
+      {
+        "name": "idempotencyKey",
+        "type": "boundedNonBlankString",
+        "source": "requestEcho"
+      },
+      {
+        "name": "conversationId",
+        "type": "ConversationId"
+      },
+      {
+        "name": "readState",
+        "type": "canonicalReadState"
+      },
+      {
+        "name": "latestSequence",
+        "type": "nonNegativeSafeInteger"
+      },
+      {
+        "name": "unreadCount",
+        "type": "derivedUnreadCount"
+      }
+    ]
+  }
+]

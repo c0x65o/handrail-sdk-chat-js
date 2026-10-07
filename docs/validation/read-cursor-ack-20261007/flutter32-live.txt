@@ -1,0 +1,122 @@
+postgres (PostgreSQL) 15.19 (Debian 15.19-0+deb12u1)
+waiting for server to start.... done
+server started
+TAP version 13
+# Subtest: command: complete immutable read cursor acknowledgements
+    # Subtest: first application, no-op, lost acknowledgement and later intent retain exact receipts
+    ok 1 - first application, no-op, lost acknowledgement and later intent retain exact receipts
+      ---
+      duration_ms: 96.019844
+      type: 'test'
+      ...
+    # Subtest: legacy completed receipt is returned without rewriting any historical data
+    ok 2 - legacy completed receipt is returned without rewriting any historical data
+      ---
+      duration_ms: 10.804942
+      type: 'test'
+      ...
+    # Subtest: same key is isolated by tenant and actor
+    ok 3 - same key is isolated by tenant and actor
+      ---
+      duration_ms: 26.171302
+      type: 'test'
+      ...
+    # Subtest: completed thread replay rechecks entity and parent access
+    ok 4 - completed thread replay rechecks entity and parent access
+      ---
+      duration_ms: 37.978836
+      type: 'test'
+      ...
+    # Subtest: concurrent duplicates commit once and expired keys retain claim semantics
+    ok 5 - concurrent duplicates commit once and expired keys retain claim semantics
+      ---
+      duration_ms: 35.607005
+      type: 'test'
+      ...
+    1..5
+ok 1 - command: complete immutable read cursor acknowledgements
+  ---
+  duration_ms: 693.471485
+  type: 'test'
+  ...
+# PostgreSQL 15.19 (Debian 15.19-0+deb12u1); isolated schema; canonical migrations
+# Subtest: HTTP: complete immutable read cursor acknowledgements
+    # Subtest: first application, no-op, lost acknowledgement and later intent retain exact receipts
+    ok 1 - first application, no-op, lost acknowledgement and later intent retain exact receipts
+      ---
+      duration_ms: 149.032619
+      type: 'test'
+      ...
+    # Subtest: legacy completed receipt is returned without rewriting any historical data
+    ok 2 - legacy completed receipt is returned without rewriting any historical data
+      ---
+      duration_ms: 11.787098
+      type: 'test'
+      ...
+    # Subtest: same key is isolated by tenant and actor
+    ok 3 - same key is isolated by tenant and actor
+      ---
+      duration_ms: 42.65655
+      type: 'test'
+      ...
+    # Subtest: completed thread replay rechecks entity and parent access
+    ok 4 - completed thread replay rechecks entity and parent access
+      ---
+      duration_ms: 42.702082
+      type: 'test'
+      ...
+    # Subtest: concurrent duplicates commit once and expired keys retain claim semantics
+    ok 5 - concurrent duplicates commit once and expired keys retain claim semantics
+      ---
+      duration_ms: 48.503315
+      type: 'test'
+      ...
+    # Subtest: unmodified published Flutter .32 runtime against candidate HTTP and PostgreSQL
+    not ok 6 - unmodified published Flutter .32 runtime against candidate HTTP and PostgreSQL
+      ---
+      duration_ms: 15708.106678
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:192:17'
+      failureType: 'testCodeFailure'
+      error: |-
+        Dart exit 255: valid: requests=1, visibilityRetry=false, Retry-After=[]
+        mark_unread applied/replayed: accepted with unchanged durable receipt
+        lost: requests=2, visibilityRetry=true, Retry-After=[]
+        malformed: requests=2, visibilityRetry=true, Retry-After=[]
+        wrong-user: requests=2, visibilityRetry=true, Retry-After=[]
+        denied: requests=2, visibilityRetry=true, Retry-After=[]
+        Unhandled exception:
+        Bad state: Retry-After must be honored
+        #0      check (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/docs/validation/read-cursor-ack-20261007/flutter32-live.dart:7:19)
+        #1      main (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/docs/validation/read-cursor-ack-20261007/flutter32-live.dart:49:9)
+        <asynchronous suspension>
+        
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        ChildProcess.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:204:75)
+        ChildProcess.emit (node:events:519:28)
+        maybeClose (node:internal/child_process:1101:16)
+        ChildProcess._handle.onexit (node:internal/child_process:304:5)
+      ...
+    1..6
+not ok 2 - HTTP: complete immutable read cursor acknowledgements
+  ---
+  duration_ms: 16438.591828
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:22:3'
+  failureType: 'subtestsFailed'
+  error: '1 subtest failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# PostgreSQL 15.19 (Debian 15.19-0+deb12u1); isolated schema; canonical migrations
+1..2
+# tests 13
+# suites 0
+# pass 11
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 17365.63789
+waiting for server to shut down.... done
+server stopped

@@ -1,0 +1,37 @@
+{
+  "baseCommit": "248fb8890b8e7e1ba15799aff06ef48156cca451",
+  "packageVersion": "1.0.54",
+  "productionPatchSha256": "6ab3aae1914f849213ec76c13565c36b310d91d513bb0f0414215ae40fd11767",
+  "productionFiles": {
+    "src/client/read-state.ts": {
+      "sha256": "9571ca9bed01eb6a71870294c459ef73a2e2b7a574607baf3c3c52e53b5c2809",
+      "gitBlob": "694af31194bfff2686c9e4a29634f3ec4621f5a6"
+    },
+    "src/server/create-chat-server.ts": {
+      "sha256": "446b38b462aa9f0ae6e005ae9c81912f26e24c279768fe254506aed3906f5149",
+      "gitBlob": "675ad6388a54e35857d59be0d1aad24f7b49582f"
+    },
+    "src/server/update-read-cursor-command.ts": {
+      "sha256": "e615b812cd764ca8116013065f2e932f39e1f3e6b2e25d37a7486e75ac167558",
+      "gitBlob": "3c6113bd1f2a119f9c52ae974cc01086daf434bb"
+    }
+  },
+  "candidate": {
+    "source": "fc0d79b3f10afe571a9f9b12cac98086265b62676d70f4088c9ceb39398f9c50",
+    "package": "3fa973e3731371f0ffa65e65470bfbcf8b616438723cdc94d2863a7f7298e2a2"
+  },
+  "linkedRepositories": {
+    "../handrail-sdk-chat-flutter": {
+      "head": "996d83d37632615df4c94fca83ff4c33ebe48227",
+      "status": " M lib/src/handrail_message_composer.dart\n M test/handrail_link_dialog_cases.dart\n?? docs/validation/link-polish-review-20261007/resume-6857a7d8/\n",
+      "trackedDiffSha256": "4132891c17067f30661c692d812da8a95366e1c703d233b29190c17b4d8338a9"
+    },
+    "../handrail-chat-preview-flutter": {
+      "head": "9dabb1c666443ed913d0400698beabfe6a7509a1",
+      "status": "",
+      "trackedDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "canonicalDartSha256": "e1f4c2318549bf5b7dec60ec42560bf529f9cca63f2262fbaa89c585f96a5ff8",
+  "capacity": "Filesystem         1B-blocks          Used   Available Use% Mounted on\n/dev/sda1      1373689626624 1275444457472 42294603776  97% /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js\n"
+}

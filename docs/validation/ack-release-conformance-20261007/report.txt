@@ -1,0 +1,144 @@
+Release conformance completion — 2026-10-07
+Work request 082b1fdd-3b3f-49e0-84fa-85228215b0b5
+Independent review reused: 1b3be8da-b67d-415f-b065-a246efa7b9f1
+
+Verdict: the exact reported snapshot gate is cleared for the paired WORKSPACE
+candidate. No substantive runtime failure surfaced. Recommend scoped source
+publication of the reviewed JS acknowledgement patch and Flutter decoration
+correction with these generated/docs additions through parent-owned native
+finalization. This is not installed-consumer, frozen-pin CI or product acceptance.
+
+Exact changes owned by this request
+
+JS: docs/releasing.md adds the eight-case HTTP matrix, measured reader/version
+boundary, reader-first/coordinated rollout order, and a strict outcome-validation
+then canonical Result/event projection example. No production, descriptor,
+generator, source fixture, validator, expected result or native gate changed.
+
+Flutter: canonical npm run sync:flutter-contracts added exactly:
+- test/shared-fixtures/composer-layout-browser.mjs: 29 lines / 1,877 bytes,
+  SHA256 05a32752c840e4225542869f7596b10fd8e83cb923529e48b3aa6d8cbfa344f2
+- test/shared-fixtures/sender-layout-browser.mjs: 67 lines / 4,419 bytes,
+  SHA256 f4ec74a432e9c9a26dabc642bcee724440f4d483aaf6c53674a1edd2a4cce8e2
+- shared-contracts.lock.json: exactly two corresponding hash entries added;
+  final SHA256 7a976c19b2382704a4e310671636c2d113ffd9e3db34ea84dedf05c47e5df6bc
+Flutter docs/releasing.md adds the scoped qualification and paired rollout notes.
+No generated Dart bytes changed. sync-plan.json records the complete planned
+114-file canonical snapshot, zero removals and only these three vendor deltas.
+Git status and byte comparison established no unknown destination edits before
+sync. The lock was written by the canonical generator, never hand-edited.
+
+js-doc.patch and flutter-generated-doc.patch contain the exact release-doc and
+vendor-file changes. This new evidence directory and the Flutter companion
+report contain receipts only; historical evidence remains untouched.
+
+Baseline versus candidate
+
+Unchanged heads remain JS 248fb8890b8e7e1ba15799aff06ef48156cca451 (1.0.54),
+Flutter 996d83d37632615df4c94fca83ff4c33ebe48227 (0.1.33), and Preview
+9dabb1c666443ed913d0400698beabfe6a7509a1. There is no new commit or release pin.
+The previous review's contract-sync.txt FAILED on both unchanged baseline
+heads and the then-current candidate with exactly the same three paths.
+That failed receipt is preserved at SHA256
+3bc8154986afcab1de4d28bbf6cb453ef3e382cd6c5e67ffae661c56c4f1ea0f.
+This run's candidate-before-sync.txt independently reproduces the FAILED gate
+(exit 1); it is not a fresh baseline run. Post-sync candidate checks pass.
+The previous check:conformance stopped at sync and remains failed; this run
+actually executes all four conformance suites on the intended sibling pair.
+
+Fresh checks (individual .json commands/exits/durations and .txt output;
+checks.json indexes all invocations)
+
+- Pre-generation JS package/version guard: PASS.
+- Flutter frozen offline dependency resolution and pre-generation public
+  import/version guard: PASS; pubspec.lock unchanged.
+- Canonical sync: PASS, 114 files. check:flutter-contracts: PASS.
+- check:capabilities: PASS, 7/7.
+- check:conformance: PASS, 4/4 in 16.56s, within 300s bound. Includes device
+  push token, durable events, normalized reducer outcomes, realtime metadata;
+  the canonical runner's nested npm build/TypeScript compile also passed.
+- check:read-cursor: PASS (canonical TypeScript/Dart generation).
+- Paired read-cursor generation/contract checks: JS 14/14, Dart 6/6 PASS.
+- Scoped tsconfig.read-cursor-command.json --noEmit: PASS.
+- Release example compile: PASS with TypeScript 7 --ignoreConfig, using the
+  actual root exports. Initial invocation FAILED TS5112 because explicit input
+  files coexist with tsconfig.json; both distinct receipts are retained. No
+  example, parser or type assertions were weakened to get a pass.
+- Both repository git diff --check: PASS.
+
+Preservation and evidence reuse
+
+preservation.json records all hashes and verify-preservation.py reproduces the
+audit. All 4,230 pre-existing tracked/nonignored file identities were checked;
+only the two release docs and Flutter shared lock changed. No existing file was
+removed. Preview's head/status and all 30 tracked file bytes are unchanged.
+All prior evidence manifests verify: JS independent 24 + producer 41 entries;
+Flutter independent 83 + resumed decoration review 79 entries (227 total).
+The retained source archive, minimum SDK archive, minimum compiled JS and both
+frozen fixture locks verify; the retained current compiled JS also verifies.
+
+JS three-file production patch SHA256:
+6ab3aae1914f849213ec76c13565c36b310d91d513bb0f0414215ae40fd11767
+Source fingerprint:
+fc0d79b3f10afe571a9f9b12cac98086265b62676d70f4088c9ceb39398f9c50
+Built package fingerprint (recomputed after conformance's normal build):
+3fa973e3731371f0ffa65e65470bfbcf8b616438723cdc94d2863a7f7298e2a2
+All equal the independent review, including each of the three production files.
+
+Flutter exact final-hashes.json SHA256:
+00256cb1fd469b314946dd59829d87d084ea418acd68b851ae8f4f6fe3428151
+All 128 library hashes and nine named source/lock/test identities match it.
+Composer SHA256: 6a56f0b06e576ac1ebb906d7255ac83f7a474c6dc230721772e61d41dcc29ebf
+Link test SHA256: c24261fe23478e988f68315cb5a3e6cbddc3d6927486a4b08b0cfedc7d3422fc
+Library-only diff SHA256: e020fff88ef634d6a403bfb0dabe60d2cf85dda8a96b866253375e00fc5c44b4
+This audit uses the exact final-hashes.json library-diff identity and verifies
+every recorded source/test byte independently.
+Minimum/current layout, lifetime, compiler, browser and configured reducer
+qualification is REUSED, not newly rerun. Runtime bytes and evidence justify
+that reuse. Historical full analysis remains 13 infos/nonzero; full suite
+remains 2,471 PASS / 7 FAILED. No broad Flutter analysis or suite was rerun.
+
+Rollout limits and repo-scoped handoff
+
+JS: ACCEPT for scoped source publication with the documented reader boundary.
+Canonical HTTP metadata was always required, but the corrected producer breaks
+previously working baseline 1.0.54 non-durable readers. Candidate non-durable
+readers work with legacy and candidate servers: upgrade readers first or upgrade
+together. Both baseline/candidate durable readers require the candidate server;
+published Flutter .32 has the same strict requirement and unchanged read runtime
+in .33/candidate. Do not claim all old pins are compatible. Hold a server-only
+rollout wherever old non-durable readers remain. No new negotiation or relaxed
+parser was added. Matrix and strict-boundary evidence are hash-reused.
+
+Flutter: ACCEPT the exact reviewed decoration plus canonical vendor sync for
+scoped source publication. Minimum/current qualification remains valid. Separate
+semantics-enabled CanvasKit toolbar continued-typing failure, device/native IME,
+staging/provider, installed-consumer and other broader acceptance stay open.
+
+Parent owns repo-scoped native version bump/commit/push, reconciling all dirty
+files, immutable remote/source verification including version mirrors, and
+public HTTPS full-SHA consumer pins with matching locks. Preview will upgrade
+its root server/React package together and run exact installed-consumer checks
+and the unchanged combined acceptance driver. No Preview edit or 126/120 cure
+is claimed. sdk-compatibility.json still freezes Flutter
+51bc3e1411858ce38980f5beded683dee957d1a3; that separate frozen-pin CI job is NOT
+certified by the passing sibling pair. Parent must reconcile the intended
+published pair with that gate before claiming combined release acceptance.
+
+Execution boundaries
+
+Read current Handrail context/configured checks, attached KB/effective auth
+requirements, project README/release/repository guidance and both review reports.
+No applicable AGENTS.md found. No auth/native scaffold changes were applicable.
+Capacity checked first: 38,946,131,968 free bytes. Existing minimum toolchain at
+.huddle-tmp/ack-review-toolchains/flutter retained and verified; no SDK downloads
+or copies. Current checks reuse existing current SDK binaries/private metadata
+and cache. A small local dispatcher invokes the existing Flutter snapshot
+without writing the global SDK. Commands were sequential, used shared heavy
+slot coordination/native cgroup, and were bounded to 300s; peak 1,031,909,376
+bytes, zero high/max/OOM events. Full CI did not run; five-minute full-CI
+auto-skip policy is unchanged and no auto-skip event is claimed.
+No commit/push/PR/deploy, runtime infrastructure, credentials/access, Preview,
+Handrail database/queue mutation, or data/cache/historical evidence deletion.
+No owner question is needed. This report recommends source publication only;
+the parent/harness retains execution and acceptance authority.

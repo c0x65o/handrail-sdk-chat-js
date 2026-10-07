@@ -1,0 +1,75 @@
+
+> @handrail/chat@1.0.54 check:conformance
+> npm run check:flutter-contracts && npm run check:capabilities && node scripts/run-conformance.mjs
+
+
+> @handrail/chat@1.0.54 check:flutter-contracts
+> node scripts/sync-flutter-contracts.mjs --check
+
+Flutter shared contracts verified: 114 files.
+
+> @handrail/chat@1.0.54 check:capabilities
+> node --test --test-concurrency=1 cross-repo-tests/cross-client-capabilities.test.mjs
+
+TAP version 13
+# Subtest: the checked-in cross-client capability manifest is valid
+ok 1 - the checked-in cross-client capability manifest is valid
+  ---
+  duration_ms: 1416.8485
+  type: 'test'
+  ...
+# Subtest: capability IDs and statuses use closed vocabularies
+ok 2 - capability IDs and statuses use closed vocabularies
+  ---
+  duration_ms: 2.437586
+  type: 'test'
+  ...
+# Subtest: the manifest exactly covers the independently reviewed family registry
+ok 3 - the manifest exactly covers the independently reviewed family registry
+  ---
+  duration_ms: 3.188498
+  type: 'test'
+  ...
+# Subtest: every capability has exactly the five required surfaces
+ok 4 - every capability has exactly the five required surfaces
+  ---
+  duration_ms: 1.766848
+  type: 'test'
+  ...
+# Subtest: supported entries require well-formed, publicly reachable citations
+ok 5 - supported entries require well-formed, publicly reachable citations
+  ---
+  duration_ms: 165.768754
+  type: 'test'
+  ...
+# Subtest: unsupported entries require a concrete host or product reason
+ok 6 - unsupported entries require a concrete host or product reason
+  ---
+  duration_ms: 92.187213
+  type: 'test'
+  ...
+# Subtest: known parity boundaries remain explicit
+ok 7 - known parity boundaries remain explicit
+  ---
+  duration_ms: 1.379915
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1751.010393
+[device-push-token] agreement: TypeScript and Dart passed.
+[durable-events] agreement: TypeScript and Dart passed.
+[normalized-reducer-outcomes] agreement: TypeScript and Dart passed.
+[realtime-metadata] agreement: TypeScript and Dart passed.
+Conformance passed: 4 suite(s).
+npm notice
+npm notice New major version of npm available! 10.9.8 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

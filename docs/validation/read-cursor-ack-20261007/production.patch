@@ -1,0 +1,208 @@
+diff --git a/src/client/read-state.ts b/src/client/read-state.ts
+index 7f102dc..694af31 100644
+--- a/src/client/read-state.ts
++++ b/src/client/read-state.ts
+@@ -919,38 +919,38 @@ export function createChatReadStateRuntime(
+     queue.mutations.shift();
+     queue.active = mutation;
+ 
++    // Non-durable clients also accept legacy servers. If either outcome field
++    // is present, validate the complete envelope against this exact request.
++    const parseResult = (value: unknown): ReadCursorMutationResult => {
++      if (mutation.durable === undefined && typeof value === "object" &&
++          value !== null && !("reconciliationStatus" in value) &&
++          !("idempotencyKey" in value)) {
++        return parseReadCursorMutationResult(value);
++      }
++      return parseReadCursorMutationOutcome(value, mutation.input);
++    };
+     let result: MutationResult;
+     if (mutation.input.operation === "mark_read") {
+-      const descriptor = mutation.durable === undefined
+-        ? markReadDescriptor
+-        : {
+-            ...markReadDescriptor,
+-            parseResult(value: unknown): MarkReadResult {
+-              const parsed = parseReadCursorMutationOutcome(
+-                value,
+-                mutation.input as MarkReadInput,
+-              );
+-              if (parsed.operation !== "mark_read") throw new TypeError("unexpected operation");
+-              return parsed;
+-            },
+-          };
++      const descriptor = {
++        ...markReadDescriptor,
++        parseResult(value: unknown): MarkReadResult {
++          const parsed = parseResult(value);
++          if (parsed.operation !== "mark_read") throw new TypeError("unexpected operation");
++          return parsed;
++        },
++      };
+       result = await options.dispatch(descriptor, mutation.input, {
+         idempotencyKey: mutation.input.idempotencyKey,
+       });
+     } else {
+-      const descriptor = mutation.durable === undefined
+-        ? markUnreadDescriptor
+-        : {
+-            ...markUnreadDescriptor,
+-            parseResult(value: unknown): MarkUnreadResult {
+-              const parsed = parseReadCursorMutationOutcome(
+-                value,
+-                mutation.input as MarkUnreadInput,
+-              );
+-              if (parsed.operation !== "mark_unread") throw new TypeError("unexpected operation");
+-              return parsed;
+-            },
+-          };
++      const descriptor = {
++        ...markUnreadDescriptor,
++        parseResult(value: unknown): MarkUnreadResult {
++          const parsed = parseResult(value);
++          if (parsed.operation !== "mark_unread") throw new TypeError("unexpected operation");
++          return parsed;
++        },
++      };
+       result = await options.dispatch(descriptor, mutation.input, {
+         idempotencyKey: mutation.input.idempotencyKey,
+       });
+diff --git a/src/server/create-chat-server.ts b/src/server/create-chat-server.ts
+index fa61e46..675ad63 100644
+--- a/src/server/create-chat-server.ts
++++ b/src/server/create-chat-server.ts
+@@ -228,9 +228,9 @@ import {
+   MAX_READ_CURSOR_IDEMPOTENCY_KEY_UTF8_BYTES,
+   ReadCursorMutationError,
+   parseReadCursorMutationInput,
+-  parseReadCursorMutationResult,
++  parseReadCursorMutationOutcome,
+   type ReadCursorMutationInput,
+-  type ReadCursorMutationResult,
++  type ReadCursorMutationOutcome,
+ } from "../contracts/read-cursor-mutation.js";
+ import {
+   MAX_SAVED_MESSAGE_IDENTIFIER_UTF8_BYTES,
+@@ -6247,7 +6247,7 @@ const writeThreadFollowJson = (
+ 
+ const writeReadCursorJson = (
+   response: ServerResponse,
+-  value: ReadCursorMutationResult,
++  value: ReadCursorMutationOutcome,
+ ): void => {
+   let body: string;
+   try {
+@@ -8219,7 +8219,7 @@ export function createChatServer<
+       schema: databaseConfig.schema,
+       requestId,
+     });
+-    writeReadCursorJson(response, parseReadCursorMutationResult(result));
++    writeReadCursorJson(response, parseReadCursorMutationOutcome(result, input));
+   };
+ 
+   const handleDraftSynchronization = async (
+diff --git a/src/server/update-read-cursor-command.ts b/src/server/update-read-cursor-command.ts
+index d2ffb97..3c6113b 100644
+--- a/src/server/update-read-cursor-command.ts
++++ b/src/server/update-read-cursor-command.ts
+@@ -10,10 +10,11 @@ import type { ConversationReadState } from "../contracts/member-read-state.js";
+ import {
+   applyReadCursorMutation,
+   createReadCursorUpdatedEvent,
++  createReadCursorMutationOutcome,
+   parseReadCursorMutationInput,
+   parseReadCursorMutationResult,
+   type ReadCursorMutationInput,
+-  type ReadCursorMutationResult,
++  type ReadCursorMutationOutcome,
+ } from "../contracts/read-cursor-mutation.js";
+ import { CHAT_PROTOCOL_VERSION } from "../contracts/realtime.js";
+ import type { ChatPermissionAdapter, TrustedChatActorContext } from "./contracts.js";
+@@ -216,7 +217,7 @@ const rollback = async (
+  */
+ export async function updateReadCursor(
+   options: UpdateReadCursorCommandOptions,
+-): Promise<ReadCursorMutationResult> {
++): Promise<ReadCursorMutationOutcome> {
+   validateActor(options.actor);
+   const input = parseReadCursorMutationInput(options.input);
+   const schema = validatePostgresSchema(
+@@ -296,13 +297,38 @@ export async function updateReadCursor(
+         threadId: input.conversationId, operation: "read",
+         entityAction: UPDATE_READ_CURSOR_IDEMPOTENCY_OPERATION, permissions,
+       });
++    } else {
++      const lockedConversation = await connection.query<LockedConversationRow>(
++        `SELECT
++           conversation.current_message_sequence,
++           clock_timestamp() AS occurred_at
++         FROM ${prefix}.chat_conversations AS conversation
++         INNER JOIN ${prefix}.chat_conversation_members AS member
++           ON member.tenant_id = conversation.tenant_id
++          AND member.conversation_id = conversation.id
++          AND member.user_id = $3
++          AND member.state = 'active'
++         WHERE conversation.tenant_id = $1
++           AND conversation.id = $2
++           AND conversation.type <> 'thread'
++         FOR UPDATE OF conversation, member`,
++        [options.actor.tenantId, input.conversationId, options.actor.userId],
++      );
++      conversation = lockedConversation.rows[0];
++    }
++    if (conversation === undefined) {
++      throw new ChatAuthorizationError();
+     }
+ 
+     if (claimed.idempotency_state === "completed") {
+       if (claimed.stored_response_body === null) {
+         throw new Error("Completed update-read-cursor outcome has no response body");
+       }
+-      const replay = parseReadCursorMutationResult(claimed.stored_response_body);
++      const replay = createReadCursorMutationOutcome(
++        parseReadCursorMutationResult(claimed.stored_response_body),
++        input,
++        "replayed",
++      );
+       await connection.query("COMMIT");
+       return replay;
+     }
+@@ -321,27 +347,6 @@ export async function updateReadCursor(
+         occurredAt: toIsoTimestamp(conversation.occurred_at, "participant setup time"),
+         initialRole: "member",
+       });
+-    } else {
+-      const lockedConversation = await connection.query<LockedConversationRow>(
+-        `SELECT
+-           conversation.current_message_sequence,
+-           clock_timestamp() AS occurred_at
+-         FROM ${prefix}.chat_conversations AS conversation
+-         INNER JOIN ${prefix}.chat_conversation_members AS member
+-           ON member.tenant_id = conversation.tenant_id
+-          AND member.conversation_id = conversation.id
+-          AND member.user_id = $3
+-          AND member.state = 'active'
+-         WHERE conversation.tenant_id = $1
+-           AND conversation.id = $2
+-           AND conversation.type <> 'thread'
+-         FOR UPDATE OF conversation, member`,
+-        [options.actor.tenantId, input.conversationId, options.actor.userId],
+-      );
+-      conversation = lockedConversation.rows[0];
+-    }
+-    if (conversation === undefined) {
+-      throw new ChatAuthorizationError();
+     }
+ 
+     const lockedCursor = await connection.query<StoredCursorRow>(
+@@ -519,8 +524,9 @@ export async function updateReadCursor(
+       );
+     }
+ 
++    const outcome = createReadCursorMutationOutcome(result, input, "applied");
+     await connection.query("COMMIT");
+-    return result;
++    return outcome;
+   } catch (error) {
+     await rollback(connection);
+     throw error;

@@ -1,0 +1,650 @@
+TAP version 13
+# (node:116) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: socket owner and follower reconcile offscreen badges independently with one timer per client
+ok 1 - socket owner and follower reconcile offscreen badges independently with one timer per client
+  ---
+  duration_ms: 11.432495
+  type: 'test'
+  ...
+# Subtest: direct thread observers share a paced queue and last release aborts
+ok 2 - direct thread observers share a paced queue and last release aborts
+  ---
+  duration_ms: 4.385302
+  type: 'test'
+  ...
+# Subtest: cursor advancement and manual unread survive repeated authoritative snapshots
+ok 3 - cursor advancement and manual unread survive repeated authoritative snapshots
+  ---
+  duration_ms: 4.272151
+  type: 'test'
+  ...
+# Subtest: HTTP 403 evicts unread state and inherited threads without retry leakage
+ok 4 - HTTP 403 evicts unread state and inherited threads without retry leakage
+  ---
+  duration_ms: 1.690072
+  type: 'test'
+  ...
+# Subtest: HTTP 404 evicts unread state and inherited threads without retry leakage
+ok 5 - HTTP 404 evicts unread state and inherited threads without retry leakage
+  ---
+  duration_ms: 2.907588
+  type: 'test'
+  ...
+# Subtest: revocation, session replacement and close reject late in-flight snapshots
+ok 6 - revocation, session replacement and close reject late in-flight snapshots
+  ---
+  duration_ms: 4.765905
+  type: 'test'
+  ...
+# Subtest: transient failures and reconnect respect the bounded interval
+ok 7 - transient failures and reconnect respect the bounded interval
+  ---
+  duration_ms: 1.335895
+  type: 'test'
+  ...
+# Subtest: a removed offscreen membership evicts the observed row and cancels polling
+ok 8 - a removed offscreen membership evicts the observed row and cancels polling
+  ---
+  duration_ms: 1.112058
+  type: 'test'
+  ...
+# Subtest: mute and explicit unfollow are not changed by unread reconciliation
+ok 9 - mute and explicit unfollow are not changed by unread reconciliation
+  ---
+  duration_ms: 1.59071
+  type: 'test'
+  ...
+# Subtest: parent removal revokes inherited thread access even when only the thread is observed
+ok 10 - parent removal revokes inherited thread access even when only the thread is observed
+  ---
+  duration_ms: 0.921905
+  type: 'test'
+  ...
+# Subtest: fresh authorized rediscovery can retain again without an old release cancelling it
+ok 11 - fresh authorized rediscovery can retain again without an old release cancelling it
+  ---
+  duration_ms: 1.567571
+  type: 'test'
+  ...
+# Subtest: 1 list observers have constant request growth and preserve discovery pages
+ok 12 - 1 list observers have constant request growth and preserve discovery pages
+  ---
+  duration_ms: 8.070377
+  type: 'test'
+  ...
+# Subtest: 24 list observers have constant request growth and preserve discovery pages
+ok 13 - 24 list observers have constant request growth and preserve discovery pages
+  ---
+  duration_ms: 16.08888
+  type: 'test'
+  ...
+# Subtest: 100 list observers have constant request growth and preserve discovery pages
+ok 14 - 100 list observers have constant request growth and preserve discovery pages
+  ---
+  duration_ms: 28.681157
+  type: 'test'
+  ...
+# Subtest: overlapping list/detail 429s retain the longest Retry-After across close/reopen
+ok 15 - overlapping list/detail 429s retain the longest Retry-After across close/reopen
+  ---
+  duration_ms: 3.465189
+  type: 'test'
+  ...
+# Subtest: 429 recovers with Retry-After null
+ok 16 - 429 recovers with Retry-After null
+  ---
+  duration_ms: 0.786426
+  type: 'test'
+  ...
+# Subtest: 429 recovers with Retry-After invalid
+ok 17 - 429 recovers with Retry-After invalid
+  ---
+  duration_ms: 0.64169
+  type: 'test'
+  ...
+# Subtest: 429 recovers with Retry-After Thu, 01 Jan 1970 00:00:15 GMT
+ok 18 - 429 recovers with Retry-After Thu, 01 Jan 1970 00:00:15 GMT
+  ---
+  duration_ms: 0.597068
+  type: 'test'
+  ...
+# Subtest: absent private membership is confirmed by detail denial without unauthorized hydration
+ok 19 - absent private membership is confirmed by detail denial without unauthorized hydration
+  ---
+  duration_ms: 0.883402
+  type: 'test'
+  ...
+# Subtest: late list snapshots do not roll back a read marker or a released observer
+ok 20 - late list snapshots do not roll back a read marker or a released observer
+  ---
+  duration_ms: 0.66756
+  type: 'test'
+  ...
+# Subtest: list refresh walks paced pages without changing the consumer pagination chain
+ok 21 - list refresh walks paced pages without changing the consumer pagination chain
+  ---
+  duration_ms: 1.981294
+  type: 'test'
+  ...
+# Subtest: paced direct observers converge fairly even when a row is repeatedly mounted
+ok 22 - paced direct observers converge fairly even when a row is repeatedly mounted
+  ---
+  duration_ms: 7.384704
+  type: 'test'
+  ...
+# Subtest: durably coalesces before projection and dispatch with one stable correlation
+ok 23 - durably coalesces before projection and dispatch with one stable correlation
+  ---
+  duration_ms: 55.617268
+  type: 'test'
+  ...
+# Subtest: never coalesces mark-read work across an explicit mark-unread boundary
+ok 24 - never coalesces mark-read work across an explicit mark-unread boundary
+  ---
+  duration_ms: 25.045324
+  type: 'test'
+  ...
+# Subtest: an exact canonical read-cursor event settles the matching persisted intent
+ok 25 - an exact canonical read-cursor event settles the matching persisted intent
+  ---
+  duration_ms: 12.745569
+  type: 'test'
+  ...
+# Subtest: transient, rate-limited, server, malformed, and close outcomes retain intent
+    # Subtest: transport
+    ok 1 - transport
+      ---
+      duration_ms: 7.960511
+      type: 'test'
+      ...
+    # Subtest: rate limited
+    ok 2 - rate limited
+      ---
+      duration_ms: 7.016309
+      type: 'test'
+      ...
+    # Subtest: server failure
+    ok 3 - server failure
+      ---
+      duration_ms: 5.810732
+      type: 'test'
+      ...
+    # Subtest: malformed success
+    ok 4 - malformed success
+      ---
+      duration_ms: 5.878502
+      type: 'test'
+      ...
+    # Subtest: mismatched correlation
+    ok 5 - mismatched correlation
+      ---
+      duration_ms: 7.425554
+      type: 'test'
+      ...
+    # Subtest: client close
+    ok 6 - client close
+      ---
+      duration_ms: 13.69058
+      type: 'test'
+      ...
+    1..6
+ok 26 - transient, rate-limited, server, malformed, and close outcomes retain intent
+  ---
+  duration_ms: 49.297645
+  type: 'test'
+  ...
+# Subtest: terminal outcomes remove the exact intent and restore only the stored baseline
+    # Subtest: validation
+    ok 1 - validation
+      ---
+      duration_ms: 7.4537
+      type: 'test'
+      ...
+    # Subtest: authorization
+    ok 2 - authorization
+      ---
+      duration_ms: 7.129433
+      type: 'test'
+      ...
+    # Subtest: conflict
+    ok 3 - conflict
+      ---
+      duration_ms: 4.01187
+      type: 'test'
+      ...
+    # Subtest: newer canonical state is not overwritten
+    ok 4 - newer canonical state is not overwritten
+      ---
+      duration_ms: 10.897421
+      type: 'test'
+      ...
+    1..4
+ok 27 - terminal outcomes remove the exact intent and restore only the stored baseline
+  ---
+  duration_ms: 30.212277
+  type: 'test'
+  ...
+# Subtest: storage write failure prevents both projection and dispatch
+ok 28 - storage write failure prevents both projection and dispatch
+  ---
+  duration_ms: 4.048386
+  type: 'test'
+  ...
+# Subtest: delayed old-identity storage and transport completions cannot alter the active identity
+ok 29 - delayed old-identity storage and transport completions cannot alter the active identity
+  ---
+  duration_ms: 10.841254
+  type: 'test'
+  ...
+# Subtest: delayed old-identity transport completion leaves a newer persisted record untouched
+ok 30 - delayed old-identity transport completion leaves a newer persisted record untouched
+  ---
+  duration_ms: 7.051407
+  type: 'test'
+  ...
+# Subtest: two runtimes atomically retain simultaneous intents for different conversations
+ok 31 - two runtimes atomically retain simultaneous intents for different conversations
+  ---
+  duration_ms: 14.584831
+  type: 'test'
+  ...
+# Subtest: two runtimes coalesce same-conversation commits onto the first committed correlation
+ok 32 - two runtimes coalesce same-conversation commits onto the first committed correlation
+  ---
+  duration_ms: 3.317965
+  type: 'test'
+  ...
+# Subtest: canonical settlement racing another runtime preserves the unrelated committed intent
+ok 33 - canonical settlement racing another runtime preserves the unrelated committed intent
+  ---
+  duration_ms: 6.018981
+  type: 'test'
+  ...
+# Subtest: settlement rejects reuse of a correlation by a different stored request
+ok 34 - settlement rejects reuse of a correlation by a different stored request
+  ---
+  duration_ms: 3.96982
+  type: 'test'
+  ...
+# Subtest: activation cannot quarantine a valid replacement installed after a corrupt read
+ok 35 - activation cannot quarantine a valid replacement installed after a corrupt read
+  ---
+  duration_ms: 1.295396
+  type: 'test'
+  ...
+# Subtest: exports derived unread selectors and keeps DM receipts cursor-only and private
+ok 36 - exports derived unread selectors and keeps DM receipts cursor-only and private
+  ---
+  duration_ms: 4.444878
+  type: 'test'
+  ...
+# Subtest: markRead is monotonic, optimistic, coalesced, and uses one stable logical key
+ok 37 - markRead is monotonic, optimistic, coalesced, and uses one stable logical key
+  ---
+  duration_ms: 24.557473
+  type: 'test'
+  ...
+# Subtest: manual unread is explicit, rolls back on rejection, and is cleared by read intent
+ok 38 - manual unread is explicit, rolls back on rejection, and is cleared by read intent
+  ---
+  duration_ms: 3.107502
+  type: 'test'
+  ...
+# Subtest: cross-device events win over stale HTTP responses and older failures
+ok 39 - cross-device events win over stale HTTP responses and older failures
+  ---
+  duration_ms: 3.92119
+  type: 'test'
+  ...
+# Subtest: close resolves queued read work and restores the last canonical state
+ok 40 - close resolves queued read work and restores the last canonical state
+  ---
+  duration_ms: 2.461351
+  type: 'test'
+  ...
+# Subtest: public non-durable client accepts mark_read applied outcome
+ok 41 - public non-durable client accepts mark_read applied outcome
+  ---
+  duration_ms: 1.239478
+  type: 'test'
+  ...
+# Subtest: public non-durable client accepts mark_read replayed outcome
+ok 42 - public non-durable client accepts mark_read replayed outcome
+  ---
+  duration_ms: 1.155554
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_read outcome with wrong key
+ok 43 - public non-durable client rejects mark_read outcome with wrong key
+  ---
+  duration_ms: 1.260449
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_read outcome with wrong status
+ok 44 - public non-durable client rejects mark_read outcome with wrong status
+  ---
+  duration_ms: 2.573537
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_read outcome with wrong partial
+ok 45 - public non-durable client rejects mark_read outcome with wrong partial
+  ---
+  duration_ms: 1.141928
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_read outcome with wrong user
+ok 46 - public non-durable client rejects mark_read outcome with wrong user
+  ---
+  duration_ms: 0.644686
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_read outcome with wrong conversation
+ok 47 - public non-durable client rejects mark_read outcome with wrong conversation
+  ---
+  duration_ms: 0.537638
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_read outcome with wrong sequence
+ok 48 - public non-durable client rejects mark_read outcome with wrong sequence
+  ---
+  duration_ms: 0.548268
+  type: 'test'
+  ...
+# Subtest: public non-durable client accepts mark_unread applied outcome
+ok 49 - public non-durable client accepts mark_unread applied outcome
+  ---
+  duration_ms: 0.662962
+  type: 'test'
+  ...
+# Subtest: public non-durable client accepts mark_unread replayed outcome
+ok 50 - public non-durable client accepts mark_unread replayed outcome
+  ---
+  duration_ms: 0.568814
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_unread outcome with wrong key
+ok 51 - public non-durable client rejects mark_unread outcome with wrong key
+  ---
+  duration_ms: 1.872487
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_unread outcome with wrong status
+ok 52 - public non-durable client rejects mark_unread outcome with wrong status
+  ---
+  duration_ms: 0.481278
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_unread outcome with wrong partial
+ok 53 - public non-durable client rejects mark_unread outcome with wrong partial
+  ---
+  duration_ms: 0.648719
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_unread outcome with wrong user
+ok 54 - public non-durable client rejects mark_unread outcome with wrong user
+  ---
+  duration_ms: 0.554316
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_unread outcome with wrong conversation
+ok 55 - public non-durable client rejects mark_unread outcome with wrong conversation
+  ---
+  duration_ms: 0.54848
+  type: 'test'
+  ...
+# Subtest: public non-durable client rejects mark_unread outcome with wrong sequence
+ok 56 - public non-durable client rejects mark_unread outcome with wrong sequence
+  ---
+  duration_ms: 0.580456
+  type: 'test'
+  ...
+# Subtest: reload waits for an authoritative baseline, then preserves correlations and per-conversation ordering
+ok 57 - reload waits for an authoritative baseline, then preserves correlations and per-conversation ordering
+  ---
+  duration_ms: 64.68753
+  type: 'test'
+  ...
+# Subtest: transient retry pauses offline and resumes after reconnect with bounded backoff
+ok 58 - transient retry pauses offline and resumes after reconnect with bounded backoff
+  ---
+  duration_ms: 17.781709
+  type: 'test'
+  ...
+# Subtest: a matching canonical event settles an ambiguous in-flight retained request
+ok 59 - a matching canonical event settles an ambiguous in-flight retained request
+  ---
+  duration_ms: 11.140697
+  type: 'test'
+  ...
+# Subtest: corrupt records are quarantined without preventing startup
+ok 60 - corrupt records are quarantined without preventing startup
+  ---
+  duration_ms: 2.387765
+  type: 'test'
+  ...
+# Subtest: close cancels retained backoff and leaves the exact record
+ok 61 - close cancels retained backoff and leaves the exact record
+  ---
+  duration_ms: 7.503382
+  type: 'test'
+  ...
+# Subtest: identity switch invalidates a delayed retained read without cross-identity effects
+ok 62 - identity switch invalidates a delayed retained read without cross-identity effects
+  ---
+  duration_ms: 10.697627
+  type: 'test'
+  ...
+# Subtest: a follower announces a durable read intent, closes, and only the leader dispatches it
+ok 63 - a follower announces a durable read intent, closes, and only the leader dispatches it
+  ---
+  duration_ms: 22.099284
+  type: 'test'
+  ...
+# Subtest: leadership failover reloads retained read work before dispatch
+ok 64 - leadership failover reloads retained read work before dispatch
+  ---
+  duration_ms: 14.170285
+  type: 'test'
+  ...
+# Subtest: unsupported, malformed, and nonmatching announcements cannot cross identity scope
+ok 65 - unsupported, malformed, and nonmatching announcements cannot cross identity scope
+  ---
+  duration_ms: 11.297127
+  type: 'test'
+  ...
+# Subtest: coordinated read results settle only the exactly matching correlation
+ok 66 - coordinated read results settle only the exactly matching correlation
+  ---
+  duration_ms: 17.913688
+  type: 'test'
+  ...
+# Subtest: README relative links point to repository files
+ok 67 - README relative links point to repository files
+  ---
+  duration_ms: 6.792938
+  type: 'test'
+  ...
+# Subtest: README dependency and import snippets track the package manifest
+ok 68 - README dependency and import snippets track the package manifest
+  ---
+  duration_ms: 7.352656
+  type: 'test'
+  ...
+# Subtest: README platform and realtime claims remain source-backed
+ok 69 - README platform and realtime claims remain source-backed
+  ---
+  duration_ms: 21.77848
+  type: 'test'
+  ...
+# Subtest: built public subpaths resolve and import independently
+ok 70 - built public subpaths resolve and import independently
+  ---
+  duration_ms: 180.729491
+  type: 'test'
+  ...
+# Subtest: package conditions expose only browser-safe entries to browser resolvers
+ok 71 - package conditions expose only browser-safe entries to browser resolvers
+  ---
+  duration_ms: 6.578637
+  type: 'test'
+  ...
+# Subtest: a browser resolver rejects the Node-only server subpath
+ok 72 - a browser resolver rejects the Node-only server subpath
+  ---
+  duration_ms: 62.273954
+  type: 'test'
+  ...
+# Subtest: each subpath emits runtime, declaration, and map artifacts
+ok 73 - each subpath emits runtime, declaration, and map artifacts
+  ---
+  duration_ms: 1.031588
+  type: 'test'
+  ...
+# Subtest: TypeScript resolves declarations for every public subpath
+ok 74 - TypeScript resolves declarations for every public subpath
+  ---
+  duration_ms: 182.101605
+  type: 'test'
+  ...
+# Subtest: the browser client bundle excludes testing, server, and Node graphs
+ok 75 - the browser client bundle excludes testing, server, and Node graphs
+  ---
+  duration_ms: 179.82685
+  type: 'test'
+  ...
+# Subtest: the root JavaScript bundle excludes the optional stylesheet
+ok 76 - the root JavaScript bundle excludes the optional stylesheet
+  ---
+  duration_ms: 15.326762
+  type: 'test'
+  ...
+# Subtest: the production server bundle excludes the testing graph
+ok 77 - the production server bundle excludes the testing graph
+  ---
+  duration_ms: 119.802669
+  type: 'test'
+  ...
+# Subtest: an explicit stylesheet import emits CSS and remains in the bundle graph
+ok 78 - an explicit stylesheet import emits CSS and remains in the bundle graph
+  ---
+  duration_ms: 10.857254
+  type: 'test'
+  ...
+# Subtest: the browser react bundle excludes React, server, testing, and Node graphs
+ok 79 - the browser react bundle excludes React, server, testing, and Node graphs
+  ---
+  duration_ms: 128.309161
+  type: 'test'
+  ...
+# Subtest: the browser ui bundle excludes React, server, testing, and Node graphs
+ok 80 - the browser ui bundle excludes React, server, testing, and Node graphs
+  ---
+  duration_ms: 115.519429
+  type: 'test'
+  ...
+# Subtest: the descriptor defines bounded intents, explicit retries, and a private durable event
+ok 81 - the descriptor defines bounded intents, explicit retries, and a private durable event
+  ---
+  duration_ms: 6.798727
+  type: 'test'
+  ...
+# Subtest: the descriptor deterministically drives TypeScript and Dart outputs
+ok 82 - the descriptor deterministically drives TypeScript and Dart outputs
+  ---
+  duration_ms: 3.198137
+  type: 'test'
+  ...
+# Subtest: check mode is clean after generation and reports drift
+ok 83 - check mode is clean after generation and reports drift
+  ---
+  duration_ms: 125.587746
+  type: 'test'
+  ...
+# Subtest: PATCH /conversations/:conversationId/read-cursor rejects an over-limit declared Content-Length before command work
+ok 84 - PATCH /conversations/:conversationId/read-cursor rejects an over-limit declared Content-Length before command work
+  ---
+  duration_ms: 27.42719
+  type: 'test'
+  ...
+# Subtest: read-cursor mutation contracts remain browser-safe
+ok 85 - read-cursor mutation contracts remain browser-safe
+  ---
+  duration_ms: 36.23297
+  type: 'test'
+  ...
+# Subtest: parses distinct exact mark-read and mark-unread commands
+ok 86 - parses distinct exact mark-read and mark-unread commands
+  ---
+  duration_ms: 2.527024
+  type: 'test'
+  ...
+# Subtest: requires nonblank idempotency keys within 255 UTF-8 bytes
+ok 87 - requires nonblank idempotency keys within 255 UTF-8 bytes
+  ---
+  duration_ms: 0.853146
+  type: 'test'
+  ...
+# Subtest: rejects every caller-authored trusted identity spelling
+ok 88 - rejects every caller-authored trusted identity spelling
+  ---
+  duration_ms: 0.530973
+  type: 'test'
+  ...
+# Subtest: rejects negative, noninteger, and unsafe command sequences
+ok 89 - rejects negative, noninteger, and unsafe command sequences
+  ---
+  duration_ms: 0.482684
+  type: 'test'
+  ...
+# Subtest: rejects cursor regression and mark-read beyond the latest sequence
+ok 90 - rejects cursor regression and mark-read beyond the latest sequence
+  ---
+  duration_ms: 0.790712
+  type: 'test'
+  ...
+# Subtest: mark-unread accepts only an existing already-read/latest sequence
+ok 91 - mark-unread accepts only an existing already-read/latest sequence
+  ---
+  duration_ms: 0.512057
+  type: 'test'
+  ...
+# Subtest: equal-cursor mark-read clears a marker and returns canonical unread
+ok 92 - equal-cursor mark-read clears a marker and returns canonical unread
+  ---
+  duration_ms: 0.442732
+  type: 'test'
+  ...
+# Subtest: repeated explicit commands retain one outcome without a new transition
+ok 93 - repeated explicit commands retain one outcome without a new transition
+  ---
+  duration_ms: 0.325545
+  type: 'test'
+  ...
+# Subtest: models applied and replayed HTTP outcomes with deterministic request correlation
+ok 94 - models applied and replayed HTTP outcomes with deterministic request correlation
+  ---
+  duration_ms: 0.703944
+  type: 'test'
+  ...
+# Subtest: cross-device envelopes name the affected user and read-cursor semantics
+ok 95 - cross-device envelopes name the affected user and read-cursor semantics
+  ---
+  duration_ms: 1.140134
+  type: 'test'
+  ...
+# Subtest: message edit and revision data are never read-state commands
+ok 96 - message edit and revision data are never read-state commands
+  ---
+  duration_ms: 0.347887
+  type: 'test'
+  ...
+1..96
+# tests 106
+# suites 0
+# pass 106
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2917.866158

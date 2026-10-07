@@ -1,0 +1,5 @@
+
+> @handrail/chat@1.0.54 check:read-cursor
+> node scripts/generate-read-cursor.mjs --check
+
+Generated read-cursor contracts are up to date.

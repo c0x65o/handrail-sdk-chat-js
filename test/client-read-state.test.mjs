@@ -310,3 +310,56 @@ test("close resolves queued read work and restores the last canonical state", as
   assert.equal((await pending).status, "closed");
   assert.equal(cache.getState().currentUser.readStates[conversationId].lastReadSequence, 1);
 });
+
+for (const operation of ["mark_read", "mark_unread"]) {
+  for (const reconciliationStatus of ["applied", "replayed"]) {
+    test(`public non-durable client accepts ${operation} ${reconciliationStatus} outcome`, async () => {
+      const cache = seedCache({ lastReadSequence: 3 });
+      const client = createChatClient({
+        endpoint: "/chat", getAccessToken: () => "token", cache,
+        readState: { generateIdempotencyKey: () => "complete-ack" },
+        fetch: async (_url, init) => {
+          const input = JSON.parse(init.body);
+          assert.equal(input.idempotencyKey, "complete-ack");
+          return response({ ...result(operation, 3, 4), reconciliationStatus, idempotencyKey: input.idempotencyKey });
+        },
+      });
+      try {
+        const outcome = operation === "mark_read"
+          ? await client.markRead({ conversationId, throughSequence: 3 })
+          : await client.markUnread({ conversationId, fromSequence: 2 });
+        assert.equal(outcome.status, "success");
+        assert.equal(outcome.value.reconciliationStatus, reconciliationStatus);
+        assert.equal(cache.getState().currentUser.readStates[conversationId].updatedAt, at(4));
+      } finally { client.close(); }
+    });
+  }
+  for (const change of ["key", "status", "partial", "user", "conversation", "sequence"]) {
+    test(`public non-durable client rejects ${operation} outcome with wrong ${change}`, async () => {
+      const cache = seedCache({ lastReadSequence: 3 });
+      const client = createChatClient({
+        endpoint: "/chat", getAccessToken: () => "token", cache,
+        readState: { generateIdempotencyKey: () => "complete-ack" },
+        fetch: async () => {
+          const body = { ...result(operation, 3, 4), reconciliationStatus: "applied", idempotencyKey: "complete-ack" };
+          if (change === "key") body.idempotencyKey = "wrong";
+          if (change === "status") body.reconciliationStatus = "pending";
+          if (change === "partial") delete body.reconciliationStatus;
+          if (change === "user") body.readState.userId = "other";
+          if (change === "conversation") body.conversationId = body.readState.conversationId = "other";
+          if (change === "sequence") {
+            if (operation === "mark_read") { body.readState.lastReadSequence = 4; body.unreadCount = 1; }
+            else { body.readState.manualUnreadFromSequence = 3; body.unreadCount = 3; }
+          }
+          return response(body);
+        },
+      });
+      try {
+        const outcome = operation === "mark_read"
+          ? await client.markRead({ conversationId, throughSequence: 3 })
+          : await client.markUnread({ conversationId, fromSequence: 2 });
+        assert.equal(outcome.status, "malformed_response");
+      } finally { client.close(); }
+    });
+  }
+}

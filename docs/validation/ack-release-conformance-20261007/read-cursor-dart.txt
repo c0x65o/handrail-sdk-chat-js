@@ -1,0 +1,8 @@
+00:00 +0: loading /opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/test/generated_read_cursor_mutation_test.dart
+00:00 +0: mark-read and mark-unread inputs round-trip and enforce local bounds
+00:00 +1: parses applied and replayed outcomes into the same canonical state
+00:00 +2: parses mark-unread outcomes and the private durable event
+00:00 +3: rejects malformed inputs and caller-authored trusted identity
+00:00 +4: rejects incoherent or non-exact mutation results
+00:00 +5: rejects malformed private streams and invalid event payloads
+00:00 +6: All tests passed!

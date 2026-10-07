@@ -1,0 +1,668 @@
+[
+  {
+    "server": "baseline",
+    "client": "baseline",
+    "durable": false,
+    "readiness": "ready",
+    "results": [
+      {
+        "operation": "mark_read",
+        "phase": "first",
+        "status": "success"
+      },
+      {
+        "operation": "mark_read",
+        "phase": "repeat",
+        "status": "success"
+      },
+      {
+        "operation": "mark_unread",
+        "phase": "first",
+        "status": "success"
+      },
+      {
+        "operation": "mark_unread",
+        "phase": "repeat",
+        "status": "success"
+      }
+    ],
+    "requests": [
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "baseline-false",
+          "idempotencyKey": "baseline-false-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "baseline-false",
+          "readState": {
+            "conversationId": "baseline-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:09.667Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "baseline-false",
+          "idempotencyKey": "baseline-false-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "baseline-false",
+          "readState": {
+            "conversationId": "baseline-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:09.667Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_unread",
+          "conversationId": "baseline-false",
+          "idempotencyKey": "baseline-false-mark_unread",
+          "fromSequence": 4
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_unread",
+          "conversationId": "baseline-false",
+          "readState": {
+            "conversationId": "baseline-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "manualUnreadFromSequence": 4,
+            "updatedAt": "2026-10-07T14:56:09.685Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 7
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_unread",
+          "conversationId": "baseline-false",
+          "idempotencyKey": "baseline-false-mark_unread",
+          "fromSequence": 4
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_unread",
+          "conversationId": "baseline-false",
+          "readState": {
+            "conversationId": "baseline-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "manualUnreadFromSequence": 4,
+            "updatedAt": "2026-10-07T14:56:09.685Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 7
+        }
+      }
+    ],
+    "counts": {
+      "receipts": 2,
+      "audits": 2
+    }
+  },
+  {
+    "server": "baseline",
+    "client": "baseline",
+    "durable": true,
+    "readiness": "ready",
+    "results": [
+      {
+        "operation": "mark_read",
+        "phase": "first",
+        "status": "malformed_response"
+      }
+    ],
+    "requests": [
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "baseline-true",
+          "idempotencyKey": "baseline-true-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "baseline-true",
+          "readState": {
+            "conversationId": "baseline-true",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:09.721Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4
+        }
+      }
+    ],
+    "counts": {
+      "receipts": 1,
+      "audits": 1
+    }
+  },
+  {
+    "server": "baseline",
+    "client": "candidate",
+    "durable": false,
+    "readiness": "ready",
+    "results": [
+      {
+        "operation": "mark_read",
+        "phase": "first",
+        "status": "success"
+      },
+      {
+        "operation": "mark_read",
+        "phase": "repeat",
+        "status": "success"
+      },
+      {
+        "operation": "mark_unread",
+        "phase": "first",
+        "status": "success"
+      },
+      {
+        "operation": "mark_unread",
+        "phase": "repeat",
+        "status": "success"
+      }
+    ],
+    "requests": [
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "candidate-false",
+          "idempotencyKey": "candidate-false-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "candidate-false",
+          "readState": {
+            "conversationId": "candidate-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:09.764Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "candidate-false",
+          "idempotencyKey": "candidate-false-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "candidate-false",
+          "readState": {
+            "conversationId": "candidate-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:09.764Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_unread",
+          "conversationId": "candidate-false",
+          "idempotencyKey": "candidate-false-mark_unread",
+          "fromSequence": 4
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_unread",
+          "conversationId": "candidate-false",
+          "readState": {
+            "conversationId": "candidate-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "manualUnreadFromSequence": 4,
+            "updatedAt": "2026-10-07T14:56:09.780Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 7
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_unread",
+          "conversationId": "candidate-false",
+          "idempotencyKey": "candidate-false-mark_unread",
+          "fromSequence": 4
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_unread",
+          "conversationId": "candidate-false",
+          "readState": {
+            "conversationId": "candidate-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "manualUnreadFromSequence": 4,
+            "updatedAt": "2026-10-07T14:56:09.780Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 7
+        }
+      }
+    ],
+    "counts": {
+      "receipts": 2,
+      "audits": 2
+    }
+  },
+  {
+    "server": "baseline",
+    "client": "candidate",
+    "durable": true,
+    "readiness": "ready",
+    "results": [
+      {
+        "operation": "mark_read",
+        "phase": "first",
+        "status": "malformed_response"
+      }
+    ],
+    "requests": [
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "candidate-true",
+          "idempotencyKey": "candidate-true-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "candidate-true",
+          "readState": {
+            "conversationId": "candidate-true",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:09.809Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4
+        }
+      }
+    ],
+    "counts": {
+      "receipts": 1,
+      "audits": 1
+    }
+  },
+  {
+    "server": "candidate",
+    "client": "baseline",
+    "durable": false,
+    "readiness": "ready",
+    "results": [
+      {
+        "operation": "mark_read",
+        "phase": "first",
+        "status": "malformed_response"
+      },
+      {
+        "operation": "mark_read",
+        "phase": "repeat",
+        "status": "malformed_response"
+      },
+      {
+        "operation": "mark_unread",
+        "phase": "first",
+        "status": "malformed_response"
+      },
+      {
+        "operation": "mark_unread",
+        "phase": "repeat",
+        "status": "malformed_response"
+      }
+    ],
+    "requests": [
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "baseline-false",
+          "idempotencyKey": "baseline-false-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "baseline-false",
+          "readState": {
+            "conversationId": "baseline-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:10.201Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4,
+          "reconciliationStatus": "applied",
+          "idempotencyKey": "baseline-false-mark_read"
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "baseline-false",
+          "idempotencyKey": "baseline-false-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "baseline-false",
+          "readState": {
+            "conversationId": "baseline-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:10.201Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4,
+          "reconciliationStatus": "replayed",
+          "idempotencyKey": "baseline-false-mark_read"
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_unread",
+          "conversationId": "baseline-false",
+          "idempotencyKey": "baseline-false-mark_unread",
+          "fromSequence": 4
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_unread",
+          "conversationId": "baseline-false",
+          "readState": {
+            "conversationId": "baseline-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "manualUnreadFromSequence": 4,
+            "updatedAt": "2026-10-07T14:56:10.216Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 7,
+          "reconciliationStatus": "applied",
+          "idempotencyKey": "baseline-false-mark_unread"
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_unread",
+          "conversationId": "baseline-false",
+          "idempotencyKey": "baseline-false-mark_unread",
+          "fromSequence": 4
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_unread",
+          "conversationId": "baseline-false",
+          "readState": {
+            "conversationId": "baseline-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "manualUnreadFromSequence": 4,
+            "updatedAt": "2026-10-07T14:56:10.216Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 7,
+          "reconciliationStatus": "replayed",
+          "idempotencyKey": "baseline-false-mark_unread"
+        }
+      }
+    ],
+    "counts": {
+      "receipts": 2,
+      "audits": 2
+    }
+  },
+  {
+    "server": "candidate",
+    "client": "baseline",
+    "durable": true,
+    "readiness": "ready",
+    "results": [
+      {
+        "operation": "mark_read",
+        "phase": "first",
+        "status": "success",
+        "reconciliationStatus": "applied"
+      }
+    ],
+    "requests": [
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "baseline-true",
+          "idempotencyKey": "baseline-true-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "baseline-true",
+          "readState": {
+            "conversationId": "baseline-true",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:10.238Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4,
+          "reconciliationStatus": "applied",
+          "idempotencyKey": "baseline-true-mark_read"
+        }
+      }
+    ],
+    "counts": {
+      "receipts": 1,
+      "audits": 1
+    }
+  },
+  {
+    "server": "candidate",
+    "client": "candidate",
+    "durable": false,
+    "readiness": "ready",
+    "results": [
+      {
+        "operation": "mark_read",
+        "phase": "first",
+        "status": "success",
+        "reconciliationStatus": "applied"
+      },
+      {
+        "operation": "mark_read",
+        "phase": "repeat",
+        "status": "success",
+        "reconciliationStatus": "replayed"
+      },
+      {
+        "operation": "mark_unread",
+        "phase": "first",
+        "status": "success",
+        "reconciliationStatus": "applied"
+      },
+      {
+        "operation": "mark_unread",
+        "phase": "repeat",
+        "status": "success",
+        "reconciliationStatus": "replayed"
+      }
+    ],
+    "requests": [
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "candidate-false",
+          "idempotencyKey": "candidate-false-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "candidate-false",
+          "readState": {
+            "conversationId": "candidate-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:10.252Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4,
+          "reconciliationStatus": "applied",
+          "idempotencyKey": "candidate-false-mark_read"
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "candidate-false",
+          "idempotencyKey": "candidate-false-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "candidate-false",
+          "readState": {
+            "conversationId": "candidate-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:10.252Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4,
+          "reconciliationStatus": "replayed",
+          "idempotencyKey": "candidate-false-mark_read"
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_unread",
+          "conversationId": "candidate-false",
+          "idempotencyKey": "candidate-false-mark_unread",
+          "fromSequence": 4
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_unread",
+          "conversationId": "candidate-false",
+          "readState": {
+            "conversationId": "candidate-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "manualUnreadFromSequence": 4,
+            "updatedAt": "2026-10-07T14:56:10.266Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 7,
+          "reconciliationStatus": "applied",
+          "idempotencyKey": "candidate-false-mark_unread"
+        }
+      },
+      {
+        "input": {
+          "operation": "mark_unread",
+          "conversationId": "candidate-false",
+          "idempotencyKey": "candidate-false-mark_unread",
+          "fromSequence": 4
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_unread",
+          "conversationId": "candidate-false",
+          "readState": {
+            "conversationId": "candidate-false",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "manualUnreadFromSequence": 4,
+            "updatedAt": "2026-10-07T14:56:10.266Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 7,
+          "reconciliationStatus": "replayed",
+          "idempotencyKey": "candidate-false-mark_unread"
+        }
+      }
+    ],
+    "counts": {
+      "receipts": 2,
+      "audits": 2
+    }
+  },
+  {
+    "server": "candidate",
+    "client": "candidate",
+    "durable": true,
+    "readiness": "ready",
+    "results": [
+      {
+        "operation": "mark_read",
+        "phase": "first",
+        "status": "success",
+        "reconciliationStatus": "applied"
+      }
+    ],
+    "requests": [
+      {
+        "input": {
+          "operation": "mark_read",
+          "conversationId": "candidate-true",
+          "idempotencyKey": "candidate-true-mark_read",
+          "throughSequence": 6
+        },
+        "httpStatus": 200,
+        "body": {
+          "operation": "mark_read",
+          "conversationId": "candidate-true",
+          "readState": {
+            "conversationId": "candidate-true",
+            "userId": "matrix-reader",
+            "lastReadSequence": 6,
+            "updatedAt": "2026-10-07T14:56:10.291Z"
+          },
+          "latestSequence": 10,
+          "unreadCount": 4,
+          "reconciliationStatus": "applied",
+          "idempotencyKey": "candidate-true-mark_read"
+        }
+      }
+    ],
+    "counts": {
+      "receipts": 1,
+      "audits": 1
+    }
+  }
+]

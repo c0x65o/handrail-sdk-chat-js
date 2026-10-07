@@ -1,0 +1,2 @@
+current FAILED Flutter contract snapshot drift: test/shared-fixtures/composer-layout-browser.mjs, test/shared-fixtures/sender-layout-browser.mjs, shared-contracts.lock.json
+unchanged-committed-heads FAILED Flutter contract snapshot drift: test/shared-fixtures/composer-layout-browser.mjs, test/shared-fixtures/sender-layout-browser.mjs, shared-contracts.lock.json

@@ -1,0 +1,357 @@
+[
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "ack-order",
+      "throughSequence": 6,
+      "idempotencyKey": "read-original"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "ack-order",
+      "readState": {
+        "conversationId": "ack-order",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:38.897Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "applied",
+      "idempotencyKey": "read-original"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "ack-order",
+      "throughSequence": 6,
+      "idempotencyKey": "read-no-op"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "ack-order",
+      "readState": {
+        "conversationId": "ack-order",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:38.897Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "applied",
+      "idempotencyKey": "read-no-op"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_unread",
+      "conversationId": "ack-order",
+      "fromSequence": 4,
+      "idempotencyKey": "unread-original"
+    },
+    "outcome": {
+      "operation": "mark_unread",
+      "conversationId": "ack-order",
+      "readState": {
+        "conversationId": "ack-order",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "manualUnreadFromSequence": 4,
+        "updatedAt": "2026-10-07T14:26:38.921Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 7,
+      "reconciliationStatus": "applied",
+      "idempotencyKey": "unread-original"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_unread",
+      "conversationId": "ack-order",
+      "fromSequence": 4,
+      "idempotencyKey": "unread-no-op"
+    },
+    "outcome": {
+      "operation": "mark_unread",
+      "conversationId": "ack-order",
+      "readState": {
+        "conversationId": "ack-order",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "manualUnreadFromSequence": 4,
+        "updatedAt": "2026-10-07T14:26:38.921Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 7,
+      "reconciliationStatus": "applied",
+      "idempotencyKey": "unread-no-op"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "ack-order",
+      "throughSequence": 6,
+      "idempotencyKey": "read-original"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "ack-order",
+      "readState": {
+        "conversationId": "ack-order",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:38.897Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "replayed",
+      "idempotencyKey": "read-original"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "ack-order",
+      "throughSequence": 9,
+      "idempotencyKey": "newer-read"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "ack-order",
+      "readState": {
+        "conversationId": "ack-order",
+        "userId": "reader",
+        "lastReadSequence": 9,
+        "updatedAt": "2026-10-07T14:26:38.953Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 1,
+      "reconciliationStatus": "applied",
+      "idempotencyKey": "newer-read"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_unread",
+      "conversationId": "ack-order",
+      "fromSequence": 4,
+      "idempotencyKey": "unread-original"
+    },
+    "outcome": {
+      "operation": "mark_unread",
+      "conversationId": "ack-order",
+      "readState": {
+        "conversationId": "ack-order",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "manualUnreadFromSequence": 4,
+        "updatedAt": "2026-10-07T14:26:38.921Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 7,
+      "reconciliationStatus": "replayed",
+      "idempotencyKey": "unread-original"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "legacy",
+      "throughSequence": 6,
+      "idempotencyKey": "legacy-key"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "legacy",
+      "readState": {
+        "conversationId": "legacy",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "replayed",
+      "idempotencyKey": "legacy-key"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "throughSequence": 6,
+      "idempotencyKey": "shared-key"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "readState": {
+        "conversationId": "isolated",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:39.040Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "applied",
+      "idempotencyKey": "shared-key"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "throughSequence": 6,
+      "idempotencyKey": "shared-key"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "readState": {
+        "conversationId": "isolated",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:39.040Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "replayed",
+      "idempotencyKey": "shared-key"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "throughSequence": 6,
+      "idempotencyKey": "shared-key"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "readState": {
+        "conversationId": "isolated",
+        "userId": "other",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:39.051Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "applied",
+      "idempotencyKey": "shared-key"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "throughSequence": 6,
+      "idempotencyKey": "shared-key"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "readState": {
+        "conversationId": "isolated",
+        "userId": "other",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:39.051Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "replayed",
+      "idempotencyKey": "shared-key"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "throughSequence": 6,
+      "idempotencyKey": "shared-key"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "readState": {
+        "conversationId": "isolated",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:39.062Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "applied",
+      "idempotencyKey": "shared-key"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "throughSequence": 6,
+      "idempotencyKey": "shared-key"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "isolated",
+      "readState": {
+        "conversationId": "isolated",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:39.062Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "replayed",
+      "idempotencyKey": "shared-key"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "parent-authority",
+      "throughSequence": 6,
+      "idempotencyKey": "parent-key"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "parent-authority",
+      "readState": {
+        "conversationId": "parent-authority",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:39.083Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "applied",
+      "idempotencyKey": "parent-key"
+    }
+  },
+  {
+    "input": {
+      "operation": "mark_read",
+      "conversationId": "concurrent",
+      "throughSequence": 6,
+      "idempotencyKey": "expired-key"
+    },
+    "outcome": {
+      "operation": "mark_read",
+      "conversationId": "concurrent",
+      "readState": {
+        "conversationId": "concurrent",
+        "userId": "reader",
+        "lastReadSequence": 6,
+        "updatedAt": "2026-10-07T14:26:39.120Z"
+      },
+      "latestSequence": 10,
+      "unreadCount": 4,
+      "reconciliationStatus": "replayed",
+      "idempotencyKey": "expired-key"
+    }
+  }
+]

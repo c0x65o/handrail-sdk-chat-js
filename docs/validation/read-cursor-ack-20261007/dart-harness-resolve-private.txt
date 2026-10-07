@@ -1,0 +1,61 @@
+Resolving dependencies in `build/read-cursor-ack/dart-harness`...
+Downloading packages...
+The existing content-hash from pubspec.lock doesn't match contents for:
+ * unorm_dart-0.3.2 from "https://pub.dev"
+ * http_parser-4.1.2 from "https://pub.dev"
+ * test-1.31.2 from "https://pub.dev"
+ * typed_data-1.4.0 from "https://pub.dev"
+ * string_scanner-1.4.1 from "https://pub.dev"
+ * source_span-1.10.2 from "https://pub.dev"
+ * collection-1.19.1 from "https://pub.dev"
+ * yaml-3.1.4 from "https://pub.dev"
+ * webkit_inspection_protocol-1.2.1 from "https://pub.dev"
+ * web_socket_channel-3.0.3 from "https://pub.dev"
+ * test_core-0.6.19 from "https://pub.dev"
+ * test_api-0.7.13 from "https://pub.dev"
+ * stream_channel-2.1.4 from "https://pub.dev"
+ * stack_trace-1.12.2 from "https://pub.dev"
+ * shelf_web_socket-3.0.0 from "https://pub.dev"
+ * shelf_static-1.1.3 from "https://pub.dev"
+ * shelf_packages_handler-3.0.2 from "https://pub.dev"
+ * shelf-1.4.2 from "https://pub.dev"
+ * pool-1.5.3 from "https://pub.dev"
+ * path-1.9.1 from "https://pub.dev"
+ * package_config-3.0.0 from "https://pub.dev"
+ * node_preamble-2.0.2 from "https://pub.dev"
+ * matcher-0.12.20 from "https://pub.dev"
+ * io-1.1.0 from "https://pub.dev"
+ * http_multi_server-3.2.2 from "https://pub.dev"
+ * coverage-1.15.1 from "https://pub.dev"
+ * boolean_selector-2.1.2 from "https://pub.dev"
+ * async-2.13.1 from "https://pub.dev"
+ * analyzer-14.1.0 from "https://pub.dev"
+ * term_glyph-1.2.2 from "https://pub.dev"
+ * logging-1.3.0 from "https://pub.dev"
+ * web_socket-1.0.1 from "https://pub.dev"
+ * web-1.1.1 from "https://pub.dev"
+ * crypto-3.0.7 from "https://pub.dev"
+ * vm_service-15.3.0 from "https://pub.dev"
+ * source_maps-0.10.14 from "https://pub.dev"
+ * source_map_stack_trace-2.1.2 from "https://pub.dev"
+ * meta-1.19.0 from "https://pub.dev"
+ * glob-2.2.0 from "https://pub.dev"
+ * frontend_server_client-4.0.0 from "https://pub.dev"
+ * args-2.7.0 from "https://pub.dev"
+ * mime-2.1.0 from "https://pub.dev"
+ * convert-3.1.2 from "https://pub.dev"
+ * cli_config-0.2.0 from "https://pub.dev"
+ * watcher-1.2.1 from "https://pub.dev"
+ * pub_semver-2.2.1 from "https://pub.dev"
+ * _fe_analyzer_shared-105.0.0 from "https://pub.dev"
+ * file-7.0.1 from "https://pub.dev"
+
+This indicates one of:
+ * The content has changed on the server since you created the pubspec.lock.
+ * The pubspec.lock has been corrupted.
+
+The content-hashes in pubspec.lock has been updated.
+
+For more information see:
+https://dart.dev/go/content-hashes
+Got dependencies in `build/read-cursor-ack/dart-harness`!

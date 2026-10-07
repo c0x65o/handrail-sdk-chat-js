@@ -6,6 +6,7 @@ import {
   CHAT_PROTOCOL_VERSION,
   ReadCursorMutationError,
   parseReadCursorUpdatedEvent,
+  parseReadCursorMutationOutcome,
 } from "@handrail/chat";
 import {
   ChatAuthorizationError,
@@ -17,6 +18,9 @@ import {
   updateReadCursor,
 } from "@handrail/chat/server";
 import { createPostgresTestBackend } from "@handrail/chat/testing";
+
+const receipt = ({ reconciliationStatus, idempotencyKey, ...result }) => result;
+const replayed = (result) => ({ ...result, reconciliationStatus: "replayed" });
 
 const quoteIdentifier = (identifier) =>
   `"${identifier.replaceAll('"', '""')}"`;
@@ -154,7 +158,10 @@ test("update-read-cursor command is tenant-safe, monotonic, idempotent, and atom
 
       const first = await command(input);
 
+      assert.deepEqual(parseReadCursorMutationOutcome(first, input), first);
       assert.deepEqual(first, {
+        reconciliationStatus: "applied",
+        idempotencyKey: input.idempotencyKey,
         operation: "mark_read",
         conversationId,
         readState: {
@@ -230,7 +237,7 @@ test("update-read-cursor command is tenant-safe, monotonic, idempotent, and atom
       assert.deepEqual(sideEffects.event_payload, {
         kind: "conversation_read_cursor",
         actorUserId: actor.userId,
-        ...first,
+        ...receipt(first),
       });
       assert.deepEqual(
         parseReadCursorUpdatedEvent(
@@ -249,10 +256,10 @@ test("update-read-cursor command is tenant-safe, monotonic, idempotent, and atom
       );
       assert.equal(sideEffects.state, "completed");
       assert.equal(sideEffects.response_status, 200);
-      assert.deepEqual(sideEffects.response_body, first);
+      assert.deepEqual(sideEffects.response_body, receipt(first));
 
       const retry = await command(input);
-      assert.deepEqual(retry, first);
+      assert.deepEqual(retry, replayed(first));
       assert.deepEqual(
         await sideEffectCounts(actor.tenantId, conversationId, input.idempotencyKey),
         { cursor_count: 1, audit_count: 1, outbox_count: 1, idempotency_count: 1 },
@@ -363,9 +370,9 @@ test("update-read-cursor command is tenant-safe, monotonic, idempotent, and atom
         update_matches_completion: true,
         precision_gap: true,
         ttl_unchanged: true,
-        response_body: result,
+        response_body: receipt(result),
       });
-      assert.deepEqual(await command(input), result);
+      assert.deepEqual(await command(input), replayed(result));
       assert.deepEqual(await sideEffectCounts(actor.tenantId, conversationId, input.idempotencyKey),
         { cursor_count: 1, audit_count: 2, outbox_count: 2, idempotency_count: 1 });
     });
@@ -414,7 +421,7 @@ test("update-read-cursor command is tenant-safe, monotonic, idempotent, and atom
         );
         assert.equal(outcomes.rows.length, 1);
         const outcome = outcomes.rows[0];
-        assert.deepEqual(outcome.response_body, result);
+        assert.deepEqual(outcome.response_body, receipt(result));
 
         const events = await harness.pool.query(
           `SELECT stream_id, payload, occurred_at, expires_at
@@ -430,7 +437,7 @@ test("update-read-cursor command is tenant-safe, monotonic, idempotent, and atom
         assert.deepEqual(event.payload, {
           kind: "conversation_read_cursor",
           actorUserId: actor.userId,
-          ...result,
+          ...receipt(result),
         });
         // Logical cursor ordering must not move wall-clock accounting or TTLs.
         assert.ok(event.occurred_at < seeded.updated_at);
@@ -446,7 +453,7 @@ test("update-read-cursor command is tenant-safe, monotonic, idempotent, and atom
       );
       assert.deepEqual(counts,
         { cursor_count: 1, audit_count: 2, outbox_count: 2, idempotency_count: 1 });
-      assert.deepEqual(await command(unreadInput), results[0]);
+      assert.deepEqual(await command(unreadInput), replayed(results[0]));
       assert.deepEqual(await readCursor(actor.tenantId, conversationId), latestCursor);
       assert.deepEqual(await sideEffectCounts(
         actor.tenantId, conversationId, unreadInput.idempotencyKey,

@@ -1,0 +1,134 @@
+[
+  {
+    "server": "baseline",
+    "operation": "mark_read",
+    "checks": {
+      "strictResult": "accepted",
+      "strictOutcome": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is required"
+      },
+      "eventWholeOutcome": "accepted",
+      "eventProjectedResult": "accepted"
+    }
+  },
+  {
+    "server": "baseline",
+    "operation": "mark_read",
+    "checks": {
+      "strictResult": "accepted",
+      "strictOutcome": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is required"
+      },
+      "eventWholeOutcome": "accepted",
+      "eventProjectedResult": "accepted"
+    }
+  },
+  {
+    "server": "baseline",
+    "operation": "mark_unread",
+    "checks": {
+      "strictResult": "accepted",
+      "strictOutcome": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is required"
+      },
+      "eventWholeOutcome": "accepted",
+      "eventProjectedResult": "accepted"
+    }
+  },
+  {
+    "server": "baseline",
+    "operation": "mark_unread",
+    "checks": {
+      "strictResult": "accepted",
+      "strictOutcome": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is required"
+      },
+      "eventWholeOutcome": "accepted",
+      "eventProjectedResult": "accepted"
+    }
+  },
+  {
+    "server": "candidate",
+    "operation": "mark_read",
+    "wireStatus": "applied",
+    "checks": {
+      "strictResult": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is not allowed"
+      },
+      "strictOutcome": "accepted",
+      "eventWholeOutcome": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is not allowed"
+      },
+      "eventProjectedResult": "accepted"
+    }
+  },
+  {
+    "server": "candidate",
+    "operation": "mark_read",
+    "wireStatus": "replayed",
+    "checks": {
+      "strictResult": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is not allowed"
+      },
+      "strictOutcome": "accepted",
+      "eventWholeOutcome": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is not allowed"
+      },
+      "eventProjectedResult": "accepted"
+    }
+  },
+  {
+    "server": "candidate",
+    "operation": "mark_unread",
+    "wireStatus": "applied",
+    "checks": {
+      "strictResult": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is not allowed"
+      },
+      "strictOutcome": "accepted",
+      "eventWholeOutcome": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is not allowed"
+      },
+      "eventProjectedResult": "accepted"
+    }
+  },
+  {
+    "server": "candidate",
+    "operation": "mark_unread",
+    "wireStatus": "replayed",
+    "checks": {
+      "strictResult": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is not allowed"
+      },
+      "strictOutcome": "accepted",
+      "eventWholeOutcome": {
+        "rejected": true,
+        "code": "malformed_result",
+        "message": "result.reconciliationStatus is not allowed"
+      },
+      "eventProjectedResult": "accepted"
+    }
+  }
+]

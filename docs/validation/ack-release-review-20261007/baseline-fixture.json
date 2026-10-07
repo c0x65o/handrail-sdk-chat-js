@@ -1,0 +1,21 @@
+{
+  "base": "248fb8890b8e7e1ba15799aff06ef48156cca451",
+  "records": [
+    {
+      "path": "src/client/read-state.ts",
+      "sourceSha256": "159d48e44ad9a7024349b36ce28e6fc5aba2a020b9f0db1c3e162dce87fb2e55",
+      "compiledSha256": "6463304e980739c813e99557b1c9be9097fac97175c1af2be4228f832d6ccdc7"
+    },
+    {
+      "path": "src/server/create-chat-server.ts",
+      "sourceSha256": "f7e3a0df3c578c215a6f6dc860feeb750052f4204da7bae909f842c904c4e511",
+      "compiledSha256": "416245f17260096d74a3620e4aeae2c01bf9c393bb8e32cb667b8158a06ea93f"
+    },
+    {
+      "path": "src/server/update-read-cursor-command.ts",
+      "sourceSha256": "855ddf2e78f410024276a5778749821d87f4e6911f3654713763ef5f26f9fc16",
+      "compiledSha256": "9e1a85184200fbc535fd4388ab3add372ccded29625fdef0a18cec1872179e7e"
+    }
+  ],
+  "note": "Node 22 built-in TypeScript transform of unchanged Git bytes; other dist modules reused from typed candidate build; git production diff is exactly these three source modules."
+}

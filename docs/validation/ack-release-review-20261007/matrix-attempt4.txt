@@ -1,0 +1,40 @@
+postgres (PostgreSQL) 15.19 (Debian 15.19-0+deb12u1)
+waiting for server to start.... done
+server started
+TAP version 13
+# Subtest: actual baseline/candidate public JS client x HTTP server, durable and non-durable
+not ok 1 - actual baseline/candidate public JS client x HTTP server, durable and non-durable
+  ---
+  duration_ms: 488.542338
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/docs/validation/ack-release-review-20261007/matrix.test.mjs:13:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    baseline/baseline/true/mark_read/first: {"status":"validation","message":"The command input is invalid."}
+    + actual - expected
+    
+    + 'validation'
+    - 'malformed_response'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'malformed_response'
+  actual: 'validation'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/docs/validation/ack-release-review-20261007/matrix.test.mjs:43:15)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 789.567989
+waiting for server to shut down.... done
+server stopped

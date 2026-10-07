@@ -1,0 +1,201 @@
+{
+  "handrail-sdk-chat-js": {
+    "newFiles": [
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/before.json",
+        "bytes": 595825
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/candidate-before-sync.json",
+        "bytes": 559
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/candidate-before-sync.txt",
+        "bytes": 258
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/canonical-sync.json",
+        "bytes": 558
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/canonical-sync.txt",
+        "bytes": 141
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/capabilities.json",
+        "bytes": 554
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/capabilities.txt",
+        "bytes": 1553
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/capacity-final.json",
+        "bytes": 566
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/checks.json",
+        "bytes": 9524
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/conformance-current.json",
+        "bytes": 554
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/conformance-current.txt",
+        "bytes": 2324
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/flutter-contracts.json",
+        "bytes": 559
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/flutter-contracts.txt",
+        "bytes": 146
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/flutter-dispatcher.sh",
+        "bytes": 275
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/flutter-generated-doc.patch",
+        "bytes": 11406
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/flutter-pre-generation-guard.json",
+        "bytes": 621
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/flutter-pre-generation-guard.txt",
+        "bytes": 349
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/js-doc.patch",
+        "bytes": 5841
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/js-pre-generation-guard.json",
+        "bytes": 557
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/js-pre-generation-guard.txt",
+        "bytes": 148
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/package-fingerprints.json",
+        "bytes": 237
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/preflight.json",
+        "bytes": 497
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/preservation.json",
+        "bytes": 18641
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/read-cursor-dart.json",
+        "bytes": 630
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/read-cursor-dart.txt",
+        "bytes": 587
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/read-cursor-generation.json",
+        "bytes": 553
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/read-cursor-generation.txt",
+        "bytes": 140
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/read-cursor-js.json",
+        "bytes": 646
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/read-cursor-js.txt",
+        "bytes": 2938
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/read-cursor-typecheck.json",
+        "bytes": 631
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/read-cursor-typecheck.txt",
+        "bytes": 0
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/release-example-typecheck-qualified.json",
+        "bytes": 812
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/release-example-typecheck-qualified.txt",
+        "bytes": 0
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/release-example-typecheck.json",
+        "bytes": 789
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/release-example-typecheck.txt",
+        "bytes": 142
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/release-example.ts",
+        "bytes": 1083
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/report.txt",
+        "bytes": 8867
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/resolve-current.json",
+        "bytes": 610
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/resolve-current.txt",
+        "bytes": 1386
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/run.py",
+        "bytes": 2280
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/sync-plan.json",
+        "bytes": 822
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/verify-preservation.py",
+        "bytes": 4273
+      },
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/whitespace.json",
+        "bytes": 138
+      }
+    ],
+    "gitStatus": " M docs/releasing.md\n M src/client/read-state.ts\n M src/server/create-chat-server.ts\n M src/server/update-read-cursor-command.ts\n M test/client-read-state.test.mjs\n M test/postgres-read-cursor-http.test.mjs\n M test/postgres-thread-read-cursor-command.test.mjs\n M test/postgres-update-read-cursor-command.test.mjs\n?? docs/validation/ack-release-conformance-20261007/\n?? docs/validation/ack-release-review-20261007/\n?? docs/validation/read-cursor-ack-20261007/\n?? test/postgres-read-cursor-outcome.test.mjs\n"
+  },
+  "handrail-sdk-chat-flutter": {
+    "newFiles": [
+      {
+        "path": "docs/validation/ack-release-conformance-20261007/report.txt",
+        "bytes": 3689
+      },
+      {
+        "path": "test/shared-fixtures/composer-layout-browser.mjs",
+        "bytes": 1877
+      },
+      {
+        "path": "test/shared-fixtures/sender-layout-browser.mjs",
+        "bytes": 4419
+      }
+    ],
+    "gitStatus": " M docs/releasing.md\n M lib/src/handrail_message_composer.dart\n M shared-contracts.lock.json\n M test/handrail_link_dialog_cases.dart\n?? docs/validation/ack-release-conformance-20261007/\n?? docs/validation/ack-release-review-20261007/\n?? docs/validation/link-polish-review-20261007/resume-6857a7d8/\n?? test/shared-fixtures/composer-layout-browser.mjs\n?? test/shared-fixtures/sender-layout-browser.mjs\n"
+  },
+  "handrail-chat-preview-flutter": {
+    "newFiles": [],
+    "gitStatus": ""
+  },
+  "_scope": "New-file inventory excludes this inventory file and final evidence-sha256.json manifests, which are generated after enumeration."
+}

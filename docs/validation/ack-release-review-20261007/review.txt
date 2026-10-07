@@ -1,0 +1,240 @@
+Independent acknowledgement release review — 2026-10-07
+Work request 1b3be8da-b67d-415f-b065-a246efa7b9f1
+
+JS verdict: the producer correction is sound within the matched-client release
+scope. No new persistence, authorization, ordering, or acknowledgement-validation
+blocker was found in the three-file patch. Do NOT describe it as transparent to
+previously installed JS clients. There is a P1 rollout hold for a server-only
+upgrade serving old non-durable JS clients, and the shared-contract check remains
+FAILED. These are outstanding publication/rollout conditions, not a failed work
+request. No production correction was made during this review.
+
+Flutter verdict is separate: the exact pending decoration correction is now
+qualified on minimum 3.19.0 and current 3.41.7 for this bounded scope. See the
+sibling Flutter docs/validation/ack-release-review-20261007/review.txt. This does
+not clear broader accessibility, device, staging, or Preview acceptance.
+
+Supported contract and compatibility finding
+
+Read README.md:3-23,135-145,266-268; docs/releasing.md; docs/sdk-repository-split.md;
+contracts/http/read-cursor.json; src/contracts/read-cursor-mutation.ts:410-505;
+src/contracts/realtime.ts; client startup/dispatcher and HTTP route source.
+The canonical PATCH contract already requires reconciliationStatus and the
+request's idempotencyKey. Git history places that descriptor, including those
+fields, in the initial extracted SDK commit 90bff33529df06720ff89ccd821360ac65eaf0d0.
+The current patch does not modify it, the outcome parser, or event schema.
+The .54 producer instead returns the older five-field result. Its non-durable
+public JS reader uses the strict five-field parser, whereas its durable reader
+and published Flutter .32 require the canonical complete HTTP outcome.
+
+Thus the underlying problem is a PRE-EXISTING producer/reader contract
+inconsistency requiring a matched SDK upgrade. There is also an actual newly
+exposed failure for the previously working old-JS/new-server deployment pair;
+the pre-existing inconsistency does not erase this operational regression.
+No documentation found promises N/N-1 HTTP command-envelope compatibility.
+The explicit current/previous-version promise is REALTIME protocol compatibility;
+schema N/N-1 rollback support is a separate database guarantee. The single npm
+package keeps contracts/client/server surfaces versioned together. Neither that
+statement nor Preview's paired install proves other deployed readers were
+upgraded, or grants a waiver to ignore their failure. This is not evidence of a
+newly broken documented N/N-1 HTTP guarantee, and it is not a safe universal
+backward-compatible server patch.
+
+Actual matrix — baseline .54 = 248fb8890b8e7e1ba15799aff06ef48156cca451;
+candidate = that base plus production patch 6ab3aae...11767.
+
+Server     JS client  Non-durable read/unread, first/repeat   Durable mark_read
+baseline   baseline   success / success                      malformed_response
+baseline   candidate  success / success                      malformed_response
+candidate  baseline   malformed_response / malformed_response success
+candidate  candidate  success / success                      success
+
+matrix-qualified.txt PASSED. matrix.json contains all eight client/server/mode
+rows, 20 actual PATCH exchanges, exact request and response bodies and database
+counts. Both operations and their same-key repeats are exercised in every
+non-durable row. Durable rows exercise first mark_read; they do not claim a
+same-key public re-authorship test after an unsettled durable intent. Every
+non-durable row commits exactly two receipts/audits; every durable row commits
+one. Candidate first/repeated wire responses are applied/replayed, including
+when the old client rejects them. All eight public clients finish metadata
+startup in ready state. No mock database or injected success envelope is used.
+
+The baseline fixture is source-runtime evidence, not an installed consumer:
+prepare-baseline.mjs reads exact baseline Git bytes for the three changed modules
+and transforms TypeScript with Node 22's built-in transform. Other runtime
+modules are unchanged and reused from the typed build. The complete package
+manifest is retained. No separate checkout or SDK installation was created.
+baseline-fixture.json records hashes. Candidate build and full typecheck pass.
+No compatibility claim is made for every earlier historical JS pin.
+
+Existing negotiation does not solve this boundary. Both sides still use
+protocol 4. decideRealtimeHandshake admits the protocol range, not an HTTP
+read-ack shape capability or minimum JS package version. The PATCH dispatcher
+and read-cursor handler have no outcome-version negotiation. The optional CLI
+packageVersion compatibility assertion verifies a server installation, not its
+remote clients. sdk-compatibility.json freezes a Flutter checkout for CI; it
+does not negotiate JS readers. The observed ready states confirm this limitation.
+Do not invent a header/protocol or relax either strict parser as a review fix.
+
+Smallest required release correction: document the read-ack minimum-reader
+boundary and coordinate every supported consumer onto a release containing this
+client parser before enabling the new producer for that consumer. The candidate
+non-durable reader works with the baseline server, allowing reader-first rollout.
+Use full public HTTPS Git SHAs and matching locks through the ordinary install
+build. If an installation must continue serving unupgraded readers, HOLD its
+server rollout and obtain a separately scoped compatibility design; the present
+code has no existing public negotiation switch to enable. Preview's matched
+server/React installation covers Preview only. No release pin was invented here.
+
+Direct command integrations also need the explicit boundary: updateReadCursor
+now returns an outcome. Passing it wholesale to parseReadCursorMutationResult
+or createReadCursorUpdatedEvent fails strict parsing; projection of the five
+canonical result fields succeeds. strict-boundaries.json proves this using
+actual HTTP receipts, both operations and statuses. The producer's own event
+construction remains before envelope creation and is unaffected. A host must
+use the outcome parser for HTTP and the canonical field projection for legacy
+result/event helpers; do not strip arbitrary unknown fields at HTTP ingress.
+
+Independent source findings
+
+- Auth and identity: input is parsed before the transaction; actor comes from
+  trusted auth. The claim is scoped by tenant, actor, operation name and key;
+  the request hash binds conversation, operation and sequence. Wrong hash is
+  a conflict, not a second write. Nonthread conversation/member row locks and
+  active membership now precede replay. Thread replay preserves discovery then
+  parent-before-child locking, relationship revalidation and current parent/
+  entity authorization. Child participant setup remains fresh-write-only.
+  Revoked access denies replay without returning stored state. This does not
+  introduce a new nonthread entity/archive policy.
+- Legacy history: completed stored results are parsed and wrapped as replayed,
+  retaining their original state and timestamps. No conversion/migration or
+  receipt rewrite occurs. Expired but unpruned rows retain their prior binding;
+  expiry remains maintenance-owned. Malformed stored state cannot become a
+  successful complete envelope. User authority derives from the tenant/actor
+  scoped receipt; clients additionally compare readState.userId with their
+  current identity. No claim of a new historical-data repair is made.
+- Ordering/concurrency: same-key repeats reuse immutable results; changed
+  sequence, operation or conversation conflicts. Fresh stale cursors retain
+  the monotonic validation. Replaying an old read after manual unread, or old
+  unread after a later read, does not mutate durable current state. Existing
+  timestamp ordering and client canonical comparison prevent stale projection
+  wins. Duplicate concurrent requests commit once; opposite fresh intents
+  serialize under the existing locks. A new-key no-op is applied, not replayed,
+  and retains established audit/outbox behavior.
+- Atomicity/boundaries: fresh outcome validation runs before COMMIT; replay
+  validation runs before its COMMIT. HTTP validates against its exact input
+  again. The stored receipt and user-private event remain canonical result
+  shapes; HTTP-only correlation/status fields do not enter storage or events.
+  No migration, SQL mutation/CAS predicate, TTL or event-format change.
+- JS parsing: either metadata field activates complete strict validation.
+  Partial envelopes, wrong key/operation/conversation/sequence and wrong-user
+  acknowledgements cannot settle as success. Only fieldless legacy responses
+  are accepted by the explicitly non-durable fallback; durable parsing stays
+  strict. Cancellation, retry scheduling and rate policy were not changed.
+- Flutter consumption: the request-bound descriptor and runtime user/intent
+  check precede success delivery to the visibility coordinator. Only that
+  consumed success clears exposure retry work. The coordinator is not fed raw
+  HTTP200 as proof. Its runtime/parser/visibility sources are byte-identical
+  between published .32 and the final Flutter workspace.
+
+Fresh verification
+
+- Package-version pre-generation guard, npm run build, npm run typecheck
+  (source and contracts), canonical read-cursor TS/Dart generation, and both
+  repository whitespace checks PASS. Source/package fingerprints reproduce
+  the producer's candidate exactly.
+- pg-http-flutter32.txt: 56 PASS, 0 failed/skipped, real PostgreSQL 15.19 using
+  createPostgresTestBackend and canonical migrations in isolated schemas.
+  Includes command/HTTP, authorization, legacy receipts, conflicts, concurrency,
+  rollback, ordering and public JS/client cases. The test-owned Unix-socket
+  cluster uses TCP disabled, pool max 4 and Node concurrency 1. Final schema
+  count is zero; all eight clusters owned by this review are stopped and their
+  artifacts retained. No shared/provider/Handrail database was contacted.
+- The same run independently executes unchanged public Flutter .32 through real
+  local HTTP/PostgreSQL: valid read uses 1 request and no 2s visibility retry;
+  lost/malformed/wrong-user acknowledgement uses 2 requests with the same key;
+  denied actor is bounded to 2 requests and commits nothing; 429 honors 12s
+  Retry-After, then succeeds with no extra visibility retry. Disposal drains
+  scheduling. Manual unread applied/replayed succeeds with retained marker.
+- focused-js.txt: 154 PASS, 0 failed/skipped, including strict public-client
+  controls, durable/recovery/atomic/background paths, dispatcher and Retry-After.
+- The producer's 94 published-.32 parser/runtime/visibility/reducer checks and
+  other evidence are REUSED: all 41 prior evidence-manifest hashes verify.
+  Historical failed attempts remain unchanged. This is not a new installed-
+  consumer or live staging proof.
+
+Failed shared-contract gate, reproduced without changed sources
+
+contract-sync.txt runs the read-only canonical sync check against current trees
+AND disposable source snapshots from unchanged JS .54 / Flutter .33 Git heads.
+Both FAIL on exactly:
+  test/shared-fixtures/composer-layout-browser.mjs
+  test/shared-fixtures/sender-layout-browser.mjs
+  shared-contracts.lock.json
+The first two JS-owned browser fixture files exist in the committed JS tree;
+their Flutter copies are absent in committed .33. The existing sync script
+copies ALL test/fixtures, including these .mjs files; their missing hash entries
+account for lock drift. There is no generated read-cursor drift or production
+wire difference in this failure. Do not describe it as two missing lockfiles.
+
+P2 source-snapshot maintenance issue; required shared/cross-runtime gate is RED.
+The smallest correction is canonical sync of those two fixture copies and the
+lockfile, followed by check:flutter-contracts and cross-runtime conformance on
+the intended paired pins. This review preserves the files and does not perform
+that separate repair. docs/releasing.md requires affected-SDK shared/conformance
+gates. npm run check:conformance stops at check:flutter-contracts on this pair;
+the remainder is not a new passing conformance run. GitHub's paired workflow
+uses the separate frozen sdk-compatibility.json revision, not automatically .33;
+its full frozen-pin job was not rerun or certified here.
+
+The live Handrail configured-check list contains only the Flutter durable
+resource reducer command, whose 45 cases are included in the passing 66-case
+minimum AND current runs. No configured native check was silently skipped.
+That passing configured test cannot turn the separate failed required shared
+gate green, and no native finalization was invoked to discover/alter additional
+gates. Parent must reconcile this failed release condition before accepting a
+combined publication. No database/check/queue status was edited.
+
+Exact JS identities (full per-file SHA-256 and Git blobs: final-hashes.json)
+
+Base: 248fb8890b8e7e1ba15799aff06ef48156cca451, package 1.0.54
+Production patch: 6ab3aae1914f849213ec76c13565c36b310d91d513bb0f0414215ae40fd11767
+Source fingerprint: fc0d79b3f10afe571a9f9b12cac98086265b62676d70f4088c9ceb39398f9c50
+Built package: 3fa973e3731371f0ffa65e65470bfbcf8b616438723cdc94d2863a7f7298e2a2
+read-state.ts: 9571ca9bed01eb6a71870294c459ef73a2e2b7a574607baf3c3c52e53b5c2809
+create-chat-server.ts: 446b38b462aa9f0ae6e005ae9c81912f26e24c279768fe254506aed3906f5149
+update-read-cursor-command.ts: e615b812cd764ca8116013065f2e932f39e1f3e6b2e25d37a7486e75ac167558
+Canonical Dart: e1f4c2318549bf5b7dec60ec42560bf529f9cca63f2262fbaa89c585f96a5ff8
+
+Attempts/limits and remaining ownership
+
+Matrix setup failures are retained: the first fixture omitted package-version
+metadata and produced a local _meta 500; copying the unchanged package manifest
+fixed that fixture. An extra roles field in the test's exact storage identity
+caused local validation; the fixture now uses only tenant/user/device. Reauthoring
+the same key after an unsettled durable intent also correctly yielded validation;
+the matrix explicitly limits those rows to first read. TypeScript 7 lacks the
+old transpileModule API; the baseline transform uses Node instead. Logs named
+matrix.txt, matrix-attempt2.txt, matrix-final.txt, matrix-attempt4.txt,
+matrix-passing.txt and matrix-verified.txt are FAILED attempts despite some
+optimistic filenames. Only matrix-qualified.txt is the completed passing matrix.
+No failed run was overwritten into a pass.
+
+No full CI, long Preview run, installed Git consumer, native/device/provider or
+staging acceptance ran. All expensive checks were sequential; Flutter/browser
+commands had 300s bounds and Flutter tests two workers. No full-CI auto-skip was
+triggered or its five-minute policy changed. Full Preview 126/120 remains an open
+acceptance result, not recomputed by subtracting two expected requests.
+
+Read current Handrail context and configured checks, attached KB/effective
+requirements, project README/release/testing/contract guidance and both supplied
+reports. No applicable AGENTS.md was found. No auth/native scaffold work applies.
+Auth rotation resumed this same request; source and old evidence were checked
+again before continuation. Capacity/custody and byte costs are in the Flutter
+companion report. No production/test-source edits, Preview edits, historical
+evidence deletion, commits, pushes, PRs, deploys, new access, or queue/database
+writes occurred; only new review evidence/fixtures/toolchain artifacts were added.
+
+Parent owns release docs/pins, the shared-snapshot repair, publishing only exact
+qualified sources through native finalization, and the combined installed-
+consumer run with the unchanged driver. No owner product question is needed.

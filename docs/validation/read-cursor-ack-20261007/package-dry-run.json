@@ -1,0 +1,3337 @@
+Candidate source=fc0d79b3f10afe571a9f9b12cac98086265b62676d70f4088c9ceb39398f9c50 package=3fa973e3731371f0ffa65e65470bfbcf8b616438723cdc94d2863a7f7298e2a2
+[
+  {
+    "id": "@handrail/chat@1.0.54",
+    "name": "@handrail/chat",
+    "version": "1.0.54",
+    "size": 1469787,
+    "unpackedSize": 8691134,
+    "shasum": "53e4b7be8890dca152ab3f7ab30fb20dcf253c25",
+    "integrity": "sha512-g1+UbrN8QKl6BBQ0BWc6HMgF16VJpWMWwxWZ8MU1D3esmdyBhVJ5QXoCxdmRek0cvn93R/xE/NvhBOCzrXYcRg==",
+    "filename": "handrail-chat-1.0.54.tgz",
+    "files": [
+      {
+        "path": "README.md",
+        "size": 14751,
+        "mode": 420
+      },
+      {
+        "path": "dist/candidate.json",
+        "size": 139876,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli.d.ts",
+        "size": 239,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli.d.ts.map",
+        "size": 291,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli.js",
+        "size": 14245,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli.js.map",
+        "size": 13106,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/application-chat-storage.d.ts",
+        "size": 26887,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/application-chat-storage.d.ts.map",
+        "size": 13388,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/application-chat-storage.js",
+        "size": 133290,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/application-chat-storage.js.map",
+        "size": 98432,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/attachment-uploader.d.ts",
+        "size": 3740,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/attachment-uploader.d.ts.map",
+        "size": 2734,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/attachment-uploader.js",
+        "size": 18440,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/attachment-uploader.js.map",
+        "size": 16865,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/command-dispatcher.d.ts",
+        "size": 6674,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/command-dispatcher.d.ts.map",
+        "size": 4803,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/command-dispatcher.js",
+        "size": 25206,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/command-dispatcher.js.map",
+        "size": 19564,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/create-chat-client.d.ts",
+        "size": 37647,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/create-chat-client.d.ts.map",
+        "size": 22143,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/create-chat-client.js",
+        "size": 515147,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/create-chat-client.js.map",
+        "size": 386841,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/cross-tab-coordinator.d.ts",
+        "size": 3886,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/cross-tab-coordinator.d.ts.map",
+        "size": 3132,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/cross-tab-coordinator.js",
+        "size": 30311,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/cross-tab-coordinator.js.map",
+        "size": 24641,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/draft-runtime.d.ts",
+        "size": 7514,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/draft-runtime.d.ts.map",
+        "size": 5736,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/draft-runtime.js",
+        "size": 61817,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/draft-runtime.js.map",
+        "size": 52666,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/durable-event-reducer.d.ts",
+        "size": 3364,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/durable-event-reducer.d.ts.map",
+        "size": 1946,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/durable-event-reducer.js",
+        "size": 56447,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/durable-event-reducer.js.map",
+        "size": 48522,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/ephemeral-signals.d.ts",
+        "size": 1070,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/ephemeral-signals.d.ts.map",
+        "size": 760,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/ephemeral-signals.js",
+        "size": 2710,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/ephemeral-signals.js.map",
+        "size": 2861,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/generated/package-version.d.ts",
+        "size": 105,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/generated/package-version.d.ts.map",
+        "size": 184,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/generated/package-version.js",
+        "size": 203,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/generated/package-version.js.map",
+        "size": 213,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/host-directory.d.ts",
+        "size": 6099,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/host-directory.d.ts.map",
+        "size": 4208,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/host-directory.js",
+        "size": 27001,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/host-directory.js.map",
+        "size": 25840,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/huddle-media-session.d.ts",
+        "size": 5512,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/huddle-media-session.d.ts.map",
+        "size": 3973,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/huddle-media-session.js",
+        "size": 21047,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/huddle-media-session.js.map",
+        "size": 18707,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/huddle-runtime.d.ts",
+        "size": 7730,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/huddle-runtime.d.ts.map",
+        "size": 6121,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/huddle-runtime.js",
+        "size": 64856,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/huddle-runtime.js.map",
+        "size": 53342,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/index.d.ts",
+        "size": 4115,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/index.d.ts.map",
+        "size": 2218,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/index.js",
+        "size": 2373,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/index.js.map",
+        "size": 1235,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-context.d.ts",
+        "size": 2175,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-context.d.ts.map",
+        "size": 1398,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-context.js",
+        "size": 16636,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-context.js.map",
+        "size": 16788,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-reminder-state.d.ts",
+        "size": 2534,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-reminder-state.d.ts.map",
+        "size": 1774,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-reminder-state.js",
+        "size": 14055,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-reminder-state.js.map",
+        "size": 11823,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-search.d.ts",
+        "size": 5164,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-search.d.ts.map",
+        "size": 3670,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-search.js",
+        "size": 20872,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/message-search.js.map",
+        "size": 20053,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/normalized-cache.d.ts",
+        "size": 37986,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/normalized-cache.d.ts.map",
+        "size": 25386,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/normalized-cache.js",
+        "size": 165849,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/normalized-cache.js.map",
+        "size": 142592,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/offline-send-message-queue.d.ts",
+        "size": 3139,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/offline-send-message-queue.d.ts.map",
+        "size": 1984,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/offline-send-message-queue.js",
+        "size": 11534,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/offline-send-message-queue.js.map",
+        "size": 8943,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/optimistic-reaction-state.d.ts",
+        "size": 1089,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/optimistic-reaction-state.d.ts.map",
+        "size": 814,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/optimistic-reaction-state.js",
+        "size": 7056,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/optimistic-reaction-state.js.map",
+        "size": 6718,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/rate-limit.d.ts",
+        "size": 312,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/rate-limit.d.ts.map",
+        "size": 294,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/rate-limit.js",
+        "size": 853,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/rate-limit.js.map",
+        "size": 1035,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/read-state.d.ts",
+        "size": 7132,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/read-state.d.ts.map",
+        "size": 4251,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/read-state.js",
+        "size": 47307,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/read-state.js.map",
+        "size": 39087,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/realtime-session.d.ts",
+        "size": 6172,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/realtime-session.d.ts.map",
+        "size": 5162,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/realtime-session.js",
+        "size": 35707,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/realtime-session.js.map",
+        "size": 29709,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/reply-style-runtime.d.ts",
+        "size": 3105,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/reply-style-runtime.d.ts.map",
+        "size": 2209,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/reply-style-runtime.js",
+        "size": 15415,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/reply-style-runtime.js.map",
+        "size": 14513,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/saved-message-state.d.ts",
+        "size": 2922,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/saved-message-state.d.ts.map",
+        "size": 1923,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/saved-message-state.js",
+        "size": 15732,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/saved-message-state.js.map",
+        "size": 12991,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/snapshot-reader.d.ts",
+        "size": 5688,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/snapshot-reader.d.ts.map",
+        "size": 4017,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/snapshot-reader.js",
+        "size": 26925,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/snapshot-reader.js.map",
+        "size": 23518,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/thread-lifecycle.d.ts",
+        "size": 2888,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/thread-lifecycle.d.ts.map",
+        "size": 2048,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/thread-lifecycle.js",
+        "size": 18319,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/thread-lifecycle.js.map",
+        "size": 18240,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/thread-list.d.ts",
+        "size": 2281,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/thread-list.d.ts.map",
+        "size": 1658,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/thread-list.js",
+        "size": 20751,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/thread-list.js.map",
+        "size": 22063,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/typing-presence.d.ts",
+        "size": 3033,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/typing-presence.d.ts.map",
+        "size": 2459,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/typing-presence.js",
+        "size": 13985,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/typing-presence.js.map",
+        "size": 11426,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/unread-mention-refresh.d.ts",
+        "size": 587,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/unread-mention-refresh.d.ts.map",
+        "size": 453,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/unread-mention-refresh.js",
+        "size": 15542,
+        "mode": 420
+      },
+      {
+        "path": "dist/client/unread-mention-refresh.js.map",
+        "size": 14577,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/attachment-transport.d.ts",
+        "size": 13384,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/attachment-transport.d.ts.map",
+        "size": 9430,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/attachment-transport.js",
+        "size": 31384,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/attachment-transport.js.map",
+        "size": 24913,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-archive.d.ts",
+        "size": 5324,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-archive.d.ts.map",
+        "size": 4127,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-archive.js",
+        "size": 8977,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-archive.js.map",
+        "size": 7080,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-creation.d.ts",
+        "size": 7569,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-creation.d.ts.map",
+        "size": 5143,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-creation.js",
+        "size": 16601,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-creation.js.map",
+        "size": 13766,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-membership.d.ts",
+        "size": 9148,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-membership.d.ts.map",
+        "size": 6381,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-membership.js",
+        "size": 17967,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-membership.js.map",
+        "size": 14696,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-preference-mutation.d.ts",
+        "size": 4488,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-preference-mutation.d.ts.map",
+        "size": 3195,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-preference-mutation.js",
+        "size": 11514,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-preference-mutation.js.map",
+        "size": 10328,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-snapshot-runtime.d.ts",
+        "size": 10617,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-snapshot-runtime.d.ts.map",
+        "size": 6245,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-snapshot-runtime.js",
+        "size": 26367,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-snapshot-runtime.js.map",
+        "size": 22448,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-snapshot.d.ts",
+        "size": 103,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-snapshot.d.ts.map",
+        "size": 170,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-snapshot.js",
+        "size": 236,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation-snapshot.js.map",
+        "size": 194,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation.d.ts",
+        "size": 4045,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation.d.ts.map",
+        "size": 2939,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation.js",
+        "size": 3737,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/conversation.js.map",
+        "size": 3058,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/device-push-token.d.ts",
+        "size": 5391,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/device-push-token.d.ts.map",
+        "size": 4330,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/device-push-token.js",
+        "size": 10950,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/device-push-token.js.map",
+        "size": 9506,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/draft-mutation.d.ts",
+        "size": 8196,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/draft-mutation.d.ts.map",
+        "size": 5661,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/draft-mutation.js",
+        "size": 21441,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/draft-mutation.js.map",
+        "size": 18225,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/ephemeral-signals.d.ts",
+        "size": 254,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/ephemeral-signals.d.ts.map",
+        "size": 174,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/ephemeral-signals.js",
+        "size": 252,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/ephemeral-signals.js.map",
+        "size": 172,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/delete-message.d.ts",
+        "size": 1742,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/delete-message.d.ts.map",
+        "size": 1265,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/delete-message.js",
+        "size": 6482,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/delete-message.js.map",
+        "size": 5099,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/durable-events.d.ts",
+        "size": 15621,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/durable-events.d.ts.map",
+        "size": 7750,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/durable-events.js",
+        "size": 28282,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/durable-events.js.map",
+        "size": 21079,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/edit-message.d.ts",
+        "size": 1939,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/edit-message.d.ts.map",
+        "size": 1457,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/edit-message.js",
+        "size": 6674,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/edit-message.js.map",
+        "size": 5186,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/ephemeral-signals.d.ts",
+        "size": 3328,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/ephemeral-signals.d.ts.map",
+        "size": 2662,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/ephemeral-signals.js",
+        "size": 8433,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/ephemeral-signals.js.map",
+        "size": 7947,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/forward-message.d.ts",
+        "size": 3689,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/forward-message.d.ts.map",
+        "size": 3239,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/forward-message.js",
+        "size": 13761,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/forward-message.js.map",
+        "size": 10854,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/message-reminder.d.ts",
+        "size": 6424,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/message-reminder.d.ts.map",
+        "size": 4780,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/message-reminder.js",
+        "size": 14131,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/message-reminder.js.map",
+        "size": 11664,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/realtime-handshake.d.ts",
+        "size": 1634,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/realtime-handshake.d.ts.map",
+        "size": 1095,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/realtime-handshake.js",
+        "size": 560,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/realtime-handshake.js.map",
+        "size": 396,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/realtime-session.d.ts",
+        "size": 8500,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/realtime-session.d.ts.map",
+        "size": 5633,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/realtime-session.js",
+        "size": 13107,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/realtime-session.js.map",
+        "size": 11171,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/send-message.d.ts",
+        "size": 3302,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/send-message.d.ts.map",
+        "size": 2940,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/send-message.js",
+        "size": 16318,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/generated/send-message.js.map",
+        "size": 14869,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/host-directory-snapshot.d.ts",
+        "size": 7304,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/host-directory-snapshot.d.ts.map",
+        "size": 6107,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/host-directory-snapshot.js",
+        "size": 18852,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/host-directory-snapshot.js.map",
+        "size": 16991,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/huddle-session.d.ts",
+        "size": 8561,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/huddle-session.d.ts.map",
+        "size": 6691,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/huddle-session.js",
+        "size": 24743,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/huddle-session.js.map",
+        "size": 20612,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/identifiers.d.ts",
+        "size": 1197,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/identifiers.d.ts.map",
+        "size": 895,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/identifiers.js",
+        "size": 174,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/identifiers.js.map",
+        "size": 151,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/index.d.ts",
+        "size": 3373,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/index.d.ts.map",
+        "size": 2023,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/index.js",
+        "size": 1583,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/index.js.map",
+        "size": 974,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/member-read-state.d.ts",
+        "size": 4101,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/member-read-state.d.ts.map",
+        "size": 2396,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/member-read-state.js",
+        "size": 3282,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/member-read-state.js.map",
+        "size": 2223,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-context.d.ts",
+        "size": 1814,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-context.d.ts.map",
+        "size": 1459,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-context.js",
+        "size": 3955,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-context.js.map",
+        "size": 3572,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-mutations.d.ts",
+        "size": 1969,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-mutations.d.ts.map",
+        "size": 1106,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-mutations.js",
+        "size": 821,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-mutations.js.map",
+        "size": 537,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-search.d.ts",
+        "size": 4416,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-search.d.ts.map",
+        "size": 3748,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-search.js",
+        "size": 11302,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-search.js.map",
+        "size": 10728,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-timeline-runtime.d.ts",
+        "size": 4576,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-timeline-runtime.d.ts.map",
+        "size": 3091,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-timeline-runtime.js",
+        "size": 8852,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-timeline-runtime.js.map",
+        "size": 7761,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-timeline.d.ts",
+        "size": 545,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-timeline.d.ts.map",
+        "size": 398,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-timeline.js",
+        "size": 282,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message-timeline.js.map",
+        "size": 220,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message.d.ts",
+        "size": 5326,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message.d.ts.map",
+        "size": 4232,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message.js",
+        "size": 163,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/message.js.map",
+        "size": 143,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/private-user-state-snapshot.d.ts",
+        "size": 10205,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/private-user-state-snapshot.d.ts.map",
+        "size": 7079,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/private-user-state-snapshot.js",
+        "size": 42866,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/private-user-state-snapshot.js.map",
+        "size": 36749,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/reaction-mutations.d.ts",
+        "size": 2899,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/reaction-mutations.d.ts.map",
+        "size": 1839,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/reaction-mutations.js",
+        "size": 7718,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/reaction-mutations.js.map",
+        "size": 6452,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/read-cursor-mutation.d.ts",
+        "size": 7949,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/read-cursor-mutation.d.ts.map",
+        "size": 5050,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/read-cursor-mutation.js",
+        "size": 18156,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/read-cursor-mutation.js.map",
+        "size": 13987,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/realtime.d.ts",
+        "size": 1780,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/realtime.d.ts.map",
+        "size": 970,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/realtime.js",
+        "size": 3739,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/realtime.js.map",
+        "size": 2604,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/reply-style-preference.d.ts",
+        "size": 4410,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/reply-style-preference.d.ts.map",
+        "size": 3755,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/reply-style-preference.js",
+        "size": 7398,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/reply-style-preference.js.map",
+        "size": 6394,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/saved-message-mutation.d.ts",
+        "size": 6915,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/saved-message-mutation.d.ts.map",
+        "size": 5117,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/saved-message-mutation.js",
+        "size": 14282,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/saved-message-mutation.js.map",
+        "size": 11265,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-creation.d.ts",
+        "size": 3542,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-creation.d.ts.map",
+        "size": 2793,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-creation.js",
+        "size": 8905,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-creation.js.map",
+        "size": 7203,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-follow-mutation.d.ts",
+        "size": 7296,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-follow-mutation.d.ts.map",
+        "size": 5109,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-follow-mutation.js",
+        "size": 13534,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-follow-mutation.js.map",
+        "size": 11222,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-lifecycle.d.ts",
+        "size": 2479,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-lifecycle.d.ts.map",
+        "size": 1624,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-lifecycle.js",
+        "size": 7380,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-lifecycle.js.map",
+        "size": 6807,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-list.d.ts",
+        "size": 3048,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-list.d.ts.map",
+        "size": 2248,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-list.js",
+        "size": 10442,
+        "mode": 420
+      },
+      {
+        "path": "dist/contracts/thread-list.js.map",
+        "size": 11458,
+        "mode": 420
+      },
+      {
+        "path": "dist/doctor.d.ts",
+        "size": 2736,
+        "mode": 420
+      },
+      {
+        "path": "dist/doctor.d.ts.map",
+        "size": 2045,
+        "mode": 420
+      },
+      {
+        "path": "dist/doctor.js",
+        "size": 15447,
+        "mode": 420
+      },
+      {
+        "path": "dist/doctor.js.map",
+        "size": 13329,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.d.ts",
+        "size": 206,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.d.ts.map",
+        "size": 217,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.js",
+        "size": 204,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.js.map",
+        "size": 215,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/action-hooks.d.ts",
+        "size": 6856,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/action-hooks.d.ts.map",
+        "size": 5125,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/action-hooks.js",
+        "size": 7672,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/action-hooks.js.map",
+        "size": 5996,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/index.d.ts",
+        "size": 2254,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/index.d.ts.map",
+        "size": 1502,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/index.js",
+        "size": 3075,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/index.js.map",
+        "size": 2751,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/query-hooks.d.ts",
+        "size": 10337,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/query-hooks.d.ts.map",
+        "size": 7353,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/query-hooks.js",
+        "size": 55456,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/query-hooks.js.map",
+        "size": 54232,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/reply-style-hooks.d.ts",
+        "size": 548,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/reply-style-hooks.d.ts.map",
+        "size": 378,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/reply-style-hooks.js",
+        "size": 2060,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/reply-style-hooks.js.map",
+        "size": 1942,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/thread-lifecycle-hook.d.ts",
+        "size": 1165,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/thread-lifecycle-hook.d.ts.map",
+        "size": 340,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/thread-lifecycle-hook.js",
+        "size": 1828,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/thread-lifecycle-hook.js.map",
+        "size": 2082,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/thread-list-hook.d.ts",
+        "size": 899,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/thread-list-hook.d.ts.map",
+        "size": 269,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/thread-list-hook.js",
+        "size": 1361,
+        "mode": 420
+      },
+      {
+        "path": "dist/react/thread-list-hook.js.map",
+        "size": 1681,
+        "mode": 420
+      },
+      {
+        "path": "dist/serve.d.ts",
+        "size": 464,
+        "mode": 420
+      },
+      {
+        "path": "dist/serve.d.ts.map",
+        "size": 398,
+        "mode": 420
+      },
+      {
+        "path": "dist/serve.js",
+        "size": 8141,
+        "mode": 420
+      },
+      {
+        "path": "dist/serve.js.map",
+        "size": 7551,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/abort-attachment-command.d.ts",
+        "size": 2012,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/abort-attachment-command.d.ts.map",
+        "size": 1220,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/abort-attachment-command.js",
+        "size": 17662,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/abort-attachment-command.js.map",
+        "size": 10994,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/active-huddle-snapshot-query.d.ts",
+        "size": 1461,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/active-huddle-snapshot-query.d.ts.map",
+        "size": 878,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/active-huddle-snapshot-query.js",
+        "size": 7356,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/active-huddle-snapshot-query.js.map",
+        "size": 4696,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/archive-conversation-command.d.ts",
+        "size": 2172,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/archive-conversation-command.d.ts.map",
+        "size": 1326,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/archive-conversation-command.js",
+        "size": 15528,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/archive-conversation-command.js.map",
+        "size": 11254,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/attachment-cleanup-dispatcher.d.ts",
+        "size": 4703,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/attachment-cleanup-dispatcher.d.ts.map",
+        "size": 3003,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/attachment-cleanup-dispatcher.js",
+        "size": 21955,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/attachment-cleanup-dispatcher.js.map",
+        "size": 15750,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/attachment-download-query.d.ts",
+        "size": 1759,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/attachment-download-query.d.ts.map",
+        "size": 1077,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/attachment-download-query.js",
+        "size": 11432,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/attachment-download-query.js.map",
+        "size": 9176,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/audit-dispatcher.d.ts",
+        "size": 3761,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/audit-dispatcher.d.ts.map",
+        "size": 2699,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/audit-dispatcher.js",
+        "size": 23286,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/audit-dispatcher.js.map",
+        "size": 17943,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/bounded-json-body.d.ts",
+        "size": 234,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/bounded-json-body.d.ts.map",
+        "size": 275,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/bounded-json-body.js",
+        "size": 1042,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/bounded-json-body.js.map",
+        "size": 1157,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/contracts.d.ts",
+        "size": 20497,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/contracts.d.ts.map",
+        "size": 12178,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/contracts.js",
+        "size": 1415,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/contracts.js.map",
+        "size": 875,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-detail-query.d.ts",
+        "size": 1462,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-detail-query.d.ts.map",
+        "size": 763,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-detail-query.js",
+        "size": 14141,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-detail-query.js.map",
+        "size": 8810,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-draft-snapshot-query.d.ts",
+        "size": 1490,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-draft-snapshot-query.d.ts.map",
+        "size": 778,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-draft-snapshot-query.js",
+        "size": 7073,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-draft-snapshot-query.js.map",
+        "size": 4359,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-list-query.d.ts",
+        "size": 2277,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-list-query.d.ts.map",
+        "size": 1153,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-list-query.js",
+        "size": 19159,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-list-query.js.map",
+        "size": 11642,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-membership-command.d.ts",
+        "size": 2619,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-membership-command.d.ts.map",
+        "size": 1527,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-membership-command.js",
+        "size": 31132,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/conversation-membership-command.js.map",
+        "size": 22755,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-chat-server.d.ts",
+        "size": 28407,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-chat-server.d.ts.map",
+        "size": 15077,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-chat-server.js",
+        "size": 334865,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-chat-server.js.map",
+        "size": 205489,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-conversation-command.d.ts",
+        "size": 2600,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-conversation-command.d.ts.map",
+        "size": 1619,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-conversation-command.js",
+        "size": 23188,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-conversation-command.js.map",
+        "size": 16421,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-thread-command.d.ts",
+        "size": 2431,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-thread-command.d.ts.map",
+        "size": 1533,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-thread-command.js",
+        "size": 23027,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/create-thread-command.js.map",
+        "size": 15349,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/device-push-token-command.d.ts",
+        "size": 2292,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/device-push-token-command.d.ts.map",
+        "size": 1302,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/device-push-token-command.js",
+        "size": 17011,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/device-push-token-command.js.map",
+        "size": 11621,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/edit-message-command.d.ts",
+        "size": 2141,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/edit-message-command.d.ts.map",
+        "size": 1371,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/edit-message-command.js",
+        "size": 14907,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/edit-message-command.js.map",
+        "size": 11215,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/end-huddle-command.d.ts",
+        "size": 2313,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/end-huddle-command.d.ts.map",
+        "size": 1521,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/end-huddle-command.js",
+        "size": 18234,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/end-huddle-command.js.map",
+        "size": 12198,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/finalize-attachment-command.d.ts",
+        "size": 2026,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/finalize-attachment-command.d.ts.map",
+        "size": 1228,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/finalize-attachment-command.js",
+        "size": 14909,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/finalize-attachment-command.js.map",
+        "size": 10531,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/forward-message-command.d.ts",
+        "size": 2488,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/forward-message-command.d.ts.map",
+        "size": 1646,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/forward-message-command.js",
+        "size": 24874,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/forward-message-command.js.map",
+        "size": 17757,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/index.d.ts",
+        "size": 6685,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/index.d.ts.map",
+        "size": 3229,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/index.js",
+        "size": 4134,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/index.js.map",
+        "size": 1977,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/join-huddle-command.d.ts",
+        "size": 2623,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/join-huddle-command.d.ts.map",
+        "size": 1526,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/join-huddle-command.js",
+        "size": 17432,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/join-huddle-command.js.map",
+        "size": 12001,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/leave-huddle-command.d.ts",
+        "size": 3508,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/leave-huddle-command.d.ts.map",
+        "size": 1981,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/leave-huddle-command.js",
+        "size": 18398,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/leave-huddle-command.js.map",
+        "size": 12582,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-context-query.d.ts",
+        "size": 1144,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-context-query.d.ts.map",
+        "size": 856,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-context-query.js",
+        "size": 7744,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-context-query.js.map",
+        "size": 3367,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-reminder-list-query.d.ts",
+        "size": 950,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-reminder-list-query.d.ts.map",
+        "size": 736,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-reminder-list-query.js",
+        "size": 6213,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-reminder-list-query.js.map",
+        "size": 4416,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-search-query.d.ts",
+        "size": 1896,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-search-query.d.ts.map",
+        "size": 1030,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-search-query.js",
+        "size": 15509,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-search-query.js.map",
+        "size": 11641,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-timeline-query.d.ts",
+        "size": 3477,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-timeline-query.d.ts.map",
+        "size": 2579,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-timeline-query.js",
+        "size": 18944,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/message-timeline-query.js.map",
+        "size": 10629,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/native-tokens.d.ts",
+        "size": 2326,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/native-tokens.d.ts.map",
+        "size": 1282,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/native-tokens.js",
+        "size": 12291,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/native-tokens.js.map",
+        "size": 10178,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/notification-dispatcher.d.ts",
+        "size": 5190,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/notification-dispatcher.d.ts.map",
+        "size": 3651,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/notification-dispatcher.js",
+        "size": 48346,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/notification-dispatcher.js.map",
+        "size": 24523,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/notification-lease-recovery.d.ts",
+        "size": 565,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/notification-lease-recovery.d.ts.map",
+        "size": 518,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/notification-lease-recovery.js",
+        "size": 3621,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/notification-lease-recovery.js.map",
+        "size": 1048,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/outbox-publisher.d.ts",
+        "size": 3700,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/outbox-publisher.d.ts.map",
+        "size": 2699,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/outbox-publisher.js",
+        "size": 14718,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/outbox-publisher.js.map",
+        "size": 11641,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-maintenance.d.ts",
+        "size": 6846,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-maintenance.d.ts.map",
+        "size": 4282,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-maintenance.js",
+        "size": 24813,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-maintenance.js.map",
+        "size": 15375,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-migrations.d.ts",
+        "size": 3665,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-migrations.d.ts.map",
+        "size": 2682,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-migrations.js",
+        "size": 12709,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-migrations.js.map",
+        "size": 10338,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-schema-migrations.d.ts",
+        "size": 10531,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-schema-migrations.d.ts.map",
+        "size": 2586,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-schema-migrations.js",
+        "size": 176455,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/postgres-schema-migrations.js.map",
+        "size": 14167,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/prepare-attachment-command.d.ts",
+        "size": 2648,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/prepare-attachment-command.d.ts.map",
+        "size": 1564,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/prepare-attachment-command.js",
+        "size": 22624,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/prepare-attachment-command.js.map",
+        "size": 17070,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/reply-style-preference-query.d.ts",
+        "size": 882,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/reply-style-preference-query.d.ts.map",
+        "size": 609,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/reply-style-preference-query.js",
+        "size": 1801,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/reply-style-preference-query.js.map",
+        "size": 1768,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/reply-thread-readiness.d.ts",
+        "size": 578,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/reply-thread-readiness.d.ts.map",
+        "size": 496,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/reply-thread-readiness.js",
+        "size": 5579,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/reply-thread-readiness.js.map",
+        "size": 3988,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/request-admission.d.ts",
+        "size": 1054,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/request-admission.d.ts.map",
+        "size": 684,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/request-admission.js",
+        "size": 1911,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/request-admission.js.map",
+        "size": 1631,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/request-context.d.ts",
+        "size": 2878,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/request-context.d.ts.map",
+        "size": 1599,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/request-context.js",
+        "size": 5239,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/request-context.js.map",
+        "size": 3971,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/saved-message-list-query.d.ts",
+        "size": 1414,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/saved-message-list-query.d.ts.map",
+        "size": 835,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/saved-message-list-query.js",
+        "size": 12593,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/saved-message-list-query.js.map",
+        "size": 8924,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/send-message-command.d.ts",
+        "size": 2589,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/send-message-command.d.ts.map",
+        "size": 1645,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/send-message-command.js",
+        "size": 29848,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/send-message-command.js.map",
+        "size": 20213,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-huddle-screen-share-command.d.ts",
+        "size": 2460,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-huddle-screen-share-command.d.ts.map",
+        "size": 1467,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-huddle-screen-share-command.js",
+        "size": 14572,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-huddle-screen-share-command.js.map",
+        "size": 9985,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-message-reminder-command.d.ts",
+        "size": 2079,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-message-reminder-command.d.ts.map",
+        "size": 1329,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-message-reminder-command.js",
+        "size": 18993,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-message-reminder-command.js.map",
+        "size": 13194,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-reaction-command.d.ts",
+        "size": 2270,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-reaction-command.d.ts.map",
+        "size": 1380,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-reaction-command.js",
+        "size": 12262,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-reaction-command.js.map",
+        "size": 8585,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-saved-message-command.d.ts",
+        "size": 2183,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-saved-message-command.d.ts.map",
+        "size": 1346,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-saved-message-command.js",
+        "size": 15220,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-saved-message-command.js.map",
+        "size": 10649,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-thread-follow-command.d.ts",
+        "size": 2177,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-thread-follow-command.d.ts.map",
+        "size": 1345,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-thread-follow-command.js",
+        "size": 18339,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/set-thread-follow-command.js.map",
+        "size": 12917,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/soft-delete-message-command.d.ts",
+        "size": 2334,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/soft-delete-message-command.d.ts.map",
+        "size": 1405,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/soft-delete-message-command.js",
+        "size": 16960,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/soft-delete-message-command.js.map",
+        "size": 10379,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/start-huddle-command.d.ts",
+        "size": 2783,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/start-huddle-command.d.ts.map",
+        "size": 1675,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/start-huddle-command.js",
+        "size": 18805,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/start-huddle-command.js.map",
+        "size": 13424,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/synchronize-draft-command.d.ts",
+        "size": 2094,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/synchronize-draft-command.d.ts.map",
+        "size": 1227,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/synchronize-draft-command.js",
+        "size": 12090,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/synchronize-draft-command.js.map",
+        "size": 9212,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-access.d.ts",
+        "size": 2527,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-access.d.ts.map",
+        "size": 1164,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-access.js",
+        "size": 5497,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-access.js.map",
+        "size": 2986,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-list-handler-options.d.ts",
+        "size": 1546,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-list-handler-options.d.ts.map",
+        "size": 740,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-list-handler-options.js",
+        "size": 1458,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-list-handler-options.js.map",
+        "size": 1119,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-list-query.d.ts",
+        "size": 1327,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-list-query.d.ts.map",
+        "size": 916,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-list-query.js",
+        "size": 15730,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-list-query.js.map",
+        "size": 9278,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-participant.d.ts",
+        "size": 1998,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-participant.d.ts.map",
+        "size": 928,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-participant.js",
+        "size": 3647,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-participant.js.map",
+        "size": 1842,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-summary-query.d.ts",
+        "size": 1030,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-summary-query.d.ts.map",
+        "size": 532,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-summary-query.js",
+        "size": 4537,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/thread-summary-query.js.map",
+        "size": 2167,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/unread-mention-sql.d.ts",
+        "size": 700,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/unread-mention-sql.d.ts.map",
+        "size": 209,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/unread-mention-sql.js",
+        "size": 1506,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/unread-mention-sql.js.map",
+        "size": 314,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-conversation-preference-command.d.ts",
+        "size": 2499,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-conversation-preference-command.d.ts.map",
+        "size": 1343,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-conversation-preference-command.js",
+        "size": 19415,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-conversation-preference-command.js.map",
+        "size": 13677,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-read-cursor-command.d.ts",
+        "size": 2204,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-read-cursor-command.d.ts.map",
+        "size": 1238,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-read-cursor-command.js",
+        "size": 15908,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-read-cursor-command.js.map",
+        "size": 10875,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-reply-style-preference-command.d.ts",
+        "size": 2129,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-reply-style-preference-command.d.ts.map",
+        "size": 1218,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-reply-style-preference-command.js",
+        "size": 11386,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-reply-style-preference-command.js.map",
+        "size": 8661,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-thread-lifecycle-command.d.ts",
+        "size": 1630,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-thread-lifecycle-command.d.ts.map",
+        "size": 1123,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-thread-lifecycle-command.js",
+        "size": 10571,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/update-thread-lifecycle-command.js.map",
+        "size": 7612,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-ephemeral-signals.d.ts",
+        "size": 3325,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-ephemeral-signals.d.ts.map",
+        "size": 2459,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-ephemeral-signals.js",
+        "size": 19885,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-ephemeral-signals.js.map",
+        "size": 17473,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-replay.d.ts",
+        "size": 2750,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-replay.d.ts.map",
+        "size": 2004,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-replay.js",
+        "size": 9437,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-replay.js.map",
+        "size": 7754,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-subscriptions.d.ts",
+        "size": 3978,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-subscriptions.d.ts.map",
+        "size": 2048,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-subscriptions.js",
+        "size": 4594,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-subscriptions.js.map",
+        "size": 3726,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-upgrade.d.ts",
+        "size": 9115,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-upgrade.d.ts.map",
+        "size": 5197,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-upgrade.js",
+        "size": 61400,
+        "mode": 420
+      },
+      {
+        "path": "dist/server/websocket-upgrade.js.map",
+        "size": 47167,
+        "mode": 420
+      },
+      {
+        "path": "dist/testing/create-chat-test-harness.d.ts",
+        "size": 6503,
+        "mode": 420
+      },
+      {
+        "path": "dist/testing/create-chat-test-harness.d.ts.map",
+        "size": 4662,
+        "mode": 420
+      },
+      {
+        "path": "dist/testing/create-chat-test-harness.js",
+        "size": 29398,
+        "mode": 420
+      },
+      {
+        "path": "dist/testing/create-chat-test-harness.js.map",
+        "size": 25489,
+        "mode": 420
+      },
+      {
+        "path": "dist/testing/index.d.ts",
+        "size": 2535,
+        "mode": 420
+      },
+      {
+        "path": "dist/testing/index.d.ts.map",
+        "size": 1559,
+        "mode": 420
+      },
+      {
+        "path": "dist/testing/index.js",
+        "size": 6646,
+        "mode": 420
+      },
+      {
+        "path": "dist/testing/index.js.map",
+        "size": 5468,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/chat-workspace.d.ts",
+        "size": 7144,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/chat-workspace.d.ts.map",
+        "size": 3585,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/chat-workspace.js",
+        "size": 173856,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/chat-workspace.js.map",
+        "size": 138733,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/composer-rich-text-editor.d.ts",
+        "size": 2441,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/composer-rich-text-editor.d.ts.map",
+        "size": 1487,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/composer-rich-text-editor.js",
+        "size": 30499,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/composer-rich-text-editor.js.map",
+        "size": 34263,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/composer-rich-text.d.ts",
+        "size": 2189,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/composer-rich-text.d.ts.map",
+        "size": 1496,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/composer-rich-text.js",
+        "size": 14002,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/composer-rich-text.js.map",
+        "size": 15167,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/direct-conversation-creation.d.ts",
+        "size": 869,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/direct-conversation-creation.d.ts.map",
+        "size": 787,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/direct-conversation-creation.js",
+        "size": 10981,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/direct-conversation-creation.js.map",
+        "size": 9255,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/group-direct-conversation-creation.d.ts",
+        "size": 795,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/group-direct-conversation-creation.d.ts.map",
+        "size": 766,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/group-direct-conversation-creation.js",
+        "size": 13609,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/group-direct-conversation-creation.js.map",
+        "size": 11490,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/huddle-controls.d.ts",
+        "size": 2094,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/huddle-controls.d.ts.map",
+        "size": 1387,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/huddle-controls.js",
+        "size": 34130,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/huddle-controls.js.map",
+        "size": 27757,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/index.d.ts",
+        "size": 793,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/index.d.ts.map",
+        "size": 571,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/index.js",
+        "size": 683,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/index.js.map",
+        "size": 506,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/member-management.d.ts",
+        "size": 1461,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/member-management.d.ts.map",
+        "size": 1069,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/member-management.js",
+        "size": 17830,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/member-management.js.map",
+        "size": 14005,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/message-composer.d.ts",
+        "size": 2112,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/message-composer.d.ts.map",
+        "size": 1340,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/message-composer.js",
+        "size": 95180,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/message-composer.js.map",
+        "size": 83612,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/message-timeline.d.ts",
+        "size": 5577,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/message-timeline.d.ts.map",
+        "size": 3144,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/message-timeline.js",
+        "size": 131165,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/message-timeline.js.map",
+        "size": 116329,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/NativeTokenManager.d.ts",
+        "size": 632,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/NativeTokenManager.d.ts.map",
+        "size": 414,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/NativeTokenManager.js",
+        "size": 10248,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/NativeTokenManager.js.map",
+        "size": 7905,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/notification-preferences.d.ts",
+        "size": 911,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/notification-preferences.d.ts.map",
+        "size": 822,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/notification-preferences.js",
+        "size": 15947,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/notification-preferences.js.map",
+        "size": 12882,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/reaction-picker.d.ts",
+        "size": 11450,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/reaction-picker.d.ts.map",
+        "size": 4030,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/reaction-picker.js",
+        "size": 16665,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/reaction-picker.js.map",
+        "size": 16164,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/reply-style-settings.d.ts",
+        "size": 564,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/reply-style-settings.d.ts.map",
+        "size": 446,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/reply-style-settings.js",
+        "size": 7055,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/reply-style-settings.js.map",
+        "size": 6352,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/slots.d.ts",
+        "size": 20174,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/slots.d.ts.map",
+        "size": 14519,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/slots.js",
+        "size": 1341,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/slots.js.map",
+        "size": 992,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/styles.css",
+        "size": 184100,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-creation-dialog.d.ts",
+        "size": 1179,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-creation-dialog.d.ts.map",
+        "size": 988,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-creation-dialog.js",
+        "size": 8150,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-creation-dialog.js.map",
+        "size": 7420,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-list.d.ts",
+        "size": 1104,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-list.d.ts.map",
+        "size": 885,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-list.js",
+        "size": 7862,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-list.js.map",
+        "size": 9074,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-panel.d.ts",
+        "size": 2387,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-panel.d.ts.map",
+        "size": 1475,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-panel.js",
+        "size": 30966,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/thread-panel.js.map",
+        "size": 28489,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/timeline-window.d.ts",
+        "size": 2062,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/timeline-window.d.ts.map",
+        "size": 1290,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/timeline-window.js",
+        "size": 5365,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/timeline-window.js.map",
+        "size": 5678,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/user-status-selector.d.ts",
+        "size": 865,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/user-status-selector.d.ts.map",
+        "size": 696,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/user-status-selector.js",
+        "size": 17582,
+        "mode": 420
+      },
+      {
+        "path": "dist/ui/user-status-selector.js.map",
+        "size": 16612,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 17973,
+        "mode": 420
+      }
+    ],
+    "entryCount": 664,
+    "bundled": []
+  }
+]

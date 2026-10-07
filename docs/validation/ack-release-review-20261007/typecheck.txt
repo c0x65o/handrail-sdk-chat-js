@@ -1,0 +1,8 @@
+
+> @handrail/chat@1.0.54 typecheck
+> tsc --project tsconfig.json --noEmit && npm run typecheck:contracts
+
+
+> @handrail/chat@1.0.54 typecheck:contracts
+> tsc --project tsconfig.type-tests.json
+

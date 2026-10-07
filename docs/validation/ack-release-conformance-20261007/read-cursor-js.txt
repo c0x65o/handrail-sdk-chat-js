@@ -1,0 +1,94 @@
+TAP version 13
+# Subtest: the descriptor defines bounded intents, explicit retries, and a private durable event
+ok 1 - the descriptor defines bounded intents, explicit retries, and a private durable event
+  ---
+  duration_ms: 6.459953
+  type: 'test'
+  ...
+# Subtest: the descriptor deterministically drives TypeScript and Dart outputs
+ok 2 - the descriptor deterministically drives TypeScript and Dart outputs
+  ---
+  duration_ms: 4.115482
+  type: 'test'
+  ...
+# Subtest: check mode is clean after generation and reports drift
+ok 3 - check mode is clean after generation and reports drift
+  ---
+  duration_ms: 141.436795
+  type: 'test'
+  ...
+# Subtest: parses distinct exact mark-read and mark-unread commands
+ok 4 - parses distinct exact mark-read and mark-unread commands
+  ---
+  duration_ms: 2.19996
+  type: 'test'
+  ...
+# Subtest: requires nonblank idempotency keys within 255 UTF-8 bytes
+ok 5 - requires nonblank idempotency keys within 255 UTF-8 bytes
+  ---
+  duration_ms: 0.940466
+  type: 'test'
+  ...
+# Subtest: rejects every caller-authored trusted identity spelling
+ok 6 - rejects every caller-authored trusted identity spelling
+  ---
+  duration_ms: 0.46097
+  type: 'test'
+  ...
+# Subtest: rejects negative, noninteger, and unsafe command sequences
+ok 7 - rejects negative, noninteger, and unsafe command sequences
+  ---
+  duration_ms: 0.3203
+  type: 'test'
+  ...
+# Subtest: rejects cursor regression and mark-read beyond the latest sequence
+ok 8 - rejects cursor regression and mark-read beyond the latest sequence
+  ---
+  duration_ms: 0.6295
+  type: 'test'
+  ...
+# Subtest: mark-unread accepts only an existing already-read/latest sequence
+ok 9 - mark-unread accepts only an existing already-read/latest sequence
+  ---
+  duration_ms: 0.351397
+  type: 'test'
+  ...
+# Subtest: equal-cursor mark-read clears a marker and returns canonical unread
+ok 10 - equal-cursor mark-read clears a marker and returns canonical unread
+  ---
+  duration_ms: 0.40024
+  type: 'test'
+  ...
+# Subtest: repeated explicit commands retain one outcome without a new transition
+ok 11 - repeated explicit commands retain one outcome without a new transition
+  ---
+  duration_ms: 0.328814
+  type: 'test'
+  ...
+# Subtest: models applied and replayed HTTP outcomes with deterministic request correlation
+ok 12 - models applied and replayed HTTP outcomes with deterministic request correlation
+  ---
+  duration_ms: 0.682194
+  type: 'test'
+  ...
+# Subtest: cross-device envelopes name the affected user and read-cursor semantics
+ok 13 - cross-device envelopes name the affected user and read-cursor semantics
+  ---
+  duration_ms: 1.242674
+  type: 'test'
+  ...
+# Subtest: message edit and revision data are never read-state commands
+ok 14 - message edit and revision data are never read-state commands
+  ---
+  duration_ms: 0.359971
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 322.853743

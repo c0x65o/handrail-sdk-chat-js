@@ -1,0 +1,541 @@
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/package_config.dart:10:8: Error: The 'unnamed-libraries' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.19 or higher.
+library;
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/package_config.dart:119:8: Error: This requires the experimental 'records' language feature to be enabled.
+Try passing the '--enable-experiment=records' command line option.
+Future<({PackageConfig config, File file})?> findPackageConfigAndFile(
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/package_config.dart:251:8: Error: This requires the experimental 'records' language feature to be enabled.
+Try passing the '--enable-experiment=records' command line option.
+Future<({PackageConfig config, Uri file})?> findPackageConfigAndUri(
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/shelf_io.dart:22:8: Error: The 'unnamed-libraries' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.19 or higher.
+library;
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/discovery.dart:41:8: Error: This requires the experimental 'records' language feature to be enabled.
+Try passing the '--enable-experiment=records' command line option.
+Future<({PackageConfig config, File file})?> findPackageConfig(
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/discovery.dart:71:8: Error: This requires the experimental 'records' language feature to be enabled.
+Try passing the '--enable-experiment=records' command line option.
+Future<({PackageConfig config, Uri file})?> findPackageConfigUri(
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/discovery.dart:145:8: Error: This requires the experimental 'records' language feature to be enabled.
+Try passing the '--enable-experiment=records' command line option.
+Future<({PackageConfig config, File file})?> findPackageConfigInDirectory(
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/discovery.dart:184:27: Error: This requires the experimental 'records' language feature to be enabled.
+Try passing the '--enable-experiment=records' command line option.
+PackageConfig? configOnly(({PackageConfig config, Object file})? pair) =>
+                          ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/errors.dart:18:13: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    Object? super.value,
+            ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/errors.dart:19:12: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    String super.name,
+           ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/errors.dart:20:12: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    String super.message,
+           ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/errors.dart:30:5: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    super.message,
+    ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/errors.dart:31:13: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    Object? super.source, [
+            ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/errors.dart:32:5: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    super.offset,
+    ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/package_config_types.dart:13:8: Error: The 'unnamed-libraries' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.19 or higher.
+library;
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:38:5: Error: Expected an identifier, but got 'switch'.
+Try inserting an identifier before 'switch'.
+    switch (permission) {
+    ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:38:5: Error: 'switch' can't be used as an identifier because it's a keyword.
+Try renaming this to be an identifier that isn't a keyword.
+    switch (permission) {
+    ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:43:6: Error: Unexpected token ';'.
+    };
+     ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/process_manager.dart:218:5: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    super.delegate,
+    ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/process_manager.dart:243:5: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    super.stdin,
+    ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/process_manager.dart:244:5: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    super.stdout,
+    ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/process_manager.dart:245:5: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    super.stderr,
+    ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/process_manager.dart:251:5: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    super.stdin,
+    ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/process_manager.dart:252:5: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    super.stdout,
+    ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/process_manager.dart:253:5: Error: The 'super-parameters' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+    super.stderr,
+    ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/constants.dart:6:8: Error: The 'unnamed-libraries' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.19 or higher.
+library;
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/constants.dart:8:11: Error: The 'inline-class' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.3 or higher.
+extension type const JsonKey(String value) implements String {}
+          ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/util_io.dart:7:8: Error: The 'unnamed-libraries' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.19 or higher.
+library;
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/util.dart:6:8: Error: The 'unnamed-libraries' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.19 or higher.
+library;
+       ^
+Error: Couldn't resolve the package 'web_socket' in 'package:web_socket/web_socket.dart'.
+Error: Couldn't resolve the package 'web_socket' in 'package:web_socket/io_web_socket.dart'.
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:10:8: Error: Not found: 'package:web_socket/web_socket.dart'
+import 'package:web_socket/web_socket.dart';
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:229:3: Error: The 'enhanced-enums' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+  const _State(this.name);
+  ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:231:3: Error: The 'enhanced-enums' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+  final String name;
+  ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:234:3: Error: The 'enhanced-enums' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.17 or higher.
+  String toString() => name;
+  ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/io.dart:8:8: Error: Not found: 'package:web_socket/io_web_socket.dart'
+import 'package:web_socket/io_web_socket.dart' show IOWebSocket;
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/typed_data-1.4.0/lib/typed_data.dart:6:8: Error: The 'unnamed-libraries' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.19 or higher.
+library;
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/pub_semver-2.2.1/lib/src/version.dart:17:1: Error: The 'class-modifiers' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.0 or higher.
+final class Version implements VersionConstraint, VersionRange {
+^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/typed_data-1.4.0/lib/typed_buffers.dart:14:8: Error: The 'unnamed-libraries' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 2.19 or higher.
+library;
+       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/watcher-1.2.1/lib/src/polling.dart:13:11: Error: The 'inline-class' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.3 or higher.
+extension type PollResult._(int _value) {
+          ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/watcher-1.2.1/lib/src/event.dart:16:11: Error: The 'inline-class' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.3 or higher.
+extension type Event._(FileSystemEvent _event) {
+          ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/watcher-1.2.1/lib/src/paths.dart:13:11: Error: The 'inline-class' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.3 or higher.
+extension type AbsolutePath(String _string) {
+          ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/watcher-1.2.1/lib/src/paths.dart:112:11: Error: The 'inline-class' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.3 or higher.
+extension type RelativePath(String _string) {
+          ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/watcher-1.2.1/lib/src/paths.dart:119:11: Error: The 'inline-class' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.3 or higher.
+extension type PathSegment._(String _string) implements RelativePath {
+          ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:73:36: Error: Type 'WebSocket' not found.
+  AdapterWebSocketChannel(FutureOr<WebSocket> webSocket) {
+                                   ^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/package_config.dart:138:13: Error: The argument type 'Function' can't be assigned to the parameter type 'void Function(Object, File)'.
+ - 'Function' is from 'dart:core'.
+ - 'Object' is from 'dart:core'.
+ - 'File' is from 'dart:io'.
+    onError ?? throwError,
+            ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/package_config.dart:195:25: Error: The argument type 'Function' can't be assigned to the parameter type 'void Function(Object, File)'.
+ - 'Function' is from 'dart:core'.
+ - 'Object' is from 'dart:core'.
+ - 'File' is from 'dart:io'.
+        onError == null ? throwError : (Object error, _) => onError(error),
+                        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/package_config.dart:272:13: Error: The argument type 'Function' can't be assigned to the parameter type 'void Function(Object, Uri)'.
+ - 'Function' is from 'dart:core'.
+ - 'Object' is from 'dart:core'.
+ - 'Uri' is from 'dart:core'.
+    onError ?? throwError,
+            ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/package_config.dart:350:25: Error: The argument type 'Function' can't be assigned to the parameter type 'void Function(Object, Uri)'.
+ - 'Function' is from 'dart:core'.
+ - 'Object' is from 'dart:core'.
+ - 'Uri' is from 'dart:core'.
+        onError == null ? throwError : (Object error, _) => onError(error),
+                        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/discovery.dart:95:25: Error: Expected ')' before this.
+      if (configAndFile case (:var config, :var file)) {
+                        ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/discovery.dart:96:25: Error: Undefined name 'config'.
+        return (config: config, file: file.uri);
+                        ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/discovery.dart:96:39: Error: Undefined name 'file'.
+        return (config: config, file: file.uri);
+                                      ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/discovery.dart:96:16: Error: The 'records' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.0 or higher.
+        return (config: config, file: file.uri);
+               ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/discovery.dart:113:48: Error: The 'records' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.0 or higher.
+      if (config.version >= minVersion) return (config: config, file: file);
+                                               ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/discovery.dart:169:12: Error: The 'records' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.0 or higher.
+    return (config: config, file: packageConfigFile);
+           ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:37:79: Error: Expected ';' after this.
+int _permissionBitIndex(_FilePermission permission, _FilePermissionRole role) =>
+                                                                              ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:38:5: Error: Unexpected token 'switch'.
+    switch (permission) {
+    ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:39:23: Error: Expected ';' after this.
+      _FilePermission.setUid => 11,
+                      ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:39:30: Error: Expected an identifier, but got '=>'.
+Try inserting an identifier before '=>'.
+      _FilePermission.setUid => 11,
+                             ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:39:30: Error: Expected ';' after this.
+      _FilePermission.setUid => 11,
+                             ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:39:33: Error: Expected ';' after this.
+      _FilePermission.setUid => 11,
+                                ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:39:35: Error: Expected an identifier, but got ','.
+Try inserting an identifier before ','.
+      _FilePermission.setUid => 11,
+                                  ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:39:35: Error: Unexpected token ';'.
+      _FilePermission.setUid => 11,
+                                  ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:40:23: Error: Expected ';' after this.
+      _FilePermission.setGid => 10,
+                      ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:40:30: Error: Expected an identifier, but got '=>'.
+Try inserting an identifier before '=>'.
+      _FilePermission.setGid => 10,
+                             ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:40:30: Error: Expected ';' after this.
+      _FilePermission.setGid => 10,
+                             ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:40:33: Error: Expected ';' after this.
+      _FilePermission.setGid => 10,
+                                ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:40:35: Error: Expected an identifier, but got ','.
+Try inserting an identifier before ','.
+      _FilePermission.setGid => 10,
+                                  ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:40:35: Error: Unexpected token ';'.
+      _FilePermission.setGid => 10,
+                                  ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:41:23: Error: Expected ';' after this.
+      _FilePermission.sticky => 9,
+                      ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:41:30: Error: Expected an identifier, but got '=>'.
+Try inserting an identifier before '=>'.
+      _FilePermission.sticky => 9,
+                             ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:41:30: Error: Expected ';' after this.
+      _FilePermission.sticky => 9,
+                             ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:41:33: Error: Expected ';' after this.
+      _FilePermission.sticky => 9,
+                                ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:41:34: Error: Expected an identifier, but got ','.
+Try inserting an identifier before ','.
+      _FilePermission.sticky => 9,
+                                 ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:41:34: Error: Unexpected token ';'.
+      _FilePermission.sticky => 9,
+                                 ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:42:9: Error: A function declaration needs an explicit list of parameters.
+Try adding a parameter list to the function declaration.
+      _ => (role.index * 3) + permission.index
+        ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:42:13: Error: Undefined name 'role'.
+      _ => (role.index * 3) + permission.index
+            ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/permissions.dart:42:42: Error: Expected ';' after this.
+      _ => (role.index * 3) + permission.index
+                                         ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/shell_words.dart:38:7: Error: Switch case may fall through to the next case.
+      case $backslash:
+      ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/shell_words.dart:51:7: Error: Switch case may fall through to the next case.
+      case $singleQuote:
+      ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/shell_words.dart:62:7: Error: Switch case may fall through to the next case.
+      case $doubleQuote:
+      ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/shell_words.dart:101:7: Error: Switch case may fall through to the next case.
+      case $hash:
+      ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/io-1.1.0/lib/src/shell_words.dart:116:7: Error: Switch case may fall through to the next case.
+      case $space:
+      ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/src/cascade.dart:76:40: Error: Can't use an expression of type 'Cascade?' as a function because it's potentially null.
+ - 'Cascade' is from 'package:shelf/src/cascade.dart' ('../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/src/cascade.dart').
+Try calling using ?.call instead.
+      return Future.sync(() => _parent.handler(request)).then((response) {
+                                       ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/src/request.dart:63:57: Error: Property 'called' cannot be accessed on '_OnHijack?' because it is potentially null.
+ - '_OnHijack' is from 'package:shelf/src/request.dart' ('../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/src/request.dart').
+Try accessing using ?. instead.
+  bool get canHijack => _onHijack != null && !_onHijack.called;
+                                                        ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/src/request.dart:57:20: Context: '_onHijack' couldn't be promoted because field promotion is only available in Dart 3.2 and above.
+See http://dart.dev/go/non-promo-field-promotion-unavailable
+  final _OnHijack? _onHijack;
+                   ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/src/request.dart:283:15: Error: Method 'run' cannot be called on '_OnHijack?' because it is potentially null.
+ - '_OnHijack' is from 'package:shelf/src/request.dart' ('../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/src/request.dart').
+Try calling using ?. instead.
+    _onHijack.run(callback);
+              ^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/src/request.dart:57:20: Context: '_onHijack' couldn't be promoted because field promotion is only available in Dart 3.2 and above.
+See http://dart.dev/go/non-promo-field-promotion-unavailable
+  final _OnHijack? _onHijack;
+                   ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/src/server_handler.dart:92:50: Error: Can't use an expression of type 'void Function()?' as a function because it's potentially null.
+Try calling using ?.call instead.
+        return _onClose == null ? null : _onClose();
+                                                 ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf-1.4.2/lib/src/server_handler.dart:67:29: Context: '_onClose' couldn't be promoted because field promotion is only available in Dart 3.2 and above.
+See http://dart.dev/go/non-promo-field-promotion-unavailable
+  final ZoneCallback<void>? _onClose;
+                            ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf_web_socket-3.0.0/lib/src/web_socket_handler.dart:76:26: Error: Method 'contains' cannot be called on 'Set<String>?' because it is potentially null.
+ - 'Set' is from 'dart:core'.
+Try calling using ?. instead.
+        !_allowedOrigins.contains(origin.toLowerCase())) {
+                         ^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf_web_socket-3.0.0/lib/src/web_socket_handler.dart:28:22: Context: '_allowedOrigins' couldn't be promoted because field promotion is only available in Dart 3.2 and above.
+See http://dart.dev/go/non-promo-field-promotion-unavailable
+  final Set<String>? _allowedOrigins;
+                     ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf_web_socket-3.0.0/lib/src/web_socket_handler.dart:111:22: Error: Method 'contains' cannot be called on 'Set<String>?' because it is potentially null.
+ - 'Set' is from 'dart:core'.
+Try calling using ?. instead.
+      if (_protocols.contains(requestProtocol)) return requestProtocol;
+                     ^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/shelf_web_socket-3.0.0/lib/src/web_socket_handler.dart:25:22: Context: '_protocols' couldn't be promoted because field promotion is only available in Dart 3.2 and above.
+See http://dart.dev/go/non-promo-field-promotion-unavailable
+  final Set<String>? _protocols;
+                     ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:165:25: Error: Expected ')' before this.
+    if (languageVersion case var languageVersion?) {
+                        ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:198:12: Error: Expected ';' after this.
+  for (var MapEntry(:key, :value) in map.entries) {
+           ^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:198:21: Error: Expected an identifier, but got ':'.
+Try inserting an identifier before ':'.
+  for (var MapEntry(:key, :value) in map.entries) {
+                    ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:198:22: Error: Undefined name 'key'.
+  for (var MapEntry(:key, :value) in map.entries) {
+                     ^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:198:27: Error: Expected an identifier, but got ':'.
+Try inserting an identifier before ':'.
+  for (var MapEntry(:key, :value) in map.entries) {
+                          ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:198:28: Error: Undefined name 'value'.
+  for (var MapEntry(:key, :value) in map.entries) {
+                           ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:198:20: Error: The 'records' language feature is disabled for this library.
+Try removing the package language version or setting the language version to 3.0 or higher.
+  for (var MapEntry(:key, :value) in map.entries) {
+                   ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:198:33: Error: Expected ';' after this.
+  for (var MapEntry(:key, :value) in map.entries) {
+                                ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:198:35: Error: 'in' can't be used as an identifier because it's a keyword.
+Try renaming this to be an identifier that isn't a keyword.
+  for (var MapEntry(:key, :value) in map.entries) {
+                                  ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:198:38: Error: Unexpected token 'map'.
+  for (var MapEntry(:key, :value) in map.entries) {
+                                     ^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:199:13: Error: Undefined name 'key'.
+    switch (key) {
+            ^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:201:28: Error: Undefined name 'value'.
+        if (checkType<int>(value, _configVersionKey) case var version?) {
+                           ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:201:54: Error: Expected ')' before this.
+        if (checkType<int>(value, _configVersionKey) case var version?) {
+                                                     ^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:202:15: Error: Undefined name 'version'.
+          if (version >= PackageConfig.minVersion &&
+              ^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:203:15: Error: Undefined name 'version'.
+              version <= PackageConfig.maxVersion) {
+              ^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:204:29: Error: Undefined name 'version'.
+            configVersion = version;
+                            ^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:209:15: Error: Undefined name 'version'.
+              version,
+              ^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:216:53: Error: Undefined name 'value'.
+        var packageArray = checkType<List<Object?>>(value, _packagesKey) ?? [];
+                                                    ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:232:28: Error: Undefined name 'key'.
+        (extraData ??= {})[key] = value;
+                           ^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:232:35: Error: Undefined name 'value'.
+        (extraData ??= {})[key] = value;
+                                  ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:198:35: Error: Undefined name 'in'.
+  for (var MapEntry(:key, :value) in map.entries) {
+                                  ^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:165:9: Error: A value of type 'String?' can't be assigned to a variable of type 'bool'.
+    if (languageVersion case var languageVersion?) {
+        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:166:38: Error: The argument type 'String?' can't be assigned to the parameter type 'String'.
+      version = parseLanguageVersion(languageVersion, onError);
+                                     ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:201:13: Error: A value of type 'int?' can't be assigned to a variable of type 'bool'.
+        if (checkType<int>(value, _configVersionKey) case var version?) {
+            ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:200:7: Error: Switch case may fall through to the next case.
+      case _configVersionKey:
+      ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/package_config-3.0.0/lib/src/package_config_json.dart:215:7: Error: Switch case may fall through to the next case.
+      case _packagesKey:
+      ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:69:31: Error: Undefined name 'WebSocket'.
+      AdapterWebSocketChannel(WebSocket.connect(url, protocols: protocols));
+                              ^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:73:36: Error: 'WebSocket' isn't a type.
+  AdapterWebSocketChannel(FutureOr<WebSocket> webSocket) {
+                                   ^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:74:12: Error: 'WebSocket' isn't a type.
+    Future<WebSocket> webSocketFuture;
+           ^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:75:22: Error: 'WebSocket' isn't a type.
+    if (webSocket is WebSocket) {
+                     ^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:84:16: Error: 'TextDataReceived' isn't a type.
+          case TextDataReceived(text: final text):
+               ^^^^^^^^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:86:16: Error: 'BinaryDataReceived' isn't a type.
+          case BinaryDataReceived(data: final data):
+               ^^^^^^^^^^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:88:16: Error: 'CloseReceived' isn't a type.
+          case CloseReceived(code: final code, reason: final reason):
+               ^^^^^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:106:14: Error: 'WebSocketConnectionClosed' isn't a type.
+        } on WebSocketConnectionClosed {
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:113:14: Error: 'WebSocketConnectionClosed' isn't a type.
+        } on WebSocketConnectionClosed {
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:78:25: Error: A value of type 'FutureOr<invalid-type>' can't be assigned to a variable of type 'Future<invalid-type>'.
+ - 'Future' is from 'dart:async'.
+      webSocketFuture = webSocket;
+                        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:82:17: Error: The getter 'events' isn't defined for the type 'Object?'.
+ - 'Object' is from 'dart:core'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'events'.
+      webSocket.events.listen((event) {
+                ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:98:25: Error: The method 'sendText' isn't defined for the type 'Object?'.
+ - 'Object' is from 'dart:core'.
+Try correcting the name to the name of an existing method, or defining a method named 'sendText'.
+              webSocket.sendText(s);
+                        ^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:100:25: Error: The method 'sendBytes' isn't defined for the type 'Object?'.
+ - 'Object' is from 'dart:core'.
+Try correcting the name to the name of an existing method, or defining a method named 'sendBytes'.
+              webSocket.sendBytes(b);
+                        ^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:102:25: Error: The method 'sendBytes' isn't defined for the type 'Object?'.
+ - 'Object' is from 'dart:core'.
+Try correcting the name to the name of an existing method, or defining a method named 'sendBytes'.
+              webSocket.sendBytes(Uint8List.fromList(b));
+                        ^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:112:27: Error: The method 'close' isn't defined for the type 'Object?'.
+ - 'Object' is from 'dart:core'.
+Try correcting the name to the name of an existing method, or defining a method named 'close'.
+          await webSocket.close(_localCloseCode, _localCloseReason);
+                          ^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/adapter_web_socket_channel.dart:117:29: Error: The getter 'protocol' isn't defined for the type 'Object?'.
+ - 'Object' is from 'dart:core'.
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'protocol'.
+      _protocol = webSocket.protocol;
+                            ^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/io.dart:61:30: Error: Undefined name 'IOWebSocket'.
+            ? webSocket.then(IOWebSocket.fromWebSocket) as FutureOr<IOWebSocket>
+                             ^^^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/io.dart:61:69: Error: 'IOWebSocket' isn't a type.
+            ? webSocket.then(IOWebSocket.fromWebSocket) as FutureOr<IOWebSocket>
+                                                                    ^^^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/io.dart:62:15: Error: Undefined name 'IOWebSocket'.
+            : IOWebSocket.fromWebSocket(webSocket));
+              ^^^^^^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:87:9: Error: Switch case may fall through to the next case.
+        case _State.boundary:
+        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:92:9: Error: Switch case may fall through to the next case.
+        case _State.size:
+        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:102:9: Error: Switch case may fall through to the next case.
+        case _State.sizeBeforeLF:
+        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:107:9: Error: Switch case may fall through to the next case.
+        case _State.body:
+        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:114:9: Error: Switch case may fall through to the next case.
+        case _State.bodyBeforeCR:
+        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:119:9: Error: Switch case may fall through to the next case.
+        case _State.bodyBeforeLF:
+        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:124:9: Error: Switch case may fall through to the next case.
+        case _State.endBeforeCR:
+        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/http_parser-4.1.2/lib/src/chunked_coding/decoder.dart:129:9: Error: Switch case may fall through to the next case.
+        case _State.endBeforeLF:
+        ^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/pub_semver-2.2.1/lib/src/version_constraint.dart:89:14: Error: Expected an identifier, but got 'switch'.
+Try inserting an identifier before 'switch'.
+      return switch (op) {
+             ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/pub_semver-2.2.1/lib/src/version_constraint.dart:89:7: Error: Expected ';' after this.
+      return switch (op) {
+      ^^^^^^
+../../../../../../../.handrail/flutter-sdk/bin/cache/pub-cache/hosted/pub.dev/pub_semver-2.2.1/lib/src/version_constraint.dart:90:9: Error: Expected to find 'case'.
+        '<=' => VersionRange(max: version, includeMax: true),
+        ^^^^

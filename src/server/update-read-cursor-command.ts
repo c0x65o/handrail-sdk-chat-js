@@ -10,10 +10,11 @@ import type { ConversationReadState } from "../contracts/member-read-state.js";
 import {
   applyReadCursorMutation,
   createReadCursorUpdatedEvent,
+  createReadCursorMutationOutcome,
   parseReadCursorMutationInput,
   parseReadCursorMutationResult,
   type ReadCursorMutationInput,
-  type ReadCursorMutationResult,
+  type ReadCursorMutationOutcome,
 } from "../contracts/read-cursor-mutation.js";
 import { CHAT_PROTOCOL_VERSION } from "../contracts/realtime.js";
 import type { ChatPermissionAdapter, TrustedChatActorContext } from "./contracts.js";
@@ -216,7 +217,7 @@ const rollback = async (
  */
 export async function updateReadCursor(
   options: UpdateReadCursorCommandOptions,
-): Promise<ReadCursorMutationResult> {
+): Promise<ReadCursorMutationOutcome> {
   validateActor(options.actor);
   const input = parseReadCursorMutationInput(options.input);
   const schema = validatePostgresSchema(
@@ -296,31 +297,6 @@ export async function updateReadCursor(
         threadId: input.conversationId, operation: "read",
         entityAction: UPDATE_READ_CURSOR_IDEMPOTENCY_OPERATION, permissions,
       });
-    }
-
-    if (claimed.idempotency_state === "completed") {
-      if (claimed.stored_response_body === null) {
-        throw new Error("Completed update-read-cursor outcome has no response body");
-      }
-      const replay = parseReadCursorMutationResult(claimed.stored_response_body);
-      await connection.query("COMMIT");
-      return replay;
-    }
-    if (claimed.idempotency_state !== "pending") {
-      throw new Error("PostgreSQL returned an invalid idempotency state");
-    }
-
-    if (target?.type === "thread") {
-      if (conversation === undefined || target.parent_conversation_id === null) {
-        throw new ChatAuthorizationError();
-      }
-      await ensureThreadParticipant({
-        connection, schema, actor: options.actor, threadId: input.conversationId,
-        parentConversationId: target.parent_conversation_id,
-        entityAction: UPDATE_READ_CURSOR_IDEMPOTENCY_OPERATION, permissions,
-        occurredAt: toIsoTimestamp(conversation.occurred_at, "participant setup time"),
-        initialRole: "member",
-      });
     } else {
       const lockedConversation = await connection.query<LockedConversationRow>(
         `SELECT
@@ -342,6 +318,35 @@ export async function updateReadCursor(
     }
     if (conversation === undefined) {
       throw new ChatAuthorizationError();
+    }
+
+    if (claimed.idempotency_state === "completed") {
+      if (claimed.stored_response_body === null) {
+        throw new Error("Completed update-read-cursor outcome has no response body");
+      }
+      const replay = createReadCursorMutationOutcome(
+        parseReadCursorMutationResult(claimed.stored_response_body),
+        input,
+        "replayed",
+      );
+      await connection.query("COMMIT");
+      return replay;
+    }
+    if (claimed.idempotency_state !== "pending") {
+      throw new Error("PostgreSQL returned an invalid idempotency state");
+    }
+
+    if (target?.type === "thread") {
+      if (conversation === undefined || target.parent_conversation_id === null) {
+        throw new ChatAuthorizationError();
+      }
+      await ensureThreadParticipant({
+        connection, schema, actor: options.actor, threadId: input.conversationId,
+        parentConversationId: target.parent_conversation_id,
+        entityAction: UPDATE_READ_CURSOR_IDEMPOTENCY_OPERATION, permissions,
+        occurredAt: toIsoTimestamp(conversation.occurred_at, "participant setup time"),
+        initialRole: "member",
+      });
     }
 
     const lockedCursor = await connection.query<StoredCursorRow>(
@@ -519,8 +524,9 @@ export async function updateReadCursor(
       );
     }
 
+    const outcome = createReadCursorMutationOutcome(result, input, "applied");
     await connection.query("COMMIT");
-    return result;
+    return outcome;
   } catch (error) {
     await rollback(connection);
     throw error;

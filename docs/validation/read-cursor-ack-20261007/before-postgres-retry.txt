@@ -1,0 +1,612 @@
+postgres (PostgreSQL) 15.19 (Debian 15.19-0+deb12u1)
+waiting for server to start.... done
+server started
+TAP version 13
+# Subtest: PATCH /conversations/:conversationId/read-cursor mounts the private read-state command
+    # Subtest: returns the exact canonical actor-private response and advances monotonically
+    not ok 1 - returns the exact canonical actor-private response and advances monotonically
+      ---
+      duration_ms: 42.182415
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:245:15'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly deep-equal:
+        + actual - expected
+        ... Skipped lines
+        
+          {
+            conversationId: 'read-target',
+        -   idempotencyKey: 'read-http-initial',
+            latestSequence: 8,
+            operation: 'mark_read',
+            readState: {
+              conversationId: 'read-target',
+              lastReadSequence: 3,
+        ...
+            },
+        -   reconciliationStatus: 'applied',
+            unreadCount: 5
+          }
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected:
+        operation: 'mark_read'
+        reconciliationStatus: 'applied'
+        idempotencyKey: 'read-http-initial'
+        conversationId: 'read-target'
+        readState:
+          conversationId: 'read-target'
+          userId: 'reader-a'
+          lastReadSequence: 3
+          updatedAt: '2026-10-07T14:23:22.151Z'
+        latestSequence: 8
+        unreadCount: 5
+      actual:
+        operation: 'mark_read'
+        conversationId: 'read-target'
+        readState:
+          conversationId: 'read-target'
+          userId: 'reader-a'
+          lastReadSequence: 3
+          updatedAt: '2026-10-07T14:23:22.151Z'
+        latestSequence: 8
+        unreadCount: 5
+      operator: 'deepStrictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:260:16)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:245:7
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:91:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:244:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: replays an identical key without duplicating durable effects
+    not ok 2 - replays an identical key without duplicating durable effects
+      ---
+      duration_ms: 21.662704
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:315:15'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly deep-equal:
+        + actual - expected
+        ... Skipped lines
+        
+          {
+            conversationId: 'retry-target',
+            latestSequence: 5,
+            operation: 'mark_read',
+            readState: {
+        ...
+            },
+        -   reconciliationStatus: 'replayed',
+            unreadCount: 1
+          }
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected:
+        operation: 'mark_read'
+        conversationId: 'retry-target'
+        readState:
+          conversationId: 'retry-target'
+          userId: 'reader-a'
+          lastReadSequence: 4
+          updatedAt: '2026-10-07T14:23:22.176Z'
+        latestSequence: 5
+        unreadCount: 1
+        reconciliationStatus: 'replayed'
+      actual:
+        operation: 'mark_read'
+        conversationId: 'retry-target'
+        readState:
+          conversationId: 'retry-target'
+          userId: 'reader-a'
+          lastReadSequence: 4
+          updatedAt: '2026-10-07T14:23:22.176Z'
+        latestSequence: 5
+        unreadCount: 1
+      operator: 'deepStrictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:322:16)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:315:7
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:91:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:244:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: maps regression and sequence bounds to one safe state conflict
+    not ok 3 - maps regression and sequence bounds to one safe state conflict
+      ---
+      duration_ms: 9.46229
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:329:15'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        200 !== 409
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 409
+      actual: 200
+      operator: 'strictEqual'
+      stack: |-
+        assertStableError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:122:10)
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:335:17)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:329:7
+        async withHttpServer (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:91:12)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:244:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: rejects malformed, ambiguous, mismatched, and spoofed transport input before command work
+    ok 4 - rejects malformed, ambiguous, mismatched, and spoofed transport input before command work
+      ---
+      duration_ms: 62.452321
+      type: 'test'
+      ...
+    # Subtest: keeps nonmember and cross-tenant failures indistinguishable and maps authentication
+    ok 5 - keeps nonmember and cross-tenant failures indistinguishable and maps authentication
+      ---
+      duration_ms: 14.442416
+      type: 'test'
+      ...
+    # Subtest: maps conflicting idempotency-key reuse without changing the cursor
+    ok 6 - maps conflicting idempotency-key reuse without changing the cursor
+      ---
+      duration_ms: 13.732435
+      type: 'test'
+      ...
+    1..6
+not ok 1 - PATCH /conversations/:conversationId/read-cursor mounts the private read-state command
+  ---
+  duration_ms: 685.035891
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-http.test.mjs:133:1'
+  failureType: 'subtestsFailed'
+  error: '3 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: command: complete immutable read cursor acknowledgements
+    # Subtest: first application, no-op, lost acknowledgement and later intent retain exact receipts
+    not ok 1 - first application, no-op, lost acknowledgement and later intent retain exact receipts
+      ---
+      duration_ms: 18.834837
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:101:15'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        accepted (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:88:26)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:105:23)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:101:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: legacy completed receipt is returned without rewriting any historical data
+    not ok 2 - legacy completed receipt is returned without rewriting any historical data
+      ---
+      duration_ms: 9.809947
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:130:15'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        accepted (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:88:26)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:142:26)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:130:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: same key is isolated by tenant and actor
+    not ok 3 - same key is isolated by tenant and actor
+      ---
+      duration_ms: 12.355674
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:145:15'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        accepted (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:88:26)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:153:25)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:145:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: completed thread replay rechecks entity and parent access
+    not ok 4 - completed thread replay rechecks entity and parent access
+      ---
+      duration_ms: 19.409051
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:157:15'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        accepted (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:88:26)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:161:9)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:157:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: concurrent duplicates commit once and expired keys retain claim semantics
+    not ok 5 - concurrent duplicates commit once and expired keys retain claim semantics
+      ---
+      duration_ms: 19.017506
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:168:15'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:173:56)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:168:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    1..5
+not ok 2 - command: complete immutable read cursor acknowledgements
+  ---
+  duration_ms: 573.670282
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:21:3'
+  failureType: 'subtestsFailed'
+  error: '5 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# PostgreSQL 15.19 (Debian 15.19-0+deb12u1); isolated schema; canonical migrations
+# Subtest: HTTP: complete immutable read cursor acknowledgements
+    # Subtest: first application, no-op, lost acknowledgement and later intent retain exact receipts
+    not ok 1 - first application, no-op, lost acknowledgement and later intent retain exact receipts
+      ---
+      duration_ms: 38.609151
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:101:15'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        accepted (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:88:26)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:105:23)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:101:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    # Subtest: legacy completed receipt is returned without rewriting any historical data
+    not ok 2 - legacy completed receipt is returned without rewriting any historical data
+      ---
+      duration_ms: 16.061836
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:130:15'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        accepted (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:88:26)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:142:26)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:130:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    # Subtest: same key is isolated by tenant and actor
+    not ok 3 - same key is isolated by tenant and actor
+      ---
+      duration_ms: 16.568212
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:145:15'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        accepted (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:88:26)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:153:25)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:145:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    # Subtest: completed thread replay rechecks entity and parent access
+    not ok 4 - completed thread replay rechecks entity and parent access
+      ---
+      duration_ms: 26.304595
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:157:15'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        accepted (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:88:26)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:161:9)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:157:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    # Subtest: concurrent duplicates commit once and expired keys retain claim semantics
+    not ok 5 - concurrent duplicates commit once and expired keys retain claim semantics
+      ---
+      duration_ms: 33.171448
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:168:15'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:173:56)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:168:7)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+      ...
+    1..5
+not ok 3 - HTTP: complete immutable read cursor acknowledgements
+  ---
+  duration_ms: 648.97672
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-read-cursor-outcome.test.mjs:21:3'
+  failureType: 'subtestsFailed'
+  error: '5 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# PostgreSQL 15.19 (Debian 15.19-0+deb12u1); isolated schema; canonical migrations
+# Subtest: update-read-cursor command is tenant-safe, monotonic, idempotent, and atomic
+    # Subtest: creates the first cursor and replays one private cross-device outcome exactly
+    not ok 1 - creates the first cursor and replays one private cross-device outcome exactly
+      ---
+      duration_ms: 16.706683
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-update-read-cursor-command.test.mjs:154:13'
+      failureType: 'testCodeFailure'
+      error: 'result.reconciliationStatus is required'
+      code: 'malformed_result'
+      name: 'ReadCursorMutationError'
+      stack: |-
+        contractError (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:435:12)
+        assertExactKeys (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:422:19)
+        parseReadCursorMutationOutcome (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/dist/contracts/read-cursor-mutation.js:164:5)
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-update-read-cursor-command.test.mjs:161:24)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-update-read-cursor-command.test.mjs:154:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: advances monotonically and equal-sequence mark-read clears a manual marker
+    ok 2 - advances monotonically and equal-sequence mark-read clears a manual marker
+      ---
+      duration_ms: 31.220336
+      type: 'test'
+      ...
+    # Subtest: completes advancement when the serialized clock precedes the claim by microseconds
+    not ok 3 - completes advancement when the serialized clock precedes the claim by microseconds
+      ---
+      duration_ms: 19.711785
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-update-read-cursor-command.test.mjs:312:13'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly deep-equal:
+        + actual - expected
+        ... Skipped lines
+        
+          {
+            conversationId: 'cursor-submillisecond-claim',
+            latestSequence: 8,
+            operation: 'mark_read',
+            readState: {
+        ...
+            },
+        -   reconciliationStatus: 'replayed',
+            unreadCount: 2
+          }
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected:
+        operation: 'mark_read'
+        conversationId: 'cursor-submillisecond-claim'
+        readState:
+          conversationId: 'cursor-submillisecond-claim'
+          userId: 'reader-a'
+          lastReadSequence: 6
+          updatedAt: '2026-10-07T14:23:24.526Z'
+        latestSequence: 8
+        unreadCount: 2
+        reconciliationStatus: 'replayed'
+      actual:
+        operation: 'mark_read'
+        conversationId: 'cursor-submillisecond-claim'
+        readState:
+          conversationId: 'cursor-submillisecond-claim'
+          userId: 'reader-a'
+          lastReadSequence: 6
+          updatedAt: '2026-10-07T14:23:24.526Z'
+        latestSequence: 8
+        unreadCount: 2
+      operator: 'deepStrictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-update-read-cursor-command.test.mjs:375:14)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-update-read-cursor-command.test.mjs:312:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: orders equal-sequence changes beyond a future cursor and replays the earlier outcome
+    not ok 4 - orders equal-sequence changes beyond a future cursor and replays the earlier outcome
+      ---
+      duration_ms: 21.66301
+      type: 'test'
+      location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-update-read-cursor-command.test.mjs:380:13'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly deep-equal:
+        + actual - expected
+        ... Skipped lines
+        
+          {
+            conversationId: 'cursor-future-timestamp',
+            latestSequence: 8,
+            operation: 'mark_unread',
+            readState: {
+        ...
+            },
+        -   reconciliationStatus: 'replayed',
+            unreadCount: 5
+          }
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected:
+        operation: 'mark_unread'
+        conversationId: 'cursor-future-timestamp'
+        readState:
+          conversationId: 'cursor-future-timestamp'
+          userId: 'reader-a'
+          lastReadSequence: 6
+          manualUnreadFromSequence: 4
+          updatedAt: '2026-10-08T14:23:24.542Z'
+        latestSequence: 8
+        unreadCount: 5
+        reconciliationStatus: 'replayed'
+      actual:
+        operation: 'mark_unread'
+        conversationId: 'cursor-future-timestamp'
+        readState:
+          conversationId: 'cursor-future-timestamp'
+          userId: 'reader-a'
+          lastReadSequence: 6
+          manualUnreadFromSequence: 4
+          updatedAt: '2026-10-08T14:23:24.542Z'
+        latestSequence: 8
+        unreadCount: 5
+      operator: 'deepStrictEqual'
+      stack: |-
+        TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-update-read-cursor-command.test.mjs:456:14)
+        process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async TestContext.<anonymous> (file:///opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-update-read-cursor-command.test.mjs:380:5)
+        async Test.run (node:internal/test_runner/test:1054:7)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: mark-unread preserves the durable cursor and rejects zero, future, and unread ranges
+    ok 5 - mark-unread preserves the durable cursor and rejects zero, future, and unread ranges
+      ---
+      duration_ms: 17.186032
+      type: 'test'
+      ...
+    # Subtest: rejects inactive, non-member, and cross-tenant targets without leaking existence
+    ok 6 - rejects inactive, non-member, and cross-tenant targets without leaking existence
+      ---
+      duration_ms: 11.600161
+      type: 'test'
+      ...
+    # Subtest: rejects conflicting reuse of an idempotency key
+    ok 7 - rejects conflicting reuse of an idempotency key
+      ---
+      duration_ms: 10.464181
+      type: 'test'
+      ...
+    # Subtest: rolls back cursor, audit, outbox, and idempotency after a late failure
+    ok 8 - rolls back cursor, audit, outbox, and idempotency after a late failure
+      ---
+      duration_ms: 7.67895
+      type: 'test'
+      ...
+    # Subtest: editing an existing message leaves cursor values and updatedAt unchanged
+    ok 9 - editing an existing message leaves cursor values and updatedAt unchanged
+      ---
+      duration_ms: 27.722933
+      type: 'test'
+      ...
+    1..9
+not ok 4 - update-read-cursor command is tenant-safe, monotonic, idempotent, and atomic
+  ---
+  duration_ms: 657.096911
+  type: 'test'
+  location: '/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js/test/postgres-update-read-cursor-command.test.mjs:53:1'
+  failureType: 'subtestsFailed'
+  error: '3 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..4
+# tests 29
+# suites 0
+# pass 9
+# fail 20
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3342.98334
+waiting for server to shut down.... done
+server stopped

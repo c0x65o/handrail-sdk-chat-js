@@ -1,0 +1,17 @@
+{
+  "exit": 0,
+  "seconds": 1.72,
+  "command": [
+    "npm",
+    "run",
+    "check:capabilities"
+  ],
+  "repository": "handrail-sdk-chat-js",
+  "timeout_seconds": 300,
+  "current_toolchain": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter/build/ack-release-review/current-flutter",
+  "flutter_dispatcher": "/opt/handrail/repos/handrail/handrail-chat/.huddle-tmp/ack-conformance-runner/bin/flutter",
+  "memory": {
+    "memory.peak": "1031909376",
+    "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+  }
+}

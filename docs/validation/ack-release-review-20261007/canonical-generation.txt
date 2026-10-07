@@ -1,0 +1,1 @@
+Generated read-cursor contracts are up to date.

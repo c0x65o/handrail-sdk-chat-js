@@ -1,0 +1,76 @@
+[
+  {
+    "check": "actual PostgreSQL command, HTTP, public JS and live Flutter .32",
+    "status": "passed",
+    "tests": 56,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "pg-http-clients-final.txt"
+  },
+  {
+    "check": "thread receipt assertion readability follow-up",
+    "status": "passed",
+    "tests": 19,
+    "evidence": "thread-final.txt"
+  },
+  {
+    "check": "focused JS runtime, durable storage, recovery, concurrency, HTTP, browser contract, generation, exports",
+    "status": "passed",
+    "tests": 106,
+    "evidence": "focused-node.txt"
+  },
+  {
+    "check": "dispatcher and package-version tests",
+    "status": "passed",
+    "tests": 32,
+    "evidence": "dispatch-package.txt"
+  },
+  {
+    "check": "Retry-After tests",
+    "status": "passed",
+    "tests": 16,
+    "evidence": "retry-after.txt"
+  },
+  {
+    "check": "unmodified public Flutter .32 generated parser, runtime, visibility and durable reducer tests",
+    "status": "passed",
+    "tests": 94,
+    "evidence": "flutter32-existing-retry.txt"
+  },
+  {
+    "check": "build",
+    "status": "passed",
+    "evidence": "final-build.txt"
+  },
+  {
+    "check": "full source and contract typecheck",
+    "status": "passed",
+    "evidence": "typecheck.txt"
+  },
+  {
+    "check": "scoped command/server TypeScript compile",
+    "status": "passed",
+    "evidence": "scoped-typecheck.txt"
+  },
+  {
+    "check": "canonical generated TS/Dart read-cursor check",
+    "status": "passed",
+    "evidence": "canonical-generation.txt"
+  },
+  {
+    "check": "package inclusion dry-run without lifecycle/install",
+    "status": "passed",
+    "evidence": "package-dry-run.json"
+  },
+  {
+    "check": "whole Flutter contract snapshot sync",
+    "status": "failed",
+    "evidence": "flutter-contracts.txt",
+    "finding": "Unchanged composer-layout-browser.mjs, sender-layout-browser.mjs, shared-contracts.lock.json differ between committed peer snapshots; no read-cursor drift. No repair in this scope."
+  },
+  {
+    "check": "full CI and installed all-SDK Preview measurement",
+    "status": "not_run",
+    "finding": "Focused verification only; no full-CI workload beyond the requested five-minute limit and no long Preview rerun. Publication and exact installed acceptance belong to parent."
+  }
+]

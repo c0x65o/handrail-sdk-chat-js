@@ -1,0 +1,366 @@
+postgres (PostgreSQL) 15.19 (Debian 15.19-0+deb12u1)
+waiting for server to start.... done
+server started
+TAP version 13
+# Subtest: PATCH /conversations/:conversationId/read-cursor mounts the private read-state command
+    # Subtest: returns the exact canonical actor-private response and advances monotonically
+    ok 1 - returns the exact canonical actor-private response and advances monotonically
+      ---
+      duration_ms: 61.646094
+      type: 'test'
+      ...
+    # Subtest: replays an identical key without duplicating durable effects
+    ok 2 - replays an identical key without duplicating durable effects
+      ---
+      duration_ms: 18.358449
+      type: 'test'
+      ...
+    # Subtest: maps regression and sequence bounds to one safe state conflict
+    ok 3 - maps regression and sequence bounds to one safe state conflict
+      ---
+      duration_ms: 21.773673
+      type: 'test'
+      ...
+    # Subtest: rejects malformed, ambiguous, mismatched, and spoofed transport input before command work
+    ok 4 - rejects malformed, ambiguous, mismatched, and spoofed transport input before command work
+      ---
+      duration_ms: 46.645636
+      type: 'test'
+      ...
+    # Subtest: keeps nonmember and cross-tenant failures indistinguishable and maps authentication
+    ok 5 - keeps nonmember and cross-tenant failures indistinguishable and maps authentication
+      ---
+      duration_ms: 11.402462
+      type: 'test'
+      ...
+    # Subtest: maps conflicting idempotency-key reuse without changing the cursor
+    ok 6 - maps conflicting idempotency-key reuse without changing the cursor
+      ---
+      duration_ms: 10.931999
+      type: 'test'
+      ...
+    1..6
+ok 1 - PATCH /conversations/:conversationId/read-cursor mounts the private read-state command
+  ---
+  duration_ms: 583.149488
+  type: 'test'
+  ...
+# Subtest: command: complete immutable read cursor acknowledgements
+    # Subtest: first application, no-op, lost acknowledgement and later intent retain exact receipts
+    ok 1 - first application, no-op, lost acknowledgement and later intent retain exact receipts
+      ---
+      duration_ms: 81.062109
+      type: 'test'
+      ...
+    # Subtest: legacy completed receipt is returned without rewriting any historical data
+    ok 2 - legacy completed receipt is returned without rewriting any historical data
+      ---
+      duration_ms: 6.842054
+      type: 'test'
+      ...
+    # Subtest: same key is isolated by tenant and actor
+    ok 3 - same key is isolated by tenant and actor
+      ---
+      duration_ms: 26.546273
+      type: 'test'
+      ...
+    # Subtest: completed thread replay rechecks entity and parent access
+    ok 4 - completed thread replay rechecks entity and parent access
+      ---
+      duration_ms: 27.81635
+      type: 'test'
+      ...
+    # Subtest: concurrent duplicates commit once and expired keys retain claim semantics
+    ok 5 - concurrent duplicates commit once and expired keys retain claim semantics
+      ---
+      duration_ms: 63.416733
+      type: 'test'
+      ...
+    1..5
+ok 2 - command: complete immutable read cursor acknowledgements
+  ---
+  duration_ms: 604.10283
+  type: 'test'
+  ...
+# PostgreSQL 15.19 (Debian 15.19-0+deb12u1); isolated schema; canonical migrations
+# Subtest: HTTP: complete immutable read cursor acknowledgements
+    # Subtest: first application, no-op, lost acknowledgement and later intent retain exact receipts
+    ok 1 - first application, no-op, lost acknowledgement and later intent retain exact receipts
+      ---
+      duration_ms: 145.615089
+      type: 'test'
+      ...
+    # Subtest: legacy completed receipt is returned without rewriting any historical data
+    ok 2 - legacy completed receipt is returned without rewriting any historical data
+      ---
+      duration_ms: 9.590183
+      type: 'test'
+      ...
+    # Subtest: same key is isolated by tenant and actor
+    ok 3 - same key is isolated by tenant and actor
+      ---
+      duration_ms: 38.566937
+      type: 'test'
+      ...
+    # Subtest: completed thread replay rechecks entity and parent access
+    ok 4 - completed thread replay rechecks entity and parent access
+      ---
+      duration_ms: 33.039489
+      type: 'test'
+      ...
+    # Subtest: concurrent duplicates commit once and expired keys retain claim semantics
+    ok 5 - concurrent duplicates commit once and expired keys retain claim semantics
+      ---
+      duration_ms: 86.570678
+      type: 'test'
+      ...
+    # Subtest: public JS client settles both commands against real HTTP
+    ok 6 - public JS client settles both commands against real HTTP
+      ---
+      duration_ms: 50.939979
+      type: 'test'
+      ...
+    # Subtest: unmodified published Flutter .32 runtime against candidate HTTP and PostgreSQL
+    ok 7 - unmodified published Flutter .32 runtime against candidate HTTP and PostgreSQL
+      ---
+      duration_ms: 3702.257285
+      type: 'test'
+      ...
+    1..7
+ok 3 - HTTP: complete immutable read cursor acknowledgements
+  ---
+  duration_ms: 4484.371918
+  type: 'test'
+  ...
+# PostgreSQL 15.19 (Debian 15.19-0+deb12u1); isolated schema; canonical migrations
+# valid: requests=1, visibilityRetry=false, Retry-After=[]\\nmark_unread applied/replayed: accepted with unchanged durable receipt\\nlost: requests=2, visibilityRetry=true, Retry-After=[]\\nmalformed: requests=2, visibilityRetry=true, Retry-After=[]\\nwrong-user: requests=2, visibilityRetry=true, Retry-After=[]\\ndenied: requests=2, visibilityRetry=true, Retry-After=[]\\n429: requests=2, visibilityRetry=false, Retry-After=[12]\\n
+# Subtest: read cursor migration persists tenant-safe sequence state
+    # Subtest: creates and advances one cursor per membership
+    ok 1 - creates and advances one cursor per membership
+      ---
+      duration_ms: 6.753808
+      type: 'test'
+      ...
+    # Subtest: rejects non-member and cross-tenant cursor identities
+    ok 2 - rejects non-member and cross-tenant cursor identities
+      ---
+      duration_ms: 12.508097
+      type: 'test'
+      ...
+    # Subtest: rejects invalid cursor and manual-unread ranges
+    ok 3 - rejects invalid cursor and manual-unread ranges
+      ---
+      duration_ms: 15.004714
+      type: 'test'
+      ...
+    # Subtest: derives unread summaries and DM receipts from stored cursors
+    ok 4 - derives unread summaries and DM receipts from stored cursors
+      ---
+      duration_ms: 6.711434
+      type: 'test'
+      ...
+    # Subtest: uses the per-user cursor index for unread summaries
+    ok 5 - uses the per-user cursor index for unread summaries
+      ---
+      duration_ms: 263.891818
+      type: 'test'
+      ...
+    1..5
+ok 4 - read cursor migration persists tenant-safe sequence state
+  ---
+  duration_ms: 805.34889
+  type: 'test'
+  ...
+# Subtest: thread cursors use current parent authority and preserve retained state
+    # Subtest: private parent reader advances without child membership or following
+    ok 1 - private parent reader advances without child membership or following
+      ---
+      duration_ms: 40.942106
+      type: 'test'
+      ...
+    # Subtest: public parent reader advances without child membership or following
+    ok 2 - public parent reader advances without child membership or following
+      ---
+      duration_ms: 28.01847
+      type: 'test'
+      ...
+    # Subtest: re-entry retains manual unread, notification settings, role, draft and follow=true
+    ok 3 - re-entry retains manual unread, notification settings, role, draft and follow=true
+      ---
+      duration_ms: 79.493895
+      type: 'test'
+      ...
+    # Subtest: re-entry retains manual unread, notification settings, role, draft and follow=false
+    ok 4 - re-entry retains manual unread, notification settings, role, draft and follow=false
+      ---
+      duration_ms: 81.144128
+      type: 'test'
+      ...
+    # Subtest: membership revocation denies fresh requests and completed retries despite retained child membership
+    ok 5 - membership revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 26.93946
+      type: 'test'
+      ...
+    # Subtest: entity revocation denies fresh requests and completed retries despite retained child membership
+    ok 6 - entity revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 26.32903
+      type: 'test'
+      ...
+    # Subtest: missing-adapter revocation denies fresh requests and completed retries despite retained child membership
+    ok 7 - missing-adapter revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 23.729738
+      type: 'test'
+      ...
+    # Subtest: throwing-adapter revocation denies fresh requests and completed retries despite retained child membership
+    ok 8 - throwing-adapter revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 26.534774
+      type: 'test'
+      ...
+    # Subtest: parent-archive revocation denies fresh requests and completed retries despite retained child membership
+    ok 9 - parent-archive revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 24.810618
+      type: 'test'
+      ...
+    # Subtest: thread-archive revocation denies fresh requests and completed retries despite retained child membership
+    ok 10 - thread-archive revocation denies fresh requests and completed retries despite retained child membership
+      ---
+      duration_ms: 25.239891
+      type: 'test'
+      ...
+    # Subtest: missing entity adapter denies initial setup without any leakage
+    ok 11 - missing entity adapter denies initial setup without any leakage
+      ---
+      duration_ms: 9.02108
+      type: 'test'
+      ...
+    # Subtest: denying entity adapter denies initial setup without any leakage
+    ok 12 - denying entity adapter denies initial setup without any leakage
+      ---
+      duration_ms: 8.749038
+      type: 'test'
+      ...
+    # Subtest: throwing entity adapter denies initial setup without any leakage
+    ok 13 - throwing entity adapter denies initial setup without any leakage
+      ---
+      duration_ms: 8.520185
+      type: 'test'
+      ...
+    # Subtest: setup-recheck entity adapter denies initial setup without any leakage
+    ok 14 - setup-recheck entity adapter denies initial setup without any leakage
+      ---
+      duration_ms: 13.568197
+      type: 'test'
+      ...
+    # Subtest: tenant and user isolation deny setup using another actor's parent membership
+    ok 15 - tenant and user isolation deny setup using another actor's parent membership
+      ---
+      duration_ms: 13.554384
+      type: 'test'
+      ...
+    # Subtest: relationship changes after discovery are rejected under parent-before-child locks
+    ok 16 - relationship changes after discovery are rejected under parent-before-child locks
+      ---
+      duration_ms: 20.39616
+      type: 'test'
+      ...
+    # Subtest: invalid first cursor mutation rolls back participant setup
+    ok 17 - invalid first cursor mutation rolls back participant setup
+      ---
+      duration_ms: 13.784956
+      type: 'test'
+      ...
+    # Subtest: outbox failure rolls back new and retained participant state, cursor, preference, audit and claim
+    ok 18 - outbox failure rolls back new and retained participant state, cursor, preference, audit and claim
+      ---
+      duration_ms: 58.268536
+      type: 'test'
+      ...
+    1..18
+ok 5 - thread cursors use current parent authority and preserve retained state
+  ---
+  duration_ms: 1008.86308
+  type: 'test'
+  ...
+# Real PostgreSQL 15.19 (Debian 15.19-0+deb12u1); url-backed, isolated schema and canonical migrations
+# Subtest: update-read-cursor command is tenant-safe, monotonic, idempotent, and atomic
+    # Subtest: creates the first cursor and replays one private cross-device outcome exactly
+    ok 1 - creates the first cursor and replays one private cross-device outcome exactly
+      ---
+      duration_ms: 20.0076
+      type: 'test'
+      ...
+    # Subtest: advances monotonically and equal-sequence mark-read clears a manual marker
+    ok 2 - advances monotonically and equal-sequence mark-read clears a manual marker
+      ---
+      duration_ms: 23.516865
+      type: 'test'
+      ...
+    # Subtest: completes advancement when the serialized clock precedes the claim by microseconds
+    ok 3 - completes advancement when the serialized clock precedes the claim by microseconds
+      ---
+      duration_ms: 15.84348
+      type: 'test'
+      ...
+    # Subtest: orders equal-sequence changes beyond a future cursor and replays the earlier outcome
+    ok 4 - orders equal-sequence changes beyond a future cursor and replays the earlier outcome
+      ---
+      duration_ms: 16.946826
+      type: 'test'
+      ...
+    # Subtest: mark-unread preserves the durable cursor and rejects zero, future, and unread ranges
+    ok 5 - mark-unread preserves the durable cursor and rejects zero, future, and unread ranges
+      ---
+      duration_ms: 12.866369
+      type: 'test'
+      ...
+    # Subtest: rejects inactive, non-member, and cross-tenant targets without leaking existence
+    ok 6 - rejects inactive, non-member, and cross-tenant targets without leaking existence
+      ---
+      duration_ms: 8.394439
+      type: 'test'
+      ...
+    # Subtest: rejects conflicting reuse of an idempotency key
+    ok 7 - rejects conflicting reuse of an idempotency key
+      ---
+      duration_ms: 8.596491
+      type: 'test'
+      ...
+    # Subtest: rolls back cursor, audit, outbox, and idempotency after a late failure
+    ok 8 - rolls back cursor, audit, outbox, and idempotency after a late failure
+      ---
+      duration_ms: 6.48638
+      type: 'test'
+      ...
+    # Subtest: editing an existing message leaves cursor values and updatedAt unchanged
+    ok 9 - editing an existing message leaves cursor values and updatedAt unchanged
+      ---
+      duration_ms: 21.762279
+      type: 'test'
+      ...
+    1..9
+ok 6 - update-read-cursor command is tenant-safe, monotonic, idempotent, and atomic
+  ---
+  duration_ms: 577.71372
+  type: 'test'
+  ...
+1..6
+# tests 56
+# suites 0
+# pass 56
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9159.638537
+ remaining_test_schemas 
+------------------------
+                      0
+(1 row)
+
+waiting for server to shut down.... done
+server stopped

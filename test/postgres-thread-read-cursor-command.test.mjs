@@ -7,6 +7,7 @@ import { createPostgresMigrationRunner } from "../dist/server/postgres-migration
 import { handrailChatPostgresMigrations } from "../dist/server/postgres-schema-migrations.js";
 import { createPostgresTestBackend } from "../dist/testing/index.js";
 
+const receipt = ({ reconciliationStatus, idempotencyKey, ...result }) => result;
 const actor = { tenantId: "tenant-a", userId: "reader", roles: [] };
 const denied = (error) => error instanceof ChatAuthorizationError && error.statusCode === 403;
 
@@ -91,8 +92,8 @@ test("thread cursors use current parent authority and preserve retained state", 
         assert.equal(after.audit[0].metadata.previousLastReadSequence, 0);
         assert.equal(after.outbox.length, 1);
         assert.equal(after.outbox[0].stream_id, "user:reader");
-        assert.deepEqual(after.outbox[0].payload, { kind: "conversation_read_cursor", actorUserId: "reader", ...result });
-        assert.deepEqual(await command(input), result);
+        assert.deepEqual(after.outbox[0].payload, { kind: "conversation_read_cursor", actorUserId: "reader", ...receipt(result) });
+        assert.deepEqual(await command(input), { ...result, reconciliationStatus: "replayed" });
         assert.deepEqual(await snapshot(id), after);
       });
     }
@@ -117,7 +118,7 @@ test("thread cursors use current parent authority and preserve retained state", 
           VALUES ('tenant-a', $1, 'reader', '{"format":"plain","text":"draft"}', 6)`, [id]);
         const before = await snapshot(id);
         // Completed retries do not run participant setup or reconcile newer state.
-        assert.deepEqual(await command(originalInput), original);
+        assert.deepEqual(await command(originalInput), { ...original, reconciliationStatus: "replayed" });
         assert.deepEqual(await snapshot(id), before);
         const stale = request(id, { throughSequence: 5 });
         await assert.rejects(command(stale), (e) => e instanceof ReadCursorMutationError && e.code === "cursor_regression");

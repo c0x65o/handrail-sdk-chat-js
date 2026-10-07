@@ -1,0 +1,9 @@
+{
+  "availableBytes": 38954446848,
+  "freeInodes": 67648300,
+  "heavyPeakBytes": 1031909376,
+  "expensiveCommands": "Sequential, heavy slot lock, native delegated cgroup, 300s command bounds",
+  "fullCI": "Not run; existing five-minute auto-skip policy unchanged; no skip claimed",
+  "toolchains": "No downloads or copies. Existing current Flutter private metadata with mounted binaries; minimum qualification reused with verified original toolchain archive.",
+  "pubResolution": "Existing current private cache, offline --enforce-lockfile; source lock unchanged"
+}
