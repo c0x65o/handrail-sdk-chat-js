@@ -1,0 +1,2 @@
+{"command": ["/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter-sdk/bin/dart", "compile", "js", "--packages=.dart_tool/package_config.json", "browser_consumer.dart", "-o", "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js/bundle-flutter.js"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter"}
+Compiled 14,958,950 input bytes (9,952,342 characters source) to 609,078 characters JavaScript in 3.94 seconds

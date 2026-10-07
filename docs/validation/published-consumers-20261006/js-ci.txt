@@ -1,0 +1,133 @@
+{"command": ["npm", "ci", "--include=dev", "--no-audit", "--no-fund", "--foreground-scripts"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js"}
+npm warn skipping integrity check for git dependency ssh://git@github.com/c0x65o/handrail-sdk-chat-js.git
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+
+> @handrail/chat@1.0.53 prepare
+> npm run build
+
+
+> @handrail/chat@1.0.53 build
+> node scripts/generate-package-version.mjs && tsc --project tsconfig.json && node scripts/copy-ui-styles.mjs && node scripts/candidate-provenance.mjs
+
+Candidate source=012e5eb1cec78f2e2fa07fd84dfcd3a0a77da39e7f009a1f285405bbf580219a package=829999664c9bed6258684dbdb077ea18d723ce584cf5fdad023778999c447fdc
+
+> cpu-features@0.0.10 install
+> node buildcheck.js > buildcheck.gypi && node-gyp rebuild
+
+gyp info it worked if it ends with ok
+gyp info using node-gyp@11.5.0
+gyp info using node@22.23.1 | linux | x64
+gyp info find Python using Python version 3.11.2 found at "/usr/bin/python3"
+
+gyp info spawn /usr/bin/python3
+gyp info spawn args [
+gyp info spawn args '/usr/lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py',
+gyp info spawn args 'binding.gyp',
+gyp info spawn args '-f',
+gyp info spawn args 'make',
+gyp info spawn args '-I',
+gyp info spawn args '/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js/node_modules/cpu-features/build/config.gypi',
+gyp info spawn args '-I',
+gyp info spawn args '/usr/lib/node_modules/npm/node_modules/node-gyp/addon.gypi',
+gyp info spawn args '-I',
+gyp info spawn args '/opt/handrail/.cache/node-gyp/22.23.1/include/node/common.gypi',
+gyp info spawn args '-Dlibrary=shared_library',
+gyp info spawn args '-Dvisibility=default',
+gyp info spawn args '-Dnode_root_dir=/opt/handrail/.cache/node-gyp/22.23.1',
+gyp info spawn args '-Dnode_gyp_dir=/usr/lib/node_modules/npm/node_modules/node-gyp',
+gyp info spawn args '-Dnode_lib_file=/opt/handrail/.cache/node-gyp/22.23.1/<(target_arch)/node.lib',
+gyp info spawn args '-Dmodule_root_dir=/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js/node_modules/cpu-features',
+gyp info spawn args '-Dnode_engine=v8',
+gyp info spawn args '--depth=.',
+gyp info spawn args '--no-parallel',
+gyp info spawn args '--generator-output',
+gyp info spawn args 'build',
+gyp info spawn args '-Goutput_dir=.'
+gyp info spawn args ]
+gyp info spawn make
+gyp info spawn args [ 'BUILDTYPE=Release', '-C', 'build' ]
+make: Entering directory '/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js/node_modules/cpu-features/build'
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/impl_aarch64_linux_or_android.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/impl_aarch64_macos_or_iphone.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/impl_aarch64_windows.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/impl_arm_linux_or_android.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/impl_mips_linux_or_android.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/impl_ppc_linux.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/impl_x86_freebsd.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/impl_x86_linux_or_android.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/impl_x86_macos.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/impl_x86_windows.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/filesystem.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/stack_line_reader.o
+  CC(target) Release/obj.target/cpu_features/deps/cpu_features/src/string_view.o
+rm -f Release/obj.target/deps/cpu_features/cpu_features.a Release/obj.target/deps/cpu_features/cpu_features.a.ar-file-list; mkdir -p `dirname Release/obj.target/deps/cpu_features/cpu_features.a`
+ar crs Release/obj.target/deps/cpu_features/cpu_features.a @Release/obj.target/deps/cpu_features/cpu_features.a.ar-file-list
+  COPY Release/cpu_features.a
+  CXX(target) Release/obj.target/cpufeatures/src/binding.o
+In file included from ../src/binding.cc:1:
+/opt/handrail/.cache/node-gyp/22.23.1/include/node/node.h:1243:7: warning: cast between incompatible function types from ‘void (*)(Nan::ADDON_REGISTER_FUNCTION_ARGS_TYPE)’ {aka ‘void (*)(v8::Local<v8::Object>)’} to ‘node::addon_register_func’ {aka ‘void (*)(v8::Local<v8::Object>, v8::Local<v8::Value>, void*)’} [-Wcast-function-type]
+ 1243 |       (node::addon_register_func) (regfunc),                          \
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/opt/handrail/.cache/node-gyp/22.23.1/include/node/node.h:1277:3: note: in expansion of macro ‘NODE_MODULE_X’
+ 1277 |   NODE_MODULE_X(modname, regfunc, NULL, 0)  // NOLINT (readability/null_usage)
+      |   ^~~~~~~~~~~~~
+../src/binding.cc:151:1: note: in expansion of macro ‘NODE_MODULE’
+  151 | NODE_MODULE(cpufeatures, init)
+      | ^~~~~~~~~~~
+  SOLINK_MODULE(target) Release/obj.target/cpufeatures.node
+  COPY Release/cpufeatures.node
+make: Leaving directory '/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js/node_modules/cpu-features/build'
+gyp info ok 
+
+> ssh2@1.17.0 install
+> node install.js
+
+gyp info it worked if it ends with ok
+gyp info using node-gyp@11.5.0
+gyp info using node@22.23.1 | linux | x64
+gyp info find Python using Python version 3.11.2 found at "/usr/bin/python3"
+
+gyp info spawn /usr/bin/python3
+gyp info spawn args [
+gyp info spawn args '/usr/lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py',
+gyp info spawn args 'binding.gyp',
+gyp info spawn args '-f',
+gyp info spawn args 'make',
+gyp info spawn args '-I',
+gyp info spawn args '/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js/node_modules/ssh2/lib/protocol/crypto/build/config.gypi',
+gyp info spawn args '-I',
+gyp info spawn args '/usr/lib/node_modules/npm/node_modules/node-gyp/addon.gypi',
+gyp info spawn args '-I',
+gyp info spawn args '/opt/handrail/.cache/node-gyp/22.23.1/include/node/common.gypi',
+gyp info spawn args '-Dlibrary=shared_library',
+gyp info spawn args '-Dvisibility=default',
+gyp info spawn args '-Dnode_root_dir=/opt/handrail/.cache/node-gyp/22.23.1',
+gyp info spawn args '-Dnode_gyp_dir=/usr/lib/node_modules/npm/node_modules/node-gyp',
+gyp info spawn args '-Dnode_lib_file=/opt/handrail/.cache/node-gyp/22.23.1/<(target_arch)/node.lib',
+gyp info spawn args '-Dmodule_root_dir=/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js/node_modules/ssh2/lib/protocol/crypto',
+gyp info spawn args '-Dnode_engine=v8',
+gyp info spawn args '--depth=.',
+gyp info spawn args '--no-parallel',
+gyp info spawn args '--generator-output',
+gyp info spawn args 'build',
+gyp info spawn args '-Goutput_dir=.'
+gyp info spawn args ]
+gyp info spawn make
+gyp info spawn args [ 'BUILDTYPE=Release', '-C', 'build' ]
+make: Entering directory '/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js/node_modules/ssh2/lib/protocol/crypto/build'
+  CXX(target) Release/obj.target/sshcrypto/src/binding.o
+  SOLINK_MODULE(target) Release/obj.target/sshcrypto.node
+  COPY Release/sshcrypto.node
+make: Leaving directory '/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js/node_modules/ssh2/lib/protocol/crypto/build'
+gyp info ok 
+Succeeded in building optional crypto binding
+
+> esbuild@0.28.2 postinstall
+> node install.js
+
+
+> protobufjs@7.6.6 postinstall
+> node scripts/postinstall
+
+
+added 200 packages in 21s

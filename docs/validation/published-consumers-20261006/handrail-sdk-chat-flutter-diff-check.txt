@@ -1,0 +1,1 @@
+{"command": ["git", "diff", "--check"], "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-flutter"}

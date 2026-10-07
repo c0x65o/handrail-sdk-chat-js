@@ -1,0 +1,331 @@
+{"command": ["/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter-sdk/bin/flutter", "test", "--no-pub", "--concurrency=2", "--reporter=expanded", "test/command_retry_after_test.dart", "test/command_dispatcher_test.dart", "test/durable_resource_event_reducer_test.dart", "test/send_message_client_test.dart", "test/offline_send_message_queue_test.dart", "test/offline_send_message_queue_pump_test.dart", "test/read_cursor_runtime_test.dart", "test/reply_unread_refresh_client_test.dart", "test/realtime_session_transport_test.dart"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter"}
+00:00 +0: loading /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart
+00:00 +0: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: Retry-After 0
+00:00 +1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: Retry-After Tue, 06 Oct 2026 18:00:00 GMT
+00:00 +2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: Retry-After 60
+00:00 +3: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: Retry-After Tue, 06 Oct 2026 19:02:00 GMT
+00:00 +4: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: Retry-After null
+00:00 +5: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: Retry-After garbage
+00:00 +6: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: Retry-After -1
+00:00 +7: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: Retry-After Infinity
+00:00 +8: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: Retry-After 9999999999999999999999999999999999999999
+00:00 +9: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: overlap [10, 30] extends waiting and new commands; success cannot shorten cooldown
+00:00 +10: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: overlap [30, 10] extends waiting and new commands; success cannot shorten cooldown
+00:00 +11: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: abort during cooldown prevents retry
+00:00 +12: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: close during cooldown prevents retry
+00:00 +13: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: bounded attempts retain cooldown for the next command
+00:00 +14: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: lost acknowledgement and 429 keep one identity and successful side effect
+00:00 +15: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: late old-identity response after close cannot impose cooldown on reused dispatcher
+00:00 +16: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_retry_after_test.dart: actual HTTP headers propagate through shipped ERP adapter and public dispatcher
+test/durable_resource_event_reducer_test.dart:7:8: Error: Error when reading 'test/fixtures/draft_mutation_fixtures.dart': No such file or directory
+import 'fixtures/draft_mutation_fixtures.dart';
+       ^
+test/durable_resource_event_reducer_test.dart:1051:30: Error: Undefined name 'replaceDraftInputFixture'.
+                  'content': replaceDraftInputFixture['content'],
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+test/durable_resource_event_reducer_test.dart:1144:26: Error: Undefined name 'replaceDraftInputFixture'.
+              'content': replaceDraftInputFixture['content'],
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+test/durable_resource_event_reducer_test.dart:2223:17: Error: Undefined name 'clearDraftInputFixture'.
+    ...(clear ? clearDraftInputFixture : replaceDraftInputFixture),
+                ^^^^^^^^^^^^^^^^^^^^^^
+test/durable_resource_event_reducer_test.dart:2223:42: Error: Undefined name 'replaceDraftInputFixture'.
+    ...(clear ? clearDraftInputFixture : replaceDraftInputFixture),
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+test/durable_resource_event_reducer_test.dart:2230:8: Error: Method not found: 'settledDraftResultFixture'.
+    ...settledDraftResultFixture(input),
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+test/durable_resource_event_reducer_test.dart:2235:10: Error: Method not found: 'draftUpdatedEventFixture'.
+      ...draftUpdatedEventFixture(input, result),
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+test/durable_resource_event_reducer_test.dart:2223:15: Error: Unexpected type 'invalid-type' of a map spread entry.  Expected 'dynamic' or a Map.
+    ...(clear ? clearDraftInputFixture : replaceDraftInputFixture),
+              ^
+test/durable_resource_event_reducer_test.dart:2230:8: Error: Unexpected type 'invalid-type' of a map spread entry.  Expected 'dynamic' or a Map.
+    ...settledDraftResultFixture(input),
+       ^
+test/durable_resource_event_reducer_test.dart:2235:10: Error: Unexpected type 'invalid-type' of a map spread entry.  Expected 'dynamic' or a Map.
+      ...draftUpdatedEventFixture(input, result),
+         ^
+00:00 +17 -1: loading /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/durable_resource_event_reducer_test.dart [E]
+  Failed to load "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/durable_resource_event_reducer_test.dart":
+  Compilation failed for testPath=/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/durable_resource_event_reducer_test.dart: test/durable_resource_event_reducer_test.dart:7:8: Error: Error when reading 'test/fixtures/draft_mutation_fixtures.dart': No such file or directory
+  import 'fixtures/draft_mutation_fixtures.dart';
+         ^
+  test/durable_resource_event_reducer_test.dart:1051:30: Error: Undefined name 'replaceDraftInputFixture'.
+                    'content': replaceDraftInputFixture['content'],
+                               ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/durable_resource_event_reducer_test.dart:1144:26: Error: Undefined name 'replaceDraftInputFixture'.
+                'content': replaceDraftInputFixture['content'],
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/durable_resource_event_reducer_test.dart:2223:17: Error: Undefined name 'clearDraftInputFixture'.
+      ...(clear ? clearDraftInputFixture : replaceDraftInputFixture),
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  test/durable_resource_event_reducer_test.dart:2223:42: Error: Undefined name 'replaceDraftInputFixture'.
+      ...(clear ? clearDraftInputFixture : replaceDraftInputFixture),
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/durable_resource_event_reducer_test.dart:2230:8: Error: Method not found: 'settledDraftResultFixture'.
+      ...settledDraftResultFixture(input),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  test/durable_resource_event_reducer_test.dart:2235:10: Error: Method not found: 'draftUpdatedEventFixture'.
+        ...draftUpdatedEventFixture(input, result),
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/durable_resource_event_reducer_test.dart:2223:15: Error: Unexpected type 'invalid-type' of a map spread entry.  Expected 'dynamic' or a Map.
+      ...(clear ? clearDraftInputFixture : replaceDraftInputFixture),
+                ^
+  test/durable_resource_event_reducer_test.dart:2230:8: Error: Unexpected type 'invalid-type' of a map spread entry.  Expected 'dynamic' or a Map.
+      ...settledDraftResultFixture(input),
+         ^
+  test/durable_resource_event_reducer_test.dart:2235:10: Error: Unexpected type 'invalid-type' of a map spread entry.  Expected 'dynamic' or a Map.
+        ...draftUpdatedEventFixture(input, result),
+           ^
+  .
+00:00 +17 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher validation validates descriptor, input, path, and idempotency before token access
+00:00 +18 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher validation validates generated idempotency keys before token access
+00:00 +19 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher requests supports every command method and uses normalized dynamic paths
+00:00 +20 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher requests adds bearer and one idempotency key to every attempt
+00:00 +21 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher requests accepts a strictly parsed domain result from an error status
+00:00 +22 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher retries and authentication retries failures only for explicitly safe commands with bounded waits
+00:00 +23 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher retries and authentication refreshes a refreshable 401 once without changing idempotency
+00:00 +24 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher retries and authentication continues successfully after its single authentication refresh
+00:00 +25 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher cancellation caller cancellation during token resolution is aborted
+00:00 +26 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher cancellation close during token resolution is closed
+00:00 +27 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher cancellation caller cancellation and close interrupt transport distinctly
+00:00 +28 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher cancellation caller cancellation and close interrupt response parsing distinctly
+00:00 +29 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher cancellation caller cancellation and close interrupt retry waits distinctly
+00:00 +30 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher response classification maps malformed status, JSON, result, and error payloads
+00:00 +31 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: ChatCommandDispatcher response classification maps HTTP failures to every required non-malformed category
+00:00 +32 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/command_dispatcher_test.dart: diagnostics and string output cannot reveal transport secrets
+00:02 +33 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: sends exact validated body to the encoded message route
+00:02 +34 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: reply preserves channel-1 and ping=true on replay
+00:02 +35 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: reply preserves channel-1 and ping=false on replay
+00:02 +36 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: reply preserves dm-1 and ping=true on replay
+00:02 +37 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: reply preserves dm-1 and ping=false on replay
+00:02 +38 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: reply preserves existing-thread-1 and ping=true on replay
+00:02 +39 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: reply preserves existing-thread-1 and ping=false on replay
+00:02 +40 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: keeps generated IDs and body stable across a transient retry
+00:02 +41 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: Retry-After reaches public sendMessage without changing generated identity
+00:02 +42 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: generated-contract validation runs before token and HTTP access
+00:02 +43 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: applied then replayed stays one canonical row and stream effect
+00:02 +44 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: preserves caller cancellation before and during transport
+00:02 +45 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: canonical reply survives optimistic edit/delete and rollback
+00:02 +46 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/send_message_client_test.dart: authentication and transport exceptions return safe typed failures
+00:03 +47 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence reply round trip: channel-1, notifyAuthor=true
+00:03 +48 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence reply round trip: channel-1, notifyAuthor=false
+00:03 +49 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:03 +50 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:03 +51 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:03 +52 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:03 +53 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:03 +54 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:03 +55 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:03 +56 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:03 +57 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:04 +58 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:04 +59 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:04 +60 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:04 +61 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:04 +62 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_pump_test.dart: persisted send-message queue pump replays channel-1 reply unchanged after restart, style switch and retry (notifyAuthor=true)
+00:04 +63 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +64 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +65 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +66 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +67 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +68 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +69 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +70 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +71 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +72 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +73 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +74 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:04 +75 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence concurrent sends re-check durable capacity after contention
+00:05 +76 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence cancellation preserves a concurrent append
+00:05 +77 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence cancellation preserves a concurrent replacement
+00:05 +78 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence malformed quarantine preserves and hydrates a valid replacement
+00:05 +79 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence restart rehydrates once with stable identities and FIFO order
+00:05 +80 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence isolates identity scopes and narrowly removes invalid records
+00:05 +81 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence explicit cancellation removes only its record and projection
+00:05 +82 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence serialized queue excludes credentials, providers, and bytes
+00:05 +83 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence queued send intent capacity rejects enqueue without replacing or publishing
+00:05 +84 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence queued send intent capacity rejects enqueue without replacing or publishing
+00:05 +85 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence queued send intent capacity rejects enqueue without replacing or publishing
+00:05 +86 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence queued send intent capacity rejects enqueue without replacing or publishing
+00:05 +87 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/offline_send_message_queue_test.dart: offline send-message persistence queued send intent capacity rejects enqueue without replacing or publishing
+00:05 +88 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: persists ordered unread and read segments without cross-coalescing
+00:05 +89 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: matching durable event settles and removes the persisted intent
+00:05 +90 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: atomic shared storage retains distinct-conversation intents
+test/reply_unread_refresh_client_test.dart:7:8: Error: Error when reading 'test/fixtures/conversation_list_fixtures.dart': No such file or directory
+import 'fixtures/conversation_list_fixtures.dart';
+       ^
+test/reply_unread_refresh_client_test.dart:10:15: Error: Undefined name 'conversationListTestNow'.
+const _time = conversationListTestNow;
+              ^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:111:17: Error: Undefined name 'conversationListTestUser'.
+      'userId': conversationListTestUser,
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:200:27: Error: Undefined name 'conversationListTestUser'.
+    socket.emit(_accepted(conversationListTestUser));
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:209:27: Error: Undefined name 'conversationListTestUser'.
+    socket.emit(_accepted(conversationListTestUser));
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:247:12: Error: Method not found: 'conversationListSummary'.
+        ...conversationListSummary(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:253:27: Error: Undefined name 'conversationListTestUser'.
+        'memberUserIds': [conversationListTestUser],
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:256:16: Error: Method not found: 'conversationListMetadata'.
+      '_meta': conversationListMetadata(),
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:247:12: Error: Unexpected type 'invalid-type' of a map spread entry.  Expected 'dynamic' or a Map.
+        ...conversationListSummary(
+           ^
+test/reply_unread_refresh_client_test.dart:266:19: Error: Undefined name 'conversationListTestTenant'.
+      'tenantId': conversationListTestTenant,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:273:23: Error: Undefined name 'conversationListTestTenant'.
+          'tenantId': conversationListTestTenant,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:292:32: Error: Undefined name 'conversationListTestTenant'.
+            tenantId: TenantId(conversationListTestTenant),
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:293:28: Error: Undefined name 'conversationListTestUser'.
+            userId: UserId(conversationListTestUser)));
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:305:17: Error: Undefined name 'conversationListTestTenant'.
+    'tenantId': conversationListTestTenant,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:306:24: Error: Undefined name 'conversationListTestUser'.
+    'streamId': 'user:$conversationListTestUser',
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:315:25: Error: Undefined name 'conversationListTestUser'.
+        'memberUserId': conversationListTestUser,
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:318:23: Error: Undefined name 'conversationListTestUser'.
+            'userId': conversationListTestUser,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:329:30: Error: Undefined name 'conversationListTestTenant'.
+          tenantId: TenantId(conversationListTestTenant),
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:330:26: Error: Undefined name 'conversationListTestUser'.
+          userId: UserId(conversationListTestUser)));
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:335:19: Error: Method not found: 'conversationListMetadata'.
+      'metadata': conversationListMetadata(),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+test/reply_unread_refresh_client_test.dart:336:19: Error: Undefined name 'conversationListTestTenant'.
+      'tenantId': conversationListTestTenant,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+00:05 +91 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: atomic same-conversation supersession commits one canonical winner
+00:05 +92 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: atomic retry derives queue order and baseline from committed state
+00:05 +93 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: atomic stale settlement preserves a same-key replacement
+00:05 +94 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: atomic exact settlement preserves an unrelated conversation
+00:05 +95 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: atomic corrupt quarantine preserves a racing valid replacement
+00:05 +96 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: hydrates retained work over an older canonical baseline
+00:05 +97 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: waits for matching canonical hydration before retained dispatch
+00:05 +98 -1: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: drains retained intents in deterministic conversation order
+00:05 +98 -2: loading /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/reply_unread_refresh_client_test.dart [E]
+  Failed to load "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/reply_unread_refresh_client_test.dart":
+  Compilation failed for testPath=/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/reply_unread_refresh_client_test.dart: test/reply_unread_refresh_client_test.dart:7:8: Error: Error when reading 'test/fixtures/conversation_list_fixtures.dart': No such file or directory
+  import 'fixtures/conversation_list_fixtures.dart';
+         ^
+  test/reply_unread_refresh_client_test.dart:10:15: Error: Undefined name 'conversationListTestNow'.
+  const _time = conversationListTestNow;
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:111:17: Error: Undefined name 'conversationListTestUser'.
+        'userId': conversationListTestUser,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:200:27: Error: Undefined name 'conversationListTestUser'.
+      socket.emit(_accepted(conversationListTestUser));
+                            ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:209:27: Error: Undefined name 'conversationListTestUser'.
+      socket.emit(_accepted(conversationListTestUser));
+                            ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:247:12: Error: Method not found: 'conversationListSummary'.
+          ...conversationListSummary(
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:253:27: Error: Undefined name 'conversationListTestUser'.
+          'memberUserIds': [conversationListTestUser],
+                            ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:256:16: Error: Method not found: 'conversationListMetadata'.
+        '_meta': conversationListMetadata(),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:247:12: Error: Unexpected type 'invalid-type' of a map spread entry.  Expected 'dynamic' or a Map.
+          ...conversationListSummary(
+             ^
+  test/reply_unread_refresh_client_test.dart:266:19: Error: Undefined name 'conversationListTestTenant'.
+        'tenantId': conversationListTestTenant,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:273:23: Error: Undefined name 'conversationListTestTenant'.
+            'tenantId': conversationListTestTenant,
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:292:32: Error: Undefined name 'conversationListTestTenant'.
+              tenantId: TenantId(conversationListTestTenant),
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:293:28: Error: Undefined name 'conversationListTestUser'.
+              userId: UserId(conversationListTestUser)));
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:305:17: Error: Undefined name 'conversationListTestTenant'.
+      'tenantId': conversationListTestTenant,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:306:24: Error: Undefined name 'conversationListTestUser'.
+      'streamId': 'user:$conversationListTestUser',
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:315:25: Error: Undefined name 'conversationListTestUser'.
+          'memberUserId': conversationListTestUser,
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:318:23: Error: Undefined name 'conversationListTestUser'.
+              'userId': conversationListTestUser,
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:329:30: Error: Undefined name 'conversationListTestTenant'.
+            tenantId: TenantId(conversationListTestTenant),
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:330:26: Error: Undefined name 'conversationListTestUser'.
+            userId: UserId(conversationListTestUser)));
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:335:19: Error: Method not found: 'conversationListMetadata'.
+        'metadata': conversationListMetadata(),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  test/reply_unread_refresh_client_test.dart:336:19: Error: Undefined name 'conversationListTestTenant'.
+        'tenantId': conversationListTestTenant,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  .
+00:05 +99 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: pauses retained dispatch offline and resumes through recovery
+00:05 +100 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: canonical event settles a retained intent during ambiguous HTTP
+00:05 +101 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: disposal cancels retained HTTP and leaves its record recoverable
+00:05 +102 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: quarantines only the active identity corrupt read-cursor record
+00:05 +103 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: retains transient and malformed outcomes but rolls projection back
+00:06 +104 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: terminal rejection removes only its exact intent and restores baseline
+00:06 +105 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: storage failure prevents an unrecorded projection or dispatch
+00:06 +106 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: serializes storage writes across conversations
+00:06 +107 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: old-identity persistence completion cannot project or dispatch
+00:06 +108 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: disposed persistence completion cannot project or dispatch
+00:06 +109 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: old-identity transport completion cannot mutate the new projection
+00:06 +110 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: identity replacement cancels a retained retry wait
+00:06 +111 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: generates one idempotency key and reuses it across safe retries
+00:06 +112 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: serializes each conversation while unrelated conversations progress
+00:06 +113 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: accepts generated events, rejects stale events, and reprojects work
+00:06 +114 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: does not let a stale successful result replace a newer event
+00:06 +115 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: reconciles both applied and replayed canonical results
+00:06 +116 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: failure and malformed response roll back to the newest canonical row
+00:06 +117 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/read_cursor_runtime_test.dart: client disposal closes pending work and restores canonical state
+00:08 +118 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport sends the public package version in the client handshake
+00:08 +119 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport constructs ordered protocols, sends handshake, and accepts session
+00:08 +120 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport loads only valid cursors and persists accepted cursors non-fatally
+00:08 +121 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport isolates cursor reads, writes, and clears by host identity scope
+00:08 +122 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport requires a bounded cursor scope only when storage is configured
+00:08 +123 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport hydrates snapshots, replaces cursor, and stops for refresh
+00:08 +124 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport recovers from token and malformed-frame failures with redaction
+00:08 +125 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport snapshot failure retries with bounded redacted diagnostics
+00:08 +126 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport pauses all work offline and resumes with a fresh connection
+00:08 +127 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport uses bounded deterministic backoff and resets after acceptance
+00:08 +128 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport restart closes the old socket and loads its accepted cursor
+00:08 +129 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport stale asynchronous socket attempts cannot regain authority
+00:08 +130 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport dispose cancels listeners and timers and never reconnects
+00:08 +131 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport reference counts conversations and sends identity-safe frames only after acceptance
+00:08 +132 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport replays desired conversations after reconnect acceptance
+00:08 +133 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport surfaces typed rejection codes only for current operations
+00:08 +134 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport isolates stale acknowledgements across release and re-retain
+00:08 +135 -2: /opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter/test/realtime_session_transport_test.dart: ChatRealtimeSessionTransport rejects actor, user, broad tenant, and malformed stream ids
+00:08 +136 -2: Some tests failed.

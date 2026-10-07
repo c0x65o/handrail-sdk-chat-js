@@ -1,0 +1,3 @@
+{"command": ["npm", "install", "--package-lock-only", "--include=dev", "--no-audit", "--no-fund"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js"}
+
+up to date in 21s

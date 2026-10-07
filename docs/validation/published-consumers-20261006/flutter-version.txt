@@ -1,0 +1,5 @@
+{"command": ["/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter-sdk/bin/flutter", "--version"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers"}
+Flutter 3.41.7 • channel [user-branch] • unknown source
+Framework • revision cc0734ac71 (6 months ago) • 2026-04-15 21:21:08 -0700
+Engine • hash 7a53c052bc4b472cf780b199087e1368e4a9aa8c (revision 59aa584fdf) (5 months ago) • 2026-04-16 02:32:16.000Z
+Tools • Dart 3.11.5 • DevTools 2.54.2

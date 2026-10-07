@@ -1,0 +1,6 @@
+{"command": ["/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/minimum-toolchain/flutter/bin/dart", "--packages=/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter-minimum/.dart_tool/package_config.json", "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/pub-cache-minimum/hosted/pub.dev/test-1.24.9/bin/test.dart", "--concurrency=2", "--reporter=expanded", "test/core_import_boundary_test.dart"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/pub-cache-minimum/git/handrail-sdk-chat-flutter-51cf4d55ea147fd71267787b774585278ed1f55a"}
+00:00 [32m+0[0m: [1m[90mloading test/core_import_boundary_test.dart[0m[0m
+00:00 [32m+0[0m: public package version matches the canonical manifest before generation[0m
+00:00 [32m+1[0m: native version mirror targets the exported Dart constant[0m
+00:00 [32m+2[0m: core.dart has a pure-Dart import graph[0m
+00:00 [32m+3[0m: All tests passed![0m

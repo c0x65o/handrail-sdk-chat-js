@@ -1,0 +1,17 @@
+{"command": ["/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter-sdk/bin/dart", "test", "--concurrency=2", "--reporter=expanded", "test/core_import_boundary_test.dart"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/pub-cache/git/handrail-sdk-chat-flutter-51cf4d55ea147fd71267787b774585278ed1f55a"}
+Cannot operate on packages inside the cache.
+#0      fail (package:pub/src/utils.dart:556)
+#1      new Entrypoint (package:pub/src/entrypoint.dart:339)
+#2      getExecutableForCommand (package:pub/src/executable.dart:413)
+<asynchronous suspension>
+#3      TestCommand.run (package:dartdev/src/commands/test.dart:109)
+<asynchronous suspension>
+#4      CommandRunner.runCommand (package:args/command_runner.dart:236)
+<asynchronous suspension>
+#5      DartdevRunner.runCommand (package:dartdev/dartdev.dart:265)
+<asynchronous suspension>
+#6      runDartdev (package:dartdev/dartdev.dart:51)
+<asynchronous suspension>
+#7      main (file:///b/s/w/ir/x/w/sdk/pkg/dartdev/bin/dartdev.dart:13)
+<asynchronous suspension>
+

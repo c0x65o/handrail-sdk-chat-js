@@ -1,0 +1,21 @@
+{"command": ["npm", "run", "test:git-consumer"], "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js"}
+
+> @handrail/chat@1.0.53 test:git-consumer
+> node --test --test-concurrency=1 --test-timeout=180000 consumer-tests/git-install.test.mjs
+
+TAP version 13
+# Subtest: public Git install builds the SDK and shares the host React runtime
+ok 1 - public Git install builds the SDK and shares the host React runtime
+  ---
+  duration_ms: 32279.487403
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 32339.15496

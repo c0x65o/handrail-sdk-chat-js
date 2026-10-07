@@ -1,0 +1,4 @@
+{"command": ["curl", "--fail", "--location", "--max-time", "270", "--output", "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter-3.19.0.tar.xz", "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.19.0-stable.tar.xz"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers"}
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0 26  632M   26  165M    0     0   217M      0  0:00:02 --:--:--  0:00:02  217M 69  632M   69  442M    0     0   251M      0  0:00:02  0:00:01  0:00:01  251M100  632M  100  632M    0     0   269M      0  0:00:02  0:00:02 --:--:--  269M

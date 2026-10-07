@@ -1,0 +1,1229 @@
+{
+  "browser": "151.0.7922.34",
+  "origins": {
+    "origin": "http://127.0.0.1:42475",
+    "cross": "http://127.0.0.1:35209"
+  },
+  "results": [
+    {
+      "sdk": "js",
+      "cors": "same",
+      "results": [
+        {
+          "mode": "seconds",
+          "status": "success",
+          "waits": [
+            2000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "2"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "2"
+              }
+            }
+          ],
+          "elapsedMs": 11.699999809265137,
+          "version": "1.0.53"
+        },
+        {
+          "mode": "date",
+          "status": "success",
+          "waits": [
+            5000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "Tue, 06 Oct 2026 19:00:05 GMT"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "Tue, 06 Oct 2026 19:00:05 GMT"
+              }
+            }
+          ],
+          "elapsedMs": 13.300000190734863,
+          "version": "1.0.53"
+        },
+        {
+          "mode": "invalid",
+          "status": "success",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "nonsense"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "nonsense"
+              }
+            }
+          ],
+          "elapsedMs": 4.200000762939453,
+          "version": "1.0.53"
+        },
+        {
+          "mode": "cancel",
+          "status": "aborted",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "120"
+              }
+            }
+          ],
+          "elapsedMs": 2.200000762939453,
+          "version": "1.0.53"
+        },
+        {
+          "mode": "real",
+          "status": "success",
+          "waits": [],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "1"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "1"
+              }
+            }
+          ],
+          "elapsedMs": 1005.1000003814697,
+          "version": "1.0.53"
+        }
+      ]
+    },
+    {
+      "sdk": "js",
+      "cors": "exposed",
+      "results": [
+        {
+          "mode": "seconds",
+          "status": "success",
+          "waits": [
+            2000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "2"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "2"
+              }
+            }
+          ],
+          "elapsedMs": 11.90000057220459,
+          "version": "1.0.53"
+        },
+        {
+          "mode": "date",
+          "status": "success",
+          "waits": [
+            5000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "Tue, 06 Oct 2026 19:00:05 GMT"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "Tue, 06 Oct 2026 19:00:05 GMT"
+              }
+            }
+          ],
+          "elapsedMs": 11.800000190734863,
+          "version": "1.0.53"
+        },
+        {
+          "mode": "invalid",
+          "status": "success",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "nonsense"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "nonsense"
+              }
+            }
+          ],
+          "elapsedMs": 9.800000190734863,
+          "version": "1.0.53"
+        },
+        {
+          "mode": "cancel",
+          "status": "aborted",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "120"
+              }
+            }
+          ],
+          "elapsedMs": 3.8000001907348633,
+          "version": "1.0.53"
+        },
+        {
+          "mode": "real",
+          "status": "success",
+          "waits": [],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "1"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "1"
+              }
+            }
+          ],
+          "elapsedMs": 1009.6999998092651,
+          "version": "1.0.53"
+        }
+      ]
+    },
+    {
+      "sdk": "js",
+      "cors": "hidden",
+      "results": [
+        {
+          "mode": "seconds",
+          "status": "success",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": null
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": null
+              }
+            }
+          ],
+          "elapsedMs": 8.699999809265137,
+          "version": "1.0.53"
+        },
+        {
+          "mode": "date",
+          "status": "success",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": null
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": null
+              }
+            }
+          ],
+          "elapsedMs": 12.600000381469727,
+          "version": "1.0.53"
+        },
+        {
+          "mode": "invalid",
+          "status": "success",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": null
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": null
+              }
+            }
+          ],
+          "elapsedMs": 4.5,
+          "version": "1.0.53"
+        }
+      ]
+    },
+    {
+      "sdk": "flutter",
+      "cors": "same",
+      "results": [
+        {
+          "mode": "seconds",
+          "status": "success",
+          "waits": [
+            2000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "2"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "2"
+              }
+            }
+          ],
+          "elapsedMs": 14,
+          "version": "0.1.31"
+        },
+        {
+          "mode": "date",
+          "status": "success",
+          "waits": [
+            5000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "Tue, 06 Oct 2026 19:00:05 GMT"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "Tue, 06 Oct 2026 19:00:05 GMT"
+              }
+            }
+          ],
+          "elapsedMs": 17,
+          "version": "0.1.31"
+        },
+        {
+          "mode": "invalid",
+          "status": "success",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "nonsense"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "nonsense"
+              }
+            }
+          ],
+          "elapsedMs": 5,
+          "version": "0.1.31"
+        },
+        {
+          "mode": "cancel",
+          "status": "aborted",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "120"
+              }
+            }
+          ],
+          "elapsedMs": 2,
+          "version": "0.1.31"
+        },
+        {
+          "mode": "real",
+          "status": "success",
+          "waits": [],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "1"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "1"
+              }
+            }
+          ],
+          "elapsedMs": 1005,
+          "version": "0.1.31"
+        }
+      ]
+    },
+    {
+      "sdk": "flutter",
+      "cors": "exposed",
+      "results": [
+        {
+          "mode": "seconds",
+          "status": "success",
+          "waits": [
+            2000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "2"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "2"
+              }
+            }
+          ],
+          "elapsedMs": 26,
+          "version": "0.1.31"
+        },
+        {
+          "mode": "date",
+          "status": "success",
+          "waits": [
+            5000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "Tue, 06 Oct 2026 19:00:05 GMT"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "Tue, 06 Oct 2026 19:00:05 GMT"
+              }
+            }
+          ],
+          "elapsedMs": 9,
+          "version": "0.1.31"
+        },
+        {
+          "mode": "invalid",
+          "status": "success",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "nonsense"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "nonsense"
+              }
+            }
+          ],
+          "elapsedMs": 5,
+          "version": "0.1.31"
+        },
+        {
+          "mode": "cancel",
+          "status": "aborted",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "120"
+              }
+            }
+          ],
+          "elapsedMs": 4,
+          "version": "0.1.31"
+        },
+        {
+          "mode": "real",
+          "status": "success",
+          "waits": [],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {
+                "retry-after": "1"
+              }
+            },
+            {
+              "status": 200,
+              "headers": {
+                "retry-after": "1"
+              }
+            }
+          ],
+          "elapsedMs": 1006,
+          "version": "0.1.31"
+        }
+      ]
+    },
+    {
+      "sdk": "flutter",
+      "cors": "hidden",
+      "results": [
+        {
+          "mode": "seconds",
+          "status": "success",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {}
+            },
+            {
+              "status": 200,
+              "headers": {}
+            }
+          ],
+          "elapsedMs": 20,
+          "version": "0.1.31"
+        },
+        {
+          "mode": "date",
+          "status": "success",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {}
+            },
+            {
+              "status": 200,
+              "headers": {}
+            }
+          ],
+          "elapsedMs": 15,
+          "version": "0.1.31"
+        },
+        {
+          "mode": "invalid",
+          "status": "success",
+          "waits": [
+            60000
+          ],
+          "responses": [
+            {
+              "status": 429,
+              "headers": {}
+            },
+            {
+              "status": 200,
+              "headers": {}
+            }
+          ],
+          "elapsedMs": 5,
+          "version": "0.1.31"
+        }
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "path": "/api/js/same/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-same-seconds",
+      "time": 1791316177821
+    },
+    {
+      "path": "/api/js/same/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-same-seconds",
+      "time": 1791316177826
+    },
+    {
+      "path": "/api/js/same/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-same-date",
+      "time": 1791316177830
+    },
+    {
+      "path": "/api/js/same/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-same-date",
+      "time": 1791316177840
+    },
+    {
+      "path": "/api/js/same/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-same-invalid",
+      "time": 1791316177843
+    },
+    {
+      "path": "/api/js/same/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-same-invalid",
+      "time": 1791316177845
+    },
+    {
+      "path": "/api/js/same/cancel/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-same-cancel",
+      "time": 1791316177848
+    },
+    {
+      "path": "/api/js/same/real/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-same-real",
+      "time": 1791316177850
+    },
+    {
+      "path": "/api/js/same/real/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-same-real",
+      "time": 1791316178853
+    },
+    {
+      "path": "/api/js/exposed/seconds/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/js/exposed/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-exposed-seconds",
+      "time": 1791316179037
+    },
+    {
+      "path": "/api/js/exposed/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-exposed-seconds",
+      "time": 1791316179040
+    },
+    {
+      "path": "/api/js/exposed/date/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/js/exposed/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-exposed-date",
+      "time": 1791316179045
+    },
+    {
+      "path": "/api/js/exposed/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-exposed-date",
+      "time": 1791316179054
+    },
+    {
+      "path": "/api/js/exposed/invalid/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/js/exposed/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-exposed-invalid",
+      "time": 1791316179058
+    },
+    {
+      "path": "/api/js/exposed/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-exposed-invalid",
+      "time": 1791316179059
+    },
+    {
+      "path": "/api/js/exposed/cancel/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/js/exposed/cancel/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-exposed-cancel",
+      "time": 1791316179068
+    },
+    {
+      "path": "/api/js/exposed/real/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/js/exposed/real/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-exposed-real",
+      "time": 1791316179073
+    },
+    {
+      "path": "/api/js/exposed/real/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-exposed-real",
+      "time": 1791316180079
+    },
+    {
+      "path": "/api/js/hidden/seconds/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/js/hidden/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-hidden-seconds",
+      "time": 1791316180230
+    },
+    {
+      "path": "/api/js/hidden/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-hidden-seconds",
+      "time": 1791316180233
+    },
+    {
+      "path": "/api/js/hidden/date/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/js/hidden/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-hidden-date",
+      "time": 1791316180237
+    },
+    {
+      "path": "/api/js/hidden/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-hidden-date",
+      "time": 1791316180246
+    },
+    {
+      "path": "/api/js/hidden/invalid/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/js/hidden/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-hidden-invalid",
+      "time": 1791316180250
+    },
+    {
+      "path": "/api/js/hidden/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-js-hidden-invalid",
+      "time": 1791316180252
+    },
+    {
+      "path": "/api/flutter/same/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-same-seconds",
+      "time": 1791316180380
+    },
+    {
+      "path": "/api/flutter/same/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-same-seconds",
+      "time": 1791316180385
+    },
+    {
+      "path": "/api/flutter/same/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-same-date",
+      "time": 1791316180389
+    },
+    {
+      "path": "/api/flutter/same/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-same-date",
+      "time": 1791316180401
+    },
+    {
+      "path": "/api/flutter/same/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-same-invalid",
+      "time": 1791316180407
+    },
+    {
+      "path": "/api/flutter/same/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-same-invalid",
+      "time": 1791316180410
+    },
+    {
+      "path": "/api/flutter/same/cancel/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-same-cancel",
+      "time": 1791316180412
+    },
+    {
+      "path": "/api/flutter/same/real/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-same-real",
+      "time": 1791316180415
+    },
+    {
+      "path": "/api/flutter/same/real/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-same-real",
+      "time": 1791316181418
+    },
+    {
+      "path": "/api/flutter/exposed/seconds/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/flutter/exposed/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-exposed-seconds",
+      "time": 1791316181555
+    },
+    {
+      "path": "/api/flutter/exposed/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-exposed-seconds",
+      "time": 1791316181560
+    },
+    {
+      "path": "/api/flutter/exposed/date/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/flutter/exposed/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-exposed-date",
+      "time": 1791316181571
+    },
+    {
+      "path": "/api/flutter/exposed/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-exposed-date",
+      "time": 1791316181577
+    },
+    {
+      "path": "/api/flutter/exposed/invalid/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/flutter/exposed/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-exposed-invalid",
+      "time": 1791316181580
+    },
+    {
+      "path": "/api/flutter/exposed/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-exposed-invalid",
+      "time": 1791316181582
+    },
+    {
+      "path": "/api/flutter/exposed/cancel/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/flutter/exposed/cancel/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-exposed-cancel",
+      "time": 1791316181586
+    },
+    {
+      "path": "/api/flutter/exposed/real/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/flutter/exposed/real/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-exposed-real",
+      "time": 1791316181590
+    },
+    {
+      "path": "/api/flutter/exposed/real/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-exposed-real",
+      "time": 1791316182592
+    },
+    {
+      "path": "/api/flutter/hidden/seconds/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/flutter/hidden/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-hidden-seconds",
+      "time": 1791316182750
+    },
+    {
+      "path": "/api/flutter/hidden/seconds/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-hidden-seconds",
+      "time": 1791316182755
+    },
+    {
+      "path": "/api/flutter/hidden/date/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/flutter/hidden/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-hidden-date",
+      "time": 1791316182759
+    },
+    {
+      "path": "/api/flutter/hidden/date/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-hidden-date",
+      "time": 1791316182768
+    },
+    {
+      "path": "/api/flutter/hidden/invalid/commands",
+      "method": "OPTIONS",
+      "origin": "http://127.0.0.1:42475"
+    },
+    {
+      "path": "/api/flutter/hidden/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-hidden-invalid",
+      "time": 1791316182776
+    },
+    {
+      "path": "/api/flutter/hidden/invalid/commands",
+      "method": "POST",
+      "origin": "http://127.0.0.1:42475",
+      "body": "{\"synthetic\":true}",
+      "key": "synthetic-flutter-hidden-invalid",
+      "time": 1791316182778
+    }
+  ],
+  "consoleMessages": [
+    {
+      "sdk": "js",
+      "cors": "same",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "same",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "same",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "same",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "same",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "exposed",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "exposed",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "exposed",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "exposed",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "exposed",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "hidden",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "hidden",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "js",
+      "cors": "hidden",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "same",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "same",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "same",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "same",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "same",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "exposed",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "exposed",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "exposed",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "exposed",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "exposed",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "hidden",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "hidden",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    },
+    {
+      "sdk": "flutter",
+      "cors": "hidden",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    }
+  ],
+  "pageErrors": [],
+  "limitations": [
+    "Loopback fixtures only: not production CORS/host acceptance.",
+    "Injected advancing clock for long delays; real timers separately checked at one second.",
+    "No PostgreSQL, Preview two-client limiter window or native-device acceptance."
+  ]
+}

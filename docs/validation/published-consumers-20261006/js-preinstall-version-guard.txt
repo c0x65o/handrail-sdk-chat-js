@@ -1,0 +1,2 @@
+{"command": ["node", "scripts/generate-package-version.mjs", "--check"], "cwd": "/opt/handrail/repos/handrail/handrail-chat/handrail-sdk-chat-js"}
+Generated package-version source is up to date.

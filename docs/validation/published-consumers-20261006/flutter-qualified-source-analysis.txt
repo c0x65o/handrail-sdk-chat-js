@@ -1,0 +1,3 @@
+{"command": ["/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter-sdk/bin/flutter", "analyze", "--no-pub", "lib/src/core/command_dispatcher.dart", "lib/src/handrail_chat_client.dart", "test/command_retry_after_test.dart", "test/send_message_client_test.dart"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/flutter-source-analysis"}
+Analyzing 4 items...                                            
+No issues found! (ran in 17.7s)

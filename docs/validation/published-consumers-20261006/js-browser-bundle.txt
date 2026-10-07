@@ -1,0 +1,5 @@
+{"command": ["node_modules/.bin/esbuild", "browser_consumer.mjs", "--bundle", "--platform=browser", "--format=iife", "--outfile=bundle-js.js"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js"}
+
+  bundle-js.js  1.5mb ⚠️
+
+⚡ Done in 51ms

@@ -1,0 +1,16 @@
+{
+  "name": "published-chat-consumer",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@handrail/chat": "git+https://github.com/c0x65o/handrail-sdk-chat-js.git#5cc37c0aad6bf4f74c4e849f62ae51badb124dca",
+    "react": "19.2.8"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "esbuild": "0.28.2",
+    "@types/react": "19.2.18",
+    "@types/node": "26.3.0",
+    "playwright": "1.61.1"
+  }
+}

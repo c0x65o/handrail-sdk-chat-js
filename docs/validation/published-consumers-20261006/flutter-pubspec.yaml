@@ -1,0 +1,18 @@
+name: published_chat_consumer
+publish_to: none
+version: 1.0.0
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  handrail_chat:
+    git:
+      url: https://github.com/c0x65o/handrail-sdk-chat-flutter.git
+      ref: 51cf4d55ea147fd71267787b774585278ed1f55a
+  web: 0.5.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  test: ^1.24.9
+  flutter_lints: ^4.0.0

@@ -1,0 +1,14 @@
+{"command": ["node_modules/.bin/esbuild", "browser_consumer.mjs", "--bundle", "--platform=browser", "--format=iife", "--outfile=bundle-js.js"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js"}
+✘ [ERROR] Top-level await is currently not supported with the "iife" output format
+
+    browser_consumer.mjs:14:22:
+      14 │   if(mode==='cancel'){await started;cancel.abort();}
+         ╵                       ~~~~~
+
+✘ [ERROR] Top-level await is currently not supported with the "iife" output format
+
+    browser_consumer.mjs:15:15:
+      15 │   const result=await future;
+         ╵                ~~~~~
+
+2 errors

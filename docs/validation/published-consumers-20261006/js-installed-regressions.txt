@@ -1,0 +1,412 @@
+{"command": ["node", "--test", "--test-concurrency=1", "test/command-retry-after.test.mjs", "test/client-command-dispatcher.test.mjs", "test/client-durable-send-dispatch.test.mjs", "test/client-durable-read-state.test.mjs"], "cwd": "/opt/handrail/.handrail/codex-runs/d1e102be-9b54-4288-84d1-671b0379486a/tmp/published-consumers/js"}
+TAP version 13
+# Subtest: dispatch validates before transport and returns only the parsed canonical result
+ok 1 - dispatch validates before transport and returns only the parsed canonical result
+  ---
+  duration_ms: 16.204097
+  type: 'test'
+  ...
+# Subtest: refreshes authentication at most once and reuses one generated idempotency key
+ok 2 - refreshes authentication at most once and reuses one generated idempotency key
+  ---
+  duration_ms: 4.27505
+  type: 'test'
+  ...
+# Subtest: retries safe network and explicit transient failures with deterministic bounded backoff
+ok 3 - retries safe network and explicit transient failures with deterministic bounded backoff
+  ---
+  duration_ms: 2.66583
+  type: 'test'
+  ...
+# Subtest: returns canonical conflict, auth, feature-disabled, and unsupported outcomes without retry
+ok 4 - returns canonical conflict, auth, feature-disabled, and unsupported outcomes without retry
+  ---
+  duration_ms: 4.32716
+  type: 'test'
+  ...
+# Subtest: rejects malformed JSON and structurally malformed successful and error payloads
+ok 5 - rejects malformed JSON and structurally malformed successful and error payloads
+  ---
+  duration_ms: 1.301958
+  type: 'test'
+  ...
+# Subtest: caller abort and close interrupt active fetches with distinct canonical outcomes
+ok 6 - caller abort and close interrupt active fetches with distinct canonical outcomes
+  ---
+  duration_ms: 2.287318
+  type: 'test'
+  ...
+# Subtest: caller abort and close interrupt deterministic backoff and prevent retries
+ok 7 - caller abort and close interrupt deterministic backoff and prevent retries
+  ---
+  duration_ms: 2.689889
+  type: 'test'
+  ...
+# Subtest: diagnostics structurally redact tokens, authorization, thrown secrets, and content
+ok 8 - diagnostics structurally redact tokens, authorization, thrown secrets, and content
+  ---
+  duration_ms: 0.887256
+  type: 'test'
+  ...
+# Subtest: token-provider outage before dispatch is transport and allows manual retry
+ok 9 - token-provider outage before dispatch is transport and allows manual retry
+  ---
+  duration_ms: 0.737227
+  type: 'test'
+  ...
+# Subtest: token-provider outage during refresh is transport and allows manual retry
+ok 10 - token-provider outage during refresh is transport and allows manual retry
+  ---
+  duration_ms: 0.70161
+  type: 'test'
+  ...
+# Subtest: invalid returned token "" remains an authentication failure
+ok 11 - invalid returned token "" remains an authentication failure
+  ---
+  duration_ms: 0.414462
+  type: 'test'
+  ...
+# Subtest: invalid returned token "   " remains an authentication failure
+ok 12 - invalid returned token "   " remains an authentication failure
+  ---
+  duration_ms: 0.308284
+  type: 'test'
+  ...
+# Subtest: invalid returned token null remains an authentication failure
+ok 13 - invalid returned token null remains an authentication failure
+  ---
+  duration_ms: 0.288761
+  type: 'test'
+  ...
+# Subtest: invalid returned token undefined remains an authentication failure
+ok 14 - invalid returned token undefined remains an authentication failure
+  ---
+  duration_ms: 0.280142
+  type: 'test'
+  ...
+# Subtest: invalid returned token 123 remains an authentication failure
+ok 15 - invalid returned token 123 remains an authentication failure
+  ---
+  duration_ms: 1.353367
+  type: 'test'
+  ...
+# Subtest: durably coalesces before projection and dispatch with one stable correlation
+ok 16 - durably coalesces before projection and dispatch with one stable correlation
+  ---
+  duration_ms: 44.473708
+  type: 'test'
+  ...
+# Subtest: never coalesces mark-read work across an explicit mark-unread boundary
+ok 17 - never coalesces mark-read work across an explicit mark-unread boundary
+  ---
+  duration_ms: 21.222492
+  type: 'test'
+  ...
+# Subtest: an exact canonical read-cursor event settles the matching persisted intent
+ok 18 - an exact canonical read-cursor event settles the matching persisted intent
+  ---
+  duration_ms: 9.601589
+  type: 'test'
+  ...
+# Subtest: transient, rate-limited, server, malformed, and close outcomes retain intent
+    # Subtest: transport
+    ok 1 - transport
+      ---
+      duration_ms: 5.67513
+      type: 'test'
+      ...
+    # Subtest: rate limited
+    ok 2 - rate limited
+      ---
+      duration_ms: 6.325077
+      type: 'test'
+      ...
+    # Subtest: server failure
+    ok 3 - server failure
+      ---
+      duration_ms: 5.79884
+      type: 'test'
+      ...
+    # Subtest: malformed success
+    ok 4 - malformed success
+      ---
+      duration_ms: 5.104097
+      type: 'test'
+      ...
+    # Subtest: mismatched correlation
+    ok 5 - mismatched correlation
+      ---
+      duration_ms: 6.168177
+      type: 'test'
+      ...
+    # Subtest: client close
+    ok 6 - client close
+      ---
+      duration_ms: 10.781581
+      type: 'test'
+      ...
+    1..6
+ok 19 - transient, rate-limited, server, malformed, and close outcomes retain intent
+  ---
+  duration_ms: 41.149043
+  type: 'test'
+  ...
+# Subtest: terminal outcomes remove the exact intent and restore only the stored baseline
+    # Subtest: validation
+    ok 1 - validation
+      ---
+      duration_ms: 7.140977
+      type: 'test'
+      ...
+    # Subtest: authorization
+    ok 2 - authorization
+      ---
+      duration_ms: 7.465857
+      type: 'test'
+      ...
+    # Subtest: conflict
+    ok 3 - conflict
+      ---
+      duration_ms: 5.987936
+      type: 'test'
+      ...
+    # Subtest: newer canonical state is not overwritten
+    ok 4 - newer canonical state is not overwritten
+      ---
+      duration_ms: 13.871465
+      type: 'test'
+      ...
+    1..4
+ok 20 - terminal outcomes remove the exact intent and restore only the stored baseline
+  ---
+  duration_ms: 35.162698
+  type: 'test'
+  ...
+# Subtest: storage write failure prevents both projection and dispatch
+ok 21 - storage write failure prevents both projection and dispatch
+  ---
+  duration_ms: 2.150075
+  type: 'test'
+  ...
+# Subtest: delayed old-identity storage and transport completions cannot alter the active identity
+ok 22 - delayed old-identity storage and transport completions cannot alter the active identity
+  ---
+  duration_ms: 5.867303
+  type: 'test'
+  ...
+# Subtest: delayed old-identity transport completion leaves a newer persisted record untouched
+ok 23 - delayed old-identity transport completion leaves a newer persisted record untouched
+  ---
+  duration_ms: 8.567178
+  type: 'test'
+  ...
+# Subtest: persists before fetch and dispatches the queued request correlation unchanged
+ok 24 - persists before fetch and dispatches the queued request correlation unchanged
+  ---
+  duration_ms: 43.864677
+  type: 'test'
+  ...
+# Subtest: terminal HTTP outcomes remove the exact durable intent
+    # Subtest: validation rejection
+    ok 1 - validation rejection
+      ---
+      duration_ms: 7.081151
+      type: 'test'
+      ...
+    # Subtest: authentication
+    ok 2 - authentication
+      ---
+      duration_ms: 5.425476
+      type: 'test'
+      ...
+    # Subtest: authorization
+    ok 3 - authorization
+      ---
+      duration_ms: 5.916632
+      type: 'test'
+      ...
+    # Subtest: conflict
+    ok 4 - conflict
+      ---
+      duration_ms: 5.763509
+      type: 'test'
+      ...
+    1..4
+ok 25 - terminal HTTP outcomes remove the exact durable intent
+  ---
+  duration_ms: 25.070034
+  type: 'test'
+  ...
+# Subtest: transport, 429, retryable HTTP, and ambiguous responses retain correlation
+    # Subtest: transport
+    ok 1 - transport
+      ---
+      duration_ms: 5.429472
+      type: 'test'
+      ...
+    # Subtest: rate limit
+    ok 2 - rate limit
+      ---
+      duration_ms: 4.614649
+      type: 'test'
+      ...
+    # Subtest: temporary server
+    ok 3 - temporary server
+      ---
+      duration_ms: 4.643469
+      type: 'test'
+      ...
+    # Subtest: malformed success
+    ok 4 - malformed success
+      ---
+      duration_ms: 11.401163
+      type: 'test'
+      ...
+    1..4
+ok 26 - transport, 429, retryable HTTP, and ambiguous responses retain correlation
+  ---
+  duration_ms: 27.017839
+  type: 'test'
+  ...
+# Subtest: cancellation is durable and observable without another dispatch
+ok 27 - cancellation is durable and observable without another dispatch
+  ---
+  duration_ms: 6.437884
+  type: 'test'
+  ...
+# Subtest: storage failure and unfinished attachments prevent persistence or command fetch
+    # Subtest: queued write failure
+    ok 1 - queued write failure
+      ---
+      duration_ms: 2.515283
+      type: 'test'
+      ...
+    # Subtest: unfinalized attachment
+    ok 2 - unfinalized attachment
+      ---
+      duration_ms: 4.36372
+      type: 'test'
+      ...
+    1..2
+ok 28 - storage failure and unfinished attachments prevent persistence or command fetch
+  ---
+  duration_ms: 7.237608
+  type: 'test'
+  ...
+# Subtest: a delayed old-generation completion cannot settle the active identity queue
+ok 29 - a delayed old-generation completion cannot settle the active identity queue
+  ---
+  duration_ms: 12.872718
+  type: 'test'
+  ...
+# Subtest: identity turnover while rate limited preserves old queue identity and releases the new actor
+ok 30 - identity turnover while rate limited preserves old queue identity and releases the new actor
+  ---
+  duration_ms: 20.8709
+  type: 'test'
+  ...
+# Subtest: Retry-After 0
+ok 31 - Retry-After 0
+  ---
+  duration_ms: 19.224817
+  type: 'test'
+  ...
+# Subtest: Retry-After Tue, 06 Oct 2026 18:00:00 GMT
+ok 32 - Retry-After Tue, 06 Oct 2026 18:00:00 GMT
+  ---
+  duration_ms: 1.504183
+  type: 'test'
+  ...
+# Subtest: Retry-After 60
+ok 33 - Retry-After 60
+  ---
+  duration_ms: 1.151985
+  type: 'test'
+  ...
+# Subtest: Retry-After Tue, 06 Oct 2026 19:02:00 GMT
+ok 34 - Retry-After Tue, 06 Oct 2026 19:02:00 GMT
+  ---
+  duration_ms: 1.136679
+  type: 'test'
+  ...
+# Subtest: Retry-After undefined
+ok 35 - Retry-After undefined
+  ---
+  duration_ms: 1.512025
+  type: 'test'
+  ...
+# Subtest: Retry-After garbage
+ok 36 - Retry-After garbage
+  ---
+  duration_ms: 0.994551
+  type: 'test'
+  ...
+# Subtest: Retry-After -1
+ok 37 - Retry-After -1
+  ---
+  duration_ms: 1.968207
+  type: 'test'
+  ...
+# Subtest: Retry-After Infinity
+ok 38 - Retry-After Infinity
+  ---
+  duration_ms: 0.770367
+  type: 'test'
+  ...
+# Subtest: Retry-After 9999999999999999999999999999999999999999
+ok 39 - Retry-After 9999999999999999999999999999999999999999
+  ---
+  duration_ms: 3.082936
+  type: 'test'
+  ...
+# Subtest: overlapping cooldown gates retries and new commands; success cannot shorten it
+ok 40 - overlapping cooldown gates retries and new commands; success cannot shorten it
+  ---
+  duration_ms: 9.610008
+  type: 'test'
+  ...
+# Subtest: abort while waiting prevents retries
+ok 41 - abort while waiting prevents retries
+  ---
+  duration_ms: 1.412471
+  type: 'test'
+  ...
+# Subtest: close while waiting prevents retries
+ok 42 - close while waiting prevents retries
+  ---
+  duration_ms: 0.726162
+  type: 'test'
+  ...
+# Subtest: bounded attempts and retry-never retain final-response cooldown
+ok 43 - bounded attempts and retry-never retain final-response cooldown
+  ---
+  duration_ms: 1.302839
+  type: 'test'
+  ...
+# Subtest: uncertain admission then 429 retains identity and one successful side effect
+ok 44 - uncertain admission then 429 retains identity and one successful side effect
+  ---
+  duration_ms: 2.673291
+  type: 'test'
+  ...
+# Subtest: native fetch propagates actual HTTP Retry-After through public client
+ok 45 - native fetch propagates actual HTTP Retry-After through public client
+  ---
+  duration_ms: 28.349691
+  type: 'test'
+  ...
+# Subtest: a shorter overlapping 429 cannot shorten the existing deadline
+ok 46 - a shorter overlapping 429 cannot shorten the existing deadline
+  ---
+  duration_ms: 4.187528
+  type: 'test'
+  ...
+1..46
+# tests 66
+# suites 0
+# pass 66
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 920.465222

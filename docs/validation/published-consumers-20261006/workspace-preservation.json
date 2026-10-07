@@ -1,0 +1,17 @@
+{
+  "handrail-sdk-chat-js": {
+    "head": "5cc37c0aad6bf4f74c4e849f62ae51badb124dca",
+    "tracked_status": "",
+    "status": "?? docs/validation/published-consumers-20261006/\n"
+  },
+  "handrail-sdk-chat-flutter": {
+    "head": "51cf4d55ea147fd71267787b774585278ed1f55a",
+    "tracked_status": "",
+    "status": ""
+  },
+  "handrail-chat-preview-flutter": {
+    "head": "b48bf8418702f3acf3b12b8e401749e7ff3a63fb",
+    "tracked_status": "",
+    "status": ""
+  }
+}
